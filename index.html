@@ -166,15 +166,14 @@ footer {
     </div>
 </section>
 <section id="countdown" style="padding:40px; text-align:center;">
-    <h2>Next Live Session Countdown</h2>
+<section id="countdown">
+    <h2>Next Session Starts In</h2>
 
-    <div id="timer" style="font-size:28px; font-weight:bold; margin-top:20px;">
-        Loading countdown...
+    <div class="card" style="text-align:center;">
+        <div id="timer">Loading...</div>
+        <p>Every Thursday at 19h00 (GMT+2)</p>
     </div>
-
-    <p style="margin-top:20px;">Join us every Thursday at 19h00 (GMT+2)</p>
 </section>
-
 <script>
 function getNextThursday() {
     const now = new Date();
