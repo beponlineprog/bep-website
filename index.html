@@ -1,250 +1,220 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Biblical Empowerment Program (B.E.P)</title>
-    <style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Biblical Empowerment Program (B.E.P)</title>
+
+<style>
 body {
-    font-family: 'Segoe UI', sans-serif;
     margin: 0;
-    padding: 0;
-    background: #f4f7fb;
-    color: #333;
+    font-family: 'Segoe UI', sans-serif;
+    background: #f5f7fb;
 }
 
-/* HEADER */
-header {
-    background: linear-gradient(135deg, #2c3e50, #4ca1af);
+/* HERO SECTION */
+.hero {
+    height: 90vh;
+    background: linear-gradient(rgba(0,0,50,0.7), rgba(0,0,80,0.9)),
+    url('https://images.unsplash.com/photo-1504052434569-70ad5836ab65');
+    background-size: cover;
+    background-position: center;
     color: white;
-    padding: 40px 20px;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px;
 }
 
-header img {
+.hero img {
     width: 120px;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+.hero h1 {
+    font-size: 40px;
+}
+
+.hero p {
+    font-size: 18px;
+    opacity: 0.9;
 }
 
 /* NAV */
 nav {
-    background: white;
-    padding: 12px;
+    background: #0b1d3a;
     text-align: center;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    padding: 12px;
 }
 
 nav a {
-    color: #2c3e50;
+    color: white;
+    margin: 15px;
     text-decoration: none;
-    margin: 12px;
-    font-weight: 500;
-}
-
-nav a:hover {
-    color: #4ca1af;
+    font-weight: bold;
 }
 
 /* SECTIONS */
 section {
-    padding: 50px 20px;
-    max-width: 900px;
+    padding: 60px 20px;
+    max-width: 1000px;
     margin: auto;
 }
 
 h2 {
     text-align: center;
-    margin-bottom: 20px;
+    color: #0b1d3a;
 }
 
-/* CARDS */
+/* CARD */
 .card {
     background: white;
-    padding: 25px;
+    padding: 30px;
     border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.1);
 }
 
-/* BUTTONS */
+/* GOLD ACCENT */
+.gold {
+    color: #d4af37;
+}
+
+/* BUTTON */
 .btn {
-    display: inline-block;
-    background: #0078d4;
-    color: white;
-    padding: 12px 22px;
-    border-radius: 8px;
+    background: #d4af37;
+    color: #0b1d3a;
+    padding: 12px 25px;
     text-decoration: none;
-    font-size: 16px;
-    margin-top: 15px;
-}
-
-.btn:hover {
-    background: #005fa3;
+    border-radius: 8px;
+    font-weight: bold;
+    display: inline-block;
+    margin-top: 20px;
 }
 
 /* COUNTDOWN */
 #timer {
     font-size: 30px;
     font-weight: bold;
-    color: #2c3e50;
 }
 
 /* FOOTER */
 footer {
-    background: #2c3e50;
+    background: #0b1d3a;
     color: white;
     text-align: center;
     padding: 20px;
 }
-    </style>
+</style>
 </head>
 
 <body>
 
-<header>
-    <img src="bep-logo.png" alt="BEP Logo">
-    <h1>Biblical Empowerment Program (B.E.P)</h1>
-    <p><i>“Building the Church of Christ”</i></p>
-</header>
+<!-- HERO -->
+<div class="hero">
+    <img src="bep-logo.png">
+    <h1>Biblical Empowerment Program</h1>
+    <p class="gold">Building the Church of Christ</p>
+</div>
 
 <nav>
     <a href="#about">About</a>
+    <a href="#mission">Mission</a>
+    <a href="#vision">Vision</a>
+    <a href="#sessions">Sessions</a>
     <a href="#register">Register</a>
-    <a href="#contact">Contact</a>
 </nav>
 
+<!-- ABOUT -->
 <section id="about">
-    <h2 style="text-align:center;">About Us</h2>
-
-    <p style="line-height:1.7;">
+    <h2>About Us</h2>
+    <div class="card">
+        <p>
         The Biblical Empowerment Program (B.E.P) is a faith-driven initiative dedicated to equipping individuals 
-        with a deeper understanding of the Word of God and the transformative power of the Holy Spirit. Our mission 
-        is to build spiritually grounded believers who are empowered to live purposeful, Christ-centered lives.
-    </p>
-
-    <p style="line-height:1.7;">
-        At B.E.P, we believe that true empowerment comes through knowledge, revelation, and application of Scripture. 
-        Through structured teachings, interactive sessions, and Spirit-led discussions, we create a space where individuals 
-        can grow in faith, gain clarity in their spiritual journey, and develop a personal relationship with God.
-    </p>
-
-    <p style="line-height:1.7;">
-        Our program is designed for everyone—whether you are a new believer or someone seeking deeper spiritual insight. 
-        We focus on practical teachings that address real-life challenges while guiding individuals to walk in faith, 
-        wisdom, and obedience to God’s will.
-    </p>
-
-    <div style="background:#f4f6f8; padding:20px; border-radius:10px; margin-top:20px;">
-        <p><b>We are committed to:</b></p>
-        <ul>
-            <li>Teaching the Word of God with clarity and truth</li>
-            <li>Empowering believers through the Holy Spirit</li>
-            <li>Building a strong, united faith community</li>
-            <li>Encouraging spiritual growth and personal transformation</li>
-        </ul>
-    </div>
-
-    <p style="line-height:1.7; margin-top:20px;">
-        The Biblical Empowerment Program is more than just a teaching platform—it is a movement of believers rising in 
-        faith, purpose, and power.
-    </p>
-</section>
-<section id="sessions">
-    <h2>Online Sessions</h2>
-
-    <div class="card" style="text-align:center;">
-        <p><b>📅 Every Thursday</b></p>
-        <p><b>⏰ 19h00 – 20h30</b></p>
-        <p><b>💻 Microsoft Teams</b></p>
-
-        <a href="https://teams.live.com/meet/936085799236?p=b66LnDUAB2Xkx2uQYp&eventType=community" class="btn">
-            Join on Microsoft Teams
-        </a>
-
-        <p style="margin-top:20px;">
-            Grow in faith, understanding, and spiritual power through weekly teachings.
+        with a deeper understanding of the Word of God and the transformative power of the Holy Spirit.
         </p>
     </div>
 </section>
-<section id="countdown" style="padding:40px; text-align:center;">
-<section id="countdown">
-    <h2>Next Session Starts In</h2>
 
-    <div class="card" style="text-align:center;">
-        <div id="timer">Loading...</div>
-        <p>Every Thursday at 19h00 (GMT+2)</p>
+<!-- MISSION -->
+<section id="mission">
+    <h2>Our Mission</h2>
+    <div class="card">
+        <p>
+        To equip individuals with deep biblical understanding, spiritual empowerment, and practical Christian living 
+        through Spirit-led teaching and mentorship.
+        </p>
     </div>
 </section>
+
+<!-- VISION -->
+<section id="vision">
+    <h2>Our Vision</h2>
+    <div class="card">
+        <p>
+        To build a global community of believers who walk in faith, wisdom, and the transforming power of the Holy Spirit.
+        </p>
+    </div>
+</section>
+
+<!-- SESSIONS -->
+<section id="sessions">
+    <h2>Online Sessions</h2>
+    <div class="card" style="text-align:center;">
+        <p>📅 Every Thursday</p>
+        <p>⏰ 19h00 – 20h30</p>
+        <p>💻 Microsoft Teams</p>
+
+        <a href="https://teams.live.com/meet/936085799236?p=b66LnDUAB2Xkx2uQYp&eventType=community" class="btn">
+            Join Session
+        </a>
+    </div>
+</section>
+
+<!-- COUNTDOWN -->
+<section>
+    <h2>Next Session Starts In</h2>
+    <div class="card" style="text-align:center;">
+        <div id="timer">Loading...</div>
+    </div>
+</section>
+
 <script>
 function getNextThursday() {
     const now = new Date();
     const result = new Date();
-    result.setHours(19, 0, 0, 0); // Set to 19h00
-
-    // Calculate days until Thursday (4)
+    result.setHours(19,0,0,0);
     result.setDate(now.getDate() + ((4 - now.getDay() + 7) % 7));
-
-    // If it's already past 19:00 today, move to next week
-    if (result < now) {
-        result.setDate(result.getDate() + 7);
-    }
+    if (result < now) result.setDate(result.getDate()+7);
     return result;
 }
 
 function updateCountdown() {
-    const nextSession = getNextThursday();
-    const now = new Date();
-    const diff = nextSession - now;
-
-    if (diff <= 0) {
-        document.getElementById("timer").innerHTML = "We are LIVE now!";
-        return;
-    }
-
-    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-    const minutes = Math.floor((diff / (1000 * 60)) % 60);
-    const seconds = Math.floor((diff / 1000) % 60);
-
-    document.getElementById("timer").innerHTML =
-        `${days}d ${hours}h ${minutes}m ${seconds}s`;
+    const diff = getNextThursday() - new Date();
+    const d = Math.floor(diff/86400000);
+    const h = Math.floor(diff/3600000)%24;
+    const m = Math.floor(diff/60000)%60;
+    const s = Math.floor(diff/1000)%60;
+    document.getElementById("timer").innerHTML = `${d}d ${h}h ${m}m ${s}s`;
 }
+setInterval(updateCountdown,1000);
+</script>
 
-setInterval(updateCountdown, 1000);
-updateCountdown();
-            </script>
+<!-- REGISTER -->
+<section id="register">
+    <h2>Register</h2>
+    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeH_cWqcKUmWsCejDsDkyXL0Bvil8_FUWj_ZjzWKznCA2VzeQ/viewform?embedded=true"
+    width="100%" height="800"></iframe>
+</section>
+
+<!-- CONTACT -->
 <section>
-    <h2>Set a Reminder</h2>
-
-    <div class="card" style="text-align:center;">
-        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=B.E.P+Online+Session&details=Weekly+Bible+Teaching&dates=20260101T170000Z/20260101T183000Z&recur=RRULE:FREQ=WEEKLY;BYDAY=TH"
-           target="_blank" class="btn" style="background:#db4437;">
-           Google Calendar
-        </a>
-
-        <a href="https://outlook.live.com/calendar/0/deeplink/compose?subject=B.E.P%20Online%20Session&startdt=2026-01-01T19:00:00&enddt=2026-01-01T20:30:00"
-           target="_blank" class="btn">
-           Outlook Calendar
-        </a>
-    </div>
-</section>
-<section id="register" style="background:#f9f9f9;">
-    <h2>Register for B.E.P</h2>
-    <p>Please complete our official registration form below:</p>
-
-    <iframe 
-        src="https://docs.google.com/forms/d/e/1FAIpQLSeH_cWqcKUmWsCejDsDkyXL0Bvil8_FUWj_ZjzWKznCA2VzeQ/viewform?embedded=true">
-        Loading…
-    </iframe>
-</section>
-
-<section id="contact">
-    <h2>Contact Us</h2>
-    <p>📧 Email: <b>bep.onlineprog@gmail.com</b></p>
-    <p>📞 WhatsApp: <b>074 038 6671</b></p>
+    <h2>Contact</h2>
+    <p style="text-align:center;">📧 bep.onlineprog@gmail.com | 📞 074 038 6671</p>
 </section>
 
 <footer>
-    <p>&copy; 2026 Biblical Empowerment Program. All Rights Reserved.</p>
+    <p>&copy; 2026 Biblical Empowerment Program</p>
 </footer>
 
 </body>
