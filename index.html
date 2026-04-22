@@ -38,11 +38,12 @@ window.addEventListener("scroll", reveal);
 reveal();
 </script>
    <!-- Floating WhatsApp Button -->
-<a class="whatsapp-float" 
-   href="https://wa.me/27740386671?text=Hello%20I%20would%20like%20to%20join%20BEP"
-   target="_blank">
-   <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" class="whatsapp-icon">
+<a href="https://wa.me/27740386671" class="whatsapp-float" target="_blank">
+    <i class="fab fa-whatsapp"></i>
 </a>
+
+<!-- Font Awesome Icon Library -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 body {
     margin: 0;
     padding: 0;
@@ -480,33 +481,29 @@ footer {
         display: inline-block;
         margin: 8px;
     }
-}
-   /* Floating WhatsApp Button */
+}/* Floating WhatsApp Button */
 .whatsapp-float {
     position: fixed;
-    bottom: 25px;
-    right: 25px;
-    width: 70px;
-    height: 70px;
+    width: 60px;
+    height: 60px;
+    bottom: 20px;
+    right: 20px;
     background: #25D366;
+    color: #fff;
     border-radius: 50%;
+    text-align: center;
+    font-size: 35px;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
-    z-index: 9999;
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    z-index: 99999;
+    transition: 0.3s ease;
 }
 
 .whatsapp-float:hover {
     transform: scale(1.1);
-    box-shadow: 0 0 25px rgba(0, 255, 0, 0.7);
-}
-
-.whatsapp-icon {
-    width: 38px;
-    height: 38px;
-    display: block;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.4);
 }
 </style>
 </head>
