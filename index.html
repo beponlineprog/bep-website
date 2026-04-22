@@ -7,99 +7,222 @@
 
 <style>
 
-/* GENERAL */
-body {
+/* ------------------------------ */
+/* GLOBAL RESET */
+/* ------------------------------ */
+* {
     margin: 0;
-    font-family: Arial, sans-serif;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
     background: #f4f6f9;
     color: #333;
+    line-height: 1.6;
 }
 
-<!-- HERO SECTION -->
-<section class="hero">
-
-    <div class="hero-overlay"></div>
-
-    <div class="hero-content">
-
-        <!-- LOGO -->
-        <img src="bep-logo.png" alt="BEP Logo" class="hero-logo">
-
-        <!-- TITLE -->
-        <h1 class="hero-title">Biblical Empowerment Program</h1>
-
-        <!-- SUBTITLE -->
-        <p class="hero-subtitle">“Building the Church of Christ”</p>
-
-        <!-- BUTTONS -->
-        <div class="hero-buttons">
-            <a href="https://wa.me/27740386671?text=Hello%20I%20want%20to%20register%20for%20the%20Biblical%20Empowerment%20Program"
-   target="_blank" 
-   class="btn hero-btn-primary">
-   Register
-</a>
-.register-section {
-    padding: 60px 20px;
+/* ------------------------------ */
+/* HEADER */
+/* ------------------------------ */
+header {
+    background: #0b1b48;
+    color: white;
     text-align: center;
-    background: #f5f5f5;
+    padding: 20px;
 }
-            <a href="https://teams.live.com/meet/936085799236?p=b66LnDUAB2Xkx2uQYp&eventType=community"
-               target="_blank"
-               class="btn hero-btn-secondary">
-               Join Session
-            </a>
-        </div>
 
-    </div>
-</section>
-    <section id="register" class="register-section">
-    <h2>Register for Biblical Empowerment Program</h2>
-    <p>Fill in your details to join the program.</p>
+header img {
+    width: 110px;
+    margin-bottom: 10px;
+}
 
-    <!-- Example form -->
-    <form>
-        <input type="text" placeholder="Your Name" required><br><br>
-        <input type="email" placeholder="Your Email" required><br><br>
-        <button type="submit">Submit</button>
-    </form>
-</section>
+/* ------------------------------ */
+/* NAVBAR */
+/* ------------------------------ */
+nav {
+    background: #142c6e;
+    text-align: center;
+    padding: 12px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
 
-/* BUTTONS */
+nav a {
+    color: white;
+    margin: 0 15px;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+nav a:hover {
+    color: gold;
+}
+
+/* ------------------------------ */
+/* HERO SECTION */
+/* ------------------------------ */
+.hero {
+    position: relative;
+    height: 70vh;
+    background: url('images/banner.png') center/cover no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(11, 27, 72, 0.75);
+}
+
+.hero-content {
+    position: relative;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+.hero-title {
+    font-size: 2.8rem;
+    color: gold;
+    margin-bottom: 10px;
+}
+
+.hero-subtitle {
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+}
+
+/* ------------------------------ */
+/* PREMIUM BUTTONS */
+/* ------------------------------ */
 .btn {
+    padding: 12px 25px;
+    margin: 5px;
+    border-radius: 6px;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-block;
+    transition: 0.3s;
+}
+
+.btn-primary {
+    background: linear-gradient(45deg, #d4af37, #f7e27d);
+    color: #0b1b48;
+}
+
+.btn-primary:hover {
+    transform: scale(1.05);
+}
+
+.btn-secondary {
+    border: 2px solid gold;
+    color: gold;
+}
+
+.btn-secondary:hover {
     background: gold;
     color: #0b1b48;
-    padding: 12px 25px;
-    text-decoration: none;
-    border-radius: 6px;
-    font-weight: bold;
 }
 
+/* ------------------------------ */
 /* SECTIONS */
+/* ------------------------------ */
 section {
-    padding: 40px 20px;
+    padding: 60px 20px;
 }
 
 h2 {
     text-align: center;
     color: #0b1b48;
+    margin-bottom: 20px;
 }
 
-/* CARDS */
+/* ------------------------------ */
+/* CARD DESIGN */
+/* ------------------------------ */
 .card {
     max-width: 900px;
     margin: auto;
     background: white;
     padding: 25px;
     border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 3px 12px rgba(0,0,0,0.1);
 }
 
+/* ------------------------------ */
+/* LIST STYLING */
+/* ------------------------------ */
+ul {
+    padding-left: 20px;
+}
+
+/* ------------------------------ */
+/* COUNTDOWN */
+/* ------------------------------ */
+#timer {
+    font-size: 28px;
+    font-weight: bold;
+    color: gold;
+}
+
+/* ------------------------------ */
+/* IFRAME (FORM) */
+/* ------------------------------ */
+iframe {
+    border: none;
+    width: 100%;
+    height: 800px;
+}
+
+/* ------------------------------ */
 /* FOOTER */
+/* ------------------------------ */
 footer {
     background: #0b1b48;
     color: white;
     text-align: center;
     padding: 15px;
+}
+
+/* ------------------------------ */
+/* WHATSAPP FLOAT */
+/* ------------------------------ */
+.whatsapp-float {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    bottom: 20px;
+    right: 20px;
+    background: #25D366;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+    z-index: 1000;
+}
+
+/* ------------------------------ */
+/* MOBILE */
+/* ------------------------------ */
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 2rem;
+    }
+
+    .hero {
+        height: 60vh;
+    }
+
+    nav a {
+        display: inline-block;
+        margin: 8px;
+    }
 }
 
 </style>
