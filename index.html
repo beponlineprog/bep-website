@@ -6,7 +6,72 @@
 <title>B.E.P Ministry</title>
 
 <style>
+/* ======================================
+   B.E.P ULTRA PREMIUM GLOBAL DESIGN
+   ====================================== */
 
+/* Premium Color System */
+:root {
+    --gold: #d4af37;
+    --gold-light: #f7e27d;
+    --gold-soft: #e5c75f;
+    --blue-dark: #0b1b48;
+    --blue-night: #060b22;
+    --glass-white: rgba(255,255,255,0.07);
+    --white: #ffffff;
+    --shadow-gold: rgba(212, 175, 55, 0.4);
+}
+
+/* Luxury Font */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Poppins", sans-serif;
+    background: var(--blue-night);
+    color: var(--white);
+    line-height: 1.7;
+    overflow-x: hidden;
+}
+
+/* Smooth animations everywhere */
+* {
+    transition: 0.3s ease;
+}
+
+/* Section spacing */
+section {
+    padding: 80px 10%;
+}
+
+/* Premium Titles */
+section h2 {
+    text-align: center;
+    font-size: 2.7rem;
+    color: var(--gold);
+    margin-bottom: 25px;
+    text-shadow: 0 0 20px var(--shadow-gold);
+}
+
+/* Premium Cards */
+.card {
+    background: var(--glass-white);
+    border-radius: 18px;
+    padding: 30px;
+    border: 1px solid rgba(255,255,255,0.15);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+    backdrop-filter: blur(10px);
+}
+
+/* Fade-in Animation */
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
 /* ------------------------------ */
 /* GLOBAL RESET */
 /* ------------------------------ */
