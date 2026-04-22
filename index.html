@@ -97,38 +97,74 @@ nav a:hover {
     margin-bottom: 20px;
 }
 
-/* ------------------------------ */
-/* PREMIUM BUTTONS */
-/* ------------------------------ */
+/* PREMIUM GLOW BUTTON SYSTEM */
 .btn {
-    padding: 12px 25px;
-    margin: 5px;
-    border-radius: 6px;
+    padding: 14px 32px;
+    margin: 8px;
+    border-radius: 50px; /* pill shape */
+    font-size: 1.05rem;
     font-weight: 600;
     text-decoration: none;
-    display: inline-block;
-    transition: 0.3s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
 }
 
+/* GOLD PRIMARY BUTTON */
 .btn-primary {
     background: linear-gradient(45deg, #d4af37, #f7e27d);
     color: #0b1b48;
+    box-shadow: 0 0 15px rgba(212,175,55,0.6);
 }
 
+/* GLOW + LIFT */
 .btn-primary:hover {
-    transform: scale(1.05);
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 0 25px rgba(255,215,0,0.9),
+                0 0 50px rgba(255,215,0,0.6);
 }
 
+/* SECONDARY BUTTON */
 .btn-secondary {
-    border: 2px solid gold;
-    color: gold;
+    border: 2px solid #f7d774;
+    color: #f7d774;
+    background: transparent;
 }
 
+/* SECONDARY HOVER GLOW */
 .btn-secondary:hover {
-    background: gold;
+    background: #f7d774;
     color: #0b1b48;
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 0 20px rgba(255,215,0,0.8);
 }
 
+/* ICON STYLE */
+.btn-icon {
+    width: 20px;
+    height: 20px;
+}
+
+/* SHINE SWEEP EFFECT */
+.btn::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 120%;
+    height: 100%;
+    background: rgba(255,255,255,0.25);
+    transform: skewX(-25deg);
+    transition: 0.6s;
+}
+
+.btn:hover::after {
+    left: 120%;
+}
 /* ------------------------------ */
 /* SECTIONS */
 /* ------------------------------ */
