@@ -670,10 +670,238 @@ setInterval(updateCountdown,1000);
 </section>
 
 <!-- CONTACT -->
-<section>
-    <h2>Contact</h2>
-    📧 <a href="mailto:bep.onlineprog@gmail.com">bep.onlineprog@gmail.com</a> | 📞 074 038 6671</p>
-</section>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Us – B.E.P</title>
+
+<!-- ICONS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+
+    body {
+        margin: 0;
+        font-family: "Poppins", sans-serif;
+        background: #f0f2f7;
+    }
+
+    /* Header Banner */
+    .contact-header {
+        height: 35vh;
+        background: linear-gradient(135deg, #0078ff, #6a5acd);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        text-align: center;
+        font-size: 32px;
+        font-weight: 700;
+        animation: fadeIn 1.5s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+        from {opacity: 0; transform: translateY(-20px);}
+        to   {opacity: 1; transform: translateY(0);}
+    }
+
+    /* Main Container */
+    .contact-wrapper {
+        width: 90%;
+        max-width: 1100px;
+        margin: -80px auto 50px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+    }
+
+    @media(max-width: 900px) {
+        .contact-wrapper {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    /* Cards */
+    .card {
+        background: rgba(255, 255, 255, 0.88);
+        backdrop-filter: blur(12px);
+        padding: 30px;
+        border-radius: 18px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        animation: slideUp 1.4s ease;
+    }
+
+    @keyframes slideUp {
+        from {opacity: 0; transform: translateY(30px);}
+        to   {opacity: 1; transform: translateY(0);}
+    }
+
+    h3 {
+        font-size: 24px;
+        margin-bottom: 12px;
+        color: #222;
+    }
+
+    /* Form Inputs */
+    label {
+        margin-top: 12px;
+        font-weight: 600;
+        display: block;
+    }
+
+    input, textarea {
+        width: 100%;
+        padding: 14px;
+        border: 2px solid #ddd;
+        border-radius: 12px;
+        font-size: 16px;
+        margin-top: 5px;
+        transition: 0.3s;
+    }
+
+    input:focus, textarea:focus {
+        border-color: #0078ff;
+        box-shadow: 0 0 8px rgba(0,120,255,0.3);
+        outline: none;
+    }
+
+    button {
+        width: 100%;
+        padding: 16px;
+        background: linear-gradient(135deg, #0078ff, #6a5acd);
+        color: white;
+        border: none;
+        border-radius: 14px;
+        font-size: 19px;
+        margin-top: 20px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+    }
+
+    /* Contact List */
+    .contact-item {
+        font-size: 18px;
+        padding: 15px 0;
+        border-bottom: 1px solid #e1e1e1;
+    }
+
+    .contact-item i {
+        margin-right: 12px;
+        color: #0078ff;
+    }
+
+    .social-buttons {
+        margin-top: 25px;
+        display: flex;
+        gap: 15px;
+        flex-wrap: wrap;
+    }
+
+    .social-buttons a {
+        flex: 1;
+        min-width: 120px;
+        padding: 12px;
+        border-radius: 12px;
+        text-align: center;
+        color: white;
+        text-decoration: none;
+        font-weight: 600;
+        transition: 0.3s;
+    }
+
+    .wa { background: #25D366; }
+    .fb { background: #1877f2; }
+    .ig { background: #d6249f; }
+    .email-btn { background: #0078ff; }
+
+    .social-buttons a:hover {
+        opacity: 0.85;
+        transform: translateY(-3px);
+    }
+
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="contact-header">
+    Contact Us
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="contact-wrapper">
+
+    <!-- LEFT: Contact Form -->
+    <div class="card">
+        <h3>Send us a Message</h3>
+
+        <form action="send_email.php" method="POST">
+            <label>Your Name</label>
+            <input type="text" name="name" required>
+
+            <label>Your Email</label>
+            <input type="email" name="email" required>
+
+            <label>Your Message</label>
+            <textarea name="message" rows="6" required></textarea>
+
+            <button type="submit">
+                <i class="fa fa-paper-plane"></i> Send Message
+            </button>
+        </form>
+    </div>
+
+    <!-- RIGHT: Contact Info -->
+    <div class="card">
+        <h3>Reach Us Directly</h3>
+
+        <div class="contact-item">
+            <i class="fa fa-phone"></i> +27 74 038 6671
+        </div>
+
+        <div class="contact-item">
+            <i class="fa fa-whatsapp"></i> WhatsApp Chat Available
+        </div>
+
+        <div class="contact-item">
+            <i class="fa fa-envelope"></i> beponlineprogram@gmail.com
+        </div>
+
+        <div class="contact-item">
+            <i class="fa fa-location-dot"></i> Johannesburg, South Africa
+        </div>
+
+        <div class="social-buttons">
+            <a href="https://wa.me/27740386671" target="_blank" class="wa">
+                <i class="fab fa-whatsapp"></i> WhatsApp
+            </a>
+
+            <a href="#" class="fb">
+                <i class="fab fa-facebook"></i> Facebook
+            </a>
+
+            <a href="#" class="ig">
+                <i class="fab fa-instagram"></i> Instagram
+            </a>
+
+            <a href="mailto:beponlineprogram@gmail.com" class="email-btn">
+                <i class="fa fa-envelope"></i> Email
+            </a>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>>
 
 <footer>
     <p>&copy; 2026 Biblical Empowerment Program</p>
