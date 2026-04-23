@@ -842,7 +842,17 @@ setInterval(updateCountdown,1000);
     <div class="card">
         <h3>Send us a Message</h3>
 
-        <form action="send_email.php" method="POST">
+        <form action="https://formsubmit.co/bep.onlineprog@gmail.com" method="POST" class="contact-form">
+
+    <!-- Honeypot (Spam Protection) -->
+    <input type="text" name="_honey" style="display:none">
+
+    <!-- Disable Captcha -->
+    <input type="hidden" name="_captcha" value="false">
+
+    <!-- Redirect After Success -->
+    <input type="hidden" name="_next" value="https://yourwebsite.github.io/success.html">
+
     <label>Your Name</label>
     <input type="text" name="name" required>
 
@@ -852,7 +862,7 @@ setInterval(updateCountdown,1000);
     <label>Your Message</label>
     <textarea name="message" rows="6" required></textarea>
 
-    <button type="submit">
+    <button type="submit" class="btn-submit">
         <i class="fa fa-paper-plane"></i> Send Message
     </button>
 </form>
