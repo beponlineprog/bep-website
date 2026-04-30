@@ -3,101 +3,101 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Biblical Empowerment Program</title>
+    <title>Biblical Empowerment Program | Home</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/feather-icons"></script>
 </head>
 
 <body>
 
 <!-- NAVBAR -->
-<nav class="navbar">
+<nav class="navbar fade-in">
     <div class="nav-container">
         <a href="index.html" class="nav-logo">
-            <img src="be-logo.png" alt="BEP Logo">
+            <img src="bep-logo.png" alt="BEP Logo">
         </a>
 
         <ul class="nav-links">
-            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html" class="active">Home</a></li>
             <li><a href="about.html">About</a></li>
-            <li><a href="sessions.html">Sessions</a></li>
+            <li><a href="register.html">Register</a></li>
             <li><a href="contact.html">Contact</a></li>
         </ul>
     </div>
 </nav>
 
-<!-- HERO -->
-<header class="hero">
+<!-- HERO SECTION -->
+<header class="hero slide-up">
     <div class="hero-overlay"></div>
-    <div class="hero-content">
+
+    <div class="hero-content zoom-in">
         <h1 class="hero-title">Biblical Empowerment Program</h1>
-        <p class="hero-subtitle">Building the Church of Christ through Scripture & the Holy Spirit</p>
+        <p class="hero-subtitle">Equipping believers with Kingdom understanding, power, and purpose.</p>
 
         <div class="hero-buttons">
-            <a href="https://wa.me/27740386671?text=Hello%20I%20want%20to%20register%20for%20the%20Biblical%20Empowerment%20Program"
-               target="_blank"
+            
+            <a href="https://wa.me/27740386671?text=Hello%2C%20I%20want%20to%20register%20for%20BEP" 
+               target="_blank" 
                class="btn hero-btn-primary">
-               <i data-feather="message-circle"></i> Register via WhatsApp
+               ⚜ Register via WhatsApp
             </a>
 
-            <a href="sessions.html"
+            <a href="https://teams.live.com/meet/936085799236?p=b66LnDUAB2Xkx2uQYp&eventType=community" 
+               target="_blank" 
                class="btn hero-btn-secondary">
-               <i data-feather="calendar"></i> View Sessions
+               ▶ Join Live Session
             </a>
+
         </div>
     </div>
 </header>
 
-<!-- WELCOME SECTION -->
-<section class="section">
-    <div class="section-container">
-        <h2 class="section-title">Welcome to B.E.P</h2>
-        <p class="section-text">
-            A faith-driven program designed to equip believers with biblical truth, spiritual empowerment,
-            and practical guidance for daily Christian living.
-        </p>
-    </div>
+<!-- INTRO SECTION -->
+<section class="content-section fade-in">
+    <h2 class="section-title">Welcome to B.E.P</h2>
+    <p class="section-text">
+        We are a faith-driven program dedicated to building spiritually grounded believers,
+        empowered to walk in divine purpose and revelation through the Word and the Holy Spirit.
+    </p>
 </section>
 
-<!-- FEATURES -->
-<section class="features">
-    <div class="feature-card">
-        <i data-feather="book-open"></i>
-        <h3>Powerful Teachings</h3>
-        <p>Deep, sound, Scripture-based lessons for spiritual growth.</p>
-    </div>
-
-    <div class="feature-card">
-        <i data-feather="users"></i>
-        <h3>Faith Community</h3>
-        <p>A united community growing in Christ together.</p>
-    </div>
-
-    <div class="feature-card">
-        <i data-feather="zap"></i>
-        <h3>Holy Spirit Empowerment</h3>
-        <p>Spirit-led sessions focused on transformation and purpose.</p>
+<!-- NEXT SESSION COUNTDOWN -->
+<section class="content-section slide-up">
+    <h2 class="section-title">Next Session Countdown</h2>
+    <div class="countdown-card">
+        <div id="timer">Loading...</div>
     </div>
 </section>
-
-<!-- FOOTER -->
-<footer class="footer">
-    <p>© 2026 Biblical Empowerment Program — All Rights Reserved</p>
-</footer>
-
-<!-- FLOATING WHATSAPP -->
-<a href="https://wa.me/27740386671?text=Hello%20I%20would%20like%20to%20know%20more%20about%20BEP"
-   class="whatsapp-float"
-   target="_blank">
-   <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
-        class="whatsapp-icon" alt="WhatsApp">
-</a>
 
 <script>
-    feather.replace();
+function getNextThursday() {
+    const now = new Date();
+    const result = new Date();
+    result.setHours(19,0,0,0);
+    result.setDate(now.getDate() + ((4 - now.getDay() + 7) % 7));
+    if (result < now) result.setDate(result.getDate()+7);
+    return result;
+}
+
+function updateCountdown() {
+    const diff = getNextThursday() - new Date();
+    const d = Math.floor(diff / 86400000);
+    const h = Math.floor(diff / 3600000) % 24;
+    const m = Math.floor(diff / 60000) % 60;
+    const s = Math.floor(diff / 1000) % 60;
+    document.getElementById("timer").innerHTML = `${d}d ${h}h ${m}m ${s}s`;
+}
+setInterval(updateCountdown, 1000);
 </script>
+
+<!-- FLOATING WHATSAPP BUTTON -->
+<a href="https://wa.me/27740386671" target="_blank" class="whatsapp-float">
+    <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" class="whatsapp-icon">
+</a>
+
+<!-- FOOTER -->
+<footer class="footer fade-in">
+    <p>© 2026 Biblical Empowerment Program • All Rights Reserved</p>
+</footer>
 
 </body>
 </html>
