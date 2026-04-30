@@ -3,101 +3,124 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Biblical Empowerment Program | Home</title>
+    <title>Biblical Empowerment Program (B.E.P)</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<!-- NAVBAR -->
-<nav class="navbar fade-in">
+<!-- ▬▬▬▬▬ NAVBAR ▬▬▬▬▬ -->
+<nav class="navbar">
     <div class="nav-container">
-        <a href="index.html" class="nav-logo">
-            <img src="bep-logo.png" alt="BEP Logo">
-        </a>
+        <div class="nav-logo">
+            <a href="index.html">
+                <img src="bep-logo.png" alt="BEP Logo">
+            </a>
+        </div>
 
         <ul class="nav-links">
-            <li><a href="index.html" class="active">Home</a></li>
+            <li><a class="active" href="index.html">Home</a></li>
             <li><a href="about.html">About</a></li>
+            <li><a href="sessions.html">Sessions</a></li>
             <li><a href="register.html">Register</a></li>
             <li><a href="contact.html">Contact</a></li>
         </ul>
     </div>
 </nav>
 
-<!-- HERO SECTION -->
-<header class="hero slide-up">
+<!-- ▬▬▬▬▬ HERO SECTION ▬▬▬▬▬ -->
+<header class="hero fade-in">
     <div class="hero-overlay"></div>
 
-    <div class="hero-content zoom-in">
+    <div class="hero-content">
         <h1 class="hero-title">Biblical Empowerment Program</h1>
-        <p class="hero-subtitle">Equipping believers with Kingdom understanding, power, and purpose.</p>
+        <p class="hero-subtitle">Building Spirit-filled, Word-grounded believers for Christ.</p>
 
         <div class="hero-buttons">
-            
-            <a href="https://wa.me/27740386671?text=Hello%2C%20I%20want%20to%20register%20for%20BEP" 
-               target="_blank" 
+            <a href="https://wa.me/27740386671?text=Hello%20I%20want%20to%20register%20for%20the%20Biblical%20Empowerment%20Program"
+               target="_blank"
                class="btn hero-btn-primary">
-               ⚜ Register via WhatsApp
+               ☎ Register via WhatsApp
             </a>
 
-            <a href="https://teams.live.com/meet/936085799236?p=b66LnDUAB2Xkx2uQYp&eventType=community" 
-               target="_blank" 
+            <a href="https://teams.live.com/meet/936085799236?p=b66LnDUAB2Xkx2uQYp&eventType=community"
+               target="_blank"
                class="btn hero-btn-secondary">
-               ▶ Join Live Session
+               ▶ Join Session
             </a>
-
         </div>
     </div>
 </header>
 
-<!-- INTRO SECTION -->
-<section class="content-section fade-in">
-    <h2 class="section-title">Welcome to B.E.P</h2>
-    <p class="section-text">
-        We are a faith-driven program dedicated to building spiritually grounded believers,
-        empowered to walk in divine purpose and revelation through the Word and the Holy Spirit.
-    </p>
-</section>
 
-<!-- NEXT SESSION COUNTDOWN -->
+<!-- ▬▬▬▬▬ ABOUT PREVIEW ▬▬▬▬▬ -->
 <section class="content-section slide-up">
-    <h2 class="section-title">Next Session Countdown</h2>
-    <div class="countdown-card">
-        <div id="timer">Loading...</div>
+    <h2>Who We Are</h2>
+
+    <div class="card">
+        <p>
+            The Biblical Empowerment Program (B.E.P) is dedicated to equipping believers with deeper 
+            understanding of the Word of God and the transforming power of the Holy Spirit.
+        </p>
+
+        <a href="about.html" class="contact-btn" style="margin-top:20px;">Learn More →</a>
     </div>
 </section>
 
-<script>
-function getNextThursday() {
-    const now = new Date();
-    const result = new Date();
-    result.setHours(19,0,0,0);
-    result.setDate(now.getDate() + ((4 - now.getDay() + 7) % 7));
-    if (result < now) result.setDate(result.getDate()+7);
-    return result;
-}
 
-function updateCountdown() {
-    const diff = getNextThursday() - new Date();
-    const d = Math.floor(diff / 86400000);
-    const h = Math.floor(diff / 3600000) % 24;
-    const m = Math.floor(diff / 60000) % 60;
-    const s = Math.floor(diff / 1000) % 60;
-    document.getElementById("timer").innerHTML = `${d}d ${h}h ${m}m ${s}s`;
-}
-setInterval(updateCountdown, 1000);
-</script>
+<!-- ▬▬▬▬▬ SESSIONS PREVIEW ▬▬▬▬▬ -->
+<section class="content-section slide-up">
+    <h2>Weekly Online Sessions</h2>
 
-<!-- FLOATING WHATSAPP BUTTON -->
-<a href="https://wa.me/27740386671" target="_blank" class="whatsapp-float">
-    <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" class="whatsapp-icon">
-</a>
+    <div class="card" style="text-align:center;">
+        <p>📅 Every Thursday</p>
+        <p>⏰ 19h00 – 20h30</p>
+        <p>💻 Microsoft Teams</p>
 
-<!-- FOOTER -->
-<footer class="footer fade-in">
-    <p>© 2026 Biblical Empowerment Program • All Rights Reserved</p>
+        <a href="sessions.html" class="contact-btn">View Full Sessions →</a>
+    </div>
+</section>
+
+
+<!-- ▬▬▬▬▬ REGISTER PREVIEW ▬▬▬▬▬ -->
+<section class="content-section slide-up">
+    <h2>Join the Program</h2>
+    <div class="card">
+        <p>
+            Register today and be part of a growing community of Spirit-filled believers.
+        </p>
+
+        <a href="register.html" class="contact-btn">Register Now →</a>
+    </div>
+</section>
+
+
+<!-- ▬▬▬▬▬ CONTACT PREVIEW ▬▬▬▬▬ -->
+<section class="content-section slide-up">
+    <h2>Contact Us</h2>
+    <div class="card">
+        <p>
+            Need help or have questions? We’re here for you.
+        </p>
+
+        <a href="contact.html" class="contact-btn">Contact Page →</a>
+    </div>
+</section>
+
+
+<!-- ▬▬▬▬▬ FOOTER ▬▬▬▬▬ -->
+<footer class="footer">
+    <p>&copy; 2026 Biblical Empowerment Program</p>
 </footer>
+
+
+<!-- ▬▬▬▬▬ FLOATING WHATSAPP BUTTON ▬▬▬▬▬ -->
+<a href="https://wa.me/27740386671?text=Hello%20I%20want%20to%20connect%20with%20B.E.P"
+   class="whatsapp-float"
+   target="_blank">
+
+    <img src="whatsapp-icon.png" class="whatsapp-icon" alt="WhatsApp">
+</a>
 
 </body>
 </html>
