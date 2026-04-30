@@ -1,93 +1,88 @@
-/* ============================================
-   GLOBAL STYLE — ULTRA PREMIUM BLUE + GOLD THEME
-   ============================================ */
-
-:root {
-    --blue: #0b1b48;
-    --blue-dark: #081233;
-    --gold: #d4af37;
-    --gold-light: #f8e7b9;
-    --white: #ffffff;
-    --text-light: #e2e6f3;
-    --card-bg: rgba(255,255,255,0.06);
-}
-
-/* RESET */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Poppins", sans-serif;
-}
-
+/* -------------------------
+   GLOBAL STYLING
+-------------------------- */
 body {
-    background: var(--blue);
-    color: var(--text-light);
+    margin: 0;
+    font-family: "Poppins", sans-serif;
+    background: #f4f6fc;
+    color: #0b1b48;
+}
+
+h1, h2, h3 {
+    margin: 0;
+    font-weight: 700;
+}
+
+p {
     line-height: 1.7;
 }
 
-.container {
+/* Container system */
+.content-section {
     width: 90%;
-    max-width: 1200px;
-    margin: auto;
+    max-width: 1100px;
+    margin: 40px auto;
 }
 
-/* ============================================
-   NAVBAR
-   ============================================ */
+/* Premium CARD */
+.card {
+    background: #fff;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 6px 25px rgba(0,0,0,0.08);
+}
 
+/* -------------------------
+   NAVBAR
+-------------------------- */
 .navbar {
-    background: var(--blue-dark);
-    padding: 15px 0;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+    width: 100%;
+    background: #0b1b48;
+    padding: 12px 0;
+    display: flex;
+    justify-content: center;
     position: sticky;
     top: 0;
     z-index: 999;
 }
 
-.nav-content {
+.nav-container {
+    width: 90%;
+    max-width: 1200px;
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-.logo img {
+.nav-logo img {
     height: 55px;
 }
 
-nav a {
-    color: var(--text-light);
-    margin-left: 25px;
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+}
+
+.nav-links li a {
+    color: #fff;
     text-decoration: none;
-    font-size: 1.1rem;
-    position: relative;
-    transition: 0.3s;
+    font-weight: 500;
+    transition: 0.2s;
 }
 
-nav a:hover,
-nav a.active {
-    color: var(--gold);
+.nav-links li a:hover,
+.nav-links li a.active {
+    color: gold;
 }
 
-nav a.active::after,
-nav a:hover::after {
-    content: "";
-    width: 100%;
-    height: 2px;
-    background: var(--gold);
-    position: absolute;
-    bottom: -5px;
-    left: 0;
-}
-
-/* ============================================
+/* -------------------------
    HERO SECTION
-   ============================================ */
-
+-------------------------- */
 .hero {
     position: relative;
-    height: 55vh; /* medium small */
-    background: url("images/banner.png") center/cover no-repeat;
+    height: 60vh;
+    background: url('images/banner.png') center/cover no-repeat;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -97,188 +92,200 @@ nav a:hover::after {
     position: absolute;
     width: 100%;
     height: 100%;
-    background: rgba(11, 27, 72, 0.78);
-    backdrop-filter: blur(2px);
+    background: rgba(11, 27, 72, 0.7);
 }
 
 .hero-content {
     position: relative;
     text-align: center;
+    color: #fff;
     z-index: 2;
-    color: var(--white);
-    animation: fadeIn 1.4s ease-in-out;
 }
 
 .hero-title {
     font-size: 3rem;
-    color: var(--gold);
-    font-weight: 700;
+    color: gold;
+    margin-bottom: 10px;
 }
 
 .hero-subtitle {
-    margin-top: 10px;
     font-size: 1.2rem;
+    margin-bottom: 25px;
 }
 
-/* ============================================
-   BUTTONS — PREMIUM GOLD GLOW
-   ============================================ */
+/* HERO BUTTONS */
+.hero-buttons {
+    margin-top: 10px;
+}
 
-.btn {
-    padding: 12px 30px;
+.hero-btn-primary,
+.hero-btn-secondary {
+    padding: 14px 28px;
     border-radius: 8px;
+    font-size: 1rem;
     text-decoration: none;
-    font-weight: 600;
-    display: inline-block;
     margin: 8px;
-    transition: 0.3s ease;
-}
-
-.btn-primary {
-    background: var(--gold);
-    color: var(--blue);
-    box-shadow: 0 0 15px rgba(212,175,55,0.6);
-}
-
-.btn-primary:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 22px rgba(212,175,55,0.9);
-}
-
-.btn-secondary {
-    border: 2px solid var(--gold);
-    color: var(--gold);
-}
-
-.btn-secondary:hover {
-    background: var(--gold);
-    color: var(--blue);
-    transform: scale(1.05);
-}
-
-/* ============================================
-   PAGE HERO SECTIONS (About, Contact, Sessions)
-   ============================================ */
-
-.page-hero {
-    position: relative;
-    height: 40vh;
-    background: url("images/banner.png") center/cover no-repeat;
-    display: flex;
+    display: inline-flex;
     align-items: center;
-    justify-content: center;
+    gap: 10px;
+    transition: 0.25s;
 }
 
-.page-hero-overlay {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: rgba(11, 27, 72, 0.85);
+/* PRIMARY BUTTON */
+.hero-btn-primary {
+    background: gold;
+    color: #0b1b48;
+    font-weight: 700;
+    box-shadow: 0 0 15px rgba(255,215,0,0.4);
 }
 
-.page-hero-content {
-    position: relative;
-    z-index: 2;
+.hero-btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 25px rgba(255,215,0,0.7);
+}
+
+/* SECONDARY BUTTON */
+.hero-btn-secondary {
+    border: 2px solid gold;
+    color: gold;
+}
+
+.hero-btn-secondary:hover {
+    background: gold;
+    color: #0b1b48;
+    transform: translateY(-3px);
+}
+
+/* -------------------------
+   SUBPAGE HEADER
+-------------------------- */
+.subpage-header {
+    background: #0b1b48;
+    color: #fff;
+    padding: 60px 20px;
     text-align: center;
 }
 
-.page-hero-content h1 {
-    font-size: 2.8rem;
-    color: var(--gold);
+.subpage-header h1 {
+    color: gold;
+    margin-bottom: 10px;
 }
 
-.page-hero-content p {
-    margin-top: 10px;
-    font-size: 1.2rem;
-}
-
-/* ============================================
-   CARDS
-   ============================================ */
-
-.card {
-    background: var(--card-bg);
-    padding: 30px;
-    border-radius: 15px;
-    margin-top: 40px;
-    border-left: 4px solid var(--gold);
-    box-shadow: 0 0 15px rgba(0,0,0,0.3);
-}
-
-.section-title {
-    text-align: center;
-    font-size: 2rem;
-    color: var(--gold);
-    margin-bottom: 20px;
-}
-
-/* ============================================
-   CONTACT PAGE GRID
-   ============================================ */
-
+/* -------------------------
+   CONTACT PAGE
+-------------------------- */
 .contact-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 25px;
     margin-top: 30px;
 }
 
-.contact-item {
+.contact-box {
     text-align: center;
+    padding: 25px;
 }
 
-.contact-icon {
-    font-size: 45px;
-    color: var(--gold);
-    margin-bottom: 15px;
+.contact-box .icon {
+    width: 70px;
+    margin-bottom: 10px;
 }
 
-/* ============================================
+.contact-btn {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 12px 25px;
+    border-radius: 8px;
+    background: gold;
+    color: #0b1b48;
+    font-weight: 600;
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+.contact-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 20px rgba(255,215,0,0.6);
+}
+
+/* -------------------------
+   FOOTER
+-------------------------- */
+.footer {
+    background: #0b1b48;
+    text-align: center;
+    color: #fff;
+    padding: 20px;
+    margin-top: 40px;
+}
+
+/* -------------------------
    FLOATING WHATSAPP BUTTON
-   ============================================ */
-
+-------------------------- */
 .whatsapp-float {
     position: fixed;
     width: 60px;
     height: 60px;
-    bottom: 25px;
-    right: 25px;
+    bottom: 20px;
+    right: 20px;
     background: #25D366;
-    color: #fff;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
     z-index: 1000;
-    box-shadow: 0 0 15px rgba(0,0,0,0.3);
-    transition: 0.3s;
+    transition: 0.2s;
 }
 
 .whatsapp-float:hover {
-    transform: scale(1.12);
+    transform: scale(1.05);
 }
 
 .whatsapp-icon {
-    font-size: 32px;
+    width: 38px;
+    height: 38px;
 }
 
-/* ============================================
-   FOOTER
-   ============================================ */
-
-footer {
-    text-align: center;
-    padding: 25px 0;
-    background: var(--blue-dark);
-    margin-top: 50px;
-    font-size: 0.95rem;
-}
-
-/* ============================================
+/* -------------------------
    ANIMATIONS
-   ============================================ */
+-------------------------- */
+.fade-in {
+    animation: fadeIn 1s ease forwards;
+}
+
+.slide-up {
+    animation: slideUp 1s ease forwards;
+}
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(15px); }
-    to { opacity: 1; transform: translateY(0); }
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(25px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* -------------------------
+   RESPONSIVE (MOBILE)
+-------------------------- */
+@media (max-width: 768px) {
+
+    .nav-links {
+        display: none; /* mobile menu coming later if needed */
+    }
+
+    .contact-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-title {
+        font-size: 2.2rem;
+    }
+
+    .hero {
+        height: 50vh;
+    }
 }
