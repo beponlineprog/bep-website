@@ -1,43 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Contact – B.E.P</title>
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <title>Contact - B.E.P</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<nav>
-    <div class="container">
-        <img src="bep-logo.png">
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="sessions.html">Sessions</a></li>
-            <li><a href="register.html">Register</a></li>
-            <li><a href="contact.html">Contact</a></li>
-        </ul>
+<div class="navbar">
+    <div class="nav-container">
+        <div class="nav-logo"><img src="bep-logo.png"></div>
+        <div class="nav-menu">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="sessions.html">Sessions</a>
+            <a href="register.html">Register</a>
+            <a href="contact.html" class="active">Contact</a>
+        </div>
     </div>
-</nav>
+</div>
 
-<section class="card">
-    <h2>Contact Us</h2>
+<div class="page-header">
+    <h1>Contact Us</h1>
+    <p>We are here to assist you</p>
+</div>
 
-    <p><b>📞 Phone / WhatsApp:</b> <a href="https://wa.me/27740386671">074 038 6671</a></p>
-    <p><b>📧 Email:</b> <a href="mailto:bep.onlineprog@gmail.com">bep.onlineprog@gmail.com</a></p>
-    <p><b>📘 Facebook Group:</b>  
-       <a href="https://facebook.com/groups/1421853356307383/" target="_blank">
-       Join Here
-       </a>
-    </p>
-</section>
+<div class="container">
+    <div class="box">
+        <h3>Send Us a Message</h3>
 
-<footer>
-    <p>© 2026 Biblical Empowerment Program</p>
-</footer>
+        <form action="https://formspree.io/f/mqenaqjg" method="POST">
+            <label>Your Name</label>
+            <input type="text" name="name" required>
 
-<a class="whatsapp-float" href="https://wa.me/27740386671">
+            <label>Your Email</label>
+            <input type="email" name="email" required>
+
+            <label>Your Message</label>
+            <textarea name="message" rows="4" required></textarea>
+
+            <button type="submit" class="btn btn-primary">Send Message</button>
+        </form>
+    </div>
+
+    <div class="box">
+        <h3>Direct Contacts</h3>
+        <p><strong>Phone/WhatsApp:</strong> <a href="https://wa.me/27740386671">074 038 6671</a></p>
+        <p><strong>Email:</strong> <a href="mailto:bep.onlineprog@gmail.com">bep.onlineprog@gmail.com</a></p>
+        <p><strong>Facebook:</strong> <a href="https://facebook.com/groups/1421853356307383/" target="_blank">Facebook Group</a></p>
+    </div>
+</div>
+
+<a class="whatsapp-float" href="https://wa.me/27740386671" target="_blank">
     <img src="whatsapp.jpg">
 </a>
 
