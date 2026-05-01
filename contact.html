@@ -3,87 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact | Biblical Empowerment Program</title>
+    <title>Contact – B.E.P</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
 <!-- NAVBAR -->
-<nav class="navbar fade-in">
-    <div class="nav-container">
-        <a href="index.html" class="nav-logo">
-            <img src="bep-logo.png" alt="BEP Logo">
-        </a>
-
-        <ul class="nav-links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="register.html">Register</a></li>
-            <li><a href="contact.html" class="active">Contact</a></li>
-        </ul>
-    </div>
+<nav>
+    <img src="bep-logo.png" alt="BEP Logo">
+    <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="sessions.html">Sessions</a></li>
+        <li><a href="register.html">Register</a></li>
+        <li><a href="contact.html" class="active">Contact</a></li>
+    </ul>
 </nav>
 
-<!-- HEADER -->
-<header class="subpage-header slide-up">
-    <h1>Contact Us</h1>
-    <p>We are here to connect, support, and walk with you on your spiritual journey.</p>
-</header>
+<section>
+    <h2>Contact Us</h2>
 
-<!-- CONTACT SECTION -->
-<section class="content-section fade-in">
-    <div class="card contact-card">
+    <div class="contact-box">
 
-        <h2 style="text-align:center; margin-bottom:20px;">Get in Touch</h2>
+        <p><strong>Email:</strong> bep.onlineprog@gmail.com</p>
+        <p><strong>WhatsApp:</strong> <a href="https://wa.me/">Chat on WhatsApp</a></p>
+        <p><strong>Facebook:</strong> <a href="https://facebook.com/groups/1421853356307383/">Join our Group</a></p>
 
-        <div class="contact-grid">
+        <hr><br>
 
-            <!-- WhatsApp -->
-            <div class="contact-box">
-                <img src="https://cdn-icons-png.flaticon.com/512/124/124034.png" class="icon">
-                <h3>WhatsApp & Calls</h3>
-                <p>074 038 6671</p>
+        <form class="contact-form" action="https://formsubmit.co/bep.onlineprog@gmail.com" method="POST">
+            <input type="text" name="name" placeholder="Your Full Name" required>
+            <input type="email" name="email" placeholder="Your Email Address" required>
+            <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
 
-                <a href="https://wa.me/27740386671?text=Hello%20BEP%20Team%2C%20I%20would%20like%20to%20contact%20you"
-                   class="contact-btn">
-                    Message on WhatsApp
-                </a>
-            </div>
-
-            <!-- Email -->
-            <div class="contact-box">
-                <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" class="icon">
-                <h3>Email</h3>
-                <p>bep.onlineprog@gmail.com</p>
-
-                <a href="mailto:bep.onlineprog@gmail.com" class="contact-btn">
-                    Send Email
-                </a>
-            </div>
-
-            <!-- Facebook -->
-            <div class="contact-box">
-                <img src="https://cdn-icons-png.flaticon.com/512/124/124010.png" class="icon">
-                <h3>Facebook</h3>
-                <p>Biblical Empowerment Community</p>
-
-                <a href="https://facebook.com/groups/1421853356307383/"
-                   target="_blank"
-                   class="contact-btn">
-                    Visit Facebook Group
-                </a>
-            </div>
-
-        </div>
+            <button type="submit">Send Message</button>
+        </form>
 
     </div>
 </section>
 
 <!-- FOOTER -->
-<footer class="footer fade-in">
-    <p>© 2026 Biblical Empowerment Program • All Rights Reserved</p>
+<footer>
+    <div class="socials">
+        <a href="https://facebook.com/groups/1421853356307383/">Facebook Group</a> |
+        <a href="https://wa.me/">WhatsApp</a>
+    </div>
+    <p>&copy; 2024 Biblical Empowerment Program. All Rights Reserved.</p>
 </footer>
+
+<!-- WHATSAPP FLOAT -->
+<a href="https://wa.me/">
+    <div class="whatsapp-float">
+        <img src="images/whatsapp.png" alt="WhatsApp">
+    </div>
+</a>
 
 </body>
 </html>
