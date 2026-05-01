@@ -1,38 +1,33 @@
-/* --------------------------------------------------
-   GLOBAL STYLES – ROYAL BLUE + GOLD THEME
--------------------------------------------------- */
-body {
-    font-family: "Poppins", sans-serif;
+/* ===========================
+   GLOBAL RESET & BASE STYLE
+=============================*/
+* {
     margin: 0;
     padding: 0;
-    background: #f4f6fc;
-    color: #0b1b48;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
 }
 
-h1, h2, h3 {
-    color: #0b1b48;
-    text-align: center;
-    font-weight: 700;
+body {
+    background: #f9f9fc;
+    color: #002060; /* Royal Blue */
+    line-height: 1.7;
 }
 
-p {
-    line-height: 1.8;
-}
-
-/* --------------------------------------------------
-   NAVBAR
--------------------------------------------------- */
-nav {
+/* ===========================
+          NAVBAR
+=============================*/
+.navbar {
     width: 100%;
-    background: #0b1b48;
-    padding: 12px 0;
-    position: fixed;
+    background: white;
+    border-bottom: 2px solid #d9b65d;
+    padding: 15px 0;
+    position: sticky;
     top: 0;
-    left: 0;
-    z-index: 2000;
+    z-index: 999;
 }
 
-nav .container {
+.nav-container {
     width: 90%;
     margin: auto;
     display: flex;
@@ -40,139 +35,154 @@ nav .container {
     justify-content: space-between;
 }
 
-nav img {
-    height: 45px;
+.nav-logo img {
+    height: 60px;
 }
 
-nav ul {
-    list-style: none;
+.nav-menu {
     display: flex;
     gap: 25px;
 }
 
-nav ul li a {
-    color: gold;
-    font-weight: 600;
+.nav-menu a {
     text-decoration: none;
-    font-size: 1rem;
+    color: #002060;
+    font-weight: 600;
+    padding-bottom: 5px;
+    transition: 0.3s;
 }
 
-nav ul li a:hover {
-    color: #fff;
+.nav-menu a:hover,
+.nav-menu a.active {
+    color: #d4af37;
+    border-bottom: 2px solid #d4af37;
 }
 
-/* --------------------------------------------------
-   HERO SECTION (SMALL B1 – 45vh)
--------------------------------------------------- */
+/* ===========================
+            HERO
+=============================*/
 .hero {
-    position: relative;
-    height: 45vh;
+    height: 55vh;
     background: url('image/banner.png') center/cover no-repeat;
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 70px;
 }
 
 .hero-overlay {
-    position: absolute;
+    background: rgba(0,0,0,0.5);
     width: 100%;
     height: 100%;
-    background: rgba(11,27,72,0.7);
+    position: absolute;
+    top:0;
+    left:0;
 }
 
 .hero-content {
     position: relative;
-    z-index: 2;
     text-align: center;
-    color: #fff;
+    color: white;
+    z-index: 2;
 }
 
 .hero h1 {
-    font-size: 2.5rem;
-    color: gold;
-    margin-bottom: 8px;
+    font-size: 48px;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 5px black;
 }
 
 .hero p {
-    font-size: 1.2rem;
+    font-size: 20px;
+    opacity: 0.9;
 }
 
-/* --------------------------------------------------
-   BUTTONS – PREMIUM GOLD
--------------------------------------------------- */
+/* ===========================
+      PAGE HEADERS
+=============================*/
+.page-header {
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.page-header h1 {
+    font-size: 42px;
+    color: #002060;
+    margin-bottom: 10px;
+}
+
+.page-header p {
+    font-size: 18px;
+    color: #444;
+}
+
+/* ===========================
+         CONTENT BOXES
+=============================*/
+.container {
+    width: 90%;
+    margin: auto;
+    padding: 40px 0;
+}
+
+.box {
+    background: white;
+    border: 1px solid #d9b65d;
+    border-radius: 10px;
+    padding: 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.07);
+}
+
+/* ===========================
+         BUTTONS
+=============================*/
 .btn {
     display: inline-block;
-    padding: 12px 30px;
+    padding: 12px 25px;
     border-radius: 8px;
-    text-decoration: none;
     font-weight: 600;
+    text-decoration: none;
     transition: 0.3s;
-    margin: 5px;
 }
 
 .btn-primary {
-    background: gold;
-    color: #0b1b48;
-    box-shadow: 0 0 12px gold;
+    background: #d4af37;
+    color: white;
 }
 
 .btn-primary:hover {
-    background: #ffe680;
+    background: #b89630;
 }
 
 .btn-secondary {
-    border: 2px solid gold;
-    color: gold;
+    background: #002060;
+    color: white;
 }
 
 .btn-secondary:hover {
-    background: gold;
-    color: #0b1b48;
+    background: #001744;
 }
 
-/* --------------------------------------------------
-   CONTENT CARDS
--------------------------------------------------- */
-.card {
-    background: #fff;
-    width: 90%;
-    max-width: 900px;
-    margin: 25px auto;
-    padding: 25px;
-    border-radius: 12px;
-    box-shadow: 0 0 12px rgba(0,0,0,0.08);
-}
-
-/* --------------------------------------------------
-   FLOATING WHATSAPP BUTTON
--------------------------------------------------- */
+/* ===========================
+    WHATSAPP FLOATING BUTTON
+=============================*/
 .whatsapp-float {
     position: fixed;
-    width: 60px;
-    height: 60px;
-    bottom: 22px;
-    right: 22px;
-    background: #25D366;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 2000;
+    bottom: 18px;
+    right: 20px;
+    z-index: 9999;
 }
 
 .whatsapp-float img {
-    width: 38px;
-    height: 38px;
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    cursor: pointer;
+    transition: 0.3s;
 }
 
-/* --------------------------------------------------
-   FOOTER
--------------------------------------------------- */
-footer {
-    text-align: center;
-    background: #0b1b48;
-    color: gold;
-    padding: 15px 0;
-    margin-top: 40px;
+.whatsapp-float img:hover {
+    transform: scale(1.1);
 }
