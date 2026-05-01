@@ -1,188 +1,44 @@
 /* ===========================
-   GLOBAL RESET & BASE STYLE
+             FOOTER
 =============================*/
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Poppins", sans-serif;
-}
-
-body {
-    background: #f9f9fc;
-    color: #002060; /* Royal Blue */
-    line-height: 1.7;
-}
-
-/* ===========================
-          NAVBAR
-=============================*/
-.navbar {
-    width: 100%;
-    background: white;
-    border-bottom: 2px solid #d9b65d;
-    padding: 15px 0;
-    position: sticky;
-    top: 0;
-    z-index: 999;
-}
-
-.nav-container {
-    width: 90%;
-    margin: auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.nav-logo img {
-    height: 60px;
-}
-
-.nav-menu {
-    display: flex;
-    gap: 25px;
-}
-
-.nav-menu a {
-    text-decoration: none;
-    color: #002060;
-    font-weight: 600;
-    padding-bottom: 5px;
-    transition: 0.3s;
-}
-
-.nav-menu a:hover,
-.nav-menu a.active {
-    color: #d4af37;
-    border-bottom: 2px solid #d4af37;
-}
-
-/* ===========================
-            HERO
-=============================*/
-.hero {
-    height: 55vh;
-    background: url('image/banner.png') center/cover no-repeat;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.hero-overlay {
-    background: rgba(0,0,0,0.5);
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top:0;
-    left:0;
-}
-
-.hero-content {
-    position: relative;
-    text-align: center;
+footer {
+    background: #002060; /* Royal Blue */
     color: white;
-    z-index: 2;
-}
-
-.hero h1 {
-    font-size: 48px;
-    margin-bottom: 10px;
-    text-shadow: 2px 2px 5px black;
-}
-
-.hero p {
-    font-size: 20px;
-    opacity: 0.9;
-}
-
-/* ===========================
-      PAGE HEADERS
-=============================*/
-.page-header {
-    text-align: center;
-    padding: 60px 20px;
-}
-
-.page-header h1 {
-    font-size: 42px;
-    color: #002060;
-    margin-bottom: 10px;
-}
-
-.page-header p {
-    font-size: 18px;
-    color: #444;
-}
-
-/* ===========================
-         CONTENT BOXES
-=============================*/
-.container {
-    width: 90%;
-    margin: auto;
     padding: 40px 0;
+    margin-top: 60px;
+    border-top: 3px solid #d4af37;
 }
 
-.box {
-    background: white;
-    border: 1px solid #d9b65d;
-    border-radius: 10px;
-    padding: 30px;
-    margin-bottom: 30px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.07);
+.footer-container {
+    width: 90%;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 30px;
 }
 
-/* ===========================
-         BUTTONS
-=============================*/
-.btn {
-    display: inline-block;
-    padding: 12px 25px;
-    border-radius: 8px;
-    font-weight: 600;
+.footer-box h3 {
+    font-size: 20px;
+    margin-bottom: 15px;
+    color: #d4af37;
+}
+
+.footer-box p,
+.footer-box a {
+    color: white;
+    font-size: 16px;
     text-decoration: none;
-    transition: 0.3s;
 }
 
-.btn-primary {
-    background: #d4af37;
-    color: white;
+.footer-box a:hover {
+    color: #d4af37;
 }
 
-.btn-primary:hover {
-    background: #b89630;
-}
-
-.btn-secondary {
-    background: #002060;
-    color: white;
-}
-
-.btn-secondary:hover {
-    background: #001744;
-}
-
-/* ===========================
-    WHATSAPP FLOATING BUTTON
-=============================*/
-.whatsapp-float {
-    position: fixed;
-    bottom: 18px;
-    right: 20px;
-    z-index: 9999;
-}
-
-.whatsapp-float img {
-    width: 65px;
-    height: 65px;
-    border-radius: 50%;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.whatsapp-float img:hover {
-    transform: scale(1.1);
+.footer-bottom {
+    text-align: center;
+    margin-top: 30px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(255,255,255,0.3);
+    font-size: 14px;
+    opacity: 0.8;
 }
