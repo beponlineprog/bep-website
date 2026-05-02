@@ -97,13 +97,17 @@ h1, h2 {
 /* -----------------------------------
    WHATSAPP IMAGE BOX
 ----------------------------------- */
-.whatsapp-box {
-    margin: 30px 0;
-    text-align: center;
-}
-
-.whatsapp-box img {
-    width: 250px;
+.contact-whatsapp-img {
+    display: block;
+    max-width: 180px;
+    width: 100%;
+    margin: 20px auto;
+    border-radius: 10px;
+}.contact-whatsapp-img {
+    display: block;
+    max-width: 180px;
+    width: 100%;
+    margin: 20px auto;
     border-radius: 10px;
 }
 
