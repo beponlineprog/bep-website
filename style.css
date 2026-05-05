@@ -1,4 +1,4 @@
-/* ===================================================== BIBLICAL EMPOWERMENT PROGRAM - SIMPLIFIED STYLE.CSS (Banner, Logo & WhatsApp Removed) ===================================================== */
+/* ===================================================== BIBLICAL EMPOWERMENT PROGRAM - CLEAN STYLE.CSS (Navbar Removed) ===================================================== */
 
 /* RESET */
 
@@ -6,14 +6,6 @@
 
 
 body { background: #0b1a3a; color: #ffffff; line-height: 1.6; }
-
-/* ===================================================== NAVBAR (CLEAN) ===================================================== */ .navbar { position: fixed; top: 0; width: 100%; display: flex; justify-content: center; align-items: center; padding: 15px 20px; background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(8px); z-index: 1000; }
-
-.nav-links { list-style: none; display: flex; gap: 20px; }
-
-.nav-links a { text-decoration: none; color: #ffffff; font-weight: 500; transition: 0.3s; }
-
-.nav-links a:hover { color: gold; }
 
 /* ===================================================== CONTENT ===================================================== */ .container { padding: 120px 20px; max-width: 900px; margin: auto; text-align: center; }
 
@@ -31,10 +23,4 @@ p { color: #ddd; margin-bottom: 15px; }
 
 .secondary:hover { background: gold; color: #0b1a3a; }
 
-/* ===================================================== RESPONSIVE ===================================================== */ @media (max-width: 768px) { .nav-links { flex-wrap: wrap; justify-content: center; }
-
-.container {
-    padding: 100px 15px;
-}
-
-}
+/* ===================================================== RESPONSIVE ===================================================== */ @media (max-width: 768px) { .container { padding: 100px 15px; } }
