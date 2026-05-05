@@ -1,13 +1,13 @@
-/* ===================================================== BIBLICAL EMPOWERMENT PROGRAM - CLEAN STYLE.CSS (Navbar Removed) ===================================================== */
+/* ===================================================== BIBLICAL EMPOWERMENT PROGRAM - CLEAN FULL STYLE.CSS (Navbar, Banner, Logo, WhatsApp Removed) Footer Added ===================================================== */
 
 /* RESET */
 
 { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
 
 
-body { background: #0b1a3a; color: #ffffff; line-height: 1.6; }
+body { background: #0b1a3a; color: #ffffff; line-height: 1.6; min-height: 100vh; display: flex; flex-direction: column; }
 
-/* ===================================================== CONTENT ===================================================== */ .container { padding: 120px 20px; max-width: 900px; margin: auto; text-align: center; }
+/* ===================================================== CONTENT ===================================================== */ .container { flex: 1; padding: 120px 20px 60px; max-width: 900px; margin: auto; text-align: center; }
 
 h1, h2 { color: gold; margin-bottom: 15px; }
 
@@ -23,4 +23,8 @@ p { color: #ddd; margin-bottom: 15px; }
 
 .secondary:hover { background: gold; color: #0b1a3a; }
 
-/* ===================================================== RESPONSIVE ===================================================== */ @media (max-width: 768px) { .container { padding: 100px 15px; } }
+/* ===================================================== FOOTER ===================================================== */ footer { text-align: center; padding: 25px; background: #050c1f; color: #aaa; border-top: 1px solid rgba(255, 215, 0, 0.2); }
+
+footer p { margin: 5px 0; }
+
+/* ===================================================== RESPONSIVE ===================================================== */ @media (max-width: 768px) { .container { padding: 100px 15px 40px; } }
