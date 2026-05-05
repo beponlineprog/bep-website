@@ -1,106 +1,40 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Arial;
-}
+/* ===================================================== BIBLICAL EMPOWERMENT PROGRAM - SIMPLIFIED STYLE.CSS (Banner, Logo & WhatsApp Removed) ===================================================== */
 
-body {
-    background: #0b1a3a;
-    color: white;
-}
+/* RESET */
 
-/* NAVBAR */
-.navbar {
-    position: fixed;
-    width: 100%;
-    top: 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 40px;
-    background: rgba(0,0,0,0.6);
-    backdrop-filter: blur(10px);
-}
+{ margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
 
-.logo img {
-    height: 50px;
-}
 
-.nav-links {
-    list-style: none;
-    display: flex;
-    gap: 20px;
-}
+body { background: #0b1a3a; color: #ffffff; line-height: 1.6; }
 
-.nav-links a {
-    color: white;
-    text-decoration: none;
-}
+/* ===================================================== NAVBAR (CLEAN) ===================================================== */ .navbar { position: fixed; top: 0; width: 100%; display: flex; justify-content: center; align-items: center; padding: 15px 20px; background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(8px); z-index: 1000; }
 
-.nav-links a:hover {
-    color: gold;
-}
+.nav-links { list-style: none; display: flex; gap: 20px; }
 
-/* HERO */
-.hero {
-    height: 100vh;
-    background: url("banner.png") center/cover no-repeat;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    position: relative;
-}
+.nav-links a { text-decoration: none; color: #ffffff; font-weight: 500; transition: 0.3s; }
 
-.hero-overlay {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.6);
-}
+.nav-links a:hover { color: gold; }
 
-.hero-content {
-    position: relative;
-}
+/* ===================================================== CONTENT ===================================================== */ .container { padding: 120px 20px; max-width: 900px; margin: auto; text-align: center; }
 
-.hero h1 {
-    font-size: 3rem;
-    color: gold;
-}
+h1, h2 { color: gold; margin-bottom: 15px; }
 
-/* BUTTONS */
-.btn {
-    padding: 10px 20px;
-    border-radius: 25px;
-    text-decoration: none;
-    display: inline-block;
-    margin-top: 10px;
-}
+p { color: #ddd; margin-bottom: 15px; }
 
-.primary {
-    background: gold;
-    color: black;
-}
+/* ===================================================== BUTTONS ===================================================== */ .btn { display: inline-block; padding: 12px 25px; border-radius: 25px; text-decoration: none; font-weight: bold; margin-top: 10px; transition: 0.3s; }
 
-.secondary {
-    border: 2px solid gold;
-    color: gold;
-}
+.primary { background: gold; color: #0b1a3a; }
 
-/* CONTENT */
+.primary:hover { transform: scale(1.05); }
+
+.secondary { border: 2px solid gold; color: gold; }
+
+.secondary:hover { background: gold; color: #0b1a3a; }
+
+/* ===================================================== RESPONSIVE ===================================================== */ @media (max-width: 768px) { .nav-links { flex-wrap: wrap; justify-content: center; }
+
 .container {
-    padding: 100px 20px;
-    text-align: center;
+    padding: 100px 15px;
 }
 
-/* WHATSAPP */
-.whatsapp-float {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-}
-
-.whatsapp-float img {
-    width: 60px;
 }
