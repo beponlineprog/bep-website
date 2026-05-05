@@ -6,6 +6,7 @@
 <title>B.E.P | Biblical Empowerment Program</title>
 
 <style>
+
 /* ================================
    GLOBAL STYLES
 ================================ */
@@ -17,189 +18,246 @@
 }
 
 body {
-    background: #081a3a;
+    background: #061a3a;
     color: white;
+    line-height: 1.6;
 }
 
 /* ================================
-   HERO SECTION (OPTIONAL)
+   HERO SECTION
 ================================ */
 .hero {
-    background: linear-gradient(rgba(8,26,58,0.85), rgba(8,26,58,0.85)),
-    url("banner.png") center/cover no-repeat;
-    height: 80vh;
+    height: 85vh;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
+    background: linear-gradient(rgba(6,26,58,0.85), rgba(6,26,58,0.85)),
+    url("banner.png") center/cover no-repeat;
     padding: 20px;
 }
 
 .hero h1 {
-    font-size: 48px;
+    font-size: 52px;
     color: gold;
+    letter-spacing: 2px;
 }
 
 .hero p {
     font-size: 18px;
-    margin-top: 10px;
     color: #e6e6e6;
+    margin-top: 10px;
+}
+
+.hero button {
+    margin-top: 20px;
+    padding: 12px 20px;
+    border: none;
+    background: gold;
+    color: #061a3a;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
 }
 
 /* ================================
-   ABOUT SECTION - PREMIUM STYLE
+   SECTION BASE
+================================ */
+section {
+    padding: 80px 20px;
+}
+
+.container {
+    max-width: 1000px;
+    margin: auto;
+}
+
+/* ================================
+   ABOUT SECTION
 ================================ */
 .about-section {
     background: linear-gradient(135deg, #0a1f44, #102a5c);
-    color: #ffffff;
-    padding: 80px 20px;
     text-align: center;
-    position: relative;
-    overflow: hidden;
-}
-
-.about-section::before,
-.about-section::after {
-    content: "";
-    position: absolute;
-    border-radius: 50%;
-    background: gold;
-    opacity: 0.07;
-    filter: blur(50px);
-}
-
-.about-section::before {
-    top: -60px;
-    left: -60px;
-    width: 200px;
-    height: 200px;
-}
-
-.about-section::after {
-    bottom: -80px;
-    right: -80px;
-    width: 250px;
-    height: 250px;
-}
-
-.about-section .container {
-    max-width: 900px;
-    margin: auto;
-    position: relative;
-    z-index: 2;
 }
 
 .about-section h2 {
-    font-size: 42px;
-    margin-bottom: 20px;
     color: gold;
-    text-transform: uppercase;
-    letter-spacing: 2px;
+    font-size: 38px;
+    margin-bottom: 20px;
+}
+
+.about-section h3 {
+    color: gold;
+    margin-top: 25px;
 }
 
 .about-section p {
-    font-size: 17px;
-    line-height: 1.8;
     color: #e6e6e6;
     margin-bottom: 15px;
 }
 
-.about-section h3 {
-    margin-top: 30px;
-    font-size: 24px;
-    color: gold;
-    border-left: 4px solid gold;
-    padding-left: 10px;
-    display: inline-block;
-}
-
 .about-section ul {
     list-style: none;
-    margin-top: 15px;
+    margin-top: 10px;
 }
 
 .about-section ul li {
-    background: rgba(255, 215, 0, 0.08);
-    margin: 10px 0;
-    padding: 12px 15px;
+    background: rgba(255,215,0,0.08);
+    margin: 8px 0;
+    padding: 10px;
     border-left: 3px solid gold;
-    border-radius: 6px;
-    transition: 0.3s;
+    border-radius: 5px;
 }
 
-.about-section ul li:hover {
-    transform: translateX(5px);
-    background: rgba(255, 215, 0, 0.15);
+/* ================================
+   SESSIONS
+================================ */
+.sessions {
+    background: #081f45;
+    text-align: center;
+}
+
+.sessions h2 {
+    color: gold;
+    font-size: 38px;
+    margin-bottom: 20px;
+}
+
+.session-card {
+    background: rgba(255,255,255,0.05);
+    padding: 25px;
+    border-radius: 10px;
+    margin-top: 20px;
+    border: 1px solid rgba(255,215,0,0.2);
+}
+
+.session-card h3 {
+    color: gold;
+}
+
+/* ================================
+   CONTACT SECTION
+================================ */
+.contact {
+    background: linear-gradient(135deg, #0a1f44, #0c2b5e);
+    text-align: center;
+}
+
+.contact h2 {
+    color: gold;
+    font-size: 38px;
+}
+
+.contact p {
+    margin: 10px 0;
+}
+
+.contact a {
+    display: inline-block;
+    margin: 8px;
+    padding: 10px 15px;
+    background: gold;
+    color: #061a3a;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
 }
 
 /* ================================
    FOOTER
 ================================ */
 footer {
-    background: #06142c;
+    background: #041126;
     text-align: center;
     padding: 25px;
     color: #aaa;
-    margin-top: 40px;
 }
 
 /* ================================
    RESPONSIVE
 ================================ */
-@media (max-width: 768px) {
+@media(max-width:768px){
     .hero h1 {
         font-size: 32px;
     }
-
-    .about-section h2 {
-        font-size: 30px;
-    }
 }
+
 </style>
 
 </head>
 
 <body>
 
-<!-- HERO SECTION -->
+<!-- HERO -->
 <section class="hero">
     <div>
         <h1>Biblical Empowerment Program</h1>
         <p>Equipping believers through the Word of God</p>
+        <button onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">
+            Learn More
+        </button>
     </div>
 </section>
 
-<!-- ABOUT SECTION -->
+<!-- ABOUT -->
 <section id="about" class="about-section">
     <div class="container">
 
         <h2>About Us</h2>
 
-        <p>
-            <strong>Biblical Empowerment Program (B.E.P)</strong> is a Christ-centered online ministry dedicated to strengthening believers through the Word of God, prayer, and spiritual teaching.
-        </p>
+        <p><strong>Biblical Empowerment Program (B.E.P)</strong> is a Christ-centered online ministry dedicated to building and empowering believers through the Word of God.</p>
 
-        <p>
-            We exist to build, equip, and empower the Church of Christ by making biblical teachings accessible to everyone, everywhere.
-        </p>
+        <p>We help believers grow spiritually, understand Scripture deeply, and strengthen their relationship with God.</p>
 
-        <p>
-            Our weekly online sessions are held every <strong>Thursday from 19:00 to 20:30</strong>.
-        </p>
+        <h3>Who We Are</h3>
+        <p>A Bible-based teaching community focused on spiritual growth, prayer, and encouragement.</p>
 
         <h3>Our Mission</h3>
-        <p>To empower believers through sound biblical teaching, spiritual growth, and practical Christian living.</p>
+        <p>To empower believers through sound biblical teaching and practical Christian living.</p>
 
         <h3>Our Vision</h3>
-        <p>To see a globally empowered Church grounded in the truth of God’s Word.</p>
+        <p>To see a globally empowered Church rooted in truth and spiritual maturity.</p>
 
         <h3>What We Offer</h3>
         <ul>
-            <li>Weekly online Bible teaching sessions</li>
-            <li>Prayer and spiritual guidance</li>
-            <li>Faith-building discussions</li>
-            <li>A growing Christian community</li>
+            <li>Weekly Bible Teaching</li>
+            <li>Prayer & Guidance</li>
+            <li>Faith Building Sessions</li>
+            <li>Christian Community Support</li>
         </ul>
+
+    </div>
+</section>
+
+<!-- SESSIONS -->
+<section class="sessions">
+    <div class="container">
+
+        <h2>Weekly Sessions</h2>
+
+        <div class="session-card">
+            <h3>Thursday Online Service</h3>
+            <p><strong>Time:</strong> 19:00 – 20:30</p>
+            <p>Join us for Bible teaching, prayer, and spiritual growth.</p>
+        </div>
+
+    </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact">
+    <div class="container">
+
+        <h2>Contact Us</h2>
+
+        <p>Get in touch with B.E.P</p>
+
+        <p><strong>Phone:</strong> 078 819 0578</p>
+        <p><strong>Email:</strong> bep.onlineprog@gmail.com</p>
+        <p><strong>Location:</strong> 35446 Ndumo Street, Etwatwa 1519</p>
+
+        <a href="mailto:bep.onlineprog@gmail.com">Email Us</a>
+        <a href="https://wa.me/27788190578" target="_blank">WhatsApp</a>
 
     </div>
 </section>
