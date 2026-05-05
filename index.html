@@ -49,17 +49,6 @@ body {
     margin-top: 10px;
 }
 
-.hero button {
-    margin-top: 20px;
-    padding: 12px 20px;
-    border: none;
-    background: gold;
-    color: #061a3a;
-    font-weight: bold;
-    cursor: pointer;
-    border-radius: 5px;
-}
-
 /* ================================
    SECTION BASE
 ================================ */
@@ -146,6 +135,7 @@ section {
 .contact h2 {
     color: gold;
     font-size: 38px;
+    margin-bottom: 10px;
 }
 
 .contact p {
@@ -161,6 +151,11 @@ section {
     border-radius: 5px;
     text-decoration: none;
     font-weight: bold;
+    transition: 0.3s;
+}
+
+.contact a:hover {
+    transform: scale(1.05);
 }
 
 /* ================================
@@ -193,14 +188,11 @@ footer {
     <div>
         <h1>Biblical Empowerment Program</h1>
         <p>Equipping believers through the Word of God</p>
-        <button onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">
-            Learn More
-        </button>
     </div>
 </section>
 
 <!-- ABOUT -->
-<section id="about" class="about-section">
+<section class="about-section">
     <div class="container">
 
         <h2>About Us</h2>
@@ -250,14 +242,22 @@ footer {
 
         <h2>Contact Us</h2>
 
-        <p>Get in touch with B.E.P</p>
-
-        <p><strong>Phone:</strong> 078 819 0578</p>
+        <p><strong>Phone:</strong> 074 038 6671</p>
         <p><strong>Email:</strong> bep.onlineprog@gmail.com</p>
-        <p><strong>Location:</strong> 35446 Ndumo Street, Etwatwa 1519</p>
+
+        <p><strong>Platform:</strong> Microsoft Teams Online Sessions</p>
 
         <a href="mailto:bep.onlineprog@gmail.com">Email Us</a>
-        <a href="https://wa.me/27788190578" target="_blank">WhatsApp</a>
+
+        <a href="https://wa.me/27740386671" target="_blank">WhatsApp</a>
+
+        <a href="https://teams.live.com/meet/936085799236?p=b66LnDUAB2Xkx2uQYp&eventType=community" target="_blank">
+            Join Microsoft Teams
+        </a>
+
+        <a href="https://facebook.com/groups/1421853356307383/" target="_blank">
+            Facebook Group
+        </a>
 
     </div>
 </section>
