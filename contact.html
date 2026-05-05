@@ -2,93 +2,107 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Contact - B.E.P</title>
+    <title>Contact – B.E.P</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<div class="navbar">
-    <div class="nav-container">
-        <div class="nav-logo"><img src="bep-logo.png"></div>
-        <div class="nav-menu">
-            <a href="index.html">Home</a>
-            <a href="about.html">About</a>
-            <a href="sessions.html">Sessions</a>
-            <a href="register.html">Register</a>
-            <a href="contact.html" class="active">Contact</a>
-        </div>
+<!-- NAVIGATION -->
+<nav>
+    <img src="bep-logo.png" alt="BEP Logo">
+    <div>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="sessions.html">Sessions</a>
+        <a href="register.html">Register</a>
+        <a class="active" href="contact.html">Contact</a>
+    </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+    <div class="hero-overlay">
+        <h1>Contact Us</h1>
     </div>
 </div>
 
-<div class="page-header">
-    <h1>Contact Us</h1>
-    <p>We are here to assist you</p>
-</div>
-
+<!-- CONTACT CARD SECTION -->
 <div class="container">
-    <div class="box">
-        <h3>Send Us a Message</h3>
 
-        <form action="https://formspree.io/f/mqenaqjg" method="POST">
+    <div class="contact-card" style="
+        background: #ffffff;
+        max-width: 700px;
+        margin: auto;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+    ">
+
+        <h2 style="text-align:center; color:#003366; margin-bottom:20px;">Get In Touch</h2>
+
+        <!-- WhatsApp Image -->
+        <img src="whatsapp.jpg" alt="WhatsApp" class="contact-whatsapp-img">
+
+        <p style="text-align:center; font-size:16px; margin-bottom:25px;">
+            Phone: <strong>078 819 0578</strong><br>
+            Email: <strong>thulim.belina@gmail.com</strong><br>
+            Location: <strong>35446 Ndumo Street, Etwatwa 1519</strong>
+        </p>
+
+        <!-- FORM -->
+        <form class="contact-form">
+
             <label>Your Name</label>
-            <input type="text" name="name" required>
+            <input type="text" placeholder="Enter your full name">
 
             <label>Your Email</label>
-            <input type="email" name="email" required>
+            <input type="email" placeholder="Enter your email">
 
             <label>Your Message</label>
-            <textarea name="message" rows="4" required></textarea>
+            <textarea rows="5" placeholder="Write your message..."></textarea>
 
-            <button type="submit" class="btn btn-primary">Send Message</button>
+            <button type="submit">Send Message</button>
         </form>
-    </div>
 
-    <div class="box">
-        <h3>Direct Contacts</h3>
-        <p><strong>Phone/WhatsApp:</strong> <a href="https://wa.me/27740386671">074 038 6671</a></p>
-        <p><strong>Email:</strong> <a href="mailto:bep.onlineprog@gmail.com">bep.onlineprog@gmail.com</a></p>
-        <p><strong>Facebook:</strong> <a href="https://facebook.com/groups/1421853356307383/" target="_blank">Facebook Group</a></p>
     </div>
 </div>
 
-<a class="whatsapp-float" href="https://wa.me/27740386671" target="_blank">
-    <img src="whatsapp.jpg">
+<!-- WHATSAPP FLOATING BUTTON -->
+<a href="https://wa.me/27788190578" class="whatsapp-float">
+    <img src="whatsapp.jpg" alt="WhatsApp Chat">
 </a>
+
 <!-- FOOTER -->
 <footer>
     <div class="footer-container">
 
-        <div class="footer-box">
-            <h3>Biblical Empowerment Program</h3>
-            <p>Building & equipping the body of Christ through sound biblical teaching.</p>
+        <div class="footer-section">
+            <h3>B.E.P Ministry</h3>
+            <p>Building the church of Christ through biblical empowerment.</p>
         </div>
 
-        <div class="footer-box">
+        <div class="footer-section">
             <h3>Quick Links</h3>
             <a href="index.html">Home</a><br>
-            <a href="about.html">About</a><br>
             <a href="sessions.html">Sessions</a><br>
             <a href="register.html">Register</a><br>
             <a href="contact.html">Contact</a>
         </div>
 
-        <div class="footer-box">
-            <h3>Contact Info</h3>
-            <p><strong>WhatsApp:</strong> <a href="https://wa.me/27740386671" target="_blank">074 038 6671</a></p>
-            <p><strong>Email:</strong> 
-                <a href="mailto:bep.onlineprog@gmail.com">bep.onlineprog@gmail.com</a>
-            </p>
-            <p><strong>Facebook:</strong> 
-                <a href="https://facebook.com/groups/1421853356307383/" target="_blank">Facebook Group</a>
-            </p>
+        <div class="footer-section">
+            <h3>Contact Details</h3>
+            <p>Phone: 078 819 0578</p>
+            <p>Email: thulim.belina@gmail.com</p>
+            <p>Etwatwa, 1519</p>
         </div>
 
     </div>
 
     <div class="footer-bottom">
-        © 2024 Biblical Empowerment Program • All Rights Reserved
+        © 2026 B.E.P Ministry – All Rights Reserved
     </div>
 </footer>
+
 </body>
 </html>
