@@ -1,38 +1,212 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Biblical Empowerment Program</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>B.E.P | Biblical Empowerment Program</title>
+
+<style>
+/* ================================
+   GLOBAL STYLES
+================================ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #081a3a;
+    color: white;
+}
+
+/* ================================
+   HERO SECTION (OPTIONAL)
+================================ */
+.hero {
+    background: linear-gradient(rgba(8,26,58,0.85), rgba(8,26,58,0.85)),
+    url("banner.png") center/cover no-repeat;
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+}
+
+.hero h1 {
+    font-size: 48px;
+    color: gold;
+}
+
+.hero p {
+    font-size: 18px;
+    margin-top: 10px;
+    color: #e6e6e6;
+}
+
+/* ================================
+   ABOUT SECTION - PREMIUM STYLE
+================================ */
+.about-section {
+    background: linear-gradient(135deg, #0a1f44, #102a5c);
+    color: #ffffff;
+    padding: 80px 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.about-section::before,
+.about-section::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    background: gold;
+    opacity: 0.07;
+    filter: blur(50px);
+}
+
+.about-section::before {
+    top: -60px;
+    left: -60px;
+    width: 200px;
+    height: 200px;
+}
+
+.about-section::after {
+    bottom: -80px;
+    right: -80px;
+    width: 250px;
+    height: 250px;
+}
+
+.about-section .container {
+    max-width: 900px;
+    margin: auto;
+    position: relative;
+    z-index: 2;
+}
+
+.about-section h2 {
+    font-size: 42px;
+    margin-bottom: 20px;
+    color: gold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.about-section p {
+    font-size: 17px;
+    line-height: 1.8;
+    color: #e6e6e6;
+    margin-bottom: 15px;
+}
+
+.about-section h3 {
+    margin-top: 30px;
+    font-size: 24px;
+    color: gold;
+    border-left: 4px solid gold;
+    padding-left: 10px;
+    display: inline-block;
+}
+
+.about-section ul {
+    list-style: none;
+    margin-top: 15px;
+}
+
+.about-section ul li {
+    background: rgba(255, 215, 0, 0.08);
+    margin: 10px 0;
+    padding: 12px 15px;
+    border-left: 3px solid gold;
+    border-radius: 6px;
+    transition: 0.3s;
+}
+
+.about-section ul li:hover {
+    transform: translateX(5px);
+    background: rgba(255, 215, 0, 0.15);
+}
+
+/* ================================
+   FOOTER
+================================ */
+footer {
+    background: #06142c;
+    text-align: center;
+    padding: 25px;
+    color: #aaa;
+    margin-top: 40px;
+}
+
+/* ================================
+   RESPONSIVE
+================================ */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 32px;
+    }
+
+    .about-section h2 {
+        font-size: 30px;
+    }
+}
+</style>
+
 </head>
 
 <body>
 
-<!-- MAIN CONTENT -->
-<section class="container">
-
-    <h1>Welcome to BEP</h1>
-
-    <p>
-        The Biblical Empowerment Program (BEP) is a Christian ministry dedicated to
-        building believers through the Word of God, prayer, and spiritual teaching.
-    </p>
-
-    <p>
-        Our mission is to strengthen your faith, deepen your understanding of Scripture,
-        and help you grow in your walk with Christ.
-    </p>
-
-    <a href="about.html" class="btn primary">Learn More About Us</a>
-    <a href="sessions.html" class="btn secondary">View Sessions</a>
-
+<!-- HERO SECTION -->
+<section class="hero">
+    <div>
+        <h1>Biblical Empowerment Program</h1>
+        <p>Equipping believers through the Word of God</p>
+    </div>
 </section>
 
+<!-- ABOUT SECTION -->
+<section id="about" class="about-section">
+    <div class="container">
+
+        <h2>About Us</h2>
+
+        <p>
+            <strong>Biblical Empowerment Program (B.E.P)</strong> is a Christ-centered online ministry dedicated to strengthening believers through the Word of God, prayer, and spiritual teaching.
+        </p>
+
+        <p>
+            We exist to build, equip, and empower the Church of Christ by making biblical teachings accessible to everyone, everywhere.
+        </p>
+
+        <p>
+            Our weekly online sessions are held every <strong>Thursday from 19:00 to 20:30</strong>.
+        </p>
+
+        <h3>Our Mission</h3>
+        <p>To empower believers through sound biblical teaching, spiritual growth, and practical Christian living.</p>
+
+        <h3>Our Vision</h3>
+        <p>To see a globally empowered Church grounded in the truth of God’s Word.</p>
+
+        <h3>What We Offer</h3>
+        <ul>
+            <li>Weekly online Bible teaching sessions</li>
+            <li>Prayer and spiritual guidance</li>
+            <li>Faith-building discussions</li>
+            <li>A growing Christian community</li>
+        </ul>
+
+    </div>
+</section>
+
+<!-- FOOTER -->
 <footer>
-    <p><strong>Biblical Empowerment Program (BEP)</strong></p>
-    <p>Building believers through the Word of God</p>
-    <p>&copy; 2026 All Rights Reserved</p>
+    <p>© 2026 Biblical Empowerment Program (B.E.P) | All Rights Reserved</p>
 </footer>
 
 </body>
