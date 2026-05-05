@@ -1,4 +1,4 @@
-/* ===================================================== BIBLICAL EMPOWERMENT PROGRAM - CLEAN FULL STYLE.CSS (Premium Footer Upgrade) ===================================================== */
+/* ===================================================== BIBLICAL EMPOWERMENT PROGRAM - CLEAN FULL STYLE.CSS (Premium Footer + Contact Buttons Upgrade) ===================================================== */
 
 /* RESET */
 
@@ -34,6 +34,18 @@ p { color: #ddd; margin-bottom: 15px; }
 .footer-box a { display: block; color: #ddd; text-decoration: none; margin-bottom: 6px; font-size: 14px; transition: 0.3s; }
 
 .footer-box a:hover { color: gold; padding-left: 5px; }
+
+/* ===================================================== FOOTER CONTACT BUTTONS ===================================================== */ .footer-buttons { margin-top: 10px; display: flex; flex-direction: column; gap: 10px; }
+
+.footer-btn { display: inline-block; padding: 10px 15px; border-radius: 20px; text-decoration: none; font-weight: bold; font-size: 14px; text-align: center; transition: 0.3s; }
+
+.footer-btn.whatsapp { background: #25D366; color: #fff; }
+
+.footer-btn.whatsapp:hover { transform: scale(1.05); }
+
+.footer-btn.email { background: gold; color: #0b1a3a; }
+
+.footer-btn.email:hover { transform: scale(1.05); }
 
 .footer-bottom { text-align: center; margin-top: 25px; padding-top: 15px; border-top: 1px solid rgba(255, 215, 0, 0.2); font-size: 13px; color: #888; }
 
