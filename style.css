@@ -112,3 +112,10 @@ p { color: #ddd; margin-bottom: 15px; }
     background: #e6c200;
     transform: scale(1.05);
        }
+.section-title {
+    text-align: center;
+    font-size: 36px;
+    color: gold;
+    margin-bottom: 40px;
+    margin-top: -10px;
+   }
