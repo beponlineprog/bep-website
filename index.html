@@ -185,7 +185,49 @@
             color: gold;
             font-size: 14px;
         }
+/* ===========================
+   CARD LAYOUT SYSTEM
+=========================== */
+.section {
+    padding: 80px 20px;
+    text-align: center;
+}
 
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    max-width: 1100px;
+    margin: auto;
+}
+
+.card {
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-6px);
+}
+
+.card h2 {
+    color: gold;
+    margin-bottom: 10px;
+}
+
+.card p, .card li {
+    color: #333;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.card ul {
+    text-align: left;
+    padding-left: 20px;
+}
     </style>
 </head>
 
@@ -204,76 +246,80 @@
     </section>
 
     <!-- ABOUT -->
-    <section class="about" id="about">
-    <div class="container">
+    <section class="section">
+    <div class="card-grid">
 
-        <h2>About Us</h2>
+        <div class="card" style="grid-column: span 2;">
+            <h2>About Us</h2>
 
-        <p>
-            The Biblical Empowerment Program (B.E.P) is a faith-driven initiative dedicated to equipping individuals 
-            with a deeper understanding of the Word of God and the transformative power of the Holy Spirit. 
-            Our mission is to build spiritually grounded believers who are empowered to live purposeful, 
-            Christ-centered lives.
-        </p>
+            <p>
+                The Biblical Empowerment Program (B.E.P) is a faith-driven initiative dedicated to equipping individuals 
+                with a deeper understanding of the Word of God and the transformative power of the Holy Spirit. 
+                Our mission is to build spiritually grounded believers who are empowered to live purposeful, 
+                Christ-centered lives.
+            </p>
 
-        <p>
-            At B.E.P, we believe that true empowerment comes through knowledge, revelation, and application of Scripture. 
-            Through structured teachings, interactive sessions, and Spirit-led discussions, we create a space where 
-            individuals can grow in faith, gain clarity in their spiritual journey, and develop a personal relationship 
-            with God.
-        </p>
+            <p>
+                At B.E.P, we believe that true empowerment comes through knowledge, revelation, and application of Scripture. 
+                Through structured teachings, interactive sessions, and Spirit-led discussions, we create a space where 
+                individuals can grow in faith, gain clarity in their spiritual journey, and develop a personal relationship 
+                with God.
+            </p>
 
-        <p>
-            Our program is designed for everyone—whether you are a new believer or someone seeking deeper spiritual 
-            insight. We focus on practical teachings that address real-life challenges while guiding individuals to 
-            walk in faith, wisdom, and obedience to God’s will.
-        </p>
+            <p>
+                Our program is designed for everyone—whether you are a new believer or someone seeking deeper spiritual 
+                insight. We focus on practical teachings that address real-life challenges while guiding individuals to 
+                walk in faith, wisdom, and obedience to God’s will.
+            </p>
 
-        <p><strong>We are committed to:</strong></p>
-        <ul style="max-width:900px; margin:auto; text-align:left; font-size:17px; line-height:1.7; color:#333;">
-            <li>Teaching the Word of God with clarity and truth</li>
-            <li>Empowering believers through the Holy Spirit</li>
-            <li>Building a strong, united faith community</li>
-            <li>Encouraging spiritual growth and personal transformation</li>
-        </ul>
+            <p><strong>We are committed to:</strong></p>
+            <ul>
+                <li>Teaching the Word of God with clarity and truth</li>
+                <li>Empowering believers through the Holy Spirit</li>
+                <li>Building a strong, united faith community</li>
+                <li>Encouraging spiritual growth and personal transformation</li>
+            </ul>
 
-        <p>
-            The Biblical Empowerment Program is more than just a teaching platform—it is a movement of believers 
-            rising in faith, purpose, and power.
-        </p>
+            <p>
+                The Biblical Empowerment Program is more than just a teaching platform—it is a movement of believers 
+                rising in faith, purpose, and power.
+            </p>
+        </div>
 
     </div>
 </section>
+    <section class="section">
+    <div class="card-grid">
 
-    <section class="sessions">
-    <div class="container">
+        <div class="card" style="grid-column: span 2;">
+            <h2>Thursday Sessions</h2>
 
-        <h2>Thursday Sessions</h2>
+            <p>
+                The Thursday sessions are held every week from 7:00 PM to 8:30 PM. They are designed to deepen participants’ understanding of the Word of God through structured teaching and interactive engagement.
+            </p>
 
-        <p>
-            The Thursday sessions are held every week from 7:00 PM to 8:30 PM. They are designed to deepen participants’ understanding of the Word of God through structured teaching and interactive engagement.
-        </p>
+            <p>
+                The goal is to build a strong biblical foundation while encouraging spiritual growth and practical application of Scripture in daily life. Each session is centered on presentation-based learning, where topics are shared and explored through discussion, comments, and questions, promoting active participation.
+            </p>
 
-        <p>
-            The goal is to build a strong biblical foundation while encouraging spiritual growth and practical application of Scripture in daily life. Each session is centered on presentation-based learning, where topics are shared and explored through discussion, comments, and questions, promoting active participation.
-        </p>
+            <p>
+                These sessions aim to create a space for the diverse expansion of biblical knowledge, allowing participants to learn through Scripture, guided teaching, and shared insights.
+            </p>
+        </div>
 
-        <p>
-            These sessions aim to create a space for the diverse expansion of biblical knowledge, allowing participants to learn through Scripture, guided teaching, and shared insights.
-        </p>
-
-        <p><strong>Objectives include:</strong></p>
-
-        <ul style="max-width:900px; margin:auto; text-align:left; font-size:17px; line-height:1.7; color:#333;">
-            <li>Strengthening biblical understanding and spiritual maturity</li>
-            <li>Encouraging active participation through questions and discussion</li>
-            <li>Promoting clear and correct interpretation of Scripture</li>
-            <li>Building confidence in sharing and applying biblical knowledge</li>
-            <li>Fostering spiritual growth through collective learning</li>
-        </ul>
+        <div class="card">
+            <h2>Objectives</h2>
+            <ul>
+                <li>Strengthening biblical understanding and spiritual maturity</li>
+                <li>Encouraging active participation through questions and discussion</li>
+                <li>Promoting clear and correct interpretation of Scripture</li>
+                <li>Building confidence in sharing and applying biblical knowledge</li>
+                <li>Fostering spiritual growth through collective learning</li>
+            </ul>
+        </div>
 
     </div>
-    </section>
+</section>
     <!-- CONTACT -->
     <section class="contact">
         <div class="container">
