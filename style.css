@@ -119,3 +119,41 @@ p { color: #ddd; margin-bottom: 15px; }
     margin-bottom: 40px;
     margin-top: -10px;
    }
+/* PREMIUM REGISTER BUTTONS */
+.card-btn {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 12px 20px;
+    background: gold;
+    color: #061a3a;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: 0.3s ease;
+}
+
+.card-btn:hover {
+    transform: scale(1.08);
+    background: #f5c400;
+}
+
+/* PREMIUM FOOTER BUTTONS */
+.footer-buttons {
+    margin-top: 12px;
+}
+
+.footer-buttons a {
+    display: inline-block;
+    margin: 6px;
+    padding: 10px 16px;
+    background: gold;
+    color: #061a3a;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s ease;
+}
+
+.footer-buttons a:hover {
+    transform: scale(1.08);
+}
