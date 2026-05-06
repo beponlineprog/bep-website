@@ -1,327 +1,312 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>B.E.P | Biblical Empowerment Program</title>
+    <meta charset="UTF-8">
+    <title>Biblical Empowerment Program - B.E.P</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<style>
+    <style>
 
-/* ================================
-   GLOBAL STYLES
-================================ */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
-}
+        /* ===========================
+           GLOBAL STYLES
+        ============================ */
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #ffffff;
+        }
 
-body {
-    background: #061a3a;
-    color: white;
-    line-height: 1.6;
-}
+        h2 {
+            font-size: 36px;
+            color: gold;
+            margin-bottom: 15px;
+        }
 
-/* ================================
-   HERO SECTION
-================================ */
-.hero {
-    height: 55vh; /* reduced from 85vh */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    background: linear-gradient(rgba(6,26,58,0.85), rgba(6,26,58,0.85)),
-    url("banner.png") center/cover no-repeat;
-    padding: 20px;
-}
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: auto;
+        }
 
-.hero h1 {
-    font-size: 52px;
-    color: gold;
-    letter-spacing: 2px;
-}
+        /* ===========================
+           HERO SECTION
+        ============================ */
+        .hero {
+            height: 45vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: 
+                linear-gradient(rgba(6,26,58,0.85), rgba(6,26,58,0.85)),
+                url("banner.png") center/cover no-repeat;
+            padding: 20px;
+        }
 
-.hero p {
-    font-size: 18px;
-    color: #e6e6e6;
-    margin-top: 10px;
-}
-.hero h1 {
-    font-size: 40px;
-    margin-bottom: 10px;
-}
+        .hero h1 {
+            font-size: 38px;
+            color: gold;
+            margin: 0;
+        }
 
-.hero p {
-    font-size: 16px;
-    margin-bottom: 10px;
-}
-/* ================================
-   SECTION BASE
-================================ */
-section {
-    padding: 80px 20px;
-}
+        .hero p {
+            margin-top: 8px;
+            font-size: 18px;
+            color: #e6e6e6;
+            letter-spacing: 1px;
+            font-style: italic;
+        }
 
-.container {
-    max-width: 1000px;
-    margin: auto;
-}
+        .hero button {
+            margin-top: 15px;
+            padding: 10px 18px;
+            border: none;
+            background: gold;
+            color: #061a3a;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
 
-/* ================================
-   ABOUT SECTION
-================================ */
-.about-section {
-    background: linear-gradient(135deg, #0a1f44, #102a5c);
-    text-align: center;
-}
+        .hero button:hover {
+            transform: scale(1.07);
+        }
 
-.about-section h2 {
-    color: gold;
-    font-size: 38px;
-    margin-bottom: 20px;
-}
+        /* ===========================
+           ABOUT SECTION
+        ============================ */
+        .about {
+            padding: 80px 20px;
+            background: #f5f5f5;
+            text-align: center;
+        }
 
-.about-section h3 {
-    color: gold;
-    margin-top: 25px;
-}
+        .about p {
+            max-width: 900px;
+            margin: 10px auto;
+            font-size: 17px;
+            line-height: 1.7;
+            color: #333;
+        }
 
-.about-section p {
-    color: #e6e6e6;
-    margin-bottom: 15px;
-}
+        /* ===========================
+           CONTACT SECTION (CARDS)
+        ============================ */
+        .contact {
+            background: linear-gradient(135deg, #091a3c, #0d2b5f);
+            padding: 90px 25px;
+            text-align: center;
+        }
 
-.about-section ul {
-    list-style: none;
-    margin-top: 10px;
-}
+        .contact-intro {
+            color: #cfcfcf;
+            max-width: 600px;
+            margin: 0 auto 40px auto;
+            font-size: 16px;
+            line-height: 1.6;
+        }
 
-.about-section ul li {
-    background: rgba(255,215,0,0.08);
-    margin: 8px 0;
-    padding: 10px;
-    border-left: 3px solid gold;
-    border-radius: 5px;
-}
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 25px;
+        }
 
-/* ================================
-   SESSIONS
-================================ */
-.sessions {
-    background: #081f45;
-    text-align: center;
-}
+        .contact-card {
+            background: rgba(255, 255, 255, 0.06);
+            padding: 30px 25px;
+            border-radius: 14px;
+            border: 1px solid rgba(255, 215, 0, 0.25);
+            box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.25);
+            transition: 0.35s ease;
+        }
 
-.sessions h2 {
-    color: gold;
-    font-size: 38px;
-    margin-bottom: 20px;
-}
+        .contact-card:hover {
+            transform: translateY(-8px);
+            background: rgba(255, 215, 0, 0.10);
+            box-shadow: 0px 10px 22px rgba(0, 0, 0, 0.35);
+        }
 
-.session-card {
-    background: rgba(255,255,255,0.05);
-    padding: 25px;
-    border-radius: 10px;
-    margin-top: 20px;
-    border: 1px solid rgba(255,215,0,0.2);
-}
+        .icon-circle {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 15px auto;
+            background: gold;
+            color: #061a3a;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            font-weight: bold;
+        }
 
-.session-card h3 {
-    color: gold;
-}
+        .contact-card h3 {
+            color: gold;
+            font-size: 20px;
+            margin-bottom: 8px;
+        }
 
-/* ================================
-   CONTACT SECTION
-================================ */
-.contact {
-    background: linear-gradient(135deg, #0a1f44, #0c2b5e);
-    text-align: center;
-}
+        .contact-card p {
+            color: #e6e6e6;
+            font-size: 16px;
+            font-weight: 300;
+        }
 
-.contact h2 {
-    color: gold;
-    font-size: 38px;
-    margin-bottom: 10px;
-}
+        .contact-buttons {
+            margin-top: 40px;
+        }
 
-.contact p {
-    margin: 10px 0;
-}
+        .contact-buttons a {
+            display: inline-block;
+            margin: 10px;
+            padding: 12px 18px;
+            background: gold;
+            color: #061a3a;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s ease;
+        }
 
-.contact a {
-    display: inline-block;
-    margin: 8px;
-    padding: 10px 15px;
-    background: gold;
-    color: #061a3a;
-    border-radius: 5px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: 0.3s;
-}
+        .contact-buttons a:hover {
+            transform: scale(1.08);
+            background: #f5c400;
+        }
 
-.contact a:hover {
-    transform: scale(1.05);
-}
+        /* ===========================
+           FOOTER
+        ============================ */
+        footer {
+            background: #061a3a;
+            padding: 20px;
+            text-align: center;
+            color: gold;
+            font-size: 14px;
+        }
 
-/* ================================
-   FOOTER
-================================ */
-footer {
-    background: #041126;
-    text-align: center;
-    padding: 25px;
-    color: #aaa;
-}
-
-/* ================================
-   RESPONSIVE
-================================ */
-@media(max-width:768px){
-    .hero h1 {
-        font-size: 32px;
-    }
-}
-
-</style>
-
+    </style>
 </head>
 
 <body>
 
-<!-- HERO -->
-   <section class="hero">
-    <div>
+    <!-- ===========================
+         HERO
+    ============================ -->
+    <section class="hero">
+        <div>
 
-        <h1>Biblical Empowerment Program</h1>
+            <h1>Biblical Empowerment Program</h1>
+            <p>Building the Church of Christ</p>
 
-        <p>Building the Church of Christ in Faith, Truth, and Power</p>
-
-        <button onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">
-            Learn More
-        </button>
-
-    </div>
-   </section>
-<section class="about-section">
-    <div class="container">
-
-        <h2>About Us</h2>
-
-        <p>
-            <strong>Biblical Empowerment Program (B.E.P)</strong> is a faith-driven initiative dedicated to equipping individuals with a deeper understanding of the Word of God and the transformative power of the Holy Spirit.
-        </p>
-
-        <p>
-            Our mission is to build spiritually grounded believers who are empowered to live purposeful, Christ-centered lives.
-        </p>
-
-        <p>
-            At B.E.P, we believe that true empowerment comes through knowledge, revelation, and application of Scripture. Through structured teachings, interactive sessions, and Spirit-led discussions, we create a space where individuals can grow in faith, gain clarity in their spiritual journey, and develop a personal relationship with God.
-        </p>
-
-        <p>
-            Our program is designed for everyone—whether you are a new believer or someone seeking deeper spiritual insight. We focus on practical teachings that address real-life challenges while guiding individuals to walk in faith, wisdom, and obedience to God’s will.
-        </p>
-
-        <h3>We are committed to:</h3>
-
-        <ul>
-            <li>Teaching the Word of God with clarity and truth</li>
-            <li>Empowering believers through the Holy Spirit</li>
-            <li>Building a strong, united faith community</li>
-            <li>Encouraging spiritual growth and personal transformation</li>
-        </ul>
-
-        <p>
-            The Biblical Empowerment Program is more than just a teaching platform—it is a movement of believers rising in faith, purpose, and power.
-        </p>
-
-    </div>
-</section>
-
-<!-- SESSIONS -->
-<section class="sessions">
-    <div class="container">
-
-        <h2>Weekly Sessions</h2>
-
-        <div class="session-card">
-            <h3>Thursday Online Service</h3>
-            <p><strong>Time:</strong> 19:00 – 20:30</p>
-            <p>Join us for Bible teaching, prayer, and spiritual growth.</p>
-        </div>
-
-    </div>
-</section>
-
-<!-- CONTACT --
-   
-   <section class="contact">
-    <div class="container">
-
-        <h2>Contact Us</h2>
-
-        <p class="contact-intro">
-            We are here to connect with you, support you, and walk with you in your spiritual journey.
-        </p>
-
-        <div class="contact-grid">
-
-            <!-- PHONE CARD -->
-            <div class="contact-card">
-                <div class="icon-circle">
-                    📞
-                </div>
-                <h3>Phone</h3>
-                <p>074 038 6671</p>
-            </div>
-
-            <!-- EMAIL CARD -->
-            <div class="contact-card">
-                <div class="icon-circle">
-                    📧
-                </div>
-                <h3>Email</h3>
-                <p>bep.onlineprog@gmail.com</p>
-            </div>
-
-            <!-- PLATFORM CARD -->
-            <div class="contact-card">
-                <div class="icon-circle">
-                    💻
-                </div>
-                <h3>Platform</h3>
-                <p>Microsoft Teams Online Sessions</p>
-            </div>
+            <button onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">
+                Learn More
+            </button>
 
         </div>
+    </section>
 
-        <div class="contact-buttons">
+    <!-- ===========================
+         ABOUT
+    ============================ -->
+    <section class="about" id="about">
+        <div class="container">
 
-            <a href="mailto:bep.onlineprog@gmail.com">Email Us</a>
+            <h2>About Us</h2>
 
-            <a href="https://wa.me/27740386671" target="_blank">WhatsApp</a>
+            <p>
+                The Biblical Empowerment Program (B.E.P) is a faith-driven initiative dedicated to equipping individuals 
+                with a deeper understanding of the Word of God and the transformative power of the Holy Spirit. 
+                Our mission is to build spiritually grounded believers who are empowered to live purposeful, 
+                Christ-centered lives.
+            </p>
 
-            <a href="https://teams.live.com/meet/936085799236?p=b66LnDUAB2Xkx2uQYp&eventType=community" target="_blank">
-                Join Microsoft Teams
-            </a>
+            <p>
+                At B.E.P, we believe that true empowerment comes through knowledge, revelation, and application of Scripture. 
+                Through structured teachings, interactive sessions, and Spirit-led discussions, we create a space where 
+                individuals can grow in faith, gain clarity in their spiritual journey, and develop a personal relationship 
+                with God.
+            </p>
 
-            <a href="https://facebook.com/groups/1421853356307383/" target="_blank">
-                Facebook Group
-            </a>
+            <p>
+                Our program is designed for everyone—whether you are a new believer or someone seeking deeper spiritual insight. 
+                We focus on practical teachings that address real-life challenges while guiding individuals to walk in faith, 
+                wisdom, and obedience to God’s will.
+            </p>
+
+            <p>
+                We are committed to teaching the Word of God with clarity and truth, empowering believers through the Holy Spirit, 
+                building a strong, united faith community, and encouraging spiritual growth and personal transformation.
+            </p>
+
+            <p>
+                The Biblical Empowerment Program is more than just a teaching platform—it is a movement of believers rising in faith, 
+                purpose, and power.
+            </p>
 
         </div>
+    </section>
 
-    </div>
-</section>
+    <!-- ===========================
+         CONTACT
+    ============================ -->
+    <section class="contact">
+        <div class="container">
 
-<!-- FOOTER -->
-<footer>
-    <p>© 2026 Biblical Empowerment Program (B.E.P) | All Rights Reserved</p>
-</footer>
+            <h2>Contact Us</h2>
+
+            <p class="contact-intro">
+                We are here to connect with you, support you, and walk with you in your spiritual journey.
+            </p>
+
+            <div class="contact-grid">
+
+                <div class="contact-card">
+                    <div class="icon-circle">📞</div>
+                    <h3>Phone</h3>
+                    <p>074 038 6671</p>
+                </div>
+
+                <div class="contact-card">
+                    <div class="icon-circle">📧</div>
+                    <h3>Email</h3>
+                    <p>bep.onlineprog@gmail.com</p>
+                </div>
+
+                <div class="contact-card">
+                    <div class="icon-circle">💻</div>
+                    <h3>Platform</h3>
+                    <p>Microsoft Teams Online Sessions</p>
+                </div>
+
+            </div>
+
+            <div class="contact-buttons">
+
+                <a href="mailto:bep.onlineprog@gmail.com">Email Us</a>
+
+                <a href="https://wa.me/27740386671" target="_blank">WhatsApp</a>
+
+                <a href="https://teams.live.com/meet/936085799236?p=b66LnDUAB2Xkx2uQYp&eventType=community" target="_blank">
+                    Join Microsoft Teams
+                </a>
+
+                <a href="https://facebook.com/groups/1421853356307383/" target="_blank">
+                    Facebook Group
+                </a>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ===========================
+         FOOTER
+    ============================ -->
+    <footer>
+        © 2026 Biblical Empowerment Program (B.E.P) — All Rights Reserved
+    </footer>
 
 </body>
 </html>
