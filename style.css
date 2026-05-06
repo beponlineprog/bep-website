@@ -157,3 +157,56 @@ p { color: #ddd; margin-bottom: 15px; }
 .footer-buttons a:hover {
     transform: scale(1.08);
 }
+/* ===========================
+   COUNTDOWN SECTION
+=========================== */
+.countdown-section {
+    padding: 60px 20px;
+    text-align: center;
+    background: #ffffff;
+}
+
+.countdown-section h2 {
+    color: #061a3a;
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+.countdown-label {
+    color: #444;
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.countdown-box {
+    font-size: 28px;
+    font-weight: bold;
+    background: #061a3a;
+    color: gold;
+    padding: 15px 20px;
+    border-radius: 8px;
+    display: inline-block;
+    margin-bottom: 25px;
+}
+
+.reminder-btn {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 12px 18px;
+    background: gold;
+    color: #061a3a;
+    font-weight: bold;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: 0.3s ease;
+    font-size: 16px;
+}
+
+.reminder-btn i {
+    margin-right: 8px;
+}
+
+.reminder-btn:hover {
+    transform: scale(1.07);
+    background: #f2c200;
+}
