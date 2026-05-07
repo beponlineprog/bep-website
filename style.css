@@ -313,3 +313,8 @@ p { color: #ddd; margin-bottom: 15px; }
 .register-btn:hover {
     background: #b58329;
 }
+.session-note {
+    margin-top: 20px;
+    color: #666;
+    font-size: 1rem;
+}
