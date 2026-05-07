@@ -161,54 +161,77 @@ p { color: #ddd; margin-bottom: 15px; }
    COUNTDOWN SECTION
 =========================== */
 .countdown-section {
-    padding: 60px 20px;
-    text-align: center;
+    padding: 70px 20px;
+    background: #f4f7fb;
+}
+
+.countdown-section .container {
+    max-width: 850px;
+    margin: auto;
     background: #ffffff;
+    padding: 50px 35px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    border-top: 5px solid #cc9933;
 }
 
 .countdown-section h2 {
-    color: #061a3a;
-    font-size: 32px;
-    margin-bottom: 10px;
+    font-size: 2.4rem;
+    color: #003366;
+    margin-bottom: 15px;
 }
 
 .countdown-label {
-    color: #444;
-    font-size: 18px;
-    margin-bottom: 20px;
+    font-size: 1.1rem;
+    color: #555;
+    margin-bottom: 35px;
 }
 
 .countdown-box {
-    font-size: 28px;
+    font-size: 2rem;
     font-weight: bold;
-    background: #061a3a;
-    color: gold;
-    padding: 15px 20px;
-    border-radius: 8px;
-    display: inline-block;
-    margin-bottom: 25px;
+    background: #003366;
+    color: white;
+    padding: 25px;
+    border-radius: 15px;
+    margin-bottom: 35px;
+    letter-spacing: 1px;
+    box-shadow: 0 5px 15px rgba(0,51,102,0.25);
 }
 
 .reminder-btn {
     display: inline-block;
-    margin-top: 10px;
-    padding: 12px 18px;
-    background: gold;
-    color: #061a3a;
-    font-weight: bold;
-    border-radius: 6px;
+    padding: 15px 28px;
+    background: #cc9933;
+    color: white;
     text-decoration: none;
-    transition: 0.3s ease;
+    border-radius: 10px;
     font-size: 16px;
-}
-
-.reminder-btn i {
-    margin-right: 8px;
+    font-weight: bold;
+    transition: 0.3s ease;
 }
 
 .reminder-btn:hover {
-    transform: scale(1.07);
-    background: #f2c200;
+    transform: translateY(-3px);
+    background: #b58329;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+
+    .countdown-section .container {
+        padding: 35px 20px;
+    }
+
+    .countdown-section h2 {
+        font-size: 1.8rem;
+    }
+
+    .countdown-box {
+        font-size: 1.4rem;
+        padding: 20px;
+    }
 }
 .hero {
     height: 30vh;   /* smaller visible banner area */
