@@ -1,1 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <title>B.E.P | Poll & Reviews</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+            color: #222;
+        }
+
+        header {
+            background: linear-gradient(135deg, #003b73, #0074c8);
+            color: white;
+            text-align: center;
+            padding: 30px 15px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 30px;
+        }
+
+        header p {
+            margin-top: 8px;
+        }
+
+        .container {
+            width: 92%;
+            max-width: 1000px;
+            margin: 30px auto;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        h2 {
+            color: #003b73;
+        }
+
+        .option {
+            display: block;
+            background: #f1f5f9;
+            padding: 14px;
+            margin: 10px 0;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .option:hover {
+            background: #e2edf8;
+        }
+
+        .option input {
+            margin-right: 10px;
+        }
+
+        button {
+            width: 100%;
+            padding: 13px;
+            border: none;
+            border-radius: 8px;
+            background: #0074c8;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background: #005b9e;
+        }
+
+        .result {
+            margin: 15px 0;
+        }
+
+        .result-title {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+
+        .bar {
+            height: 12px;
+            background: #e5e7eb;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .bar-fill {
+            height: 100%;
+            background: #0074c8;
+            width: 0%;
+        }
+
+        input[type="text"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccd5df;
+            border-radius: 8px;
+            font-size: 15px;
+            margin-top: 5px;
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        .stars {
+            font-size: 30px;
+            color: #f5b301;
+            margin: 10px 0;
+        }
+
+        .review {
+            border-bottom: 1px solid #ddd;
+            padding: 20px 0;
+        }
+
+        .review:last-child {
+            border-bottom: none;
+        }
+
+        .review-name {
+            font-weight: bold;
+            color: #003b73;
+        }
+
+        .review-date {
+            color: #777;
+            font-size: 13px;
+        }
+
+        .review-text {
+            margin-top: 8px;
+        }
+
+        footer {
+            background: #003b73;
+            color: white;
+            text-align: center;
+            padding: 25px;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+
+    <h1>📖 Biblical Empowerment Program</h1>
+
+    <p>Polls • Reviews • Feedback</p>
+
+</header>
+
+
+<div class="container">
+
+
+    <!-- POLL -->
+
+    <div class="card">
+
+        <h2>🗳️ B.E.P Community Poll</h2>
+
+        <p>
+            What topic would you like B.E.P to discuss next?
+        </p>
+
+
+        <form id="pollForm">
+
+            <label class="option">
+                <input type="radio" name="poll" value="Prayer">
+                Prayer
+            </label>
+
+            <label class="option">
+                <input type="radio" name="poll" value="Discipleship">
+                Discipleship
+            </label>
+
+            <label class="option">
+                <input type="radio" name="poll" value="Holy Spirit">
+                The Holy Spirit
+            </label>
+
+            <label class="option">
+                <input type="radio" name="poll" value="Marriage">
+                Marriage & Family
+            </label>
+
+            <label class="option">
+                <input type="radio" name="poll" value="Spiritual Growth">
+                Spiritual Growth
+            </label>
+
+
+            <button type="submit">
+                Submit Vote
+            </button>
+
+        </form>
+
+
+        <p id="pollMessage"></p>
+
+    </div>
+
+
+
+    <!-- POLL RESULTS -->
+
+    <div class="card">
+
+        <h2>📊 Poll Results</h2>
+
+        <div id="results"></div>
+
+        <p>
+            Total votes:
+            <strong id="totalVotes">0</strong>
+        </p>
+
+    </div>
+
+
+
+    <!-- REVIEW FORM -->
+
+    <div class="card">
+
+        <h2>⭐ Leave a Review</h2>
+
+        <p>
+            Share your experience with the Biblical Empowerment Program.
+        </p>
+
+
+        <form id="reviewForm">
+
+
+            <p>
+
+                <label>
+                    Your Name
+                </label>
+
+                <input
+                    type="text"
+                    id="name"
+                    placeholder="Enter your name"
+                    required
+                >
+
+            </p>
+
+
+            <p>
+
+                <label>
+                    Rating
+                </label>
+
+                <select id="rating" required>
+
+                    <option value="">
+                        Select rating
+                    </option>
+
+                    <option value="5">
+                        ⭐⭐⭐⭐⭐ Excellent
+                    </option>
+
+                    <option value="4">
+                        ⭐⭐⭐⭐ Very Good
+                    </option>
+
+                    <option value="3">
+                        ⭐⭐⭐ Good
+                    </option>
+
+                    <option value="2">
+                        ⭐⭐ Fair
+                    </option>
+
+                    <option value="1">
+                        ⭐ Needs Improvement
+                    </option>
+
+                </select>
+
+            </p>
+
+
+            <p>
+
+                <label>
+                    Your Review
+                </label>
+
+                <textarea
+                    id="review"
+                    placeholder="Write your review or testimony..."
+                    required
+                ></textarea>
+
+            </p>
+
+
+            <button type="submit">
+                Submit Review
+            </button>
+
+        </form>
+
+
+        <p id="reviewMessage"></p>
+
+    </div>
+
+
+
+    <!-- REVIEWS -->
+
+    <div class="card">
+
+        <h2>💬 Reviews & Testimonials</h2>
+
+        <div id="reviews"></div>
+
+    </div>
+
+
+</div>
+
+
+
+<footer>
+
+    <p>
+        © 2026 Biblical Empowerment Program
+    </p>
+
+    <p>
+        Growing in Christ • Building Character • Empowering Lives
+    </p>
+
+</footer>
+
+
+
+<script>
+
+    /*
+    =====================================
+    POLL SYSTEM
+    =====================================
+    */
+
+
+    let votes = JSON.parse(
+        localStorage.getItem("bepVotes")
+    ) || {
+
+        "Prayer": 0,
+
+        "Discipleship": 0,
+
+        "Holy Spirit": 0,
+
+        "Marriage": 0,
+
+        "Spiritual Growth": 0
+
+    };
+
+
+    function displayResults() {
+
+        const results =
+            document.getElementById("results");
+
+
+        const total =
+            Object.values(votes)
+            .reduce(
+                (sum, value) => sum + value,
+                0
+            );
+
+
+        document.getElementById(
+            "totalVotes"
+        ).textContent = total;
+
+
+        results.innerHTML = "";
+
+
+        Object.keys(votes).forEach(option => {
+
+
+            const voteCount =
+                votes[option];
+
+
+            const percentage =
+                total === 0
+                ? 0
+                : Math.round(
+                    (voteCount / total) * 100
+                );
+
+
+            results.innerHTML += `
+
+                <div class="result">
+
+                    <div class="result-title">
+
+                        <span>
+                            ${option}
+                        </span>
+
+                        <span>
+                            ${percentage}%
+                        </span>
+
+                    </div>
+
+
+                    <div class="bar">
+
+                        <div
+                            class="bar-fill"
+                            style="width:${percentage}%"
+                        ></div>
+
+                    </div>
+
+                </div>
+
+            `;
+
+        });
+
+    }
+
+
+
+    document
+        .getElementById("pollForm")
+        .addEventListener(
+            "submit",
+            function(event) {
+
+                event.preventDefault();
+
+
+                const selected =
+                    document.querySelector(
+                        'input[name="poll"]:checked'
+                    );
+
+
+                if (!selected) {
+
+                    document.getElementById(
+                        "pollMessage"
+                    ).textContent =
+                        "Please select an option.";
+
+                    return;
+
+                }
+
+
+                votes[selected.value]++;
+
+
+                localStorage.setItem(
+                    "bepVotes",
+                    JSON.stringify(votes)
+                );
+
+
+                document.getElementById(
+                    "pollMessage"
+                ).textContent =
+                    "Thank you! Your vote has been recorded.";
+
+
+                displayResults();
+
+            }
+        );
+
+
+
+    /*
+    =====================================
+    REVIEW SYSTEM
+    =====================================
+    */
+
+
+    let reviews =
+        JSON.parse(
+            localStorage.getItem("bepReviews")
+        ) || [];
+
+
+    function displayReviews() {
+
+        const container =
+            document.getElementById("reviews");
+
+
+        if (reviews.length === 0) {
+
+            container.innerHTML =
+
+                "<p>No reviews yet. Be the first to leave a review!</p>";
+
+            return;
+
+        }
+
+
+        container.innerHTML = "";
+
+
+        reviews.forEach(review => {
+
+
+            const stars =
+                "⭐".repeat(review.rating);
+
+
+            container.innerHTML += `
+
+                <div class="review">
+
+                    <div class="review-name">
+
+                        ${review.name}
+
+                    </div>
+
+
+                    <div class="stars">
+
+                        ${stars}
+
+                    </div>
+
+
+                    <div class="review-date">
+
+                        ${review.date}
+
+                    </div>
+
+
+                    <div class="review-text">
+
+                        ${review.text}
+
+                    </div>
+
+                </div>
+
+            `;
+
+        });
+
+    }
+
+
+
+    document
+        .getElementById("reviewForm")
+        .addEventListener(
+            "submit",
+            function(event) {
+
+                event.preventDefault();
+
+
+                const name =
+                    document
+                    .getElementById("name")
+                    .value
+                    .trim();
+
+
+                const rating =
+                    Number(
+                        document
+                        .getElementById("rating")
+                        .value
+                    );
+
+
+                const text =
+                    document
+                    .getElementById("review")
+                    .value
+                    .trim();
+
+
+                if (!name || !rating || !text) {
+
+                    return;
+
+                }
+
+
+                const newReview = {
+
+                    name: name,
+
+                    rating: rating,
+
+                    text: text,
+
+                    date:
+                        new Date()
+                        .toLocaleDateString()
+
+                };
+
+
+                reviews.unshift(
+                    newReview
+                );
+
+
+                localStorage.setItem(
+                    "bepReviews",
+                    JSON.stringify(reviews)
+                );
+
+
+                this.reset();
+
+
+                document.getElementById(
+                    "reviewMessage"
+                ).textContent =
+                    "Thank you! Your review has been submitted.";
+
+
+                displayReviews();
+
+            }
+        );
+
+
+
+    /*
+    =====================================
+    START
+    =====================================
+    */
+
+
+    displayResults();
+
+    displayReviews();
+
+</script>
+
+
+</body>
+  </html>
