@@ -1,1029 +1,857 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
-    <meta name="description"
-          content="Biblical Empowerment Program - Building the Church of Christ">
-
-    <title>Biblical Empowerment Program - B.E.P</title>
-
-    <!-- Font Awesome -->
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
-    <style>
-
-        /* =====================================================
-           GLOBAL STYLES
-        ===================================================== */
-
-        * {
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            margin: 0;
-            font-family: Arial, Helvetica, sans-serif;
-            background: #f5f7fb;
-            color: #333;
-        }
-
-        a {
-            text-decoration: none;
-        }
-
-        .container {
-            width: 90%;
-            max-width: 1100px;
-            margin: auto;
-        }
-
-        h2 {
-            color: #003366;
-        }
-
-        button {
-            font-family: inherit;
-        }
-
-
-        /* =====================================================
-           HERO / BANNER
-        ===================================================== */
-
-        .hero {
-            min-height: 390px;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            text-align: center;
-
-            position: relative;
-
-            background:
-                linear-gradient(
-                    rgba(6, 26, 58, 0.82),
-                    rgba(6, 26, 58, 0.82)
-                ),
-                url("banner.png") center / cover no-repeat;
-
-            padding: 40px 20px;
-        }
-
-        .hero-content {
-            max-width: 900px;
-        }
-
-        .hero h1 {
-            font-size: 42px;
-            color: gold;
-            margin: 0;
-        }
-
-        .hero p {
-            margin-top: 12px;
-            font-size: 20px;
-            color: #ffffff;
-            letter-spacing: 1px;
-            font-style: italic;
-        }
-
-        .hero button {
-            margin-top: 20px;
-            padding: 12px 24px;
-            border: none;
-            background: gold;
-            color: #061a3a;
-            font-weight: bold;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .hero button:hover {
-            transform: scale(1.05);
-        }
-
-
-        /* =====================================================
-           GENERAL SECTIONS
-        ===================================================== */
-
-        .section {
-            padding: 70px 20px;
-            text-align: center;
-        }
-
-        .section-title {
-            color: #003366;
-            font-size: 36px;
-            margin-bottom: 30px;
-        }
-
-        .card-grid {
-            display: grid;
-            grid-template-columns:
-                repeat(auto-fit, minmax(280px, 1fr));
-
-            gap: 25px;
-
-            max-width: 1100px;
-            margin: auto;
-        }
-
-        .card {
-            background: #ffffff;
-            padding: 30px;
-            border-radius: 14px;
-
-            box-shadow:
-                0 6px 20px rgba(0,0,0,0.10);
-
-            transition: 0.3s;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-        }
-
-        .card h2 {
-            color: #003366;
-            margin-bottom: 15px;
-        }
-
-        .card p,
-        .card li {
-            color: #444;
-            font-size: 16px;
-            line-height: 1.7;
-        }
-
-        .card ul {
-            text-align: left;
-            padding-left: 25px;
-        }
-
-
-        /* =====================================================
-           NEXT SESSION
-        ===================================================== */
-
-        .next-session-section {
-            padding: 60px 20px;
-            background: #f5f7fb;
-        }
-
-        .session-card {
-            max-width: 950px;
-            margin: auto;
-
-            background: #ffffff;
-
-            border-radius: 20px;
-
-            padding: 45px 30px;
-
-            text-align: center;
-
-            box-shadow:
-                0 8px 25px rgba(0,0,0,0.08);
-
-            border-top: 5px solid #cc9933;
-        }
-
-        .session-card h2 {
-            font-size: 2.2rem;
-            color: #003366;
-            margin-bottom: 10px;
-        }
-
-        .session-subtitle {
-            color: #666;
-            margin-bottom: 35px;
-        }
-
-        .session-info {
-            display: grid;
-
-            grid-template-columns:
-                repeat(auto-fit, minmax(200px, 1fr));
-
-            gap: 20px;
-
-            margin-bottom: 30px;
-        }
-
-        .info-box {
-            background: #f8fafc;
-            padding: 25px;
-            border-radius: 15px;
-        }
-
-        .info-box i {
-            font-size: 28px;
-            color: #cc9933;
-            margin-bottom: 12px;
-        }
-
-        .info-box h3 {
-            color: #003366;
-            font-size: 16px;
-        }
-
-        .countdown-box {
-            background: #003366;
-            color: white;
-
-            padding: 18px;
-
-            border-radius: 14px;
-
-            font-size: 22px;
-            font-weight: bold;
-
-            margin-bottom: 25px;
-        }
-
-        .session-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-
-        .join-btn,
-        .reminder-btn {
-            padding: 13px 22px;
-            border-radius: 9px;
-            font-weight: bold;
-            color: white;
-            transition: 0.3s;
-        }
-
-        .join-btn {
-            background: #003366;
-        }
-
-        .reminder-btn {
-            background: #cc9933;
-        }
-
-        .join-btn:hover,
-        .reminder-btn:hover {
-            transform: translateY(-2px);
-        }
-
-
-        /* =====================================================
-           REGISTER
-        ===================================================== */
-
-        .register-section {
-            padding: 70px 20px;
-            background: #f7f9fc;
-        }
-
-        .register-container {
-            max-width: 650px;
-            margin: auto;
-
-            background: #ffffff;
-
-            padding: 35px;
-
-            border-radius: 15px;
-
-            box-shadow:
-                0 5px 18px rgba(0,0,0,0.08);
-        }
-
-        .register-container h2 {
-            text-align: center;
-            color: #003366;
-        }
-
-        .register-sub {
-            text-align: center;
-            color: #666;
-            margin-bottom: 25px;
-        }
-
-        .input-group {
-            margin-bottom: 20px;
-        }
-
-        .input-group label {
-            display: block;
-
-            font-weight: bold;
-
-            margin-bottom: 7px;
-
-            color: #003366;
-
-            text-align: left;
-        }
-
-        .input-group input,
-        .input-group select {
-            width: 100%;
-
-            padding: 13px;
-
-            border: 1px solid #ccc;
-
-            border-radius: 8px;
-
-            font-size: 15px;
-        }
-
-        .register-btn {
-            width: 100%;
-
-            padding: 14px;
-
-            background: #cc9933;
-
-            color: white;
-
-            border: none;
-
-            font-size: 17px;
-
-            border-radius: 8px;
-
-            cursor: pointer;
-        }
-
-        .register-btn:hover {
-            background: #b58329;
-        }
-
-
-        /* =====================================================
-           REGISTRATION OPTIONS
-        ===================================================== */
-
-        .card-btn {
-            display: inline-block;
-
-            background: #003366;
-
-            color: white;
-
-            padding: 12px 20px;
-
-            border-radius: 7px;
-
-            font-weight: bold;
-
-            margin-top: 10px;
-        }
-
-        .card-btn:hover {
-            background: #00509e;
-        }
-
-
-        /* =====================================================
-           POLL + REVIEWS
-        ===================================================== */
-
-        .community-section {
-            padding: 70px 20px;
-
-            background:
-                linear-gradient(
-                    180deg,
-                    #f5f7fb,
-                    #eef3f9
-                );
-        }
-
-        .community-container {
-            max-width: 1000px;
-            margin: auto;
-        }
-
-        .community-title {
-            text-align: center;
-            color: #003366;
-            font-size: 36px;
-            margin-bottom: 10px;
-        }
-
-        .community-subtitle {
-            text-align: center;
-            color: #666;
-            margin-bottom: 35px;
-        }
-
-        .community-card {
-            background: #ffffff;
-
-            padding: 30px;
-
-            border-radius: 15px;
-
-            margin-bottom: 25px;
-
-            box-shadow:
-                0 6px 20px rgba(0,0,0,0.09);
-        }
-
-        .community-card h2 {
-            color: #003366;
-            margin-top: 0;
-        }
-
-        .poll-option {
-            display: flex;
-
-            align-items: center;
-
-            gap: 12px;
-
-            background: #f1f5f9;
-
-            padding: 14px;
-
-            margin: 10px 0;
-
-            border-radius: 8px;
-
-            cursor: pointer;
-
-            transition: 0.2s;
-        }
-
-        .poll-option:hover {
-            background: #e4edf7;
-        }
-
-        .poll-option input {
-            width: 18px;
-            height: 18px;
-        }
-
-        .poll-option label {
-            cursor: pointer;
-            width: 100%;
-        }
-
-        .submit-btn {
-            width: 100%;
-
-            padding: 14px;
-
-            border: none;
-
-            border-radius: 8px;
-
-            background: #0078c8;
-
-            color: white;
-
-            font-weight: bold;
-
-            cursor: pointer;
-
-            margin-top: 12px;
-        }
-
-        .submit-btn:hover {
-            background: #005fa3;
-        }
-
-        .message {
-            margin-top: 15px;
-
-            padding: 12px;
-
-            border-radius: 8px;
-
-            display: none;
-
-            text-align: center;
-
-            font-weight: bold;
-        }
-
-        .success-message {
-            background: #e6f7ed;
-            color: #137333;
-        }
-
-        .error-message {
-            background: #fde8e8;
-            color: #b42318;
-        }
-
-
-        /* =====================================================
-           POLL RESULTS
-        ===================================================== */
-
-        .result-row {
-            margin-bottom: 18px;
-        }
-
-        .result-label {
-            display: flex;
-
-            justify-content: space-between;
-
-            margin-bottom: 6px;
-
-            font-size: 14px;
-        }
-
-        .result-bar {
-            height: 10px;
-
-            background: #e5e7eb;
-
-            border-radius: 10px;
-
-            overflow: hidden;
-        }
-
-        .result-fill {
-            height: 100%;
-
-            width: 0%;
-
-            background: #0078c8;
-
-            transition: width 0.5s ease;
-        }
-
-        .total-votes {
-            margin-top: 20px;
-
-            font-weight: bold;
-
-            color: #003366;
-        }
-
-
-        /* =====================================================
-           REVIEW FORM
-        ===================================================== */
-
-        .review-form input,
-        .review-form select,
-        .review-form textarea {
-            width: 100%;
-
-            padding: 13px;
-
-            border: 1px solid #ccc;
-
-            border-radius: 8px;
-
-            font-size: 15px;
-
-            margin-bottom: 15px;
-        }
-
-        .review-form textarea {
-            min-height: 130px;
-
-            resize: vertical;
-        }
-
-        .review-form label {
-            display: block;
-
-            color: #003366;
-
-            font-weight: bold;
-
-            margin-bottom: 6px;
-        }
-
-
-        /* =====================================================
-           REVIEWS DISPLAY
-        ===================================================== */
-
-        .review-item {
-            border-bottom: 1px solid #ddd;
-
-            padding: 20px 0;
-        }
-
-        .review-item:last-child {
-            border-bottom: none;
-        }
-
-        .review-header {
-            display: flex;
-
-            justify-content: space-between;
-
-            align-items: center;
-
-            gap: 10px;
-
-            flex-wrap: wrap;
-        }
-
-        .review-name {
-            color: #003366;
-
-            font-weight: bold;
-
-            font-size: 17px;
-        }
-
-        .stars {
-            color: #f4b400;
-
-            letter-spacing: 2px;
-        }
-
-        .review-text {
-            color: #555;
-
-            line-height: 1.6;
-
-            margin-top: 10px;
-        }
-
-        .review-date {
-            color: #999;
-
-            font-size: 12px;
-
-            margin-top: 8px;
-        }
-
-        .no-reviews {
-            text-align: center;
-
-            color: #777;
-
-            padding: 20px;
-        }
-
-
-        /* =====================================================
-           CONTACT
-        ===================================================== */
-
-        .contact {
-            background:
-                linear-gradient(
-                    135deg,
-                    #091a3c,
-                    #0d2b5f
-                );
-
-            padding: 80px 25px;
-
-            text-align: center;
-        }
-
-        .contact h2 {
-            color: gold;
-            font-size: 36px;
-        }
-
-        .contact-intro {
-            color: #cfcfcf;
-
-            max-width: 650px;
-
-            margin:
-                0 auto 40px auto;
-
-            line-height: 1.6;
-        }
-
-        .contact-grid {
-            display: grid;
-
-            grid-template-columns:
-                repeat(auto-fit, minmax(250px, 1fr));
-
-            gap: 25px;
-        }
-
-        .contact-card {
-            background:
-                rgba(255,255,255,0.06);
-
-            padding: 30px;
-
-            border-radius: 14px;
-
-            border:
-                1px solid
-                rgba(255,215,0,0.25);
-        }
-
-        .icon-circle {
-            width: 60px;
-            height: 60px;
-
-            margin:
-                0 auto 15px auto;
-
-            background: gold;
-
-            color: #061a3a;
-
-            border-radius: 50%;
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: center;
-
-            font-size: 26px;
-        }
-
-        .contact-card h3 {
-            color: gold;
-        }
-
-        .contact-card p {
-            color: #e6e6e6;
-        }
-
-        .contact-buttons {
-            margin-top: 35px;
-
-            display: flex;
-
-            justify-content: center;
-
-            flex-wrap: wrap;
-        }
-
-        .contact-buttons a {
-            display: inline-block;
-
-            margin: 7px;
-
-            padding: 12px 18px;
-
-            background: gold;
-
-            color: #061a3a;
-
-            border-radius: 6px;
-
-            font-weight: bold;
-        }
-
-
-        /* =====================================================
-           FOOTER
-        ===================================================== */
-
-        footer {
-            background: #061a3a;
-
-            padding: 25px 20px;
-
-            text-align: center;
-
-            color: gold;
-
-            font-size: 14px;
-        }
-
-        .footer-buttons {
-            margin-top: 15px;
-        }
-
-        .footer-buttons a {
-            color: white;
-
-            margin: 0 8px;
-
-            font-weight: bold;
-        }
-
-
-        /* =====================================================
-           MOBILE
-        ===================================================== */
-
-        @media (max-width: 768px) {
-
-            .hero {
-                min-height: 330px;
-            }
-
-            .hero h1 {
-                font-size: 30px;
-            }
-
-            .hero p {
-                font-size: 16px;
-            }
-
-            .section-title,
-            .community-title {
-                font-size: 28px;
-            }
-
-            .session-card {
-                padding: 30px 18px;
-            }
-
-            .session-card h2 {
-                font-size: 28px;
-            }
-
-            .countdown-box {
-                font-size: 18px;
-            }
-
-            .register-container,
-            .community-card {
-                padding: 22px;
-            }
-
-        }
-
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Biblical Empowerment Program - Building the Church of Christ">
+<title>Biblical Empowerment Program - B.E.P</title>
+
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+* {
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f5f7fb;
+    color: #333;
+    line-height: 1.6;
+}
+
+a {
+    text-decoration: none;
+}
+
+.container {
+    width: 92%;
+    max-width: 1100px;
+    margin: auto;
+}
+
+/* NAVIGATION */
+.navbar {
+    background: #061a3a;
+    padding: 12px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,.2);
+}
+
+.nav-inner {
+    width: 92%;
+    max-width: 1100px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.logo {
+    color: gold;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.nav-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+}
+
+.nav-links a {
+    color: white;
+    padding: 8px 10px;
+    font-size: 13px;
+    border-radius: 5px;
+}
+
+.nav-links a:hover {
+    background: gold;
+    color: #061a3a;
+}
+
+/* HERO */
+.hero {
+    min-height: 360px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    background:
+        linear-gradient(rgba(6,26,58,.82), rgba(6,26,58,.82)),
+        url("banner.png") center/cover no-repeat;
+    padding: 40px 20px;
+}
+
+.hero h1 {
+    font-size: clamp(30px, 6vw, 48px);
+    color: gold;
+    margin: 0;
+}
+
+.hero p {
+    color: white;
+    font-size: 18px;
+    font-style: italic;
+    margin: 8px 0 20px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 12px 20px;
+    border-radius: 7px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-gold {
+    background: gold;
+    color: #061a3a;
+}
+
+.btn-blue {
+    background: #003f73;
+    color: white;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+}
+
+/* GENERAL SECTIONS */
+.section {
+    padding: 55px 20px;
+}
+
+.card {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 5px 18px rgba(0,0,0,.09);
+    margin-bottom: 25px;
+}
+
+.section-title {
+    text-align: center;
+    color: #003366;
+    font-size: 32px;
+    margin-top: 0;
+}
+
+.gold-title {
+    color: #d4a017;
+}
+
+.card h2 {
+    color: #d4a017;
+    text-align: center;
+}
+
+.card p {
+    font-size: 16px;
+}
+
+.card ul {
+    max-width: 800px;
+    margin: 15px auto;
+    text-align: left;
+}
+
+/* SESSION */
+.next-session-section {
+    padding: 55px 20px;
+    background: #f5f7fb;
+}
+
+.session-card {
+    max-width: 950px;
+    margin: auto;
+    background: white;
+    border-radius: 18px;
+    padding: 40px 25px;
+    text-align: center;
+    box-shadow: 0 8px 25px rgba(0,0,0,.09);
+    border-top: 5px solid #cc9933;
+}
+
+.session-card h2 {
+    font-size: 32px;
+    color: #003366;
+    margin: 0 0 8px;
+}
+
+.session-subtitle {
+    color: #666;
+    margin-bottom: 30px;
+}
+
+.session-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.session-item {
+    background: #f8fafc;
+    padding: 22px 10px;
+    border-radius: 12px;
+}
+
+.session-item i {
+    color: #cc9933;
+    font-size: 25px;
+    margin-bottom: 8px;
+}
+
+.session-item h3 {
+    color: #003366;
+    font-size: 15px;
+    margin: 5px 0 0;
+}
+
+.countdown-box {
+    background: #003f73;
+    color: white;
+    padding: 18px;
+    border-radius: 12px;
+    font-size: 22px;
+    font-weight: bold;
+    margin: 20px 0;
+}
+
+.session-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+/* OBJECTIVES */
+.objectives {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+}
+
+/* REGISTER */
+.register-section {
+    padding: 55px 20px;
+    background: #eef3f9;
+}
+
+.register-container {
+    max-width: 650px;
+    margin: auto;
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 5px 18px rgba(0,0,0,.09);
+}
+
+.register-container h2 {
+    text-align: center;
+    color: #003366;
+}
+
+.register-sub {
+    text-align: center;
+    color: #666;
+    margin-bottom: 25px;
+}
+
+.input-group {
+    margin-bottom: 18px;
+}
+
+.input-group label {
+    display: block;
+    font-weight: bold;
+    color: #003366;
+    margin-bottom: 6px;
+}
+
+.input-group input,
+.input-group select {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 15px;
+}
+
+.register-btn {
+    width: 100%;
+    padding: 14px;
+    background: #cc9933;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* POLL / REVIEWS */
+.poll-link-section {
+    padding: 55px 20px;
+    background: white;
+    text-align: center;
+}
+
+.poll-box {
+    max-width: 850px;
+    margin: auto;
+    padding: 35px 25px;
+    border-radius: 15px;
+    background: #f7f9fc;
+    box-shadow: 0 4px 15px rgba(0,0,0,.07);
+}
+
+.poll-box h2 {
+    color: #003366;
+}
+
+.poll-box p {
+    color: #555;
+}
+
+/* CONTACT */
+.contact {
+    background: linear-gradient(135deg, #091a3c, #0d2b5f);
+    padding: 65px 20px;
+    text-align: center;
+}
+
+.contact h2 {
+    color: gold;
+    font-size: 35px;
+}
+
+.contact-intro {
+    color: #ddd;
+    max-width: 650px;
+    margin: 0 auto 35px;
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.contact-card {
+    background: rgba(255,255,255,.07);
+    padding: 25px 15px;
+    border-radius: 14px;
+    border: 1px solid rgba(255,215,0,.25);
+}
+
+.icon-circle {
+    width: 55px;
+    height: 55px;
+    margin: auto;
+    background: gold;
+    color: #061a3a;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+}
+
+.contact-card h3 {
+    color: gold;
+}
+
+.contact-card p {
+    color: white;
+}
+
+.contact-buttons {
+    margin-top: 30px;
+}
+
+.contact-buttons a {
+    display: inline-block;
+    margin: 6px;
+    padding: 11px 16px;
+    background: gold;
+    color: #061a3a;
+    border-radius: 6px;
+    font-weight: bold;
+}
+
+/* FOOTER */
+footer {
+    background: #061a3a;
+    color: gold;
+    text-align: center;
+    padding: 25px 15px;
+}
+
+.footer-buttons {
+    margin-top: 12px;
+}
+
+.footer-buttons a {
+    color: white;
+    margin: 0 8px;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+    .nav-inner {
+        flex-direction: column;
+    }
+
+    .nav-links {
+        width: 100%;
+    }
+
+    .hero {
+        min-height: 300px;
+    }
+
+    .session-grid,
+    .objectives,
+    .contact-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .card {
+        padding: 22px 17px;
+    }
+
+    .section {
+        padding: 40px 14px;
+    }
+
+    .next-session-section {
+        padding: 40px 14px;
+    }
+
+    .session-card {
+        padding: 30px 15px;
+    }
+
+    .session-card h2 {
+        font-size: 27px;
+    }
+
+    .countdown-box {
+        font-size: 18px;
+    }
+
+    .nav-links a {
+        font-size: 12px;
+    }
+}
+</style>
 </head>
-
 
 <body>
 
-
-<!-- =========================================================
-     HERO
-========================================================= -->
-
-<section class="hero">
-
-    <div class="hero-content">
-
-        <h1>
-            Biblical Empowerment Program
-        </h1>
-
-        <p>
-            Building the Church of Christ
-        </p>
-
-        <button
-            onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">
-
-            Learn More
-
-        </button>
-
+<!-- NAVIGATION -->
+<nav class="navbar">
+    <div class="nav-inner">
+        <div class="logo">📖 B.E.P</div>
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#sessions">Sessions</a>
+            <a href="#register">Register</a>
+            <a href="#poll">Poll & Reviews</a>
+            <a href="#contact">Contact</a>
+        </div>
     </div>
+</nav>
 
+<!-- HERO -->
+<section class="hero" id="home">
+    <div>
+        <h1>Biblical Empowerment Program</h1>
+        <p>Building the Church of Christ</p>
+        <a href="#about" class="btn btn-gold">Learn More</a>
+    </div>
 </section>
 
-
-
-<!-- =========================================================
-     NEXT B.E.P SESSION
-========================================================= -->
-
-<section class="next-session-section">
-
+<!-- NEXT SESSION -->
+<section class="next-session-section" id="sessions">
     <div class="session-card">
 
-        <h2>
-            Next B.E.P Session
-        </h2>
+        <h2>Next B.E.P Session</h2>
+        <p class="session-subtitle">Building the Church of Christ</p>
 
-        <p class="session-subtitle">
-            Building the Church of Christ
-        </p>
-
-
-        <div class="session-info">
-
-            <div class="info-box">
-
+        <div class="session-grid">
+            <div class="session-item">
                 <i class="fa-solid fa-calendar-days"></i>
-
-                <h3>
-                    Every Thursday
-                </h3>
-
+                <h3>Every Thursday</h3>
             </div>
 
-
-            <div class="info-box">
-
+            <div class="session-item">
                 <i class="fa-solid fa-clock"></i>
-
-                <h3>
-                    7:00 PM – 8:30 PM
-                </h3>
-
+                <h3>7:00 PM – 8:30 PM</h3>
             </div>
 
-
-            <div class="info-box">
-
+            <div class="session-item">
                 <i class="fa-solid fa-video"></i>
-
-                <h3>
-                    Microsoft Teams
-                </h3>
-
+                <h3>Microsoft Teams</h3>
             </div>
-
         </div>
 
-
-        <div
-            id="countdown"
-            class="countdown-box">
-
-            Loading countdown...
-
-        </div>
-
+        <div id="countdown" class="countdown-box">Loading countdown...</div>
 
         <div class="session-buttons">
-
-            <a
-                href="https://teams.live.com/meet/936085799236?p=b66LnDUAB2Xkx2uQYp&eventType=community"
-                class="join-btn"
-                target="_blank">
-
-                <i class="fa-solid fa-video"></i>
-
-                Join Microsoft Teams
-
+            <a href="https://teams.live.com/meet/936085799236?p=b66LnDUAB2Xkx2uQYp&eventType=community"
+               class="btn btn-blue" target="_blank" rel="noopener">
+                <i class="fa-solid fa-video"></i> Join Microsoft Teams
             </a>
 
+            <button class="btn btn-gold" onclick="setReminder()">
+                <i class="fa-solid fa-bell"></i> Set Reminder
+            </button>
+        </div>
 
-            <a
-                href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Biblical+Empowerment+Program+(B.E.P)+Session&details=Weekly+B.E.P+Teaching+Session&location=Microsoft+Teams"
-                class="reminder-btn"
-                target="_blank">
+    </div>
+</section>
 
-                <i class="fa-solid fa-bell"></i>
+<!-- ABOUT -->
+<section class="section" id="about">
+    <div class="card">
 
-                Set Reminder
+        <h2 class="section-title gold-title">About Us</h2>
 
+        <p>
+            The Biblical Empowerment Program (B.E.P) is a faith-driven initiative
+            dedicated to equipping individuals with a deeper understanding of the
+            Word of God and the transformative power of the Holy Spirit.
+            Our mission is to build spiritually grounded believers who are
+            empowered to live purposeful, Christ-centered lives.
+        </p>
+
+        <p>
+            At B.E.P, we believe that true empowerment comes through knowledge,
+            revelation, and application of Scripture. Through structured teachings,
+            interactive sessions, and Spirit-led discussions, we create a space
+            where individuals can grow in faith, gain clarity in their spiritual
+            journey, and develop a personal relationship with God.
+        </p>
+
+        <p>
+            Our program is designed for everyone—whether you are a new believer
+            or someone seeking deeper spiritual insight. We focus on practical
+            teachings that address real-life challenges while guiding individuals
+            to walk in faith, wisdom, and obedience to God's will.
+        </p>
+
+        <p><strong>We are committed to:</strong></p>
+
+        <ul>
+            <li>Teaching the Word of God with clarity and truth</li>
+            <li>Empowering believers through the Holy Spirit</li>
+            <li>Building a strong, united faith community</li>
+            <li>Encouraging spiritual growth and personal transformation</li>
+        </ul>
+
+        <p>
+            The Biblical Empowerment Program is more than just a teaching
+            platform—it is a movement of believers rising in faith, purpose,
+            and power.
+        </p>
+
+    </div>
+</section>
+
+<!-- THURSDAY SESSIONS -->
+<section class="section">
+    <div class="card">
+
+        <h2 class="section-title gold-title">Thursday Sessions</h2>
+
+        <p>
+            The Thursday sessions are held every week from 7:00 PM to 8:30 PM.
+            They are designed to deepen participants' understanding of the Word
+            of God through structured teaching and interactive engagement.
+        </p>
+
+        <p>
+            The goal is to build a strong biblical foundation while encouraging
+            spiritual growth and practical application of Scripture in daily life.
+            Each session is centered on presentation-based learning, where topics
+            are shared and explored through discussion, comments, and questions,
+            promoting active participation.
+        </p>
+
+        <p>
+            These sessions aim to create a space for the diverse expansion of
+            biblical knowledge, allowing participants to learn through Scripture,
+            guided teaching, and shared insights.
+        </p>
+
+    </div>
+</section>
+
+<!-- OBJECTIVES -->
+<section class="section">
+    <div class="objectives">
+
+        <div class="card">
+            <h2>Objectives</h2>
+            <ul>
+                <li>Strengthening biblical understanding and spiritual maturity</li>
+                <li>Encouraging active participation through questions and discussion</li>
+                <li>Promoting clear and correct interpretation of Scripture</li>
+                <li>Building confidence in sharing and applying biblical knowledge</li>
+                <li>Fostering spiritual growth through collective learning</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>What You Can Expect</h2>
+            <ul>
+                <li>Biblical teaching and practical application</li>
+                <li>Interactive discussions</li>
+                <li>Questions and answers</li>
+                <li>Spiritual encouragement</li>
+                <li>A welcoming Christian community</li>
+            </ul>
+        </div>
+
+    </div>
+</section>
+
+<!-- REGISTRATION OPTIONS -->
+<section class="section" id="register">
+    <h2 class="section-title">Register for B.E.P</h2>
+
+    <div class="objectives">
+
+        <div class="card">
+            <h2>Register via WhatsApp</h2>
+            <p>
+                Message us directly on WhatsApp to register for the Biblical
+                Empowerment Program.
+            </p>
+            <a href="https://wa.me/27740386671?text=I%20would%20like%20to%20register%20for%20B.E.P"
+               class="btn btn-blue" target="_blank" rel="noopener">
+                Open WhatsApp
+            </a>
+        </div>
+
+        <div class="card">
+            <h2>Register via Email</h2>
+            <p>
+                Send us your full name and request to join the program.
+            </p>
+            <a href="mailto:bep.onlineprog@gmail.com" class="btn btn-gold">
+                Send Email
+            </a>
+        </div>
+
+        <div class="card">
+            <h2>Join Microsoft Teams</h2>
+            <p>
+                Attend our weekly Thursday sessions directly on Microsoft Teams.
+            </p>
+            <a href="https://teams.live.com/meet/936085799236?p=b66LnDUAB2Xkx2uQYp&eventType=community"
+               class="btn btn-blue" target="_blank" rel="noopener">
+                Join Teams
+            </a>
+        </div>
+
+        <div class="card">
+            <h2>Quick Registration</h2>
+            <p>
+                Complete the registration form below and we will receive your
+                details by email.
+            </p>
+            <a href="#registration-form" class="btn btn-gold">
+                Open Form
+            </a>
+        </div>
+
+    </div>
+</section>
+
+<!-- REGISTRATION FORM -->
+<section class="register-section" id="registration-form">
+    <div class="register-container">
+
+        <h2>Register for Biblical Empowerment Program</h2>
+        <p class="register-sub">
+            Fill in your details to join our weekly Thursday sessions.
+        </p>
+
+        <form action="https://formspree.io/f/xvzlqawa"
+              method="POST">
+
+            <div class="input-group">
+                <label for="name">Full Name</label>
+                <input id="name" type="text" name="name"
+                       placeholder="Enter your full name" required>
+            </div>
+
+            <div class="input-group">
+                <label for="email">Email Address</label>
+                <input id="email" type="email" name="email"
+                       placeholder="Enter your email" required>
+            </div>
+
+            <div class="input-group">
+                <label for="phone">Phone Number (WhatsApp)</label>
+                <input id="phone" type="tel" name="phone"
+                       placeholder="e.g. 074 000 0000" required>
+            </div>
+
+            <div class="input-group">
+                <label for="location">City / Location</label>
+                <input id="location" type="text" name="location"
+                       placeholder="Enter your location" required>
+            </div>
+
+            <div class="input-group">
+                <label for="source">How did you hear about us?</label>
+                <select id="source" name="source" required>
+                    <option value="">Select one</option>
+                    <option>Facebook</option>
+                    <option>WhatsApp</option>
+                    <option>Friend / Family</option>
+                    <option>Church Sharing</option>
+                    <option>Other</option>
+                </select>
+            </div>
+
+            <button type="submit" class="register-btn">
+                Submit Registration
+            </button>
+
+        </form>
+    </div>
+</section>
+
+<!-- POLL AND REVIEWS -->
+<section class="poll-link-section" id="poll">
+    <div class="poll-box">
+
+        <h2>📊 B.E.P Polls & Reviews</h2>
+
+        <p>
+            Tell us what topic you would like B.E.P to discuss next,
+            and share your experience with the program.
+        </p>
+
+        <a href="poll-reviews.html" class="btn btn-blue">
+            Open Poll & Reviews
+        </a>
+
+    </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+    <div class="container">
+
+        <h2>Contact Us</h2>
+
+        <p class="contact-intro">
+            We are here to connect with you, support you, and walk with you
+            in your spiritual journey.
+        </p>
+
+        <div class="contact-grid">
+
+            <div class="contact-card">
+                <div class="icon-circle">📞</div>
+                <h3>Phone</h3>
+                <p>074 038 6671</p>
+            </div>
+
+            <div class="contact-card">
+                <div class="icon-circle">📧</div>
+                <h3>Email</h3>
+                <p>bep.onlineprog@gmail.com</p>
+            </div>
+
+            <div class="contact-card">
+                <div class="icon-circle">💻</div>
+                <h3>Platform</h3>
+                <p>Microsoft Teams Online Sessions</p>
+            </div>
+
+        </div>
+
+        <div class="contact-buttons">
+
+            <a href="mailto:bep.onlineprog@gmail.com">
+                <i class="fa-solid fa-envelope"></i> Email Us
+            </a>
+
+            <a href="https://wa.me/27740386671"
+               target="_blank" rel="noopener">
+                <i class="fa-brands fa-whatsapp"></i> WhatsApp
+            </a>
+
+            <a href="https://teams.live.com/meet/936085799236?p=b66LnDUAB2Xkx2uQYp&eventType=community"
+               target="_blank" rel="noopener">
+                <i class="fa-solid fa-video"></i> Join Microsoft Teams
+            </a>
+
+            <a href="https://facebook.com/groups/1421853356307383/"
+               target="_blank" rel="noopener">
+                <i class="fa-brands fa-facebook"></i> Facebook Group
             </a>
 
         </div>
 
     </div>
-
 </section>
 
+<!-- FOOTER -->
+<footer>
+    <div>
+        © 2026 Biblical Empowerment Program (B.E.P) —
+        All Rights Reserved
+    </div>
 
+    <div class="footer-buttons">
+        <a href="https://wa.me/27740386671"
+           target="_blank" rel="noopener">WhatsApp</a>
+        <a href="mailto:bep.onlineprog@gmail.com">Email</a>
+        <a href="poll-reviews.html">Poll & Reviews</a>
+    </div>
+</footer>
 
-<!-- =========================================================
-     ABOUT US
-========================================================= -->
+<script>
+/* ============================
+   WEEKLY THURSDAY COUNTDOWN
+============================ */
+function updateCountdown() {
 
-<section
-    class="section"
-    id="about">
+    const countdown = document.getElementById("countdown");
+    const now = new Date();
 
-    <div class="card-grid">
+    let nextThursday = new Date(now);
+    let daysUntilThursday = (4 - now.getDay() + 7) % 7;
 
-        <div
-            class="card"
-            style="grid-column: span 2;">
+    nextThursday.setDate(now.getDate() + daysUntilThursday);
+    nextThursday.setHours(19, 0, 0, 0);
 
-            <h2>
-                About Us
-            </h2>
+    if (now >= nextThursday) {
+        nextThursday.setDate(nextThursday.getDate() + 7);
+    }
 
+    const difference = nextThursday - now;
 
-            <p>
-                The Biblical Empowerment Program (B.E.P) is a
-                faith-driven initiative dedicated to equipping
-                individuals with a deeper understanding of the
-                Word of God and the transformative power of the
-                Holy Spirit. Our mission is to build spiritually
-                grounded believers who are empowered to live
-                purposeful, Christ-centered lives.
-            </p>
-
-
-            <p>
-                At B.E.P, we believe that true empowerment comes
-                through knowledge, revelation, and application of
-                
+    if (difference <= 0) {
+        countdown.textConten
