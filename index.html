@@ -2,24 +2,27 @@
 <html lang="en">
 
 <head>
+
 <meta charset="UTF-8">
 
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
 <title>Biblical Empowerment Program - B.E.P</title>
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<meta name="description"
-content="Biblical Empowerment Program - Building the Church of Christ">
 
 <!-- Font Awesome -->
 <link rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
+<!-- Supabase -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
 <style>
 
-/* =========================================================
+/* =====================================================
    GLOBAL
-========================================================= */
+===================================================== */
 
 * {
     box-sizing: border-box;
@@ -32,7 +35,7 @@ html {
 body {
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
-    background: #f5f7fb;
+    background: #f4f7fb;
     color: #333;
 }
 
@@ -42,41 +45,36 @@ body {
     margin: auto;
 }
 
-a {
-    text-decoration: none;
-}
-
-button,
-input,
-select,
-textarea {
-    font-family: inherit;
+section {
+    scroll-margin-top: 20px;
 }
 
 
-/* =========================================================
+/* =====================================================
    HERO
-========================================================= */
+===================================================== */
 
 .hero {
-    min-height: 380px;
+
+    min-height: 390px;
 
     display: flex;
+
     align-items: center;
+
     justify-content: center;
 
     text-align: center;
-
-    position: relative;
 
     padding: 40px 20px;
 
     background:
         linear-gradient(
-            rgba(3, 35, 75, 0.82),
-            rgba(3, 35, 75, 0.82)
+            rgba(6,26,58,0.82),
+            rgba(6,26,58,0.82)
         ),
-        url("banner.png") center/cover no-repeat;
+        url("banner.png")
+        center/cover no-repeat;
 }
 
 .hero-content {
@@ -84,91 +82,66 @@ textarea {
 }
 
 .hero h1 {
-    color: #ffd000;
+
+    color: #ffd21c;
+
     font-size: 42px;
+
     margin: 0 0 15px;
-    line-height: 1.2;
+
+    text-shadow:
+        0 2px 5px rgba(0,0,0,.4);
 }
 
 .hero p {
+
     color: white;
-    font-size: 21px;
+
+    font-size: 20px;
+
     font-style: italic;
+
     margin-bottom: 25px;
 }
 
 .hero-btn {
+
     display: inline-block;
 
-    padding: 14px 25px;
+    background: #ffd21c;
 
-    background: #ffd000;
-    color: #003b70;
+    color: #061a3a;
 
-    font-weight: bold;
+    padding: 13px 25px;
 
     border-radius: 8px;
 
-    transition: 0.3s;
+    text-decoration: none;
+
+    font-weight: bold;
+
+    transition: .3s;
 }
 
 .hero-btn:hover {
+
     transform: translateY(-3px);
+
 }
 
 
-/* =========================================================
-   GENERAL SECTION
-========================================================= */
+/* =====================================================
+   SESSION
+===================================================== */
 
-.section {
-    padding: 70px 20px;
-}
+.next-session {
 
-.section-title {
-    text-align: center;
-    color: #003b70;
-    font-size: 34px;
-    margin-bottom: 30px;
-}
-
-.card {
-    background: white;
-    border-radius: 15px;
-    padding: 35px;
-
-    box-shadow:
-        0 5px 20px rgba(0,0,0,0.08);
-
-    margin-bottom: 25px;
-}
-
-.card h2 {
-    color: #003b70;
-    text-align: center;
-}
-
-.card p {
-    font-size: 16px;
-    line-height: 1.8;
-}
-
-.card li {
-    line-height: 1.8;
-}
-
-
-/* =========================================================
-   NEXT SESSION
-========================================================= */
-
-.next-session-section {
-    padding: 55px 15px;
-    background: #f5f7fb;
+    padding: 55px 20px;
 }
 
 .session-card {
-    max-width: 1000px;
+
+    max-width: 1100px;
 
     margin: auto;
 
@@ -180,58 +153,73 @@ textarea {
 
     text-align: center;
 
-    border-top: 5px solid #d4a22c;
+    border-top: 5px solid #cc9933;
 
     box-shadow:
-        0 8px 30px rgba(0,0,0,0.08);
+        0 8px 30px rgba(0,0,0,.10);
 }
 
 .session-card h2 {
-    color: #003b70;
+
+    color: #003f70;
+
     font-size: 32px;
+
     margin-bottom: 10px;
 }
 
 .session-subtitle {
+
     color: #666;
+
     margin-bottom: 35px;
 }
 
 .session-grid {
+
     display: grid;
 
     grid-template-columns:
-        repeat(auto-fit, minmax(220px, 1fr));
+        repeat(auto-fit,minmax(220px,1fr));
 
     gap: 18px;
 
-    margin-bottom: 30px;
+    margin-bottom: 25px;
 }
 
 .session-item {
+
     background: #f7f9fc;
 
-    padding: 25px 15px;
+    padding: 25px;
 
     border-radius: 14px;
 }
 
 .session-item i {
+
     font-size: 28px;
-    color: #d4a22c;
-    margin-bottom: 15px;
+
+    color: #cc9933;
+
+    margin-bottom: 12px;
 }
 
 .session-item h3 {
-    color: #003b70;
-    font-size: 16px;
+
+    color: #003f70;
+
+    margin: 5px 0;
+
+    font-size: 17px;
 }
 
 
 /* COUNTDOWN */
 
-.countdown-box {
-    background: #003f73;
+.countdown {
+
+    background: #004579;
 
     color: white;
 
@@ -243,13 +231,27 @@ textarea {
 
     font-weight: bold;
 
-    margin-bottom: 25px;
+    margin: 25px 0;
+}
+
+.countdown-label {
+
+    display: block;
+
+    font-size: 14px;
+
+    font-weight: normal;
+
+    margin-top: 5px;
+
+    opacity: .9;
 }
 
 
-/* SESSION BUTTONS */
+/* BUTTONS */
 
 .session-buttons {
+
     display: flex;
 
     justify-content: center;
@@ -259,113 +261,131 @@ textarea {
     gap: 12px;
 }
 
-.join-btn,
-.reminder-btn {
+.btn {
+
     display: inline-block;
 
-    padding: 14px 22px;
+    padding: 13px 20px;
 
     border-radius: 8px;
 
+    text-decoration: none;
+
     font-weight: bold;
+
+    border: none;
+
+    cursor: pointer;
+
+    transition: .3s;
 }
 
-.join-btn {
-    background: #003f73;
-    color: white;
-}
+.btn:hover {
 
-.reminder-btn {
-    background: #ffd000;
-    color: #111;
-}
-
-.join-btn:hover,
-.reminder-btn:hover {
     transform: translateY(-2px);
 }
 
+.btn-blue {
 
-/* =========================================================
-   ABOUT
-========================================================= */
+    background: #003f70;
 
-.about-section {
-    padding: 70px 15px;
+    color: white;
 }
 
-.about-card {
-    max-width: 1000px;
-    margin: auto;
+.btn-gold {
+
+    background: #cc9933;
+
+    color: white;
+}
+
+
+/* =====================================================
+   GENERAL SECTIONS
+===================================================== */
+
+.section {
+
+    padding: 70px 20px;
+}
+
+.section-title {
+
+    text-align: center;
+
+    color: #003f70;
+
+    font-size: 34px;
+
+    margin-bottom: 35px;
+}
+
+.card {
 
     background: white;
 
-    padding: 40px;
+    padding: 35px;
 
     border-radius: 15px;
 
     box-shadow:
-        0 5px 20px rgba(0,0,0,0.08);
+        0 6px 20px rgba(0,0,0,.08);
+
+    margin-bottom: 25px;
 }
 
-.about-card h2 {
+.card h2 {
+
+    color: #cc9933;
+
     text-align: center;
-    color: #ffd000;
 
-    font-size: 32px;
+    margin-top: 0;
 }
 
-.about-card p {
+.card p {
+
     line-height: 1.8;
-    text-align: center;
+
+    font-size: 16px;
+}
+
+.card li {
+
+    margin-bottom: 10px;
+
+    line-height: 1.6;
 }
 
 
-/* =========================================================
-   OBJECTIVES
-========================================================= */
+/* =====================================================
+   TWO COLUMN
+===================================================== */
 
-.objectives {
+.two-column {
+
     display: grid;
 
     grid-template-columns:
-        repeat(auto-fit, minmax(250px, 1fr));
+        repeat(auto-fit,minmax(280px,1fr));
 
-    gap: 20px;
-}
-
-.objective-card {
-    background: white;
-
-    padding: 25px;
-
-    border-radius: 15px;
-
-    box-shadow:
-        0 5px 18px rgba(0,0,0,0.08);
-}
-
-.objective-card i {
-    color: #d4a22c;
-    font-size: 30px;
-}
-
-.objective-card h3 {
-    color: #003b70;
+    gap: 25px;
 }
 
 
-/* =========================================================
+/* =====================================================
    REGISTRATION
-========================================================= */
+===================================================== */
 
 .register-section {
-    padding: 70px 15px;
 
-    background: #f5f7fb;
+    padding: 70px 20px;
+
+    background: #eef3f9;
 }
 
 .register-container {
+
     max-width: 650px;
 
     margin: auto;
@@ -377,37 +397,44 @@ textarea {
     border-radius: 15px;
 
     box-shadow:
-        0 5px 20px rgba(0,0,0,0.08);
+        0 6px 20px rgba(0,0,0,.08);
 }
 
 .register-container h2 {
+
     text-align: center;
 
-    color: #003b70;
+    color: #003f70;
 }
 
 .register-sub {
+
     text-align: center;
+
     color: #666;
+
     margin-bottom: 25px;
 }
 
 .input-group {
+
     margin-bottom: 18px;
 }
 
 .input-group label {
+
     display: block;
 
     font-weight: bold;
 
-    color: #003b70;
+    color: #003f70;
 
-    margin-bottom: 7px;
+    margin-bottom: 6px;
 }
 
 .input-group input,
 .input-group select {
+
     width: 100%;
 
     padding: 13px;
@@ -420,17 +447,18 @@ textarea {
 }
 
 .register-btn {
+
     width: 100%;
 
     padding: 14px;
 
+    background: #cc9933;
+
+    color: white;
+
     border: none;
 
     border-radius: 8px;
-
-    background: #003f73;
-
-    color: white;
 
     font-size: 17px;
 
@@ -440,108 +468,167 @@ textarea {
 }
 
 .register-btn:hover {
-    background: #002b50;
+
+    background: #b07e22;
+}
+
+.form-message {
+
+    text-align: center;
+
+    margin-top: 15px;
+
+    font-weight: bold;
 }
 
 
-/* =========================================================
+/* =====================================================
    POLL
-========================================================= */
+===================================================== */
 
 .poll-section {
-    padding: 70px 15px;
+
+    padding: 70px 20px;
+
+    background: white;
 }
 
 .poll-container {
-    max-width: 700px;
+
+    max-width: 800px;
 
     margin: auto;
+}
 
-    background: white;
+.poll-card {
+
+    background: #f7f9fc;
 
     padding: 30px;
 
     border-radius: 15px;
 
     box-shadow:
-        0 5px 20px rgba(0,0,0,0.08);
+        0 5px 18px rgba(0,0,0,.08);
 }
 
-.poll-container h2 {
-    color: #003b70;
+.poll-card h2 {
+
+    text-align: center;
+
+    color: #003f70;
+}
+
+.poll-question {
+
+    text-align: center;
+
+    font-size: 18px;
+
+    font-weight: bold;
+
+    margin: 25px 0;
+}
+
+.poll-options {
+
+    display: grid;
+
+    gap: 12px;
 }
 
 .poll-option {
-    display: flex;
 
-    align-items: center;
+    width: 100%;
 
-    gap: 10px;
+    padding: 15px;
 
-    background: #f0f3f8;
+    border: 2px solid #ddd;
 
-    padding: 14px;
+    background: white;
 
-    border-radius: 8px;
-
-    margin-bottom: 10px;
+    border-radius: 10px;
 
     cursor: pointer;
+
+    font-size: 16px;
+
+    text-align: left;
+
+    transition: .3s;
 }
 
 .poll-option:hover {
-    background: #e5eaf2;
+
+    border-color: #cc9933;
+
+    background: #fffaf0;
 }
 
-.poll-option input {
-    accent-color: #003f73;
+.poll-option.selected {
+
+    border-color: #cc9933;
+
+    background: #fff5d6;
 }
 
-.poll-btn {
-    width: 100%;
+.vote-button {
+
+    display: block;
+
+    margin: 25px auto 10px;
+
+    background: #003f70;
+
+    color: white;
 
     border: none;
 
-    padding: 14px;
+    padding: 13px 30px;
 
     border-radius: 8px;
-
-    background: #007cc3;
-
-    color: white;
 
     font-weight: bold;
 
     cursor: pointer;
+}
 
-    margin-top: 10px;
+.vote-button:disabled {
+
+    opacity: .5;
+
+    cursor: not-allowed;
 }
 
 
 /* POLL RESULTS */
 
 .results {
-    margin-top: 35px;
+
+    margin-top: 30px;
 }
 
 .result-row {
-    margin-bottom: 18px;
+
+    margin-bottom: 15px;
 }
 
-.result-label {
+.result-title {
+
     display: flex;
 
     justify-content: space-between;
 
-    font-size: 14px;
-
     margin-bottom: 5px;
+
+    font-weight: bold;
 }
 
 .result-bar {
-    height: 10px;
 
-    background: #e4e7eb;
+    height: 12px;
+
+    background: #ddd;
 
     border-radius: 20px;
 
@@ -549,28 +636,40 @@ textarea {
 }
 
 .result-fill {
+
     height: 100%;
+
+    background: #cc9933;
 
     width: 0%;
 
-    background: #007cc3;
-
-    transition: width 0.5s ease;
+    transition: width .6s;
 }
 
 
-/* =========================================================
+/* =====================================================
    REVIEWS
-========================================================= */
+===================================================== */
 
 .reviews-section {
-    padding: 70px 15px;
+
+    padding: 70px 20px;
+
+    background: #eef3f9;
+}
+
+.reviews-container {
+
+    max-width: 1100px;
+
+    margin: auto;
 }
 
 .review-form {
-    max-width: 700px;
 
-    margin: auto;
+    max-width: 650px;
+
+    margin: 0 auto 45px;
 
     background: white;
 
@@ -579,51 +678,68 @@ textarea {
     border-radius: 15px;
 
     box-shadow:
-        0 5px 20px rgba(0,0,0,0.08);
+        0 5px 18px rgba(0,0,0,.08);
 }
 
-.review-form h2 {
-    color: #003b70;
+.review-form h3 {
+
+    text-align: center;
+
+    color: #003f70;
 }
 
-.review-form label {
-    display: block;
 
-    font-weight: bold;
+/* STARS */
 
-    color: #003b70;
+.star-rating {
 
-    margin: 15px 0 7px;
+    display: flex;
+
+    justify-content: center;
+
+    gap: 7px;
+
+    margin: 15px 0 25px;
 }
 
-.review-form input,
-.review-form select,
+.star {
+
+    font-size: 30px;
+
+    color: #ccc;
+
+    cursor: pointer;
+}
+
+.star.active {
+
+    color: #cc9933;
+}
+
 .review-form textarea {
+
     width: 100%;
 
-    padding: 13px;
+    min-height: 120px;
+
+    padding: 12px;
 
     border: 1px solid #ccc;
 
     border-radius: 8px;
 
-    font-size: 15px;
-}
-
-.review-form textarea {
-    min-height: 130px;
-
     resize: vertical;
 }
 
-.review-btn {
+.review-submit {
+
     width: 100%;
 
-    padding: 14px;
+    padding: 13px;
 
     margin-top: 15px;
 
-    background: #007cc3;
+    background: #003f70;
 
     color: white;
 
@@ -637,94 +753,72 @@ textarea {
 }
 
 
-/* REVIEW DISPLAY */
+/* REVIEW CARDS */
 
-.review-list {
-    max-width: 900px;
+.review-grid {
 
-    margin: 35px auto 0;
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fit,minmax(280px,1fr));
+
+    gap: 20px;
 }
 
 .review-card {
+
     background: white;
 
     padding: 25px;
 
-    border-radius: 15px;
-
-    margin-bottom: 15px;
+    border-radius: 14px;
 
     box-shadow:
-        0 5px 18px rgba(0,0,0,0.07);
-}
-
-.review-header {
-    display: flex;
-
-    justify-content: space-between;
-
-    align-items: center;
-
-    gap: 15px;
+        0 5px 18px rgba(0,0,0,.08);
 }
 
 .review-name {
-    color: #003b70;
+
+    color: #003f70;
 
     font-weight: bold;
 
     font-size: 18px;
 }
 
-.stars {
-    color: #f4bd00;
+.review-stars {
 
-    letter-spacing: 2px;
+    color: #cc9933;
+
+    margin: 8px 0;
 }
 
 .review-text {
-    line-height: 1.7;
 
-    margin-top: 12px;
+    line-height: 1.6;
+
+    color: #555;
 }
 
-.review-date {
-    font-size: 12px;
-
-    color: #888;
-
-    margin-top: 10px;
-}
-
-.pending-message {
-    max-width: 700px;
-
-    margin: 15px auto;
-
-    padding: 14px;
-
-    background: #fff8d8;
-
-    color: #765d00;
-
-    border-radius: 8px;
+.no-reviews {
 
     text-align: center;
 
-    display: none;
+    color: #777;
 }
 
 
-/* =========================================================
+/* =====================================================
    CONTACT
-========================================================= */
+===================================================== */
 
 .contact {
+
     background:
         linear-gradient(
             135deg,
             #061a3a,
-            #0d2b5f
+            #0d3970
         );
 
     padding: 70px 20px;
@@ -733,12 +827,14 @@ textarea {
 }
 
 .contact h2 {
-    color: #ffd000;
+
+    color: #ffd21c;
 
     font-size: 34px;
 }
 
 .contact-intro {
+
     color: #ddd;
 
     max-width: 650px;
@@ -749,35 +845,41 @@ textarea {
 }
 
 .contact-grid {
+
     display: grid;
 
     grid-template-columns:
-        repeat(auto-fit, minmax(220px, 1fr));
+        repeat(auto-fit,minmax(230px,1fr));
 
     gap: 20px;
 }
 
 .contact-card {
-    background: rgba(255,255,255,0.06);
 
-    padding: 30px 20px;
+    background:
+        rgba(255,255,255,.07);
+
+    padding: 25px;
 
     border-radius: 14px;
 
-    border: 1px solid rgba(255,215,0,0.25);
+    border: 1px solid
+        rgba(255,215,0,.25);
 }
 
 .icon-circle {
+
     width: 60px;
+
     height: 60px;
 
     margin: auto auto 15px;
 
-    background: #ffd000;
+    border-radius: 50%;
+
+    background: #cc9933;
 
     color: #061a3a;
-
-    border-radius: 50%;
 
     display: flex;
 
@@ -789,14 +891,17 @@ textarea {
 }
 
 .contact-card h3 {
-    color: #ffd000;
+
+    color: #ffd21c;
 }
 
 .contact-card p {
+
     color: white;
 }
 
 .contact-buttons {
+
     margin-top: 35px;
 
     display: flex;
@@ -808,27 +913,16 @@ textarea {
     gap: 10px;
 }
 
-.contact-buttons a {
-    background: #ffd000;
 
-    color: #061a3a;
-
-    padding: 12px 18px;
-
-    border-radius: 7px;
-
-    font-weight: bold;
-}
-
-
-/* =========================================================
+/* =====================================================
    FOOTER
-========================================================= */
+===================================================== */
 
 footer {
-    background: #061a3a;
 
-    color: #ffd000;
+    background: #031126;
+
+    color: #ffd21c;
 
     text-align: center;
 
@@ -836,76 +930,70 @@ footer {
 }
 
 .footer-buttons {
+
     margin-top: 15px;
 }
 
 .footer-buttons a {
+
     color: white;
 
     margin: 0 8px;
+
+    text-decoration: none;
 }
 
 
-/* =========================================================
-   STATUS MESSAGE
-========================================================= */
-
-.status-message {
-    text-align: center;
-
-    margin-top: 15px;
-
-    font-weight: bold;
-}
-
-
-/* =========================================================
+/* =====================================================
    MOBILE
-========================================================= */
+===================================================== */
 
-@media (max-width: 700px) {
+@media(max-width:700px) {
 
     .hero {
+
         min-height: 330px;
     }
 
     .hero h1 {
+
         font-size: 30px;
     }
 
     .hero p {
+
         font-size: 17px;
     }
 
     .session-card {
-        padding: 35px 15px;
+
+        padding: 30px 15px;
     }
 
     .session-card h2 {
+
         font-size: 27px;
     }
 
-    .countdown-box {
+    .countdown {
+
         font-size: 20px;
     }
 
-    .about-card,
-    .card,
-    .register-container,
-    .poll-container,
-    .review-form {
-        padding: 25px 18px;
+    .card {
+
+        padding: 25px 20px;
     }
 
-    .review-header {
-        flex-direction: column;
+    .section-title {
 
-        align-items: flex-start;
+        font-size: 28px;
     }
 
 }
 
 </style>
+
 </head>
 
 
@@ -914,7 +1002,7 @@ footer {
 
 <!-- =====================================================
      HERO
-====================================================== -->
+===================================================== -->
 
 <section class="hero">
 
@@ -925,11 +1013,14 @@ footer {
         </h1>
 
         <p>
-            "Building the Church of Christ"
+            Building the Church of Christ
         </p>
 
-        <a href="#about" class="hero-btn">
+        <a href="#about"
+           class="hero-btn">
+
             Learn More
+
         </a>
 
     </div>
@@ -940,9 +1031,9 @@ footer {
 
 <!-- =====================================================
      NEXT SESSION
-====================================================== -->
+===================================================== -->
 
-<section class="next-session-section">
+<section class="next-session">
 
     <div class="session-card">
 
@@ -992,18 +1083,26 @@ footer {
         </div>
 
 
-        <div id="countdown" class="countdown-box">
+        <!-- REAL COUNTDOWN -->
+
+        <div id="countdown"
+             class="countdown">
+
             Calculating next session...
+
+            <span class="countdown-label">
+                Next Thursday at 7:00 PM
+            </span>
+
         </div>
 
 
         <div class="session-buttons">
 
             <a
-                href="https://teams.live.com/meet/936085799236?p=b66LnDUAB2Xkx2uQYp&eventType=community"
-                class="join-btn"
-                target="_blank"
-                rel="noopener">
+            href="https://teams.live.com/meet/936085799236?p=b66LnDUAB2Xkx2uQYp&eventType=community"
+            target="_blank"
+            class="btn btn-blue">
 
                 <i class="fa-solid fa-video"></i>
 
@@ -1013,10 +1112,9 @@ footer {
 
 
             <a
-                href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Biblical+Empowerment+Program+(B.E.P)+Session&dates=20260101T170000Z/20260101T183000Z&details=Weekly+B.E.P+Teaching+Session&location=Microsoft+Teams"
-                class="reminder-btn"
-                target="_blank"
-                rel="noopener">
+            href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Biblical+Empowerment+Program+(B.E.P)+Session&dates=20260101T170000Z/20260101T183000Z&details=Weekly+B.E.P+Teaching+Session&location=Microsoft+Teams"
+            target="_blank"
+            class="btn btn-gold">
 
                 <i class="fa-solid fa-bell"></i>
 
@@ -1034,70 +1132,86 @@ footer {
 
 <!-- =====================================================
      ABOUT
-====================================================== -->
+===================================================== -->
 
-<section class="about-section" id="about">
+<section class="section"
+         id="about">
 
-    <div class="about-card">
+    <div class="container">
 
-        <h2>
-            About Us
-        </h2>
+        <div class="card">
 
-        <p>
-            The Biblical Empowerment Program (B.E.P) is a faith-driven
-            initiative dedicated to equipping individuals with a deeper
-            understanding of the Word of God and the transformative power
-            of the Holy Spirit.
-        </p>
+            <h2>
+                About Us
+            </h2>
 
-        <p>
-            Our mission is to build spiritually grounded believers who
-            are empowered to live purposeful, Christ-centered lives.
-        </p>
+            <p>
+                The Biblical Empowerment Program (B.E.P) is a
+                faith-driven initiative dedicated to equipping
+                individuals with a deeper understanding of the
+                Word of God and the transformative power of the
+                Holy Spirit.
+            </p>
 
-        <p>
-            At B.E.P, we believe that true empowerment comes through
-            knowledge, revelation, and application of Scripture.
-            Through structured teachings, interactive sessions and
-            Spirit-led discussions, we create a space where individuals
-            can grow in faith and develop a personal relationship with God.
-        </p>
+            <p>
+                Our mission is to build spiritually grounded
+                believers who are empowered to live purposeful,
+                Christ-centered lives.
+            </p>
 
-        <p>
-            Our program is designed for everyone — whether you are a
-            new believer or someone seeking deeper spiritual insight.
-        </p>
+            <p>
+                At B.E.P, we believe that true empowerment comes
+                through knowledge, revelation, and application
+                of Scripture.
+            </p>
 
-        <p>
-            We are committed to:
-        </p>
+            <p>
+                Through structured teachings, interactive
+                sessions, and Spirit-led discussions, we create
+                a space where individuals can grow in faith,
+                gain clarity in their spiritual journey, and
+                develop a personal relationship with God.
+            </p>
 
-        <ul>
+            <p>
+                Our program is designed for everyone—whether
+                you are a new believer or someone seeking deeper
+                spiritual insight.
+            </p>
 
-            <li>
-                Teaching the Word of God with clarity and truth
-            </li>
+            <p>
+                <strong>
+                    We are committed to:
+                </strong>
+            </p>
 
-            <li>
-                Empowering believers through the Holy Spirit
-            </li>
+            <ul>
 
-            <li>
-                Building a strong and united faith community
-            </li>
+                <li>
+                    Teaching the Word of God with clarity and truth
+                </li>
 
-            <li>
-                Encouraging spiritual growth and personal transformation
-            </li>
+                <li>
+                    Empowering believers through the Holy Spirit
+                </li>
 
-        </ul>
+                <li>
+                    Building a strong, united faith community
+                </li>
 
-        <p>
-            The Biblical Empowerment Program is more than just a teaching
-            platform — it is a movement of believers rising in faith,
-            purpose and power.
-        </p>
+                <li>
+                    Encouraging spiritual growth and personal transformation
+                </li>
+
+            </ul>
+
+            <p>
+                The Biblical Empowerment Program is more than
+                just a teaching platform—it is a movement of
+                believers rising in faith, purpose, and power.
+            </p>
+
+        </div>
 
     </div>
 
@@ -1107,202 +1221,120 @@ footer {
 
 <!-- =====================================================
      THURSDAY SESSIONS
-====================================================== -->
+===================================================== -->
 
 <section class="section">
 
-    <h2 class="section-title">
-        Thursday Sessions
-    </h2>
-
-    <div class="card">
-
-        <p>
-            The Thursday sessions are held every week from
-            7:00 PM to 8:30 PM.
-        </p>
-
-        <p>
-            They are designed to deepen participants' understanding
-            of the Word of God through structured teaching and
-            interactive engagement.
-        </p>
-
-        <p>
-            The goal is to build a strong biblical foundation while
-            encouraging spiritual growth and practical application
-            of Scripture in daily life.
-        </p>
-
-        <p>
-            Each session is centered on presentation-based learning,
-            where topics are shared and explored through discussion,
-            comments and questions.
-        </p>
-
-        <p>
-            These sessions create a space for the diverse expansion
-            of biblical knowledge through Scripture, guided teaching
-            and shared insights.
-        </p>
-
-    </div>
-
-</section>
-
-
-
-<!-- =====================================================
-     OBJECTIVES
-====================================================== -->
-
-<section class="section">
-
-    <h2 class="section-title">
-        B.E.P Objectives
-    </h2>
-
-    <div class="objectives">
-
-        <div class="objective-card">
-
-            <i class="fa-solid fa-book-bible"></i>
-
-            <h3>
-                Biblical Understanding
-            </h3>
-
-            <p>
-                Strengthening biblical understanding and spiritual maturity.
-            </p>
-
-        </div>
-
-
-        <div class="objective-card">
-
-            <i class="fa-solid fa-comments"></i>
-
-            <h3>
-                Active Participation
-            </h3>
-
-            <p>
-                Encouraging questions, discussion and meaningful engagement.
-            </p>
-
-        </div>
-
-
-        <div class="objective-card">
-
-            <i class="fa-solid fa-cross"></i>
-
-            <h3>
-                Spiritual Growth
-            </h3>
-
-            <p>
-                Helping believers grow in faith and relationship with God.
-            </p>
-
-        </div>
-
-
-        <div class="objective-card">
-
-            <i class="fa-solid fa-users"></i>
-
-            <h3>
-                Community
-            </h3>
-
-            <p>
-                Building a strong and united community of believers.
-            </p>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-
-<!-- =====================================================
-     REGISTRATION OPTIONS
-====================================================== -->
-
-<section class="section">
-
-    <h2 class="section-title">
-        Register for B.E.P
-    </h2>
-
-
-    <div class="objectives">
+    <div class="container">
 
         <div class="card">
 
             <h2>
-                Register via WhatsApp
+                Thursday Sessions
             </h2>
 
             <p>
-                Contact us directly on WhatsApp to register.
+                The Thursday sessions are held every week from
+                7:00 PM to 8:30 PM.
             </p>
 
-            <a
-                href="https://wa.me/27740386671?text=I%20would%20like%20to%20register%20for%20B.E.P"
-                class="hero-btn"
-                target="_blank">
+            <p>
+                They are designed to deepen participants'
+                understanding of the Word of God through
+                structured teaching and interactive engagement.
+            </p>
 
-                Open WhatsApp
+            <p>
+                The goal is to build a strong biblical
+                foundation while encouraging spiritual growth
+                and practical application of Scripture in daily
+                life.
+            </p>
 
-            </a>
+            <p>
+                Each session encourages participants to ask
+                questions, share comments, and participate in
+                meaningful biblical discussions.
+            </p>
 
         </div>
 
 
-        <div class="card">
+        <div class="two-column">
 
-            <h2>
-                Register via Email
-            </h2>
+            <div class="card">
 
-            <p>
-                Send your full name and request to join B.E.P.
-            </p>
+                <h2>
+                    Objectives
+                </h2>
 
-            <a
-                href="mailto:bep.onlineprog@gmail.com"
-                class="hero-btn">
+                <ul>
 
-                Send Email
+                    <li>
+                        Strengthening biblical understanding
+                        and spiritual maturity
+                    </li>
 
-            </a>
+                    <li>
+                        Encouraging active participation
+                        through questions and discussion
+                    </li>
 
-        </div>
+                    <li>
+                        Promoting clear and correct
+                        interpretation of Scripture
+                    </li>
+
+                    <li>
+                        Building confidence in sharing and
+                        applying biblical knowledge
+                    </li>
+
+                    <li>
+                        Fostering spiritual growth through
+                        collective learning
+                    </li>
+
+                </ul>
+
+            </div>
 
 
-        <div class="card">
+            <div class="card">
 
-            <h2>
-                Microsoft Teams
-            </h2>
+                <h2>
+                    Our Focus
+                </h2>
 
-            <p>
-                Join our weekly Thursday online sessions.
-            </p>
+                <ul>
 
-            <a
-                href="https://teams.live.com/meet/936085799236?p=b66LnDUAB2Xkx2uQYp&eventType=community"
-                class="hero-btn"
-                target="_blank">
+                    <li>
+                        Discipleship
+                    </li>
 
-                Join Teams
+                    <li>
+                        Prayer
+                    </li>
 
-            </a>
+                    <li>
+                        Spiritual Growth
+                    </li>
+
+                    <li>
+                        The Holy Spirit
+                    </li>
+
+                    <li>
+                        Biblical Knowledge
+                    </li>
+
+                    <li>
+                        Christian Character
+                    </li>
+
+                </ul>
+
+            </div>
 
         </div>
 
@@ -1313,25 +1345,27 @@ footer {
 
 
 <!-- =====================================================
-     REGISTRATION FORM
-====================================================== -->
+     REGISTRATION
+===================================================== -->
 
-<section class="register-section">
+<section class="register-section"
+         id="register">
 
     <div class="register-container">
 
         <h2>
-            Register for Biblical Empowerment Program
+            Register for B.E.P
         </h2>
 
         <p class="register-sub">
-            Fill in your details to join our weekly Thursday sessions.
+            Fill in your details to join our weekly Thursday
+            sessions.
         </p>
 
 
         <form
-            action="https://formspree.io/f/xvzlqawa"
-            method="POST">
+        action="https://formspree.io/f/xvzlqawa"
+        method="POST">
 
 
             <div class="input-group">
@@ -1341,10 +1375,10 @@ footer {
                 </label>
 
                 <input
-                    type="text"
-                    name="name"
-                    placeholder="Enter your full name"
-                    required>
+                type="text"
+                name="name"
+                placeholder="Enter your full name"
+                required>
 
             </div>
 
@@ -1356,10 +1390,10 @@ footer {
                 </label>
 
                 <input
-                    type="email"
-                    name="email"
-                    placeholder="Enter your email"
-                    required>
+                type="email"
+                name="email"
+                placeholder="Enter your email"
+                required>
 
             </div>
 
@@ -1367,14 +1401,14 @@ footer {
             <div class="input-group">
 
                 <label>
-                    Phone Number (WhatsApp)
+                    Phone Number / WhatsApp
                 </label>
 
                 <input
-                    type="tel"
-                    name="phone"
-                    placeholder="e.g. 074 000 0000"
-                    required>
+                type="tel"
+                name="phone"
+                placeholder="e.g. 074 000 0000"
+                required>
 
             </div>
 
@@ -1386,10 +1420,10 @@ footer {
                 </label>
 
                 <input
-                    type="text"
-                    name="location"
-                    placeholder="Enter your location"
-                    required>
+                type="text"
+                name="location"
+                placeholder="Enter your location"
+                required>
 
             </div>
 
@@ -1432,8 +1466,8 @@ footer {
 
 
             <button
-                type="submit"
-                class="register-btn">
+            type="submit"
+            class="register-btn">
 
                 Submit Registration
 
@@ -1449,243 +1483,91 @@ footer {
 
 <!-- =====================================================
      ONLINE POLL
-====================================================== -->
+===================================================== -->
 
-<section class="poll-section">
+<section class="poll-section"
+         id="poll">
 
     <div class="poll-container">
 
-        <h2>
-            📊 B.E.P Community Poll
+        <h2 class="section-title">
+            B.E.P Community Poll
         </h2>
 
-        <p>
-            What topic would you like B.E.P to discuss next?
-        </p>
+
+        <div class="poll-card">
+
+            <p class="poll-question">
+
+                How helpful are the B.E.P Thursday sessions
+                to your spiritual growth?
+
+            </p>
 
 
-        <form id="pollForm">
+            <div class="poll-options">
 
-            <label class="poll-option">
+                <button
+                class="poll-option"
+                data-option="Very Helpful">
 
-                <input
-                    type="radio"
-                    name="poll"
-                    value="Prayer">
+                    ⭐ Very Helpful
 
-                Prayer
-
-            </label>
+                </button>
 
 
-            <label class="poll-option">
+                <button
+                class="poll-option"
+                data-option="Helpful">
 
-                <input
-                    type="radio"
-                    name="poll"
-                    value="Discipleship">
+                    👍 Helpful
 
-                Discipleship
-
-            </label>
+                </button>
 
 
-            <label class="poll-option">
+                <button
+                class="poll-option"
+                data-option="Somewhat Helpful">
 
-                <input
-                    type="radio"
-                    name="poll"
-                    value="The Holy Spirit">
+                    🙂 Somewhat Helpful
 
-                The Holy Spirit
-
-            </label>
+                </button>
 
 
-            <label class="poll-option">
+                <button
+                class="poll-option"
+                data-option="Needs Improvement">
 
-                <input
-                    type="radio"
-                    name="poll"
-                    value="Marriage & Family">
+                    📝 Needs Improvement
 
-                Marriage & Family
+                </button>
 
-            </label>
-
-
-            <label class="poll-option">
-
-                <input
-                    type="radio"
-                    name="poll"
-                    value="Spiritual Growth">
-
-                Spiritual Growth
-
-            </label>
+            </div>
 
 
             <button
-                type="submit"
-                class="poll-btn">
+            id="voteButton"
+            class="vote-button"
+            disabled>
 
                 Submit Vote
 
             </button>
 
-        </form>
 
-
-        <div
-            id="pollStatus"
-            class="status-message">
-        </div>
-
-
-        <div class="results">
-
-            <h3>
-                📊 Poll Results
-            </h3>
-
-
-            <div class="result-row">
-
-                <div class="result-label">
-
-                    <span>
-                        Prayer
-                    </span>
-
-                    <span id="Prayer-percent">
-                        0%
-                    </span>
-
-                </div>
-
-                <div class="result-bar">
-
-                    <div
-                        id="Prayer-bar"
-                        class="result-fill">
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="result-row">
-
-                <div class="result-label">
-
-                    <span>
-                        Discipleship
-                    </span>
-
-                    <span id="Discipleship-percent">
-                        0%
-                    </span>
-
-                </div>
-
-                <div class="result-bar">
-
-                    <div
-                        id="Discipleship-bar"
-                        class="result-fill">
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="result-row">
-
-                <div class="result-label">
-
-                    <span>
-                        The Holy Spirit
-                    </span>
-
-                    <span id="The-Holy-Spirit-percent">
-                        0%
-                    </span>
-
-                </div>
-
-                <div class="result-bar">
-
-                    <div
-                        id="The-Holy-Spirit-bar"
-                        class="result-fill">
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="result-row">
-
-                <div class="result-label">
-
-                    <span>
-                        Marriage & Family
-                    </span>
-
-                    <span id="Marriage-Family-percent">
-                        0%
-                    </span>
-
-                </div>
-
-                <div class="result-bar">
-
-                    <div
-                        id="Marriage-Family-bar"
-                        class="result-fill">
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="result-row">
-
-                <div class="result-label">
-
-                    <span>
-                        Spiritual Growth
-                    </span>
-
-                    <span id="Spiritual-Growth-percent">
-                        0%
-                    </span>
-
-                </div>
-
-                <div class="result-bar">
-
-                    <div
-                        id="Spiritual-Growth-bar"
-                        class="result-fill">
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <p>
-                Total votes:
-                <strong id="totalVotes">
-                    0
-                </strong>
+            <p
+            id="voteMessage"
+            class="form-message">
             </p>
+
+
+            <div
+            id="pollResults"
+            class="results">
+
+                Loading poll results...
+
+            </div>
 
         </div>
 
@@ -1697,119 +1579,125 @@ footer {
 
 <!-- =====================================================
      REVIEWS
-====================================================== -->
+===================================================== -->
 
-<section class="reviews-section">
+<section class="reviews-section"
+         id="reviews">
 
-    <h2 class="section-title">
-        ⭐ Leave a Review
-    </h2>
+    <div class="reviews-container">
 
-
-    <p style="text-align:center;">
-        Share your experience with the Biblical Empowerment Program.
-    </p>
-
-
-    <div class="review-form">
-
-        <h2>
-            Your Review
+        <h2 class="section-title">
+            B.E.P Reviews
         </h2>
 
 
-        <form id="reviewForm">
+        <!-- REVIEW FORM -->
+
+        <div class="review-form">
+
+            <h3>
+                Share Your Experience
+            </h3>
 
 
-            <label>
-                Your Name
-            </label>
+            <div class="input-group">
 
-            <input
+                <label>
+                    Your Name
+                </label>
+
+                <input
                 type="text"
                 id="reviewName"
                 placeholder="Enter your name"
                 required>
 
+            </div>
 
-            <label>
-                Rating
+
+            <label
+            style="display:block;text-align:center;font-weight:bold;color:#003f70;">
+
+                Your Rating
+
             </label>
 
-            <select
-                id="reviewRating"
-                required>
 
-                <option value="">
-                    Select rating
-                </option>
+            <div
+            class="star-rating"
+            id="starRating">
 
-                <option value="5">
-                    ⭐⭐⭐⭐⭐ Excellent
-                </option>
+                <i
+                class="fa-solid fa-star star"
+                data-rating="1"></i>
 
-                <option value="4">
-                    ⭐⭐⭐⭐ Very Good
-                </option>
+                <i
+                class="fa-solid fa-star star"
+                data-rating="2"></i>
 
-                <option value="3">
-                    ⭐⭐⭐ Good
-                </option>
+                <i
+                class="fa-solid fa-star star"
+                data-rating="3"></i>
 
-                <option value="2">
-                    ⭐⭐ Fair
-                </option>
+                <i
+                class="fa-solid fa-star star"
+                data-rating="4"></i>
 
-                <option value="1">
-                    ⭐ Poor
-                </option>
+                <i
+                class="fa-solid fa-star star"
+                data-rating="5"></i>
 
-            </select>
+            </div>
 
 
-            <label>
-                Your Review
-            </label>
+            <div class="input-group">
 
-            <textarea
+                <label>
+                    Your Review
+                </label>
+
+                <textarea
                 id="reviewText"
-                placeholder="Write your review or testimony..."
-                required>
-            </textarea>
+                placeholder="Tell us about your experience..."
+                required></textarea>
+
+            </div>
 
 
             <button
-                type="submit"
-                class="review-btn">
+            id="reviewSubmit"
+            class="review-submit">
 
                 Submit Review
 
             </button>
 
-        </form>
+
+            <p
+            id="reviewMessage"
+            class="form-message">
+            </p>
 
 
-        <div
-            id="reviewStatus"
-            class="status-message">
+            <p
+            style="text-align:center;color:#777;font-size:13px;">
+
+                Reviews are reviewed before appearing publicly.
+
+            </p>
+
         </div>
 
-    </div>
 
+        <!-- PUBLIC REVIEWS -->
 
-    <div
-        id="pendingMessage"
-        class="pending-message">
+        <div
+        id="reviewGrid"
+        class="review-grid">
 
-        ✅ Thank you! Your review has been submitted
-        and is waiting for approval.
+            Loading reviews...
 
-    </div>
-
-
-    <div
-        id="reviewList"
-        class="review-list">
+        </div>
 
     </div>
 
@@ -1819,9 +1707,10 @@ footer {
 
 <!-- =====================================================
      CONTACT
-====================================================== -->
+===================================================== -->
 
-<section class="contact">
+<section class="contact"
+         id="contact">
 
     <div class="container">
 
@@ -1901,7 +1790,10 @@ footer {
 
         <div class="contact-buttons">
 
-            <a href="mailto:bep.onlineprog@gmail.com">
+
+            <a
+            href="mailto:bep.onlineprog@gmail.com"
+            class="btn btn-gold">
 
                 <i class="fa-solid fa-envelope"></i>
 
@@ -1911,8 +1803,9 @@ footer {
 
 
             <a
-                href="https://wa.me/27740386671"
-                target="_blank">
+            href="https://wa.me/27740386671"
+            target="_blank"
+            class="btn btn-gold">
 
                 <i class="fa-brands fa-whatsapp"></i>
 
@@ -1922,8 +1815,9 @@ footer {
 
 
             <a
-                href="https://teams.live.com/meet/936085799236?p=b66LnDUAB2Xkx2uQYp&eventType=community"
-                target="_blank">
+            href="https://teams.live.com/meet/936085799236?p=b66LnDUAB2Xkx2uQYp&eventType=community"
+            target="_blank"
+            class="btn btn-gold">
 
                 <i class="fa-solid fa-video"></i>
 
@@ -1933,8 +1827,9 @@ footer {
 
 
             <a
-                href="https://facebook.com/groups/1421853356307383/"
-                target="_blank">
+            href="https://facebook.com/groups/1421853356307383/"
+            target="_blank"
+            class="btn btn-gold">
 
                 <i class="fa-brands fa-facebook"></i>
 
@@ -1952,28 +1847,43 @@ footer {
 
 <!-- =====================================================
      FOOTER
-====================================================== -->
+===================================================== -->
 
 <footer>
 
     © 2026 Biblical Empowerment Program (B.E.P)
     — All Rights Reserved
 
+
     <div class="footer-buttons">
 
         <a
-            href="https://wa.me/27740386671"
-            target="_blank">
+        href="https://wa.me/27740386671"
+        target="_blank">
 
             WhatsApp
 
         </a>
 
-        |
 
-        <a href="mailto:bep.onlineprog@gmail.com">
+        <a
+        href="mailto:bep.onlineprog@gmail.com">
 
             Email
+
+        </a>
+
+
+        <a href="#poll">
+
+            Vote
+
+        </a>
+
+
+        <a href="#reviews">
+
+            Reviews
 
         </a>
 
@@ -1984,20 +1894,13 @@ footer {
 
 
 <!-- =====================================================
-     SUPABASE
-====================================================== -->
+     JAVASCRIPT
+===================================================== -->
 
-<script type="module">
-
-import {
-    createClient
-}
-from
-"https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
-
+<script>
 
 /* =====================================================
-   YOUR SUPABASE CONNECTION
+   SUPABASE CONNECTION
 ===================================================== */
 
 const SUPABASE_URL =
@@ -2006,58 +1909,64 @@ const SUPABASE_URL =
 const SUPABASE_KEY =
 "sb_publishable_Co8_MoJOV14tXBkSWyXFTA_ULn1WRa5";
 
-
-const supabase =
-createClient(
+const supabaseClient =
+supabase.createClient(
     SUPABASE_URL,
     SUPABASE_KEY
 );
 
 
 /* =====================================================
-   REAL THURSDAY COUNTDOWN
+   REAL WEEKLY COUNTDOWN
 ===================================================== */
 
 function updateCountdown() {
 
     const now = new Date();
 
-    const target = new Date(now);
+    let nextThursday = new Date(now);
 
-    const currentDay = now.getDay();
+    let daysUntilThursday =
+        (4 - now.getDay() + 7) % 7;
 
-    let daysUntil =
-        (4 - currentDay + 7) % 7;
+    nextThursday.setDate(
+        now.getDate() + daysUntilThursday
+    );
+
+    nextThursday.setHours(19,0,0,0);
 
 
     /*
-       If today is Thursday and
-       it is already past 19:00,
-       go to next Thursday.
+       If today is Thursday and the meeting
+       has already started/passed, move to next Thursday.
     */
 
-    target.setDate(
-        now.getDate() + daysUntil
-    );
-
-    target.setHours(19, 0, 0, 0);
-
-
     if (
-        currentDay === 4 &&
-        now >= target
+        now.getDay() === 4 &&
+        now >= nextThursday
     ) {
 
-        target.setDate(
-            target.getDate() + 7
+        nextThursday.setDate(
+            nextThursday.getDate() + 7
         );
 
     }
 
 
     const difference =
-        target.getTime() -
+        nextThursday.getTime() -
         now.getTime();
+
+
+    if (difference <= 0) {
+
+        document.getElementById("countdown")
+        .innerHTML =
+        "Starting soon!";
+
+        return;
+
+    }
 
 
     const days =
@@ -2087,11 +1996,13 @@ function updateCountdown() {
         );
 
 
-    document.getElementById(
-        "countdown"
-    ).textContent =
+    document.getElementById("countdown")
+    .innerHTML =
 
-        `${days}d ${hours}h ${minutes}m ${seconds}s`;
+        `${days}d ${hours}h ${minutes}m ${seconds}s
+        <span class="countdown-label">
+        Next Thursday at 7:00 PM
+        </span>`;
 
 }
 
@@ -2104,23 +2015,131 @@ setInterval(
 );
 
 
+
 /* =====================================================
    POLL
 ===================================================== */
 
-const pollOptions = [
+let selectedOption = null;
 
-    "Prayer",
 
-    "Discipleship",
+/* SELECT POLL OPTION */
 
-    "The Holy Spirit",
+document
+.querySelectorAll(".poll-option")
+.forEach(button => {
 
-    "Marriage & Family",
+    button.addEventListener(
+        "click",
+        function() {
 
-    "Spiritual Growth"
+            document
+            .querySelectorAll(".poll-option")
+            .forEach(btn => {
 
-];
+                btn.classList.remove(
+                    "selected"
+                );
+
+            });
+
+
+            this.classList.add(
+                "selected"
+            );
+
+
+            selectedOption =
+                this.dataset.option;
+
+
+            document.getElementById(
+                "voteButton"
+            ).disabled = false;
+
+        }
+
+    );
+
+});
+
+
+
+/* SUBMIT VOTE */
+
+document
+.getElementById("voteButton")
+.addEventListener(
+    "click",
+    async function() {
+
+        if (!selectedOption) {
+
+            return;
+
+        }
+
+
+        const button = this;
+
+        button.disabled = true;
+
+        button.textContent =
+            "Submitting...";
+
+
+        const {
+            error
+        } = await supabaseClient
+        .from("poll_votes")
+        .insert([
+            {
+                option: selectedOption
+            }
+        ]);
+
+
+        if (error) {
+
+            console.error(error);
+
+            document.getElementById(
+                "voteMessage"
+            ).textContent =
+            "Unable to submit vote. Please try again.";
+
+            button.disabled = false;
+
+            button.textContent =
+                "Submit Vote";
+
+            return;
+
+        }
+
+
+        localStorage.setItem(
+            "bep_has_voted",
+            "true"
+        );
+
+
+        document.getElementById(
+            "voteMessage"
+        ).textContent =
+        "Thank you! Your vote has been recorded online.";
+
+
+        button.textContent =
+            "Vote Submitted";
+
+
+        loadPollResults();
+
+    }
+
+);
+
 
 
 /* LOAD POLL RESULTS */
@@ -2130,38 +2149,53 @@ async function loadPollResults() {
     const {
         data,
         error
-    } = await supabase
-
-        .from("poll_votes")
-
-        .select("option");
+    } = await supabaseClient
+    .from("poll_votes")
+    .select("option");
 
 
     if (error) {
 
-        console.error(
-            "Poll loading error:",
-            error
-        );
+        console.error(error);
+
+        document.getElementById(
+            "pollResults"
+        ).innerHTML =
+        "<p>Poll results unavailable.</p>";
 
         return;
 
     }
 
 
+    const options = [
+
+        "Very Helpful",
+
+        "Helpful",
+
+        "Somewhat Helpful",
+
+        "Needs Improvement"
+
+    ];
+
+
     const counts = {};
 
-    pollOptions.forEach(
-        option => counts[option] = 0
-    );
+    options.forEach(option => {
+
+        counts[option] = 0;
+
+    });
 
 
     data.forEach(row => {
 
         if (
-            counts.hasOwnProperty(
-                row.option
-            )
+            Object.prototype
+            .hasOwnProperty
+            .call(counts,row.option)
         ) {
 
             counts[row.option]++;
@@ -2175,12 +2209,10 @@ async function loadPollResults() {
         data.length;
 
 
-    document.getElementById(
-        "totalVotes"
-    ).textContent = total;
+    let html = "";
 
 
-    pollOptions.forEach(option => {
+    options.forEach(option => {
 
         const count =
             counts[option];
@@ -2188,216 +2220,330 @@ async function loadPollResults() {
 
         const percentage =
             total === 0
-                ? 0
-                : Math.round(
-                    (count / total) * 100
-                );
-
-
-        const id =
-            option.replace(
-                /[^a-zA-Z0-9]/g,
-                "-"
+            ? 0
+            : Math.round(
+                (count / total) * 100
             );
 
 
-        const percentElement =
-            document.getElementById(
-                id + "-percent"
-            );
+        html += `
 
+        <div class="result-row">
 
-        const barElement =
-            document.getElementById(
-                id + "-bar"
-            );
+            <div class="result-title">
 
+                <span>
+                    ${option}
+                </span>
 
-        if (percentElement) {
+                <span>
+                    ${count}
+                    (${percentage}%)
+                </span>
 
-            percentElement.textContent =
-                percentage + "%";
+            </div>
 
-        }
+            <div class="result-bar">
 
+                <div
+                class="result-fill"
+                style="width:${percentage}%">
+                </div>
 
-        if (barElement) {
+            </div>
 
-            barElement.style.width =
-                percentage + "%";
+        </div>
 
-        }
+        `;
 
     });
 
+
+    html += `
+
+        <p style="text-align:center;color:#777;">
+            Total votes: ${total}
+        </p>
+
+    `;
+
+
+    document.getElementById(
+        "pollResults"
+    ).innerHTML = html;
+
 }
 
-
-/* SUBMIT POLL */
-
-document.getElementById(
-    "pollForm"
-).addEventListener(
-    "submit",
-    async function(event) {
-
-        event.preventDefault();
-
-
-        const selected =
-            document.querySelector(
-                'input[name="poll"]:checked'
-            );
-
-
-        const status =
-            document.getElementById(
-                "pollStatus"
-            );
-
-
-        if (!selected) {
-
-            status.textContent =
-                "Please select an option.";
-
-            status.style.color =
-                "red";
-
-            return;
-
-        }
-
-
-        status.textContent =
-            "Submitting vote...";
-
-
-        status.style.color =
-            "#003f73";
-
-
-        const {
-            error
-        } = await supabase
-
-            .from("poll_votes")
-
-            .insert({
-
-                option:
-                    selected.value
-
-            });
-
-
-        if (error) {
-
-            console.error(error);
-
-            status.textContent =
-                "Unable to submit vote. Please try again.";
-
-            status.style.color =
-                "red";
-
-            return;
-
-        }
-
-
-        status.textContent =
-            "✅ Thank you! Your vote has been recorded.";
-
-        status.style.color =
-            "green";
-
-
-        document.getElementById(
-            "pollForm"
-        ).reset();
-
-
-        await loadPollResults();
-
-    }
-);
-
-
-/* INITIAL POLL LOAD */
 
 loadPollResults();
 
 
 
 /* =====================================================
-   REVIEWS
+   PREVENT SECOND VOTE ON SAME DEVICE
 ===================================================== */
 
+if (
+    localStorage.getItem(
+        "bep_has_voted"
+    )
+) {
 
-/*
-   IMPORTANT:
+    document.getElementById(
+        "voteButton"
+    ).disabled = true;
 
-   New reviews are inserted with:
+    document.getElementById(
+        "voteMessage"
+    ).textContent =
+    "You have already voted from this device.";
 
-   approved = false
+}
 
-   Therefore they are NOT displayed publicly.
 
-   Only reviews with:
 
-   approved = true
+/* =====================================================
+   STAR RATING
+===================================================== */
 
-   are loaded below.
-*/
+let selectedRating = 0;
 
+
+document
+.querySelectorAll(".star")
+.forEach(star => {
+
+    star.addEventListener(
+        "click",
+        function() {
+
+            selectedRating =
+                Number(
+                    this.dataset.rating
+                );
+
+
+            document
+            .querySelectorAll(".star")
+            .forEach(s => {
+
+                const rating =
+                    Number(
+                        s.dataset.rating
+                    );
+
+
+                if (
+                    rating <= selectedRating
+                ) {
+
+                    s.classList.add(
+                        "active"
+                    );
+
+                } else {
+
+                    s.classList.remove(
+                        "active"
+                    );
+
+                }
+
+            });
+
+        }
+
+    );
+
+});
+
+
+
+/* =====================================================
+   SUBMIT REVIEW
+===================================================== */
+
+document
+.getElementById("reviewSubmit")
+.addEventListener(
+    "click",
+    async function() {
+
+        const name =
+            document
+            .getElementById(
+                "reviewName"
+            )
+            .value
+            .trim();
+
+
+        const review =
+            document
+            .getElementById(
+                "reviewText"
+            )
+            .value
+            .trim();
+
+
+        const message =
+            document
+            .getElementById(
+                "reviewMessage"
+            );
+
+
+        if (!name) {
+
+            message.textContent =
+            "Please enter your name.";
+
+            return;
+
+        }
+
+
+        if (!selectedRating) {
+
+            message.textContent =
+            "Please select a rating.";
+
+            return;
+
+        }
+
+
+        if (!review) {
+
+            message.textContent =
+            "Please write a review.";
+
+            return;
+
+        }
+
+
+        this.disabled = true;
+
+        this.textContent =
+            "Submitting...";
+
+
+        const {
+            error
+        } = await supabaseClient
+        .from("reviews")
+        .insert([
+            {
+                name: name,
+                rating: selectedRating,
+                review: review,
+                approved: false
+            }
+        ]);
+
+
+        if (error) {
+
+            console.error(error);
+
+            message.textContent =
+            "Unable to submit review. Please try again.";
+
+            this.disabled = false;
+
+            this.textContent =
+                "Submit Review";
+
+            return;
+
+        }
+
+
+        message.textContent =
+        "Thank you! Your review was submitted and is awaiting approval.";
+
+
+        document
+        .getElementById(
+            "reviewName"
+        ).value = "";
+
+
+        document
+        .getElementById(
+            "reviewText"
+        ).value = "";
+
+
+        selectedRating = 0;
+
+
+        document
+        .querySelectorAll(".star")
+        .forEach(star => {
+
+            star.classList.remove(
+                "active"
+            );
+
+        });
+
+
+        this.disabled = false;
+
+        this.textContent =
+            "Submit Review";
+
+    }
+
+);
+
+
+
+/* =====================================================
+   LOAD APPROVED REVIEWS
+===================================================== */
 
 async function loadReviews() {
-
-    const reviewList =
-        document.getElementById(
-            "reviewList"
-        );
-
-
-    reviewList.innerHTML =
-        "<p style='text-align:center;'>Loading reviews...</p>";
-
 
     const {
         data,
         error
-    } = await supabase
+    } = await supabaseClient
+    .from("reviews")
+    .select(
+        "name,rating,review,created_at"
+    )
+    .eq(
+        "approved",
+        true
+    )
+    .order(
+        "created_at",
+        {
+            ascending: false
+        }
+    );
 
-        .from("reviews")
 
-        .select(
-            "id, created_at, name, rating, review, approved"
-        )
-
-        .eq(
-            "approved",
-            true
-        )
-
-        .order(
-            "created_at",
-            {
-                ascending: false
-            }
+    const reviewGrid =
+        document.getElementById(
+            "reviewGrid"
         );
 
 
     if (error) {
 
-        console.error(
-            "Reviews loading error:",
-            error
-        );
+        console.error(error);
 
-
-        reviewList.innerHTML =
-            "<p style='text-align:center;'>Reviews could not be loaded.</p>";
+        reviewGrid.innerHTML =
+        `
+        <p class="no-reviews">
+            Reviews are currently unavailable.
+        </p>
+        `;
 
         return;
 
@@ -2406,318 +2552,108 @@ async function loadReviews() {
 
     if (!data || data.length === 0) {
 
-        reviewList.innerHTML =
-            "<p style='text-align:center;'>No approved reviews yet. Be the first to share your experience!</p>";
+        reviewGrid.innerHTML =
+        `
+        <p class="no-reviews">
+            No approved reviews yet.
+            Be the first to share your experience!
+        </p>
+        `;
 
         return;
 
     }
 
 
-    reviewList.innerHTML = "";
+    reviewGrid.innerHTML = "";
 
 
-    data.forEach(review => {
+    data.forEach(item => {
+
+        let stars = "";
+
+
+        for (
+            let i = 1;
+            i <= 5;
+            i++
+        ) {
+
+            stars +=
+                i <= item.rating
+                ? "★"
+                : "☆";
+
+        }
+
 
         const card =
-            document.createElement(
-                "div"
-            );
-
+        document.createElement(
+            "div"
+        );
 
         card.className =
             "review-card";
 
 
-        const header =
-            document.createElement(
-                "div"
-            );
+        card.innerHTML = `
+
+            <div class="review-name">
+
+                ${escapeHTML(item.name)}
+
+            </div>
+
+            <div class="review-stars">
+
+                ${stars}
+
+            </div>
+
+            <div class="review-text">
+
+                ${escapeHTML(item.review)}
+
+            </div>
+
+        `;
 
 
-        header.className =
-            "review-header";
-
-
-        const name =
-            document.createElement(
-                "div"
-            );
-
-
-        name.className =
-            "review-name";
-
-
-        name.textContent =
-            review.name;
-
-
-        const stars =
-            document.createElement(
-                "div"
-            );
-
-
-        stars.className =
-            "stars";
-
-
-        const rating =
-            Number(
-                review.rating
-            );
-
-
-        stars.textContent =
-            "★".repeat(rating) +
-            "☆".repeat(5 - rating);
-
-
-        header.appendChild(name);
-
-        header.appendChild(stars);
-
-
-        const text =
-            document.createElement(
-                "div"
-            );
-
-
-        text.className =
-            "review-text";
-
-
-        text.textContent =
-            review.review;
-
-
-        const date =
-            document.createElement(
-                "div"
-            );
-
-
-        date.className =
-            "review-date";
-
-
-        const reviewDate =
-            new Date(
-                review.created_at
-            );
-
-
-        date.textContent =
-            reviewDate.toLocaleDateString(
-                "en-ZA",
-                {
-                    year: "numeric",
-                    month: "long",
-                    day: "numeric"
-                }
-            );
-
-
-        card.appendChild(header);
-
-        card.appendChild(text);
-
-        card.appendChild(date);
-
-
-        reviewList.appendChild(card);
+        reviewGrid.appendChild(
+            card
+        );
 
     });
 
 }
 
 
+
 /* =====================================================
-   SUBMIT REVIEW
+   SECURITY HELPER
 ===================================================== */
 
-document.getElementById(
-    "reviewForm"
-).addEventListener(
-    "submit",
-    async function(event) {
+function escapeHTML(text) {
 
-        event.preventDefault();
+    const div =
+        document.createElement(
+            "div"
+        );
 
+    div.textContent =
+        text;
 
-        const name =
-            document.getElementById(
-                "reviewName"
-            ).value.trim();
+    return div.innerHTML;
 
+}
 
-        const rating =
-            document.getElementById(
-                "reviewRating"
-            ).value;
-
-
-        const review =
-            document.getElementById(
-                "reviewText"
-            ).value.trim();
-
-
-        const status =
-            document.getElementById(
-                "reviewStatus"
-            );
-
-
-        if (
-            !name ||
-            !rating ||
-            !review
-        ) {
-
-            status.textContent =
-                "Please complete all fields.";
-
-            status.style.color =
-                "red";
-
-            return;
-
-        }
-
-
-        status.textContent =
-            "Submitting review...";
-
-        status.style.color =
-            "#003f73";
-
-
-        /*
-           IMPORTANT:
-
-           approved is deliberately false.
-
-           This means you must approve
-           the review before it appears
-           publicly.
-        */
-
-
-        const {
-            error
-        } = await supabase
-
-            .from("reviews")
-
-            .insert({
-
-                name: name,
-
-                rating: Number(rating),
-
-                review: review,
-
-                approved: false
-
-            });
-
-
-        if (error) {
-
-            console.error(
-                "Review submission error:",
-                error
-            );
-
-
-            status.textContent =
-                "Unable to submit review. Please try again.";
-
-            status.style.color =
-                "red";
-
-            return;
-
-        }
-
-
-        status.textContent = "";
-
-
-        document.getElementById(
-            "pendingMessage"
-        ).style.display =
-            "block";
-
-
-        document.getElementById(
-            "reviewForm"
-        ).reset();
-
-    }
-);
-
-
-/* INITIAL REVIEWS LOAD */
 
 loadReviews();
-
-
-/* =====================================================
-   OPTIONAL REALTIME REFRESH
-===================================================== */
-
-supabase
-
-    .channel("reviews-changes")
-
-    .on(
-        "postgres_changes",
-        {
-            event: "*",
-            schema: "public",
-            table: "reviews"
-        },
-        function() {
-
-            loadReviews();
-
-        }
-    )
-
-    .subscribe();
-
-
-/* =====================================================
-   POLL REALTIME REFRESH
-===================================================== */
-
-supabase
-
-    .channel("poll-changes")
-
-    .on(
-        "postgres_changes",
-        {
-            event: "*",
-            schema: "public",
-            table: "poll_votes"
-        },
-        function() {
-
-            loadPollResults();
-
-        }
-    )
-
-    .subscribe();
 
 
 </script>
 
 
 </body>
+
 </html>
