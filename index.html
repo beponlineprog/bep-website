@@ -1,15 +1,8 @@
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
-    <meta name="description"
-          content="Biblical Empowerment Program - Building the Church of Christ">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Biblical Empowerment Program - B.E.P</title>
 
@@ -22,9 +15,9 @@
 
     <style>
 
-        /* =========================================
+        /* =====================================================
            GLOBAL
-        ========================================= */
+        ====================================================== */
 
         * {
             box-sizing: border-box;
@@ -36,9 +29,8 @@
 
         body {
             margin: 0;
-            padding: 0;
             font-family: Arial, Helvetica, sans-serif;
-            background: #f5f7fb;
+            background: #ffffff;
             color: #222;
         }
 
@@ -46,222 +38,138 @@
             text-decoration: none;
         }
 
-        button,
-        input,
-        select,
-        textarea {
-            font-family: inherit;
+        h2 {
+            font-size: 36px;
+            color: #cc9933;
+            margin-bottom: 15px;
         }
 
         .container {
-            width: 92%;
+            width: 90%;
             max-width: 1100px;
             margin: auto;
         }
 
-        /* =========================================
-           NAVIGATION
-        ========================================= */
-
-        nav {
-            background: #061a3a;
-            color: white;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        .section {
+            padding: 70px 20px;
+            text-align: center;
         }
 
-        .nav-container {
-            width: 92%;
-            max-width: 1100px;
-            margin: auto;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            min-height: 65px;
-        }
-
-        .logo {
-            font-weight: bold;
-            color: gold;
-            font-size: 20px;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 20px;
-            align-items: center;
-        }
-
-        .nav-links a {
-            color: white;
-            font-size: 14px;
-            transition: 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: gold;
-        }
-
-        .menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            color: white;
-            font-size: 25px;
-            cursor: pointer;
-        }
-
-        /* =========================================
+        /* =====================================================
            HERO
-        ========================================= */
+        ====================================================== */
 
         .hero {
-            min-height: 400px;
-
+            min-height: 360px;
             display: flex;
             align-items: center;
             justify-content: center;
-
             text-align: center;
-
             position: relative;
 
             background:
                 linear-gradient(
-                    rgba(6,26,58,0.78),
-                    rgba(6,26,58,0.88)
+                    rgba(6, 26, 58, 0.85),
+                    rgba(6, 26, 58, 0.85)
                 ),
                 url("banner.png") center/cover no-repeat;
 
             padding: 40px 20px;
         }
 
-        .hero-content {
-            max-width: 850px;
-        }
-
         .hero h1 {
-            margin: 0;
+            font-size: 42px;
             color: gold;
-            font-size: clamp(32px, 6vw, 55px);
-            line-height: 1.1;
+            margin: 0;
         }
 
         .hero p {
-            color: white;
-            font-size: clamp(18px, 3vw, 25px);
+            margin-top: 10px;
+            font-size: 19px;
+            color: #e6e6e6;
+            letter-spacing: 1px;
             font-style: italic;
-            margin: 20px 0;
         }
 
-        .hero-btn {
-            display: inline-block;
-            padding: 13px 25px;
+        .hero button {
+            margin-top: 18px;
+            padding: 12px 22px;
+            border: none;
             background: gold;
             color: #061a3a;
-            border-radius: 7px;
             font-weight: bold;
-            border: none;
+            border-radius: 7px;
             cursor: pointer;
             transition: 0.3s;
         }
 
-        .hero-btn:hover {
+        .hero button:hover {
             transform: scale(1.06);
         }
 
-        /* =========================================
-           GENERAL SECTIONS
-        ========================================= */
-
-        .section {
-            padding: 70px 20px;
-        }
-
-        .section-title {
-            text-align: center;
-            color: #003366;
-            font-size: 35px;
-            margin-bottom: 35px;
-        }
+        /* =====================================================
+           CARDS
+        ====================================================== */
 
         .card-grid {
-            width: 92%;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
             max-width: 1100px;
             margin: auto;
-
-            display: grid;
-            grid-template-columns:
-                repeat(auto-fit, minmax(280px, 1fr));
-
-            gap: 25px;
         }
 
         .card {
-            background: white;
+            background: #ffffff;
             padding: 30px;
             border-radius: 15px;
-
-            box-shadow:
-                0 6px 20px rgba(0,0,0,0.08);
-
+            box-shadow: 0 6px 18px rgba(0,0,0,0.12);
             transition: 0.3s;
         }
 
         .card:hover {
-            transform: translateY(-4px);
+            transform: translateY(-5px);
         }
 
         .card h2 {
             color: #cc9933;
-            margin-top: 0;
+            font-size: 28px;
         }
 
         .card p,
         .card li {
+            color: #333;
+            font-size: 16px;
             line-height: 1.7;
-            color: #444;
         }
 
         .card ul {
             text-align: left;
-            padding-left: 22px;
         }
 
-        /* =========================================
+        /* =====================================================
            NEXT SESSION
-        ========================================= */
+        ====================================================== */
 
         .next-session-section {
-            padding: 65px 15px;
+            padding: 65px 20px;
             background: #f5f7fb;
         }
 
         .session-card {
-            width: 100%;
-            max-width: 1000px;
+            max-width: 950px;
             margin: auto;
-
-            background: white;
-
+            background: #ffffff;
             border-radius: 20px;
-
-            padding: 45px 25px;
-
+            padding: 45px 30px;
             text-align: center;
-
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
             border-top: 5px solid #cc9933;
-
-            box-shadow:
-                0 8px 30px rgba(0,0,0,0.08);
         }
 
         .session-card h2 {
-            color: #003f73;
-            font-size: clamp(28px, 5vw, 40px);
-            margin: 0 0 10px;
+            font-size: 2.2rem;
+            color: #003366;
         }
 
         .session-subtitle {
@@ -271,90 +179,55 @@
 
         .session-info {
             display: grid;
-
-            grid-template-columns:
-                repeat(auto-fit, minmax(220px, 1fr));
-
-            gap: 18px;
-
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 20px;
             margin-bottom: 30px;
         }
 
         .info-box {
-            background: #f7f9fc;
-            padding: 25px 15px;
+            background: #f8fafc;
+            padding: 25px;
             border-radius: 15px;
         }
 
         .info-box i {
-            font-size: 28px;
+            font-size: 2rem;
             color: #cc9933;
             margin-bottom: 12px;
         }
 
         .info-box h3 {
             color: #003366;
-            font-size: 16px;
-            margin: 5px 0;
+            font-size: 1rem;
         }
-
-        /* =========================================
-           REAL COUNTDOWN
-        ========================================= */
 
         .countdown-box {
-            background: #003f73;
+            background: #003366;
             color: white;
-
-            padding: 25px 15px;
-
+            padding: 22px;
             border-radius: 15px;
-
-            font-size: clamp(20px, 4vw, 32px);
-
+            font-size: 1.8rem;
             font-weight: bold;
-
-            margin: 20px 0 30px;
-
-            box-shadow:
-                0 5px 15px rgba(0,0,0,0.12);
+            margin-bottom: 30px;
         }
-
-        .countdown-label {
-            display: block;
-            font-size: 14px;
-            font-weight: normal;
-            opacity: 0.85;
-            margin-top: 8px;
-        }
-
-        /* =========================================
-           SESSION BUTTONS
-        ========================================= */
 
         .session-buttons {
             display: flex;
             justify-content: center;
-            align-items: center;
+            gap: 15px;
             flex-wrap: wrap;
-            gap: 12px;
         }
 
         .join-btn,
         .reminder-btn {
-            display: inline-block;
-
-            padding: 14px 22px;
-
-            border-radius: 8px;
-
+            padding: 14px 25px;
+            border-radius: 10px;
             font-weight: bold;
-
             transition: 0.3s;
         }
 
         .join-btn {
-            background: #003f73;
+            background: #003366;
             color: white;
         }
 
@@ -368,9 +241,9 @@
             transform: translateY(-3px);
         }
 
-        /* =========================================
-           REGISTER
-        ========================================= */
+        /* =====================================================
+           REGISTRATION
+        ====================================================== */
 
         .register-section {
             padding: 70px 20px;
@@ -378,18 +251,12 @@
         }
 
         .register-container {
-            width: 92%;
-            max-width: 650px;
+            max-width: 600px;
             margin: auto;
-
-            background: white;
-
-            padding: 35px;
-
+            background: #fff;
+            padding: 30px;
             border-radius: 15px;
-
-            box-shadow:
-                0 6px 20px rgba(0,0,0,0.08);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
         }
 
         .register-container h2 {
@@ -399,8 +266,8 @@
 
         .register-sub {
             text-align: center;
-            color: #666;
-            margin-bottom: 30px;
+            color: #555;
+            margin-bottom: 25px;
         }
 
         .input-group {
@@ -410,36 +277,27 @@
         .input-group label {
             display: block;
             font-weight: bold;
-            color: #003366;
             margin-bottom: 7px;
+            color: #003366;
         }
 
         .input-group input,
         .input-group select {
             width: 100%;
             padding: 13px;
-
             border: 1px solid #ccc;
-
             border-radius: 8px;
-
             font-size: 15px;
         }
 
         .register-btn {
             width: 100%;
             padding: 14px;
-
             background: #cc9933;
             color: white;
-
             border: none;
-
+            font-size: 18px;
             border-radius: 8px;
-
-            font-size: 17px;
-            font-weight: bold;
-
             cursor: pointer;
         }
 
@@ -447,227 +305,246 @@
             background: #b58329;
         }
 
-        /* =========================================
-           POLLS & REVIEWS
-        ========================================= */
+        /* =====================================================
+           POLL
+        ====================================================== */
 
-        .community-section {
+        .poll-section {
             padding: 70px 20px;
-            background: #eef3f9;
+            background: #f5f7fb;
         }
 
-        .community-card {
-            width: 92%;
-            max-width: 1000px;
-            margin: 0 auto 30px;
-
+        .poll-container {
+            max-width: 700px;
+            margin: auto;
             background: white;
-
-            padding: 30px;
-
-            border-radius: 15px;
-
-            box-shadow:
-                0 6px 20px rgba(0,0,0,0.08);
+            padding: 35px;
+            border-radius: 18px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
         }
 
-        .community-card h2 {
-            color: #003f73;
-            margin-top: 0;
+        .poll-container h2 {
+            color: #003366;
+            text-align: center;
+        }
+
+        .poll-question {
+            text-align: center;
+            color: #555;
+            margin-bottom: 25px;
         }
 
         .poll-option {
-            display: block;
-
-            background: #f1f5f9;
-
-            padding: 14px;
-
-            border-radius: 8px;
-
-            margin: 10px 0;
-
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 15px;
+            margin-bottom: 12px;
+            background: #f5f7fb;
+            border-radius: 10px;
             cursor: pointer;
-
-            transition: 0.2s;
-        }
-
-        .poll-option:hover {
-            background: #e3ebf5;
         }
 
         .poll-option input {
-            margin-right: 10px;
+            transform: scale(1.2);
         }
 
-        .community-btn {
+        .poll-submit {
             width: 100%;
-
-            padding: 13px;
-
-            background: #007cc3;
-
-            color: white;
-
+            padding: 14px;
             border: none;
-
-            border-radius: 7px;
-
+            border-radius: 8px;
+            background: #003366;
+            color: white;
+            font-size: 17px;
             font-weight: bold;
-
             cursor: pointer;
-
             margin-top: 10px;
         }
 
-        .community-btn:hover {
-            background: #005f99;
+        .poll-submit:hover {
+            background: #082c52;
+        }
+
+        #pollMessage {
+            text-align: center;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        .results {
+            margin-top: 30px;
         }
 
         .result-row {
-            margin: 15px 0;
+            margin-bottom: 18px;
         }
 
-        .result-title {
+        .result-label {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 5px;
-            font-size: 14px;
+            margin-bottom: 6px;
+            font-weight: bold;
+            color: #003366;
         }
 
         .result-bar {
-            height: 10px;
+            height: 12px;
             background: #e5e7eb;
-            border-radius: 10px;
+            border-radius: 20px;
             overflow: hidden;
         }
 
         .result-fill {
             height: 100%;
-            width: 0%;
             background: #cc9933;
+            width: 0%;
             transition: width 0.5s ease;
         }
 
+        /* =====================================================
+           REVIEWS
+        ====================================================== */
+
+        .reviews-section {
+            padding: 75px 20px;
+            background: white;
+        }
+
+        .reviews-container {
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        .reviews-title {
+            text-align: center;
+        }
+
+        .review-form {
+            background: #f7f9fc;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 40px;
+        }
+
         .review-form input,
-        .review-form select,
-        .review-form textarea {
+        .review-form textarea,
+        .review-form select {
             width: 100%;
-
             padding: 13px;
-
             margin-bottom: 15px;
-
             border: 1px solid #ccc;
-
             border-radius: 8px;
-
             font-size: 15px;
         }
 
         .review-form textarea {
-            min-height: 120px;
+            min-height: 130px;
             resize: vertical;
         }
 
+        .review-btn {
+            width: 100%;
+            padding: 14px;
+            background: #003366;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .review-btn:hover {
+            background: #082c52;
+        }
+
+        #reviewMessage {
+            text-align: center;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
         .reviews-list {
-            margin-top: 25px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
         }
 
-        .review-item {
+        .review-card {
             background: #f7f9fc;
-
-            padding: 18px;
-
-            border-radius: 10px;
-
-            margin-bottom: 15px;
-        }
-
-        .review-stars {
-            color: #cc9933;
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 5px solid #cc9933;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.07);
         }
 
         .review-name {
+            font-size: 18px;
             font-weight: bold;
             color: #003366;
         }
 
-        .review-date {
-            color: #888;
-            font-size: 12px;
+        .stars {
+            color: #cc9933;
+            margin: 8px 0;
+            letter-spacing: 2px;
         }
 
-        /* =========================================
+        .review-text {
+            color: #444;
+            line-height: 1.6;
+        }
+
+        .no-reviews {
+            text-align: center;
+            color: #777;
+        }
+
+        /* =====================================================
            CONTACT
-        ========================================= */
+        ====================================================== */
 
         .contact {
-            background:
-                linear-gradient(
-                    135deg,
-                    #091a3c,
-                    #0d2b5f
-                );
-
-            padding: 80px 20px;
-
+            background: linear-gradient(135deg, #091a3c, #0d2b5f);
+            padding: 80px 25px;
             text-align: center;
         }
 
         .contact h2 {
             color: gold;
-            font-size: 38px;
         }
 
         .contact-intro {
-            color: #ddd;
-            max-width: 650px;
+            color: #cfcfcf;
+            max-width: 600px;
             margin: 0 auto 40px;
             line-height: 1.6;
         }
 
         .contact-grid {
             display: grid;
-
-            grid-template-columns:
-                repeat(auto-fit, minmax(240px, 1fr));
-
-            gap: 20px;
-
-            max-width: 1000px;
-
-            margin: auto;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 25px;
         }
 
         .contact-card {
             background: rgba(255,255,255,0.06);
-
-            padding: 30px;
-
+            padding: 30px 25px;
             border-radius: 14px;
-
-            border:
-                1px solid rgba(255,215,0,0.25);
+            border: 1px solid rgba(255,215,0,0.25);
         }
 
         .icon-circle {
             width: 60px;
             height: 60px;
-
             margin: auto auto 15px;
-
-            border-radius: 50%;
-
             background: gold;
-
             color: #061a3a;
-
+            border-radius: 50%;
             display: flex;
-
             align-items: center;
             justify-content: center;
-
             font-size: 25px;
         }
 
@@ -676,109 +553,70 @@
         }
 
         .contact-card p {
-            color: #eee;
+            color: #e6e6e6;
         }
 
         .contact-buttons {
-            margin-top: 35px;
-
-            display: flex;
-
-            justify-content: center;
-
-            flex-wrap: wrap;
-
-            gap: 10px;
+            margin-top: 40px;
         }
 
         .contact-buttons a {
-            background: gold;
-
-            color: #061a3a;
-
+            display: inline-block;
+            margin: 8px;
             padding: 12px 18px;
-
-            border-radius: 7px;
-
+            background: gold;
+            color: #061a3a;
+            border-radius: 6px;
             font-weight: bold;
         }
 
-        /* =========================================
+        /* =====================================================
            FOOTER
-        ========================================= */
+        ====================================================== */
 
         footer {
             background: #061a3a;
-
-            color: gold;
-
+            padding: 25px;
             text-align: center;
-
-            padding: 25px 15px;
+            color: gold;
+            font-size: 14px;
         }
 
         .footer-buttons {
-            margin-top: 15px;
+            margin-top: 12px;
         }
 
         .footer-buttons a {
             color: white;
-
             margin: 0 8px;
-
-            font-size: 14px;
         }
 
-        /* =========================================
+        /* =====================================================
            MOBILE
-        ========================================= */
+        ====================================================== */
 
         @media (max-width: 768px) {
 
-            .nav-links {
-                display: none;
-
-                position: absolute;
-
-                top: 65px;
-                left: 0;
-
-                width: 100%;
-
-                background: #061a3a;
-
-                flex-direction: column;
-
-                padding: 20px;
+            .hero h1 {
+                font-size: 30px;
             }
 
-            .nav-links.active {
-                display: flex;
+            .hero p {
+                font-size: 16px;
             }
 
-            .menu-btn {
-                display: block;
+            h2 {
+                font-size: 28px;
             }
 
-            .hero {
-                min-height: 330px;
+            .countdown-box {
+                font-size: 1.3rem;
             }
 
             .session-card {
-                padding: 35px 15px;
+                padding: 30px 18px;
             }
 
-            .register-container {
-                padding: 25px 18px;
-            }
-
-            .community-card {
-                padding: 22px 18px;
-            }
-
-            .section {
-                padding: 50px 15px;
-            }
         }
 
     </style>
@@ -786,159 +624,82 @@
 
 <body>
 
-
-<!-- =========================================
-     NAVIGATION
-========================================= -->
-
-<nav>
-
-    <div class="nav-container">
-
-        <div class="logo">
-            📖 B.E.P
-        </div>
-
-        <button class="menu-btn"
-                onclick="toggleMenu()">
-            <i class="fa-solid fa-bars"></i>
-        </button>
-
-        <div class="nav-links" id="navLinks">
-
-            <a href="#home">Home</a>
-
-            <a href="#about">About</a>
-
-            <a href="#sessions">Sessions</a>
-
-            <a href="#register">Register</a>
-
-            <a href="#community">Polls & Reviews</a>
-
-            <a href="#contact">Contact</a>
-
-        </div>
-
-    </div>
-
-</nav>
-
-
-<!-- =========================================
+<!-- =========================================================
      HERO
-========================================= -->
+========================================================== -->
 
-<section class="hero" id="home">
+<section class="hero">
 
-    <div class="hero-content">
+    <div>
 
-        <h1>
-            Biblical Empowerment Program
-        </h1>
+        <h1>Biblical Empowerment Program</h1>
 
-        <p>
-            "Building the Church of Christ"
-        </p>
+        <p>Building the Church of Christ</p>
 
-        <a href="#about"
-           class="hero-btn">
+        <button onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">
             Learn More
-        </a>
+        </button>
 
     </div>
 
 </section>
 
 
-<!-- =========================================
+<!-- =========================================================
      NEXT SESSION
-========================================= -->
+========================================================== -->
 
-<section class="next-session-section"
-         id="sessions">
+<section class="next-session-section">
 
     <div class="session-card">
 
-        <h2>
-            Next B.E.P Session
-        </h2>
+        <h2>Next B.E.P Session</h2>
 
         <p class="session-subtitle">
             Building the Church of Christ
         </p>
 
-
         <div class="session-info">
 
             <div class="info-box">
-
                 <i class="fa-solid fa-calendar-days"></i>
-
-                <h3>
-                    Every Thursday
-                </h3>
-
+                <h3>Every Thursday</h3>
             </div>
 
-
             <div class="info-box">
-
                 <i class="fa-solid fa-clock"></i>
-
-                <h3>
-                    7:00 PM – 8:30 PM
-                </h3>
-
+                <h3>7:00 PM – 8:30 PM</h3>
             </div>
-
 
             <div class="info-box">
-
                 <i class="fa-solid fa-video"></i>
-
-                <h3>
-                    Microsoft Teams
-                </h3>
-
+                <h3>Microsoft Teams</h3>
             </div>
 
         </div>
 
-
-        <!-- REAL COUNTDOWN -->
-
-        <div id="countdown"
-             class="countdown-box">
-
-            Calculating next session...
-
-            <span class="countdown-label">
-                Time remaining until B.E.P
-            </span>
-
+        <div id="countdown" class="countdown-box">
+            Loading countdown...
         </div>
-
 
         <div class="session-buttons">
 
-            <a href="https://teams.live.com/meet/936085799236?p=b66LnDUAB2Xkx2uQYp&eventType=community"
-               class="join-btn"
-               target="_blank">
+            <a
+                href="https://teams.live.com/meet/936085799236?p=b66LnDUAB2Xkx2uQYp&eventType=community"
+                class="join-btn"
+                target="_blank">
 
                 <i class="fa-solid fa-video"></i>
-
                 Join Microsoft Teams
 
             </a>
 
-
-            <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Biblical+Empowerment+Program+(B.E.P)+Session&dates=20260101T170000Z/20260101T183000Z&details=Weekly+B.E.P+Teaching+Session&location=Microsoft+Teams"
-               class="reminder-btn"
-               target="_blank">
+            <a
+                href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Biblical+Empowerment+Program+(B.E.P)+Session&dates=20260101T170000Z/20260101T183000Z&details=Weekly+B.E.P+Teaching+Session&location=Microsoft+Teams"
+                class="reminder-btn"
+                target="_blank">
 
                 <i class="fa-solid fa-bell"></i>
-
                 Set Reminder
 
             </a>
@@ -950,94 +711,48 @@
 </section>
 
 
-<!-- =========================================
+<!-- =========================================================
      ABOUT
-========================================= -->
+========================================================== -->
 
-<section class="section"
-         id="about">
+<section class="section" id="about">
 
     <div class="card-grid">
 
-        <div class="card"
-             style="grid-column: 1 / -1;">
+        <div class="card">
 
-            <h2>
-                About Us
-            </h2>
+            <h2>About Us</h2>
 
             <p>
-                The Biblical Empowerment Program (B.E.P) is a
-                faith-driven initiative dedicated to equipping
-                individuals with a deeper understanding of the
-                Word of God and the transformative power of the
-                Holy Spirit.
+                The Biblical Empowerment Program (B.E.P) is a faith-driven
+                initiative dedicated to equipping individuals with a deeper
+                understanding of the Word of God and the transformative power
+                of the Holy Spirit.
             </p>
 
             <p>
-                Our mission is to build spiritually grounded
-                believers who are empowered to live purposeful,
-                Christ-centered lives.
+                Our mission is to build spiritually grounded believers who are
+                empowered to live purposeful, Christ-centered lives.
             </p>
 
             <p>
-                At B.E.P, we believe that true empowerment comes
-                through knowledge, revelation, and application of
-                Scripture.
+                At B.E.P, we believe that true empowerment comes through
+                knowledge, revelation, and application of Scripture.
             </p>
 
-            <p>
-                Through structured teachings, interactive sessions,
-                and Spirit-led discussions, we create a space where
-                individuals can grow in faith, gain clarity in their
-                spiritual journey, and develop a personal relationship
-                with God.
-            </p>
-
-            <p>
-                Our program is designed for everyone—whether you are
-                a new believer or someone seeking deeper spiritual
-                insight.
-            </p>
-
-            <p>
-                We focus on practical teachings that address
-                real-life challenges while guiding individuals to
-                walk in faith, wisdom, and obedience to God's will.
-            </p>
-
-            <p>
-                <strong>
-                    We are committed to:
-                </strong>
-            </p>
+            <p><strong>We are committed to:</strong></p>
 
             <ul>
 
-                <li>
-                    Teaching the Word of God with clarity and truth
-                </li>
+                <li>Teaching the Word of God with clarity and truth</li>
 
-                <li>
-                    Empowering believers through the Holy Spirit
-                </li>
+                <li>Empowering believers through the Holy Spirit</li>
 
-                <li>
-                    Building a strong, united faith community
-                </li>
+                <li>Building a strong, united faith community</li>
 
-                <li>
-                    Encouraging spiritual growth and personal
-                    transformation
-                </li>
+                <li>Encouraging spiritual growth and personal transformation</li>
 
             </ul>
-
-            <p>
-                The Biblical Empowerment Program is more than just
-                a teaching platform—it is a movement of believers
-                rising in faith, purpose, and power.
-            </p>
 
         </div>
 
@@ -1046,48 +761,32 @@
 </section>
 
 
-<!-- =========================================
+<!-- =========================================================
      THURSDAY SESSIONS
-========================================= -->
+========================================================== -->
 
 <section class="section">
 
     <div class="card-grid">
 
-        <div class="card"
-             style="grid-column: 1 / -1;">
+        <div class="card">
 
-            <h2>
-                Thursday Sessions
-            </h2>
+            <h2>Thursday Sessions</h2>
 
             <p>
-                The Thursday sessions are held every week from
-                7:00 PM to 8:30 PM.
+                The Thursday sessions are held every week from 7:00 PM
+                to 8:30 PM.
             </p>
 
             <p>
-                They are designed to deepen participants'
-                understanding of the Word of God through
-                structured teaching and interactive engagement.
+                They are designed to deepen participants' understanding
+                of the Word of God through structured teaching and
+                interactive engagement.
             </p>
 
             <p>
-                The goal is to build a strong biblical foundation
-                while encouraging spiritual growth and practical
-                application of Scripture in daily life.
-            </p>
-
-            <p>
-                Each session is centered on presentation-based
-                learning, where topics are shared and explored
-                through discussion, comments, and questions.
-            </p>
-
-            <p>
-                These sessions create a space for the expansion
-                of biblical knowledge through Scripture, guided
-                teaching, and shared insights.
+                Each session encourages discussion, comments, questions,
+                and practical application of Scripture.
             </p>
 
         </div>
@@ -1095,73 +794,19 @@
 
         <div class="card">
 
-            <h2>
-                Objectives
-            </h2>
+            <h2>Objectives</h2>
 
             <ul>
 
-                <li>
-                    Strengthening biblical understanding and
-                    spiritual maturity
-                </li>
+                <li>Strengthening biblical understanding</li>
 
-                <li>
-                    Encouraging active participation through
-                    questions and discussion
-                </li>
+                <li>Encouraging active participation</li>
 
-                <li>
-                    Promoting clear and correct interpretation
-                    of Scripture
-                </li>
+                <li>Promoting correct interpretation of Scripture</li>
 
-                <li>
-                    Building confidence in sharing and applying
-                    biblical knowledge
-                </li>
+                <li>Building confidence in sharing biblical knowledge</li>
 
-                <li>
-                    Fostering spiritual growth through collective
-                    learning
-                </li>
-
-            </ul>
-
-        </div>
-
-
-        <div class="card">
-
-            <h2>
-                What We Teach
-            </h2>
-
-            <ul>
-
-                <li>
-                    Discipleship
-                </li>
-
-                <li>
-                    Prayer
-                </li>
-
-                <li>
-                    The Holy Spirit
-                </li>
-
-                <li>
-                    Spiritual Growth
-                </li>
-
-                <li>
-                    Marriage & Family
-                </li>
-
-                <li>
-                    Christian Character
-                </li>
+                <li>Fostering spiritual growth</li>
 
             </ul>
 
@@ -1172,34 +817,28 @@
 </section>
 
 
-<!-- =========================================
+<!-- =========================================================
      REGISTRATION OPTIONS
-========================================= -->
+========================================================== -->
 
-<section class="section"
-         id="register">
+<section class="section" id="register">
 
-    <h2 class="section-title">
-        Register for B.E.P
-    </h2>
+    <h2>Register for B.E.P</h2>
 
     <div class="card-grid">
 
-
         <div class="card">
 
-            <h2>
-                Register via WhatsApp
-            </h2>
+            <h2>Register via WhatsApp</h2>
 
             <p>
-                Quick and convenient. Message us directly
-                on WhatsApp to register.
+                Message us directly on WhatsApp to register.
             </p>
 
-            <a href="https://wa.me/27740386671?text=I%20would%20like%20to%20register%20for%20B.E.P"
-               class="hero-btn"
-               target="_blank">
+            <a
+                href="https://wa.me/27740386671?text=I%20would%20like%20to%20register%20for%20B.E.P"
+                class="register-btn"
+                target="_blank">
 
                 Open WhatsApp
 
@@ -1210,17 +849,15 @@
 
         <div class="card">
 
-            <h2>
-                Register via Email
-            </h2>
+            <h2>Register via Email</h2>
 
             <p>
-                Send us your full name and request to join
-                the program.
+                Send us your full name and request to join the program.
             </p>
 
-            <a href="mailto:bep.onlineprog@gmail.com"
-               class="hero-btn">
+            <a
+                href="mailto:bep.onlineprog@gmail.com"
+                class="register-btn">
 
                 Send Email
 
@@ -1231,18 +868,16 @@
 
         <div class="card">
 
-            <h2>
-                Join Microsoft Teams
-            </h2>
+            <h2>Join Microsoft Teams</h2>
 
             <p>
-                Attend our weekly Thursday sessions directly
-                on Microsoft Teams.
+                Attend our weekly Thursday sessions online.
             </p>
 
-            <a href="https://teams.live.com/meet/936085799236?p=b66LnDUAB2Xkx2uQYp&eventType=community"
-               class="hero-btn"
-               target="_blank">
+            <a
+                href="https://teams.live.com/meet/936085799236?p=b66LnDUAB2Xkx2uQYp&eventType=community"
+                class="register-btn"
+                target="_blank">
 
                 Join Teams
 
@@ -1255,114 +890,101 @@
 </section>
 
 
-<!-- =========================================
+<!-- =========================================================
      REGISTRATION FORM
-========================================= -->
+========================================================== -->
 
 <section class="register-section">
 
     <div class="register-container">
 
-        <h2>
-            Register for Biblical Empowerment Program
-        </h2>
+        <h2>Register for Biblical Empowerment Program</h2>
 
         <p class="register-sub">
-            Fill in your details to join our weekly
-            Thursday sessions.
+            Fill in your details to join our weekly Thursday sessions.
         </p>
 
-
-        <form action="https://formspree.io/f/xvzlqawa"
-              method="POST">
-
+        <form
+            action="https://formspree.io/f/xvzlqawa"
+            method="POST">
 
             <div class="input-group">
 
-                <label>
-                    Full Name
-                </label>
+                <label>Full Name</label>
 
-                <input type="text"
-                       name="name"
-                       placeholder="Enter your full name"
-                       required>
+                <input
+                    type="text"
+                    name="name"
+                    placeholder="Enter your full name"
+                    required>
 
             </div>
 
 
             <div class="input-group">
 
-                <label>
-                    Email Address
-                </label>
+                <label>Email Address</label>
 
-                <input type="email"
-                       name="email"
-                       placeholder="Enter your email"
-                       required>
-
-            </div>
-
-
-            <div class="input-group">
-
-                <label>
-                    Phone Number (WhatsApp)
-                </label>
-
-                <input type="tel"
-                       name="phone"
-                       placeholder="e.g. 074 000 0000"
-                       required>
+                <input
+                    type="email"
+                    name="email"
+                    placeholder="Enter your email"
+                    required>
 
             </div>
 
 
             <div class="input-group">
 
-                <label>
-                    City / Location
-                </label>
+                <label>Phone Number (WhatsApp)</label>
 
-                <input type="text"
-                       name="location"
-                       placeholder="Enter your location"
-                       required>
+                <input
+                    type="tel"
+                    name="phone"
+                    placeholder="e.g. 074 000 0000"
+                    required>
 
             </div>
 
 
             <div class="input-group">
 
-                <label>
-                    How did you hear about us?
-                </label>
+                <label>City / Location</label>
 
-                <select name="source"
-                        required>
+                <input
+                    type="text"
+                    name="location"
+                    placeholder="Enter your location"
+                    required>
 
-                    <option value="">
-                        Select one
-                    </option>
+            </div>
 
-                    <option>
+
+            <div class="input-group">
+
+                <label>How did you hear about us?</label>
+
+                <select name="source" required>
+
+                    <option value="">Select one</option>
+
+                    <option value="Facebook">
                         Facebook
                     </option>
 
-                    <option>
+                    <option value="WhatsApp">
                         WhatsApp
                     </option>
 
-                    <option>
+                    <option value="Friend / Family">
                         Friend / Family
                     </option>
 
-                    <option>
+                    <option value="Church Sharing">
                         Church Sharing
                     </option>
 
-                    <option>
+                    <option value="Other">
                         Other
                     </option>
 
@@ -1371,8 +993,9 @@
             </div>
 
 
-            <button type="submit"
-                    class="register-btn">
+            <button
+                type="submit"
+                class="register-btn">
 
                 Submit Registration
 
@@ -1385,199 +1008,205 @@
 </section>
 
 
-<!-- =========================================
-     POLLS & REVIEWS
-========================================= -->
+<!-- =========================================================
+     POLL
+========================================================== -->
 
-<section class="community-section"
-         id="community">
+<section class="poll-section" id="poll">
 
-    <h2 class="section-title">
-        B.E.P Community
-    </h2>
-
-
-    <!-- POLL -->
-
-    <div class="community-card">
+    <div class="poll-container">
 
         <h2>
-            📊 B.E.P Community Poll
+            <i class="fa-solid fa-square-poll-vertical"></i>
+            B.E.P Poll
         </h2>
 
-        <p>
-            What topic would you like B.E.P to discuss next?
+        <p class="poll-question">
+            What would you like us to focus on in upcoming B.E.P sessions?
         </p>
 
 
-        <label class="poll-option">
+        <form id="pollForm">
 
-            <input type="radio"
-                   name="poll"
-                   value="Prayer">
+            <label class="poll-option">
 
-            Prayer
+                <input
+                    type="radio"
+                    name="pollOption"
+                    value="Prayer">
 
-        </label>
+                <span>Prayer</span>
 
-
-        <label class="poll-option">
-
-            <input type="radio"
-                   name="poll"
-                   value="Discipleship">
-
-            Discipleship
-
-        </label>
+            </label>
 
 
-        <label class="poll-option">
+            <label class="poll-option">
 
-            <input type="radio"
-                   name="poll"
-                   value="The Holy Spirit">
+                <input
+                    type="radio"
+                    name="pollOption"
+                    value="Discipleship">
 
-            The Holy Spirit
+                <span>Discipleship</span>
 
-        </label>
-
-
-        <label class="poll-option">
-
-            <input type="radio"
-                   name="poll"
-                   value="Marriage & Family">
-
-            Marriage & Family
-
-        </label>
+            </label>
 
 
-        <label class="poll-option">
+            <label class="poll-option">
 
-            <input type="radio"
-                   name="poll"
-                   value="Spiritual Growth">
+                <input
+                    type="radio"
+                    name="pollOption"
+                    value="Holy Spirit">
 
-            Spiritual Growth
+                <span>The Holy Spirit</span>
 
-        </label>
-
-
-        <button class="community-btn"
-                onclick="submitVote()">
-
-            Submit Vote
-
-        </button>
-
-        <p id="voteMessage"></p>
-
-    </div>
+            </label>
 
 
-    <!-- POLL RESULTS -->
+            <label class="poll-option">
 
-    <div class="community-card">
+                <input
+                    type="radio"
+                    name="pollOption"
+                    value="Marriage and Family">
 
-        <h2>
-            📈 Poll Results
-        </h2>
+                <span>Marriage & Family</span>
 
-        <div id="pollResults">
-
-            Loading results...
-
-        </div>
-
-    </div>
+            </label>
 
 
-    <!-- REVIEW FORM -->
+            <label class="poll-option">
 
-    <div class="community-card">
+                <input
+                    type="radio"
+                    name="pollOption"
+                    value="Christian Character">
 
-        <h2>
-            ⭐ Leave a Review
-        </h2>
+                <span>Christian Character</span>
 
-        <p>
-            Share your experience with the Biblical
-            Empowerment Program.
-        </p>
+            </label>
 
 
-        <form class="review-form"
-              onsubmit="submitReview(event)">
+            <button
+                type="submit"
+                class="poll-submit">
 
-
-            <input type="text"
-                   id="reviewName"
-                   placeholder="Your name"
-                   required>
-
-
-            <select id="reviewRating"
-                    required>
-
-                <option value="">
-                    Select rating
-                </option>
-
-                <option value="5">
-                    ⭐⭐⭐⭐⭐ 5 - Excellent
-                </option>
-
-                <option value="4">
-                    ⭐⭐⭐⭐ 4 - Very Good
-                </option>
-
-                <option value="3">
-                    ⭐⭐⭐ 3 - Good
-                </option>
-
-                <option value="2">
-                    ⭐⭐ 2 - Fair
-                </option>
-
-                <option value="1">
-                    ⭐ 1 - Needs Improvement
-                </option>
-
-            </select>
-
-
-            <textarea id="reviewText"
-                      placeholder="Write your review or testimony..."
-                      required></textarea>
-
-
-            <button type="submit"
-                    class="community-btn">
-
-                Submit Review
+                Submit Vote
 
             </button>
 
         </form>
 
-        <p id="reviewMessage"></p>
 
-    </div>
+        <p id="pollMessage"></p>
 
 
-    <!-- REVIEWS -->
+        <div class="results">
 
-    <div class="community-card">
+            <h3>
+                Live Poll Results
+            </h3>
 
-        <h2>
-            💬 B.E.P Community Reviews
-        </h2>
 
-        <div id="reviewsList">
+            <div class="result-row">
 
-            Loading reviews...
+                <div class="result-label">
+
+                    <span>Prayer</span>
+
+                    <span id="count-Prayer">0</span>
+
+                </div>
+
+                <div class="result-bar">
+                    <div
+                        id="bar-Prayer"
+                        class="result-fill">
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="result-row">
+
+                <div class="result-label">
+
+                    <span>Discipleship</span>
+
+                    <span id="count-Discipleship">0</span>
+
+                </div>
+
+                <div class="result-bar">
+                    <div
+                        id="bar-Discipleship"
+                        class="result-fill">
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="result-row">
+
+                <div class="result-label">
+
+                    <span>The Holy Spirit</span>
+
+                    <span id="count-Holy-Spirit">0</span>
+
+                </div>
+
+                <div class="result-bar">
+                    <div
+                        id="bar-Holy-Spirit"
+                        class="result-fill">
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="result-row">
+
+                <div class="result-label">
+
+                    <span>Marriage & Family</span>
+
+                    <span id="count-Marriage-and-Family">0</span>
+
+                </div>
+
+                <div class="result-bar">
+                    <div
+                        id="bar-Marriage-and-Family"
+                        class="result-fill">
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="result-row">
+
+                <div class="result-label">
+
+                    <span>Christian Character</span>
+
+                    <span id="count-Christian-Character">0</span>
+
+                </div>
+
+                <div class="result-bar">
+                    <div
+                        id="bar-Christian-Character"
+                        class="result-fill">
+                    </div>
+                </div>
+
+            </div>
 
         </div>
 
@@ -1586,30 +1215,131 @@
 </section>
 
 
-<!-- =========================================
-     CONTACT
-========================================= -->
+<!-- =========================================================
+     REVIEWS
+========================================================== -->
 
-<section class="contact"
-         id="contact">
+<section class="reviews-section" id="reviews">
+
+    <div class="reviews-container">
+
+        <h2 class="reviews-title">
+            <i class="fa-solid fa-star"></i>
+            B.E.P Reviews
+        </h2>
+
+        <p class="reviews-title">
+            Share your experience with the Biblical Empowerment Program.
+        </p>
+
+
+        <div class="review-form">
+
+            <form id="reviewForm">
+
+                <label>
+                    Your Name
+                </label>
+
+                <input
+                    type="text"
+                    id="reviewName"
+                    placeholder="Enter your name"
+                    required>
+
+
+                <label>
+                    Rating
+                </label>
+
+                <select
+                    id="reviewRating"
+                    required>
+
+                    <option value="">
+                        Select rating
+                    </option>
+
+                    <option value="5">
+                        ★★★★★ — Excellent
+                    </option>
+
+                    <option value="4">
+                        ★★★★ — Very Good
+                    </option>
+
+                    <option value="3">
+                        ★★★ — Good
+                    </option>
+
+                    <option value="2">
+                        ★★ — Fair
+                    </option>
+
+                    <option value="1">
+                        ★ — Poor
+                    </option>
+
+                </select>
+
+
+                <label>
+                    Your Review
+                </label>
+
+                <textarea
+                    id="reviewText"
+                    placeholder="Write your review..."
+                    required>
+                </textarea>
+
+
+                <button
+                    type="submit"
+                    class="review-btn">
+
+                    Submit Review
+
+                </button>
+
+            </form>
+
+
+            <p id="reviewMessage"></p>
+
+        </div>
+
+
+        <div id="reviewsList" class="reviews-list">
+
+            <p class="no-reviews">
+                Loading reviews...
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     CONTACT
+========================================================== -->
+
+<section class="contact">
 
     <div class="container">
 
-        <h2>
-            Contact Us
-        </h2>
+        <h2>Contact Us</h2>
 
         <p class="contact-intro">
-
-            We are here to connect with you,
-            support you, and walk with you
-            in your spiritual journey.
-
+            We are here to connect with you, support you,
+            and walk with you in your spiritual journey.
         </p>
 
 
         <div class="contact-grid">
-
 
             <div class="contact-card">
 
@@ -1617,9 +1347,7 @@
                     📞
                 </div>
 
-                <h3>
-                    Phone
-                </h3>
+                <h3>Phone</h3>
 
                 <p>
                     074 038 6671
@@ -1634,9 +1362,7 @@
                     📧
                 </div>
 
-                <h3>
-                    Email
-                </h3>
+                <h3>Email</h3>
 
                 <p>
                     bep.onlineprog@gmail.com
@@ -1651,9 +1377,7 @@
                     💻
                 </div>
 
-                <h3>
-                    Platform
-                </h3>
+                <h3>Platform</h3>
 
                 <p>
                     Microsoft Teams Online Sessions
@@ -1666,34 +1390,36 @@
 
         <div class="contact-buttons">
 
-            <a href="mailto:bep.onlineprog@gmail.com">
-                <i class="fa-solid fa-envelope"></i>
+            <a
+                href="mailto:bep.onlineprog@gmail.com">
+
                 Email Us
+
             </a>
 
 
-            <a href="https://wa.me/27740386671"
-               target="_blank">
+            <a
+                href="https://wa.me/27740386671"
+                target="_blank">
 
-                <i class="fa-brands fa-whatsapp"></i>
                 WhatsApp
 
             </a>
 
 
-            <a href="https://teams.live.com/meet/936085799236?p=b66LnDUAB2Xkx2uQYp&eventType=community"
-               target="_blank">
+            <a
+                href="https://teams.live.com/meet/936085799236?p=b66LnDUAB2Xkx2uQYp&eventType=community"
+                target="_blank">
 
-                <i class="fa-solid fa-video"></i>
-                Microsoft Teams
+                Join Microsoft Teams
 
             </a>
 
 
-            <a href="https://facebook.com/groups/1421853356307383/"
-               target="_blank">
+            <a
+                href="https://facebook.com/groups/1421853356307383/"
+                target="_blank">
 
-                <i class="fa-brands fa-facebook"></i>
                 Facebook Group
 
             </a>
@@ -1705,9 +1431,9 @@
 </section>
 
 
-<!-- =========================================
+<!-- =========================================================
      FOOTER
-========================================= -->
+========================================================== -->
 
 <footer>
 
@@ -1716,16 +1442,16 @@
 
     <div class="footer-buttons">
 
-        <a href="https://wa.me/27740386671"
-           target="_blank">
+        <a
+            href="https://wa.me/27740386671"
+            target="_blank">
 
             WhatsApp
 
         </a>
 
-        |
-
-        <a href="mailto:bep.onlineprog@gmail.com">
+        <a
+            href="mailto:bep.onlineprog@gmail.com">
 
             Email
 
@@ -1736,115 +1462,51 @@
 </footer>
 
 
-<!-- =========================================
+<!-- =========================================================
      JAVASCRIPT
-========================================= -->
+========================================================== -->
 
 <script>
 
-/* =========================================
-   MOBILE MENU
-========================================= */
+/* ==========================================================
+   SUPABASE CONNECTION
+========================================================== */
 
-function toggleMenu() {
+const SUPABASE_URL =
+    "https://rukusaellqqwthzibyib.supabase.co";
 
-    const menu =
-        document.getElementById("navLinks");
+const SUPABASE_KEY =
+    "sb_publishable_Co8_MoJOV14tXBkSWyXFTA_ULn1WRa5";
 
-    menu.classList.toggle("active");
-
-}
-
-
-/* Close mobile menu after clicking */
-
-document.querySelectorAll(".nav-links a")
-.forEach(function(link) {
-
-    link.addEventListener("click", function() {
-
-        document
-            .getElementById("navLinks")
-            .classList.remove("active");
-
-    });
-
-});
+const supabaseClient =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
 
 
-/* =========================================
-   REAL B.E.P COUNTDOWN
-========================================= */
-
-/*
-    B.E.P:
-    Every Thursday
-    7:00 PM South African time
-    Session ends at 8:30 PM
-
-    The browser's local clock is used.
-
-    Because your website is intended for South Africa,
-    visitors in South Africa will see the correct time.
-*/
+/* ==========================================================
+   REAL THURSDAY COUNTDOWN
+========================================================== */
 
 function updateCountdown() {
 
-    const countdown =
-        document.getElementById("countdown");
-
     const now = new Date();
 
-
-    /*
-        JavaScript:
-        Sunday = 0
-        Monday = 1
-        Tuesday = 2
-        Wednesday = 3
-        Thursday = 4
-        Friday = 5
-        Saturday = 6
-    */
-
-    const THURSDAY = 4;
-
-    let target =
-        new Date(now);
-
-
-    /*
-        Calculate days until Thursday.
-    */
+    const target = new Date();
 
     let daysUntilThursday =
-        (THURSDAY - now.getDay() + 7) % 7;
-
-
-    /*
-        Set target to Thursday 19:00.
-    */
+        (4 - now.getDay() + 7) % 7;
 
     target.setDate(
         now.getDate() + daysUntilThursday
     );
 
-    target.setHours(
-        19,
-        0,
-        0,
-        0
-    );
+    target.setHours(19, 0, 0, 0);
 
-
-    /*
-        If today is Thursday and
-        19:00 has already passed,
-        move to next Thursday.
-    */
 
     if (
-        now.getDay() === THURSDAY &&
+        now.getDay() === 4 &&
         now >= target
     ) {
 
@@ -1855,13 +1517,18 @@ function updateCountdown() {
     }
 
 
-    /*
-        Calculate remaining time.
-    */
-
     const difference =
         target.getTime() -
         now.getTime();
+
+
+    const countdown =
+        document.getElementById("countdown");
+
+
+    if (!countdown) {
+        return;
+    }
 
 
     if (difference <= 0) {
@@ -1870,58 +1537,47 @@ function updateCountdown() {
             "Starting soon...";
 
         return;
-
     }
-
-
-    const totalSeconds =
-        Math.floor(
-            difference / 1000
-        );
 
 
     const days =
         Math.floor(
-            totalSeconds / 86400
+            difference /
+            (1000 * 60 * 60 * 24)
         );
 
 
     const hours =
         Math.floor(
-            (totalSeconds % 86400) / 3600
+            (difference /
+            (1000 * 60 * 60)) % 24
         );
 
 
     const minutes =
         Math.floor(
-            (totalSeconds % 3600) / 60
+            (difference /
+            (1000 * 60)) % 60
         );
 
 
     const seconds =
-        totalSeconds % 60;
+        Math.floor(
+            (difference /
+            1000) % 60
+        );
 
 
     countdown.innerHTML =
-
-        `${days}d ${hours}h ${minutes}m ${seconds}s
-        <span class="countdown-label">
-        Time remaining until Thursday 7:00 PM
-        </span>`;
+        days + "d " +
+        hours + "h " +
+        minutes + "m " +
+        seconds + "s";
 
 }
 
 
-/*
-    Start immediately.
-*/
-
 updateCountdown();
-
-
-/*
-    Update every second.
-*/
 
 setInterval(
     updateCountdown,
@@ -1929,58 +1585,16 @@ setInterval(
 );
 
 
-/* =========================================
-   SUPABASE CONFIGURATION
-========================================= */
+/* ==========================================================
+   POLL
+========================================================== */
 
-/*
-    IMPORTANT:
+const pollForm =
+    document.getElementById("pollForm");
 
-    Put your Supabase project URL and
-    ANON/PUBLIC key below.
+const pollMessage =
+    document.getElementById("pollMessage");
 
-    DO NOT put your SERVICE_ROLE key here.
-
-    You can find these in:
-
-    Supabase
-    → Project Settings
-    → API
-*/
-
-
-const SUPABASE_URL =
-    "YOUR_SUPABASE_URL";
-
-const SUPABASE_ANON_KEY =
-    "YOUR_SUPABASE_ANON_KEY";
-
-
-let supabaseClient = null;
-
-
-/*
-    Only connect if credentials have
-    actually been entered.
-*/
-
-if (
-    SUPABASE_URL !== "YOUR_SUPABASE_URL" &&
-    SUPABASE_ANON_KEY !== "YOUR_SUPABASE_ANON_KEY"
-) {
-
-    supabaseClient =
-        window.supabase.createClient(
-            SUPABASE_URL,
-            SUPABASE_ANON_KEY
-        );
-
-}
-
-
-/* =========================================
-   POLL OPTIONS
-========================================= */
 
 const pollOptions = [
 
@@ -1988,109 +1602,81 @@ const pollOptions = [
 
     "Discipleship",
 
-    "The Holy Spirit",
+    "Holy Spirit",
 
-    "Marriage & Family",
+    "Marriage and Family",
 
-    "Spiritual Growth"
+    "Christian Character"
 
 ];
 
 
-/* =========================================
-   SUBMIT VOTE
-========================================= */
+pollForm.addEventListener(
+    "submit",
+    async function(event) {
 
-async function submitVote() {
-
-    const selected =
-        document.querySelector(
-            'input[name="poll"]:checked'
-        );
+        event.preventDefault();
 
 
-    const message =
-        document.getElementById(
-            "voteMessage"
-        );
+        const selected =
+            document.querySelector(
+                'input[name="pollOption"]:checked'
+            );
 
 
-    if (!selected) {
+        if (!selected) {
 
-        message.innerHTML =
-            "Please select an option first.";
+            pollMessage.textContent =
+                "Please select an option.";
 
-        return;
+            return;
 
-    }
-
-
-    /*
-        Supabase is required for shared votes.
-    */
-
-    if (!supabaseClient) {
-
-        message.innerHTML =
-            "Supabase is not connected yet. Add your Supabase URL and anon key.";
-
-        return;
-
-    }
+        }
 
 
-    const { error } =
-        await supabaseClient
-            .from("poll_votes")
-            .insert({
-
-                option:
-                    selected.value
-
-            });
+        pollMessage.textContent =
+            "Submitting your vote...";
 
 
-    if (error) {
+        const { error } =
+            await supabaseClient
+                .from("poll_votes")
+                .insert({
 
-        console.error(error);
+                    option:
+                        selected.value
 
-        message.innerHTML =
-            "There was a problem submitting your vote.";
+                });
 
-        return;
+
+        if (error) {
+
+            console.error(error);
+
+            pollMessage.textContent =
+                "Sorry, your vote could not be submitted.";
+
+            return;
+
+        }
+
+
+        pollMessage.textContent =
+            "Thank you! Your vote has been recorded.";
+
+        pollForm.reset();
+
+        loadPollResults();
 
     }
+);
 
 
-    message.innerHTML =
-        "✅ Your vote has been submitted.";
-
-    loadPollResults();
-
-}
-
-
-/* =========================================
+/* ==========================================================
    LOAD POLL RESULTS
-========================================= */
+========================================================== */
 
 async function loadPollResults() {
-
-    const container =
-        document.getElementById(
-            "pollResults"
-        );
-
-
-    if (!supabaseClient) {
-
-        container.innerHTML =
-            "<p>Connect Supabase to display shared results.</p>";
-
-        return;
-
-    }
-
 
     const { data, error } =
         await supabaseClient
@@ -2100,31 +1686,37 @@ async function loadPollResults() {
 
     if (error) {
 
-        console.error(error);
-
-        container.innerHTML =
-            "<p>Unable to load poll results.</p>";
+        console.error(
+            "Poll loading error:",
+            error
+        );
 
         return;
 
     }
 
 
-    const counts = {};
+    const counts = {
 
+        "Prayer": 0,
 
-    pollOptions.forEach(function(option) {
+        "Discipleship": 0,
 
-        counts[option] = 0;
+        "Holy Spirit": 0,
 
-    });
+        "Marriage and Family": 0,
+
+        "Christian Character": 0
+
+    };
 
 
     data.forEach(function(vote) {
 
         if (
-            Object.prototype.hasOwnProperty
-                .call(counts, vote.option)
+            counts.hasOwnProperty(
+                vote.option
+            )
         ) {
 
             counts[vote.option]++;
@@ -2138,182 +1730,179 @@ async function loadPollResults() {
         data.length;
 
 
-    let html = "";
+    Object.keys(counts)
+        .forEach(function(option) {
+
+            const count =
+                counts[option];
 
 
-    pollOptions.forEach(function(option) {
-
-        const count =
-            counts[option];
+            let percentage = 0;
 
 
-        const percentage =
-            total === 0
-                ? 0
-                : Math.round(
-                    (count / total) * 100
+            if (total > 0) {
+
+                percentage =
+                    (count / total) * 100;
+
+            }
+
+
+            const safeId =
+                option.replace(
+                    /[^a-zA-Z0-9]/g,
+                    "-"
                 );
 
 
-        html += `
-
-            <div class="result-row">
-
-                <div class="result-title">
-
-                    <span>
-                        ${option}
-                    </span>
-
-                    <span>
-                        ${percentage}%
-                    </span>
-
-                </div>
-
-                <div class="result-bar">
-
-                    <div
-                        class="result-fill"
-                        style="width:${percentage}%">
-                    </div>
-
-                </div>
-
-            </div>
-
-        `;
-
-    });
+            const countElement =
+                document.getElementById(
+                    "count-" + safeId
+                );
 
 
-    html += `
-
-        <p>
-            <strong>
-                Total votes: ${total}
-            </strong>
-        </p>
-
-    `;
+            const barElement =
+                document.getElementById(
+                    "bar-" + safeId
+                );
 
 
-    container.innerHTML =
-        html;
+            if (countElement) {
+
+                countElement.textContent =
+                    count;
+
+            }
+
+
+            if (barElement) {
+
+                barElement.style.width =
+                    percentage + "%";
+
+            }
+
+        });
 
 }
 
 
-/* =========================================
-   SUBMIT REVIEW
-========================================= */
-
-async function submitReview(event) {
-
-    event.preventDefault();
+loadPollResults();
 
 
-    const name =
-        document.getElementById(
-            "reviewName"
-        ).value.trim();
+/* ==========================================================
+   REVIEWS
+========================================================== */
+
+const reviewForm =
+    document.getElementById("reviewForm");
+
+const reviewMessage =
+    document.getElementById("reviewMessage");
 
 
-    const rating =
-        document.getElementById(
-            "reviewRating"
-        ).value;
+reviewForm.addEventListener(
+    "submit",
+    async function(event) {
+
+        event.preventDefault();
 
 
-    const review =
-        document.getElementById(
-            "reviewText"
-        ).value.trim();
+        const name =
+            document
+                .getElementById("reviewName")
+                .value
+                .trim();
 
 
-    const message =
-        document.getElementById(
-            "reviewMessage"
-        );
+        const rating =
+            Number(
+                document
+                    .getElementById("reviewRating")
+                    .value
+            );
 
 
-    if (!supabaseClient) {
+        const review =
+            document
+                .getElementById("reviewText")
+                .value
+                .trim();
 
-        message.innerHTML =
-            "Supabase is not connected yet. Add your Supabase URL and anon key.";
 
-        return;
+        if (
+            !name ||
+            !rating ||
+            !review
+        ) {
+
+            reviewMessage.textContent =
+                "Please complete all fields.";
+
+            return;
+
+        }
+
+
+        reviewMessage.textContent =
+            "Submitting your review...";
+
+
+        const { error } =
+            await supabaseClient
+                .from("reviews")
+                .insert({
+
+                    name: name,
+
+                    rating: rating,
+
+                    review: review
+
+                });
+
+
+        if (error) {
+
+            console.error(error);
+
+            reviewMessage.textContent =
+                "Sorry, your review could not be submitted.";
+
+            return;
+
+        }
+
+
+        reviewMessage.textContent =
+            "Thank you! Your review has been submitted.";
+
+        reviewForm.reset();
+
+        loadReviews();
 
     }
+);
 
 
-    const { error } =
-        await supabaseClient
-            .from("reviews")
-            .insert({
-
-                name: name,
-
-                rating:
-                    Number(rating),
-
-                review: review
-
-            });
-
-
-    if (error) {
-
-        console.error(error);
-
-        message.innerHTML =
-            "There was a problem submitting your review.";
-
-        return;
-
-    }
-
-
-    message.innerHTML =
-        "✅ Thank you! Your review has been submitted.";
-
-
-    document
-        .querySelector(".review-form")
-        .reset();
-
-
-    loadReviews();
-
-}
-
-
-/* =========================================
-   LOAD REVIEWS
-========================================= */
+/* ==========================================================
+   DISPLAY REVIEWS
+========================================================== */
 
 async function loadReviews() {
 
-    const container =
+    const reviewsList =
         document.getElementById(
             "reviewsList"
         );
 
 
-    if (!supabaseClient) {
-
-        container.innerHTML =
-            "<p>Connect Supabase to display community reviews.</p>";
-
-        return;
-
-    }
-
-
     const { data, error } =
         await supabaseClient
             .from("reviews")
-            .select("*")
+            .select(
+                "id, name, rating, review, created_at"
+            )
             .order(
                 "created_at",
                 {
@@ -2324,120 +1913,151 @@ async function loadReviews() {
 
     if (error) {
 
-        console.error(error);
-
-        container.innerHTML =
-            "<p>Unable to load reviews.</p>";
-
-        return;
-
-    }
+        console.error(
+            "Reviews loading error:",
+            error
+        );
 
 
-    if (!data || data.length === 0) {
-
-        container.innerHTML =
-            "<p>No reviews yet. Be the first to share your experience!</p>";
+        reviewsList.innerHTML =
+            '<p class="no-reviews">' +
+            'Unable to load reviews right now.' +
+            '</p>';
 
         return;
 
     }
 
 
-    let html = "";
+    if (
+        !data ||
+        data.length === 0
+    ) {
+
+        reviewsList.innerHTML =
+            '<p class="no-reviews">' +
+            'No reviews yet. Be the first to share your experience!' +
+            '</p>';
+
+        return;
+
+    }
+
+
+    reviewsList.innerHTML = "";
 
 
     data.forEach(function(item) {
 
-        const stars =
-            "⭐".repeat(
-                Math.max(
-                    1,
-                    Math.min(
-                        5,
-                        Number(item.rating)
-                    )
-                )
+        const card =
+            document.createElement(
+                "div"
             );
 
 
-        const date =
-            item.created_at
-                ? new Date(
-                    item.created_at
-                ).toLocaleDateString()
-                : "";
+        card.className =
+            "review-card";
 
 
-        html += `
+        const name =
+            document.createElement(
+                "div"
+            );
 
-            <div class="review-item">
+        name.className =
+            "review-name";
 
-                <div class="review-name">
+        name.textContent =
+            item.name;
 
-                    ${escapeHTML(item.name)}
 
-                </div>
+        const stars =
+            document.createElement(
+                "div"
+            );
 
-                <div class="review-stars">
+        stars.className =
+            "stars";
 
-                    ${stars}
+        const rating =
+            Number(item.rating);
 
-                </div>
 
-                <p>
+        stars.textContent =
+            "★".repeat(rating) +
+            "☆".repeat(5 - rating);
 
-                    ${escapeHTML(item.review)}
 
-                </p>
+        const text =
+            document.createElement(
+                "div"
+            );
 
-                <div class="review-date">
+        text.className =
+            "review-text";
 
-                    ${date}
+        text.textContent =
+            item.review;
 
-                </div>
 
-            </div>
+        card.appendChild(name);
 
-        `;
+        card.appendChild(stars);
+
+        card.appendChild(text);
+
+
+        reviewsList.appendChild(card);
 
     });
 
-
-    container.innerHTML =
-        html;
-
 }
 
-
-/* =========================================
-   SECURITY HELPER
-========================================= */
-
-function escapeHTML(text) {
-
-    const div =
-        document.createElement("div");
-
-    div.textContent =
-        text;
-
-    return div.innerHTML;
-
-}
-
-
-/* =========================================
-   LOAD COMMUNITY DATA
-========================================= */
-
-loadPollResults();
 
 loadReviews();
 
 
-</script>
+/* ==========================================================
+   LIVE UPDATES
+========================================================== */
 
+supabaseClient
+    .channel("poll-votes-live")
+    .on(
+        "postgres_changes",
+        {
+            event: "INSERT",
+            schema: "public",
+            table: "poll_votes"
+        },
+        function() {
+
+            loadPollResults();
+
+        }
+    )
+    .subscribe();
+
+
+supabaseClient
+    .channel("reviews-live")
+    .on(
+        "postgres_changes",
+        {
+            event: "INSERT",
+            schema: "public",
+            table: "reviews"
+        },
+        function() {
+
+            loadReviews();
+
+        }
+    )
+    .subscribe();
+
+
+</script>
 
 </body>
 </html>
