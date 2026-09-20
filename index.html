@@ -1,12 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
-
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Biblical Empowerment Program - B.E.P</title>
 
@@ -14,18 +10,11 @@
 <link rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-<!-- Supabase -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-
 <style>
-
-/* =====================================================
-   GLOBAL
-===================================================== */
-
 * {
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 html {
@@ -33,48 +22,65 @@ html {
 }
 
 body {
-    margin: 0;
     font-family: Arial, Helvetica, sans-serif;
-    background: #f4f7fb;
-    color: #333;
+    background: #f4f8ff;
+    color: #172033;
+    line-height: 1.6;
 }
 
-.container {
-    width: 92%;
+/* NAVIGATION */
+nav {
+    background: #063b8c;
+    padding: 15px 20px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+}
+
+.nav-container {
     max-width: 1100px;
     margin: auto;
-}
-
-section {
-    scroll-margin-top: 20px;
-}
-
-
-/* =====================================================
-   HERO
-===================================================== */
-
-.hero {
-
-    min-height: 390px;
-
     display: flex;
-
+    justify-content: space-between;
     align-items: center;
+}
 
+.logo {
+    color: white;
+    font-size: 21px;
+    font-weight: bold;
+}
+
+.nav-links {
+    display: flex;
+    gap: 18px;
+    list-style: none;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.nav-links a:hover {
+    color: #ffd34d;
+}
+
+/* HERO */
+.hero {
+    min-height: 500px;
+    display: flex;
+    align-items: center;
     justify-content: center;
-
     text-align: center;
-
-    padding: 40px 20px;
-
+    padding: 60px 20px;
     background:
-        linear-gradient(
-            rgba(6,26,58,0.82),
-            rgba(6,26,58,0.82)
-        ),
-        url("banner.png")
-        center/cover no-repeat;
+        linear-gradient(rgba(0,48,120,0.82), rgba(0,48,120,0.82)),
+        url("banner.png") center/cover;
+    color: white;
 }
 
 .hero-content {
@@ -82,2578 +88,1223 @@ section {
 }
 
 .hero h1 {
+    font-size: clamp(38px, 8vw, 72px);
+    margin-bottom: 10px;
+}
 
-    color: #ffd21c;
-
-    font-size: 42px;
-
-    margin: 0 0 15px;
-
-    text-shadow:
-        0 2px 5px rgba(0,0,0,.4);
+.hero h2 {
+    font-size: clamp(20px, 4vw, 34px);
+    color: #ffd34d;
+    margin-bottom: 20px;
 }
 
 .hero p {
-
-    color: white;
-
-    font-size: 20px;
-
-    font-style: italic;
-
+    font-size: 18px;
     margin-bottom: 25px;
-}
-
-.hero-btn {
-
-    display: inline-block;
-
-    background: #ffd21c;
-
-    color: #061a3a;
-
-    padding: 13px 25px;
-
-    border-radius: 8px;
-
-    text-decoration: none;
-
-    font-weight: bold;
-
-    transition: .3s;
-}
-
-.hero-btn:hover {
-
-    transform: translateY(-3px);
-
-}
-
-
-/* =====================================================
-   SESSION
-===================================================== */
-
-.next-session {
-
-    padding: 55px 20px;
-}
-
-.session-card {
-
-    max-width: 1100px;
-
-    margin: auto;
-
-    background: white;
-
-    border-radius: 20px;
-
-    padding: 45px 25px;
-
-    text-align: center;
-
-    border-top: 5px solid #cc9933;
-
-    box-shadow:
-        0 8px 30px rgba(0,0,0,.10);
-}
-
-.session-card h2 {
-
-    color: #003f70;
-
-    font-size: 32px;
-
-    margin-bottom: 10px;
-}
-
-.session-subtitle {
-
-    color: #666;
-
-    margin-bottom: 35px;
-}
-
-.session-grid {
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(auto-fit,minmax(220px,1fr));
-
-    gap: 18px;
-
-    margin-bottom: 25px;
-}
-
-.session-item {
-
-    background: #f7f9fc;
-
-    padding: 25px;
-
-    border-radius: 14px;
-}
-
-.session-item i {
-
-    font-size: 28px;
-
-    color: #cc9933;
-
-    margin-bottom: 12px;
-}
-
-.session-item h3 {
-
-    color: #003f70;
-
-    margin: 5px 0;
-
-    font-size: 17px;
-}
-
-
-/* COUNTDOWN */
-
-.countdown {
-
-    background: #004579;
-
-    color: white;
-
-    padding: 22px;
-
-    border-radius: 12px;
-
-    font-size: 25px;
-
-    font-weight: bold;
-
-    margin: 25px 0;
-}
-
-.countdown-label {
-
-    display: block;
-
-    font-size: 14px;
-
-    font-weight: normal;
-
-    margin-top: 5px;
-
-    opacity: .9;
-}
-
-
-/* BUTTONS */
-
-.session-buttons {
-
-    display: flex;
-
-    justify-content: center;
-
-    flex-wrap: wrap;
-
-    gap: 12px;
 }
 
 .btn {
-
     display: inline-block;
-
-    padding: 13px 20px;
-
+    padding: 13px 22px;
     border-radius: 8px;
-
+    background: #ffd34d;
+    color: #063b8c;
     text-decoration: none;
-
     font-weight: bold;
-
     border: none;
-
     cursor: pointer;
-
-    transition: .3s;
+    transition: 0.3s;
 }
 
 .btn:hover {
-
     transform: translateY(-2px);
+    opacity: 0.9;
 }
 
-.btn-blue {
-
-    background: #003f70;
-
-    color: white;
+/* SECTIONS */
+section {
+    padding: 60px 20px;
 }
 
-.btn-gold {
-
-    background: #cc9933;
-
-    color: white;
-}
-
-
-/* =====================================================
-   GENERAL SECTIONS
-===================================================== */
-
-.section {
-
-    padding: 70px 20px;
+.container {
+    max-width: 1100px;
+    margin: auto;
 }
 
 .section-title {
-
     text-align: center;
-
-    color: #003f70;
-
-    font-size: 34px;
-
+    color: #063b8c;
     margin-bottom: 35px;
+    font-size: 32px;
+}
+
+/* CARDS */
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 20px;
 }
 
 .card {
-
     background: white;
-
-    padding: 35px;
-
-    border-radius: 15px;
-
-    box-shadow:
-        0 6px 20px rgba(0,0,0,.08);
-
-    margin-bottom: 25px;
-}
-
-.card h2 {
-
-    color: #cc9933;
-
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
     text-align: center;
-
-    margin-top: 0;
 }
 
-.card p {
-
-    line-height: 1.8;
-
-    font-size: 16px;
-}
-
-.card li {
-
-    margin-bottom: 10px;
-
-    line-height: 1.6;
-}
-
-
-/* =====================================================
-   TWO COLUMN
-===================================================== */
-
-.two-column {
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(auto-fit,minmax(280px,1fr));
-
-    gap: 25px;
-}
-
-
-/* =====================================================
-   REGISTRATION
-===================================================== */
-
-.register-section {
-
-    padding: 70px 20px;
-
-    background: #eef3f9;
-}
-
-.register-container {
-
-    max-width: 650px;
-
-    margin: auto;
-
-    background: white;
-
-    padding: 35px;
-
-    border-radius: 15px;
-
-    box-shadow:
-        0 6px 20px rgba(0,0,0,.08);
-}
-
-.register-container h2 {
-
-    text-align: center;
-
-    color: #003f70;
-}
-
-.register-sub {
-
-    text-align: center;
-
-    color: #666;
-
-    margin-bottom: 25px;
-}
-
-.input-group {
-
-    margin-bottom: 18px;
-}
-
-.input-group label {
-
-    display: block;
-
-    font-weight: bold;
-
-    color: #003f70;
-
-    margin-bottom: 6px;
-}
-
-.input-group input,
-.input-group select {
-
-    width: 100%;
-
-    padding: 13px;
-
-    border: 1px solid #ccc;
-
-    border-radius: 8px;
-
-    font-size: 15px;
-}
-
-.register-btn {
-
-    width: 100%;
-
-    padding: 14px;
-
-    background: #cc9933;
-
-    color: white;
-
-    border: none;
-
-    border-radius: 8px;
-
-    font-size: 17px;
-
-    font-weight: bold;
-
-    cursor: pointer;
-}
-
-.register-btn:hover {
-
-    background: #b07e22;
-}
-
-.form-message {
-
-    text-align: center;
-
-    margin-top: 15px;
-
-    font-weight: bold;
-}
-
-
-/* =====================================================
-   POLL
-===================================================== */
-
-.poll-section {
-
-    padding: 70px 20px;
-
-    background: white;
-}
-
-.poll-container {
-
-    max-width: 800px;
-
-    margin: auto;
-}
-
-.poll-card {
-
-    background: #f7f9fc;
-
-    padding: 30px;
-
-    border-radius: 15px;
-
-    box-shadow:
-        0 5px 18px rgba(0,0,0,.08);
-}
-
-.poll-card h2 {
-
-    text-align: center;
-
-    color: #003f70;
-}
-
-.poll-question {
-
-    text-align: center;
-
-    font-size: 18px;
-
-    font-weight: bold;
-
-    margin: 25px 0;
-}
-
-.poll-options {
-
-    display: grid;
-
-    gap: 12px;
-}
-
-.poll-option {
-
-    width: 100%;
-
-    padding: 15px;
-
-    border: 2px solid #ddd;
-
-    background: white;
-
-    border-radius: 10px;
-
-    cursor: pointer;
-
-    font-size: 16px;
-
-    text-align: left;
-
-    transition: .3s;
-}
-
-.poll-option:hover {
-
-    border-color: #cc9933;
-
-    background: #fffaf0;
-}
-
-.poll-option.selected {
-
-    border-color: #cc9933;
-
-    background: #fff5d6;
-}
-
-.vote-button {
-
-    display: block;
-
-    margin: 25px auto 10px;
-
-    background: #003f70;
-
-    color: white;
-
-    border: none;
-
-    padding: 13px 30px;
-
-    border-radius: 8px;
-
-    font-weight: bold;
-
-    cursor: pointer;
-}
-
-.vote-button:disabled {
-
-    opacity: .5;
-
-    cursor: not-allowed;
-}
-
-
-/* POLL RESULTS */
-
-.results {
-
-    margin-top: 30px;
-}
-
-.result-row {
-
+.card i {
+    font-size: 35px;
+    color: #063b8c;
     margin-bottom: 15px;
 }
 
-.result-title {
-
-    display: flex;
-
-    justify-content: space-between;
-
-    margin-bottom: 5px;
-
-    font-weight: bold;
+.card h3 {
+    color: #063b8c;
+    margin-bottom: 10px;
 }
 
-.result-bar {
-
-    height: 12px;
-
-    background: #ddd;
-
-    border-radius: 20px;
-
-    overflow: hidden;
-}
-
-.result-fill {
-
-    height: 100%;
-
-    background: #cc9933;
-
-    width: 0%;
-
-    transition: width .6s;
-}
-
-
-/* =====================================================
-   REVIEWS
-===================================================== */
-
-.reviews-section {
-
-    padding: 70px 20px;
-
-    background: #eef3f9;
-}
-
-.reviews-container {
-
-    max-width: 1100px;
-
-    margin: auto;
-}
-
-.review-form {
-
-    max-width: 650px;
-
-    margin: 0 auto 45px;
-
-    background: white;
-
-    padding: 30px;
-
-    border-radius: 15px;
-
-    box-shadow:
-        0 5px 18px rgba(0,0,0,.08);
-}
-
-.review-form h3 {
-
-    text-align: center;
-
-    color: #003f70;
-}
-
-
-/* STARS */
-
-.star-rating {
-
-    display: flex;
-
-    justify-content: center;
-
-    gap: 7px;
-
-    margin: 15px 0 25px;
-}
-
-.star {
-
-    font-size: 30px;
-
-    color: #ccc;
-
-    cursor: pointer;
-}
-
-.star.active {
-
-    color: #cc9933;
-}
-
-.review-form textarea {
-
-    width: 100%;
-
-    min-height: 120px;
-
-    padding: 12px;
-
-    border: 1px solid #ccc;
-
-    border-radius: 8px;
-
-    resize: vertical;
-}
-
-.review-submit {
-
-    width: 100%;
-
-    padding: 13px;
-
-    margin-top: 15px;
-
-    background: #003f70;
-
+/* COUNTDOWN */
+.countdown-section {
+    background: #063b8c;
     color: white;
+    text-align: center;
+}
 
-    border: none;
+.countdown-section .section-title {
+    color: white;
+}
 
+.countdown {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.time-box {
+    background: white;
+    color: #063b8c;
+    min-width: 90px;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.time-box strong {
+    display: block;
+    font-size: 28px;
+}
+
+.time-box span {
+    font-size: 12px;
+}
+
+/* QUIZ */
+.quiz-section {
+    background: #eef5ff;
+}
+
+.quiz-info {
+    background: white;
+    border-left: 5px solid #063b8c;
+    padding: 20px;
+    margin-bottom: 25px;
     border-radius: 8px;
+}
 
+.registration {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    margin-bottom: 30px;
+}
+
+.registration h3 {
+    color: #063b8c;
+    margin-bottom: 20px;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group.full {
+    grid-column: 1 / -1;
+}
+
+label {
     font-weight: bold;
+    margin-bottom: 6px;
+}
 
+input {
+    padding: 13px;
+    border: 1px solid #c7d1df;
+    border-radius: 7px;
+    font-size: 16px;
+}
+
+input:focus {
+    outline: none;
+    border-color: #063b8c;
+    box-shadow: 0 0 0 2px rgba(6,59,140,0.1);
+}
+
+.question {
+    background: white;
+    margin-bottom: 20px;
+    padding: 22px;
+    border-radius: 10px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.07);
+}
+
+.question h3 {
+    color: #063b8c;
+    margin-bottom: 15px;
+}
+
+.option {
+    display: block;
+    padding: 9px;
+    margin: 6px 0;
+    border-radius: 6px;
     cursor: pointer;
 }
 
-
-/* REVIEW CARDS */
-
-.review-grid {
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(auto-fit,minmax(280px,1fr));
-
-    gap: 20px;
+.option:hover {
+    background: #eef5ff;
 }
 
-.review-card {
+.option input {
+    margin-right: 8px;
+}
 
+/* RESULT */
+.result {
+    display: none;
     background: white;
-
-    padding: 25px;
-
-    border-radius: 14px;
-
-    box-shadow:
-        0 5px 18px rgba(0,0,0,.08);
+    padding: 30px;
+    border-radius: 12px;
+    margin-top: 30px;
+    text-align: center;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
 }
 
-.review-name {
+.result h2 {
+    color: #063b8c;
+    margin-bottom: 15px;
+}
 
-    color: #003f70;
+.result-details {
+    text-align: left;
+    max-width: 600px;
+    margin: 20px auto;
+}
 
+.result-details p {
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.pass {
+    color: green;
     font-weight: bold;
-
-    font-size: 18px;
+    font-size: 22px;
 }
 
-.review-stars {
-
-    color: #cc9933;
-
-    margin: 8px 0;
+.fail {
+    color: #c62828;
+    font-weight: bold;
+    font-size: 22px;
 }
 
-.review-text {
-
-    line-height: 1.6;
-
-    color: #555;
-}
-
-.no-reviews {
-
-    text-align: center;
-
-    color: #777;
-}
-
-
-/* =====================================================
-   CONTACT
-===================================================== */
-
+/* CONTACT */
 .contact {
-
-    background:
-        linear-gradient(
-            135deg,
-            #061a3a,
-            #0d3970
-        );
-
-    padding: 70px 20px;
-
-    text-align: center;
+    background: #063b8c;
+    color: white;
 }
 
-.contact h2 {
-
-    color: #ffd21c;
-
-    font-size: 34px;
-}
-
-.contact-intro {
-
-    color: #ddd;
-
-    max-width: 650px;
-
-    margin: auto auto 35px;
-
-    line-height: 1.7;
-}
-
-.contact-grid {
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(auto-fit,minmax(230px,1fr));
-
-    gap: 20px;
+.contact .section-title {
+    color: white;
 }
 
 .contact-card {
-
-    background:
-        rgba(255,255,255,.07);
-
+    background: white;
+    color: #172033;
     padding: 25px;
-
-    border-radius: 14px;
-
-    border: 1px solid
-        rgba(255,215,0,.25);
-}
-
-.icon-circle {
-
-    width: 60px;
-
-    height: 60px;
-
-    margin: auto auto 15px;
-
-    border-radius: 50%;
-
-    background: #cc9933;
-
-    color: #061a3a;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    font-size: 25px;
-}
-
-.contact-card h3 {
-
-    color: #ffd21c;
-}
-
-.contact-card p {
-
-    color: white;
-}
-
-.contact-buttons {
-
-    margin-top: 35px;
-
-    display: flex;
-
-    justify-content: center;
-
-    flex-wrap: wrap;
-
-    gap: 10px;
-}
-
-
-/* =====================================================
-   FOOTER
-===================================================== */
-
-footer {
-
-    background: #031126;
-
-    color: #ffd21c;
-
+    border-radius: 12px;
     text-align: center;
-
-    padding: 25px 15px;
 }
 
-.footer-buttons {
-
-    margin-top: 15px;
+.contact-card i {
+    color: #063b8c;
+    font-size: 30px;
+    margin-bottom: 10px;
 }
 
-.footer-buttons a {
-
-    color: white;
-
-    margin: 0 8px;
-
+.contact-card a {
+    color: #063b8c;
     text-decoration: none;
+    font-weight: bold;
 }
 
-
-/* =====================================================
-   MOBILE
-===================================================== */
-
-@media(max-width:700px) {
-
-    .hero {
-
-        min-height: 330px;
-    }
-
-    .hero h1 {
-
-        font-size: 30px;
-    }
-
-    .hero p {
-
-        font-size: 17px;
-    }
-
-    .session-card {
-
-        padding: 30px 15px;
-    }
-
-    .session-card h2 {
-
-        font-size: 27px;
-    }
-
-    .countdown {
-
-        font-size: 20px;
-    }
-
-    .card {
-
-        padding: 25px 20px;
-    }
-
-    .section-title {
-
-        font-size: 28px;
-    }
-
+/* FOOTER */
+footer {
+    background: #022653;
+    color: white;
+    text-align: center;
+    padding: 25px 15px;
+    font-size: 14px;
 }
 
+/* MOBILE */
+@media (max-width: 700px) {
+
+    .nav-container {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .form-group.full {
+        grid-column: auto;
+    }
+
+    section {
+        padding: 45px 15px;
+    }
+}
 </style>
-
 </head>
-
 
 <body>
 
+<!-- NAVIGATION -->
+<nav>
+<div class="nav-container">
 
-<!-- =====================================================
-     HERO
-===================================================== -->
+<div class="logo">
+<i class="fas fa-cross"></i> B.E.P
+</div>
 
-<section class="hero">
+<ul class="nav-links">
+<li><a href="#home">Home</a></li>
+<li><a href="#about">About</a></li>
+<li><a href="#sessions">Sessions</a></li>
+<li><a href="#quiz">Bible Quiz</a></li>
+<li><a href="#contact">Contact</a></li>
+</ul>
 
-    <div class="hero-content">
+</div>
+</nav>
 
-        <h1>
-            Biblical Empowerment Program
-        </h1>
 
-        <p>
-            Building the Church of Christ
-        </p>
+<!-- HERO -->
+<section class="hero" id="home">
 
-        <a href="#about"
-           class="hero-btn">
+<div class="hero-content">
 
-            Learn More
+<h1>B.E.P</h1>
 
-        </a>
+<h2>Biblical Empowerment Program</h2>
 
-    </div>
+<p>
+Building the Church of Christ
+</p>
 
+<p>
+Growing in God's Word • Strengthening Faith • Empowering Believers
+</p>
+
+<a href="#quiz" class="btn">
+<i class="fas fa-book-bible"></i>
+Take the Bible Quiz
+</a>
+
+</div>
 </section>
 
 
+<!-- COUNTDOWN -->
+<section class="countdown-section">
 
-<!-- =====================================================
-     NEXT SESSION
-===================================================== -->
+<div class="container">
 
-<section class="next-session">
+<h2 class="section-title">
+Next B.E.P. Session
+</h2>
 
-    <div class="session-card">
+<p style="margin-bottom:20px;">
+Every Thursday • 19:00 – 20:30
+</p>
 
-        <h2>
-            Next B.E.P Session
-        </h2>
+<div class="countdown">
 
-        <p class="session-subtitle">
-            Building the Church of Christ
-        </p>
+<div class="time-box">
+<strong id="days">0</strong>
+<span>DAYS</span>
+</div>
 
+<div class="time-box">
+<strong id="hours">0</strong>
+<span>HOURS</span>
+</div>
 
-        <div class="session-grid">
+<div class="time-box">
+<strong id="minutes">0</strong>
+<span>MINUTES</span>
+</div>
 
-            <div class="session-item">
+<div class="time-box">
+<strong id="seconds">0</strong>
+<span>SECONDS</span>
+</div>
 
-                <i class="fa-solid fa-calendar-days"></i>
+</div>
 
-                <h3>
-                    Every Thursday
-                </h3>
-
-            </div>
-
-
-            <div class="session-item">
-
-                <i class="fa-solid fa-clock"></i>
-
-                <h3>
-                    7:00 PM – 8:30 PM
-                </h3>
-
-            </div>
-
-
-            <div class="session-item">
-
-                <i class="fa-solid fa-video"></i>
-
-                <h3>
-                    Microsoft Teams
-                </h3>
-
-            </div>
-
-        </div>
-
-
-        <!-- REAL COUNTDOWN -->
-
-        <div id="countdown"
-             class="countdown">
-
-            Calculating next session...
-
-            <span class="countdown-label">
-                Next Thursday at 7:00 PM
-            </span>
-
-        </div>
-
-
-        <div class="session-buttons">
-
-            <a
-            href="https://teams.live.com/meet/936085799236?p=b66LnDUAB2Xkx2uQYp&eventType=community"
-            target="_blank"
-            class="btn btn-blue">
-
-                <i class="fa-solid fa-video"></i>
-
-                Join Microsoft Teams
-
-            </a>
-
-
-            <a
-            href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Biblical+Empowerment+Program+(B.E.P)+Session&dates=20260101T170000Z/20260101T183000Z&details=Weekly+B.E.P+Teaching+Session&location=Microsoft+Teams"
-            target="_blank"
-            class="btn btn-gold">
-
-                <i class="fa-solid fa-bell"></i>
-
-                Set Reminder
-
-            </a>
-
-        </div>
-
-    </div>
-
+</div>
 </section>
 
 
+<!-- ABOUT -->
+<section id="about">
 
-<!-- =====================================================
-     ABOUT
-===================================================== -->
+<div class="container">
 
-<section class="section"
-         id="about">
+<h2 class="section-title">
+About B.E.P
+</h2>
 
-    <div class="container">
+<div class="card">
 
-        <div class="card">
+<i class="fas fa-church"></i>
 
-            <h2>
-                About Us
-            </h2>
+<h3>Biblical Empowerment Program</h3>
 
-            <p>
-                The Biblical Empowerment Program (B.E.P) is a
-                faith-driven initiative dedicated to equipping
-                individuals with a deeper understanding of the
-                Word of God and the transformative power of the
-                Holy Spirit.
-            </p>
+<p>
+B.E.P. is an online Christian teaching program focused on
+helping believers grow in their understanding of God's Word,
+develop their faith, strengthen their spiritual lives and
+become effective disciples of Jesus Christ.
+</p>
 
-            <p>
-                Our mission is to build spiritually grounded
-                believers who are empowered to live purposeful,
-                Christ-centered lives.
-            </p>
+<br>
 
-            <p>
-                At B.E.P, we believe that true empowerment comes
-                through knowledge, revelation, and application
-                of Scripture.
-            </p>
+<p>
+<strong>Our vision:</strong>
+Building the Church of Christ through biblical teaching,
+spiritual growth and practical Christian living.
+</p>
 
-            <p>
-                Through structured teachings, interactive
-                sessions, and Spirit-led discussions, we create
-                a space where individuals can grow in faith,
-                gain clarity in their spiritual journey, and
-                develop a personal relationship with God.
-            </p>
+</div>
 
-            <p>
-                Our program is designed for everyone—whether
-                you are a new believer or someone seeking deeper
-                spiritual insight.
-            </p>
-
-            <p>
-                <strong>
-                    We are committed to:
-                </strong>
-            </p>
-
-            <ul>
-
-                <li>
-                    Teaching the Word of God with clarity and truth
-                </li>
-
-                <li>
-                    Empowering believers through the Holy Spirit
-                </li>
-
-                <li>
-                    Building a strong, united faith community
-                </li>
-
-                <li>
-                    Encouraging spiritual growth and personal transformation
-                </li>
-
-            </ul>
-
-            <p>
-                The Biblical Empowerment Program is more than
-                just a teaching platform—it is a movement of
-                believers rising in faith, purpose, and power.
-            </p>
-
-        </div>
-
-    </div>
-
+</div>
 </section>
 
 
+<!-- OBJECTIVES -->
+<section id="sessions">
 
-<!-- =====================================================
-     THURSDAY SESSIONS
-===================================================== -->
+<div class="container">
 
-<section class="section">
+<h2 class="section-title">
+Our Sessions & Objectives
+</h2>
 
-    <div class="container">
+<div class="cards">
 
-        <div class="card">
+<div class="card">
+<i class="fas fa-book-open"></i>
+<h3>Study the Word</h3>
+<p>
+Understand Scripture and apply biblical principles to everyday life.
+</p>
+</div>
 
-            <h2>
-                Thursday Sessions
-            </h2>
+<div class="card">
+<i class="fas fa-person-praying"></i>
+<h3>Grow Spiritually</h3>
+<p>
+Develop a stronger prayer life and deeper relationship with God.
+</p>
+</div>
 
-            <p>
-                The Thursday sessions are held every week from
-                7:00 PM to 8:30 PM.
-            </p>
+<div class="card">
+<i class="fas fa-users"></i>
+<h3>Discipleship</h3>
+<p>
+Equip believers to follow Christ and help others grow in faith.
+</p>
+</div>
 
-            <p>
-                They are designed to deepen participants'
-                understanding of the Word of God through
-                structured teaching and interactive engagement.
-            </p>
+<div class="card">
+<i class="fas fa-heart"></i>
+<h3>Christian Character</h3>
+<p>
+Learn to live with love, forgiveness, humility and integrity.
+</p>
+</div>
 
-            <p>
-                The goal is to build a strong biblical
-                foundation while encouraging spiritual growth
-                and practical application of Scripture in daily
-                life.
-            </p>
+</div>
 
-            <p>
-                Each session encourages participants to ask
-                questions, share comments, and participate in
-                meaningful biblical discussions.
-            </p>
+<br>
 
-        </div>
+<div class="card">
 
+<h3>
+<i class="fas fa-video"></i>
+Thursday Online Sessions
+</h3>
 
-        <div class="two-column">
+<p>
+<strong>Time:</strong> 19:00 – 20:30
+</p>
 
-            <div class="card">
+<p>
+<strong>Platform:</strong> Microsoft Teams
+</p>
 
-                <h2>
-                    Objectives
-                </h2>
+<p>
+Participants can register through the B.E.P. contact channels.
+</p>
 
-                <ul>
+</div>
 
-                    <li>
-                        Strengthening biblical understanding
-                        and spiritual maturity
-                    </li>
-
-                    <li>
-                        Encouraging active participation
-                        through questions and discussion
-                    </li>
-
-                    <li>
-                        Promoting clear and correct
-                        interpretation of Scripture
-                    </li>
-
-                    <li>
-                        Building confidence in sharing and
-                        applying biblical knowledge
-                    </li>
-
-                    <li>
-                        Fostering spiritual growth through
-                        collective learning
-                    </li>
-
-                </ul>
-
-            </div>
-
-
-            <div class="card">
-
-                <h2>
-                    Our Focus
-                </h2>
-
-                <ul>
-
-                    <li>
-                        Discipleship
-                    </li>
-
-                    <li>
-                        Prayer
-                    </li>
-
-                    <li>
-                        Spiritual Growth
-                    </li>
-
-                    <li>
-                        The Holy Spirit
-                    </li>
-
-                    <li>
-                        Biblical Knowledge
-                    </li>
-
-                    <li>
-                        Christian Character
-                    </li>
-
-                </ul>
-
-            </div>
-
-        </div>
-
-    </div>
-
+</div>
 </section>
 
 
+<!-- QUIZ -->
+<section class="quiz-section" id="quiz">
 
-<!-- =====================================================
-     REGISTRATION
-===================================================== -->
+<div class="container">
 
-<section class="register-section"
-         id="register">
+<h2 class="section-title">
+B.E.P. Bible Quiz
+</h2>
 
-    <div class="register-container">
+<div class="quiz-info">
 
-        <h2>
-            Register for B.E.P
-        </h2>
+<strong>Quiz Instructions</strong>
 
-        <p class="register-sub">
-            Fill in your details to join our weekly Thursday
-            sessions.
-        </p>
+<ul style="margin-left:20px; margin-top:10px;">
 
+<li>20 multiple-choice questions</li>
+<li>Each question carries 3 marks</li>
+<li>Total: 60 marks</li>
+<li>Pass mark: 40/60</li>
+<li>Select one answer for each question</li>
+<li>Complete your personal details before submitting</li>
 
-        <form
-        action="https://formspree.io/f/xvzlqawa"
-        method="POST">
+</ul>
 
+</div>
 
-            <div class="input-group">
 
-                <label>
-                    Full Name
-                </label>
+<!-- REGISTRATION -->
+<div class="registration">
 
-                <input
-                type="text"
-                name="name"
-                placeholder="Enter your full name"
-                required>
+<h3>
+<i class="fas fa-user"></i>
+Participant Information
+</h3>
 
-            </div>
+<div class="form-grid">
 
+<div class="form-group">
 
-            <div class="input-group">
+<label for="name">Name *</label>
 
-                <label>
-                    Email Address
-                </label>
+<input
+type="text"
+id="name"
+placeholder="Enter your name"
+required>
 
-                <input
-                type="email"
-                name="email"
-                placeholder="Enter your email"
-                required>
+</div>
 
-            </div>
 
+<div class="form-group">
 
-            <div class="input-group">
+<label for="surname">Surname *</label>
 
-                <label>
-                    Phone Number / WhatsApp
-                </label>
+<input
+type="text"
+id="surname"
+placeholder="Enter your surname"
+required>
 
-                <input
-                type="tel"
-                name="phone"
-                placeholder="e.g. 074 000 0000"
-                required>
+</div>
 
-            </div>
 
+<div class="form-group">
 
-            <div class="input-group">
+<label for="phone">Cell Number *</label>
 
-                <label>
-                    City / Location
-                </label>
+<input
+type="tel"
+id="phone"
+placeholder="062 350 8689"
+required>
 
-                <input
-                type="text"
-                name="location"
-                placeholder="Enter your location"
-                required>
+</div>
 
-            </div>
 
+<div class="form-group">
 
-            <div class="input-group">
+<label for="email">Email Address *</label>
 
-                <label>
-                    How did you hear about us?
-                </label>
+<input
+type="email"
+id="email"
+placeholder="Enter your email"
+required>
 
-                <select name="source" required>
+</div>
 
-                    <option value="">
-                        Select one
-                    </option>
+</div>
 
-                    <option>
-                        Facebook
-                    </option>
+</div>
 
-                    <option>
-                        WhatsApp
-                    </option>
 
-                    <option>
-                        Friend / Family
-                    </option>
+<form id="quizForm">
 
-                    <option>
-                        Church Sharing
-                    </option>
 
-                    <option>
-                        Other
-                    </option>
+<!-- QUESTION 1 -->
+<div class="question">
 
-                </select>
+<h3>1. Who created the heavens and the earth?</h3>
 
-            </div>
+<label class="option">
+<input type="radio" name="q1" value="0">
+A. Moses
+</label>
 
+<label class="option">
+<input type="radio" name="q1" value="1">
+B. God
+</label>
 
-            <button
-            type="submit"
-            class="register-btn">
+<label class="option">
+<input type="radio" name="q1" value="0">
+C. Abraham
+</label>
 
-                Submit Registration
+<label class="option">
+<input type="radio" name="q1" value="0">
+D. David
+</label>
 
-            </button>
+</div>
 
-        </form>
 
-    </div>
+<!-- QUESTION 2 -->
+<div class="question">
 
-</section>
+<h3>2. Who built the ark?</h3>
 
+<label class="option">
+<input type="radio" name="q2" value="0">
+A. Abraham
+</label>
 
+<label class="option">
+<input type="radio" name="q2" value="1">
+B. Noah
+</label>
 
-<!-- =====================================================
-     ONLINE POLL
-===================================================== -->
+<label class="option">
+<input type="radio" name="q2" value="0">
+C. Moses
+</label>
 
-<section class="poll-section"
-         id="poll">
+<label class="option">
+<input type="radio" name="q2" value="0">
+D. Joshua
+</label>
 
-    <div class="poll-container">
+</div>
 
-        <h2 class="section-title">
-            B.E.P Community Poll
-        </h2>
 
+<!-- QUESTION 3 -->
+<div class="question">
 
-        <div class="poll-card">
+<h3>3. Who led the Israelites out of Egypt?</h3>
 
-            <p class="poll-question">
+<label class="option">
+<input type="radio" name="q3" value="0">
+A. David
+</label>
 
-                How helpful are the B.E.P Thursday sessions
-                to your spiritual growth?
+<label class="option">
+<input type="radio" name="q3" value="1">
+B. Moses
+</label>
 
-            </p>
+<label class="option">
+<input type="radio" name="q3" value="0">
+C. Solomon
+</label>
 
+<label class="option">
+<input type="radio" name="q3" value="0">
+D. Elijah
+</label>
 
-            <div class="poll-options">
+</div>
 
-                <button
-                class="poll-option"
-                data-option="Very Helpful">
 
-                    ⭐ Very Helpful
+<!-- QUESTION 4 -->
+<div class="question">
 
-                </button>
+<h3>4. Where was Jesus born?</h3>
 
+<label class="option">
+<input type="radio" name="q4" value="1">
+A. Bethlehem
+</label>
 
-                <button
-                class="poll-option"
-                data-option="Helpful">
+<label class="option">
+<input type="radio" name="q4" value="0">
+B. Jerusalem
+</label>
 
-                    👍 Helpful
+<label class="option">
+<input type="radio" name="q4" value="0">
+C. Nazareth
+</label>
 
-                </button>
+<label class="option">
+<input type="radio" name="q4" value="0">
+D. Jericho
+</label>
 
+</div>
 
-                <button
-                class="poll-option"
-                data-option="Somewhat Helpful">
 
-                    🙂 Somewhat Helpful
+<!-- QUESTION 5 -->
+<div class="question">
 
-                </button>
+<h3>5. Who was the mother of Jesus?</h3>
 
+<label class="option">
+<input type="radio" name="q5" value="1">
+A. Mary
+</label>
 
-                <button
-                class="poll-option"
-                data-option="Needs Improvement">
+<label class="option">
+<input type="radio" name="q5" value="0">
+B. Martha
+</label>
 
-                    📝 Needs Improvement
+<label class="option">
+<input type="radio" name="q5" value="0">
+C. Elizabeth
+</label>
 
-                </button>
+<label class="option">
+<input type="radio" name="q5" value="0">
+D. Ruth
+</label>
 
-            </div>
+</div>
 
 
-            <button
-            id="voteButton"
-            class="vote-button"
-            disabled>
+<!-- QUESTION 6 -->
+<div class="question">
 
-                Submit Vote
+<h3>6. How many disciples did Jesus choose?</h3>
 
-            </button>
+<label class="option">
+<input type="radio" name="q6" value="0">
+A. 7
+</label>
 
+<label class="option">
+<input type="radio" name="q6" value="1">
+B. 12
+</label>
 
-            <p
-            id="voteMessage"
-            class="form-message">
-            </p>
+<label class="option">
+<input type="radio" name="q6" value="0">
+C. 10
+</label>
 
+<label class="option">
+<input type="radio" name="q6" value="0">
+D. 40
+</label>
 
-            <div
-            id="pollResults"
-            class="results">
+</div>
 
-                Loading poll results...
 
-            </div>
+<!-- QUESTION 7 -->
+<div class="question">
 
-        </div>
+<h3>7. What is the first book of the Bible?</h3>
 
-    </div>
+<label class="option">
+<input type="radio" name="q7" value="1">
+A. Genesis
+</label>
 
-</section>
+<label class="option">
+<input type="radio" name="q7" value="0">
+B. Exodus
+</label>
 
+<label class="option">
+<input type="radio" name="q7" value="0">
+C. Matthew
+</label>
 
+<label class="option">
+<input type="radio" name="q7" value="0">
+D. Psalms
+</label>
 
-<!-- =====================================================
-     REVIEWS
-===================================================== -->
+</div>
 
-<section class="reviews-section"
-         id="reviews">
 
-    <div class="reviews-container">
+<!-- QUESTION 8 -->
+<div class="question">
 
-        <h2 class="section-title">
-            B.E.P Reviews
-        </h2>
+<h3>8. What is the last book of the Bible?</h3>
 
+<label class="option">
+<input type="radio" name="q8" value="0">
+A. Acts
+</label>
 
-        <!-- REVIEW FORM -->
+<label class="option">
+<input type="radio" name="q8" value="0">
+B. Jude
+</label>
 
-        <div class="review-form">
+<label class="option">
+<input type="radio" name="q8" value="1">
+C. Revelation
+</label>
 
-            <h3>
-                Share Your Experience
-            </h3>
+<label class="option">
+<input type="radio" name="q8" value="0">
+D. Romans
+</label>
 
+</div>
 
-            <div class="input-group">
 
-                <label>
-                    Your Name
-                </label>
+<!-- QUESTION 9 -->
+<div class="question">
 
-                <input
-                type="text"
-                id="reviewName"
-                placeholder="Enter your name"
-                required>
+<h3>9. Who defeated Goliath?</h3>
 
-            </div>
+<label class="option">
+<input type="radio" name="q9" value="1">
+A. David
+</label>
 
+<label class="option">
+<input type="radio" name="q9" value="0">
+B. Saul
+</label>
 
-            <label
-            style="display:block;text-align:center;font-weight:bold;color:#003f70;">
+<label class="option">
+<input type="radio" name="q9" value="0">
+C. Samson
+</label>
 
-                Your Rating
+<label class="option">
+<input type="radio" name="q9" value="0">
+D. Joshua
+</label>
 
-            </label>
+</div>
 
 
-            <div
-            class="star-rating"
-            id="starRating">
+<!-- QUESTION 10 -->
+<div class="question">
 
-                <i
-                class="fa-solid fa-star star"
-                data-rating="1"></i>
+<h3>10. What did Jesus turn water into?</h3>
 
-                <i
-                class="fa-solid fa-star star"
-                data-rating="2"></i>
+<label class="option">
+<input type="radio" name="q10" value="0">
+A. Oil
+</label>
 
-                <i
-                class="fa-solid fa-star star"
-                data-rating="3"></i>
+<label class="option">
+<input type="radio" name="q10" value="1">
+B. Wine
+</label>
 
-                <i
-                class="fa-solid fa-star star"
-                data-rating="4"></i>
+<label class="option">
+<input type="radio" name="q10" value="0">
+C. Milk
+</label>
 
-                <i
-                class="fa-solid fa-star star"
-                data-rating="5"></i>
+<label class="option">
+<input type="radio" name="q10" value="0">
+D. Juice
+</label>
 
-            </div>
+</div>
 
 
-            <div class="input-group">
+<!-- QUESTION 11 -->
+<div class="question">
 
-                <label>
-                    Your Review
-                </label>
+<h3>11. What is the greatest commandment?</h3>
 
-                <textarea
-                id="reviewText"
-                placeholder="Tell us about your experience..."
-                required></textarea>
+<label class="option">
+<input type="radio" name="q11" value="1">
+A. Love God with all your heart
+</label>
 
-            </div>
+<label class="option">
+<input type="radio" name="q11" value="0">
+B. Build a temple
+</label>
 
+<label class="option">
+<input type="radio" name="q11" value="0">
+C. Become wealthy
+</label>
 
-            <button
-            id="reviewSubmit"
-            class="review-submit">
+<label class="option">
+<input type="radio" name="q11" value="0">
+D. Travel the world
+</label>
 
-                Submit Review
+</div>
 
-            </button>
 
+<!-- QUESTION 12 -->
+<div class="question">
 
-            <p
-            id="reviewMessage"
-            class="form-message">
-            </p>
+<h3>12. Who baptized Jesus?</h3>
 
+<label class="option">
+<input type="radio" name="q12" value="1">
+A. John the Baptist
+</label>
 
-            <p
-            style="text-align:center;color:#777;font-size:13px;">
+<label class="option">
+<input type="radio" name="q12" value="0">
+B. Peter
+</label>
 
-                Reviews are reviewed before appearing publicly.
+<label class="option">
+<input type="radio" name="q12" value="0">
+C. Paul
+</label>
 
-            </p>
+<label class="option">
+<input type="radio" name="q12" value="0">
+D. James
+</label>
 
-        </div>
+</div>
 
 
-        <!-- PUBLIC REVIEWS -->
+<!-- QUESTION 13 -->
+<div class="question">
 
-        <div
-        id="reviewGrid"
-        class="review-grid">
+<h3>13. Who betrayed Jesus?</h3>
 
-            Loading reviews...
+<label class="option">
+<input type="radio" name="q13" value="0">
+A. Peter
+</label>
 
-        </div>
+<label class="option">
+<input type="radio" name="q13" value="1">
+B. Judas Iscariot
+</label>
 
-    </div>
+<label class="option">
+<input type="radio" name="q13" value="0">
+C. Thomas
+</label>
 
-</section>
+<label class="option">
+<input type="radio" name="q13" value="0">
+D. John
+</label>
 
+</div>
 
 
-<!-- =====================================================
-     CONTACT
-===================================================== -->
+<!-- QUESTION 14 -->
+<div class="question">
 
-<section class="contact"
-         id="contact">
+<h3>14. How many days did Jesus fast in the wilderness?</h3>
 
-    <div class="container">
+<label class="option">
+<input type="radio" name="q14" value="0">
+A. 7
+</label>
 
-        <h2>
-            Contact Us
-        </h2>
+<label class="option">
+<input type="radio" name="q14" value="1">
+B. 40
+</label>
 
-        <p class="contact-intro">
+<label class="option">
+<input type="radio" name="q14" value="0">
+C. 12
+</label>
 
-            We are here to connect with you, support you,
-            and walk with you in your spiritual journey.
+<label class="option">
+<input type="radio" name="q14" value="0">
+D. 30
+</label>
 
-        </p>
+</div>
 
 
-        <div class="contact-grid">
+<!-- QUESTION 15 -->
+<div class="question">
 
+<h3>15. What is the shortest verse in many English Bible translations?</h3>
 
-            <div class="contact-card">
+<label class="option">
+<input type="radio" name="q15" value="1">
+A. Jesus wept.
+</label>
 
-                <div class="icon-circle">
+<label class="option">
+<input type="radio" name="q15" value="0">
+B. God is love.
+</label>
 
-                    <i class="fa-solid fa-phone"></i>
+<label class="option">
+<input type="radio" name="q15" value="0">
+C. Pray continually.
+</label>
 
-                </div>
+<label class="option">
+<input type="radio" name="q15" value="0">
+D. Rejoice always.
+</label>
 
-                <h3>
-                    Phone
-                </h3>
+</div>
 
-                <p>
-                    074 038 6671
-                </p>
 
-            </div>
+<!-- QUESTION 16 -->
+<div class="question">
 
+<h3>16. Who was known for his great strength?</h3>
 
-            <div class="contact-card">
+<label class="option">
+<input type="radio" name="q16" value="1">
+A. Samson
+</label>
 
-                <div class="icon-circle">
+<label class="option">
+<input type="radio" name="q16" value="0">
+B. Solomon
+</label>
 
-                    <i class="fa-solid fa-envelope"></i>
+<label class="option">
+<input type="radio" name="q16" value="0">
+C. Samuel
+</label>
 
-                </div>
+<label class="option">
+<input type="radio" name="q16" value="0">
+D. Stephen
+</label>
 
-                <h3>
-                    Email
-                </h3>
+</div>
 
-                <p>
-                    bep.onlineprog@gmail.com
-                </p>
 
-            </div>
+<!-- QUESTION 17 -->
+<div class="question">
 
+<h3>17. Who received the Ten Commandments from God?</h3>
 
-            <div class="contact-card">
+<label class="option">
+<input type="radio" name="q17" value="1">
+A. Moses
+</label>
 
-                <div class="icon-circle">
+<label class="option">
+<input type="radio" name="q17" value="0">
+B. David
+</label>
 
-                    <i class="fa-solid fa-video"></i>
+<label class="option">
+<input type="radio" name="q17" value="0">
+C. Aaron
+</label>
 
-                </div>
+<label class="option">
+<input type="radio" name="q17" value="0">
+D. Joshua
+</label>
 
-                <h3>
-                    Platform
-                </h3>
+</div>
 
-                <p>
-                    Microsoft Teams Online Sessions
-                </p>
 
-            </div>
+<!-- QUESTION 18 -->
+<div class="question">
 
-        </div>
+<h3>18. What did God create on the first day?</h3>
 
+<label class="option">
+<input type="radio" name="q18" value="1">
+A. Light
+</label>
 
-        <div class="contact-buttons">
+<label class="option">
+<input type="radio" name="q18" value="0">
+B. Animals
+</label>
 
+<label class="option">
+<input type="radio" name="q18" value="0">
+C. The sun
+</label>
 
-            <a
-            href="mailto:bep.onlineprog@gmail.com"
-            class="btn btn-gold">
+<label class="option">
+<input type="radio" name="q18" value="0">
+D. Humans
+</label>
 
-                <i class="fa-solid fa-envelope"></i>
+</div>
 
-                Email Us
 
-            </a>
+<!-- QUESTION 19 -->
+<div class="question">
 
+<h3>19. What is the fruit of the Spirit according to Galatians 5?</h3>
 
-            <a
-            href="https://wa.me/27740386671"
-            target="_blank"
-            class="btn btn-gold">
+<label class="option">
+<input type="radio" name="q19" value="1">
+A. Love
+</label>
 
-                <i class="fa-brands fa-whatsapp"></i>
+<label class="option">
+<input type="radio" name="q19" value="0">
+B. Wealth
+</label>
 
-                WhatsApp
+<label class="option">
+<input type="radio" name="q19" value="0">
+C. Fame
+</label>
 
-            </a>
+<label class="option">
+<input type="radio" name="q19" value="0">
+D. Power
+</label>
 
+</div>
 
-            <a
-            href="https://teams.live.com/meet/936085799236?p=b66LnDUAB2Xkx2uQYp&eventType=community"
-            target="_blank"
-            class="btn btn-gold">
 
-                <i class="fa-solid fa-video"></i>
+<!-- QUESTION 20 -->
+<div class="question">
 
-                Join Microsoft Teams
+<h3>20. According to John 3:16, what did God give because He loved the world?</h3>
 
-            </a>
+<label class="option">
+<input type="radio" name="q20" value="1">
+A. His one and only Son
+</label>
 
+<label class="option">
+<input type="radio" name="q20" value="0">
+B. A kingdom
+</label>
 
-            <a
-            href="https://facebook.com/groups/1421853356307383/"
-            target="_blank"
-            class="btn btn-gold">
+<label class="option">
+<input type="radio" name="q20" value="0">
+C. Wealth
+</label>
 
-                <i class="fa-brands fa-facebook"></i>
+<label class="option">
+<input type="radio" name="q20" value="0">
+D. Angels
+</label>
 
-                Facebook Group
+</div>
 
-            </a>
 
-        </div>
+<div style="text-align:center;">
 
-    </div>
+<button type="submit" class="btn">
+<i class="fas fa-check-circle"></i>
+Submit Quiz
+</button>
 
-</section>
+</div>
 
+</form>
 
 
-<!-- =====================================================
-     FOOTER
-===================================================== -->
+<!-- RESULT -->
+<div class="result" id="result">
 
-<footer>
+<h2>
+<i class="fas fa-certificate"></i>
+B.E.P. Quiz Result
+</h2>
 
-    © 2026 Biblical Empowerment Program (B.E.P)
-    — All Rights Reserved
+<div class="result-details">
 
+<p>
+<strong>Name:</strong>
+<span id="resultName"></span>
+</p>
 
-    <div class="footer-buttons">
+<p>
+<strong>Surname:</strong>
+<span id="resultSurname"></span>
+</p>
 
-        <a
-        href="https://wa.me/27740386671"
-        target="_blank">
+<p>
+<strong>Cell Number:</strong>
+<span id="resultPhone"></span>
+</p>
 
-            WhatsApp
+<p>
+<strong>Email:</strong>
+<span id="resultEmail"></span>
+</p>
 
-        </a>
+<p>
+<strong>Score:</strong>
+<span id="resultScore"></span> / 60
+</p>
 
+<p>
+<strong>Percentage:</strong>
+<span id="resultPercentage"></span>%
+</p>
 
-        <a
-        href="mailto:bep.onlineprog@gmail.com">
+<p>
+<strong>Status:</strong>
+<span id="resultStatus"></span>
+</p>
 
-            Email
+</div>
 
-        </a>
-
-
-        <a href="#poll">
-
-            Vote
-
-        </a>
-
-
-        <a href="#reviews">
-
-            Reviews
-
-        </a>
-
-    </div>
-
-</footer>
-
-
-
-<!-- =====================================================
-     JAVASCRIPT
-===================================================== -->
-
-<script>
-
-/* =====================================================
-   SUPABASE CONNECTION
-===================================================== */
-
-const SUPABASE_URL =
-"https://rukusaellqqwthzibyib.supabase.co";
-
-const SUPABASE_KEY =
-"sb_publishable_Co8_MoJOV14tXBkSWyXFTA_ULn1WRa5";
-
-const supabaseClient =
-supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_KEY
-);
-
-
-/* =====================================================
-   REAL WEEKLY COUNTDOWN
-===================================================== */
-
-function updateCountdown() {
-
-    const now = new Date();
-
-    let nextThursday = new Date(now);
-
-    let daysUntilThursday =
-        (4 - now.getDay() + 7) % 7;
-
-    nextThursday.setDate(
-        now.getDate() + daysUntilThursday
-    );
-
-    nextThursday.setHours(19,0,0,0);
-
-
-    /*
-       If today is Thursday and the meeting
-       has already started/passed, move to next Thursday.
-    */
-
-    if (
-        now.getDay() === 4 &&
-        now >= nextThursday
-    ) {
-
-        nextThursday.setDate(
-            nextThursday.getDate() + 7
-        );
-
-    }
-
-
-    const difference =
-        nextThursday.getTime() -
-        now.getTime();
-
-
-    if (difference <= 0) {
-
-        document.getElementById("countdown")
-        .innerHTML =
-        "Starting soon!";
-
-        return;
-
-    }
-
-
-    const days =
-        Math.floor(
-            difference /
-            (1000 * 60 * 60 * 24)
-        );
-
-
-    const hours =
-        Math.floor(
-            (difference /
-            (1000 * 60 * 60)) % 24
-        );
-
-
-    const minutes =
-        Math.floor(
-            (difference /
-            (1000 * 60)) % 60
-        );
-
-
-    const seconds =
-        Math.floor(
-            (difference / 1000) % 60
-        );
-
-
-    document.getElementById("countdown")
-    .innerHTML =
-
-        `${days}d ${hours}h ${minutes}m ${seconds}s
-        <span class="countdown-label">
-        Next Thursday at 7:00 PM
-        </span>`;
-
-}
-
-
-updateCountdown();
-
-setInterval(
-    updateCountdown,
-    1000
-);
-
-
-
-/* =====================================================
-   POLL
-===================================================== */
-
-let selectedOption = null;
-
-
-/* SELECT POLL OPTION */
-
-document
-.querySelectorAll(".poll-option")
-.forEach(button => {
-
-    button.addEventListener(
-        "click",
-        function() {
-
-            document
-            .querySelectorAll(".poll-option")
-            .forEach(btn => {
-
-                btn.classList.remove(
-                    "selected"
-                );
-
-            });
-
-
-            this.classList.add(
-                "selected"
-            );
-
-
-            selectedOption =
-                this.dataset.option;
-
-
-            document.getElementById(
-                "voteButton"
-            ).disabled = false;
-
-        }
-
-    );
-
-});
-
-
-
-/* SUBMIT VOTE */
-
-document
-.getElementById("voteButton")
-.addEventListener(
-    "click",
-    async function() {
-
-        if (!selectedOption) {
-
-            return;
-
-        }
-
-
-        const button = this;
-
-        button.disabled = true;
-
-        button.textContent =
-            "Submitting...";
-
-
-        const {
-            error
-        } = await supabaseClient
-        .from("poll_votes")
-        .insert([
-            {
-                option: selectedOption
-            }
-        ]);
-
-
-        if (error) {
-
-            console.error(error);
-
-            document.getElementById(
-                "voteMessage"
-            ).textContent =
-            "Unable to submit vote. Please try again.";
-
-            button.disabled = false;
-
-            button.textContent =
-                "Submit Vote";
-
-            return;
-
-        }
-
-
-        localStorage.setItem(
-            "bep_has_voted",
-            "true"
-        );
-
-
-        document.getElementById(
-            "voteMessage"
-        ).textContent =
-        "Thank you! Your vote has been recorded online.";
-
-
-        button.textContent =
-            "Vote Submitted";
-
-
-        loadPollResults();
-
-    }
-
-);
-
-
-
-/* LOAD POLL RESULTS */
-
-async function loadPollResults() {
-
-    const {
-        data,
-        error
-    } = await supabaseClient
-    .from("poll_votes")
-    .select("option");
-
-
-    if (error) {
-
-        console.error(error);
-
-        document.getElementById(
-            "pollResults"
-        ).innerHTML =
-        "<p>Poll results unavailable.</p>";
-
-        return;
-
-    }
-
-
-    const options = [
-
-        "Very Helpful",
-
-        "Helpful",
-
-        "Somewhat Helpful",
-
-        "Needs Improvement"
-
-    ];
-
-
-    const counts = {};
-
-    options.forEach(option => {
-
-        counts[option] = 0;
-
-    });
-
-
-    data.forEach(row => {
-
-        if (
-            Object.prototype
-            .hasOwnProperty
-            .call(counts,row.option)
-        ) {
-
-            counts[row.option]++;
-
-        }
-
-    });
-
-
-    const total =
-        data.length;
-
-
-    let html = "";
-
-
-    options.forEach(option => {
-
-        const count =
-            counts[option];
-
-
-        const percentage =
-            total === 0
-            ? 0
-            : Math.round(
-                (count / total) * 100
-            );
-
-
-        html += `
-
-        <div class="result-row">
-
-            <div class="result-title">
-
-                <span>
-                    ${option}
-                </span>
-
-                <span>
-                    ${count}
-                    (${percentage}%)
-                </span>
-
-            </div>
-
-            <div class="result-bar">
-
-                <div
-                class="result-fill"
-                style="width:${percentage}%">
-                </div>
-
-            </div>
-
-        </div>
-
-        `;
-
-    });
-
-
-    html += `
-
-        <p style="text-align:center;color:#777;">
-            Total votes: ${total}
-        </p>
-
-    `;
-
-
-    document.getElementById(
-        "pollResults"
-    ).innerHTML = html;
-
-}
-
-
-loadPollResults();
-
-
-
-/* =====================================================
-   PREVENT SECOND VOTE ON SAME DEVICE
-===================================================== */
-
-if (
-    localStorage.getItem(
-        "bep_has_voted"
-    )
-) {
-
-    document.getElementById(
-        "voteButton"
-    ).disabled = true;
-
-    document.getElementById(
-        "voteMessage"
-    ).textContent =
-    "You have already voted from this device.";
-
-}
-
-
-
-/* =====================================================
-   STAR RATING
-===================================================== */
-
-let selectedRating = 0;
-
-
-document
-.querySelectorAll(".star")
-.forEach(star => {
-
-    star.addEventListener(
-        "click",
-        function() {
-
-            selectedRating =
-                Number(
-                    this.dataset.rating
-                );
-
-
-            document
-            .querySelectorAll(".star")
-            .forEach(s => {
-
-                const rating =
-                    Number(
-                        s.dataset.rating
-                    );
-
-
-                if (
-                    rating <= selectedRating
-                ) {
-
-                    s.classList.add(
-                        "active"
-                    );
-
-                } else {
-
-                    s.classList.remove(
-                        "active"
-                    );
-
-                }
-
-            });
-
-        }
-
-    );
-
-});
-
-
-
-/* =====================================================
-   SUBMIT REVIEW
-===================================================== */
-
-document
-.getElementById("reviewSubmit")
-.addEventListener(
-    "click",
-    async function() {
-
-        const name =
-            document
-            .getElementById(
-                "reviewName"
-            )
-            .value
-            .trim();
-
-
-        const review =
-            document
-            .getElementById(
-                "reviewText"
-            )
-            .value
-            .trim();
-
-
-        const message =
-            document
-            .getElementById(
-                "reviewMessage"
-            );
-
-
-        if (!name) {
-
-            message.textContent =
-            "Please enter your name.";
-
-            return;
-
-        }
-
-
-        if (!selectedRating) {
-
-            message.textContent =
-            "Please select a rating.";
-
-            return;
-
-        }
-
-
-        if (!review) {
-
-            message.textContent =
-            "Please write a review.";
-
-            return;
-
-        }
-
-
-        this.disabled = true;
-
-        this.textContent =
-            "Submitting...";
-
-
-        const {
-            error
-        } = await supabaseClient
-        .from("reviews")
-        .insert([
-            {
-                name: name,
-                rating: selectedRating,
-                review: review,
-                approved: false
-            }
-        ]);
-
-
-        if (error) {
-
-            console.error(error);
-
-            message.textContent =
-            "Unable to submit review. Please try again.";
-
-            this.disabled = false;
-
-            this.textContent =
-                "Submit Review";
-
-            return;
-
-        }
-
-
-        message.textContent =
-        "Thank you! Your review was submitted and is awaiting approval.";
-
-
-        document
-        .getElementById(
-            "reviewName"
-        ).value = "";
-
-
-        document
-        .getElementById(
-            "reviewText"
-        ).value = "";
-
-
-        selectedRating = 0;
-
-
-        document
-        .querySelectorAll(".star")
-        .forEach(star => {
-
-            star.classList.remove(
-                "active"
-            );
-
-        });
-
-
-        this.disabled = false;
-
-        this.textContent =
-            "Submit Review";
-
-    }
-
-);
-
-
-
-/* =====================================================
-   LOAD APPROVED REVIEWS
-===================================================== */
-
-async function loadReviews() {
-
-    const {
-        data,
-        error
-    } = await supabaseClient
-    .from("reviews")
-    .select(
-        "name,rating,review,created_at"
-    )
-    .eq(
-        "approved",
-        true
-    )
-    .order(
-        "created_at",
-        {
-            ascending: false
-        }
-    );
-
-
-    const reviewGrid =
-        document.getElementById(
-            "reviewGrid"
-        );
-
-
-    if (error) {
-
-        console.error(error);
-
-        reviewGrid.innerHTML =
-        `
-        <p class="no-reviews">
-            Reviews are currently unavailable.
-        </p>
-        `;
-
-        return;
-
-    }
-
-
-    if (!data || data.length === 0) {
-
-        reviewGrid.innerHTML =
-        `
-        <p class="no-reviews">
-            No approved reviews yet.
-            Be the first to share your experience!
-        </p>
-        `;
-
-        return;
-
-    }
-
-
-    reviewGrid.innerHTML = "";
-
-
-    data.forEach(item => {
-
-        let stars = "";
-
-
-        for (
-            let i = 1;
-            i <= 5;
-            i++
-        ) {
-
-            stars +=
-                i <= item.rating
-                ? "★"
-                : "☆";
-
-        }
-
-
-        const card =
-        document.createElement(
-            "div"
-        );
-
-        card.className =
-            "review-card";
-
-
-        card.innerHTML = `
-
-            <div class="review-name">
-
-                ${escapeHTML(item.name)}
-
-            </div>
-
-            <div class="review-stars">
-
-                ${stars}
-
-            </div>
-
-            <div class="review-text">
-
-                ${escapeHTML(item.review)}
-
-            </div>
-
-        `;
-
-
-        reviewGrid.appendChild(
-            card
-        );
-
-    });
-
-}
-
-
-
-/* =====================================================
-   SECURITY HELPER
-===================================================== */
-
-function escapeHTML(text) {
-
-    const div =
-        document.createElement(
-            "div"
-        );
-
-    div.textContent =
-        text;
-
-    return div.innerHTML;
-
-}
-
-
-loadReviews();
-
-
-</script>
-
-
-</body>
-
-</html>
+<p>
+<strong>Thank you for 
