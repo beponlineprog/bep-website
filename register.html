@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>B.E.P. Registration</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:Arial,sans-serif;
+    background:#f4f8fc;
+    color:#222;
+}
+
+header{
+    background:#063b73;
+    color:white;
+    padding:18px 7%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+}
+
+.logo{
+    font-size:23px;
+    font-weight:bold;
+}
+
+.logo span{
+    color:#f4c542;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    margin:5px 8px;
+    font-weight:bold;
+}
+
+nav a:hover{
+    color:#f4c542;
+}
+
+.container{
+    max-width:750px;
+    margin:45px auto;
+    padding:20px;
+}
+
+.form-box{
+    background:white;
+    padding:35px;
+    border-radius:15px;
+    box-shadow:0 5px 20px rgba(0,0,0,.1);
+}
+
+h1{
+    text-align:center;
+    color:#063b73;
+    margin-bottom:10px;
+}
+
+.intro{
+    text-align:center;
+    margin-bottom:30px;
+}
+
+label{
+    display:block;
+    margin-top:18px;
+    margin-bottom:7px;
+    font-weight:bold;
+    color:#063b73;
+}
+
+input{
+    width:100%;
+    padding:13px;
+    border:1px solid #ccc;
+    border-radius:7px;
+    font-size:16px;
+}
+
+button{
+    width:100%;
+    margin-top:25px;
+    padding:14px;
+    border:0;
+    border-radius:7px;
+    background:#063b73;
+    color:white;
+    font-size:17px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#f4c542;
+    color:#063b73;
+}
+
+.success{
+    display:none;
+    text-align:center;
+    padding:30px;
+}
+
+.success h2{
+    color:#063b73;
+    margin-bottom:15px;
+}
+
+.success p{
+    margin-bottom:20px;
+}
+
+.success a{
+    display:inline-block;
+    background:#f4c542;
+    color:#063b73;
+    padding:12px 20px;
+    text-decoration:none;
+    border-radius:7px;
+    font-weight:bold;
+}
+
+footer{
+    text-align:center;
+    background:#031f3c;
+    color:white;
+    padding:25px;
+    margin-top:50px;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">
+B.E.P. <span>ONLINE PROGRAM</span>
+</div>
+
+<nav>
+<a href="index.html">Home</a>
+<a href="register.html">Register</a>
+<a href="quiz.html">Quiz</a>
+</nav>
+
+</header>
+
+<div class="container">
+
+<div class="form-box" id="registrationBox">
+
+<h1>B.E.P. Learner Registration</h1>
+
+<p class="intro">
+Register to participate in the Biblical Empowerment Program.
+</p>
+
+<form id="registrationForm">
+
+<label>Name</label>
+<input type="text" id="name" required>
+
+<label>Surname</label>
+<input type="text" id="surname" required>
+
+<label>Phone Number</label>
+<input type="tel" id="phone" required>
+
+<label>Email Address</label>
+<input type="email" id="email" required>
+
+<label>Location</label>
+<input type="text" id="location" required>
+
+<button type="submit">
+Submit Registration
+</button>
+
+</form>
+
+</div>
+
+<div class="form-box success" id="successBox">
+
+<h2>Registration Successful! 🙏</h2>
+
+<p>
+Thank you for registering with the Biblical Empowerment Program.
+We look forward to having you with us as we learn, grow and
+become empowered through the Word of God.
+</p>
+
+<a href="index.html">Return to B.E.P. Website</a>
+
+</div>
+
+</div>
+
+<footer>
+© 2026 Biblical Empowerment Program (B.E.P.)
+</footer>
+
+<script>
+
+document.getElementById("registrationForm")
+.addEventListener("submit",function(event){
+
+    event.preventDefault();
+
+    document.getElementById("registrationBox")
+    .style.display="none";
+
+    document.getElementById("successBox")
+    .style.display="block";
+
+});
+
+</script>
+
+</body>
+  </html>
