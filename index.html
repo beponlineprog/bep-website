@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
 
 <title>Biblical Empowerment Program - B.E.P</title>
 
@@ -11,6 +14,11 @@
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
+
+/* =========================
+   GENERAL
+========================= */
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -28,59 +36,98 @@ body {
     line-height: 1.6;
 }
 
-/* NAVIGATION */
+.container {
+    width: 92%;
+    max-width: 1100px;
+    margin: auto;
+}
+
+section {
+    padding: 65px 0;
+}
+
+.section-title {
+    text-align: center;
+    color: #063b8c;
+    font-size: 32px;
+    margin-bottom: 35px;
+}
+
+
+/* =========================
+   NAVIGATION
+========================= */
+
 nav {
     background: #063b8c;
-    padding: 15px 20px;
     position: sticky;
     top: 0;
     z-index: 1000;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+    box-shadow: 0 3px 12px rgba(0,0,0,0.2);
 }
 
 .nav-container {
+    width: 92%;
     max-width: 1100px;
     margin: auto;
+    min-height: 65px;
+
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
 }
 
 .logo {
     color: white;
-    font-size: 21px;
+    font-size: 22px;
     font-weight: bold;
 }
 
+.logo i {
+    color: #ffd34d;
+}
+
 .nav-links {
-    display: flex;
-    gap: 18px;
     list-style: none;
+    display: flex;
+    gap: 20px;
 }
 
 .nav-links a {
     color: white;
     text-decoration: none;
-    font-weight: bold;
     font-size: 14px;
+    font-weight: bold;
 }
 
 .nav-links a:hover {
     color: #ffd34d;
 }
 
-/* HERO */
+
+/* =========================
+   HERO
+========================= */
+
 .hero {
-    min-height: 500px;
+    min-height: 530px;
+
     display: flex;
     align-items: center;
     justify-content: center;
+
     text-align: center;
-    padding: 60px 20px;
-    background:
-        linear-gradient(rgba(0,48,120,0.82), rgba(0,48,120,0.82)),
-        url("banner.png") center/cover;
+
+    padding: 70px 20px;
+
     color: white;
+
+    background:
+    linear-gradient(
+        rgba(0,48,120,0.84),
+        rgba(0,48,120,0.84)
+    ),
+    url("banner.png") center/cover no-repeat;
 }
 
 .hero-content {
@@ -88,31 +135,50 @@ nav {
 }
 
 .hero h1 {
-    font-size: clamp(38px, 8vw, 72px);
-    margin-bottom: 10px;
+    font-size: clamp(45px, 10vw, 78px);
+    margin-bottom: 5px;
 }
 
 .hero h2 {
-    font-size: clamp(20px, 4vw, 34px);
     color: #ffd34d;
+    font-size: clamp(20px, 5vw, 35px);
     margin-bottom: 20px;
 }
 
 .hero p {
     font-size: 18px;
-    margin-bottom: 25px;
+    margin-bottom: 12px;
 }
+
+.hero-tagline {
+    font-weight: bold;
+}
+
+
+/* =========================
+   BUTTON
+========================= */
 
 .btn {
     display: inline-block;
-    padding: 13px 22px;
-    border-radius: 8px;
+
     background: #ffd34d;
     color: #063b8c;
-    text-decoration: none;
-    font-weight: bold;
+
     border: none;
+    border-radius: 8px;
+
+    padding: 14px 23px;
+
+    margin-top: 20px;
+
+    font-size: 16px;
+    font-weight: bold;
+
+    text-decoration: none;
+
     cursor: pointer;
+
     transition: 0.3s;
 }
 
@@ -121,50 +187,11 @@ nav {
     opacity: 0.9;
 }
 
-/* SECTIONS */
-section {
-    padding: 60px 20px;
-}
 
-.container {
-    max-width: 1100px;
-    margin: auto;
-}
+/* =========================
+   COUNTDOWN
+========================= */
 
-.section-title {
-    text-align: center;
-    color: #063b8c;
-    margin-bottom: 35px;
-    font-size: 32px;
-}
-
-/* CARDS */
-.cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-    gap: 20px;
-}
-
-.card {
-    background: white;
-    padding: 25px;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-    text-align: center;
-}
-
-.card i {
-    font-size: 35px;
-    color: #063b8c;
-    margin-bottom: 15px;
-}
-
-.card h3 {
-    color: #063b8c;
-    margin-bottom: 10px;
-}
-
-/* COUNTDOWN */
 .countdown-section {
     background: #063b8c;
     color: white;
@@ -178,15 +205,19 @@ section {
 .countdown {
     display: flex;
     justify-content: center;
-    gap: 12px;
     flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 25px;
 }
 
 .time-box {
     background: white;
     color: #063b8c;
-    min-width: 90px;
+
+    min-width: 95px;
+
     padding: 15px;
+
     border-radius: 10px;
 }
 
@@ -197,26 +228,150 @@ section {
 
 .time-box span {
     font-size: 12px;
+    font-weight: bold;
 }
 
-/* QUIZ */
-.quiz-section {
+
+/* =========================
+   ABOUT US
+========================= */
+
+.about-intro {
+    background: white;
+    padding: 30px;
+
+    border-radius: 12px;
+
+    box-shadow:
+    0 4px 18px rgba(0,0,0,0.08);
+
+    margin-bottom: 25px;
+}
+
+.about-intro p {
+    margin-bottom: 18px;
+    font-size: 16px;
+}
+
+.about-heading {
+    color: #063b8c;
+    font-size: 25px;
+    margin: 25px 0 12px;
+}
+
+.about-list {
+    margin-left: 25px;
+}
+
+.about-list li {
+    margin-bottom: 9px;
+}
+
+.vision-box,
+.mission-box {
     background: #eef5ff;
+
+    padding: 25px;
+
+    border-left: 5px solid #063b8c;
+
+    border-radius: 8px;
+
+    margin-top: 20px;
+}
+
+.vision-box h3,
+.mission-box h3 {
+    color: #063b8c;
+    margin-bottom: 8px;
+}
+
+
+/* =========================
+   CARDS
+========================= */
+
+.cards {
+    display: grid;
+
+    grid-template-columns:
+    repeat(auto-fit, minmax(230px, 1fr));
+
+    gap: 20px;
+}
+
+.card {
+    background: white;
+
+    padding: 25px;
+
+    border-radius: 12px;
+
+    text-align: center;
+
+    box-shadow:
+    0 4px 15px rgba(0,0,0,0.08);
+}
+
+.card i {
+    color: #063b8c;
+    font-size: 35px;
+    margin-bottom: 15px;
+}
+
+.card h3 {
+    color: #063b8c;
+    margin-bottom: 10px;
+}
+
+
+/* =========================
+   SESSIONS
+========================= */
+
+.sessions-section {
+    background: #eef5ff;
+}
+
+
+/* =========================
+   QUIZ
+========================= */
+
+.quiz-section {
+    background: #f0f6ff;
 }
 
 .quiz-info {
     background: white;
+
+    padding: 22px;
+
     border-left: 5px solid #063b8c;
-    padding: 20px;
-    margin-bottom: 25px;
+
     border-radius: 8px;
+
+    margin-bottom: 25px;
 }
+
+.quiz-info ul {
+    margin-left: 22px;
+    margin-top: 10px;
+}
+
+
+/* PARTICIPANT FORM */
 
 .registration {
     background: white;
-    padding: 25px;
+
+    padding: 28px;
+
     border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+
+    box-shadow:
+    0 4px 15px rgba(0,0,0,0.08);
+
     margin-bottom: 30px;
 }
 
@@ -227,7 +382,10 @@ section {
 
 .form-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+
+    grid-template-columns:
+    repeat(2, 1fr);
+
     gap: 18px;
 }
 
@@ -236,34 +394,44 @@ section {
     flex-direction: column;
 }
 
-.form-group.full {
-    grid-column: 1 / -1;
-}
-
-label {
+.form-group label {
     font-weight: bold;
     margin-bottom: 6px;
 }
 
-input {
+.form-group input {
     padding: 13px;
+
     border: 1px solid #c7d1df;
+
     border-radius: 7px;
+
     font-size: 16px;
 }
 
-input:focus {
+.form-group input:focus {
     outline: none;
+
     border-color: #063b8c;
-    box-shadow: 0 0 0 2px rgba(6,59,140,0.1);
+
+    box-shadow:
+    0 0 0 2px rgba(6,59,140,0.12);
 }
+
+
+/* QUESTIONS */
 
 .question {
     background: white;
-    margin-bottom: 20px;
-    padding: 22px;
+
+    padding: 23px;
+
     border-radius: 10px;
-    box-shadow: 0 3px 12px rgba(0,0,0,0.07);
+
+    margin-bottom: 20px;
+
+    box-shadow:
+    0 3px 12px rgba(0,0,0,0.07);
 }
 
 .question h3 {
@@ -273,9 +441,13 @@ input:focus {
 
 .option {
     display: block;
+
     padding: 9px;
-    margin: 6px 0;
+
+    margin: 5px 0;
+
     border-radius: 6px;
+
     cursor: pointer;
 }
 
@@ -287,30 +459,42 @@ input:focus {
     margin-right: 8px;
 }
 
-/* RESULT */
+
+/* =========================
+   RESULT
+========================= */
+
 .result {
     display: none;
+
     background: white;
+
     padding: 30px;
+
     border-radius: 12px;
+
     margin-top: 30px;
+
     text-align: center;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+
+    box-shadow:
+    0 5px 20px rgba(0,0,0,0.1);
 }
 
 .result h2 {
     color: #063b8c;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
 }
 
 .result-details {
-    text-align: left;
     max-width: 600px;
-    margin: 20px auto;
+    margin: auto;
+    text-align: left;
 }
 
 .result-details p {
-    padding: 8px 0;
+    padding: 9px 0;
+
     border-bottom: 1px solid #eee;
 }
 
@@ -326,21 +510,28 @@ input:focus {
     font-size: 22px;
 }
 
-/* CONTACT */
-.contact {
+
+/* =========================
+   CONTACT
+========================= */
+
+.contact-section {
     background: #063b8c;
-    color: white;
 }
 
-.contact .section-title {
+.contact-section .section-title {
     color: white;
 }
 
 .contact-card {
     background: white;
+
     color: #172033;
+
     padding: 25px;
+
     border-radius: 12px;
+
     text-align: center;
 }
 
@@ -350,26 +541,47 @@ input:focus {
     margin-bottom: 10px;
 }
 
-.contact-card a {
-    color: #063b8c;
-    text-decoration: none;
-    font-weight: bold;
+.contact-card h3 {
+    margin-bottom: 8px;
 }
 
-/* FOOTER */
+.contact-card a {
+    color: #063b8c;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
 footer {
     background: #022653;
+
     color: white;
+
     text-align: center;
-    padding: 25px 15px;
+
+    padding: 28px 15px;
+
     font-size: 14px;
 }
 
-/* MOBILE */
+footer p {
+    margin: 5px 0;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
 @media (max-width: 700px) {
 
     .nav-container {
         flex-direction: column;
+        padding: 13px 0;
         gap: 10px;
     }
 
@@ -383,40 +595,70 @@ footer {
         grid-template-columns: 1fr;
     }
 
-    .form-group.full {
-        grid-column: auto;
+    section {
+        padding: 45px 0;
     }
 
-    section {
-        padding: 45px 15px;
+    .about-intro {
+        padding: 22px;
     }
+
 }
+
 </style>
 </head>
 
+
 <body>
 
-<!-- NAVIGATION -->
+
+<!-- =========================================
+     NAVIGATION
+========================================= -->
+
 <nav>
+
 <div class="nav-container">
 
 <div class="logo">
-<i class="fas fa-cross"></i> B.E.P
+<i class="fas fa-cross"></i>
+B.E.P
 </div>
 
 <ul class="nav-links">
-<li><a href="#home">Home</a></li>
-<li><a href="#about">About</a></li>
-<li><a href="#sessions">Sessions</a></li>
-<li><a href="#quiz">Bible Quiz</a></li>
-<li><a href="#contact">Contact</a></li>
+
+<li>
+<a href="#home">Home</a>
+</li>
+
+<li>
+<a href="#about">About Us</a>
+</li>
+
+<li>
+<a href="#sessions">Sessions</a>
+</li>
+
+<li>
+<a href="#quiz">Bible Quiz</a>
+</li>
+
+<li>
+<a href="#contact">Contact</a>
+</li>
+
 </ul>
 
 </div>
+
 </nav>
 
 
-<!-- HERO -->
+
+<!-- =========================================
+     HERO
+========================================= -->
+
 <section class="hero" id="home">
 
 <div class="hero-content">
@@ -425,24 +667,33 @@ footer {
 
 <h2>Biblical Empowerment Program</h2>
 
-<p>
+<p class="hero-tagline">
 Building the Church of Christ
 </p>
 
 <p>
-Growing in God's Word • Strengthening Faith • Empowering Believers
+Growing in God's Word • Strengthening Faith •
+Empowering Believers
 </p>
 
 <a href="#quiz" class="btn">
+
 <i class="fas fa-book-bible"></i>
+
 Take the Bible Quiz
+
 </a>
 
 </div>
+
 </section>
 
 
-<!-- COUNTDOWN -->
+
+<!-- =========================================
+     COUNTDOWN
+========================================= -->
+
 <section class="countdown-section">
 
 <div class="container">
@@ -451,147 +702,326 @@ Take the Bible Quiz
 Next B.E.P. Session
 </h2>
 
-<p style="margin-bottom:20px;">
+<p>
 Every Thursday • 19:00 – 20:30
+</p>
+
+<p>
+Microsoft Teams
 </p>
 
 <div class="countdown">
 
 <div class="time-box">
+
 <strong id="days">0</strong>
+
 <span>DAYS</span>
+
 </div>
 
+
 <div class="time-box">
+
 <strong id="hours">0</strong>
+
 <span>HOURS</span>
+
 </div>
 
+
 <div class="time-box">
+
 <strong id="minutes">0</strong>
+
 <span>MINUTES</span>
+
 </div>
+
 
 <div class="time-box">
+
 <strong id="seconds">0</strong>
+
 <span>SECONDS</span>
-</div>
 
 </div>
 
 </div>
+
+</div>
+
 </section>
 
 
-<!-- ABOUT -->
+
+<!-- =========================================
+     ABOUT US
+========================================= -->
+
 <section id="about">
 
 <div class="container">
 
 <h2 class="section-title">
-About B.E.P
+About Us
 </h2>
 
-<div class="card">
 
-<i class="fas fa-church"></i>
-
-<h3>Biblical Empowerment Program</h3>
+<div class="about-intro">
 
 <p>
-B.E.P. is an online Christian teaching program focused on
-helping believers grow in their understanding of God's Word,
-develop their faith, strengthen their spiritual lives and
+<strong>
+The Biblical Empowerment Program (B.E.P.)
+</strong>
+is an online Christian teaching and discipleship
+program established to help believers grow deeper
+in their relationship with God and develop a stronger
+understanding of His Word.
+</p>
+
+
+<p>
+At B.E.P., we believe that the Word of God is not
+only meant to be heard, but also understood, lived out,
+and shared with others. Our program creates an
+opportunity for believers to learn biblical principles,
+ask questions, grow in faith, and discover how
+Scripture can guide their everyday lives.
+</p>
+
+
+<p>
+Through our online teaching sessions, Bible studies,
+prayer, discipleship, and spiritual discussions, we
+focus on building believers who are rooted in Christ
+and equipped to serve God and others.
+</p>
+
+
+<h3 class="about-heading">
+Our Purpose
+</h3>
+
+<p>
+Our purpose is to build, equip, encourage, and empower
+believers through the Word of God. We aim to create an
+environment where people can grow spiritually, develop
+Christian character, strengthen their prayer lives, and
+become more committed followers of Jesus Christ.
+</p>
+
+
+<h3 class="about-heading">
+What We Teach
+</h3>
+
+<ul class="about-list">
+
+<li>
+Biblical understanding and Christian foundations
+</li>
+
+<li>
+Prayer and spiritual growth
+</li>
+
+<li>
+Discipleship and following Christ
+</li>
+
+<li>
+Faith and trusting God
+</li>
+
+<li>
+Christian character and godly living
+</li>
+
+<li>
+Forgiveness, love, and reconciliation
+</li>
+
+<li>
+The work of the Holy Spirit
+</li>
+
+<li>
+Discovering and using spiritual gifts
+</li>
+
+<li>
+Applying God's Word in everyday life
+</li>
+
+</ul>
+
+
+<div class="vision-box">
+
+<h3>
+Our Vision
+</h3>
+
+<p>
+<strong>
+Building the Church of Christ through biblical
+teaching, spiritual growth, discipleship, and
+practical Christian living.
+</strong>
+</p>
+
+</div>
+
+
+<div class="mission-box">
+
+<h3>
+Our Mission
+</h3>
+
+<p>
+To provide accessible biblical teaching that
+encourages believers to know God's Word, grow in
+faith, live according to biblical principles, and
 become effective disciples of Jesus Christ.
 </p>
 
+</div>
+
+
 <br>
 
-<p>
-<strong>Our vision:</strong>
-Building the Church of Christ through biblical teaching,
-spiritual growth and practical Christian living.
+<p style="text-align:center; font-weight:bold; color:#063b8c;">
+
+B.E.P. — Building the Church of Christ.
+
 </p>
 
 </div>
 
 </div>
+
 </section>
 
 
-<!-- OBJECTIVES -->
-<section id="sessions">
+
+<!-- =========================================
+     SESSIONS & OBJECTIVES
+========================================= -->
+
+<section class="sessions-section" id="sessions">
 
 <div class="container">
 
 <h2 class="section-title">
-Our Sessions & Objectives
+Sessions & Objectives
 </h2>
+
 
 <div class="cards">
 
+
 <div class="card">
+
 <i class="fas fa-book-open"></i>
-<h3>Study the Word</h3>
-<p>
-Understand Scripture and apply biblical principles to everyday life.
-</p>
-</div>
-
-<div class="card">
-<i class="fas fa-person-praying"></i>
-<h3>Grow Spiritually</h3>
-<p>
-Develop a stronger prayer life and deeper relationship with God.
-</p>
-</div>
-
-<div class="card">
-<i class="fas fa-users"></i>
-<h3>Discipleship</h3>
-<p>
-Equip believers to follow Christ and help others grow in faith.
-</p>
-</div>
-
-<div class="card">
-<i class="fas fa-heart"></i>
-<h3>Christian Character</h3>
-<p>
-Learn to live with love, forgiveness, humility and integrity.
-</p>
-</div>
-
-</div>
-
-<br>
-
-<div class="card">
 
 <h3>
+Study the Word
+</h3>
+
+<p>
+Understand Scripture and learn how to apply
+biblical principles to everyday life.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<i class="fas fa-person-praying"></i>
+
+<h3>
+Prayer & Spiritual Growth
+</h3>
+
+<p>
+Develop a stronger prayer life and deeper
+relationship with God.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<i class="fas fa-users"></i>
+
+<h3>
+Discipleship
+</h3>
+
+<p>
+Learn what it means to follow Christ and
+help others grow in faith.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<i class="fas fa-heart"></i>
+
+<h3>
+Christian Character
+</h3>
+
+<p>
+Grow in love, forgiveness, humility,
+obedience and godly living.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="card" style="margin-top:25px;">
+
 <i class="fas fa-video"></i>
+
+<h3>
 Thursday Online Sessions
 </h3>
 
 <p>
-<strong>Time:</strong> 19:00 – 20:30
+<strong>
+Every Thursday
+</strong>
 </p>
 
 <p>
-<strong>Platform:</strong> Microsoft Teams
+19:00 – 20:30
 </p>
 
 <p>
-Participants can register through the B.E.P. contact channels.
+Microsoft Teams
 </p>
 
 </div>
 
 </div>
+
 </section>
 
 
-<!-- QUIZ -->
+
+<!-- =========================================
+     BIBLE QUIZ
+========================================= -->
+
 <section class="quiz-section" id="quiz">
 
 <div class="container">
@@ -600,25 +1030,49 @@ Participants can register through the B.E.P. contact channels.
 B.E.P. Bible Quiz
 </h2>
 
+
 <div class="quiz-info">
 
-<strong>Quiz Instructions</strong>
+<h3>
+Quiz Instructions
+</h3>
 
-<ul style="margin-left:20px; margin-top:10px;">
+<ul>
 
-<li>20 multiple-choice questions</li>
-<li>Each question carries 3 marks</li>
-<li>Total: 60 marks</li>
-<li>Pass mark: 40/60</li>
-<li>Select one answer for each question</li>
-<li>Complete your personal details before submitting</li>
+<li>
+20 multiple-choice questions
+</li>
+
+<li>
+Each question carries 3 marks
+</li>
+
+<li>
+Total: 60 marks
+</li>
+
+<li>
+Pass mark: 40/60
+</li>
+
+<li>
+Select one answer for each question
+</li>
+
+<li>
+Complete your personal details before submitting
+</li>
 
 </ul>
 
 </div>
 
 
-<!-- REGISTRATION -->
+
+<!-- =========================================
+     PARTICIPANT INFORMATION
+========================================= -->
+
 <div class="registration">
 
 <h3>
@@ -626,11 +1080,15 @@ B.E.P. Bible Quiz
 Participant Information
 </h3>
 
+
 <div class="form-grid">
+
 
 <div class="form-group">
 
-<label for="name">Name *</label>
+<label for="name">
+Name *
+</label>
 
 <input
 type="text"
@@ -643,7 +1101,9 @@ required>
 
 <div class="form-group">
 
-<label for="surname">Surname *</label>
+<label for="surname">
+Surname *
+</label>
 
 <input
 type="text"
@@ -656,7 +1116,9 @@ required>
 
 <div class="form-group">
 
-<label for="phone">Cell Number *</label>
+<label for="phone">
+Cell Number *
+</label>
 
 <input
 type="tel"
@@ -669,7 +1131,9 @@ required>
 
 <div class="form-group">
 
-<label for="email">Email Address *</label>
+<label for="email">
+Email Address *
+</label>
 
 <input
 type="email"
@@ -679,18 +1143,23 @@ required>
 
 </div>
 
+
 </div>
 
 </div>
+
 
 
 <form id="quizForm">
 
 
 <!-- QUESTION 1 -->
+
 <div class="question">
 
-<h3>1. Who created the heavens and the earth?</h3>
+<h3>
+1. Who created the heavens and the earth?
+</h3>
 
 <label class="option">
 <input type="radio" name="q1" value="0">
@@ -715,10 +1184,14 @@ D. David
 </div>
 
 
+
 <!-- QUESTION 2 -->
+
 <div class="question">
 
-<h3>2. Who built the ark?</h3>
+<h3>
+2. Who built the ark?
+</h3>
 
 <label class="option">
 <input type="radio" name="q2" value="0">
@@ -743,10 +1216,14 @@ D. Joshua
 </div>
 
 
+
 <!-- QUESTION 3 -->
+
 <div class="question">
 
-<h3>3. Who led the Israelites out of Egypt?</h3>
+<h3>
+3. Who led the Israelites out of Egypt?
+</h3>
 
 <label class="option">
 <input type="radio" name="q3" value="0">
@@ -771,10 +1248,14 @@ D. Elijah
 </div>
 
 
+
 <!-- QUESTION 4 -->
+
 <div class="question">
 
-<h3>4. Where was Jesus born?</h3>
+<h3>
+4. Where was Jesus born?
+</h3>
 
 <label class="option">
 <input type="radio" name="q4" value="1">
@@ -799,10 +1280,14 @@ D. Jericho
 </div>
 
 
+
 <!-- QUESTION 5 -->
+
 <div class="question">
 
-<h3>5. Who was the mother of Jesus?</h3>
+<h3>
+5. Who was the mother of Jesus?
+</h3>
 
 <label class="option">
 <input type="radio" name="q5" value="1">
@@ -827,10 +1312,14 @@ D. Ruth
 </div>
 
 
+
 <!-- QUESTION 6 -->
+
 <div class="question">
 
-<h3>6. How many disciples did Jesus choose?</h3>
+<h3>
+6. How many disciples did Jesus choose?
+</h3>
 
 <label class="option">
 <input type="radio" name="q6" value="0">
@@ -855,10 +1344,14 @@ D. 40
 </div>
 
 
+
 <!-- QUESTION 7 -->
+
 <div class="question">
 
-<h3>7. What is the first book of the Bible?</h3>
+<h3>
+7. What is the first book of the Bible?
+</h3>
 
 <label class="option">
 <input type="radio" name="q7" value="1">
@@ -883,10 +1376,14 @@ D. Psalms
 </div>
 
 
+
 <!-- QUESTION 8 -->
+
 <div class="question">
 
-<h3>8. What is the last book of the Bible?</h3>
+<h3>
+8. What is the last book of the Bible?
+</h3>
 
 <label class="option">
 <input type="radio" name="q8" value="0">
@@ -911,10 +1408,14 @@ D. Romans
 </div>
 
 
+
 <!-- QUESTION 9 -->
+
 <div class="question">
 
-<h3>9. Who defeated Goliath?</h3>
+<h3>
+9. Who defeated Goliath?
+</h3>
 
 <label class="option">
 <input type="radio" name="q9" value="1">
@@ -939,10 +1440,14 @@ D. Joshua
 </div>
 
 
+
 <!-- QUESTION 10 -->
+
 <div class="question">
 
-<h3>10. What did Jesus turn water into?</h3>
+<h3>
+10. What did Jesus turn water into?
+</h3>
 
 <label class="option">
 <input type="radio" name="q10" value="0">
@@ -967,10 +1472,14 @@ D. Juice
 </div>
 
 
+
 <!-- QUESTION 11 -->
+
 <div class="question">
 
-<h3>11. What is the greatest commandment?</h3>
+<h3>
+11. What is the greatest commandment?
+</h3>
 
 <label class="option">
 <input type="radio" name="q11" value="1">
@@ -995,10 +1504,14 @@ D. Travel the world
 </div>
 
 
+
 <!-- QUESTION 12 -->
+
 <div class="question">
 
-<h3>12. Who baptized Jesus?</h3>
+<h3>
+12. Who baptized Jesus?
+</h3>
 
 <label class="option">
 <input type="radio" name="q12" value="1">
@@ -1023,288 +1536,5 @@ D. James
 </div>
 
 
-<!-- QUESTION 13 -->
-<div class="question">
 
-<h3>13. Who betrayed Jesus?</h3>
-
-<label class="option">
-<input type="radio" name="q13" value="0">
-A. Peter
-</label>
-
-<label class="option">
-<input type="radio" name="q13" value="1">
-B. Judas Iscariot
-</label>
-
-<label class="option">
-<input type="radio" name="q13" value="0">
-C. Thomas
-</label>
-
-<label class="option">
-<input type="radio" name="q13" value="0">
-D. John
-</label>
-
-</div>
-
-
-<!-- QUESTION 14 -->
-<div class="question">
-
-<h3>14. How many days did Jesus fast in the wilderness?</h3>
-
-<label class="option">
-<input type="radio" name="q14" value="0">
-A. 7
-</label>
-
-<label class="option">
-<input type="radio" name="q14" value="1">
-B. 40
-</label>
-
-<label class="option">
-<input type="radio" name="q14" value="0">
-C. 12
-</label>
-
-<label class="option">
-<input type="radio" name="q14" value="0">
-D. 30
-</label>
-
-</div>
-
-
-<!-- QUESTION 15 -->
-<div class="question">
-
-<h3>15. What is the shortest verse in many English Bible translations?</h3>
-
-<label class="option">
-<input type="radio" name="q15" value="1">
-A. Jesus wept.
-</label>
-
-<label class="option">
-<input type="radio" name="q15" value="0">
-B. God is love.
-</label>
-
-<label class="option">
-<input type="radio" name="q15" value="0">
-C. Pray continually.
-</label>
-
-<label class="option">
-<input type="radio" name="q15" value="0">
-D. Rejoice always.
-</label>
-
-</div>
-
-
-<!-- QUESTION 16 -->
-<div class="question">
-
-<h3>16. Who was known for his great strength?</h3>
-
-<label class="option">
-<input type="radio" name="q16" value="1">
-A. Samson
-</label>
-
-<label class="option">
-<input type="radio" name="q16" value="0">
-B. Solomon
-</label>
-
-<label class="option">
-<input type="radio" name="q16" value="0">
-C. Samuel
-</label>
-
-<label class="option">
-<input type="radio" name="q16" value="0">
-D. Stephen
-</label>
-
-</div>
-
-
-<!-- QUESTION 17 -->
-<div class="question">
-
-<h3>17. Who received the Ten Commandments from God?</h3>
-
-<label class="option">
-<input type="radio" name="q17" value="1">
-A. Moses
-</label>
-
-<label class="option">
-<input type="radio" name="q17" value="0">
-B. David
-</label>
-
-<label class="option">
-<input type="radio" name="q17" value="0">
-C. Aaron
-</label>
-
-<label class="option">
-<input type="radio" name="q17" value="0">
-D. Joshua
-</label>
-
-</div>
-
-
-<!-- QUESTION 18 -->
-<div class="question">
-
-<h3>18. What did God create on the first day?</h3>
-
-<label class="option">
-<input type="radio" name="q18" value="1">
-A. Light
-</label>
-
-<label class="option">
-<input type="radio" name="q18" value="0">
-B. Animals
-</label>
-
-<label class="option">
-<input type="radio" name="q18" value="0">
-C. The sun
-</label>
-
-<label class="option">
-<input type="radio" name="q18" value="0">
-D. Humans
-</label>
-
-</div>
-
-
-<!-- QUESTION 19 -->
-<div class="question">
-
-<h3>19. What is the fruit of the Spirit according to Galatians 5?</h3>
-
-<label class="option">
-<input type="radio" name="q19" value="1">
-A. Love
-</label>
-
-<label class="option">
-<input type="radio" name="q19" value="0">
-B. Wealth
-</label>
-
-<label class="option">
-<input type="radio" name="q19" value="0">
-C. Fame
-</label>
-
-<label class="option">
-<input type="radio" name="q19" value="0">
-D. Power
-</label>
-
-</div>
-
-
-<!-- QUESTION 20 -->
-<div class="question">
-
-<h3>20. According to John 3:16, what did God give because He loved the world?</h3>
-
-<label class="option">
-<input type="radio" name="q20" value="1">
-A. His one and only Son
-</label>
-
-<label class="option">
-<input type="radio" name="q20" value="0">
-B. A kingdom
-</label>
-
-<label class="option">
-<input type="radio" name="q20" value="0">
-C. Wealth
-</label>
-
-<label class="option">
-<input type="radio" name="q20" value="0">
-D. Angels
-</label>
-
-</div>
-
-
-<div style="text-align:center;">
-
-<button type="submit" class="btn">
-<i class="fas fa-check-circle"></i>
-Submit Quiz
-</button>
-
-</div>
-
-</form>
-
-
-<!-- RESULT -->
-<div class="result" id="result">
-
-<h2>
-<i class="fas fa-certificate"></i>
-B.E.P. Quiz Result
-</h2>
-
-<div class="result-details">
-
-<p>
-<strong>Name:</strong>
-<span id="resultName"></span>
-</p>
-
-<p>
-<strong>Surname:</strong>
-<span id="resultSurname"></span>
-</p>
-
-<p>
-<strong>Cell Number:</strong>
-<span id="resultPhone"></span>
-</p>
-
-<p>
-<strong>Email:</strong>
-<span id="resultEmail"></span>
-</p>
-
-<p>
-<strong>Score:</strong>
-<span id="resultScore"></span> / 60
-</p>
-
-<p>
-<strong>Percentage:</strong>
-<span id="resultPercentage"></span>%
-</p>
-
-<p>
-<strong>Status:</strong>
-<span id="resultStatus"></span>
-</p>
-
-</div>
-
-<p>
-<strong>Thank you for 
+    
