@@ -1,832 +1,1151 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>B.E.P. | Quick Bible Quiz</title>
+<title>B.E.P. Bible Examination</title>
 
 <style>
-    * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:Arial,sans-serif;
+    background:#eef4fa;
+    color:#222;
+}
+
+header{
+    background:#063b73;
+    color:white;
+    padding:18px 6%;
+    text-align:center;
+}
+
+header h1{
+    font-size:28px;
+}
+
+header p{
+    color:#f4c542;
+    margin-top:5px;
+    font-weight:bold;
+}
+
+.container{
+    max-width:900px;
+    margin:30px auto;
+    padding:15px;
+}
+
+.exam-header{
+    background:white;
+    padding:25px;
+    border-radius:12px;
+    box-shadow:0 4px 15px rgba(0,0,0,.08);
+    margin-bottom:20px;
+}
+
+.exam-header h2{
+    color:#063b73;
+    margin-bottom:10px;
+}
+
+.instructions{
+    background:#f7f9fc;
+    padding:15px;
+    border-left:5px solid #f4c542;
+    margin-top:15px;
+}
+
+.student-details{
+    background:white;
+    padding:25px;
+    border-radius:12px;
+    box-shadow:0 4px 15px rgba(0,0,0,.08);
+    margin-bottom:20px;
+}
+
+.student-details h2{
+    color:#063b73;
+    margin-bottom:20px;
+}
+
+.form-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+}
+
+.form-group label{
+    display:block;
+    font-weight:bold;
+    color:#063b73;
+    margin-bottom:7px;
+}
+
+.form-group input{
+    width:100%;
+    padding:12px;
+    border:1px solid #ccc;
+    border-radius:7px;
+    font-size:16px;
+}
+
+.question{
+    background:white;
+    padding:25px;
+    margin-bottom:20px;
+    border-radius:12px;
+    box-shadow:0 4px 15px rgba(0,0,0,.08);
+}
+
+.progress{
+    color:#063b73;
+    font-weight:bold;
+    margin-bottom:10px;
+}
+
+.question h3{
+    margin-bottom:20px;
+    line-height:1.5;
+}
+
+.option{
+    display:block;
+    border:1px solid #ddd;
+    border-radius:8px;
+    padding:13px;
+    margin:10px 0;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.option:hover{
+    background:#f1f6fb;
+    border-color:#063b73;
+}
+
+.option input{
+    margin-right:10px;
+}
+
+.submit-btn{
+    width:100%;
+    background:#063b73;
+    color:white;
+    padding:16px;
+    border:none;
+    border-radius:8px;
+    font-size:18px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.submit-btn:hover{
+    background:#f4c542;
+    color:#063b73;
+}
+
+.result{
+    display:none;
+    background:white;
+    padding:35px;
+    border-radius:15px;
+    text-align:center;
+    margin-top:25px;
+    box-shadow:0 5px 20px rgba(0,0,0,.1);
+}
+
+.result h2{
+    color:#063b73;
+    margin-bottom:15px;
+}
+
+.score{
+    font-size:40px;
+    font-weight:bold;
+    color:#063b73;
+    margin:15px;
+}
+
+.message{
+    font-size:18px;
+    line-height:1.7;
+}
+
+.home-btn{
+    display:inline-block;
+    margin-top:20px;
+    padding:12px 20px;
+    background:#f4c542;
+    color:#063b73;
+    text-decoration:none;
+    border-radius:7px;
+    font-weight:bold;
+}
+
+@media(max-width:650px){
+
+    .form-grid{
+        grid-template-columns:1fr;
     }
 
-    body {
-        font-family: Arial, Helvetica, sans-serif;
-        background: #f4f8fc;
-        color: #172b4d;
-        line-height: 1.6;
+    header h1{
+        font-size:23px;
     }
 
-    /* HEADER */
-    header {
-        background: linear-gradient(135deg, #003b73, #0066b3);
-        color: white;
-        text-align: center;
-        padding: 30px 15px;
-        box-shadow: 0 3px 10px rgba(0,0,0,0.15);
-    }
+}
 
-    .logo {
-        font-size: 32px;
-        font-weight: bold;
-        letter-spacing: 2px;
-    }
-
-    .tagline {
-        margin-top: 5px;
-        color: #ffd700;
-        font-weight: bold;
-    }
-
-    /* MAIN */
-    .container {
-        max-width: 850px;
-        margin: 30px auto;
-        padding: 0 15px;
-    }
-
-    .intro {
-        background: white;
-        border-radius: 15px;
-        padding: 25px;
-        margin-bottom: 25px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-        text-align: center;
-    }
-
-    .intro h1 {
-        color: #003b73;
-        margin-bottom: 10px;
-    }
-
-    .instructions {
-        margin-top: 15px;
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 10px;
-    }
-
-    .info-box {
-        background: #eef6ff;
-        border-left: 4px solid #0066b3;
-        padding: 12px;
-        border-radius: 8px;
-    }
-
-    .info-box strong {
-        display: block;
-        color: #003b73;
-        font-size: 18px;
-    }
-
-    /* PROGRESS */
-    .progress-container {
-        background: white;
-        padding: 15px 20px;
-        border-radius: 12px;
-        margin-bottom: 20px;
-        box-shadow: 0 3px 12px rgba(0,0,0,0.07);
-    }
-
-    .progress-text {
-        display: flex;
-        justify-content: space-between;
-        font-weight: bold;
-        margin-bottom: 8px;
-    }
-
-    .progress-bar {
-        height: 10px;
-        background: #dbe7f2;
-        border-radius: 20px;
-        overflow: hidden;
-    }
-
-    .progress-fill {
-        height: 100%;
-        width: 0%;
-        background: #0066b3;
-        transition: width 0.3s ease;
-    }
-
-    /* QUESTIONS */
-    .question {
-        background: white;
-        padding: 25px;
-        margin-bottom: 20px;
-        border-radius: 15px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-        border-top: 4px solid #0066b3;
-    }
-
-    .question h3 {
-        color: #003b73;
-        margin-bottom: 18px;
-    }
-
-    .marks {
-        float: right;
-        background: #ffd700;
-        color: #172b4d;
-        padding: 4px 10px;
-        border-radius: 15px;
-        font-size: 13px;
-    }
-
-    .option {
-        display: block;
-        background: #f7faff;
-        border: 2px solid #d9e5f0;
-        border-radius: 10px;
-        padding: 12px 15px;
-        margin: 10px 0;
-        cursor: pointer;
-        transition: 0.2s;
-    }
-
-    .option:hover {
-        border-color: #0066b3;
-        background: #eef7ff;
-    }
-
-    .option input {
-        margin-right: 10px;
-        transform: scale(1.2);
-    }
-
-    /* SUBMIT */
-    .submit-area {
-        text-align: center;
-        margin: 30px 0;
-    }
-
-    .submit-btn,
-    .restart-btn {
-        border: none;
-        padding: 15px 35px;
-        border-radius: 30px;
-        font-size: 17px;
-        font-weight: bold;
-        cursor: pointer;
-        transition: 0.2s;
-    }
-
-    .submit-btn {
-        background: #0066b3;
-        color: white;
-    }
-
-    .submit-btn:hover {
-        background: #003b73;
-        transform: translateY(-2px);
-    }
-
-    /* RESULT */
-    #result {
-        display: none;
-        background: white;
-        padding: 30px;
-        border-radius: 18px;
-        text-align: center;
-        margin: 30px 0;
-        box-shadow: 0 5px 20px rgba(0,0,0,0.12);
-    }
-
-    .result-icon {
-        font-size: 55px;
-        margin-bottom: 10px;
-    }
-
-    .score {
-        font-size: 45px;
-        font-weight: bold;
-        color: #003b73;
-        margin: 10px 0;
-    }
-
-    .percentage {
-        font-size: 25px;
-        font-weight: bold;
-        margin-bottom: 15px;
-    }
-
-    .pass {
-        color: #16803c;
-    }
-
-    .fail {
-        color: #c62828;
-    }
-
-    .result-message {
-        margin: 15px auto 25px;
-        max-width: 600px;
-    }
-
-    .restart-btn {
-        background: #ffd700;
-        color: #172b4d;
-    }
-
-    .restart-btn:hover {
-        background: #e6c200;
-    }
-
-    /* REVIEW */
-    #review {
-        display: none;
-        margin-top: 30px;
-    }
-
-    #review h2 {
-        color: #003b73;
-        margin-bottom: 15px;
-    }
-
-    .review-item {
-        background: white;
-        padding: 18px;
-        border-radius: 12px;
-        margin-bottom: 12px;
-        border-left: 5px solid #0066b3;
-    }
-
-    .review-item.correct {
-        border-left-color: #16803c;
-    }
-
-    .review-item.wrong {
-        border-left-color: #c62828;
-    }
-
-    .correct-answer {
-        color: #16803c;
-        font-weight: bold;
-    }
-
-    .your-answer {
-        margin-top: 5px;
-    }
-
-    /* FOOTER */
-    footer {
-        background: #003b73;
-        color: white;
-        text-align: center;
-        padding: 25px 15px;
-        margin-top: 40px;
-    }
-
-    footer strong {
-        color: #ffd700;
-    }
-
-    /* MOBILE */
-    @media (max-width: 650px) {
-        .instructions {
-            grid-template-columns: 1fr;
-        }
-
-        .question {
-            padding: 18px;
-        }
-
-        .logo {
-            font-size: 26px;
-        }
-
-        .score {
-            font-size: 38px;
-        }
-    }
 </style>
+
 </head>
 
 <body>
 
 <header>
-    <div class="logo">B.E.P.</div>
-    <div class="tagline">Building the Church of Christ</div>
+
+<h1>BIBLICAL EMPOWERMENT PROGRAM</h1>
+
+<p>B.E.P. ONLINE BIBLE EXAMINATION</p>
+
 </header>
 
-<main class="container">
-
-    <section class="intro">
-        <h1>📖 Quick Bible Quiz</h1>
-
-        <p>
-            Test your knowledge of the Word of God.
-            Answer all 20 multiple-choice questions.
-        </p>
-
-        <div class="instructions">
-
-            <div class="info-box">
-                <strong>20</strong>
-                Questions
-            </div>
-
-            <div class="info-box">
-                <strong>60</strong>
-                Total Marks
-            </div>
-
-            <div class="info-box">
-                <strong>40/60</strong>
-                Pass Mark
-            </div>
-
-        </div>
-    </section>
-
-    <div class="progress-container">
-
-        <div class="progress-text">
-            <span>Quiz Progress</span>
-            <span id="answered">0 / 20 answered</span>
-        </div>
-
-        <div class="progress-bar">
-            <div class="progress-fill" id="progressFill"></div>
-        </div>
-
-    </div>
-
-    <form id="quizForm">
-
-        <!-- QUESTION 1 -->
-        <div class="question">
-            <h3>
-                1. Who created the heavens and the earth?
-                <span class="marks">3 marks</span>
-            </h3>
-
-            <label class="option">
-                <input type="radio" name="q1" value="A">
-                A. Moses
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q1" value="B">
-                B. Abraham
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q1" value="C">
-                C. God
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q1" value="D">
-                D. David
-            </label>
-        </div>
-
-        <!-- QUESTION 2 -->
-        <div class="question">
-            <h3>
-                2. Who built the ark?
-                <span class="marks">3 marks</span>
-            </h3>
-
-            <label class="option">
-                <input type="radio" name="q2" value="A">
-                A. Noah
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q2" value="B">
-                B. Moses
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q2" value="C">
-                C. Solomon
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q2" value="D">
-                D. Joseph
-            </label>
-        </div>
-
-        <!-- QUESTION 3 -->
-        <div class="question">
-            <h3>
-                3. How many days did God take to create the world before resting?
-                <span class="marks">3 marks</span>
-            </h3>
-
-            <label class="option">
-                <input type="radio" name="q3" value="A">
-                A. 5
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q3" value="B">
-                B. 6
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q3" value="C">
-                C. 7
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q3" value="D">
-                D. 8
-            </label>
-        </div>
-
-        <!-- QUESTION 4 -->
-        <div class="question">
-            <h3>
-                4. Who led the Israelites out of Egypt?
-                <span class="marks">3 marks</span>
-            </h3>
-
-            <label class="option">
-                <input type="radio" name="q4" value="A">
-                A. Joshua
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q4" value="B">
-                B. Aaron
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q4" value="C">
-                C. Moses
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q4" value="D">
-                D. David
-            </label>
-        </div>
-
-        <!-- QUESTION 5 -->
-        <div class="question">
-            <h3>
-                5. What did David use to defeat Goliath?
-                <span class="marks">3 marks</span>
-            </h3>
-
-            <label class="option">
-                <input type="radio" name="q5" value="A">
-                A. A sword
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q5" value="B">
-                B. A spear
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q5" value="C">
-                C. A sling and a stone
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q5" value="D">
-                D. A bow and arrow
-            </label>
-        </div>
-
-        <!-- QUESTION 6 -->
-        <div class="question">
-            <h3>
-                6. Who was the mother of Jesus?
-                <span class="marks">3 marks</span>
-            </h3>
-
-            <label class="option">
-                <input type="radio" name="q6" value="A">
-                A. Martha
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q6" value="B">
-                B. Mary
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q6" value="C">
-                C. Elizabeth
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q6" value="D">
-                D. Ruth
-            </label>
-        </div>
-
-        <!-- QUESTION 7 -->
-        <div class="question">
-            <h3>
-                7. Where was Jesus born?
-                <span class="marks">3 marks</span>
-            </h3>
-
-            <label class="option">
-                <input type="radio" name="q7" value="A">
-                A. Jerusalem
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q7" value="B">
-                B. Nazareth
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q7" value="C">
-                C. Bethlehem
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q7" value="D">
-                D. Galilee
-            </label>
-        </div>
-
-        <!-- QUESTION 8 -->
-        <div class="question">
-            <h3>
-                8. How many disciples did Jesus have?
-                <span class="marks">3 marks</span>
-            </h3>
-
-            <label class="option">
-                <input type="radio" name="q8" value="A">
-                A. 7
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q8" value="B">
-                B. 10
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q8" value="C">
-                C. 12
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q8" value="D">
-                D. 14
-            </label>
-        </div>
-
-        <!-- QUESTION 9 -->
-        <div class="question">
-            <h3>
-                9. Who baptized Jesus?
-                <span class="marks">3 marks</span>
-            </h3>
-
-            <label class="option">
-                <input type="radio" name="q9" value="A">
-                A. Peter
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q9" value="B">
-                B. John the Baptist
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q9" value="C">
-                C. James
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q9" value="D">
-                D. Paul
-            </label>
-        </div>
-
-        <!-- QUESTION 10 -->
-        <div class="question">
-            <h3>
-                10. What was Jesus' first recorded miracle?
-                <span class="marks">3 marks</span>
-            </h3>
-
-            <label class="option">
-                <input type="radio" name="q10" value="A">
-                A. Healing a blind man
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q10" value="B">
-                B. Walking on water
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q10" value="C">
-                C. Turning water into wine
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q10" value="D">
-                D. Feeding 5,000 people
-            </label>
-        </div>
-
-        <!-- QUESTION 11 -->
-        <div class="question">
-            <h3>
-                11. Who betrayed Jesus?
-                <span class="marks">3 marks</span>
-            </h3>
-
-            <label class="option">
-                <input type="radio" name="q11" value="A">
-                A. Peter
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q11" value="B">
-                B. Judas Iscariot
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q11" value="C">
-                C. Thomas
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q11" value="D">
-                D. Matthew
-            </label>
-        </div>
-
-        <!-- QUESTION 12 -->
-        <div class="question">
-            <h3>
-                12. How many times did Peter deny Jesus?
-                <span class="marks">3 marks</span>
-            </h3>
-
-            <label class="option">
-                <input type="radio" name="q12" value="A">
-                A. Once
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q12" value="B">
-                B. Twice
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q12" value="C">
-                C. Three times
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q12" value="D">
-                D. Four times
-            </label>
-        </div>
-
-        <!-- QUESTION 13 -->
-        <div class="question">
-            <h3>
-                13. Which book comes first in the Bible?
-                <span class="marks">3 marks</span>
-            </h3>
-
-            <label class="option">
-                <input type="radio" name="q13" value="A">
-                A. Exodus
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q13" value="B">
-                B. Psalms
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q13" value="C">
-                C. Genesis
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q13" value="D">
-                D. Matthew
-            </label>
-        </div>
-
-        <!-- QUESTION 14 -->
-        <div class="question">
-            <h3>
-                14. Which is the longest book in the Bible?
-                <span class="marks">3 marks</span>
-            </h3>
-
-            <label class="option">
-                <input type="radio" name="q14" value="A">
-                A. Isaiah
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q14" value="B">
-                B. Psalms
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q14" value="C">
-                C. Genesis
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q14" value="D">
-                D. Jeremiah
-            </label>
-        </div>
-
-        <!-- QUESTION 15 -->
-        <div class="question">
-            <h3>
-                15. What is the last book of the Bible?
-                <span class="marks">3 marks</span>
-            </h3>
-
-            <label class="option">
-                <input type="radio" name="q15" value="A">
-                A. Jude
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q15" value="B">
-                B. Revelation
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q15" value="C">
-                C. Acts
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q15" value="D">
-                D. Romans
-            </label>
-        </div>
-
-        <!-- QUESTION 16 -->
-        <div class="question">
-            <h3>
-                16. Who was known for his great wisdom?
-                <span class="marks">3 marks</span>
-            </h3>
-
-            <label class="option">
-                <input type="radio" name="q16" value="A">
-                A. Solomon
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q16" value="B">
-                B. Saul
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q16" value="C">
-                C. Elijah
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q16" value="D">
-                D. Daniel
-            </label>
-        </div>
-
-        <!-- QUESTION 17 -->
-        <div class="question">
-            <h3>
-                17. Who was thrown into the lions' den?
-                <span class="marks">3 marks</span>
-            </h3>
-
-            <label class="option">
-                <input type="radio" name="q17" value="A">
-                A. Daniel
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q17" value="B">
-                B. Joseph
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q17" value="C">
-                C. Jeremiah
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q17" value="D">
-             
+<div class="container">
+
+<div class="exam-header">
+
+<h2>B.E.P. Bible Examination</h2>
+
+<p><strong>Total Questions:</strong> 20</p>
+
+<p><strong>Marks:</strong> 60</p>
+
+<p><strong>Marks per Question:</strong> 3</p>
+
+<p><strong>Pass Mark:</strong> 40 / 60</p>
+
+<div class="instructions">
+
+<strong>Examination Instructions:</strong>
+
+<ul style="margin-left:20px;margin-top:8px;">
+
+<li>Answer all 20 questions.</li>
+<li>Select only ONE answer for each question.</li>
+<li>Each question carries 3 marks.</li>
+<li>Total marks are 60.</li>
+<li>The pass mark is 40/60.</li>
+<li>Submit the examination when you have completed all questions.</li>
+
+</ul>
+
+</div>
+
+</div>
+
+<form id="quizForm">
+
+<div class="student-details">
+
+<h2>Learner Details</h2>
+
+<div class="form-grid">
+
+<div class="form-group">
+
+<label>Name</label>
+
+<input type="text"
+id="studentName"
+required>
+
+</div>
+
+<div class="form-group">
+
+<label>Surname</label>
+
+<input type="text"
+id="studentSurname"
+required>
+
+</div>
+
+<div class="form-group">
+
+<label>Phone Number</label>
+
+<input type="tel"
+id="studentPhone"
+required>
+
+</div>
+
+<div class="form-group">
+
+<label>Email Address</label>
+
+<input type="email"
+id="studentEmail"
+required>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- QUESTION 1 -->
+
+<div class="question">
+
+<div class="progress">
+Question 1 of 20 — 3 Marks
+</div>
+
+<h3>
+What is the first book of the Bible?
+</h3>
+
+<label class="option">
+<input type="radio" name="q1" value="A" required>
+A. Exodus
+</label>
+
+<label class="option">
+<input type="radio" name="q1" value="B">
+B. Genesis
+</label>
+
+<label class="option">
+<input type="radio" name="q1" value="C">
+C. Matthew
+</label>
+
+<label class="option">
+<input type="radio" name="q1" value="D">
+D. Psalms
+</label>
+
+</div>
+
+
+<!-- QUESTION 2 -->
+
+<div class="question">
+
+<div class="progress">
+Question 2 of 20 — 3 Marks
+</div>
+
+<h3>
+Who built the ark according to Genesis?
+</h3>
+
+<label class="option">
+<input type="radio" name="q2" value="A" required>
+A. Abraham
+</label>
+
+<label class="option">
+<input type="radio" name="q2" value="B">
+B. Moses
+</label>
+
+<label class="option">
+<input type="radio" name="q2" value="C">
+C. Noah
+</label>
+
+<label class="option">
+<input type="radio" name="q2" value="D">
+D. David
+</label>
+
+</div>
+
+
+<!-- QUESTION 3 -->
+
+<div class="question">
+
+<div class="progress">
+Question 3 of 20 — 3 Marks
+</div>
+
+<h3>
+Who led the Israelites out of Egypt?
+</h3>
+
+<label class="option">
+<input type="radio" name="q3" value="A" required>
+A. Joshua
+</label>
+
+<label class="option">
+<input type="radio" name="q3" value="B">
+B. Moses
+</label>
+
+<label class="option">
+<input type="radio" name="q3" value="C">
+C. Aaron
+</label>
+
+<label class="option">
+<input type="radio" name="q3" value="D">
+D. Samuel
+</label>
+
+</div>
+
+
+<!-- QUESTION 4 -->
+
+<div class="question">
+
+<div class="progress">
+Question 4 of 20 — 3 Marks
+</div>
+
+<h3>
+How many disciples did Jesus choose?
+</h3>
+
+<label class="option">
+<input type="radio" name="q4" value="A" required>
+A. 7
+</label>
+
+<label class="option">
+<input type="radio" name="q4" value="B">
+B. 10
+</label>
+
+<label class="option">
+<input type="radio" name="q4" value="C">
+C. 12
+</label>
+
+<label class="option">
+<input type="radio" name="q4" value="D">
+D. 14
+</label>
+
+</div>
+
+
+<!-- QUESTION 5 -->
+
+<div class="question">
+
+<div class="progress">
+Question 5 of 20 — 3 Marks
+</div>
+
+<h3>
+Who baptized Jesus?
+</h3>
+
+<label class="option">
+<input type="radio" name="q5" value="A" required>
+A. Peter
+</label>
+
+<label class="option">
+<input type="radio" name="q5" value="B">
+B. John the Baptist
+</label>
+
+<label class="option">
+<input type="radio" name="q5" value="C">
+C. James
+</label>
+
+<label class="option">
+<input type="radio" name="q5" value="D">
+D. Paul
+</label>
+
+</div>
+
+
+<!-- QUESTION 6 -->
+
+<div class="question">
+
+<div class="progress">
+Question 6 of 20 — 3 Marks
+</div>
+
+<h3>
+What is the greatest commandment according to Jesus?
+</h3>
+
+<label class="option">
+<input type="radio" name="q6" value="A" required>
+A. Love God with all your heart, soul and mind
+</label>
+
+<label class="option">
+<input type="radio" name="q6" value="B">
+B. Build a temple
+</label>
+
+<label class="option">
+<input type="radio" name="q6" value="C">
+C. Give all your possessions away
+</label>
+
+<label class="option">
+<input type="radio" name="q6" value="D">
+D. Fast every day
+</label>
+
+</div>
+
+
+<!-- QUESTION 7 -->
+
+<div class="question">
+
+<div class="progress">
+Question 7 of 20 — 3 Marks
+</div>
+
+<h3>
+According to John 3:16, what did God give because He loved the world?
+</h3>
+
+<label class="option">
+<input type="radio" name="q7" value="A" required>
+A. His angels
+</label>
+
+<label class="option">
+<input type="radio" name="q7" value="B">
+B. His only Son
+</label>
+
+<label class="option">
+<input type="radio" name="q7" value="C">
+C. His kingdom
+</label>
+
+<label class="option">
+<input type="radio" name="q7" value="D">
+D. His prophets
+</label>
+
+</div>
+
+
+<!-- QUESTION 8 -->
+
+<div class="question">
+
+<div class="progress">
+Question 8 of 20 — 3 Marks
+</div>
+
+<h3>
+What is the fruit of the Spirit mentioned in Galatians 5?
+</h3>
+
+<label class="option">
+<input type="radio" name="q8" value="A" required>
+A. Love, joy, peace and other spiritual qualities
+</label>
+
+<label class="option">
+<input type="radio" name="q8" value="B">
+B. Wealth and power
+</label>
+
+<label class="option">
+<input type="radio" name="q8" value="C">
+C. Gold and silver
+</label>
+
+<label class="option">
+<input type="radio" name="q8" value="D">
+D. Fame and success
+</label>
+
+</div>
+
+
+<!-- QUESTION 9 -->
+
+<div class="question">
+
+<div class="progress">
+Question 9 of 20 — 3 Marks
+</div>
+
+<h3>
+Who defeated Goliath?
+</h3>
+
+<label class="option">
+<input type="radio" name="q9" value="A" required>
+A. Saul
+</label>
+
+<label class="option">
+<input type="radio" name="q9" value="B">
+B. Solomon
+</label>
+
+<label class="option">
+<input type="radio" name="q9" value="C">
+C. David
+</label>
+
+<label class="option">
+<input type="radio" name="q9" value="D">
+D. Jonathan
+</label>
+
+</div>
+
+
+<!-- QUESTION 10 -->
+
+<div class="question">
+
+<div class="progress">
+Question 10 of 20 — 3 Marks
+</div>
+
+<h3>
+What did Jesus do after His resurrection?
+</h3>
+
+<label class="option">
+<input type="radio" name="q10" value="A" required>
+A. He appeared to His disciples
+</label>
+
+<label class="option">
+<input type="radio" name="q10" value="B">
+B. He returned to Bethlehem
+</label>
+
+<label class="option">
+<input type="radio" name="q10" value="C">
+C. He became a Roman ruler
+</label>
+
+<label class="option">
+<input type="radio" name="q10" value="D">
+D. He built a temple
+</label>
+
+</div>
+
+
+<!-- QUESTION 11 -->
+
+<div class="question">
+
+<div class="progress">
+Question 11 of 20 — 3 Marks
+</div>
+
+<h3>
+What is prayer?
+</h3>
+
+<label class="option">
+<input type="radio" name="q11" value="A" required>
+A. Communication with God
+</label>
+
+<label class="option">
+<input type="radio" name="q11" value="B">
+B. A political meeting
+</label>
+
+<label class="option">
+<input type="radio" name="q11" value="C">
+C. A financial transaction
+</label>
+
+<label class="option">
+<input type="radio" name="q11" value="D">
+D. A competition
+</label>
+
+</div>
+
+
+<!-- QUESTION 12 -->
+
+<div class="question">
+
+<div class="progress">
+Question 12 of 20 — 3 Marks
+</div>
+
+<h3>
+According to Ephesians 6, what should believers put on?
+</h3>
+
+<label class="option">
+<input type="radio" name="q12" value="A" required>
+A. The armour of God
+</label>
+
+<label class="option">
+<input type="radio" name="q12" value="B">
+B. A royal crown
+</label>
+
+<label class="option">
+<input type="radio" name="q12" value="C">
+C. A military uniform
+</label>
+
+<label class="option">
+<input type="radio" name="q12" value="D">
+D. A white robe only
+</label>
+
+</div>
+
+
+<!-- QUESTION 13 -->
+
+<div class="question">
+
+<div class="progress">
+Question 13 of 20 — 3 Marks
+</div>
+
+<h3>
+What does faith mean according to Hebrews 11:1?
+</h3>
+
+<label class="option">
+<input type="radio" name="q13" value="A" required>
+A. Confidence in what we hope for and assurance about what we do not see
+</label>
+
+<label class="option">
+<input type="radio" name="q13" value="B">
+B. Trusting only what we can touch
+</label>
+
+<label class="option">
+<input type="radio" name="q13" value="C">
+C. Avoiding prayer
+</label>
+
+<label class="option">
+<input type="radio" name="q13" value="D">
+D. Depending only on human strength
+</label>
+
+</div>
+
+
+<!-- QUESTION 14 -->
+
+<div class="question">
+
+<div class="progress">
+Question 14 of 20 — 3 Marks
+</div>
+
+<h3>
+What did Jesus teach about forgiving others?
+</h3>
+
+<label class="option">
+<input type="radio" name="q14" value="A" required>
+A. We should forgive others
+</label>
+
+<label class="option">
+<input type="radio" name="q14" value="B">
+B. We should never forgive
+</label>
+
+<label class="option">
+<input type="radio" name="q14" value="C">
+C. Forgiveness is unnecessary
+</label>
+
+<label class="option">
+<input type="radio" name="q14" value="D">
+D. Only leaders must forgive
+</label>
+
+</div>
+
+
+<!-- QUESTION 15 -->
+
+<div class="question">
+
+<div class="progress">
+Question 15 of 20 — 3 Marks
+</div>
+
+<h3>
+What happened when the Holy Spirit came upon the disciples in Acts 2?
+</h3>
+
+<label class="option">
+<input type="radio" name="q15" value="A" required>
+A. They began speaking in other tongues
+</label>
+
+<label class="option">
+<input type="radio" name="q15" value="B">
+B. They left Jerusalem
+</label>
+
+<label class="option">
+<input type="radio" name="q15" value="C">
+C. They stopped preaching
+</label>
+
+<label class="option">
+<input type="radio" name="q15" value="D">
+D. They returned to fishing
+</label>
+
+</div>
+
+
+<!-- QUESTION 16 -->
+
+<div class="question">
+
+<div class="progress">
+Question 16 of 20 — 3 Marks
+</div>
+
+<h3>
+What is discipleship?
+</h3>
+
+<label class="option">
+<input type="radio" name="q16" value="A" required>
+A. Following Christ and helping others follow Him
+</label>
+
+<label class="option">
+<input type="radio" name="q16" value="B">
+B. Becoming famous
+</label>
+
+<label class="option">
+<input type="radio" name="q16" value="C">
+C. Collecting money
+</label>
+
+<label class="option">
+<input type="radio" name="q16" value="D">
+D. Avoiding other believers
+</label>
+
+</div>
+
+
+<!-- QUESTION 17 -->
+
+<div class="question">
+
+<div class="progress">
+Question 17 of 20 — 3 Marks
+</div>
+
+<h3>
+What does the Bible teach believers to do with bitterness?
+</h3>
+
+<label class="option">
+<input type="radio" name="q17" value="A" required>
+A. Get rid of bitterness and forgive
+</label>
+
+<label class="option">
+<input type="radio" name="q17" value="B">
+B. Keep it hidden forever
+</label>
+
+<label class="option">
+<input type="radio" name="q17" value="C">
+C. Use it against others
+</label>
+
+<label class="option">
+<input type="radio" name="q17" value="D">
+D. Encourage anger
+</label>
+
+</div>
+
+
+<!-- QUESTION 18 -->
+
+<div class="question">
+
+<div class="progress">
+Question 18 of 20 — 3 Marks
+</div>
+
+<h3>
+What does Romans 12:2 teach believers about transformation?
+</h3>
+
+<label class="option">
+<input type="radio" name="q18" value="A" required>
+A. Be transformed by the renewing of your mind
+</label>
+
+<label class="option">
+<input type="radio" name="q18" value="B">
+B. Follow the patterns of the world
+</label>
+
+<label class="option">
+<input type="radio" name="q18" value="C">
+C. Avoid reading Scripture
+</label>
+
+<label class="option">
+<input type="radio" name="q18" value="D">
+D. Depend only on human wisdom
+</label>
+
+</div>
+
+
+<!-- QUESTION 19 -->
+
+<div class="question">
+
+<div class="progress">
+Question 19 of 20 — 3 Marks
+</div>
+
+<h3>
+What did Jesus command His disciples to do in the Great Commission?
+</h3>
+
+<label class="option">
+<input type="radio" name="q19" value="A" required>
+A. Make disciples of all nations
+</label>
+
+<label class="option">
+<input type="radio" name="q19" value="B">
+B. Build political kingdoms
+</label>
+
+<label class="option">
+<input type="radio" name="q19" value="C">
+C. Stop teaching
+</label>
+
+<label class="option">
+<input type="radio" name="q19" value="D">
+D. Avoid the nations
+</label>
+
+</div>
+
+
+<!-- QUESTION 20 -->
+
+<div class="question">
+
+<div class="progress">
+Question 20 of 20 — 3 Marks
+</div>
+
+<h3>
+According to 2 Timothy 3:16, what is Scripture useful for?
+</h3>
+
+<label class="option">
+<input type="radio" name="q20" value="A" required>
+A. Teaching, rebuking, correcting and training in righteousness
+</label>
+
+<label class="option">
+<input type="radio" name="q20" value="B">
+B. Entertainment only
+</label>
+
+<label class="option">
+<input type="radio" name="q20" value="C">
+C. Financial investment
+</label>
+
+<label class="option">
+<input type="radio" name="q20" value="D">
+D. Political debate
+</label>
+
+</div>
+
+
+<button type="submit" class="submit-btn">
+
+SUBMIT B.E.P. EXAMINATION
+
+</button>
+
+</form>
+
+
+<div class="result" id="result">
+
+<h2>Examination Completed 🙏</h2>
+
+<p id="studentResult"></p>
+
+<div class="score" id="score"></div>
+
+<p id="passResult" class="message"></p>
+
+<p class="message">
+
+Thank you for participating in the Biblical Empowerment Program
+examination. We appreciate your commitment to learning and growing
+in the Word of God.
+
+</p>
+
+<p class="message">
+
+May God continue to strengthen you, guide you and deepen your
+understanding of His Word. 🙏📖
+
+</p>
+
+<a href="index.html" class="home-btn">
+Return to B.E.P. Website
+</a>
+
+</div>
+
+</div>
+
+
+<script>
+
+const correctAnswers = {
+
+q1:"B",
+q2:"C",
+q3:"B",
+q4:"C",
+q5:"B",
+q6:"A",
+q7:"B",
+q8:"A",
+q9:"C",
+q10:"A",
+q11:"A",
+q12:"A",
+q13:"A",
+q14:"A",
+q15:"A",
+q16:"A",
+q17:"A",
+q18:"A",
+q19:"A",
+q20:"A"
+
+};
+
+
+document.getElementById("quizForm")
+.addEventListener("submit",function(event){
+
+event.preventDefault();
+
+let score = 0;
+
+for(let i=1;i<=20;i++){
+
+    const answer =
+    document.querySelector(
+        'input[name="q'+i+'"]:checked'
+    );
+
+    if(answer &&
+       answer.value === correctAnswers["q"+i]){
+
+        score += 3;
+
+    }
+
+}
+
+const name =
+document.getElementById("studentName").value;
+
+const surname =
+document.getElementById("studentSurname").value;
+
+document.getElementById("studentResult")
+.innerHTML =
+"Well done, <strong>" +
+name + " " + surname +
+"</strong>. Your examination has been submitted successfully.";
+
+document.getElementById("score")
+.innerHTML =
+score + " / 60";
+
+if(score >= 40){
+
+    document.getElementById("passResult")
+    .innerHTML =
+    "<strong>Result: PASS ✅</strong><br><br>" +
+    "Congratulations! You achieved the B.E.P. pass mark of 40/60.";
+
+}else{
+
+    document.getElementById("passResult")
+    .innerHTML =
+    "<strong>Result: NOT YET PASSED</strong><br><br>" +
+    "Your score is below the current pass mark of 40/60. " +
+    "Keep studying God's Word and continue growing in understanding.";
+
+}
+
+document.getElementById("quizForm")
+.style.display="none";
+
+document.getElementById("result")
+.style.display="block";
+
+window.scrollTo({
+    top:0,
+    behavior:"smooth"
+});
+
+});
+
+</script>
+
+</body>
+
+   </html>
