@@ -1,28 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
-
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Biblical Empowerment Program - B.E.P</title>
 
-<!-- Font Awesome -->
 <link rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <style>
 
-/* =========================
-   GENERAL
-========================= */
+/* =====================================================
+   GLOBAL
+===================================================== */
 
 * {
     box-sizing: border-box;
-    margin: 0;
-    padding: 0;
 }
 
 html {
@@ -30,10 +26,10 @@ html {
 }
 
 body {
+    margin: 0;
     font-family: Arial, Helvetica, sans-serif;
-    background: #f4f8ff;
-    color: #172033;
-    line-height: 1.6;
+    background: #f4f7fb;
+    color: #333;
 }
 
 .container {
@@ -43,91 +39,31 @@ body {
 }
 
 section {
-    padding: 65px 0;
+    scroll-margin-top: 20px;
 }
 
-.section-title {
-    text-align: center;
-    color: #063b8c;
-    font-size: 32px;
-    margin-bottom: 35px;
-}
-
-
-/* =========================
-   NAVIGATION
-========================= */
-
-nav {
-    background: #063b8c;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    box-shadow: 0 3px 12px rgba(0,0,0,0.2);
-}
-
-.nav-container {
-    width: 92%;
-    max-width: 1100px;
-    margin: auto;
-    min-height: 65px;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.logo {
-    color: white;
-    font-size: 22px;
-    font-weight: bold;
-}
-
-.logo i {
-    color: #ffd34d;
-}
-
-.nav-links {
-    list-style: none;
-    display: flex;
-    gap: 20px;
-}
-
-.nav-links a {
-    color: white;
+a {
     text-decoration: none;
-    font-size: 14px;
-    font-weight: bold;
-}
-
-.nav-links a:hover {
-    color: #ffd34d;
 }
 
 
-/* =========================
+/* =====================================================
    HERO
-========================= */
+===================================================== */
 
 .hero {
-    min-height: 530px;
-
+    min-height: 390px;
     display: flex;
     align-items: center;
     justify-content: center;
-
     text-align: center;
 
-    padding: 70px 20px;
+    background:
+        linear-gradient(rgba(0,45,80,.78), rgba(0,45,80,.78)),
+        url("banner.png") center/cover no-repeat;
 
     color: white;
-
-    background:
-    linear-gradient(
-        rgba(0,48,120,0.84),
-        rgba(0,48,120,0.84)
-    ),
-    url("banner.png") center/cover no-repeat;
+    padding: 50px 20px;
 }
 
 .hero-content {
@@ -135,474 +71,793 @@ nav {
 }
 
 .hero h1 {
-    font-size: clamp(45px, 10vw, 78px);
-    margin-bottom: 5px;
-}
-
-.hero h2 {
-    color: #ffd34d;
-    font-size: clamp(20px, 5vw, 35px);
-    margin-bottom: 20px;
+    color: #ffd21c;
+    font-size: 42px;
+    margin: 0 0 15px;
 }
 
 .hero p {
-    font-size: 18px;
-    margin-bottom: 12px;
-}
-
-.hero-tagline {
-    font-weight: bold;
-}
-
-
-/* =========================
-   BUTTON
-========================= */
-
-.btn {
-    display: inline-block;
-
-    background: #ffd34d;
-    color: #063b8c;
-
-    border: none;
-    border-radius: 8px;
-
-    padding: 14px 23px;
-
-    margin-top: 20px;
-
-    font-size: 16px;
-    font-weight: bold;
-
-    text-decoration: none;
-
-    cursor: pointer;
-
-    transition: 0.3s;
-}
-
-.btn:hover {
-    transform: translateY(-2px);
-    opacity: 0.9;
-}
-
-
-/* =========================
-   COUNTDOWN
-========================= */
-
-.countdown-section {
-    background: #063b8c;
-    color: white;
-    text-align: center;
-}
-
-.countdown-section .section-title {
-    color: white;
-}
-
-.countdown {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 12px;
-    margin-top: 25px;
-}
-
-.time-box {
-    background: white;
-    color: #063b8c;
-
-    min-width: 95px;
-
-    padding: 15px;
-
-    border-radius: 10px;
-}
-
-.time-box strong {
-    display: block;
-    font-size: 28px;
-}
-
-.time-box span {
-    font-size: 12px;
-    font-weight: bold;
-}
-
-
-/* =========================
-   ABOUT US
-========================= */
-
-.about-intro {
-    background: white;
-    padding: 30px;
-
-    border-radius: 12px;
-
-    box-shadow:
-    0 4px 18px rgba(0,0,0,0.08);
-
+    font-size: 20px;
+    line-height: 1.6;
     margin-bottom: 25px;
 }
 
-.about-intro p {
-    margin-bottom: 18px;
-    font-size: 16px;
-}
-
-.about-heading {
-    color: #063b8c;
-    font-size: 25px;
-    margin: 25px 0 12px;
-}
-
-.about-list {
-    margin-left: 25px;
-}
-
-.about-list li {
-    margin-bottom: 9px;
-}
-
-.vision-box,
-.mission-box {
-    background: #eef5ff;
-
-    padding: 25px;
-
-    border-left: 5px solid #063b8c;
-
-    border-radius: 8px;
-
-    margin-top: 20px;
-}
-
-.vision-box h3,
-.mission-box h3 {
-    color: #063b8c;
-    margin-bottom: 8px;
+.hero-btn {
+    display: inline-block;
+    background: #ffd21c;
+    color: #003f70;
+    padding: 13px 25px;
+    border-radius: 7px;
+    font-weight: bold;
+    margin: 5px;
 }
 
 
-/* =========================
-   CARDS
-========================= */
+/* =====================================================
+   GENERAL SECTIONS
+===================================================== */
 
-.cards {
-    display: grid;
+.section {
+    padding: 70px 20px;
+}
 
-    grid-template-columns:
-    repeat(auto-fit, minmax(230px, 1fr));
-
-    gap: 20px;
+.section-title {
+    text-align: center;
+    color: #003f70;
+    font-size: 30px;
+    margin-bottom: 35px;
 }
 
 .card {
     background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 5px 18px rgba(0,0,0,.08);
+}
 
-    padding: 25px;
+.two-column {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+}
 
-    border-radius: 12px;
 
+/* =====================================================
+   NEXT SESSION
+===================================================== */
+
+.next-session {
+    background: #003f70;
+    color: white;
+    padding: 60px 20px;
     text-align: center;
-
-    box-shadow:
-    0 4px 15px rgba(0,0,0,0.08);
 }
 
-.card i {
-    color: #063b8c;
-    font-size: 35px;
-    margin-bottom: 15px;
+.next-session .section-title {
+    color: #ffd21c;
 }
 
-.card h3 {
-    color: #063b8c;
-    margin-bottom: 10px;
-}
-
-
-/* =========================
-   SESSIONS
-========================= */
-
-.sessions-section {
-    background: #eef5ff;
-}
-
-
-/* =========================
-   QUIZ
-========================= */
-
-.quiz-section {
-    background: #f0f6ff;
-}
-
-.quiz-info {
+.session-card {
+    max-width: 900px;
+    margin: auto;
     background: white;
+    color: #333;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 6px 20px rgba(0,0,0,.15);
+}
 
-    padding: 22px;
+.session-card h3 {
+    color: #003f70;
+    font-size: 25px;
+    margin-top: 0;
+}
 
-    border-left: 5px solid #063b8c;
+.session-card p {
+    line-height: 1.7;
+}
 
+/* Teams button ABOVE countdown */
+
+.teams-meeting-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    background: #5b2dab;
+    color: white;
+
+    padding: 14px 25px;
     border-radius: 8px;
 
+    font-size: 16px;
+    font-weight: bold;
+
+    margin: 10px auto 25px;
+
+    transition: .3s;
+}
+
+.teams-meeting-button:hover {
+    transform: translateY(-2px);
+    opacity: .9;
+}
+
+/* Countdown */
+
+.countdown {
+    background: #003f70;
+    color: #ffd21c;
+
+    font-size: 32px;
+    font-weight: bold;
+
+    padding: 20px;
+    border-radius: 10px;
+
+    margin: 10px auto;
+    max-width: 600px;
+}
+
+.countdown-label {
+    color: #666;
     margin-bottom: 25px;
 }
 
-.quiz-info ul {
-    margin-left: 22px;
-    margin-top: 10px;
-}
-
-
-/* PARTICIPANT FORM */
-
-.registration {
-    background: white;
-
-    padding: 28px;
-
-    border-radius: 12px;
-
-    box-shadow:
-    0 4px 15px rgba(0,0,0,0.08);
-
-    margin-bottom: 30px;
-}
-
-.registration h3 {
-    color: #063b8c;
-    margin-bottom: 20px;
-}
-
-.form-grid {
+.session-grid {
     display: grid;
-
-    grid-template-columns:
-    repeat(2, 1fr);
-
-    gap: 18px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-top: 25px;
 }
 
-.form-group {
-    display: flex;
-    flex-direction: column;
+.session-item {
+    background: #f4f7fb;
+    padding: 20px;
+    border-radius: 10px;
 }
 
-.form-group label {
-    font-weight: bold;
-    margin-bottom: 6px;
+.session-item i {
+    display: block;
+    color: #cc9933;
+    font-size: 25px;
+    margin-bottom: 10px;
 }
 
-.form-group input {
-    padding: 13px;
+.session-buttons {
+    margin-top: 25px;
+}
 
-    border: 1px solid #c7d1df;
-
+.btn {
+    display: inline-block;
+    padding: 12px 22px;
     border-radius: 7px;
+    font-weight: bold;
+    margin: 5px;
+}
 
+.btn-blue {
+    background: #003f70;
+    color: white;
+}
+
+.btn-gold {
+    background: #cc9933;
+    color: white;
+}
+
+
+/* =====================================================
+   ABOUT / OBJECTIVES
+===================================================== */
+
+.about-text {
+    line-height: 1.8;
     font-size: 16px;
 }
 
-.form-group input:focus {
-    outline: none;
-
-    border-color: #063b8c;
-
-    box-shadow:
-    0 0 0 2px rgba(6,59,140,0.12);
+.objectives {
+    padding-left: 20px;
+    line-height: 1.9;
 }
 
 
-/* QUESTIONS */
+/* =====================================================
+   B.E.P BIBLE QUIZ
+===================================================== */
 
-.question {
+.quiz-section {
+    padding: 70px 20px;
     background: white;
+}
 
-    padding: 23px;
+.quiz-container {
+    max-width: 900px;
+    margin: auto;
+}
 
+.quiz-intro {
+    text-align: center;
+    color: #666;
+    line-height: 1.7;
+    margin: -15px auto 20px;
+    max-width: 750px;
+}
+
+.quiz-badge {
+    text-align: center;
+    color: #003f70;
+    font-weight: bold;
+    background: #f4f7fb;
+    padding: 15px;
     border-radius: 10px;
+    margin-bottom: 25px;
+}
 
+.quiz-card {
+    background: #f7f9fc;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 5px 18px rgba(0,0,0,.08);
     margin-bottom: 20px;
-
-    box-shadow:
-    0 3px 12px rgba(0,0,0,0.07);
 }
 
-.question h3 {
-    color: #063b8c;
-    margin-bottom: 15px;
+.quiz-question {
+    color: #003f70;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0 0 15px;
 }
 
-.option {
+.quiz-options {
+    display: grid;
+    gap: 10px;
+}
+
+.quiz-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    padding: 13px 15px;
+
+    background: white;
+    border: 2px solid #ddd;
+    border-radius: 9px;
+
+    cursor: pointer;
+    transition: .3s;
+}
+
+.quiz-option:hover {
+    border-color: #cc9933;
+    background: #fffaf0;
+}
+
+.quiz-option input {
+    accent-color: #003f70;
+    transform: scale(1.1);
+}
+
+.quiz-submit {
     display: block;
+    width: 100%;
 
-    padding: 9px;
+    padding: 15px;
 
-    margin: 5px 0;
+    background: #003f70;
+    color: white;
 
-    border-radius: 6px;
+    border: 0;
+    border-radius: 8px;
+
+    font-size: 17px;
+    font-weight: bold;
+
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.quiz-submit:hover {
+    background: #002e52;
+}
+
+.quiz-message {
+    text-align: center;
+    color: #b3261e;
+    font-weight: bold;
+    margin-top: 15px;
+}
+
+.quiz-result {
+    margin-top: 30px;
+
+    background: #f7f9fc;
+
+    padding: 30px;
+
+    border-radius: 15px;
+
+    border-top: 5px solid #cc9933;
+}
+
+.quiz-score {
+    text-align: center;
+    color: #003f70;
+    font-size: 34px;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.quiz-percentage {
+    text-align: center;
+    color: #666;
+    font-size: 20px;
+}
+
+.quiz-status {
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 15px 0;
+}
+
+.quiz-status.pass {
+    color: #1f7a3f;
+}
+
+.quiz-status.fail {
+    color: #b3261e;
+}
+
+.quiz-review {
+    margin-top: 30px;
+}
+
+.quiz-review h3 {
+    color: #003f70;
+}
+
+.quiz-review-item {
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    background: white;
+    border-left: 5px solid #999;
+    line-height: 1.6;
+}
+
+.quiz-review-item.correct {
+    border-left-color: #1f7a3f;
+}
+
+.quiz-review-item.incorrect {
+    border-left-color: #b3261e;
+}
+
+.quiz-restart {
+    display: block;
+    margin: 25px auto 0;
+
+    padding: 12px 25px;
+
+    background: #cc9933;
+    color: white;
+
+    border: 0;
+    border-radius: 8px;
+
+    font-weight: bold;
+    cursor: pointer;
+}
+
+
+/* =====================================================
+   REGISTRATION
+===================================================== */
+
+.register-section {
+    padding: 70px 20px;
+    background: #eef4fa;
+}
+
+.register-container {
+    max-width: 750px;
+    margin: auto;
+    background: white;
+    padding: 35px;
+    border-radius: 15px;
+    box-shadow: 0 5px 18px rgba(0,0,0,.08);
+}
+
+.register-container h2 {
+    text-align: center;
+    color: #003f70;
+}
+
+.register-sub {
+    text-align: center;
+    color: #666;
+    margin-bottom: 30px;
+}
+
+.input-group {
+    margin-bottom: 18px;
+}
+
+.input-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 7px;
+    color: #003f70;
+}
+
+.input-group input,
+.input-group select,
+.input-group textarea {
+    width: 100%;
+    padding: 13px;
+
+    border: 1px solid #ccc;
+    border-radius: 7px;
+
+    font-size: 15px;
+}
+
+.register-btn {
+    width: 100%;
+    padding: 14px;
+
+    border: 0;
+    border-radius: 7px;
+
+    background: #003f70;
+    color: white;
+
+    font-size: 16px;
+    font-weight: bold;
 
     cursor: pointer;
 }
 
-.option:hover {
-    background: #eef5ff;
-}
 
-.option input {
-    margin-right: 8px;
-}
+/* =====================================================
+   POLL
+===================================================== */
 
-
-/* =========================
-   RESULT
-========================= */
-
-.result {
-    display: none;
-
+.poll-section {
+    padding: 70px 20px;
     background: white;
-
-    padding: 30px;
-
-    border-radius: 12px;
-
-    margin-top: 30px;
-
-    text-align: center;
-
-    box-shadow:
-    0 5px 20px rgba(0,0,0,0.1);
 }
 
-.result h2 {
-    color: #063b8c;
+.poll-container {
+    max-width: 750px;
+    margin: auto;
+}
+
+.poll-card {
+    background: #f7f9fc;
+    padding: 30px;
+    border-radius: 15px;
+}
+
+.poll-question {
+    text-align: center;
+    color: #003f70;
+    font-size: 20px;
+    font-weight: bold;
     margin-bottom: 20px;
 }
 
-.result-details {
-    max-width: 600px;
+.poll-options {
+    display: grid;
+    gap: 10px;
+}
+
+.poll-option {
+    background: white;
+    border: 2px solid #ddd;
+    padding: 13px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.poll-option.selected {
+    border-color: #cc9933;
+    background: #fffaf0;
+}
+
+.vote-button {
+    width: 100%;
+    padding: 14px;
+
+    margin-top: 20px;
+
+    border: 0;
+    border-radius: 8px;
+
+    background: #003f70;
+    color: white;
+
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.results {
+    margin-top: 25px;
+}
+
+.result-row {
+    margin-bottom: 15px;
+}
+
+.result-title {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+.result-bar {
+    background: #ddd;
+    height: 12px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.result-fill {
+    height: 100%;
+    background: #cc9933;
+}
+
+#voteMessage {
+    text-align: center;
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+
+/* =====================================================
+   REVIEWS
+===================================================== */
+
+.reviews-section {
+    padding: 70px 20px;
+    background: #eef4fa;
+}
+
+.reviews-container {
+    max-width: 1000px;
     margin: auto;
-    text-align: left;
 }
 
-.result-details p {
-    padding: 9px 0;
-
-    border-bottom: 1px solid #eee;
+.review-form {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    margin-bottom: 35px;
 }
 
-.pass {
-    color: green;
+.review-form input,
+.review-form textarea {
+    width: 100%;
+    padding: 13px;
+    margin-bottom: 15px;
+
+    border: 1px solid #ccc;
+    border-radius: 7px;
+}
+
+.review-form textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.star-rating {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 15px;
+}
+
+.star {
+    font-size: 30px;
+    color: #ccc;
+    cursor: pointer;
+}
+
+.star.selected {
+    color: #cc9933;
+}
+
+.review-submit {
+    padding: 13px 25px;
+
+    border: 0;
+    border-radius: 7px;
+
+    background: #003f70;
+    color: white;
+
     font-weight: bold;
-    font-size: 22px;
+    cursor: pointer;
 }
 
-.fail {
-    color: #c62828;
+#reviewMessage {
+    margin-top: 15px;
     font-weight: bold;
-    font-size: 22px;
+}
+
+.review-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.review-card {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,.07);
+}
+
+.review-name {
+    color: #003f70;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.review-stars {
+    color: #cc9933;
+    margin: 8px 0;
+}
+
+.review-text {
+    color: #555;
+    line-height: 1.6;
 }
 
 
-/* =========================
+/* =====================================================
    CONTACT
-========================= */
+===================================================== */
 
 .contact-section {
-    background: #063b8c;
-}
+    padding: 70px 20px;
 
-.contact-section .section-title {
+    background:
+        linear-gradient(rgba(0,45,80,.96), rgba(0,45,80,.96));
+    
     color: white;
 }
 
+.contact-section .section-title {
+    color: #ffd21c;
+}
+
+.contact-grid {
+    max-width: 1000px;
+    margin: auto;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
 .contact-card {
-    background: white;
-
-    color: #172033;
-
+    background: rgba(255,255,255,.1);
     padding: 25px;
-
     border-radius: 12px;
-
     text-align: center;
 }
 
 .contact-card i {
-    color: #063b8c;
     font-size: 30px;
-    margin-bottom: 10px;
+    color: #ffd21c;
+    margin-bottom: 15px;
 }
 
 .contact-card h3 {
-    margin-bottom: 8px;
+    margin: 10px 0;
 }
 
-.contact-card a {
-    color: #063b8c;
+.contact-card p {
+    word-break: break-word;
+}
+
+.contact-btn {
+    display: inline-block;
+    background: #ffd21c;
+    color: #003f70;
+    padding: 10px 18px;
+    border-radius: 6px;
     font-weight: bold;
-    text-decoration: none;
+    margin-top: 8px;
 }
 
 
-/* =========================
+/* =====================================================
    FOOTER
-========================= */
+===================================================== */
 
 footer {
-    background: #022653;
-
+    background: #002e52;
     color: white;
-
     text-align: center;
-
-    padding: 28px 15px;
-
-    font-size: 14px;
+    padding: 30px 20px;
 }
 
-footer p {
-    margin: 5px 0;
+.footer-links {
+    margin-bottom: 20px;
+}
+
+.footer-links a {
+    display: inline-block;
+    color: white;
+    margin: 5px 10px;
+    font-weight: bold;
+}
+
+.footer-links a:hover {
+    color: #ffd21c;
 }
 
 
-/* =========================
+/* =====================================================
    MOBILE
-========================= */
+===================================================== */
 
 @media (max-width: 700px) {
 
-    .nav-container {
-        flex-direction: column;
-        padding: 13px 0;
-        gap: 10px;
+    .hero h1 {
+        font-size: 31px;
     }
 
-    .nav-links {
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 10px;
+    .hero p {
+        font-size: 17px;
     }
 
-    .form-grid {
+    .section {
+        padding: 50px 15px;
+    }
+
+    .section-title {
+        font-size: 26px;
+    }
+
+    .two-column,
+    .session-grid,
+    .review-grid,
+    .contact-grid {
         grid-template-columns: 1fr;
     }
 
-    section {
-        padding: 45px 0;
+    .session-card {
+        padding: 20px 15px;
     }
 
-    .about-intro {
-        padding: 22px;
+    .countdown {
+        font-size: 24px;
     }
 
+    .quiz-section {
+        padding: 50px 15px;
+    }
+
+    .quiz-card {
+        padding: 20px 15px;
+    }
+
+    .quiz-question {
+        font-size: 16px;
+    }
+
+    .quiz-score {
+        font-size: 28px;
+    }
+
+    .register-container {
+        padding: 25px 18px;
+    }
 }
 
 </style>
@@ -612,929 +867,261 @@ footer p {
 <body>
 
 
-<!-- =========================================
-     NAVIGATION
-========================================= -->
-
-<nav>
-
-<div class="nav-container">
-
-<div class="logo">
-<i class="fas fa-cross"></i>
-B.E.P
-</div>
-
-<ul class="nav-links">
-
-<li>
-<a href="#home">Home</a>
-</li>
-
-<li>
-<a href="#about">About Us</a>
-</li>
-
-<li>
-<a href="#sessions">Sessions</a>
-</li>
-
-<li>
-<a href="#quiz">Bible Quiz</a>
-</li>
-
-<li>
-<a href="#contact">Contact</a>
-</li>
-
-</ul>
-
-</div>
-
-</nav>
-
-
-
-<!-- =========================================
+<!-- =====================================================
      HERO
-========================================= -->
+===================================================== -->
 
-<section class="hero" id="home">
+<section class="hero">
 
-<div class="hero-content">
+    <div class="hero-content">
 
-<h1>B.E.P</h1>
+        <h1>Biblical Empowerment Program</h1>
 
-<h2>Biblical Empowerment Program</h2>
+        <p>
+            <strong>B.E.P</strong><br>
+            Building the Church of Christ
+        </p>
 
-<p class="hero-tagline">
-Building the Church of Christ
-</p>
+        <p>
+            Growing in God's Word. Strengthening our faith.
+            Becoming disciples who live and share the Gospel.
+        </p>
 
-<p>
-Growing in God's Word • Strengthening Faith •
-Empowering Believers
-</p>
+        <a href="#quiz" class="hero-btn">
+            <i class="fa-solid fa-book-open"></i>
+            Take Bible Quiz
+        </a>
 
-<a href="#quiz" class="btn">
+        <a href="#register" class="hero-btn">
+            <i class="fa-solid fa-user-plus"></i>
+            Register
+        </a>
 
-<i class="fas fa-book-bible"></i>
-
-Take the Bible Quiz
-
-</a>
-
-</div>
-
-</section>
-
-
-
-<!-- =========================================
-     COUNTDOWN
-========================================= -->
-
-<section class="countdown-section">
-
-<div class="container">
-
-<h2 class="section-title">
-Next B.E.P. Session
-</h2>
-
-<p>
-Every Thursday • 19:00 – 20:30
-</p>
-
-<p>
-Microsoft Teams
-</p>
-
-<div class="countdown">
-
-<div class="time-box">
-
-<strong id="days">0</strong>
-
-<span>DAYS</span>
-
-</div>
-
-
-<div class="time-box">
-
-<strong id="hours">0</strong>
-
-<span>HOURS</span>
-
-</div>
-
-
-<div class="time-box">
-
-<strong id="minutes">0</strong>
-
-<span>MINUTES</span>
-
-</div>
-
-
-<div class="time-box">
-
-<strong id="seconds">0</strong>
-
-<span>SECONDS</span>
-
-</div>
-
-</div>
-
-</div>
+    </div>
 
 </section>
 
 
+<!-- =====================================================
+     NEXT SESSION
+===================================================== -->
 
-<!-- =========================================
+<section class="next-session" id="next-session">
+
+    <div class="container">
+
+        <h2 class="section-title">
+            Next B.E.P Session
+        </h2>
+
+        <div class="session-card">
+
+            <h3>
+                Biblical Empowerment Program
+            </h3>
+
+            <p>
+                Join us every Thursday for online Bible teaching,
+                discipleship and spiritual growth.
+            </p>
+
+
+            <!-- TEAMS MEETING BUTTON ABOVE COUNTDOWN -->
+
+            <a
+                href="https://teams.live.com/l/message/19:c8PJ7BzLpZV5_topOdSk27_84CuwhDYyVgS-mE3DS4s1@thread.v2/1773217272396?groupId=&parentMessageId=1773217272396&parentMessageId=1773217272396&tenantId=9188040d-6c67-4c5b-b112-36a304b66dad&owningTeamId=19:c8PJ7BzLpZV5_topOdSk27_84CuwhDYyVgS-mE3DS4s1@thread.v2"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="teams-meeting-button"
+            >
+                <i class="fa-brands fa-microsoft"></i>
+                Join B.E.P Microsoft Teams Meeting
+            </a>
+
+
+            <!-- WORKING COUNTDOWN -->
+
+            <div class="countdown" id="countdown">
+                0d 0h 0m 0s
+            </div>
+
+            <div class="countdown-label">
+                Countdown to the next Thursday session
+            </div>
+
+
+            <div class="session-grid">
+
+                <div class="session-item">
+                    <i class="fa-solid fa-calendar-days"></i>
+                    <strong>Every Thursday</strong>
+                </div>
+
+                <div class="session-item">
+                    <i class="fa-solid fa-clock"></i>
+                    <strong>19:00 – 20:30</strong>
+                </div>
+
+                <div class="session-item">
+                    <i class="fa-brands fa-microsoft"></i>
+                    <strong>Microsoft Teams</strong>
+                </div>
+
+            </div>
+
+
+            <div class="session-buttons">
+
+                <a href="#quiz" class="btn btn-gold">
+                    <i class="fa-solid fa-book-open"></i>
+                    Take Bible Quiz
+                </a>
+
+                <a href="#register" class="btn btn-blue">
+                    <i class="fa-solid fa-user-plus"></i>
+                    Register for B.E.P
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
      ABOUT US
-========================================= -->
+===================================================== -->
 
-<section id="about">
+<section class="section" id="about">
 
-<div class="container">
+    <div class="container">
 
-<h2 class="section-title">
-About Us
-</h2>
+        <h2 class="section-title">
+            About Us
+        </h2>
 
+        <div class="card">
 
-<div class="about-intro">
+            <p class="about-text">
 
-<p>
-<strong>
-The Biblical Empowerment Program (B.E.P.)
-</strong>
-is an online Christian teaching and discipleship
-program established to help believers grow deeper
-in their relationship with God and develop a stronger
-understanding of His Word.
-</p>
+                The Biblical Empowerment Program (B.E.P.) is an online
+                Christian teaching and discipleship program established
+                to help believers grow deeper in their relationship
+                with God and develop a stronger understanding of His Word.
 
+                <br><br>
 
-<p>
-At B.E.P., we believe that the Word of God is not
-only meant to be heard, but also understood, lived out,
-and shared with others. Our program creates an
-opportunity for believers to learn biblical principles,
-ask questions, grow in faith, and discover how
-Scripture can guide their everyday lives.
-</p>
+                At B.E.P., we believe that the Word of God is not only
+                meant to be heard, but also understood, lived out, and
+                shared with others.
 
+                <br><br>
 
-<p>
-Through our online teaching sessions, Bible studies,
-prayer, discipleship, and spiritual discussions, we
-focus on building believers who are rooted in Christ
-and equipped to serve God and others.
-</p>
+                Our program creates an opportunity for believers to learn
+                biblical principles, ask questions, grow in faith,
+                strengthen their spiritual lives, and become effective
+                disciples of Jesus Christ.
 
+                <br><br>
 
-<h3 class="about-heading">
-Our Purpose
-</h3>
+                <strong>
+                    Our vision is to build the Church of Christ through
+                    the teaching of God's Word.
+                </strong>
 
-<p>
-Our purpose is to build, equip, encourage, and empower
-believers through the Word of God. We aim to create an
-environment where people can grow spiritually, develop
-Christian character, strengthen their prayer lives, and
-become more committed followers of Jesus Christ.
-</p>
+            </p>
 
+        </div>
 
-<h3 class="about-heading">
-What We Teach
-</h3>
-
-<ul class="about-list">
-
-<li>
-Biblical understanding and Christian foundations
-</li>
-
-<li>
-Prayer and spiritual growth
-</li>
-
-<li>
-Discipleship and following Christ
-</li>
-
-<li>
-Faith and trusting God
-</li>
-
-<li>
-Christian character and godly living
-</li>
-
-<li>
-Forgiveness, love, and reconciliation
-</li>
-
-<li>
-The work of the Holy Spirit
-</li>
-
-<li>
-Discovering and using spiritual gifts
-</li>
-
-<li>
-Applying God's Word in everyday life
-</li>
-
-</ul>
-
-
-<div class="vision-box">
-
-<h3>
-Our Vision
-</h3>
-
-<p>
-<strong>
-Building the Church of Christ through biblical
-teaching, spiritual growth, discipleship, and
-practical Christian living.
-</strong>
-</p>
-
-</div>
-
-
-<div class="mission-box">
-
-<h3>
-Our Mission
-</h3>
-
-<p>
-To provide accessible biblical teaching that
-encourages believers to know God's Word, grow in
-faith, live according to biblical principles, and
-become effective disciples of Jesus Christ.
-</p>
-
-</div>
-
-
-<br>
-
-<p style="text-align:center; font-weight:bold; color:#063b8c;">
-
-B.E.P. — Building the Church of Christ.
-
-</p>
-
-</div>
-
-</div>
+    </div>
 
 </section>
 
 
+<!-- =====================================================
+     THURSDAY SESSIONS
+===================================================== -->
 
-<!-- =========================================
-     SESSIONS & OBJECTIVES
-========================================= -->
+<section class="section" id="sessions">
 
-<section class="sessions-section" id="sessions">
+    <div class="container">
 
-<div class="container">
+        <h2 class="section-title">
+            Thursday Sessions & Objectives
+        </h2>
 
-<h2 class="section-title">
-Sessions & Objectives
-</h2>
+        <div class="two-column">
 
+            <div class="card">
 
-<div class="cards">
+                <h3 style="color:#003f70;">
+                    Thursday Sessions
+                </h3>
 
+                <p class="about-text">
 
-<div class="card">
+                    B.E.P. meets every Thursday from
+                    <strong>19:00 to 20:30</strong> through
+                    Microsoft Teams.
 
-<i class="fas fa-book-open"></i>
+                    <br><br>
 
-<h3>
-Study the Word
-</h3>
+                    Each session focuses on biblical teaching,
+                    spiritual growth, discipleship, prayer,
+                    Christian character and practical application
+                    of God's Word.
 
-<p>
-Understand Scripture and learn how to apply
-biblical principles to everyday life.
-</p>
+                </p>
 
-</div>
-
-
-<div class="card">
-
-<i class="fas fa-person-praying"></i>
-
-<h3>
-Prayer & Spiritual Growth
-</h3>
-
-<p>
-Develop a stronger prayer life and deeper
-relationship with God.
-</p>
-
-</div>
+            </div>
 
 
-<div class="card">
+            <div class="card">
 
-<i class="fas fa-users"></i>
+                <h3 style="color:#003f70;">
+                    Our Objectives
+                </h3>
 
-<h3>
-Discipleship
-</h3>
+                <ul class="objectives">
 
-<p>
-Learn what it means to follow Christ and
-help others grow in faith.
-</p>
+                    <li>To deepen believers' understanding of Scripture.</li>
 
-</div>
+                    <li>To strengthen personal faith in God.</li>
 
+                    <li>To encourage spiritual growth and maturity.</li>
 
-<div class="card">
+                    <li>To develop committed disciples of Jesus Christ.</li>
 
-<i class="fas fa-heart"></i>
+                    <li>To teach believers how to apply God's Word.</li>
 
-<h3>
-Christian Character
-</h3>
+                    <li>To equip believers to share the Gospel.</li>
 
-<p>
-Grow in love, forgiveness, humility,
-obedience and godly living.
-</p>
+                    <li>To build and strengthen the Church of Christ.</li>
 
-</div>
+                </ul>
 
-</div>
+            </div>
 
+        </div>
 
-<div class="card" style="margin-top:25px;">
-
-<i class="fas fa-video"></i>
-
-<h3>
-Thursday Online Sessions
-</h3>
-
-<p>
-<strong>
-Every Thursday
-</strong>
-</p>
-
-<p>
-19:00 – 20:30
-</p>
-
-<p>
-Microsoft Teams
-</p>
-
-</div>
-
-</div>
+    </div>
 
 </section>
 
 
-
-<!-- =========================================
+<!-- =====================================================
      BIBLE QUIZ
-========================================= -->
+===================================================== -->
 
 <section class="quiz-section" id="quiz">
 
-<div class="container">
+    <div class="quiz-container">
 
-<h2 class="section-title">
-B.E.P. Bible Quiz
-</h2>
+        <h2 class="section-title">
+            Quick Bible Quiz for B.E.P
+        </h2>
 
-
-<div class="quiz-info">
-
-<h3>
-Quiz Instructions
-</h3>
-
-<ul>
-
-<li>
-20 multiple-choice questions
-</li>
-
-<li>
-Each question carries 3 marks
-</li>
-
-<li>
-Total: 60 marks
-</li>
-
-<li>
-Pass mark: 40/60
-</li>
-
-<li>
-Select one answer for each question
-</li>
-
-<li>
-Complete your personal details before submitting
-</li>
-
-</ul>
-
-</div>
-
-
-
-<!-- =========================================
-     PARTICIPANT INFORMATION
-========================================= -->
-
-<div class="registration">
-
-<h3>
-<i class="fas fa-user"></i>
-Participant Information
-</h3>
-
-
-<div class="form-grid">
-
-
-<div class="form-group">
-
-<label for="name">
-Name *
-</label>
-
-<input
-type="text"
-id="name"
-placeholder="Enter your name"
-required>
-
-</div>
-
-
-<div class="form-group">
-
-<label for="surname">
-Surname *
-</label>
-
-<input
-type="text"
-id="surname"
-placeholder="Enter your surname"
-required>
-
-</div>
-
-
-<div class="form-group">
-
-<label for="phone">
-Cell Number *
-</label>
-
-<input
-type="tel"
-id="phone"
-placeholder="062 350 8689"
-required>
-
-</div>
-
-
-<div class="form-group">
-
-<label for="email">
-Email Address *
-</label>
-
-<input
-type="email"
-id="email"
-placeholder="Enter your email"
-required>
-
-</div>
-
-
-</div>
-
-</div>
-
-
-
-<form id="quizForm">
-
-
-<!-- QUESTION 1 -->
-
-<div class="question">
-
-<h3>
-1. Who created the heavens and the earth?
-</h3>
-
-<label class="option">
-<input type="radio" name="q1" value="0">
-A. Moses
-</label>
-
-<label class="option">
-<input type="radio" name="q1" value="1">
-B. God
-</label>
-
-<label class="option">
-<input type="radio" name="q1" value="0">
-C. Abraham
-</label>
-
-<label class="option">
-<input type="radio" name="q1" value="0">
-D. David
-</label>
-
-</div>
-
-
-
-<!-- QUESTION 2 -->
-
-<div class="question">
-
-<h3>
-2. Who built the ark?
-</h3>
-
-<label class="option">
-<input type="radio" name="q2" value="0">
-A. Abraham
-</label>
-
-<label class="option">
-<input type="radio" name="q2" value="1">
-B. Noah
-</label>
-
-<label class="option">
-<input type="radio" name="q2" value="0">
-C. Moses
-</label>
-
-<label class="option">
-<input type="radio" name="q2" value="0">
-D. Joshua
-</label>
-
-</div>
-
-
-
-<!-- QUESTION 3 -->
-
-<div class="question">
-
-<h3>
-3. Who led the Israelites out of Egypt?
-</h3>
-
-<label class="option">
-<input type="radio" name="q3" value="0">
-A. David
-</label>
-
-<label class="option">
-<input type="radio" name="q3" value="1">
-B. Moses
-</label>
-
-<label class="option">
-<input type="radio" name="q3" value="0">
-C. Solomon
-</label>
-
-<label class="option">
-<input type="radio" name="q3" value="0">
-D. Elijah
-</label>
-
-</div>
-
-
-
-<!-- QUESTION 4 -->
-
-<div class="question">
-
-<h3>
-4. Where was Jesus born?
-</h3>
-
-<label class="option">
-<input type="radio" name="q4" value="1">
-A. Bethlehem
-</label>
-
-<label class="option">
-<input type="radio" name="q4" value="0">
-B. Jerusalem
-</label>
-
-<label class="option">
-<input type="radio" name="q4" value="0">
-C. Nazareth
-</label>
-
-<label class="option">
-<input type="radio" name="q4" value="0">
-D. Jericho
-</label>
-
-</div>
-
-
-
-<!-- QUESTION 5 -->
-
-<div class="question">
-
-<h3>
-5. Who was the mother of Jesus?
-</h3>
-
-<label class="option">
-<input type="radio" name="q5" value="1">
-A. Mary
-</label>
-
-<label class="option">
-<input type="radio" name="q5" value="0">
-B. Martha
-</label>
-
-<label class="option">
-<input type="radio" name="q5" value="0">
-C. Elizabeth
-</label>
-
-<label class="option">
-<input type="radio" name="q5" value="0">
-D. Ruth
-</label>
-
-</div>
-
-
-
-<!-- QUESTION 6 -->
-
-<div class="question">
-
-<h3>
-6. How many disciples did Jesus choose?
-</h3>
-
-<label class="option">
-<input type="radio" name="q6" value="0">
-A. 7
-</label>
-
-<label class="option">
-<input type="radio" name="q6" value="1">
-B. 12
-</label>
-
-<label class="option">
-<input type="radio" name="q6" value="0">
-C. 10
-</label>
-
-<label class="option">
-<input type="radio" name="q6" value="0">
-D. 40
-</label>
-
-</div>
-
-
-
-<!-- QUESTION 7 -->
-
-<div class="question">
-
-<h3>
-7. What is the first book of the Bible?
-</h3>
-
-<label class="option">
-<input type="radio" name="q7" value="1">
-A. Genesis
-</label>
-
-<label class="option">
-<input type="radio" name="q7" value="0">
-B. Exodus
-</label>
-
-<label class="option">
-<input type="radio" name="q7" value="0">
-C. Matthew
-</label>
-
-<label class="option">
-<input type="radio" name="q7" value="0">
-D. Psalms
-</label>
-
-</div>
-
-
-
-<!-- QUESTION 8 -->
-
-<div class="question">
-
-<h3>
-8. What is the last book of the Bible?
-</h3>
-
-<label class="option">
-<input type="radio" name="q8" value="0">
-A. Acts
-</label>
-
-<label class="option">
-<input type="radio" name="q8" value="0">
-B. Jude
-</label>
-
-<label class="option">
-<input type="radio" name="q8" value="1">
-C. Revelation
-</label>
-
-<label class="option">
-<input type="radio" name="q8" value="0">
-D. Romans
-</label>
-
-</div>
-
-
-
-<!-- QUESTION 9 -->
-
-<div class="question">
-
-<h3>
-9. Who defeated Goliath?
-</h3>
-
-<label class="option">
-<input type="radio" name="q9" value="1">
-A. David
-</label>
-
-<label class="option">
-<input type="radio" name="q9" value="0">
-B. Saul
-</label>
-
-<label class="option">
-<input type="radio" name="q9" value="0">
-C. Samson
-</label>
-
-<label class="option">
-<input type="radio" name="q9" value="0">
-D. Joshua
-</label>
-
-</div>
-
-
-
-<!-- QUESTION 10 -->
-
-<div class="question">
-
-<h3>
-10. What did Jesus turn water into?
-</h3>
-
-<label class="option">
-<input type="radio" name="q10" value="0">
-A. Oil
-</label>
-
-<label class="option">
-<input type="radio" name="q10" value="1">
-B. Wine
-</label>
-
-<label class="option">
-<input type="radio" name="q10" value="0">
-C. Milk
-</label>
-
-<label class="option">
-<input type="radio" name="q10" value="0">
-D. Juice
-</label>
-
-</div>
-
-
-
-<!-- QUESTION 11 -->
-
-<div class="question">
-
-<h3>
-11. What is the greatest commandment?
-</h3>
-
-<label class="option">
-<input type="radio" name="q11" value="1">
-A. Love God with all your heart
-</label>
-
-<label class="option">
-<input type="radio" name="q11" value="0">
-B. Build a temple
-</label>
-
-<label class="option">
-<input type="radio" name="q11" value="0">
-C. Become wealthy
-</label>
-
-<label class="option">
-<input type="radio" name="q11" value="0">
-D. Travel the world
-</label>
-
-</div>
-
-
-
-<!-- QUESTION 12 -->
-
-<div class="question">
-
-<h3>
-12. Who baptized Jesus?
-</h3>
-
-<label class="option">
-<input type="radio" name="q12" value="1">
-A. John the Baptist
-</label>
-
-<label class="option">
-<input type="radio" name="q12" value="0">
-B. Peter
-</label>
-
-<label class="option">
-<input type="radio" name="q12" value="0">
-C. Paul
-</label>
-
-<label class="option">
-<input type="radio" name="q12" value="0">
-D. James
-</label>
-
-</div>
-
-
-
-    
+        <p class="qui
