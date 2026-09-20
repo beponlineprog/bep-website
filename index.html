@@ -16,8 +16,12 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
     padding:0;
 }
 
+html{
+    scroll-behavior:smooth;
+}
+
 body{
-    font-family:Arial, sans-serif;
+    font-family:Arial,sans-serif;
     line-height:1.6;
     background:#f4f8fc;
     color:#222;
@@ -26,7 +30,7 @@ body{
 header{
     background:#063b73;
     color:white;
-    padding:15px 5%;
+    padding:15px 6%;
     display:flex;
     justify-content:space-between;
     align-items:center;
@@ -34,7 +38,7 @@ header{
 }
 
 .logo{
-    font-size:24px;
+    font-size:23px;
     font-weight:bold;
 }
 
@@ -44,14 +48,14 @@ header{
 
 nav{
     display:flex;
-    gap:10px;
+    gap:8px;
     flex-wrap:wrap;
 }
 
 nav a{
     color:white;
     text-decoration:none;
-    padding:9px 13px;
+    padding:9px 12px;
     border-radius:6px;
     font-weight:bold;
 }
@@ -62,16 +66,16 @@ nav a:hover{
 }
 
 .hero{
-    min-height:430px;
+    min-height:440px;
     background:
     linear-gradient(rgba(0,45,90,.72),rgba(0,45,90,.72)),
     url("banner.png") center/cover;
     display:flex;
-    justify-content:center;
     align-items:center;
+    justify-content:center;
     text-align:center;
-    padding:40px 20px;
     color:white;
+    padding:40px 20px;
 }
 
 .hero-content{
@@ -80,7 +84,7 @@ nav a:hover{
 
 .hero h1{
     font-size:44px;
-    margin-bottom:15px;
+    margin-bottom:10px;
 }
 
 .hero h2{
@@ -98,17 +102,15 @@ nav a:hover{
     text-decoration:none;
     background:#f4c542;
     color:#063b73;
-    padding:13px 22px;
+    padding:13px 21px;
     border-radius:7px;
     font-weight:bold;
     margin:5px;
-    border:none;
-    cursor:pointer;
 }
 
 .btn:hover{
-    transform:translateY(-2px);
     opacity:.9;
+    transform:translateY(-2px);
 }
 
 section{
@@ -122,6 +124,8 @@ section{
     margin-bottom:30px;
 }
 
+/* ABOUT */
+
 .about{
     max-width:950px;
     margin:auto;
@@ -132,9 +136,36 @@ section{
     margin-bottom:15px;
 }
 
+/* COUNTDOWN */
+
+.countdown{
+    background:#063b73;
+    color:white;
+    text-align:center;
+}
+
+.countdown .section-title{
+    color:white;
+}
+
+.session-info{
+    font-size:18px;
+    margin-bottom:15px;
+}
+
+#timer{
+    font-size:32px;
+    font-weight:bold;
+    color:#f4c542;
+    margin:15px 0;
+}
+
+/* CARDS */
+
 .cards{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+    grid-template-columns:
+    repeat(auto-fit,minmax(220px,1fr));
     gap:20px;
 }
 
@@ -142,8 +173,8 @@ section{
     background:white;
     padding:25px;
     border-radius:12px;
-    box-shadow:0 4px 15px rgba(0,0,0,.08);
     text-align:center;
+    box-shadow:0 4px 15px rgba(0,0,0,.08);
 }
 
 .card i{
@@ -157,54 +188,52 @@ section{
     margin-bottom:10px;
 }
 
-.countdown{
-    background:#063b73;
-    color:white;
-    text-align:center;
-}
+/* CONTACT */
 
-.countdown .section-title{
-    color:white;
-}
-
-#timer{
-    font-size:30px;
-    font-weight:bold;
-    color:#f4c542;
+.contact{
+    background:#eef4fa;
 }
 
 .contact-grid{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    grid-template-columns:
+    repeat(auto-fit,minmax(210px,1fr));
     gap:20px;
 }
 
 .contact-card{
     background:white;
-    border-radius:12px;
     padding:25px;
+    border-radius:12px;
     text-align:center;
     box-shadow:0 4px 15px rgba(0,0,0,.08);
 }
 
 .contact-card i{
-    font-size:35px;
+    font-size:38px;
     color:#063b73;
     margin-bottom:12px;
 }
 
 .contact-card h3{
     color:#063b73;
+    margin-bottom:5px;
+}
+
+.contact-card p{
+    font-size:14px;
+    min-height:45px;
 }
 
 .contact-card a{
     display:inline-block;
     margin-top:12px;
-    text-decoration:none;
+    padding:10px 16px;
     background:#063b73;
     color:white;
-    padding:10px 16px;
+    text-decoration:none;
     border-radius:6px;
+    font-weight:bold;
 }
 
 .contact-card a:hover{
@@ -212,18 +241,72 @@ section{
     color:#063b73;
 }
 
+/* FOOTER */
+
 footer{
     background:#031f3c;
     color:white;
+    padding:35px 7% 20px;
     text-align:center;
-    padding:25px;
 }
 
-footer span{
+.footer-logo{
+    font-size:23px;
+    font-weight:bold;
+    margin-bottom:8px;
+}
+
+.footer-logo span{
     color:#f4c542;
 }
 
-@media(max-width:600px){
+.footer-links{
+    margin:18px 0;
+}
+
+.footer-links a{
+    color:white;
+    text-decoration:none;
+    margin:0 8px;
+}
+
+.footer-links a:hover{
+    color:#f4c542;
+}
+
+.footer-social{
+    margin:15px 0;
+}
+
+.footer-social a{
+    color:white;
+    font-size:23px;
+    margin:0 9px;
+}
+
+.footer-social a:hover{
+    color:#f4c542;
+}
+
+.copyright{
+    border-top:1px solid rgba(255,255,255,.2);
+    padding-top:15px;
+    margin-top:15px;
+    font-size:14px;
+}
+
+@media(max-width:650px){
+
+    header{
+        justify-content:center;
+        text-align:center;
+    }
+
+    nav{
+        justify-content:center;
+        margin-top:10px;
+    }
+
     .hero h1{
         font-size:32px;
     }
@@ -232,12 +315,8 @@ footer span{
         font-size:16px;
     }
 
-    nav{
-        margin-top:10px;
-    }
-
     #timer{
-        font-size:23px;
+        font-size:24px;
     }
 }
 </style>
@@ -246,175 +325,517 @@ footer span{
 <body>
 
 <header>
-    <div class="logo">
-        B.E.P <span>ONLINE PROGRAM</span>
-    </div>
 
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="#about">About Us</a>
-        <a href="#sessions">Sessions</a>
-        <a href="register.html">Register</a>
-        <a href="quiz.html">Quiz</a>
-        <a href="#contact">Contact Us</a>
-    </nav>
+<div class="logo">
+B.E.P. <span>ONLINE PROGRAM</span>
+</div>
+
+<nav>
+<a href="index.html">Home</a>
+<a href="#about">About Us</a>
+<a href="#sessions">Sessions</a>
+<a href="register.html">Register</a>
+<a href="quiz.html">Quiz</a>
+<a href="#contact">Contact Us</a>
+</nav>
+
 </header>
 
+
+<!-- HERO -->
+
 <section class="hero">
-    <div class="hero-content">
 
-        <h1>Biblical Empowerment Program</h1>
+<div class="hero-content">
 
-        <h2>B.E.P.</h2>
+<h1>Biblical Empowerment Program</h1>
 
-        <p>
-            Building the Church of Christ through the teaching,
-            understanding and application of God's Word.
-        </p>
+<h2>B.E.P.</h2>
 
-        <a href="register.html" class="btn">
-            <i class="fa-solid fa-user-plus"></i>
-            Register Now
-        </a>
+<p>
+Building the Church of Christ through the teaching,
+understanding and application of God's Word.
+</p>
 
-        <a href="quiz.html" class="btn">
-            <i class="fa-solid fa-book-open"></i>
-            Take B.E.P. Quiz
-        </a>
+<a href="register.html" class="btn">
+<i class="fa-solid fa-user-plus"></i>
+Register Now
+</a>
 
-    </div>
+<a href="quiz.html" class="btn">
+<i class="fa-solid fa-file-pen"></i>
+Take B.E.P. Quiz
+</a>
+
+</div>
+
 </section>
+
+
+<!-- ABOUT -->
 
 <section id="about">
 
-    <h2 class="section-title">About Us</h2>
+<h2 class="section-title">About Us</h2>
 
-    <div class="about">
+<div class="about">
 
-        <p>
-            The Biblical Empowerment Program (B.E.P.) is an online
-            Christian teaching and discipleship program established
-            to help believers grow deeper in their relationship with
-            God and develop a stronger understanding of His Word.
-        </p>
+<p>
+The Biblical Empowerment Program (B.E.P.) is an online
+Christian teaching and discipleship program established to
+help believers grow deeper in their relationship with God
+and develop a stronger understanding of His Word.
+</p>
 
-        <p>
-            At B.E.P., we believe that the Word of God is not only
-            meant to be heard, but also understood, lived out, and
-            shared with others.
-        </p>
+<p>
+At B.E.P., we believe that the Word of God is not only
+meant to be heard, but also understood, lived out, and
+shared with others.
+</p>
 
-        <p>
-            Our program creates an opportunity for believers to learn
-            biblical principles, ask questions, grow in faith and
-            become better equipped to serve God and His Church.
-        </p>
+<p>
+Our program creates an opportunity for believers to learn
+biblical principles, ask questions, grow in faith and become
+better equipped to serve God and His Church.
+</p>
 
-    </div>
+</div>
 
 </section>
+
+
+<!-- COUNTDOWN -->
 
 <section class="countdown">
 
-    <h2 class="section-title">Next B.E.P. Session</h2>
+<h2 class="section-title">
+Next B.E.P. Session
+</h2>
 
-    <p>Every Thursday | 19:00 – 20:30</p>
+<p class="session-info">
+<i class="fa-solid fa-calendar-days"></i>
+Every Thursday
+&nbsp; | &nbsp;
+<i class="fa-solid fa-clock"></i>
+19:00 – 20:30
+</p>
 
-    <div id="timer">Loading...</div>
+<p>Next session begins in:</p>
+
+<div id="timer">Loading...</div>
+
+<p>
+Join us online through Microsoft Teams.
+</p>
+
+<a href="https://teams.microsoft.com/"
+target="_blank"
+class="btn">
+
+<i class="fa-brands fa-microsoft"></i>
+Open Microsoft Teams
+
+</a>
 
 </section>
+
+
+<!-- SESSIONS -->
 
 <section id="sessions">
 
-    <h2 class="section-title">Thursday Sessions</h2>
+<h2 class="section-title">
+Thursday Sessions
+</h2>
 
-    <div class="cards">
+<div class="cards">
 
-        <div class="card">
-            <i class="fa-solid fa-book-bible"></i>
-            <h3>Biblical Teaching</h3>
-            <p>
-                Learn and understand God's Word through structured
-                Bible-based teaching.
-            </p>
-        </div>
+<div class="card">
 
-        <div class="card">
-            <i class="fa-solid fa-person-praying"></i>
-            <h3>Spiritual Growth</h3>
-            <p>
-                Develop a deeper relationship with God and grow
-                spiritually through His Word.
-            </p>
-        </div>
+<i class="fa-solid fa-book-bible"></i>
 
-        <div class="card">
-            <i class="fa-solid fa-people-group"></i>
-            <h3>Discipleship</h3>
-            <p>
-                Become equipped to follow Christ and help others
-                grow in their faith.
-            </p>
-        </div>
+<h3>Biblical Teaching</h3>
 
-        <div class="card">
-            <i class="fa-solid fa-comments"></i>
-            <h3>Questions & Discussion</h3>
-            <p>
-                Participate in meaningful discussions and ask
-                questions about biblical principles.
-            </p>
-        </div>
+<p>
+Learn and understand God's Word through structured
+Bible-based teaching.
+</p>
 
-    </div>
+</div>
+
+
+<div class="card">
+
+<i class="fa-solid fa-person-praying"></i>
+
+<h3>Spiritual Growth</h3>
+
+<p>
+Develop a deeper relationship with God and grow
+spiritually through His Word.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<i class="fa-solid fa-people-group"></i>
+
+<h3>Discipleship</h3>
+
+<p>
+Become equipped to follow Christ and help others
+grow in their faith.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<i class="fa-solid fa-comments"></i>
+
+<h3>Questions & Discussion</h3>
+
+<p>
+Participate in meaningful discussions and ask
+questions about biblical principles.
+</p>
+
+</div>
+
+</div>
 
 </section>
+
+
+<!-- JOIN -->
 
 <section>
 
-    <h2 class="section-title">Join B.E.P.</h2>
+<h2 class="section-title">
+Join B.E.P.
+</h2>
 
-    <div class="cards">
+<div class="cards">
 
-        <div class="card">
-            <i class="fa-solid fa-user-plus"></i>
-            <h3>Register</h3>
-            <p>
-                Register as a B.E.P. learner and join our online
-                teaching program.
-            </p>
+<div class="card">
 
-            <a href="register.html" class="btn">
-                Register
-            </a>
-        </div>
+<i class="fa-solid fa-user-plus"></i>
 
-        <div class="card">
-            <i class="fa-solid fa-file-pen"></i>
-            <h3>B.E.P. Examination</h3>
-            <p>
-                Complete the B.E.P. Bible examination and test
-                your understanding of the lessons.
-            </p>
+<h3>Register</h3>
 
-            <a href="quiz.html" class="btn">
-                Start Examination
-            </a>
-        </div>
+<p>
+Register as a B.E.P. learner and join our online
+teaching program.
+</p>
 
-    </div>
+<a href="register.html" class="btn">
+Register
+</a>
+
+</div>
+
+
+<div class="card">
+
+<i class="fa-solid fa-file-pen"></i>
+
+<h3>B.E.P. Examination</h3>
+
+<p>
+Complete the B.E.P. Bible examination and test
+your understanding of the lessons.
+</p>
+
+<a href="quiz.html" class="btn">
+Start Examination
+</a>
+
+</div>
+
+</div>
 
 </section>
 
-<section id="contact">
 
-    <h2 class="section-title">Contact Us</h2>
+<!-- CONTACT -->
 
-    <div class="contact-grid">
+<section id="contact" class="contact">
 
-        <div class="contact-card">
-            <i class="fa-brands fa-whatsapp"></i>
-            <h3>WhatsApp</h3>
-            <p>Chat with B.E.P.</p>
+<h2 class="section-title">
+Contact Us
+</h2>
 
-            <a href="https
+<div class="contact-grid">
+
+
+<!-- WHATSAPP -->
+
+<div class="contact-card">
+
+<i class="fa-brands fa-whatsapp"></i>
+
+<h3>WhatsApp</h3>
+
+<p>
+Chat with B.E.P. directly on WhatsApp.
+</p>
+
+<a href="https://wa.me/27740386671"
+target="_blank">
+
+<i class="fa-brands fa-whatsapp"></i>
+WhatsApp Us
+
+</a>
+
+</div>
+
+
+<!-- FACEBOOK -->
+
+<div class="contact-card">
+
+<i class="fa-brands fa-facebook"></i>
+
+<h3>Facebook</h3>
+
+<p>
+Join the B.E.P. Facebook community.
+</p>
+
+<a href="https://facebook.com/groups/1421853356307383/"
+target="_blank">
+
+<i class="fa-brands fa-facebook"></i>
+Visit Facebook
+
+</a>
+
+</div>
+
+
+<!-- EMAIL -->
+
+<div class="contact-card">
+
+<i class="fa-solid fa-envelope"></i>
+
+<h3>Email</h3>
+
+<p>
+bep.onlineprog@gmail.com
+</p>
+
+<a href="mailto:bep.onlineprog@gmail.com">
+
+<i class="fa-solid fa-envelope"></i>
+Email Us
+
+</a>
+
+</div>
+
+
+<!-- PHONE -->
+
+<div class="contact-card">
+
+<i class="fa-solid fa-phone"></i>
+
+<h3>Phone</h3>
+
+<p>
+074 038 6671
+</p>
+
+<a href="tel:+27740386671">
+
+<i class="fa-solid fa-phone"></i>
+Call Us
+
+</a>
+
+</div>
+
+
+<!-- TEAMS -->
+
+<div class="contact-card">
+
+<i class="fa-brands fa-microsoft"></i>
+
+<h3>Microsoft Teams</h3>
+
+<p>
+Join B.E.P. online sessions through Microsoft Teams.
+</p>
+
+<a href="https://teams.microsoft.com/"
+target="_blank">
+
+<i class="fa-brands fa-microsoft"></i>
+Open Teams
+
+</a>
+
+</div>
+
+
+<!-- REGISTER -->
+
+<div class="contact-card">
+
+<i class="fa-solid fa-user-plus"></i>
+
+<h3>Registration</h3>
+
+<p>
+Become part of the B.E.P. online program.
+</p>
+
+<a href="register.html">
+
+<i class="fa-solid fa-arrow-right"></i>
+Register Now
+
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+<div class="footer-logo">
+B.E.P. <span>ONLINE PROGRAM</span>
+</div>
+
+<p>
+Biblical Empowerment Program
+</p>
+
+<p>
+Building the Church of Christ
+</p>
+
+
+<div class="footer-links">
+
+<a href="index.html">Home</a>
+<a href="#about">About</a>
+<a href="#sessions">Sessions</a>
+<a href="register.html">Register</a>
+<a href="quiz.html">Quiz</a>
+<a href="#contact">Contact</a>
+
+</div>
+
+
+<div class="footer-social">
+
+<a href="https://wa.me/27740386671" target="_blank">
+<i class="fa-brands fa-whatsapp"></i>
+</a>
+
+<a href="https://facebook.com/groups/1421853356307383/"
+target="_blank">
+<i class="fa-brands fa-facebook"></i>
+</a>
+
+<a href="mailto:bep.onlineprog@gmail.com">
+<i class="fa-solid fa-envelope"></i>
+</a>
+
+</div>
+
+
+<div class="copyright">
+
+© 2026 Biblical Empowerment Program (B.E.P.)
+<br>
+All Rights Reserved.
+
+</div>
+
+</footer>
+
+
+<script>
+
+function updateCountdown(){
+
+const now = new Date();
+
+let nextThursday = new Date(now);
+
+let daysUntil =
+(4 - now.getDay() + 7) % 7;
+
+if(
+daysUntil === 0 &&
+(
+now.getHours() > 19 ||
+(
+now.getHours() === 19 &&
+now.getMinutes() >= 0
+)
+)
+){
+
+daysUntil = 7;
+
+}
+
+nextThursday.setDate(
+now.getDate() + daysUntil
+);
+
+nextThursday.setHours(19,0,0,0);
+
+const difference =
+nextThursday - now;
+
+const days =
+Math.floor(
+difference/(1000*60*60*24)
+);
+
+const hours =
+Math.floor(
+(difference/(1000*60*60))%24
+);
+
+const minutes =
+Math.floor(
+(difference/(1000*60))%60
+);
+
+const seconds =
+Math.floor(
+(difference/1000)%60
+);
+
+document.getElementById("timer").innerHTML =
+days + "d " +
+hours + "h " +
+minutes + "m " +
+seconds + "s";
+
+}
+
+setInterval(updateCountdown,1000);
+
+updateCountdown();
+
+</script>
+
+</body>
+    </html>
