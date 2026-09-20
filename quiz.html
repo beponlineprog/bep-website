@@ -4,203 +4,345 @@
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
 <title>B.E.P. Bible Examination</title>
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
 <style>
 
 *{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
+box-sizing:border-box;
+margin:0;
+padding:0;
+}
+
+html{
+scroll-behavior:smooth;
 }
 
 body{
-    font-family:Arial,sans-serif;
-    background:#eef4fa;
-    color:#222;
+font-family:Arial,sans-serif;
+background:#eef4fa;
+color:#222;
 }
+
+/* NAVBAR */
 
 header{
-    background:#063b73;
-    color:white;
-    padding:18px 6%;
-    text-align:center;
+background:#063b73;
+color:white;
+padding:17px 6%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+flex-wrap:wrap;
 }
 
-header h1{
-    font-size:28px;
+.logo{
+font-size:22px;
+font-weight:bold;
 }
 
-header p{
-    color:#f4c542;
-    margin-top:5px;
-    font-weight:bold;
+.logo span{
+color:#f4c542;
 }
+
+nav{
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+}
+
+nav a{
+color:white;
+text-decoration:none;
+padding:8px 11px;
+border-radius:6px;
+font-weight:bold;
+}
+
+nav a:hover{
+background:#f4c542;
+color:#063b73;
+}
+
+/* FLOATING BACK BUTTON */
+
+.back-button{
+position:fixed;
+left:15px;
+bottom:20px;
+z-index:1000;
+background:#f4c542;
+color:#063b73;
+padding:12px 17px;
+border-radius:30px;
+text-decoration:none;
+font-weight:bold;
+box-shadow:0 4px 12px rgba(0,0,0,.25);
+}
+
+.back-button:hover{
+background:#063b73;
+color:white;
+}
+
+/* EXAM */
 
 .container{
-    max-width:900px;
-    margin:30px auto;
-    padding:15px;
+max-width:900px;
+margin:30px auto;
+padding:15px;
 }
 
 .exam-header{
-    background:white;
-    padding:25px;
-    border-radius:12px;
-    box-shadow:0 4px 15px rgba(0,0,0,.08);
-    margin-bottom:20px;
+background:white;
+padding:25px;
+border-radius:12px;
+box-shadow:0 4px 15px rgba(0,0,0,.08);
+margin-bottom:20px;
 }
 
-.exam-header h2{
-    color:#063b73;
-    margin-bottom:10px;
+.exam-header h1{
+color:#063b73;
+text-align:center;
+margin-bottom:8px;
+}
+
+.exam-title{
+text-align:center;
+font-weight:bold;
+color:#f4b900;
+font-size:18px;
+margin-bottom:20px;
 }
 
 .instructions{
-    background:#f7f9fc;
-    padding:15px;
-    border-left:5px solid #f4c542;
-    margin-top:15px;
+background:#f7f9fc;
+padding:15px;
+border-left:5px solid #f4c542;
+margin-top:15px;
+}
+
+.instructions ul{
+margin-left:20px;
+margin-top:8px;
 }
 
 .student-details{
-    background:white;
-    padding:25px;
-    border-radius:12px;
-    box-shadow:0 4px 15px rgba(0,0,0,.08);
-    margin-bottom:20px;
+background:white;
+padding:25px;
+border-radius:12px;
+box-shadow:0 4px 15px rgba(0,0,0,.08);
+margin-bottom:20px;
 }
 
 .student-details h2{
-    color:#063b73;
-    margin-bottom:20px;
+color:#063b73;
+margin-bottom:20px;
 }
 
 .form-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:15px;
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:15px;
 }
 
 .form-group label{
-    display:block;
-    font-weight:bold;
-    color:#063b73;
-    margin-bottom:7px;
+display:block;
+font-weight:bold;
+color:#063b73;
+margin-bottom:7px;
 }
 
 .form-group input{
-    width:100%;
-    padding:12px;
-    border:1px solid #ccc;
-    border-radius:7px;
-    font-size:16px;
+width:100%;
+padding:12px;
+border:1px solid #ccc;
+border-radius:7px;
+font-size:16px;
 }
 
+/* QUESTIONS */
+
 .question{
-    background:white;
-    padding:25px;
-    margin-bottom:20px;
-    border-radius:12px;
-    box-shadow:0 4px 15px rgba(0,0,0,.08);
+background:white;
+padding:25px;
+margin-bottom:20px;
+border-radius:12px;
+box-shadow:0 4px 15px rgba(0,0,0,.08);
 }
 
 .progress{
-    color:#063b73;
-    font-weight:bold;
-    margin-bottom:10px;
+color:#063b73;
+font-weight:bold;
+margin-bottom:10px;
 }
 
 .question h3{
-    margin-bottom:20px;
-    line-height:1.5;
+margin-bottom:20px;
+line-height:1.5;
 }
 
 .option{
-    display:block;
-    border:1px solid #ddd;
-    border-radius:8px;
-    padding:13px;
-    margin:10px 0;
-    cursor:pointer;
-    transition:.2s;
+display:block;
+border:1px solid #ddd;
+border-radius:8px;
+padding:13px;
+margin:10px 0;
+cursor:pointer;
 }
 
 .option:hover{
-    background:#f1f6fb;
-    border-color:#063b73;
+background:#f1f6fb;
+border-color:#063b73;
 }
 
 .option input{
-    margin-right:10px;
+margin-right:10px;
 }
 
+/* SUBMIT */
+
 .submit-btn{
-    width:100%;
-    background:#063b73;
-    color:white;
-    padding:16px;
-    border:none;
-    border-radius:8px;
-    font-size:18px;
-    font-weight:bold;
-    cursor:pointer;
+width:100%;
+background:#063b73;
+color:white;
+padding:16px;
+border:none;
+border-radius:8px;
+font-size:18px;
+font-weight:bold;
+cursor:pointer;
 }
 
 .submit-btn:hover{
-    background:#f4c542;
-    color:#063b73;
+background:#f4c542;
+color:#063b73;
 }
 
+/* RESULT */
+
 .result{
-    display:none;
-    background:white;
-    padding:35px;
-    border-radius:15px;
-    text-align:center;
-    margin-top:25px;
-    box-shadow:0 5px 20px rgba(0,0,0,.1);
+display:none;
+background:white;
+padding:35px;
+border-radius:15px;
+text-align:center;
+margin-top:25px;
+box-shadow:0 5px 20px rgba(0,0,0,.1);
 }
 
 .result h2{
-    color:#063b73;
-    margin-bottom:15px;
+color:#063b73;
+margin-bottom:15px;
 }
 
 .score{
-    font-size:40px;
-    font-weight:bold;
-    color:#063b73;
-    margin:15px;
+font-size:40px;
+font-weight:bold;
+color:#063b73;
+margin:15px;
 }
 
 .message{
-    font-size:18px;
-    line-height:1.7;
+font-size:18px;
+line-height:1.7;
+margin-top:15px;
 }
 
 .home-btn{
-    display:inline-block;
-    margin-top:20px;
-    padding:12px 20px;
-    background:#f4c542;
-    color:#063b73;
-    text-decoration:none;
-    border-radius:7px;
-    font-weight:bold;
+display:inline-block;
+margin-top:20px;
+padding:12px 20px;
+background:#f4c542;
+color:#063b73;
+text-decoration:none;
+border-radius:7px;
+font-weight:bold;
+}
+
+/* FOOTER */
+
+footer{
+background:#031f3c;
+color:white;
+padding:35px 7% 20px;
+text-align:center;
+margin-top:50px;
+}
+
+.footer-logo{
+font-size:23px;
+font-weight:bold;
+}
+
+.footer-logo span{
+color:#f4c542;
+}
+
+.footer-links{
+margin:18px 0;
+}
+
+.footer-links a{
+color:white;
+text-decoration:none;
+margin:0 8px;
+}
+
+.footer-links a:hover{
+color:#f4c542;
+}
+
+.footer-social{
+margin:15px 0;
+}
+
+.footer-social a{
+color:white;
+font-size:23px;
+margin:0 8px;
+}
+
+.footer-social a:hover{
+color:#f4c542;
+}
+
+.copyright{
+border-top:1px solid rgba(255,255,255,.2);
+margin-top:18px;
+padding-top:15px;
+font-size:14px;
 }
 
 @media(max-width:650px){
 
-    .form-grid{
-        grid-template-columns:1fr;
-    }
+header{
+justify-content:center;
+}
 
-    header h1{
-        font-size:23px;
-    }
+nav{
+justify-content:center;
+margin-top:10px;
+}
+
+.form-grid{
+grid-template-columns:1fr;
+}
+
+.exam-header h1{
+font-size:23px;
+}
+
+.back-button{
+font-size:13px;
+padding:10px 13px;
+}
 
 }
 
@@ -210,40 +352,113 @@ header p{
 
 <body>
 
+
+<!-- NAVIGATION -->
+
 <header>
 
-<h1>BIBLICAL EMPOWERMENT PROGRAM</h1>
+<div class="logo">
+B.E.P. <span>ONLINE PROGRAM</span>
+</div>
 
-<p>B.E.P. ONLINE BIBLE EXAMINATION</p>
+<nav>
+
+<a href="index.html">
+<i class="fa-solid fa-house"></i>
+Home
+</a>
+
+<a href="register.html">
+<i class="fa-solid fa-user-plus"></i>
+Register
+</a>
+
+<a href="quiz.html">
+<i class="fa-solid fa-file-pen"></i>
+Quiz
+</a>
+
+<a href="index.html#contact">
+<i class="fa-solid fa-address-book"></i>
+Contact
+</a>
+
+</nav>
 
 </header>
 
+
+<!-- FLOATING BACK -->
+
+<a href="index.html"
+class="back-button">
+
+<i class="fa-solid fa-arrow-left"></i>
+Go Back to B.E.P. Website
+
+</a>
+
+
 <div class="container">
+
 
 <div class="exam-header">
 
-<h2>B.E.P. Bible Examination</h2>
+<h1>
+BIBLICAL EMPOWERMENT PROGRAM
+</h1>
 
-<p><strong>Total Questions:</strong> 20</p>
+<div class="exam-title">
+B.E.P. ONLINE BIBLE EXAMINATION
+</div>
 
-<p><strong>Marks:</strong> 60</p>
+<p>
+<strong>Total Questions:</strong> 20
+</p>
 
-<p><strong>Marks per Question:</strong> 3</p>
+<p>
+<strong>Total Marks:</strong> 60
+</p>
 
-<p><strong>Pass Mark:</strong> 40 / 60</p>
+<p>
+<strong>Marks Per Question:</strong> 3
+</p>
+
+<p>
+<strong>Pass Mark:</strong> 40 / 60
+</p>
 
 <div class="instructions">
 
-<strong>Examination Instructions:</strong>
+<strong>
+EXAMINATION INSTRUCTIONS
+</strong>
 
-<ul style="margin-left:20px;margin-top:8px;">
+<ul>
 
-<li>Answer all 20 questions.</li>
-<li>Select only ONE answer for each question.</li>
-<li>Each question carries 3 marks.</li>
-<li>Total marks are 60.</li>
-<li>The pass mark is 40/60.</li>
-<li>Submit the examination when you have completed all questions.</li>
+<li>
+Answer all 20 questions.
+</li>
+
+<li>
+Select ONE answer for each question.
+</li>
+
+<li>
+Each question carries 3 marks.
+</li>
+
+<li>
+The examination is marked automatically.
+</li>
+
+<li>
+The pass mark is 40 out of 60.
+</li>
+
+<li>
+Make sure all questions are answered before submitting.
+</li>
 
 </ul>
 
@@ -251,11 +466,17 @@ header p{
 
 </div>
 
+
 <form id="quizForm">
+
+
+<!-- LEARNER DETAILS -->
 
 <div class="student-details">
 
-<h2>Learner Details</h2>
+<h2>
+Learner Details
+</h2>
 
 <div class="form-grid">
 
@@ -269,6 +490,7 @@ required>
 
 </div>
 
+
 <div class="form-group">
 
 <label>Surname</label>
@@ -279,6 +501,7 @@ required>
 
 </div>
 
+
 <div class="form-group">
 
 <label>Phone Number</label>
@@ -288,6 +511,7 @@ id="studentPhone"
 required>
 
 </div>
+
 
 <div class="form-group">
 
@@ -304,7 +528,7 @@ required>
 </div>
 
 
-<!-- QUESTION 1 -->
+<!-- QUESTIONS -->
 
 <div class="question">
 
@@ -339,8 +563,6 @@ D. Psalms
 </div>
 
 
-<!-- QUESTION 2 -->
-
 <div class="question">
 
 <div class="progress">
@@ -373,8 +595,6 @@ D. David
 
 </div>
 
-
-<!-- QUESTION 3 -->
 
 <div class="question">
 
@@ -409,8 +629,6 @@ D. Samuel
 </div>
 
 
-<!-- QUESTION 4 -->
-
 <div class="question">
 
 <div class="progress">
@@ -443,8 +661,6 @@ D. 14
 
 </div>
 
-
-<!-- QUESTION 5 -->
 
 <div class="question">
 
@@ -479,8 +695,6 @@ D. Paul
 </div>
 
 
-<!-- QUESTION 6 -->
-
 <div class="question">
 
 <div class="progress">
@@ -513,8 +727,6 @@ D. Fast every day
 
 </div>
 
-
-<!-- QUESTION 7 -->
 
 <div class="question">
 
@@ -549,8 +761,6 @@ D. His prophets
 </div>
 
 
-<!-- QUESTION 8 -->
-
 <div class="question">
 
 <div class="progress">
@@ -558,12 +768,12 @@ Question 8 of 20 — 3 Marks
 </div>
 
 <h3>
-What is the fruit of the Spirit mentioned in Galatians 5?
+Which of the following is part of the fruit of the Spirit?
 </h3>
 
 <label class="option">
 <input type="radio" name="q8" value="A" required>
-A. Love, joy, peace and other spiritual qualities
+A. Love, joy and peace
 </label>
 
 <label class="option">
@@ -573,18 +783,16 @@ B. Wealth and power
 
 <label class="option">
 <input type="radio" name="q8" value="C">
-C. Gold and silver
+C. Fame and success
 </label>
 
 <label class="option">
 <input type="radio" name="q8" value="D">
-D. Fame and success
+D. Anger and revenge
 </label>
 
 </div>
 
-
-<!-- QUESTION 9 -->
 
 <div class="question">
 
@@ -619,8 +827,6 @@ D. Jonathan
 </div>
 
 
-<!-- QUESTION 10 -->
-
 <div class="question">
 
 <div class="progress">
@@ -653,8 +859,6 @@ D. He built a temple
 
 </div>
 
-
-<!-- QUESTION 11 -->
 
 <div class="question">
 
@@ -689,8 +893,6 @@ D. A competition
 </div>
 
 
-<!-- QUESTION 12 -->
-
 <div class="question">
 
 <div class="progress">
@@ -723,8 +925,6 @@ D. A white robe only
 
 </div>
 
-
-<!-- QUESTION 13 -->
 
 <div class="question">
 
@@ -759,8 +959,6 @@ D. Depending only on human strength
 </div>
 
 
-<!-- QUESTION 14 -->
-
 <div class="question">
 
 <div class="progress">
@@ -793,8 +991,6 @@ D. Only leaders must forgive
 
 </div>
 
-
-<!-- QUESTION 15 -->
 
 <div class="question">
 
@@ -829,8 +1025,6 @@ D. They returned to fishing
 </div>
 
 
-<!-- QUESTION 16 -->
-
 <div class="question">
 
 <div class="progress">
@@ -863,8 +1057,6 @@ D. Avoiding other believers
 
 </div>
 
-
-<!-- QUESTION 17 -->
 
 <div class="question">
 
@@ -899,8 +1091,6 @@ D. Encourage anger
 </div>
 
 
-<!-- QUESTION 18 -->
-
 <div class="question">
 
 <div class="progress">
@@ -933,8 +1123,6 @@ D. Depend only on human wisdom
 
 </div>
 
-
-<!-- QUESTION 19 -->
 
 <div class="question">
 
@@ -969,8 +1157,6 @@ D. Avoid the nations
 </div>
 
 
-<!-- QUESTION 20 -->
-
 <div class="question">
 
 <div class="progress">
@@ -1004,7 +1190,10 @@ D. Political debate
 </div>
 
 
-<button type="submit" class="submit-btn">
+<button type="submit"
+class="submit-btn">
+
+<i class="fa-solid fa-paper-plane"></i>
 
 SUBMIT B.E.P. EXAMINATION
 
@@ -1013,38 +1202,109 @@ SUBMIT B.E.P. EXAMINATION
 </form>
 
 
+<!-- RESULT -->
+
 <div class="result" id="result">
 
-<h2>Examination Completed 🙏</h2>
+<h2>
+Examination Completed 🙏
+</h2>
 
 <p id="studentResult"></p>
 
 <div class="score" id="score"></div>
 
-<p id="passResult" class="message"></p>
+<p id="passResult"
+class="message">
+</p>
 
 <p class="message">
 
-Thank you for participating in the Biblical Empowerment Program
-examination. We appreciate your commitment to learning and growing
+<strong>
+Thank You for Participating in the B.E.P. Examination!
+</strong>
+
+</p>
+
+<p class="message">
+
+We appreciate your commitment to learning and growing
 in the Word of God.
 
-</p>
-
-<p class="message">
-
-May God continue to strengthen you, guide you and deepen your
-understanding of His Word. 🙏📖
+May God continue to strengthen you, guide you and deepen
+your understanding of His Word. 🙏📖
 
 </p>
 
-<a href="index.html" class="home-btn">
+<a href="index.html"
+class="home-btn">
+
 Return to B.E.P. Website
+
 </a>
 
 </div>
 
 </div>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+<div class="footer-logo">
+B.E.P. <span>ONLINE PROGRAM</span>
+</div>
+
+<p>
+Building the Church of Christ
+</p>
+
+<div class="footer-links">
+
+<a href="index.html">Home</a>
+
+<a href="register.html">Register</a>
+
+<a href="quiz.html">Quiz</a>
+
+<a href="index.html#contact">Contact</a>
+
+</div>
+
+<div class="footer-social">
+
+<a href="https://wa.me/27740386671"
+target="_blank">
+
+<i class="fa-brands fa-whatsapp"></i>
+
+</a>
+
+<a href="https://facebook.com/groups/1421853356307383/"
+target="_blank">
+
+<i class="fa-brands fa-facebook"></i>
+
+</a>
+
+<a href="mailto:bep.onlineprog@gmail.com">
+
+<i class="fa-solid fa-envelope"></i>
+
+</a>
+
+</div>
+
+<div class="copyright">
+
+© 2026 Biblical Empowerment Program (B.E.P.)
+<br>
+All Rights Reserved.
+
+</div>
+
+</footer>
 
 
 <script>
@@ -1080,72 +1340,90 @@ document.getElementById("quizForm")
 
 event.preventDefault();
 
-let score = 0;
+let score=0;
 
 for(let i=1;i<=20;i++){
 
-    const answer =
-    document.querySelector(
-        'input[name="q'+i+'"]:checked'
-    );
+const answer=
+document.querySelector(
+'input[name="q'+i+'"]:checked'
+);
 
-    if(answer &&
-       answer.value === correctAnswers["q"+i]){
+if(
+answer &&
+answer.value ===
+correctAnswers["q"+i]
+){
 
-        score += 3;
-
-    }
+score += 3;
 
 }
 
-const name =
-document.getElementById("studentName").value;
+}
 
-const surname =
-document.getElementById("studentSurname").value;
 
-document.getElementById("studentResult")
-.innerHTML =
-"Well done, <strong>" +
-name + " " + surname +
+const name=
+document.getElementById(
+"studentName"
+).value;
+
+const surname=
+document.getElementById(
+"studentSurname"
+).value;
+
+
+document.getElementById(
+"studentResult"
+).innerHTML=
+
+"Well done, <strong>"+
+name+" "+surname+
 "</strong>. Your examination has been submitted successfully.";
 
-document.getElementById("score")
-.innerHTML =
-score + " / 60";
 
-if(score >= 40){
+document.getElementById(
+"score"
+).innerHTML=
 
-    document.getElementById("passResult")
-    .innerHTML =
-    "<strong>Result: PASS ✅</strong><br><br>" +
-    "Congratulations! You achieved the B.E.P. pass mark of 40/60.";
+score+" / 60";
+
+
+if(score>=40){
+
+document.getElementById(
+"passResult"
+).innerHTML=
+
+"<strong>Result: PASS ✅</strong><br><br>"+
+"Congratulations! You achieved the B.E.P. pass mark of 40/60.";
 
 }else{
 
-    document.getElementById("passResult")
-    .innerHTML =
-    "<strong>Result: NOT YET PASSED</strong><br><br>" +
-    "Your score is below the current pass mark of 40/60. " +
-    "Keep studying God's Word and continue growing in understanding.";
+document.getElementById(
+"passResult"
+).innerHTML=
+
+"<strong>Result: NOT YET PASSED</strong><br><br>"+
+"Your score is below the current pass mark of 40/60. "+
+"Keep studying God's Word and continue growing in understanding.";
 
 }
 
-document.getElementById("quizForm")
-.style.display="none";
 
-document.getElementById("result")
-.style.display="block";
+document.getElementById(
+"quizForm"
+).style.display="none";
+
+
+document.getElementById(
+"result"
+).style.display="block";
+
 
 window.scrollTo({
-    top:0,
-    behavior:"smooth"
+top:0,
+behavior:"smooth"
 });
 
-});
-
-</script>
-
-</body>
-
-   </html>
+})
