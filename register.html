@@ -1,148 +1,217 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
 <title>B.E.P. Registration</title>
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
 <style>
 
 *{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
+box-sizing:border-box;
+margin:0;
+padding:0;
 }
 
 body{
-    font-family:Arial,sans-serif;
-    background:#f4f8fc;
-    color:#222;
+font-family:Arial,sans-serif;
+background:#f4f8fc;
+color:#222;
 }
 
 header{
-    background:#063b73;
-    color:white;
-    padding:18px 7%;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    flex-wrap:wrap;
+background:#063b73;
+color:white;
+padding:18px 6%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+flex-wrap:wrap;
 }
 
 .logo{
-    font-size:23px;
-    font-weight:bold;
+font-size:23px;
+font-weight:bold;
 }
 
 .logo span{
-    color:#f4c542;
+color:#f4c542;
 }
 
 nav a{
-    color:white;
-    text-decoration:none;
-    margin:5px 8px;
-    font-weight:bold;
+color:white;
+text-decoration:none;
+margin:5px 8px;
+font-weight:bold;
 }
 
 nav a:hover{
-    color:#f4c542;
+color:#f4c542;
+}
+
+/* FLOATING BACK BUTTON */
+
+.back-button{
+position:fixed;
+left:15px;
+bottom:20px;
+z-index:1000;
+background:#f4c542;
+color:#063b73;
+padding:12px 17px;
+border-radius:30px;
+text-decoration:none;
+font-weight:bold;
+box-shadow:0 4px 12px rgba(0,0,0,.25);
+}
+
+.back-button:hover{
+background:#063b73;
+color:white;
 }
 
 .container{
-    max-width:750px;
-    margin:45px auto;
-    padding:20px;
+max-width:750px;
+margin:45px auto;
+padding:20px;
 }
 
 .form-box{
-    background:white;
-    padding:35px;
-    border-radius:15px;
-    box-shadow:0 5px 20px rgba(0,0,0,.1);
+background:white;
+padding:35px;
+border-radius:15px;
+box-shadow:0 5px 20px rgba(0,0,0,.1);
 }
 
 h1{
-    text-align:center;
-    color:#063b73;
-    margin-bottom:10px;
+text-align:center;
+color:#063b73;
+margin-bottom:10px;
 }
 
 .intro{
-    text-align:center;
-    margin-bottom:30px;
+text-align:center;
+margin-bottom:30px;
 }
 
 label{
-    display:block;
-    margin-top:18px;
-    margin-bottom:7px;
-    font-weight:bold;
-    color:#063b73;
+display:block;
+margin-top:18px;
+margin-bottom:7px;
+font-weight:bold;
+color:#063b73;
 }
 
 input{
-    width:100%;
-    padding:13px;
-    border:1px solid #ccc;
-    border-radius:7px;
-    font-size:16px;
+width:100%;
+padding:13px;
+border:1px solid #ccc;
+border-radius:7px;
+font-size:16px;
 }
 
 button{
-    width:100%;
-    margin-top:25px;
-    padding:14px;
-    border:0;
-    border-radius:7px;
-    background:#063b73;
-    color:white;
-    font-size:17px;
-    font-weight:bold;
-    cursor:pointer;
+width:100%;
+margin-top:25px;
+padding:14px;
+border:0;
+border-radius:7px;
+background:#063b73;
+color:white;
+font-size:17px;
+font-weight:bold;
+cursor:pointer;
 }
 
 button:hover{
-    background:#f4c542;
-    color:#063b73;
+background:#f4c542;
+color:#063b73;
 }
 
 .success{
-    display:none;
-    text-align:center;
-    padding:30px;
+display:none;
+text-align:center;
+padding:30px;
 }
 
 .success h2{
-    color:#063b73;
-    margin-bottom:15px;
+color:#063b73;
+margin-bottom:15px;
 }
 
 .success p{
-    margin-bottom:20px;
+margin-bottom:20px;
 }
 
 .success a{
-    display:inline-block;
-    background:#f4c542;
-    color:#063b73;
-    padding:12px 20px;
-    text-decoration:none;
-    border-radius:7px;
-    font-weight:bold;
+display:inline-block;
+background:#f4c542;
+color:#063b73;
+padding:12px 20px;
+text-decoration:none;
+border-radius:7px;
+font-weight:bold;
 }
 
+/* FOOTER */
+
 footer{
-    text-align:center;
-    background:#031f3c;
-    color:white;
-    padding:25px;
-    margin-top:50px;
+background:#031f3c;
+color:white;
+padding:35px 7% 20px;
+text-align:center;
+margin-top:60px;
+}
+
+.footer-logo{
+font-size:23px;
+font-weight:bold;
+}
+
+.footer-logo span{
+color:#f4c542;
+}
+
+.footer-links{
+margin:18px 0;
+}
+
+.footer-links a{
+color:white;
+text-decoration:none;
+margin:0 8px;
+}
+
+.footer-links a:hover{
+color:#f4c542;
+}
+
+.footer-social a{
+color:white;
+font-size:23px;
+margin:0 8px;
+}
+
+.footer-social a:hover{
+color:#f4c542;
+}
+
+.copyright{
+border-top:1px solid rgba(255,255,255,.2);
+margin-top:18px;
+padding-top:15px;
+font-size:14px;
 }
 
 </style>
+
 </head>
 
 <body>
@@ -154,12 +223,23 @@ B.E.P. <span>ONLINE PROGRAM</span>
 </div>
 
 <nav>
+
 <a href="index.html">Home</a>
 <a href="register.html">Register</a>
 <a href="quiz.html">Quiz</a>
+
 </nav>
 
 </header>
+
+
+<a href="index.html" class="back-button">
+
+<i class="fa-solid fa-arrow-left"></i>
+Go Back to B.E.P. Website
+
+</a>
+
 
 <div class="container">
 
@@ -174,64 +254,149 @@ Register to participate in the Biblical Empowerment Program.
 <form id="registrationForm">
 
 <label>Name</label>
-<input type="text" id="name" required>
+
+<input type="text"
+id="name"
+required>
+
 
 <label>Surname</label>
-<input type="text" id="surname" required>
+
+<input type="text"
+id="surname"
+required>
+
 
 <label>Phone Number</label>
-<input type="tel" id="phone" required>
+
+<input type="tel"
+id="phone"
+required>
+
 
 <label>Email Address</label>
-<input type="email" id="email" required>
+
+<input type="email"
+id="email"
+required>
+
 
 <label>Location</label>
-<input type="text" id="location" required>
+
+<input type="text"
+id="location"
+required>
+
 
 <button type="submit">
+
+<i class="fa-solid fa-paper-plane"></i>
 Submit Registration
+
 </button>
 
 </form>
 
 </div>
 
-<div class="form-box success" id="successBox">
 
-<h2>Registration Successful! 🙏</h2>
+<div class="form-box success"
+id="successBox">
+
+<h2>
+Registration Successful! 🙏
+</h2>
 
 <p>
 Thank you for registering with the Biblical Empowerment Program.
-We look forward to having you with us as we learn, grow and
-become empowered through the Word of God.
+We look forward to having you with us as we learn, grow and become
+empowered through the Word of God.
 </p>
 
-<a href="index.html">Return to B.E.P. Website</a>
+<a href="index.html">
+Return to B.E.P. Website
+</a>
 
 </div>
 
 </div>
+
 
 <footer>
+
+<div class="footer-logo">
+B.E.P. <span>ONLINE PROGRAM</span>
+</div>
+
+<p>
+Building the Church of Christ
+</p>
+
+<div class="footer-links">
+
+<a href="index.html">Home</a>
+<a href="register.html">Register</a>
+<a href="quiz.html">Quiz</a>
+<a href="index.html#contact">Contact</a>
+
+</div>
+
+<div class="footer-social">
+
+<a href="https://wa.me/27740386671"
+target="_blank">
+
+<i class="fa-brands fa-whatsapp"></i>
+
+</a>
+
+<a href="https://facebook.com/groups/1421853356307383/"
+target="_blank">
+
+<i class="fa-brands fa-facebook"></i>
+
+</a>
+
+<a href="mailto:bep.onlineprog@gmail.com">
+
+<i class="fa-solid fa-envelope"></i>
+
+</a>
+
+</div>
+
+<div class="copyright">
+
 © 2026 Biblical Empowerment Program (B.E.P.)
+<br>
+All Rights Reserved.
+
+</div>
+
 </footer>
+
 
 <script>
 
 document.getElementById("registrationForm")
 .addEventListener("submit",function(event){
 
-    event.preventDefault();
+event.preventDefault();
 
-    document.getElementById("registrationBox")
-    .style.display="none";
+document.getElementById("registrationBox")
+.style.display="none";
 
-    document.getElementById("successBox")
-    .style.display="block";
+document.getElementById("successBox")
+.style.display="block";
+
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
 
 });
 
 </script>
 
 </body>
-  </html>
+</html>
