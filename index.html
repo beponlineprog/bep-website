@@ -4,14 +4,19 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Biblical Empowerment Program - B.E.P</title>
+<title>Biblical Empowerment Program - B.E.P.</title>
 
-<meta name="description" content="Biblical Empowerment Program - Building the Church of Christ through biblical teaching, discipleship and spiritual growth.">
+<meta name="description"
+content="Biblical Empowerment Program - Building the Church of Christ through Biblical Teaching, Discipleship and Spiritual Growth.">
 
 <link rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
 <style>
+
+/* =========================
+   RESET
+========================= */
 
 * {
     margin: 0;
@@ -25,52 +30,87 @@ html {
 
 body {
     font-family: Arial, Helvetica, sans-serif;
-    background: #f5f8fc;
+    background: #f4f8fc;
     color: #222;
     line-height: 1.6;
 }
 
 /* =========================
-   HEADER
+   NAVIGATION BAR
 ========================= */
 
 header {
-    background: linear-gradient(135deg, #063970, #0b5fa5);
-    color: white;
-    padding: 12px 20px;
     position: sticky;
     top: 0;
-    z-index: 1000;
-    box-shadow: 0 3px 12px rgba(0,0,0,0.15);
+    z-index: 9999;
+    background: linear-gradient(135deg, #063970, #0b5fa5);
+    box-shadow: 0 3px 15px rgba(0,0,0,0.2);
 }
 
 .nav-container {
     max-width: 1150px;
     margin: auto;
+    min-height: 65px;
+    padding: 0 18px;
+
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
 .logo {
+    color: white;
+    text-decoration: none;
     font-size: 21px;
     font-weight: bold;
+    white-space: nowrap;
+}
+
+.logo i {
+    color: #ffd700;
+    margin-right: 6px;
 }
 
 .logo span {
     color: #ffd700;
 }
 
-nav a {
-    color: white;
-    text-decoration: none;
-    margin-left: 18px;
-    font-size: 14px;
-    font-weight: bold;
+/* Desktop navigation */
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 5px;
 }
 
-nav a:hover {
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    padding: 9px 10px;
+    border-radius: 7px;
+    font-size: 13px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.nav-links a i {
+    margin-right: 5px;
+}
+
+.nav-links a:hover {
+    background: rgba(255,255,255,0.15);
     color: #ffd700;
+}
+
+/* Mobile menu button */
+
+.menu-btn {
+    display: none;
+    border: none;
+    background: transparent;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
 }
 
 /* =========================
@@ -78,16 +118,22 @@ nav a:hover {
 ========================= */
 
 .hero {
+    min-height: 270px;
+
     background:
-        linear-gradient(rgba(0,40,80,0.75), rgba(0,40,80,0.75)),
+        linear-gradient(
+            rgba(0,35,75,0.78),
+            rgba(0,35,75,0.78)
+        ),
         url("banner.png") center/cover no-repeat;
 
-    min-height: 270px;
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
+
     text-align: center;
     color: white;
+
     padding: 35px 20px;
 }
 
@@ -97,7 +143,7 @@ nav a:hover {
 
 .hero h1 {
     font-size: 36px;
-    margin-bottom: 8px;
+    margin-bottom: 5px;
 }
 
 .hero h2 {
@@ -113,12 +159,14 @@ nav a:hover {
 .badge {
     display: inline-block;
     margin-top: 15px;
+    padding: 7px 16px;
+    border-radius: 30px;
+
     background: #ffd700;
     color: #063970;
-    padding: 7px 15px;
-    border-radius: 20px;
+
+    font-size: 12px;
     font-weight: bold;
-    font-size: 13px;
 }
 
 /* =========================
@@ -142,9 +190,9 @@ section {
 }
 
 .section-subtitle {
-    text-align: center;
     max-width: 750px;
     margin: 0 auto 30px;
+    text-align: center;
     color: #555;
 }
 
@@ -159,12 +207,24 @@ section {
 .countdown-box {
     max-width: 850px;
     margin: auto;
-    background: linear-gradient(135deg, #063970, #0b5fa5);
-    color: white;
+
     padding: 30px 20px;
-    border-radius: 15px;
+
+    border-radius: 16px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #063970,
+            #0b5fa5
+        );
+
+    color: white;
+
     text-align: center;
-    box-shadow: 0 7px 20px rgba(0,0,0,0.12);
+
+    box-shadow:
+        0 8px 25px rgba(0,0,0,0.13);
 }
 
 .countdown-box h2 {
@@ -184,106 +244,28 @@ section {
 }
 
 .time-box {
-    background: rgba(255,255,255,0.12);
-    padding: 12px 15px;
+    min-width: 82px;
+    padding: 12px 10px;
+
     border-radius: 10px;
-    min-width: 80px;
+
+    background: rgba(255,255,255,0.12);
 }
 
 .time-box strong {
     display: block;
-    font-size: 25px;
     color: #ffd700;
+    font-size: 27px;
 }
 
 .time-box span {
     font-size: 12px;
 }
 
-/* =========================
-   CARDS
-========================= */
-
-.cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 20px;
-}
-
-.card {
-    background: white;
-    padding: 25px;
-    border-radius: 14px;
-    box-shadow: 0 5px 18px rgba(0,0,0,0.08);
-    border-top: 4px solid #0b5fa5;
-}
-
-.card i {
-    font-size: 30px;
-    color: #0b5fa5;
-    margin-bottom: 12px;
-}
-
-.card h3 {
-    color: #063970;
-    margin-bottom: 8px;
-}
-
-.card p {
-    color: #555;
-    font-size: 15px;
-}
-
-/* =========================
-   ABOUT
-========================= */
-
-.about {
-    background: #eef5fb;
-}
-
-.about-box {
-    background: white;
-    padding: 30px;
-    border-radius: 15px;
-    box-shadow: 0 5px 18px rgba(0,0,0,0.07);
-}
-
-.about-box p {
-    margin-bottom: 15px;
-}
-
-/* =========================
-   THURSDAY SESSION
-========================= */
-
-.session-section {
-    background: white;
-}
-
-.session-card {
-    max-width: 800px;
-    margin: auto;
-    background: #f5f8fc;
-    padding: 30px;
-    border-radius: 15px;
-    text-align: center;
-    border: 1px solid #dce8f2;
-}
-
-.session-card h3 {
-    color: #063970;
-    font-size: 24px;
-}
-
-.session-info {
-    margin: 15px 0;
-    font-size: 16px;
-}
-
-.session-info i {
-    color: #0b5fa5;
-    margin-right: 7px;
+.session-status {
+    margin-top: 18px;
+    font-weight: bold;
+    color: #ffd700;
 }
 
 /* =========================
@@ -293,6 +275,7 @@ section {
 .buttons {
     display: flex;
     justify-content: center;
+    align-items: center;
     gap: 12px;
     flex-wrap: wrap;
     margin-top: 20px;
@@ -300,10 +283,15 @@ section {
 
 .btn {
     display: inline-block;
+
     padding: 12px 20px;
+
     border-radius: 8px;
+
     text-decoration: none;
+
     font-weight: bold;
+
     transition: 0.3s;
 }
 
@@ -342,6 +330,129 @@ section {
 }
 
 /* =========================
+   CARDS
+========================= */
+
+.cards {
+    display: grid;
+    grid-template-columns:
+        repeat(auto-fit, minmax(235px, 1fr));
+
+    gap: 20px;
+}
+
+.card {
+    background: white;
+
+    padding: 25px;
+
+    border-radius: 14px;
+
+    border-top: 4px solid #0b5fa5;
+
+    box-shadow:
+        0 5px 18px rgba(0,0,0,0.08);
+}
+
+.card i {
+    color: #0b5fa5;
+    font-size: 30px;
+    margin-bottom: 12px;
+}
+
+.card h3 {
+    color: #063970;
+    margin-bottom: 8px;
+}
+
+.card p {
+    color: #555;
+    font-size: 15px;
+}
+
+/* =========================
+   ABOUT
+========================= */
+
+.about {
+    background: #eef5fb;
+}
+
+.about-box {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+
+    box-shadow:
+        0 5px 18px rgba(0,0,0,0.07);
+}
+
+.about-box p {
+    margin-bottom: 15px;
+}
+
+/* =========================
+   SESSION
+========================= */
+
+.session-section {
+    background: white;
+}
+
+.session-card {
+    max-width: 800px;
+    margin: auto;
+
+    background: #f5f8fc;
+
+    padding: 30px;
+
+    border-radius: 15px;
+
+    text-align: center;
+
+    border: 1px solid #dce8f2;
+}
+
+.session-card h3 {
+    color: #063970;
+    font-size: 24px;
+}
+
+.session-info {
+    margin: 15px 0;
+}
+
+.session-info p {
+    margin: 5px;
+}
+
+.session-info i {
+    color: #0b5fa5;
+    margin-right: 7px;
+}
+
+/* =========================
+   QUIZ
+========================= */
+
+.quiz-section {
+    background:
+        linear-gradient(
+            135deg,
+            #063970,
+            #0b5fa5
+        );
+
+    color: white;
+    text-align: center;
+}
+
+.quiz-section .section-title {
+    color: #ffd700;
+}
+
+/* =========================
    CONTACT
 ========================= */
 
@@ -350,41 +461,27 @@ section {
 }
 
 .contact-card {
-    text-align: center;
     background: white;
+
     padding: 25px;
+
     border-radius: 14px;
-    box-shadow: 0 5px 18px rgba(0,0,0,0.07);
+
+    text-align: center;
+
+    box-shadow:
+        0 5px 18px rgba(0,0,0,0.07);
 }
 
 .contact-card h3 {
     color: #063970;
-    margin-bottom: 8px;
+    margin: 8px 0;
 }
 
 .phone {
-    font-size: 17px;
     font-weight: bold;
+    font-size: 17px;
     margin-bottom: 10px;
-}
-
-/* =========================
-   QUIZ
-========================= */
-
-.quiz-section {
-    background: linear-gradient(135deg, #063970, #0b5fa5);
-    color: white;
-    text-align: center;
-}
-
-.quiz-section h2 {
-    color: #ffd700;
-}
-
-.quiz-section p {
-    max-width: 700px;
-    margin: 10px auto;
 }
 
 /* =========================
@@ -400,8 +497,12 @@ footer {
 .footer-grid {
     max-width: 1100px;
     margin: auto;
+
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+
+    grid-template-columns:
+        repeat(auto-fit, minmax(220px, 1fr));
+
     gap: 30px;
 }
 
@@ -427,76 +528,100 @@ footer a:hover {
 .footer-bottom {
     max-width: 1100px;
     margin: 30px auto 0;
+
     padding-top: 15px;
-    border-top: 1px solid rgba(255,255,255,0.15);
+
+    border-top:
+        1px solid rgba(255,255,255,0.15);
+
     text-align: center;
-    font-size: 13px;
+
     color: #b8c7d3;
-}
 
-.social-icons {
-    display: flex;
-    gap: 12px;
-    margin-top: 12px;
-}
-
-.social-icons a {
-    width: 38px;
-    height: 38px;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.1);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    font-size: 13px;
 }
 
 /* =========================
-   MOBILE
+   MOBILE NAVIGATION
 ========================= */
 
-@media (max-width: 700px) {
+@media (max-width: 800px) {
 
-    nav {
+    .menu-btn {
+        display: block;
+    }
+
+    .nav-links {
+        position: absolute;
+
+        top: 65px;
+        left: 0;
+        right: 0;
+
+        background: #063970;
+
         display: none;
+
+        flex-direction: column;
+
+        padding: 10px 15px 15px;
+
+        box-shadow:
+            0 8px 15px rgba(0,0,0,0.2);
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .nav-links a {
+        width: 100%;
+        padding: 12px;
+    }
+
+    .nav-links a i {
+        width: 22px;
     }
 
     .hero {
         min-height: 230px;
-        padding: 25px 15px;
     }
 
     .hero h1 {
-        font-size: 27px;
-    }
-
-    .hero h2 {
-        font-size: 18px;
+        font-size: 28px;
     }
 
     section {
-        padding: 40px 15px;
+        padding: 42px 15px;
     }
+}
 
-    .section-title {
-        font-size: 24px;
+@media (max-width: 500px) {
+
+    .logo {
+        font-size: 18px;
     }
 
     .countdown {
-        gap: 7px;
+        gap: 6px;
     }
 
     .time-box {
-        min-width: 65px;
-        padding: 9px;
+        min-width: 67px;
+        padding: 9px 5px;
     }
 
     .time-box strong {
-        font-size: 20px;
+        font-size: 21px;
     }
 
-    .about-box,
-    .session-card {
-        padding: 22px;
+    .time-box span {
+        font-size: 10px;
+    }
+
+    .buttons .btn {
+        width: 100%;
+        max-width: 300px;
     }
 }
 
@@ -505,25 +630,71 @@ footer a:hover {
 
 <body>
 
+
 <!-- =========================
-     HEADER
+     NAVIGATION
 ========================= -->
 
 <header>
 
 <div class="nav-container">
 
-<div class="logo">
-B.E.P <span>✝</span>
-</div>
+<a href="#" class="logo">
+<i class="fa-solid fa-cross"></i>
+B.E.P. <span>Online</span>
+</a>
 
-<nav>
-<a href="#about">About</a>
-<a href="#vision">Vision</a>
-<a href="#mission">Mission</a>
-<a href="#sessions">Sessions</a>
-<a href="#contact">Contact</a>
-<a href="quiz.html">Quiz</a>
+<button
+class="menu-btn"
+id="menuBtn"
+aria-label="Open menu">
+
+<i class="fa-solid fa-bars"></i>
+
+</button>
+
+<nav class="nav-links" id="navLinks">
+
+<a href="#home">
+<i class="fa-solid fa-house"></i>
+Home
+</a>
+
+<a href="#about">
+<i class="fa-solid fa-circle-info"></i>
+About
+</a>
+
+<a href="#vision">
+<i class="fa-solid fa-eye"></i>
+Vision
+</a>
+
+<a href="#mission">
+<i class="fa-solid fa-bullseye"></i>
+Mission
+</a>
+
+<a href="#sessions">
+<i class="fa-solid fa-video"></i>
+Sessions
+</a>
+
+<a href="#contact">
+<i class="fa-solid fa-phone"></i>
+Contact
+</a>
+
+<a href="register.html">
+<i class="fa-solid fa-user-plus"></i>
+Register
+</a>
+
+<a href="quiz.html">
+<i class="fa-solid fa-circle-question"></i>
+Quiz
+</a>
+
 </nav>
 
 </div>
@@ -535,7 +706,7 @@ B.E.P <span>✝</span>
      HERO
 ========================= -->
 
-<section class="hero">
+<section class="hero" id="home">
 
 <div class="hero-content">
 
@@ -549,6 +720,7 @@ Discipleship and Spiritual Growth.
 </p>
 
 <div class="badge">
+<i class="fa-solid fa-star"></i>
 1 YEAR OF GOD'S GRACE
 </div>
 
@@ -566,17 +738,21 @@ Discipleship and Spiritual Growth.
 <div class="container">
 
 <h2 class="section-title">
+<i class="fa-regular fa-clock"></i>
 Next B.E.P. Session
 </h2>
 
 <p class="section-subtitle">
-Join us every Thursday for an online session of biblical teaching,
+Join us every Thursday for biblical teaching,
 discussion and spiritual growth.
 </p>
 
 <div class="countdown-box">
 
-<h2>Thursday Online Session</h2>
+<h2>
+<i class="fa-solid fa-video"></i>
+Thursday Online Session
+</h2>
 
 <p>
 Every Thursday • 19:00 – 20:30
@@ -606,11 +782,16 @@ Every Thursday • 19:00 – 20:30
 
 </div>
 
+<div class="session-status" id="sessionStatus">
+Calculating next session...
+</div>
+
 <div class="buttons">
 
-<a class="btn btn-gold"
+<a
 href="https://teams.live.com/meet/936085799236?p=b66LnDUAB2Xkx2uQYp&eventType=community"
-target="_blank">
+target="_blank"
+class="btn btn-gold">
 
 <i class="fa-brands fa-microsoft"></i>
 Join Microsoft Teams
@@ -627,14 +808,17 @@ Join Microsoft Teams
 
 
 <!-- =========================
-     ABOUT US
+     ABOUT
 ========================= -->
 
-<section id="about" class="about">
+<section class="about" id="about">
 
 <div class="container">
 
-<h2 class="section-title">About Us</h2>
+<h2 class="section-title">
+<i class="fa-solid fa-circle-info"></i>
+About Us
+</h2>
 
 <div class="about-box">
 
@@ -673,11 +857,15 @@ more mature and more effective followers of Christ.
 
 <div class="container">
 
-<h2 class="section-title">Our Vision</h2>
+<h2 class="section-title">
+<i class="fa-solid fa-eye"></i>
+Our Vision
+</h2>
 
 <p class="section-subtitle">
-To see believers firmly established in God's Word, growing spiritually
-and becoming effective witnesses for Jesus Christ.
+To see believers firmly established in God's Word,
+growing spiritually and becoming effective witnesses
+for Jesus Christ.
 </p>
 
 <div class="cards">
@@ -689,8 +877,8 @@ and becoming effective witnesses for Jesus Christ.
 <h3>Rooted in the Word</h3>
 
 <p>
-Helping believers develop a strong biblical foundation and a deeper
-understanding of Scripture.
+Helping believers develop a strong biblical foundation
+and deeper understanding of Scripture.
 </p>
 
 </div>
@@ -702,8 +890,8 @@ understanding of Scripture.
 <h3>Growing in Faith</h3>
 
 <p>
-Encouraging continuous spiritual growth, maturity and transformation
-through God's Word.
+Encouraging continuous spiritual growth,
+maturity and transformation through God's Word.
 </p>
 
 </div>
@@ -715,8 +903,8 @@ through God's Word.
 <h3>Building Believers</h3>
 
 <p>
-Creating an environment where believers can learn, encourage and
-strengthen one another.
+Creating an environment where believers can learn,
+encourage and strengthen one another.
 </p>
 
 </div>
@@ -732,23 +920,26 @@ strengthen one another.
      MISSION
 ========================= -->
 
-<section id="mission" class="about">
+<section class="about" id="mission">
 
 <div class="container">
 
-<h2 class="section-title">Our Mission</h2>
+<h2 class="section-title">
+<i class="fa-solid fa-bullseye"></i>
+Our Mission
+</h2>
 
 <div class="cards">
 
 <div class="card">
 
-<i class="fa-solid fa-cross"></i>
+<i class="fa-solid fa-book-open"></i>
 
 <h3>Teach</h3>
 
 <p>
-To teach the Word of God faithfully and make biblical truth easier
-to understand and apply.
+To teach the Word of God faithfully and make biblical
+truth easier to understand and apply.
 </p>
 
 </div>
@@ -760,8 +951,8 @@ to understand and apply.
 <h3>Equip</h3>
 
 <p>
-To equip believers with biblical knowledge and practical spiritual
-tools for everyday Christian living.
+To equip believers with biblical knowledge and practical
+spiritual tools for everyday Christian living.
 </p>
 
 </div>
@@ -773,8 +964,8 @@ tools for everyday Christian living.
 <h3>Transform</h3>
 
 <p>
-To encourage believers to allow God's Word to transform their
-character, choices and relationships.
+To encourage believers to allow God's Word to transform
+their character, choices and relationships.
 </p>
 
 </div>
@@ -794,11 +985,14 @@ character, choices and relationships.
 
 <div class="container">
 
-<h2 class="section-title">What We Teach</h2>
+<h2 class="section-title">
+<i class="fa-solid fa-book-bible"></i>
+What We Teach
+</h2>
 
 <p class="section-subtitle">
-Our teaching is centred on the Word of God and practical Christian
-living.
+Our teaching is centred on the Word of God
+and practical Christian living.
 </p>
 
 <div class="cards">
@@ -810,8 +1004,8 @@ living.
 <h3>Bible Studies</h3>
 
 <p>
-Understanding Scripture, biblical principles and the message of
-God's Word.
+Understanding Scripture, biblical principles and
+the message of God's Word.
 </p>
 
 </div>
@@ -823,7 +1017,8 @@ God's Word.
 <h3>Prayer</h3>
 
 <p>
-Developing a deeper prayer life and learning to depend on God.
+Developing a deeper prayer life and learning
+to depend on God.
 </p>
 
 </div>
@@ -835,8 +1030,8 @@ Developing a deeper prayer life and learning to depend on God.
 <h3>Discipleship</h3>
 
 <p>
-Growing as followers of Christ and learning how to live out the
-Christian faith.
+Growing as followers of Christ and learning how
+to live out the Christian faith.
 </p>
 
 </div>
@@ -848,8 +1043,8 @@ Christian faith.
 <h3>Spiritual Renewal</h3>
 
 <p>
-Understanding repentance, transformation and the importance of
-becoming renewed in Christ.
+Understanding repentance, transformation and the
+importance of becoming renewed in Christ.
 </p>
 
 </div>
@@ -862,14 +1057,15 @@ becoming renewed in Christ.
 
 
 <!-- =========================
-     THURSDAY SESSIONS
+     THURSDAY SESSION
 ========================= -->
 
-<section id="sessions" class="session-section">
+<section class="session-section" id="sessions">
 
 <div class="container">
 
 <h2 class="section-title">
+<i class="fa-solid fa-video"></i>
 Thursday Sessions
 </h2>
 
@@ -879,9 +1075,7 @@ Join us online every Thursday as we study God's Word together.
 
 <div class="session-card">
 
-<h3>
-B.E.P. Online Teaching
-</h3>
+<h3>B.E.P. Online Teaching</h3>
 
 <div class="session-info">
 
@@ -903,23 +1097,25 @@ B.E.P. Online Teaching
 </div>
 
 <p>
-Come ready to learn, participate, ask questions and grow in your
-relationship with God.
+Come ready to learn, participate, ask questions
+and grow in your relationship with God.
 </p>
 
 <div class="buttons">
 
-<a class="btn btn-primary"
+<a
 href="https://teams.live.com/meet/936085799236?p=b66LnDUAB2Xkx2uQYp&eventType=community"
-target="_blank">
+target="_blank"
+class="btn btn-primary">
 
 <i class="fa-brands fa-microsoft"></i>
 Join Session
 
 </a>
 
-<a class="btn btn-gold"
-href="register.html">
+<a
+href="register.html"
+class="btn btn-gold">
 
 <i class="fa-solid fa-user-plus"></i>
 Register
@@ -943,13 +1139,14 @@ Register
 
 <div class="container">
 
-<h2 class="section-title">Our Heart</h2>
+<h2 class="section-title">
+<i class="fa-solid fa-heart"></i>
+Our Heart
+</h2>
 
 <p class="section-subtitle">
-
-We desire to see lives changed by the Word of God and believers
-strengthened to serve Christ faithfully.
-
+We desire to see lives changed by the Word of God
+and believers strengthened to serve Christ faithfully.
 </p>
 
 <div class="cards">
@@ -1005,20 +1202,23 @@ We learn and grow together as the body of Christ.
 
 <div class="container">
 
-<h2 class="section-title" style="color:#ffd700;">
+<h2 class="section-title">
+<i class="fa-solid fa-circle-question"></i>
 B.E.P. Bible Quiz
 </h2>
 
 <p>
-Test your understanding of God's Word through our B.E.P. Bible Quiz.
-Complete the questions and receive your score at the end.
+Test your understanding of God's Word through our B.E.P.
+Bible Quiz. Complete the questions and receive your score.
 </p>
 
 <div class="buttons">
 
-<a href="quiz.html" class="btn btn-gold">
+<a
+href="quiz.html"
+class="btn btn-gold">
 
-<i class="fa-solid fa-circle-question"></i>
+<i class="fa-solid fa-play"></i>
 Take the Bible Quiz
 
 </a>
@@ -1034,17 +1234,18 @@ Take the Bible Quiz
      CONTACT
 ========================= -->
 
-<section id="contact" class="contact-section">
+<section class="contact-section" id="contact">
 
 <div class="container">
 
 <h2 class="section-title">
+<i class="fa-solid fa-address-book"></i>
 Contact Us
 </h2>
 
 <p class="section-subtitle">
-For registration, questions, session information or general enquiries,
-please contact us.
+For registration, questions, session information
+or general enquiries, please contact us.
 </p>
 
 <div class="cards">
@@ -1060,9 +1261,10 @@ style="font-size:35px;color:#25D366;"></i>
 062 350 8689
 </p>
 
-<a class="btn btn-green"
+<a
 href="https://wa.me/27623508689"
-target="_blank">
+target="_blank"
+class="btn btn-green">
 
 <i class="fa-brands fa-whatsapp"></i>
 WhatsApp Omega
@@ -1083,9 +1285,10 @@ style="font-size:35px;color:#25D366;"></i>
 083 282 2644
 </p>
 
-<a class="btn btn-green"
+<a
 href="https://wa.me/27832822644"
-target="_blank">
+target="_blank"
+class="btn btn-green">
 
 <i class="fa-brands fa-whatsapp"></i>
 WhatsApp Bro. KB
@@ -1106,9 +1309,10 @@ style="font-size:35px;color:#1877F2;"></i>
 Connect with B.E.P. on Facebook.
 </p>
 
-<a class="btn btn-facebook"
+<a
 href="https://facebook.com/groups/1421853356307383/"
-target="_blank">
+target="_blank"
+class="btn btn-facebook">
 
 <i class="fa-brands fa-facebook"></i>
 Facebook Group
@@ -1129,8 +1333,9 @@ style="font-size:35px;color:#555;"></i>
 bep.onlineprog@gmail.com
 </p>
 
-<a class="btn btn-email"
-href="mailto:bep.onlineprog@gmail.com">
+<a
+href="mailto:bep.onlineprog@gmail.com"
+class="btn btn-email">
 
 <i class="fa-solid fa-envelope"></i>
 Email Us
@@ -1138,46 +1343,6 @@ Email Us
 </a>
 
 </div>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- =========================
-     REGISTRATION
-========================= -->
-
-<section>
-
-<div class="container">
-
-<h2 class="section-title">
-Join B.E.P.
-</h2>
-
-<p class="section-subtitle">
-Take the next step in your biblical learning and spiritual growth.
-Register for the Biblical Empowerment Program.
-</p>
-
-<div class="buttons">
-
-<a href="register.html" class="btn btn-primary">
-
-<i class="fa-solid fa-user-plus"></i>
-Register Now
-
-</a>
-
-<a href="quiz.html" class="btn btn-gold">
-
-<i class="fa-solid fa-book-bible"></i>
-Bible Quiz
-
-</a>
 
 </div>
 
@@ -1207,23 +1372,6 @@ Building the Church of Christ through biblical teaching,
 discipleship and spiritual growth.
 </p>
 
-<div class="social-icons">
-
-<a href="https://facebook.com/groups/1421853356307383/"
-target="_blank">
-
-<i class="fa-brands fa-facebook-f"></i>
-
-</a>
-
-<a href="mailto:bep.onlineprog@gmail.com">
-
-<i class="fa-solid fa-envelope"></i>
-
-</a>
-
-</div>
-
 </div>
 
 
@@ -1231,119 +1379,21 @@ target="_blank">
 
 <h3>Quick Links</h3>
 
-<p><a href="#about">About Us</a></p>
-<p><a href="#vision">Vision</a></p>
-<p><a href="#mission">Mission</a></p>
-<p><a href="#sessions">Thursday Sessions</a></p>
-<p><a href="register.html">Registration</a></p>
-<p><a href="quiz.html">Bible Quiz</a></p>
-
-</div>
-
-
-<div>
-
-<h3>Contact</h3>
-
 <p>
-<strong>Omega:</strong><br>
-<a href="tel:0623508689">
-062 350 8689
+<a href="#home">
+<i class="fa-solid fa-house"></i>
+Home
 </a>
 </p>
 
-<br>
-
 <p>
-<strong>Bro. KB:</strong><br>
-<a href="tel:0832822644">
-083 282 2644
+<a href="#about">
+<i class="fa-solid fa-circle-info"></i>
+About Us
 </a>
 </p>
 
-</div>
-
-
-<div>
-
-<h3>Online Session</h3>
-
 <p>
-Every Thursday
-</p>
-
-<p>
-19:00 – 20:30
-</p>
-
-<p>
-Microsoft Teams
-</p>
-
-<br>
-
-<a
-href="https://teams.live.com/meet/936085799236?p=b66LnDUAB2Xkx2uQYp&eventType=community"
-target="_blank"
-class="btn btn-gold">
-
-Join Teams
-
-</a>
-
-</div>
-
-</div>
-
-
-<div class="footer-bottom">
-
-<p>
-© <span id="year"></span> Biblical Empowerment Program (B.E.P.)
-</p>
-
-<p>
-Building the Church of Christ
-</p>
-
-</div>
-
-</footer>
-
-
-<!-- =========================
-     JAVASCRIPT
-========================= -->
-
-<script>
-
-/* =========================
-   CURRENT YEAR
-========================= */
-
-document.getElementById("year").textContent =
-new Date().getFullYear();
-
-
-/* =========================
-   THURSDAY COUNTDOWN
-========================= */
-
-function getNextThursday() {
-
-    const now = new Date();
-
-    let next = new Date(now);
-
-    let daysUntilThursday =
-        (4 - now.getDay() + 7) % 7;
-
-    /*
-       If today is Thursday and the session
-       time has already passed, move to next Thursday.
-    */
-
-    if (
-        daysUntilThursday === 0 &&
-        (
-            n
+<a href="register.html">
+<i class="fa-solid fa-user-plus"></i>
+Registratio
