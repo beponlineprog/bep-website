@@ -1,13 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>B.E.P. Bible Examination</title>
+<title>B.E.P. Bible Quiz | Biblical Empowerment Program</title>
 
 <link rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
@@ -15,1415 +12,522 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
 <style>
 
 *{
-box-sizing:border-box;
-margin:0;
-padding:0;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
 html{
-scroll-behavior:smooth;
+    scroll-behavior:smooth;
 }
 
 body{
-font-family:Arial,sans-serif;
-background:#eef4fa;
-color:#222;
+    font-family:Arial, Helvetica, sans-serif;
+    background:#f4f8fc;
+    color:#1f2937;
+    line-height:1.6;
 }
 
-/* NAVBAR */
+/* =========================
+   NAVIGATION
+========================= */
 
-header{
-background:#063b73;
-color:white;
-padding:17px 6%;
-display:flex;
-justify-content:space-between;
-align-items:center;
-flex-wrap:wrap;
+nav{
+    background:linear-gradient(135deg,#003b73,#0066b3);
+    color:white;
+    position:sticky;
+    top:0;
+    z-index:1000;
+    box-shadow:0 3px 12px rgba(0,0,0,0.18);
+}
+
+.nav-container{
+    max-width:1200px;
+    margin:auto;
+    padding:12px 20px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
 }
 
 .logo{
-font-size:22px;
-font-weight:bold;
+    font-size:22px;
+    font-weight:bold;
+    white-space:nowrap;
 }
 
 .logo span{
-color:#f4c542;
+    color:#ffd700;
 }
 
-nav{
-display:flex;
-gap:10px;
-flex-wrap:wrap;
+.nav-links{
+    display:flex;
+    gap:8px;
+    align-items:center;
 }
 
-nav a{
-color:white;
-text-decoration:none;
-padding:8px 11px;
-border-radius:6px;
-font-weight:bold;
+.nav-links a{
+    color:white;
+    text-decoration:none;
+    padding:9px 11px;
+    border-radius:7px;
+    font-size:14px;
+    transition:0.3s;
 }
 
-nav a:hover{
-background:#f4c542;
-color:#063b73;
+.nav-links a:hover,
+.nav-links a.active{
+    background:rgba(255,255,255,0.18);
 }
 
-/* FLOATING BACK BUTTON */
-
-.back-button{
-position:fixed;
-left:15px;
-bottom:20px;
-z-index:1000;
-background:#f4c542;
-color:#063b73;
-padding:12px 17px;
-border-radius:30px;
-text-decoration:none;
-font-weight:bold;
-box-shadow:0 4px 12px rgba(0,0,0,.25);
+.nav-links i{
+    margin-right:5px;
 }
 
-.back-button:hover{
-background:#063b73;
-color:white;
+.menu-btn{
+    display:none;
+    font-size:25px;
+    cursor:pointer;
 }
 
-/* EXAM */
+/* =========================
+   PAGE HEADER
+========================= */
+
+.page-header{
+    background:linear-gradient(135deg,#003b73,#0077c8);
+    color:white;
+    text-align:center;
+    padding:55px 20px;
+}
+
+.page-header h1{
+    font-size:38px;
+    margin-bottom:10px;
+}
+
+.page-header p{
+    font-size:18px;
+    max-width:700px;
+    margin:auto;
+}
+
+.quiz-badge{
+    display:inline-block;
+    margin-top:18px;
+    background:#ffd700;
+    color:#003b73;
+    padding:8px 18px;
+    border-radius:30px;
+    font-weight:bold;
+}
+
+/* =========================
+   MAIN
+========================= */
 
 .container{
-max-width:900px;
-margin:30px auto;
-padding:15px;
+    max-width:1000px;
+    margin:40px auto;
+    padding:0 20px;
 }
 
-.exam-header{
-background:white;
-padding:25px;
-border-radius:12px;
-box-shadow:0 4px 15px rgba(0,0,0,.08);
-margin-bottom:20px;
+.info-card{
+    background:white;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 5px 20px rgba(0,0,0,0.08);
+    margin-bottom:25px;
 }
 
-.exam-header h1{
-color:#063b73;
-text-align:center;
-margin-bottom:8px;
+.info-card h2{
+    color:#003b73;
+    margin-bottom:12px;
 }
 
-.exam-title{
-text-align:center;
-font-weight:bold;
-color:#f4b900;
-font-size:18px;
-margin-bottom:20px;
+.quiz-info{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+    margin-top:20px;
 }
 
-.instructions{
-background:#f7f9fc;
-padding:15px;
-border-left:5px solid #f4c542;
-margin-top:15px;
+.info-box{
+    background:#eef6ff;
+    border-left:5px solid #0066b3;
+    padding:15px;
+    border-radius:8px;
+    text-align:center;
 }
 
-.instructions ul{
-margin-left:20px;
-margin-top:8px;
+.info-box strong{
+    display:block;
+    color:#003b73;
+    font-size:22px;
 }
 
-.student-details{
-background:white;
-padding:25px;
-border-radius:12px;
-box-shadow:0 4px 15px rgba(0,0,0,.08);
-margin-bottom:20px;
+/* =========================
+   MEMBER DETAILS
+========================= */
+
+.member-card{
+    background:white;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 5px 20px rgba(0,0,0,0.08);
+    margin-bottom:25px;
 }
 
-.student-details h2{
-color:#063b73;
-margin-bottom:20px;
+.member-card h2{
+    color:#003b73;
+    margin-bottom:18px;
 }
 
-.form-grid{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:15px;
+.form-group{
+    margin-bottom:18px;
 }
 
 .form-group label{
-display:block;
-font-weight:bold;
-color:#063b73;
-margin-bottom:7px;
+    display:block;
+    font-weight:bold;
+    margin-bottom:7px;
 }
 
 .form-group input{
-width:100%;
-padding:12px;
-border:1px solid #ccc;
-border-radius:7px;
-font-size:16px;
+    width:100%;
+    padding:13px;
+    border:1px solid #cbd5e1;
+    border-radius:8px;
+    font-size:16px;
 }
 
-/* QUESTIONS */
-
-.question{
-background:white;
-padding:25px;
-margin-bottom:20px;
-border-radius:12px;
-box-shadow:0 4px 15px rgba(0,0,0,.08);
+.form-group input:focus{
+    outline:none;
+    border-color:#0066b3;
+    box-shadow:0 0 0 2px rgba(0,102,179,0.12);
 }
 
-.progress{
-color:#063b73;
-font-weight:bold;
-margin-bottom:10px;
+/* =========================
+   QUESTIONS
+========================= */
+
+.question-card{
+    background:white;
+    padding:25px;
+    margin-bottom:20px;
+    border-radius:15px;
+    box-shadow:0 5px 18px rgba(0,0,0,0.07);
+    border-left:5px solid #0066b3;
 }
 
-.question h3{
-margin-bottom:20px;
-line-height:1.5;
+.question-number{
+    color:#0066b3;
+    font-size:14px;
+    font-weight:bold;
+    margin-bottom:7px;
+}
+
+.question-card h3{
+    font-size:18px;
+    color:#172554;
+    margin-bottom:17px;
 }
 
 .option{
-display:block;
-border:1px solid #ddd;
-border-radius:8px;
-padding:13px;
-margin:10px 0;
-cursor:pointer;
+    display:block;
+    background:#f8fafc;
+    border:1px solid #dbe4ee;
+    padding:12px 14px;
+    margin:9px 0;
+    border-radius:8px;
+    cursor:pointer;
+    transition:0.2s;
 }
 
 .option:hover{
-background:#f1f6fb;
-border-color:#063b73;
+    background:#eef6ff;
+    border-color:#0066b3;
 }
 
 .option input{
-margin-right:10px;
+    margin-right:10px;
 }
 
-/* SUBMIT */
+/* =========================
+   SUBMIT
+========================= */
+
+.submit-container{
+    text-align:center;
+    margin:35px 0;
+}
 
 .submit-btn{
-width:100%;
-background:#063b73;
-color:white;
-padding:16px;
-border:none;
-border-radius:8px;
-font-size:18px;
-font-weight:bold;
-cursor:pointer;
+    border:none;
+    background:linear-gradient(135deg,#003b73,#0066b3);
+    color:white;
+    padding:15px 35px;
+    border-radius:30px;
+    font-size:17px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.3s;
 }
 
 .submit-btn:hover{
-background:#f4c542;
-color:#063b73;
+    transform:translateY(-2px);
+    box-shadow:0 7px 18px rgba(0,0,0,0.2);
 }
 
-/* RESULT */
+/* =========================
+   RESULT
+========================= */
 
-.result{
-display:none;
-background:white;
-padding:35px;
-border-radius:15px;
-text-align:center;
-margin-top:25px;
-box-shadow:0 5px 20px rgba(0,0,0,.1);
+#result{
+    display:none;
+    background:white;
+    padding:30px;
+    border-radius:15px;
+    text-align:center;
+    margin:30px 0;
+    box-shadow:0 5px 20px rgba(0,0,0,0.1);
 }
 
-.result h2{
-color:#063b73;
-margin-bottom:15px;
+#result h2{
+    color:#003b73;
+    margin-bottom:12px;
 }
 
 .score{
-font-size:40px;
-font-weight:bold;
-color:#063b73;
-margin:15px;
+    font-size:38px;
+    font-weight:bold;
+    color:#0066b3;
+    margin:10px 0;
 }
 
-.message{
-font-size:18px;
-line-height:1.7;
-margin-top:15px;
+.pass{
+    color:#16803c;
+    font-size:22px;
+    font-weight:bold;
 }
 
-.home-btn{
-display:inline-block;
-margin-top:20px;
-padding:12px 20px;
-background:#f4c542;
-color:#063b73;
-text-decoration:none;
-border-radius:7px;
-font-weight:bold;
+.fail{
+    color:#c62828;
+    font-size:22px;
+    font-weight:bold;
 }
 
-/* FOOTER */
+.result-message{
+    margin-top:10px;
+}
+
+/* =========================
+   CONTACT
+========================= */
+
+.contact-section{
+    background:#eaf4ff;
+    padding:50px 20px;
+    margin-top:50px;
+}
+
+.contact-container{
+    max-width:1100px;
+    margin:auto;
+}
+
+.contact-title{
+    text-align:center;
+    color:#003b73;
+    font-size:30px;
+    margin-bottom:10px;
+}
+
+.contact-subtitle{
+    text-align:center;
+    margin-bottom:30px;
+}
+
+.contact-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:20px;
+}
+
+.contact-card{
+    background:white;
+    padding:25px;
+    border-radius:15px;
+    text-align:center;
+    box-shadow:0 4px 15px rgba(0,0,0,0.07);
+}
+
+.contact-card i{
+    font-size:30px;
+    color:#0066b3;
+    margin-bottom:10px;
+}
+
+.contact-card h3{
+    color:#003b73;
+    margin-bottom:8px;
+}
+
+.contact-card p{
+    margin-bottom:15px;
+}
+
+.contact-btn{
+    display:inline-block;
+    text-decoration:none;
+    background:#0066b3;
+    color:white;
+    padding:10px 18px;
+    border-radius:25px;
+    font-weight:bold;
+    margin:4px;
+    transition:0.3s;
+}
+
+.contact-btn:hover{
+    background:#003b73;
+}
+
+.whatsapp{
+    background:#16803c;
+}
+
+.whatsapp:hover{
+    background:#0d632c;
+}
+
+.facebook{
+    background:#1877f2;
+}
+
+.email{
+    background:#6b4fbb;
+}
+
+.teams{
+    background:#4f46e5;
+}
+
+/* =========================
+   FOOTER
+========================= */
 
 footer{
-background:#031f3c;
-color:white;
-padding:35px 7% 20px;
-text-align:center;
-margin-top:50px;
+    background:#002b52;
+    color:white;
+    padding:45px 20px 20px;
 }
 
-.footer-logo{
-font-size:23px;
-font-weight:bold;
+.footer-container{
+    max-width:1100px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:30px;
 }
 
-.footer-logo span{
-color:#f4c542;
+.footer-column h3{
+    color:#ffd700;
+    margin-bottom:15px;
 }
 
-.footer-links{
-margin:18px 0;
+.footer-column p{
+    color:#dbeafe;
+    margin-bottom:8px;
 }
 
-.footer-links a{
-color:white;
-text-decoration:none;
-margin:0 8px;
+.footer-column a{
+    display:block;
+    color:#dbeafe;
+    text-decoration:none;
+    margin:7px 0;
 }
 
-.footer-links a:hover{
-color:#f4c542;
+.footer-column a:hover{
+    color:#ffd700;
 }
 
-.footer-social{
-margin:15px 0;
+.footer-bottom{
+    border-top:1px solid rgba(255,255,255,0.15);
+    text-align:center;
+    margin-top:30px;
+    padding-top:20px;
+    color:#cbd5e1;
 }
 
-.footer-social a{
-color:white;
-font-size:23px;
-margin:0 8px;
-}
+/* =========================
+   MOBILE
+========================= */
 
-.footer-social a:hover{
-color:#f4c542;
-}
+@media(max-width:850px){
 
-.copyright{
-border-top:1px solid rgba(255,255,255,.2);
-margin-top:18px;
-padding-top:15px;
-font-size:14px;
-}
+    .menu-btn{
+        display:block;
+    }
 
-@media(max-width:650px){
+    .nav-links{
+        display:none;
+        position:absolute;
+        top:59px;
+        left:0;
+        width:100%;
+        background:#003b73;
+        flex-direction:column;
+        padding:12px;
+    }
 
-header{
-justify-content:center;
-}
+    .nav-links.show{
+        display:flex;
+    }
 
-nav{
-justify-content:center;
-margin-top:10px;
-}
+    .nav-links a{
+        width:100%;
+        text-align:left;
+        padding:12px;
+    }
 
-.form-grid{
-grid-template-columns:1fr;
-}
+    .page-header h1{
+        font-size:30px;
+    }
 
-.exam-header h1{
-font-size:23px;
-}
+    .quiz-info{
+        grid-template-columns:1fr;
+    }
 
-.back-button{
-font-size:13px;
-padding:10px 13px;
-}
+    .contact-grid{
+        grid-template-columns:1fr;
+    }
 
+    .footer-container{
+        grid-template-columns:1fr;
+        text-align:center;
+    }
+
+    .footer-column a{
+        margin:10px 0;
+    }
 }
 
 </style>
-
 </head>
 
 <body>
 
-
-<!-- NAVIGATION -->
-
-<header>
-
-<div class="logo">
-B.E.P. <span>ONLINE PROGRAM</span>
-</div>
+<!-- =========================
+     NAVIGATION
+========================= -->
 
 <nav>
 
-<a href="index.html">
-<i class="fa-solid fa-house"></i>
-Home
-</a>
+<div class="nav-container">
 
-<a href="register.html">
-<i class="fa-solid fa-user-plus"></i>
-Register
-</a>
-
-<a href="quiz.html">
-<i class="fa-solid fa-file-pen"></i>
-Quiz
-</a>
-
-<a href="index.html#contact">
-<i class="fa-solid fa-address-book"></i>
-Contact
-</a>
-
-</nav>
-
-</header>
-
-
-<!-- FLOATING BACK -->
-
-<a href="index.html"
-class="back-button">
-
-<i class="fa-solid fa-arrow-left"></i>
-Go Back to B.E.P. Website
-
-</a>
-
-
-<div class="container">
-
-
-<div class="exam-header">
-
-<h1>
-BIBLICAL EMPOWERMENT PROGRAM
-</h1>
-
-<div class="exam-title">
-B.E.P. ONLINE BIBLE EXAMINATION
+<div class="logo">
+B.E.P. <span>✦</span>
 </div>
 
-<p>
-<strong>Total Questions:</strong> 20
-</p>
-
-<p>
-<strong>Total Marks:</strong> 60
-</p>
-
-<p>
-<strong>Marks Per Question:</strong> 3
-</p>
-
-<p>
-<strong>Pass Mark:</strong> 40 / 60
-</p>
-
-<div class="instructions">
-
-<strong>
-EXAMINATION INSTRUCTIONS
-</strong>
-
-<ul>
-
-<li>
-Answer all 20 questions.
-</li>
-
-<li>
-Select ONE answer for each question.
-</li>
-
-<li>
-Each question carries 3 marks.
-</li>
-
-<li>
-The examination is marked automatically.
-</li>
-
-<li>
-The pass mark is 40 out of 60.
-</li>
-
-<li>
-Make sure all questions are answered before submitting.
-</li>
-
-</ul>
-
-</div>
-
-</div>
-
-
-<form id="quizForm">
-
-
-<!-- LEARNER DETAILS -->
-
-<div class="student-details">
-
-<h2>
-Learner Details
-</h2>
-
-<div class="form-grid">
-
-<div class="form-group">
-
-<label>Name</label>
-
-<input type="text"
-id="studentName"
-required>
-
-</div>
-
-
-<div class="form-group">
-
-<label>Surname</label>
-
-<input type="text"
-id="studentSurname"
-required>
-
-</div>
-
-
-<div class="form-group">
-
-<label>Phone Number</label>
-
-<input type="tel"
-id="studentPhone"
-required>
-
-</div>
-
-
-<div class="form-group">
-
-<label>Email Address</label>
-
-<input type="email"
-id="studentEmail"
-required>
-
-</div>
-
-</div>
-
-</div>
-
-
-<!-- QUESTIONS -->
-
-<div class="question">
-
-<div class="progress">
-Question 1 of 20 — 3 Marks
-</div>
-
-<h3>
-What is the first book of the Bible?
-</h3>
-
-<label class="option">
-<input type="radio" name="q1" value="A" required>
-A. Exodus
-</label>
-
-<label class="option">
-<input type="radio" name="q1" value="B">
-B. Genesis
-</label>
-
-<label class="option">
-<input type="radio" name="q1" value="C">
-C. Matthew
-</label>
-
-<label class="option">
-<input type="radio" name="q1" value="D">
-D. Psalms
-</label>
-
-</div>
-
-
-<div class="question">
-
-<div class="progress">
-Question 2 of 20 — 3 Marks
-</div>
-
-<h3>
-Who built the ark according to Genesis?
-</h3>
-
-<label class="option">
-<input type="radio" name="q2" value="A" required>
-A. Abraham
-</label>
-
-<label class="option">
-<input type="radio" name="q2" value="B">
-B. Moses
-</label>
-
-<label class="option">
-<input type="radio" name="q2" value="C">
-C. Noah
-</label>
-
-<label class="option">
-<input type="radio" name="q2" value="D">
-D. David
-</label>
-
-</div>
-
-
-<div class="question">
-
-<div class="progress">
-Question 3 of 20 — 3 Marks
-</div>
-
-<h3>
-Who led the Israelites out of Egypt?
-</h3>
-
-<label class="option">
-<input type="radio" name="q3" value="A" required>
-A. Joshua
-</label>
-
-<label class="option">
-<input type="radio" name="q3" value="B">
-B. Moses
-</label>
-
-<label class="option">
-<input type="radio" name="q3" value="C">
-C. Aaron
-</label>
-
-<label class="option">
-<input type="radio" name="q3" value="D">
-D. Samuel
-</label>
-
-</div>
-
-
-<div class="question">
-
-<div class="progress">
-Question 4 of 20 — 3 Marks
-</div>
-
-<h3>
-How many disciples did Jesus choose?
-</h3>
-
-<label class="option">
-<input type="radio" name="q4" value="A" required>
-A. 7
-</label>
-
-<label class="option">
-<input type="radio" name="q4" value="B">
-B. 10
-</label>
-
-<label class="option">
-<input type="radio" name="q4" value="C">
-C. 12
-</label>
-
-<label class="option">
-<input type="radio" name="q4" value="D">
-D. 14
-</label>
-
-</div>
-
-
-<div class="question">
-
-<div class="progress">
-Question 5 of 20 — 3 Marks
-</div>
-
-<h3>
-Who baptized Jesus?
-</h3>
-
-<label class="option">
-<input type="radio" name="q5" value="A" required>
-A. Peter
-</label>
-
-<label class="option">
-<input type="radio" name="q5" value="B">
-B. John the Baptist
-</label>
-
-<label class="option">
-<input type="radio" name="q5" value="C">
-C. James
-</label>
-
-<label class="option">
-<input type="radio" name="q5" value="D">
-D. Paul
-</label>
-
-</div>
-
-
-<div class="question">
-
-<div class="progress">
-Question 6 of 20 — 3 Marks
-</div>
-
-<h3>
-What is the greatest commandment according to Jesus?
-</h3>
-
-<label class="option">
-<input type="radio" name="q6" value="A" required>
-A. Love God with all your heart, soul and mind
-</label>
-
-<label class="option">
-<input type="radio" name="q6" value="B">
-B. Build a temple
-</label>
-
-<label class="option">
-<input type="radio" name="q6" value="C">
-C. Give all your possessions away
-</label>
-
-<label class="option">
-<input type="radio" name="q6" value="D">
-D. Fast every day
-</label>
-
-</div>
-
-
-<div class="question">
-
-<div class="progress">
-Question 7 of 20 — 3 Marks
-</div>
-
-<h3>
-According to John 3:16, what did God give because He loved the world?
-</h3>
-
-<label class="option">
-<input type="radio" name="q7" value="A" required>
-A. His angels
-</label>
-
-<label class="option">
-<input type="radio" name="q7" value="B">
-B. His only Son
-</label>
-
-<label class="option">
-<input type="radio" name="q7" value="C">
-C. His kingdom
-</label>
-
-<label class="option">
-<input type="radio" name="q7" value="D">
-D. His prophets
-</label>
-
-</div>
-
-
-<div class="question">
-
-<div class="progress">
-Question 8 of 20 — 3 Marks
-</div>
-
-<h3>
-Which of the following is part of the fruit of the Spirit?
-</h3>
-
-<label class="option">
-<input type="radio" name="q8" value="A" required>
-A. Love, joy and peace
-</label>
-
-<label class="option">
-<input type="radio" name="q8" value="B">
-B. Wealth and power
-</label>
-
-<label class="option">
-<input type="radio" name="q8" value="C">
-C. Fame and success
-</label>
-
-<label class="option">
-<input type="radio" name="q8" value="D">
-D. Anger and revenge
-</label>
-
-</div>
-
-
-<div class="question">
-
-<div class="progress">
-Question 9 of 20 — 3 Marks
-</div>
-
-<h3>
-Who defeated Goliath?
-</h3>
-
-<label class="option">
-<input type="radio" name="q9" value="A" required>
-A. Saul
-</label>
-
-<label class="option">
-<input type="radio" name="q9" value="B">
-B. Solomon
-</label>
-
-<label class="option">
-<input type="radio" name="q9" value="C">
-C. David
-</label>
-
-<label class="option">
-<input type="radio" name="q9" value="D">
-D. Jonathan
-</label>
-
-</div>
-
-
-<div class="question">
-
-<div class="progress">
-Question 10 of 20 — 3 Marks
-</div>
-
-<h3>
-What did Jesus do after His resurrection?
-</h3>
-
-<label class="option">
-<input type="radio" name="q10" value="A" required>
-A. He appeared to His disciples
-</label>
-
-<label class="option">
-<input type="radio" name="q10" value="B">
-B. He returned to Bethlehem
-</label>
-
-<label class="option">
-<input type="radio" name="q10" value="C">
-C. He became a Roman ruler
-</label>
-
-<label class="option">
-<input type="radio" name="q10" value="D">
-D. He built a temple
-</label>
-
-</div>
-
-
-<div class="question">
-
-<div class="progress">
-Question 11 of 20 — 3 Marks
-</div>
-
-<h3>
-What is prayer?
-</h3>
-
-<label class="option">
-<input type="radio" name="q11" value="A" required>
-A. Communication with God
-</label>
-
-<label class="option">
-<input type="radio" name="q11" value="B">
-B. A political meeting
-</label>
-
-<label class="option">
-<input type="radio" name="q11" value="C">
-C. A financial transaction
-</label>
-
-<label class="option">
-<input type="radio" name="q11" value="D">
-D. A competition
-</label>
-
-</div>
-
-
-<div class="question">
-
-<div class="progress">
-Question 12 of 20 — 3 Marks
-</div>
-
-<h3>
-According to Ephesians 6, what should believers put on?
-</h3>
-
-<label class="option">
-<input type="radio" name="q12" value="A" required>
-A. The armour of God
-</label>
-
-<label class="option">
-<input type="radio" name="q12" value="B">
-B. A royal crown
-</label>
-
-<label class="option">
-<input type="radio" name="q12" value="C">
-C. A military uniform
-</label>
-
-<label class="option">
-<input type="radio" name="q12" value="D">
-D. A white robe only
-</label>
-
-</div>
-
-
-<div class="question">
-
-<div class="progress">
-Question 13 of 20 — 3 Marks
-</div>
-
-<h3>
-What does faith mean according to Hebrews 11:1?
-</h3>
-
-<label class="option">
-<input type="radio" name="q13" value="A" required>
-A. Confidence in what we hope for and assurance about what we do not see
-</label>
-
-<label class="option">
-<input type="radio" name="q13" value="B">
-B. Trusting only what we can touch
-</label>
-
-<label class="option">
-<input type="radio" name="q13" value="C">
-C. Avoiding prayer
-</label>
-
-<label class="option">
-<input type="radio" name="q13" value="D">
-D. Depending only on human strength
-</label>
-
-</div>
-
-
-<div class="question">
-
-<div class="progress">
-Question 14 of 20 — 3 Marks
-</div>
-
-<h3>
-What did Jesus teach about forgiving others?
-</h3>
-
-<label class="option">
-<input type="radio" name="q14" value="A" required>
-A. We should forgive others
-</label>
-
-<label class="option">
-<input type="radio" name="q14" value="B">
-B. We should never forgive
-</label>
-
-<label class="option">
-<input type="radio" name="q14" value="C">
-C. Forgiveness is unnecessary
-</label>
-
-<label class="option">
-<input type="radio" name="q14" value="D">
-D. Only leaders must forgive
-</label>
-
-</div>
-
-
-<div class="question">
-
-<div class="progress">
-Question 15 of 20 — 3 Marks
-</div>
-
-<h3>
-What happened when the Holy Spirit came upon the disciples in Acts 2?
-</h3>
-
-<label class="option">
-<input type="radio" name="q15" value="A" required>
-A. They began speaking in other tongues
-</label>
-
-<label class="option">
-<input type="radio" name="q15" value="B">
-B. They left Jerusalem
-</label>
-
-<label class="option">
-<input type="radio" name="q15" value="C">
-C. They stopped preaching
-</label>
-
-<label class="option">
-<input type="radio" name="q15" value="D">
-D. They returned to fishing
-</label>
-
-</div>
-
-
-<div class="question">
-
-<div class="progress">
-Question 16 of 20 — 3 Marks
-</div>
-
-<h3>
-What is discipleship?
-</h3>
-
-<label class="option">
-<input type="radio" name="q16" value="A" required>
-A. Following Christ and helping others follow Him
-</label>
-
-<label class="option">
-<input type="radio" name="q16" value="B">
-B. Becoming famous
-</label>
-
-<label class="option">
-<input type="radio" name="q16" value="C">
-C. Collecting money
-</label>
-
-<label class="option">
-<input type="radio" name="q16" value="D">
-D. Avoiding other believers
-</label>
-
-</div>
-
-
-<div class="question">
-
-<div class="progress">
-Question 17 of 20 — 3 Marks
-</div>
-
-<h3>
-What does the Bible teach believers to do with bitterness?
-</h3>
-
-<label class="option">
-<input type="radio" name="q17" value="A" required>
-A. Get rid of bitterness and forgive
-</label>
-
-<label class="option">
-<input type="radio" name="q17" value="B">
-B. Keep it hidden forever
-</label>
-
-<label class="option">
-<input type="radio" name="q17" value="C">
-C. Use it against others
-</label>
-
-<label class="option">
-<input type="radio" name="q17" value="D">
-D. Encourage anger
-</label>
-
-</div>
-
-
-<div class="question">
-
-<div class="progress">
-Question 18 of 20 — 3 Marks
-</div>
-
-<h3>
-What does Romans 12:2 teach believers about transformation?
-</h3>
-
-<label class="option">
-<input type="radio" name="q18" value="A" required>
-A. Be transformed by the renewing of your mind
-</label>
-
-<label class="option">
-<input type="radio" name="q18" value="B">
-B. Follow the patterns of the world
-</label>
-
-<label class="option">
-<input type="radio" name="q18" value="C">
-C. Avoid reading Scripture
-</label>
-
-<label class="option">
-<input type="radio" name="q18" value="D">
-D. Depend only on human wisdom
-</label>
-
-</div>
-
-
-<div class="question">
-
-<div class="progress">
-Question 19 of 20 — 3 Marks
-</div>
-
-<h3>
-What did Jesus command His disciples to do in the Great Commission?
-</h3>
-
-<label class="option">
-<input type="radio" name="q19" value="A" required>
-A. Make disciples of all nations
-</label>
-
-<label class="option">
-<input type="radio" name="q19" value="B">
-B. Build political kingdoms
-</label>
-
-<label class="option">
-<input type="radio" name="q19" value="C">
-C. Stop teaching
-</label>
-
-<label class="option">
-<input type="radio" name="q19" value="D">
-D. Avoid the nations
-</label>
-
-</div>
-
-
-<div class="question">
-
-<div class="progress">
-Question 20 of 20 — 3 Marks
-</div>
-
-<h3>
-According to 2 Timothy 3:16, what is Scripture useful for?
-</h3>
-
-<label class="option">
-<input type="radio" name="q20" value="A" required>
-A. Teaching, rebuking, correcting and training in righteousness
-</label>
-
-<label class="option">
-<input type="radio" name="q20" value="B">
-B. Entertainment only
-</label>
-
-<label class="option">
-<input type="radio" name="q20" value="C">
-C. Financial investment
-</label>
-
-<label class="option">
-<input type="radio" name="q20" value="D">
-D. Political debate
-</label>
-
-</div>
-
-
-<button type="submit"
-class="submit-btn">
-
-<i class="fa-solid fa-paper-plane"></i>
-
-SUBMIT B.E.P. EXAMINATION
-
-</button>
-
-</form>
-
-
-<!-- RESULT -->
-
-<div class="result" id="result">
-
-<h2>
-Examination Completed 🙏
-</h2>
-
-<p id="studentResult"></p>
-
-<div class="score" id="score"></div>
-
-<p id="passResult"
-class="message">
-</p>
-
-<p class="message">
-
-<strong>
-Thank You for Participating in the B.E.P. Examination!
-</strong>
-
-</p>
-
-<p class="message">
-
-We appreciate your commitment to learning and growing
-in the Word of God.
-
-May God continue to strengthen you, guide you and deepen
-your understanding of His Word. 🙏📖
-
-</p>
-
-<a href="index.html"
-class="home-btn">
-
-Return to B.E.P. Website
-
-</a>
-
-</div>
-
-</div>
-
-
-<!-- FOOTER -->
-
-<footer>
-
-<div class="footer-logo">
-B.E.P. <span>ONLINE PROGRAM</span>
-</div>
-
-<p>
-Building the Church of Christ
-</p>
-
-<div class="footer-links">
-
-<a href="index.html">Home</a>
-
-<a href="register.html">Register</a>
-
-<a href="quiz.html">Quiz</a>
-
-<a href="index.html#contact">Contact</a>
-
-</div>
-
-<div class="footer-social">
-
-<a href="https://wa.me/27740386671"
-target="_blank">
-
-<i class="fa-brands fa-whatsapp"></i>
-
-</a>
-
-<a href="https://facebook.com/groups/1421853356307383/"
-target="_blank">
-
-<i class="fa-brands fa-facebook"></i>
-
-</a>
-
-<a href="mailto:bep.onlineprog@gmail.com">
-
-<i class="fa-solid fa-envelope"></i>
-
-</a>
-
-</div>
-
-<div class="copyright">
-
-© 2026 Biblical Empowerment Program (B.E.P.)
-<br>
-All Rights Reserved.
-
-</div>
-
-</footer>
-
-
-<script>
-
-const correctAnswers = {
-
-q1:"B",
-q2:"C",
-q3:"B",
-q4:"C",
-q5:"B",
-q6:"A",
-q7:"B",
-q8:"A",
-q9:"C",
-q10:"A",
-q11:"A",
-q12:"A",
-q13:"A",
-q14:"A",
-q15:"A",
-q16:"A",
-q17:"A",
-q18:"A",
-q19:"A",
-q20:"A"
-
-};
-
-
-document.getElementById("quizForm")
-.addEventListener("submit",function(event){
-
-event.preventDefault();
-
-let score=0;
-
-for(let i=1;i<=20;i++){
-
-const answer=
-document.querySelector(
-'input[name="q'+i+'"]:checked'
-);
-
-if(
-answer &&
-answer.value ===
-correctAnswers["q"+i]
-){
-
-score += 3;
-
-}
-
-}
-
-
-const name=
-document.getElementById(
-"studentName"
-).value;
-
-const surname=
-document.getElementById(
-"studentSurname"
-).value;
-
-
-document.getElementById(
-"studentResult"
-).innerHTML=
-
-"Well done, <strong>"+
-name+" "+surname+
-"</strong>. Your examination has been submitted successfully.";
-
-
-document.getElementById(
-"score"
-).innerHTML=
-
-score+" / 60";
-
-
-if(score>=40){
-
-document.getElementById(
-"passResult"
-).innerHTML=
-
-"<strong>Result: PASS ✅</strong><br><br>"+
-"Congratulations! You achieved the B.E.P. pass mark of 40/60.";
-
-}else{
-
-document.getElementById(
-"passResult"
-).innerHTML=
-
-"<strong>Result: NOT YET PASSED</strong><br><br>"+
-"Your score is below the current pass mark of 40/60. "+
-"Keep studying God's Word and continue growing in understanding.";
-
-}
-
-
-document.getElementById(
-"quizForm"
-).style.display="none";
-
-
-document.getElementById(
-"result"
-).style.display="block";
-
-
-window.scrollTo({
-top:0,
-behavior:"smooth"
-});
-
-})
+<div class="menu
