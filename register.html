@@ -4,399 +4,1640 @@
 <head>
 
 <meta charset="UTF-8">
+
 <meta name="viewport"
 content="width=device-width, initial-scale=1.0">
 
-<title>B.E.P. Registration</title>
+<title>B.E.P. Member Registration</title>
+
+<meta name="description"
+content="Register as a member of the Biblical Empowerment Program (B.E.P.).">
 
 <link rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
+
 <style>
 
-*{
-box-sizing:border-box;
-margin:0;
-padding:0;
+/* =========================
+   RESET
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-body{
-font-family:Arial,sans-serif;
-background:#f4f8fc;
-color:#222;
+html {
+    scroll-behavior: smooth;
 }
 
-header{
-background:#063b73;
-color:white;
-padding:18px 6%;
-display:flex;
-justify-content:space-between;
-align-items:center;
-flex-wrap:wrap;
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f4f8fc;
+    color: #222;
+    line-height: 1.6;
 }
 
-.logo{
-font-size:23px;
-font-weight:bold;
+
+/* =========================
+   NAVIGATION
+========================= */
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 9999;
+
+    background:
+        linear-gradient(
+            135deg,
+            #063970,
+            #0b5fa5
+        );
+
+    box-shadow:
+        0 3px 15px rgba(0,0,0,0.2);
 }
 
-.logo span{
-color:#f4c542;
+.nav-container {
+    max-width: 1150px;
+    margin: auto;
+
+    min-height: 65px;
+
+    padding: 0 18px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
-nav a{
-color:white;
-text-decoration:none;
-margin:5px 8px;
-font-weight:bold;
+.logo {
+    color: white;
+    text-decoration: none;
+
+    font-size: 21px;
+    font-weight: bold;
+
+    white-space: nowrap;
 }
 
-nav a:hover{
-color:#f4c542;
+.logo i {
+    color: #ffd700;
+    margin-right: 6px;
 }
 
-/* FLOATING BACK BUTTON */
-
-.back-button{
-position:fixed;
-left:15px;
-bottom:20px;
-z-index:1000;
-background:#f4c542;
-color:#063b73;
-padding:12px 17px;
-border-radius:30px;
-text-decoration:none;
-font-weight:bold;
-box-shadow:0 4px 12px rgba(0,0,0,.25);
+.logo span {
+    color: #ffd700;
 }
 
-.back-button:hover{
-background:#063b73;
-color:white;
+
+/* Desktop navigation */
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 5px;
 }
 
-.container{
-max-width:750px;
-margin:45px auto;
-padding:20px;
+.nav-links a {
+    color: white;
+    text-decoration: none;
+
+    padding: 9px 10px;
+
+    border-radius: 7px;
+
+    font-size: 13px;
+    font-weight: bold;
+
+    transition: 0.3s;
 }
 
-.form-box{
-background:white;
-padding:35px;
-border-radius:15px;
-box-shadow:0 5px 20px rgba(0,0,0,.1);
+.nav-links a i {
+    margin-right: 5px;
 }
 
-h1{
-text-align:center;
-color:#063b73;
-margin-bottom:10px;
+.nav-links a:hover {
+    background: rgba(255,255,255,0.15);
+    color: #ffd700;
 }
 
-.intro{
-text-align:center;
-margin-bottom:30px;
+
+/* Mobile menu */
+
+.menu-btn {
+    display: none;
+
+    border: none;
+    background: transparent;
+
+    color: white;
+
+    font-size: 24px;
+
+    cursor: pointer;
 }
 
-label{
-display:block;
-margin-top:18px;
-margin-bottom:7px;
-font-weight:bold;
-color:#063b73;
+
+/* =========================
+   PAGE HEADER
+========================= */
+
+.page-header {
+
+    background:
+        linear-gradient(
+            rgba(0,35,75,0.88),
+            rgba(0,35,75,0.88)
+        );
+
+    color: white;
+
+    text-align: center;
+
+    padding: 55px 20px;
 }
 
-input{
-width:100%;
-padding:13px;
-border:1px solid #ccc;
-border-radius:7px;
-font-size:16px;
+.page-header h1 {
+    font-size: 34px;
+    margin-bottom: 8px;
 }
 
-button{
-width:100%;
-margin-top:25px;
-padding:14px;
-border:0;
-border-radius:7px;
-background:#063b73;
-color:white;
-font-size:17px;
-font-weight:bold;
-cursor:pointer;
+.page-header h1 i {
+    color: #ffd700;
 }
 
-button:hover{
-background:#f4c542;
-color:#063b73;
+.page-header p {
+    max-width: 700px;
+    margin: auto;
+    color: #e5eef7;
 }
 
-.success{
-display:none;
-text-align:center;
-padding:30px;
+
+/* =========================
+   REGISTRATION
+========================= */
+
+.registration-section {
+    padding: 55px 20px;
 }
 
-.success h2{
-color:#063b73;
-margin-bottom:15px;
+.container {
+    max-width: 900px;
+    margin: auto;
 }
 
-.success p{
-margin-bottom:20px;
+
+/* Registration card */
+
+.registration-card {
+
+    background: white;
+
+    padding: 35px;
+
+    border-radius: 16px;
+
+    box-shadow:
+        0 7px 25px rgba(0,0,0,0.09);
 }
 
-.success a{
-display:inline-block;
-background:#f4c542;
-color:#063b73;
-padding:12px 20px;
-text-decoration:none;
-border-radius:7px;
-font-weight:bold;
+
+/* Intro */
+
+.registration-intro {
+    text-align: center;
+    margin-bottom: 30px;
 }
 
-/* FOOTER */
-
-footer{
-background:#031f3c;
-color:white;
-padding:35px 7% 20px;
-text-align:center;
-margin-top:60px;
+.registration-intro h2 {
+    color: #063970;
+    margin-bottom: 8px;
 }
 
-.footer-logo{
-font-size:23px;
-font-weight:bold;
+.registration-intro p {
+    color: #555;
 }
 
-.footer-logo span{
-color:#f4c542;
+
+/* =========================
+   FORM
+========================= */
+
+.form-group {
+    margin-bottom: 20px;
 }
 
-.footer-links{
-margin:18px 0;
+.form-group label {
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: #063970;
+
+    font-weight: bold;
+
+    font-size: 14px;
 }
 
-.footer-links a{
-color:white;
-text-decoration:none;
-margin:0 8px;
+.form-group label i {
+    margin-right: 6px;
+    color: #0b5fa5;
 }
 
-.footer-links a:hover{
-color:#f4c542;
+
+input,
+select,
+textarea {
+
+    width: 100%;
+
+    padding: 13px 14px;
+
+    border: 1px solid #ccd8e3;
+
+    border-radius: 8px;
+
+    background: #fff;
+
+    font-size: 15px;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    outline: none;
+
+    transition: 0.3s;
 }
 
-.footer-social a{
-color:white;
-font-size:23px;
-margin:0 8px;
+input:focus,
+select:focus,
+textarea:focus {
+
+    border-color: #0b5fa5;
+
+    box-shadow:
+        0 0 0 3px rgba(11,95,165,0.10);
 }
 
-.footer-social a:hover{
-color:#f4c542;
+textarea {
+    min-height: 110px;
+    resize: vertical;
 }
 
-.copyright{
-border-top:1px solid rgba(255,255,255,.2);
-margin-top:18px;
-padding-top:15px;
-font-size:14px;
+
+/* Two-column form */
+
+.form-row {
+
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 18px;
+}
+
+
+/* =========================
+   HOW HEARD
+========================= */
+
+.hear-box {
+
+    background: #eef5fb;
+
+    padding: 20px;
+
+    border-radius: 12px;
+
+    margin: 25px 0;
+}
+
+.hear-box h3 {
+
+    color: #063970;
+
+    font-size: 17px;
+
+    margin-bottom: 5px;
+}
+
+.hear-box p {
+
+    color: #666;
+
+    font-size: 13px;
+
+    margin-bottom: 15px;
+}
+
+
+/* =========================
+   CHECKBOX
+========================= */
+
+.terms {
+
+    display: flex;
+
+    gap: 10px;
+
+    align-items: flex-start;
+
+    margin: 20px 0;
+
+    font-size: 13px;
+
+    color: #555;
+}
+
+.terms input {
+
+    width: auto;
+
+    margin-top: 5px;
+}
+
+
+/* =========================
+   BUTTON
+========================= */
+
+.submit-btn {
+
+    width: 100%;
+
+    border: none;
+
+    padding: 14px 20px;
+
+    border-radius: 9px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #063970,
+            #0b5fa5
+        );
+
+    color: white;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.submit-btn:hover {
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 5px 15px rgba(0,0,0,0.15);
+}
+
+.submit-btn i {
+    margin-right: 8px;
+}
+
+
+/* =========================
+   SUCCESS MESSAGE
+========================= */
+
+.success-message {
+
+    display: none;
+
+    margin-top: 20px;
+
+    padding: 18px;
+
+    border-radius: 10px;
+
+    background: #e9f8ef;
+
+    border-left: 5px solid #25a65a;
+
+    color: #176b3a;
+}
+
+.success-message i {
+    margin-right: 7px;
+}
+
+
+/* =========================
+   CONTACT
+========================= */
+
+.contact-section {
+
+    background: #eef5fb;
+
+    padding: 55px 20px;
+}
+
+.section-title {
+
+    text-align: center;
+
+    color: #063970;
+
+    font-size: 28px;
+
+    margin-bottom: 12px;
+}
+
+.section-subtitle {
+
+    text-align: center;
+
+    max-width: 750px;
+
+    margin: 0 auto 30px;
+
+    color: #555;
+}
+
+.cards {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fit, minmax(220px, 1fr));
+
+    gap: 20px;
+}
+
+.contact-card {
+
+    background: white;
+
+    padding: 25px;
+
+    border-radius: 14px;
+
+    text-align: center;
+
+    box-shadow:
+        0 5px 18px rgba(0,0,0,0.07);
+}
+
+.contact-card h3 {
+
+    color: #063970;
+
+    margin: 8px 0;
+}
+
+.contact-card p {
+
+    margin-bottom: 12px;
+}
+
+.phone {
+
+    font-size: 17px;
+
+    font-weight: bold;
+}
+
+
+/* =========================
+   BUTTONS
+========================= */
+
+.btn {
+
+    display: inline-block;
+
+    padding: 11px 18px;
+
+    border-radius: 8px;
+
+    text-decoration: none;
+
+    font-weight: bold;
+
+    transition: 0.3s;
+}
+
+.btn:hover {
+
+    transform: translateY(-2px);
+
+    opacity: 0.9;
+}
+
+.btn-green {
+
+    background: #25D366;
+
+    color: white;
+}
+
+.btn-facebook {
+
+    background: #1877F2;
+
+    color: white;
+}
+
+.btn-email {
+
+    background: #555;
+
+    color: white;
+}
+
+.btn i {
+    margin-right: 7px;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+
+    background: #032746;
+
+    color: white;
+
+    padding: 40px 20px 20px;
+}
+
+.footer-grid {
+
+    max-width: 1100px;
+
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fit, minmax(220px, 1fr));
+
+    gap: 30px;
+}
+
+footer h3 {
+
+    color: #ffd700;
+
+    margin-bottom: 12px;
+}
+
+footer p,
+footer a {
+
+    color: #d9e5ef;
+
+    font-size: 14px;
+}
+
+footer a {
+
+    text-decoration: none;
+}
+
+footer a:hover {
+
+    color: #ffd700;
+}
+
+.footer-bottom {
+
+    max-width: 1100px;
+
+    margin: 30px auto 0;
+
+    padding-top: 15px;
+
+    border-top:
+        1px solid rgba(255,255,255,0.15);
+
+    text-align: center;
+
+    color: #b8c7d3;
+
+    font-size: 13px;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 800px) {
+
+    .menu-btn {
+        display: block;
+    }
+
+    .nav-links {
+
+        position: absolute;
+
+        top: 65px;
+
+        left: 0;
+        right: 0;
+
+        background: #063970;
+
+        display: none;
+
+        flex-direction: column;
+
+        padding: 10px 15px 15px;
+
+        box-shadow:
+            0 8px 15px rgba(0,0,0,0.2);
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .nav-links a {
+
+        width: 100%;
+
+        padding: 12px;
+    }
+
+    .nav-links a i {
+
+        width: 22px;
+    }
+
+    .page-header h1 {
+
+        font-size: 28px;
+    }
+
+    .registration-card {
+
+        padding: 22px;
+    }
+
+    .form-row {
+
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .btn {
+
+        width: 100%;
+    }
+
+}
+
+
+/* =========================
+   SMALL PHONES
+========================= */
+
+@media (max-width: 500px) {
+
+    .logo {
+        font-size: 18px;
+    }
+
+    .registration-section,
+    .contact-section {
+        padding: 40px 15px;
+    }
+
 }
 
 </style>
 
 </head>
 
+
 <body>
+
+
+<!-- =========================
+     NAVIGATION
+========================= -->
 
 <header>
 
-<div class="logo">
-B.E.P. <span>ONLINE PROGRAM</span>
-</div>
-
-<nav>
-
-<a href="index.html">Home</a>
-<a href="register.html">Register</a>
-<a href="quiz.html">Quiz</a>
-
-</nav>
-
-</header>
+<div class="nav-container">
 
 
-<a href="index.html" class="back-button">
+<a href="index.html" class="logo">
 
-<i class="fa-solid fa-arrow-left"></i>
-Go Back to B.E.P. Website
+<i class="fa-solid fa-cross"></i>
+
+B.E.P. <span>Online</span>
 
 </a>
 
 
+<button
+class="menu-btn"
+id="menuBtn"
+aria-label="Open menu">
+
+<i class="fa-solid fa-bars"></i>
+
+</button>
+
+
+<nav
+class="nav-links"
+id="navLinks">
+
+
+<a href="index.html">
+
+<i class="fa-solid fa-house"></i>
+
+Home
+
+</a>
+
+
+<a href="index.html#about">
+
+<i class="fa-solid fa-circle-info"></i>
+
+About
+
+</a>
+
+
+<a href="index.html#vision">
+
+<i class="fa-solid fa-eye"></i>
+
+Vision
+
+</a>
+
+
+<a href="index.html#mission">
+
+<i class="fa-solid fa-bullseye"></i>
+
+Mission
+
+</a>
+
+
+<a href="index.html#sessions">
+
+<i class="fa-solid fa-video"></i>
+
+Sessions
+
+</a>
+
+
+<a href="#contact">
+
+<i class="fa-solid fa-phone"></i>
+
+Contact
+
+</a>
+
+
+<a href="register.html">
+
+<i class="fa-solid fa-user-plus"></i>
+
+Register
+
+</a>
+
+
+<a href="quiz.html">
+
+<i class="fa-solid fa-circle-question"></i>
+
+Quiz
+
+</a>
+
+
+</nav>
+
+</div>
+
+</header>
+
+
+<!-- =========================
+     PAGE HEADER
+========================= -->
+
+<section class="page-header">
+
+<h1>
+
+<i class="fa-solid fa-user-plus"></i>
+
+B.E.P. Member Registration
+
+</h1>
+
+<p>
+
+Become part of the Biblical Empowerment Program
+and grow together in God's Word.
+
+</p>
+
+</section>
+
+
+<!-- =========================
+     REGISTRATION FORM
+========================= -->
+
+<section class="registration-section">
+
 <div class="container">
 
-<div class="form-box" id="registrationBox">
 
-<h1>B.E.P. Learner Registration</h1>
+<div class="registration-card">
 
-<p class="intro">
-Register to participate in the Biblical Empowerment Program.
+
+<div class="registration-intro">
+
+<h2>
+
+<i class="fa-solid fa-users"></i>
+
+Join the B.E.P. Family
+
+</h2>
+
+<p>
+
+Please complete the form below to register
+as a member of the Biblical Empowerment Program.
+
 </p>
+
+</div>
+
 
 <form id="registrationForm">
 
-<label>Name</label>
 
-<input type="text"
-id="name"
+<!-- Name -->
+
+<div class="form-row">
+
+<div class="form-group">
+
+<label>
+
+<i class="fa-solid fa-user"></i>
+
+Full Name *
+
+</label>
+
+<input
+type="text"
+name="fullName"
+placeholder="Enter your full name"
 required>
 
+</div>
 
-<label>Surname</label>
 
-<input type="text"
-id="surname"
+<!-- Email -->
+
+<div class="form-group">
+
+<label>
+
+<i class="fa-solid fa-envelope"></i>
+
+Email Address *
+
+</label>
+
+<input
+type="email"
+name="email"
+placeholder="Enter your email address"
 required>
 
+</div>
 
-<label>Phone Number</label>
+</div>
 
-<input type="tel"
-id="phone"
+
+<!-- Phone -->
+
+<div class="form-row">
+
+<div class="form-group">
+
+<label>
+
+<i class="fa-solid fa-phone"></i>
+
+Phone / WhatsApp Number *
+
+</label>
+
+<input
+type="tel"
+name="phone"
+placeholder="e.g. 071 234 5678"
 required>
 
+</div>
 
-<label>Email Address</label>
 
-<input type="email"
-id="email"
+<!-- Location -->
+
+<div class="form-group">
+
+<label>
+
+<i class="fa-solid fa-location-dot"></i>
+
+Location
+
+</label>
+
+<input
+type="text"
+name="location"
+placeholder="Town / City / Province">
+
+</div>
+
+</div>
+
+
+<!-- How heard -->
+
+<div class="hear-box">
+
+<h3>
+
+<i class="fa-solid fa-bullhorn"></i>
+
+How did you hear about B.E.P.?
+
+</h3>
+
+<p>
+
+Please select the option that best describes
+how you heard about the Biblical Empowerment Program.
+
+</p>
+
+
+<div class="form-group">
+
+<label>
+
+How did you hear about us? *
+
+</label>
+
+
+<select
+name="howHeard"
 required>
 
+<option value="">
+-- Select an option --
+</option>
 
-<label>Location</label>
+<option value="Social Media">
+Social Media
+</option>
 
-<input type="text"
-id="location"
+<option value="Friends">
+Friends
+</option>
+
+<option value="Church">
+Church
+</option>
+
+<option value="Family">
+Family
+</option>
+
+<option value="WhatsApp">
+WhatsApp
+</option>
+
+<option value="Facebook">
+Facebook
+</option>
+
+<option value="B.E.P. Member">
+Recommended by a B.E.P. Member
+</option>
+
+<option value="Other">
+Other
+</option>
+
+</select>
+
+</div>
+
+</div>
+
+
+<!-- Church -->
+
+<div class="form-group">
+
+<label>
+
+<i class="fa-solid fa-church"></i>
+
+Church / Fellowship
+
+</label>
+
+<input
+type="text"
+name="church"
+placeholder="Optional">
+
+</div>
+
+
+<!-- Message -->
+
+<div class="form-group">
+
+<label>
+
+<i class="fa-solid fa-comment"></i>
+
+Message / Additional Information
+
+</label>
+
+<textarea
+name="message"
+placeholder="Tell us anything you would like us to know..."></textarea>
+
+</div>
+
+
+<!-- Terms -->
+
+<div class="terms">
+
+<input
+type="checkbox"
+id="agreement"
 required>
 
+<label for="agreement">
 
-<button type="submit">
+I confirm that the information I have provided
+is correct and I would like to register as a
+member of the Biblical Empowerment Program.
 
-<i class="fa-solid fa-paper-plane"></i>
-Submit Registration
+</label>
+
+</div>
+
+
+<!-- Submit -->
+
+<button
+type="submit"
+class="submit-btn">
+
+<i class="fa-solid fa-user-plus"></i>
+
+Submit B.E.P. Member Registration
 
 </button>
+
+
+<!-- Success -->
+
+<div
+class="success-message"
+id="successMessage">
+
+<i class="fa-solid fa-circle-check"></i>
+
+<strong>Registration form submitted.</strong>
+
+<p>
+Thank you for your interest in the Biblical
+Empowerment Program. We will contact you using
+the details you provided.
+</p>
+
+</div>
+
 
 </form>
 
 </div>
 
+</div>
 
-<div class="form-box success"
-id="successBox">
+</section>
 
-<h2>
-Registration Successful! 🙏
+
+<!-- =========================
+     CONTACT US
+========================= -->
+
+<section
+class="contact-section"
+id="contact">
+
+
+<div class="container">
+
+
+<h2 class="section-title">
+
+<i class="fa-solid fa-address-book"></i>
+
+Contact Us
+
 </h2>
 
-<p>
-Thank you for registering with the Biblical Empowerment Program.
-We look forward to having you with us as we learn, grow and become
-empowered through the Word of God.
+
+<p class="section-subtitle">
+
+For registration, questions, session information
+or general enquiries, please contact us.
+
 </p>
 
-<a href="index.html">
-Return to B.E.P. Website
-</a>
 
-</div>
-
-</div>
+<div class="cards">
 
 
-<footer>
+<!-- Omega -->
 
-<div class="footer-logo">
-B.E.P. <span>ONLINE PROGRAM</span>
-</div>
+<div class="contact-card">
 
-<p>
-Building the Church of Christ
+<i
+class="fa-brands fa-whatsapp"
+style="font-size:35px;color:#25D366;">
+</i>
+
+<h3>Omega</h3>
+
+<p class="phone">
+062 350 8689
 </p>
 
-<div class="footer-links">
-
-<a href="index.html">Home</a>
-<a href="register.html">Register</a>
-<a href="quiz.html">Quiz</a>
-<a href="index.html#contact">Contact</a>
-
-</div>
-
-<div class="footer-social">
-
-<a href="https://wa.me/27740386671"
-target="_blank">
+<a
+href="https://wa.me/27623508689"
+target="_blank"
+class="btn btn-green">
 
 <i class="fa-brands fa-whatsapp"></i>
 
+WhatsApp Omega
+
 </a>
 
-<a href="https://facebook.com/groups/1421853356307383/"
-target="_blank">
+</div>
+
+
+<!-- Bro KB -->
+
+<div class="contact-card">
+
+<i
+class="fa-brands fa-whatsapp"
+style="font-size:35px;color:#25D366;">
+</i>
+
+<h3>Bro. KB</h3>
+
+<p class="phone">
+083 282 2644
+</p>
+
+<a
+href="https://wa.me/27832822644"
+target="_blank"
+class="btn btn-green">
+
+<i class="fa-brands fa-whatsapp"></i>
+
+WhatsApp Bro. KB
+
+</a>
+
+</div>
+
+
+<!-- Facebook -->
+
+<div class="contact-card">
+
+<i
+class="fa-brands fa-facebook"
+style="font-size:35px;color:#1877F2;">
+</i>
+
+<h3>Facebook</h3>
+
+<p>
+Connect with B.E.P. on Facebook.
+</p>
+
+<a
+href="https://facebook.com/groups/1421853356307383/"
+target="_blank"
+class="btn btn-facebook">
 
 <i class="fa-brands fa-facebook"></i>
 
+Facebook Group
+
 </a>
 
-<a href="mailto:bep.onlineprog@gmail.com">
+</div>
+
+
+<!-- Email -->
+
+<div class="contact-card">
+
+<i
+class="fa-solid fa-envelope"
+style="font-size:35px;color:#555;">
+</i>
+
+<h3>Email</h3>
+
+<p>
+bep.onlineprog@gmail.com
+</p>
+
+<a
+href="mailto:bep.onlineprog@gmail.com"
+class="btn btn-email">
 
 <i class="fa-solid fa-envelope"></i>
 
+Email Us
+
 </a>
 
 </div>
 
-<div class="copyright">
-
-© 2026 Biblical Empowerment Program (B.E.P.)
-<br>
-All Rights Reserved.
 
 </div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+
+<div class="footer-grid">
+
+
+<!-- About -->
+
+<div>
+
+<h3>B.E.P.</h3>
+
+<p>
+Biblical Empowerment Program
+</p>
+
+<p>
+Building the Church of Christ through biblical
+teaching, discipleship and spiritual growth.
+</p>
+
+</div>
+
+
+<!-- Quick Links -->
+
+<div>
+
+<h3>Quick Links</h3>
+
+<p>
+
+<a href="index.html">
+
+<i class="fa-solid fa-house"></i>
+
+Home
+
+</a>
+
+</p>
+
+
+<p>
+
+<a href="index.html#about">
+
+<i class="fa-solid fa-circle-info"></i>
+
+About Us
+
+</a>
+
+</p>
+
+
+<p>
+
+<a href="register.html">
+
+<i class="fa-solid fa-user-plus"></i>
+
+Member Registration
+
+</a>
+
+</p>
+
+
+<p>
+
+<a href="quiz.html">
+
+<i class="fa-solid fa-circle-question"></i>
+
+Bible Quiz
+
+</a>
+
+</p>
+
+</div>
+
+
+<!-- Contact -->
+
+<div>
+
+<h3>Contact</h3>
+
+<p>
+
+<strong>Omega:</strong><br>
+
+<a href="tel:0623508689">
+
+062 350 8689
+
+</a>
+
+</p>
+
+<br>
+
+<p>
+
+<strong>Bro. KB:</strong><br>
+
+<a href="tel:0832822644">
+
+083 282 2644
+
+</a>
+
+</p>
+
+</div>
+
+
+<!-- Session -->
+
+<div>
+
+<h3>Online Session</h3>
+
+<p>
+
+<i class="fa-regular fa-calendar"></i>
+
+Every Thursday
+
+</p>
+
+<p>
+
+<i class="fa-regular fa-clock"></i>
+
+19:00 – 20:30
+
+</p>
+
+<p>
+
+<i class="fa-solid fa-video"></i>
+
+Microsoft Teams
+
+</p>
+
+<br>
+
+<a
+href="https://teams.live.com/meet/936085799236?p=b66LnDUAB2Xkx2uQYp&eventType=community"
+target="_blank"
+class="btn"
+style="background:#ffd700;color:#063970;">
+
+<i class="fa-brands fa-microsoft"></i>
+
+Join Teams
+
+</a>
+
+</div>
+
+
+</div>
+
+
+<div class="footer-bottom">
+
+<p>
+
+© <span id="year"></span>
+
+Biblical Empowerment Program (B.E.P.)
+
+</p>
+
+<p>
+
+Building the Church of Christ
+
+</p>
+
+</div>
+
 
 </footer>
 
 
+<!-- =========================
+     JAVASCRIPT
+========================= -->
+
 <script>
 
-document.getElementById("registrationForm")
-.addEventListener("submit",function(event){
 
-event.preventDefault();
+/* =========================
+   MOBILE MENU
+========================= */
 
-document.getElementById("registrationBox")
-.style.display="none";
+const menuBtn =
+document.getElementById("menuBtn");
 
-document.getElementById("successBox")
-.style.display="block";
+const navLinks =
+document.getElementById("navLinks");
 
-window.scrollTo({
-top:0,
-behavior:"smooth"
+
+menuBtn.addEventListener(
+"click",
+function() {
+
+    navLinks.classList.toggle("active");
+
+    const icon =
+        menuBtn.querySelector("i");
+
+    if (
+        navLinks.classList.contains("active")
+    ) {
+
+        icon.classList.remove("fa-bars");
+
+        icon.classList.add("fa-xmark");
+
+    } else {
+
+        icon.classList.remove("fa-xmark");
+
+        icon.classList.add("fa-bars");
+
+    }
+
 });
+
+
+/* Close menu when link clicked */
+
+document
+.querySelectorAll(".nav-links a")
+.forEach(function(link) {
+
+    link.addEventListener(
+    "click",
+    function() {
+
+        navLinks.classList.remove("active");
+
+        const icon =
+            menuBtn.querySelector("i");
+
+        icon.classList.remove("fa-xmark");
+
+        icon.classList.add("fa-bars");
+
+    });
+
+});
+
+
+/* =========================
+   CURRENT YEAR
+========================= */
+
+document.getElementById("year")
+.textContent =
+new Date().getFullYear();
+
+
+/* =========================
+   REGISTRATION FORM
+========================= */
+
+document
+.getElementById("registrationForm")
+.addEventListener(
+"submit",
+function(event) {
+
+    event.preventDefault();
+
+
+    const successMessage =
+        document.getElementById(
+            "successMessage"
+        );
+
+
+    successMessage.style.display =
+        "block";
+
+
+    successMessage.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+    });
+
+
+    /*
+       This currently displays a
+       confirmation message.
+
+       The form can later be connected
+       to Supabase, Google Sheets,
+       email, or another database.
+    */
 
 });
 
 </script>
 
+
 </body>
-</html>
+
+  </html>
