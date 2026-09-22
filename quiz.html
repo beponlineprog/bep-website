@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -9,7 +11,12 @@
 <link rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
+<!-- SUPABASE -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
 <style>
+
 *{
     box-sizing:border-box;
     margin:0;
@@ -23,7 +30,11 @@ body{
     line-height:1.6;
 }
 
-/* HEADER */
+
+/* =========================
+   HEADER
+========================= */
+
 header{
     background:#064a8a;
     color:white;
@@ -31,11 +42,11 @@ header{
     position:sticky;
     top:0;
     z-index:1000;
-    box-shadow:0 3px 10px rgba(0,0,0,0.15);
+    box-shadow:0 3px 10px rgba(0,0,0,.15);
 }
 
 .navbar{
-    max-width:1100px;
+    max-width:1200px;
     margin:auto;
     display:flex;
     align-items:center;
@@ -74,12 +85,21 @@ header{
     cursor:pointer;
 }
 
-/* HERO */
+
+/* =========================
+   HERO
+========================= */
+
 .quiz-hero{
-    background:linear-gradient(rgba(0,65,125,.9),rgba(0,65,125,.9));
+    background:
+    linear-gradient(
+        rgba(0,65,125,.92),
+        rgba(0,65,125,.92)
+    );
+
     color:white;
     text-align:center;
-    padding:35px 20px;
+    padding:40px 20px;
 }
 
 .quiz-hero h1{
@@ -91,14 +111,22 @@ header{
     font-size:16px;
 }
 
-/* MAIN */
+
+/* =========================
+   MAIN CONTAINER
+========================= */
+
 .container{
     max-width:950px;
     margin:30px auto;
     padding:0 15px;
 }
 
-/* QUIZ INFO */
+
+/* =========================
+   QUIZ INFO
+========================= */
+
 .quiz-info{
     background:white;
     border-radius:12px;
@@ -117,7 +145,15 @@ header{
     padding-left:20px;
 }
 
-/* TIMER */
+.quiz-info li{
+    margin-bottom:5px;
+}
+
+
+/* =========================
+   TIMER
+========================= */
+
 .timer-box{
     background:#064a8a;
     color:white;
@@ -154,12 +190,23 @@ header{
     margin-top:5px;
 }
 
-/* FORM */
+
+/* =========================
+   FORM
+========================= */
+
 .quiz-form{
     background:white;
     padding:25px;
     border-radius:12px;
     box-shadow:0 3px 12px rgba(0,0,0,.08);
+}
+
+.member-details-title{
+    color:#064a8a;
+    margin-bottom:18px;
+    border-bottom:2px solid #e4edf5;
+    padding-bottom:10px;
 }
 
 .form-group{
@@ -180,7 +227,31 @@ header{
     font-size:15px;
 }
 
-/* QUESTIONS */
+.form-group input:focus{
+    outline:none;
+    border-color:#064a8a;
+    box-shadow:0 0 0 2px rgba(6,74,138,.1);
+}
+
+
+/* =========================
+   SECTION DIVIDER
+========================= */
+
+.quiz-section-title{
+    background:#064a8a;
+    color:white;
+    padding:14px 16px;
+    border-radius:8px;
+    margin:25px 0 20px;
+    font-size:18px;
+}
+
+
+/* =========================
+   QUESTIONS
+========================= */
+
 .question{
     margin-bottom:25px;
     padding:20px;
@@ -211,7 +282,11 @@ header{
     margin-right:8px;
 }
 
-/* BUTTON */
+
+/* =========================
+   BUTTON
+========================= */
+
 .submit-btn{
     width:100%;
     background:#064a8a;
@@ -234,7 +309,27 @@ header{
     cursor:not-allowed;
 }
 
-/* RESULT */
+
+/* =========================
+   SAVING MESSAGE
+========================= */
+
+#savingMessage{
+    display:none;
+    margin-top:15px;
+    padding:12px;
+    background:#eef5fb;
+    color:#064a8a;
+    border-radius:7px;
+    text-align:center;
+    font-weight:bold;
+}
+
+
+/* =========================
+   RESULT
+========================= */
+
 #result{
     display:none;
     margin-top:25px;
@@ -275,7 +370,17 @@ header{
     margin-top:8px;
 }
 
-/* CONTACT */
+.database-status{
+    font-size:13px;
+    margin-top:15px;
+    color:#555;
+}
+
+
+/* =========================
+   CONTACT
+========================= */
+
 .contact-section{
     margin-top:35px;
     background:#064a8a;
@@ -307,36 +412,99 @@ header{
 }
 
 .contact-buttons a:nth-child(2){
-    background:#1877f2;
+    background:#198754;
 }
 
 .contact-buttons a:nth-child(3){
-    background:#555;
+    background:#1877f2;
 }
 
 .contact-buttons a:nth-child(4){
+    background:#555;
+}
+
+.contact-buttons a:nth-child(5){
     background:#6f42c1;
 }
 
-/* FOOTER */
+.contact-buttons a:hover{
+    opacity:.88;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
 footer{
     background:#032d52;
     color:white;
-    text-align:center;
-    padding:25px 15px;
+    padding:40px 20px 20px;
     margin-top:30px;
 }
 
-footer p{
+.footer-container{
+    max-width:1200px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:
+        repeat(4,1fr);
+    gap:30px;
+}
+
+.footer-column h3{
+    color:#ffd700;
+    margin-bottom:12px;
+}
+
+.footer-column p{
     font-size:14px;
-    margin:5px 0;
+    margin-bottom:7px;
+}
+
+.footer-column a{
+    display:block;
+    color:white;
+    text-decoration:none;
+    margin:7px 0;
+    font-size:14px;
+}
+
+.footer-column a:hover{
+    color:#ffd700;
+}
+
+.footer-bottom{
+    text-align:center;
+    border-top:1px solid rgba(255,255,255,.2);
+    margin-top:30px;
+    padding-top:20px;
+    font-size:13px;
 }
 
 .footer-gold{
     color:#ffd700;
 }
 
-/* MOBILE */
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:900px){
+
+    .nav-links{
+        gap:10px;
+    }
+
+    .footer-container{
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+}
+
+
 @media(max-width:768px){
 
     .nav-links{
@@ -374,858 +542,1347 @@ footer p{
     #timer{
         font-size:29px;
     }
+
+    .footer-container{
+        grid-template-columns:1fr;
+    }
+
 }
+
 </style>
+
 </head>
+
 
 <body>
 
-<!-- HEADER -->
+
+<!-- =========================
+     HEADER
+========================= -->
+
 <header>
-    <div class="navbar">
 
-        <div class="logo">
-            B.E.P. <span>QUIZ</span>
-        </div>
+<div class="navbar">
 
-        <div class="menu-btn" onclick="toggleMenu()">
-            <i class="fas fa-bars"></i>
-        </div>
+<div class="logo">
+    B.E.P. <span>QUIZ</span>
+</div>
 
-        <ul class="nav-links" id="navLinks">
-            <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
-            <li><a href="index.html#about"><i class="fas fa-book"></i> About</a></li>
-            <li><a href="index.html#vision"><i class="fas fa-eye"></i> Vision</a></li>
-            <li><a href="index.html#mission"><i class="fas fa-bullseye"></i> Mission</a></li>
-            <li><a href="index.html#sessions"><i class="fas fa-calendar"></i> Sessions</a></li>
-            <li><a href="register.html"><i class="fas fa-user-plus"></i> Register</a></li>
-            <li><a href="quiz.html"><i class="fas fa-question-circle"></i> Quiz</a></li>
-            <li><a href="index.html#contact"><i class="fas fa-phone"></i> Contact</a></li>
-        </ul>
 
-    </div>
-</header>
+<div class="menu-btn"
+     onclick="toggleMenu()">
 
-
-<!-- HERO -->
-<section class="quiz-hero">
-
-    <h1>
-        <i class="fas fa-book-open"></i>
-        B.E.P. Bible Knowledge Quiz
-    </h1>
-
-    <p>
-        Test your understanding of Scripture, biblical doctrine and Christian discipleship.
-    </p>
-
-</section>
-
-
-<div class="container">
-
-    <!-- QUIZ INFORMATION -->
-    <div class="quiz-info">
-
-        <h2>
-            <i class="fas fa-circle-info"></i>
-            Quiz Instructions
-        </h2>
-
-        <ul>
-            <li>There are <strong>20 multiple-choice questions.</strong></li>
-            <li>Each question carries <strong>3 marks.</strong></li>
-            <li>Total marks: <strong>60</strong>.</li>
-            <li>Pass mark: <strong>40/60</strong>.</li>
-            <li>All questions should be answered.</li>
-            <li>The quiz has a <strong>30-minute time limit.</strong></li>
-            <li>When the timer reaches zero, the quiz will be submitted automatically.</li>
-            <li>Unanswered questions at the end of the time limit will be marked incorrect.</li>
-        </ul>
-
-    </div>
-
-
-    <!-- TIMER -->
-    <div class="timer-box" id="timerBox">
-
-        <div class="timer-title">
-            <i class="fas fa-clock"></i>
-            TIME REMAINING
-        </div>
-
-        <div id="timer" aria-live="polite">
-            30:00
-        </div>
-
-        <div id="timerMessage">
-            The quiz will automatically submit when time expires.
-        </div>
-
-    </div>
-
-
-    <!-- QUIZ FORM -->
-    <form id="quizForm" class="quiz-form">
-
-        <!-- LEARNER DETAILS -->
-
-        <div class="form-group">
-
-            <label for="fullName">
-                <i class="fas fa-user"></i>
-                Full Name
-            </label>
-
-            <input
-                type="text"
-                id="fullName"
-                name="fullName"
-                placeholder="Enter your full name"
-                required
-            >
-
-        </div>
-
-
-        <div class="form-group">
-
-            <label for="email">
-                <i class="fas fa-envelope"></i>
-                Email Address
-            </label>
-
-            <input
-                type="email"
-                id="email"
-                name="email"
-                placeholder="Enter your email address"
-                required
-            >
-
-        </div>
-
-
-        <!-- QUESTION 1 -->
-
-        <div class="question">
-
-            <h3>
-                1. According to Romans 4, what is Paul's main point concerning Abraham?
-            </h3>
-
-            <label class="option">
-                <input type="radio" name="q1" value="A">
-                A. Abraham was justified because he perfectly obeyed the Law.
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q1" value="B">
-                B. Abraham was counted righteous through faith.
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q1" value="C">
-                C. Abraham became righteous because of his wealth.
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q1" value="D">
-                D. Abraham was justified because of circumcision alone.
-            </label>
-
-        </div>
-
-
-        <!-- QUESTION 2 -->
-
-        <div class="question">
-
-            <h3>
-                2. In Exodus 19:5–6, Israel is described as what in God's covenant purpose?
-            </h3>
-
-            <label class="option">
-                <input type="radio" name="q2" value="A">
-                A. A nation that would never experience suffering.
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q2" value="B">
-                B. A kingdom of priests and a holy nation.
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q2" value="C">
-                C. A nation exempt from God's commands.
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q2" value="D">
-                D. A kingdom whose purpose was only political.
-            </label>
-
-        </div>
-
-
-        <!-- QUESTION 3 -->
-
-        <div class="question">
-
-            <h3>
-                3. Jesus' teaching in Mark 12:29–31 combines which two Old Testament commands?
-            </h3>
-
-            <label class="option">
-                <input type="radio" name="q3" value="A">
-                A. Sabbath observance and sacrifice.
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q3" value="B">
-                B. Love for God and love for one's neighbour.
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q3" value="C">
-                C. Tithing and fasting.
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q3" value="D">
-                D. Circumcision and dietary laws.
-            </label>
-
-        </div>
-
-
-        <!-- QUESTION 4 -->
-
-        <div class="question">
-
-            <h3>
-                4. What central theme is emphasized in Isaiah 53 concerning the Servant?
-            </h3>
-
-            <label class="option">
-                <input type="radio" name="q4" value="A">
-                A. The Servant gains political power over Israel.
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q4" value="B">
-                B. The Servant suffers on behalf of others.
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q4" value="C">
-                C. The Servant becomes wealthy through trade.
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q4" value="D">
-                D. The Servant avoids all human suffering.
-            </label>
-
-        </div>
-
-
-        <!-- QUESTION 5 -->
-
-        <div class="question">
-
-            <h3>
-                5. According to Jeremiah 31:31–34, what distinguishes the promised new covenant?
-            </h3>
-
-            <label class="option">
-                <input type="radio" name="q5" value="A">
-                A. God's law would be written on His people's hearts.
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q5" value="B">
-                B. The old covenant would simply be repeated without change.
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q5" value="C">
-                C. Israel would no longer need to know God.
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q5" value="D">
-                D. Forgiveness would no longer be necessary.
-            </label>
-
-        </div>
-
-
-        <!-- QUESTION 6 -->
-
-        <div class="question">
-
-            <h3>
-                6. Hebrews 7 uses Melchizedek to explain what about Christ's priesthood?
-            </h3>
-
-            <label class="option">
-                <input type="radio" name="q6" value="A">
-                A. Christ's priesthood was temporary.
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q6" value="B">
-                B. Christ has a permanent priesthood.
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q6" value="C">
-                C. Christ served only as a Levitical priest.
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q6" value="D">
-                D. Christ needed another priest to represent Him.
-            </label>
-
-        </div>
-
-
-        <!-- QUESTION 7 -->
-
-        <div class="question">
-
-            <h3>
-                7. In Daniel 7:13–14, what is given to the “Son of Man”?
-            </h3>
-
-            <label class="option">
-                <input type="radio" name="q7" value="A">
-                A. Only authority over Jerusalem.
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q7" value="B">
-                B. Everlasting dominion over peoples, nations and languages.
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q7" value="C">
-                C. Authority that ends after one generation.
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q7" value="D">
-                D. Authority limited to the temple.
-            </label>
-
-        </div>
-
-
-        <!-- QUESTION 8 -->
-
-        <div class="question">
-
-            <h3>
-                8. In Matthew 5:17–20, how does Jesus describe His relationship to the Law and the Prophets?
-            </h3>
-
-            <label class="option">
-                <input type="radio" name="q8" value="A">
-                A. He came to fulfill them.
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q8" value="B">
-                B. He came to abolish every biblical command.
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q8" value="C">
-                C. He taught that righteousness was unnecessary.
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q8" value="D">
-                D. He rejected the Old Testament completely.
-            </label>
-
-        </div>
-
-
-        <!-- QUESTION 9 -->
-
-        <div class="question">
-
-            <h3>
-                9. What does Jesus' “vine and branches” teaching in John 15 emphasize?
-            </h3>
-
-            <label class="option">
-                <input type="radio" name="q9" value="A">
-                A. The necessity of abiding in Christ.
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q9" value="B">
-                B. Independence from Christ.
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q9" value="C">
-                C. Material wealth as the source of fruitfulness.
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q9" value="D">
-                D. Religious status as the source of spiritual life.
-            </label>
-
-        </div>
-
-
-        <!-- QUESTION 10 -->
-
-        <div class="question">
-
-            <h3>
-                10. According to Romans 6, what does union with Christ's death and resurrection signify for believers?
-            </h3>
-
-            <label class="option">
-                <input type="radio" name="q10" value="A">
-                A. Permission to continue living under the dominion of sin.
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q10" value="B">
-                B. A new life in which believers are no longer to live as slaves to sin.
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q10" value="C">
-                C. Freedom from all responsibility toward God.
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q10" value="D">
-                D. A promise that believers will never face temptation.
-            </label>
-
-                    </div>
-
-                <!-- QUESTION 11 -->
-
-        <div class="question">
-
-            <h3>
-                11. According to Romans 8:15–17, what does the Spirit enable believers to cry?
-            </h3>
-
-            <label class="option">
-                <input type="radio" name="q11" value="A">
-                A. “Lord of armies”
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q11" value="B">
-                B. “Abba, Father”
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q11" value="C">
-                C. “King of Israel”
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q11" value="D">
-                D. “Teacher of the nations”
-            </label>
-
-        </div>
-
-
-        <!-- QUESTION 12 -->
-
-        <div class="question">
-
-            <h3>
-                12. What does Paul's teaching in 1 Corinthians 12 imply about spiritual gifts?
-            </h3>
-
-            <label class="option">
-                <input type="radio" name="q12" value="A">
-                A. One gift makes a believer more valuable than another.
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q12" value="B">
-                B. Different gifts are given by the Spirit for the functioning of one body.
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q12" value="C">
-                C. Spiritual gifts eliminate the need for other believers.
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q12" value="D">
-                D. Every Christian must have exactly the same gift.
-            </label>
-
-        </div>
-
-
-        <!-- QUESTION 13 -->
-
-        <div class="question">
-
-            <h3>
-                13. What is Paul's argument in Galatians 2:16 regarding justification?
-            </h3>
-
-            <label class="option">
-                <input type="radio" name="q13" value="A">
-                A. People are justified by observing the Law perfectly.
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q13" value="B">
-                B. A person is justified through faith in Jesus Christ, not by works of the law.
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q13" value="C">
-                C. Justification depends on social position.
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q13" value="D">
-                D. Faith has no relationship to justification.
-            </label>
-
-        </div>
-
-
-        <!-- QUESTION 14 -->
-
-        <div class="question">
-
-            <h3>
-                14. How should Ephesians 2:8–10 be understood as a whole?
-            </h3>
-
-            <label class="option">
-                <input type="radio" name="q14" value="A">
-                A. Salvation is earned through good works.
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q14" value="B">
-                B. Grace is unnecessary if someone does enough good deeds.
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q14" value="C">
-                C. Salvation is by grace through faith, and believers are created for good works.
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q14" value="D">
-                D. Good works replace faith completely.
-            </label>
-
-        </div>
-
-
-        <!-- QUESTION 15 -->
-
-        <div class="question">
-
-            <h3>
-                15. What central example does Philippians 2:5–11 present?
-            </h3>
-
-            <label class="option">
-                <input type="radio" name="q15" value="A">
-                A. Christ's pursuit of earthly political authority.
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q15" value="B">
-                B. Christ's humility, obedience and subsequent exaltation.
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q15" value="C">
-                C. The superiority of human achievement.
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q15" value="D">
-                D. The importance of seeking personal recognition.
-            </label>
-
-        </div>
-
-
-        <!-- QUESTION 16 -->
-
-        <div class="question">
-
-            <h3>
-                16. What does Colossians 1:15–20 emphasize about Christ?
-            </h3>
-
-            <label class="option">
-                <input type="radio" name="q16" value="A">
-                A. Christ is one created being among many equal beings.
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q16" value="B">
-                B. Christ has supremacy over creation and the church.
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q16" value="C">
-                C. Christ's authority applies only to Israel.
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q16" value="D">
-                D. Christ's work concerns only moral teaching.
-            </label>
-
-        </div>
-
-
-        <!-- QUESTION 17 -->
-
-        <div class="question">
-
-            <h3>
-                17. According to Hebrews 4:14–16, why can believers approach God's throne with confidence?
-            </h3>
-
-            <label class="option">
-                <input type="radio" name="q17" value="A">
-                A. Because believers never experience temptation.
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q17" value="B">
-                B. Because Jesus is the great High Priest who sympathizes with human weakness.
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q17" value="C">
-                C. Because human righteousness is sufficient.
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q17" value="D">
-                D. Because God's judgment no longer exists.
-            </label>
-
-        </div>
-
-
-        <!-- QUESTION 18 -->
-
-        <div class="question">
-
-            <h3>
-                18. What point does James make in James 2 concerning faith?
-            </h3>
-
-            <label class="option">
-                <input type="radio" name="q18" value="A">
-                A. Genuine faith never affects behaviour.
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q18" value="B">
-                B. Faith without corresponding action is dead.
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q18" value="C">
-                C. Good works are completely unrelated to faith.
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q18" value="D">
-                D. Faith should be kept entirely private.
-            </label>
-
-        </div>
-
-
-        <!-- QUESTION 19 -->
-
-        <div class="question">
-
-            <h3>
-                19. According to 1 Peter 2:9, believers are described as what?
-            </h3>
-
-            <label class="option">
-                <input type="radio" name="q19" value="A">
-                A. A group whose purpose is only personal prosperity.
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q19" value="B">
-                B. A chosen people, royal priesthood and holy nation called to declare God's praises.
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q19" value="C">
-                C. People without a spiritual calling.
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q19" value="D">
-                D. A community separated from all responsibility toward others.
-            </label>
-
-        </div>
-
-
-        <!-- QUESTION 20 -->
-
-        <div class="question">
-
-            <h3>
-                20. What is the central promise described in Revelation 21:1–4?
-            </h3>
-
-            <label class="option">
-                <input type="radio" name="q20" value="A">
-                A. The present world will continue forever unchanged.
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q20" value="B">
-                B. God will dwell with His people in the new creation, and death and suffering will be no more.
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q20" value="C">
-                C. God's people will return permanently to the old covenant system.
-            </label>
-
-            <label class="option">
-                <input type="radio" name="q20" value="D">
-                D. Humanity will become independent from God.
-            </label>
-
-        </div>
-
-
-        <!-- SUBMIT -->
-        <button
-            type="submit"
-            class="submit-btn"
-            id="submitBtn">
-
-            <i class="fas fa-paper-plane"></i>
-            Submit Quiz
-
-        </button>
-
-
-        <!-- RESULT -->
-        <div id="result">
-
-            <h2>
-                <i class="fas fa-square-poll-vertical"></i>
-                Quiz Result
-            </h2>
-
-            <p id="learnerResult"></p>
-
-            <div class="score" id="score"></div>
-
-            <p id="percentage"></p>
-
-            <p id="status"></p>
-
-            <p id="expiredMessage" class="expired"></p>
-
-        </div>
-
-    </form>
-
-
-    <!-- CONTACT -->
-    <section class="contact-section" id="contact">
-
-        <h2>
-            <i class="fas fa-headset"></i>
-            Contact B.E.P.
-        </h2>
-
-        <p>
-            Have questions about the Biblical Empowerment Program?
-            Contact us or join one of our Thursday sessions.
-        </p>
-
-        <div class="contact-buttons">
-
-            <a href="https://wa.me/27623508689" target="_blank">
-                <i class="fab fa-whatsapp"></i>
-                Omega
-            </a>
-
-            <a href="https://facebook.com/groups/1421853356307383/"
-               target="_blank">
-                <i class="fab fa-facebook"></i>
-                Facebook
-            </a>
-
-            <a href="mailto:bep.onlineprog@gmail.com">
-                <i class="fas fa-envelope"></i>
-                Email
-            </a>
-
-            <a href="https://teams.live.com/meet/936085799236?p=b66LnDUAB2Xkx2uQYp&eventType=community"
-               target="_blank">
-                <i class="fab fa-microsoft"></i>
-                Microsoft Teams
-            </a>
-
-        </div>
-
-    </section>
+    <i class="fas fa-bars"></i>
 
 </div>
 
 
-<!-- FOOTER -->
+<ul class="nav-links" id="navLinks">
+
+<li>
+<a href="index.html">
+<i class="fas fa-home"></i>
+Home
+</a>
+</li>
+
+<li>
+<a href="index.html#about">
+<i class="fas fa-book"></i>
+About
+</a>
+</li>
+
+<li>
+<a href="index.html#vision">
+<i class="fas fa-eye"></i>
+Vision
+</a>
+</li>
+
+<li>
+<a href="index.html#mission">
+<i class="fas fa-bullseye"></i>
+Mission
+</a>
+</li>
+
+<li>
+<a href="index.html#sessions">
+<i class="fas fa-calendar"></i>
+Sessions
+</a>
+</li>
+
+<li>
+<a href="register.html">
+<i class="fas fa-user-plus"></i>
+B.E.P. Member
+</a>
+</li>
+
+<li>
+<a href="quiz.html">
+<i class="fas fa-question-circle"></i>
+Quiz
+</a>
+</li>
+
+<li>
+<a href="index.html#contact">
+<i class="fas fa-phone"></i>
+Contact
+</a>
+</li>
+
+</ul>
+
+</div>
+
+</header>
+
+
+
+<!-- =========================
+     HERO
+========================= -->
+
+<section class="quiz-hero">
+
+<h1>
+<i class="fas fa-book-open"></i>
+B.E.P. Bible Knowledge Quiz
+</h1>
+
+<p>
+Test your understanding of Scripture, biblical doctrine and Christian discipleship.
+</p>
+
+</section>
+
+
+
+<div class="container">
+
+
+<!-- =========================
+     QUIZ INFORMATION
+========================= -->
+
+<div class="quiz-info">
+
+<h2>
+<i class="fas fa-circle-info"></i>
+Quiz Instructions
+</h2>
+
+<ul>
+
+<li>
+There are
+<strong>20 multiple-choice questions.</strong>
+</li>
+
+<li>
+Each question carries
+<strong>3 marks.</strong>
+</li>
+
+<li>
+Total marks:
+<strong>60</strong>.
+</li>
+
+<li>
+Pass mark:
+<strong>40/60</strong>.
+</li>
+
+<li>
+All questions should be answered.
+</li>
+
+<li>
+The quiz has a
+<strong>30-minute time limit.</strong>
+</li>
+
+<li>
+When the timer reaches zero,
+the quiz will be submitted automatically.
+</li>
+
+<li>
+Unanswered questions at the end of the time limit
+will be marked incorrect.
+</li>
+
+</ul>
+
+</div>
+
+
+
+<!-- =========================
+     TIMER
+========================= -->
+
+<div class="timer-box" id="timerBox">
+
+<div class="timer-title">
+
+<i class="fas fa-clock"></i>
+
+TIME REMAINING
+
+</div>
+
+
+<div id="timer" aria-live="polite">
+
+30:00
+
+</div>
+
+
+<div id="timerMessage">
+
+The quiz will automatically submit when time expires.
+
+</div>
+
+</div>
+
+
+
+<!-- =========================
+     QUIZ FORM
+========================= -->
+
+<form id="quizForm" class="quiz-form">
+
+
+<!-- =========================
+     MEMBER DETAILS
+========================= -->
+
+<h2 class="member-details-title">
+
+<i class="fas fa-user-circle"></i>
+
+B.E.P. Member Details
+
+</h2>
+
+
+<div class="form-group">
+
+<label for="fullName">
+
+<i class="fas fa-user"></i>
+
+Full Name
+
+</label>
+
+<input
+type="text"
+id="fullName"
+name="fullName"
+placeholder="Enter your full name"
+required
+>
+
+</div>
+
+
+
+<div class="form-group">
+
+<label for="email">
+
+<i class="fas fa-envelope"></i>
+
+Email Address
+
+</label>
+
+<input
+type="email"
+id="email"
+name="email"
+placeholder="Enter your email address"
+required
+>
+
+</div>
+
+
+
+<div class="form-group">
+
+<label for="phone">
+
+<i class="fas fa-phone"></i>
+
+Phone / WhatsApp Number
+
+</label>
+
+<input
+type="tel"
+id="phone"
+name="phone"
+placeholder="Enter your phone number"
+required
+>
+
+</div>
+
+
+
+<div class="form-group">
+
+<label for="location">
+
+<i class="fas fa-location-dot"></i>
+
+Location
+
+</label>
+
+<input
+type="text"
+id="location"
+name="location"
+placeholder="Enter your town/city"
+required
+>
+
+</div>
+
+
+
+<!-- =========================
+     PART 1
+========================= -->
+
+<div class="quiz-section-title">
+
+<i class="fas fa-layer-group"></i>
+
+Part 1 — Biblical Foundations
+
+</div>
+
+
+
+<!-- QUESTION 1 -->
+
+<div class="question">
+
+<h3>
+1. According to Romans 4, what is Paul's main point concerning Abraham?
+</h3>
+
+<label class="option">
+<input type="radio" name="q1" value="A">
+A. Abraham was justified because he perfectly obeyed the Law.
+</label>
+
+<label class="option">
+<input type="radio" name="q1" value="B">
+B. Abraham was counted righteous through faith.
+</label>
+
+<label class="option">
+<input type="radio" name="q1" value="C">
+C. Abraham became righteous because of his wealth.
+</label>
+
+<label class="option">
+<input type="radio" name="q1" value="D">
+D. Abraham was justified because of circumcision alone.
+</label>
+
+</div>
+
+
+
+<!-- QUESTION 2 -->
+
+<div class="question">
+
+<h3>
+2. In Exodus 19:5–6, Israel is described as what in God's covenant purpose?
+</h3>
+
+<label class="option">
+<input type="radio" name="q2" value="A">
+A. A nation that would never experience suffering.
+</label>
+
+<label class="option">
+<input type="radio" name="q2" value="B">
+B. A kingdom of priests and a holy nation.
+</label>
+
+<label class="option">
+<input type="radio" name="q2" value="C">
+C. A nation exempt from God's commands.
+</label>
+
+<label class="option">
+<input type="radio" name="q2" value="D">
+D. A kingdom whose purpose was only political.
+</label>
+
+</div>
+
+
+
+<!-- QUESTION 3 -->
+
+<div class="question">
+
+<h3>
+3. Jesus' teaching in Mark 12:29–31 combines which two Old Testament commands?
+</h3>
+
+<label class="option">
+<input type="radio" name="q3" value="A">
+A. Sabbath observance and sacrifice.
+</label>
+
+<label class="option">
+<input type="radio" name="q3" value="B">
+B. Love for God and love for one's neighbour.
+</label>
+
+<label class="option">
+<input type="radio" name="q3" value="C">
+C. Tithing and fasting.
+</label>
+
+<label class="option">
+<input type="radio" name="q3" value="D">
+D. Circumcision and dietary laws.
+</label>
+
+</div>
+
+
+
+<!-- QUESTION 4 -->
+
+<div class="question">
+
+<h3>
+4. What central theme is emphasized in Isaiah 53 concerning the Servant?
+</h3>
+
+<label class="option">
+<input type="radio" name="q4" value="A">
+A. The Servant gains political power over Israel.
+</label>
+
+<label class="option">
+<input type="radio" name="q4" value="B">
+B. The Servant suffers on behalf of others.
+</label>
+
+<label class="option">
+<input type="radio" name="q4" value="C">
+C. The Servant becomes wealthy through trade.
+</label>
+
+<label class="option">
+<input type="radio" name="q4" value="D">
+D. The Servant avoids all human suffering.
+</label>
+
+</div>
+
+
+
+<!-- QUESTION 5 -->
+
+<div class="question">
+
+<h3>
+5. According to Jeremiah 31:31–34, what distinguishes the promised new covenant?
+</h3>
+
+<label class="option">
+<input type="radio" name="q5" value="A">
+A. God's law would be written on His people's hearts.
+</label>
+
+<label class="option">
+<input type="radio" name="q5" value="B">
+B. The old covenant would simply be repeated without change.
+</label>
+
+<label class="option">
+<input type="radio" name="q5" value="C">
+C. Israel would no longer need to know God.
+</label>
+
+<label class="option">
+<input type="radio" name="q5" value="D">
+D. Forgiveness would no longer be necessary.
+</label>
+
+</div>
+
+
+
+<!-- QUESTION 6 -->
+
+<div class="question">
+
+<h3>
+6. Hebrews 7 uses Melchizedek to explain what about Christ's priesthood?
+</h3>
+
+<label class="option">
+<input type="radio" name="q6" value="A">
+A. Christ's priesthood was temporary.
+</label>
+
+<label class="option">
+<input type="radio" name="q6" value="B">
+B. Christ has a permanent priesthood.
+</label>
+
+<label class="option">
+<input type="radio" name="q6" value="C">
+C. Christ served only as a Levitical priest.
+</label>
+
+<label class="option">
+<input type="radio" name="q6" value="D">
+D. Christ needed another priest to represent Him.
+</label>
+
+</div>
+
+
+
+<!-- QUESTION 7 -->
+
+<div class="question">
+
+<h3>
+7. In Daniel 7:13–14, what is given to the “Son of Man”?
+</h3>
+
+<label class="option">
+<input type="radio" name="q7" value="A">
+A. Only authority over Jerusalem.
+</label>
+
+<label class="option">
+<input type="radio" name="q7" value="B">
+B. Everlasting dominion over peoples, nations and languages.
+</label>
+
+<label class="option">
+<input type="radio" name="q7" value="C">
+C. Authority that ends after one generation.
+</label>
+
+<label class="option">
+<input type="radio" name="q7" value="D">
+D. Authority limited to the temple.
+</label>
+
+</div>
+
+
+
+<!-- QUESTION 8 -->
+
+<div class="question">
+
+<h3>
+8. In Matthew 5:17–20, how does Jesus describe His relationship to the Law and the Prophets?
+</h3>
+
+<label class="option">
+<input type="radio" name="q8" value="A">
+A. He came to fulfill them.
+</label>
+
+<label class="option">
+<input type="radio" name="q8" value="B">
+B. He came to abolish every biblical command.
+</label>
+
+<label class="option">
+<input type="radio" name="q8" value="C">
+C. He taught that righteousness was unnecessary.
+</label>
+
+<label class="option">
+<input type="radio" name="q8" value="D">
+D. He rejected the Old Testament completely.
+</label>
+
+</div>
+
+
+
+<!-- QUESTION 9 -->
+
+<div class="question">
+
+<h3>
+9. What does Jesus' “vine and branches” teaching in John 15 emphasize?
+</h3>
+
+<label class="option">
+<input type="radio" name="q9" value="A">
+A. The necessity of abiding in Christ.
+</label>
+
+<label class="option">
+<input type="radio" name="q9" value="B">
+B. Independence from Christ.
+</label>
+
+<label class="option">
+<input type="radio" name="q9" value="C">
+C. Material wealth as the source of fruitfulness.
+</label>
+
+<label class="option">
+<input type="radio" name="q9" value="D">
+D. Religious status as the source of spiritual life.
+</label>
+
+</div>
+
+
+
+<!-- QUESTION 10 -->
+
+<div class="question">
+
+<h3>
+10. According to Romans 6, what does union with Christ's death and resurrection signify for believers?
+</h3>
+
+<label class="option">
+<input type="radio" name="q10" value="A">
+A. Permission to continue living under the dominion of sin.
+</label>
+
+<label class="option">
+<input type="radio" name="q10" value="B">
+B. A new life in which believers are no longer to live as slaves to sin.
+</label>
+
+<label class="option">
+<input type="radio" name="q10" value="C">
+C. Freedom from all responsibility toward God.
+</label>
+
+<label class="option">
+<input type="radio" name="q10" value="D">
+D. A promise that believers will never face temptation.
+</label>
+
+</div>
+
+
+
+<!-- =========================
+     PART 2
+========================= -->
+
+<div class="quiz-section-title">
+
+<i class="fas fa-book-bible"></i>
+
+Part 2 — Christian Doctrine & Discipleship
+
+</div>
+
+
+
+<!-- QUESTION 11 -->
+
+<div class="question">
+
+<h3>
+11. According to Romans 8:15–17, what does the Spirit enable believers to cry?
+</h3>
+
+<label class="option">
+<input type="radio" name="q11" value="A">
+A. “Lord of armies”
+</label>
+
+<label class="option">
+<input type="radio" name="q11" value="B">
+B. “Abba, Father”
+</label>
+
+<label class="option">
+<input type="radio" name="q11" value="C">
+C. “King of Israel”
+</label>
+
+<label class="option">
+<input type="radio" name="q11" value="D">
+D. “Teacher of the nations”
+</label>
+
+</div>
+
+
+
+<!-- QUESTION 12 -->
+
+<div class="question">
+
+<h3>
+12. What does Paul's teaching in 1 Corinthians 12 imply about spiritual gifts?
+</h3>
+
+<label class="option">
+<input type="radio" name="q12" value="A">
+A. One gift makes a believer more valuable than another.
+</label>
+
+<label class="option">
+<input type="radio" name="q12" value="B">
+B. Different gifts are given by the Spirit for the functioning of one body.
+</label>
+
+<label class="option">
+<input type="radio" name="q12" value="C">
+C. Spiritual gifts eliminate the need for other believers.
+</label>
+
+<label class="option">
+<input type="radio" name="q12" value="D">
+D. Every Christian must have exactly the same gift.
+</label>
+
+</div>
+
+
+
+<!-- QUESTION 13 -->
+
+<div class="question">
+
+<h3>
+13. What is Paul's argument in Galatians 2:16 regarding justification?
+</h3>
+
+<label class="option">
+<input type="radio" name="q13" value="A">
+A. People are justified by observing the Law perfectly.
+</label>
+
+<label class="option">
+<input type="radio" name="q13" value="B">
+B. A person is justified through faith in Jesus Christ, not by works of the law.
+</label>
+
+<label class="option">
+<input type="radio" name="q13" value="C">
+C. Justification depends on social position.
+</label>
+
+<label class="option">
+<input type="radio" name="q13" value="D">
+D. Faith has no relationship to justification.
+</label>
+
+</div>
+
+
+
+<!-- QUESTION 14 -->
+
+<div class="question">
+
+<h3>
+14. How should Ephesians 2:8–10 be understood as a whole?
+</h3>
+
+<label class="option">
+<input type="radio" name="q14" value="A">
+A. Salvation is earned through good works.
+</label>
+
+<label class="option">
+<input type="radio" name="q14" value="B">
+B. Grace is unnecessary if someone does enough good deeds.
+</label>
+
+<label class="option">
+<input type="radio" name="q14" value="C">
+C. Salvation is by grace through faith, and believers are created for good works.
+</label>
+
+<label class="option">
+<input type="radio" name="q14" value="D">
+D. Good works replace faith completely.
+</label>
+
+</div>
+
+
+
+<!-- QUESTION 15 -->
+
+<div class="question">
+
+<h3>
+15. What central example does Philippians 2:5–11 present?
+</h3>
+
+<label class="option">
+<input type="radio" name="q15" value="A">
+A. Christ's pursuit of earthly political authority.
+</label>
+
+<label class="option">
+<input type="radio" name="q15" value="B">
+B. Christ's humility, obedience and subsequent exaltation.
+</label>
+
+<label class="option">
+<input type="radio" name="q15" value="C">
+C. The superiority of human achievement.
+</label>
+
+<label class="option">
+<input type="radio" name="q15" value="D">
+D. The importance of seeking personal recognition.
+</label>
+
+</div>
+
+
+
+<!-- QUESTION 16 -->
+
+<div class="question">
+
+<h3>
+16. What does Colossians 1:15–20 emphasize about Christ?
+</h3>
+
+<label class="option">
+<input type="radio" name="q16" value="A">
+A. Christ is one created being among many equal beings.
+</label>
+
+<label class="option">
+<input type="radio" name="q16" value="B">
+B. Christ has supremacy over creation and the church.
+</label>
+
+<label class="option">
+<input type="radio" name="q16" value="C">
+C. Christ's authority applies only to Israel.
+</label>
+
+<label class="option">
+<input type="radio" name="q16" value="D">
+D. Christ's work concerns only moral teaching.
+</label>
+
+</div>
+
+
+
+<!-- QUESTION 17 -->
+
+<div class="question">
+
+<h3>
+17. According to Hebrews 4:14–16, why can believers approach God's throne with confidence?
+</h3>
+
+<label class="option">
+<input type="radio" name="q17" value="A">
+A. Because believers never experience temptation.
+</label>
+
+<label class="option">
+<input type="radio" name="q17" value="B">
+B. Because Jesus is the great High Priest who sympathizes with human weakness.
+</label>
+
+<label class="option">
+<input type="radio" name="q17" value="C">
+C. Because human righteousness is sufficient.
+</label>
+
+<label class="option">
+<input type="radio" name="q17" value="D">
+D. Because God's judgment no longer exists.
+</label>
+
+</div>
+
+
+
+<!-- QUESTION 18 -->
+
+<div class="question">
+
+<h3>
+18. What point does James make in James 2 concerning faith?
+</h3>
+
+<label class="option">
+<input type="radio" name="q18" value="A">
+A. Genuine faith never affects behaviour.
+</label>
+
+<label class="option">
+<input type="radio" name="q18" value="B">
+B. Faith without corresponding action is dead.
+</label>
+
+<label class="option">
+<input type="radio" name="q18" value="C">
+C. Good works are completely unrelated to faith.
+</label>
+
+<label class="option">
+<input type="radio" name="q18" value="D">
+D. Faith should be kept entirely private.
+</label>
+
+</div>
+
+
+
+<!-- QUESTION 19 -->
+
+<div class="question">
+
+<h3>
+19. According to 1 Peter 2:9, believers are described as what?
+</h3>
+
+<label class="option">
+<input type="radio" name="q19" value="A">
+A. A group whose purpose is only personal prosperity.
+</label>
+
+<label class="option">
+<input type="radio" name="q19" value="B">
+B. A chosen people, royal priesthood and holy nation called to declare God's praises.
+</label>
+
+<label class="option">
+<input type="radio" name="q19" value="C">
+C. People without a spiritual calling.
+</label>
+
+<label class="option">
+<input type="radio" name="q19" value="D">
+D. A community separated from all responsibility toward others.
+</label>
+
+</div>
+
+
+
+<!-- QUESTION 20 -->
+
+<div class="question">
+
+<h3>
+20. What is the central promise described in Revelation 21:1–4?
+</h3>
+
+<label class="option">
+<input type="radio" name="q20" value="A">
+A. The present world will continue forever unchanged.
+</label>
+
+<label class="option">
+<input type="radio" name="q20" value="B">
+B. God will dwell with His people in the new creation, and death and suffering will be no more.
+</label>
+
+<label class="option">
+<input type="radio" name="q20" value="C">
+C. God's people will return permanently to the old covenant system.
+</label>
+
+<label class="option">
+<input type="radio" name="q20" value="D">
+D. Humanity will become independent from God.
+</label>
+
+</div>
+
+
+
+<!-- =========================
+     SUBMIT
+========================= -->
+
+<button
+type="submit"
+class="submit-btn"
+id="submitBtn">
+
+<i class="fas fa-paper-plane"></i>
+
+Submit Quiz
+
+</button>
+
+
+<div id="savingMessage">
+
+<i class="fas fa-spinner fa-spin"></i>
+
+Saving your B.E.P. quiz result...
+
+</div>
+
+
+
+<!-- =========================
+     RESULT
+========================= -->
+
+<div id="result">
+
+<h2>
+
+<i class="fas fa-square-poll-vertical"></i>
+
+Quiz Result
+
+</h2>
+
+
+<p id="learnerResult"></p>
+
+
+<div class="score"
+     id="score">
+</div>
+
+
+<p id="percentage"></p>
+
+
+<p id="status"></p>
+
+
+<p id="expiredMessage"
+   class="expired">
+</p>
+
+
+<p id="databaseStatus"
+   class="database-status">
+</p>
+
+</div>
+
+
+</form>
+
+
+
+<!-- =========================
+     CONTACT
+========================= -->
+
+<section class="contact-section"
+         id="contact">
+
+<h2>
+
+<i class="fas fa-headset"></i>
+
+Contact B.E.P.
+
+</h2>
+
+
+<p>
+
+Have questions about the Biblical Empowerment Program?
+
+Contact us or join one of our Thursday sessions.
+
+</p>
+
+
+<div class="contact-buttons">
+
+
+<a href="https://wa.me/27623508689"
+   target="_blank"
+   rel="noopener">
+
+<i class="fab fa-whatsapp"></i>
+
+Omega
+
+</a>
+
+
+<a href="https://wa.me/27832822644"
+   target="_blank"
+   rel="noopener">
+
+<i class="fab fa-whatsapp"></i>
+
+Bro. KB
+
+</a>
+
+
+<a href="https://facebook.com/groups/1421853356307383/"
+   target="_blank"
+   rel="noopener">
+
+<i class="fab fa-facebook"></i>
+
+Facebook
+
+</a>
+
+
+<a href="mailto:bep.onlineprog@gmail.com">
+
+<i class="fas fa-envelope"></i>
+
+Email
+
+</a>
+
+
+<a href="https://teams.live.com/meet/936085799236?p=b66LnDUAB2Xkx2uQYp&eventType=community"
+   target="_blank"
+   rel="noopener">
+
+<i class="fab fa-microsoft"></i>
+
+Microsoft Teams
+
+</a>
+
+
+</div>
+
+</section>
+
+
+</div>
+
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
 <footer>
 
-    <p>
-        <strong>Biblical Empowerment Program - B.E.P.</strong>
-    </p>
 
-    <p>
-        Building the Church of Christ
-    </p>
+<div class="footer-container">
 
-    <p>
-        <span class="footer-gold">
-            © <span id="year"></span> B.E.P.
-        </span>
-        All Rights Reserved.
-    </p>
+
+<!-- COLUMN 1 -->
+
+<div class="footer-column">
+
+<h3>B.E.P.</h3>
+
+<p>
+<strong>
+Biblical Empowerment Program
+</strong>
+</p>
+
+<p>
+Building the Church of Christ
+</p>
+
+<p>
+Growing believers through God's Word,
+discipleship and Christian fellowship.
+</p>
+
+</div>
+
+
+
+<!-- COLUMN 2 -->
+
+<div class="footer-column">
+
+<h3>Quick Links</h3>
+
+<a href="index.html">
+<i class="fas fa-home"></i>
+Home
+</a>
+
+<a href="index.html#about">
+<i class="fas fa-book"></i>
+About Us
+</a>
+
+<a href="index.html#sessions">
+<i class="fas fa-calendar"></i>
+Sessions
+</a>
+
+<a href="register.html">
+<i class="fas fa-user-plus"></i>
+B.E.P. Member
+</a>
+
+<a href="quiz.html">
+<i class="fas fa-question-circle"></i>
+Bible Quiz
+</a>
+
+</div>
+
+
+
+<!-- COLUMN 3 -->
+
+<div class="footer-column">
+
+<h3>Contact Us</h3>
+
+<a href="https://wa.me/27623508689"
+   target="_blank">
+
+<i class="fab fa-whatsapp"></i>
+Omega
+
+</a>
+
+<a href="https://wa.me/27832822644"
+   target="_blank">
+
+<i class="fab fa-whatsapp"></i>
+Bro. KB
+
+</a>
+
+<a href="mailto:bep.onlineprog@gmail.com">
+
+<i class="fas fa-envelope"></i>
+
+bep.onlineprog@gmail.com
+
+</a>
+
+</div>
+
+
+
+<!-- COLUMN 4 -->
+
+<div class="footer-column">
+
+<h3>Connect</h3>
+
+<a href="https://facebook.com/groups/1421853356307383/"
+   target="_blank">
+
+<i class="fab fa-facebook"></i>
+
+Facebook Group
+
+</a>
+
+<a href="https://teams.live.com/meet/936085799236?p=b66LnDUAB2Xkx2uQYp&eventType=community"
+   target="_blank">
+
+<i class="fab fa-microsoft"></i>
+
+Microsoft Teams
+
+</a>
+
+<p>
+Thursday Sessions
+</p>
+
+<p>
+7:00 PM – 8:30 PM
+</p>
+
+</div>
+
+
+</div>
+
+
+
+<div class="footer-bottom">
+
+<p>
+
+<span class="footer-gold">
+
+© <span id="year"></span> B.E.P.
+
+</span>
+
+All Rights Reserved.
+
+</p>
+
+</div>
+
 
 </footer>
 
 
+
+<!-- =========================
+     JAVASCRIPT
+========================= -->
+
 <script>
+
+
+/* =========================
+   SUPABASE CONNECTION
+========================= */
+
+const SUPABASE_URL =
+"https://rukusaellqqwthzibyib.supabase.co";
+
+
+const SUPABASE_PUBLISHABLE_KEY =
+"sb_publishable_Co8_MoJOV14tXBkSWyXFTA_ULn1WRa5";
+
+
+const supabaseClient =
+window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_PUBLISHABLE_KEY
+);
+
+
 
 /* =========================
    MOBILE MENU
@@ -1241,6 +1898,7 @@ function toggleMenu(){
 }
 
 
+
 /* =========================
    QUIZ SETTINGS
 ========================= */
@@ -1254,39 +1912,41 @@ const TOTAL_MARKS = 60;
 const PASS_MARK = 40;
 
 
+
 /* =========================
    ANSWER KEY
 ========================= */
 
 const correctAnswers = {
 
-    q1: "B",
-    q2: "B",
-    q3: "B",
-    q4: "B",
-    q5: "A",
-    q6: "B",
-    q7: "B",
-    q8: "A",
-    q9: "A",
-    q10: "B",
-    q11: "B",
-    q12: "B",
-    q13: "B",
-    q14: "C",
-    q15: "B",
-    q16: "B",
-    q17: "B",
-    q18: "B",
-    q19: "B",
-    q20: "B"
+    q1:"B",
+    q2:"B",
+    q3:"B",
+    q4:"B",
+    q5:"A",
+    q6:"B",
+    q7:"B",
+    q8:"A",
+    q9:"A",
+    q10:"B",
+
+    q11:"B",
+    q12:"B",
+    q13:"B",
+    q14:"C",
+    q15:"B",
+    q16:"B",
+    q17:"B",
+    q18:"B",
+    q19:"B",
+    q20:"B"
 
 };
 
 
+
 /* =========================
    TIMER
-   30 MINUTES
 ========================= */
 
 let timeLeft = 30 * 60;
@@ -1295,9 +1955,12 @@ let timerInterval;
 
 let quizSubmitted = false;
 
+let resultSaved = false;
+
+
 
 /* =========================
-   TIMER DISPLAY
+   UPDATE TIMER
 ========================= */
 
 function updateTimer(){
@@ -1305,13 +1968,20 @@ function updateTimer(){
     const minutes =
         Math.floor(timeLeft / 60);
 
+
     const seconds =
         timeLeft % 60;
 
-    const formattedSeconds =
-        seconds.toString().padStart(2, "0");
 
-    document.getElementById("timer").textContent =
+    const formattedSeconds =
+        seconds
+        .toString()
+        .padStart(2,"0");
+
+
+    document
+        .getElementById("timer")
+        .textContent =
         `${minutes}:${formattedSeconds}`;
 
 
@@ -1319,27 +1989,46 @@ function updateTimer(){
         document.getElementById("timerBox");
 
 
-    /* WARNING AT 10 MINUTES */
+    /* 10 MINUTE WARNING */
 
-    if(timeLeft <= 600 && timeLeft > 300){
+    if(
+        timeLeft <= 600 &&
+        timeLeft > 300
+    ){
 
-        timerBox.classList.add("timer-warning");
+        timerBox
+            .classList
+            .add("timer-warning");
 
-        document.getElementById("timerMessage").textContent =
+
+        document
+            .getElementById("timerMessage")
+            .textContent =
             "Time is running. Please continue with the quiz.";
 
     }
 
 
-    /* DANGER AT 5 MINUTES */
+    /* 5 MINUTE WARNING */
 
-    if(timeLeft <= 300 && timeLeft > 0){
+    if(
+        timeLeft <= 300 &&
+        timeLeft > 0
+    ){
 
-        timerBox.classList.remove("timer-warning");
+        timerBox
+            .classList
+            .remove("timer-warning");
 
-        timerBox.classList.add("timer-danger");
 
-        document.getElementById("timerMessage").textContent =
+        timerBox
+            .classList
+            .add("timer-danger");
+
+
+        document
+            .getElementById("timerMessage")
+            .textContent =
             "Less than 5 minutes remaining!";
 
     }
@@ -1351,13 +2040,21 @@ function updateTimer(){
 
         clearInterval(timerInterval);
 
-        document.getElementById("timer").textContent =
+
+        document
+            .getElementById("timer")
+            .textContent =
             "00:00";
 
-        document.getElementById("timerMessage").textContent =
+
+        document
+            .getElementById("timerMessage")
+            .textContent =
             "TIME EXPIRED — submitting your quiz...";
 
+
         autoSubmitQuiz();
+
 
         return;
 
@@ -1369,13 +2066,19 @@ function updateTimer(){
 }
 
 
+
 /* =========================
    START TIMER
 ========================= */
 
 updateTimer();
 
-timerInterval = setInterval(updateTimer, 1000);
+timerInterval =
+    setInterval(
+        updateTimer,
+        1000
+    );
+
 
 
 /* =========================
@@ -1385,14 +2088,19 @@ timerInterval = setInterval(updateTimer, 1000);
 function autoSubmitQuiz(){
 
     if(quizSubmitted){
+
         return;
+
     }
 
+
     quizSubmitted = true;
+
 
     calculateScore(true);
 
 }
+
 
 
 /* =========================
@@ -1400,92 +2108,168 @@ function autoSubmitQuiz(){
 ========================= */
 
 document
-.getElementById("quizForm")
-.addEventListener("submit", function(event){
+    .getElementById("quizForm")
+    .addEventListener(
+        "submit",
+        async function(event){
 
-    event.preventDefault();
-
-    if(quizSubmitted){
-        return;
-    }
+            event.preventDefault();
 
 
-    const fullName =
-        document.getElementById("fullName").value.trim();
+            if(quizSubmitted){
 
-    const email =
-        document.getElementById("email").value.trim();
+                return;
 
-
-    if(!fullName || !email){
-
-        alert("Please enter your full name and email address.");
-
-        return;
-
-    }
+            }
 
 
-    /* CHECK ALL QUESTIONS */
-
-    let unanswered = [];
-
-
-    for(let i = 1; i <= TOTAL_QUESTIONS; i++){
-
-        const selected =
-            document.querySelector(
-                `input[name="q${i}"]:checked`
-            );
+            const fullName =
+                document
+                .getElementById("fullName")
+                .value
+                .trim();
 
 
-        if(!selected){
+            const email =
+                document
+                .getElementById("email")
+                .value
+                .trim();
 
-            unanswered.push(i);
+
+            const phone =
+                document
+                .getElementById("phone")
+                .value
+                .trim();
+
+
+            const location =
+                document
+                .getElementById("location")
+                .value
+                .trim();
+
+
+            if(
+                !fullName ||
+                !email ||
+                !phone ||
+                !location
+            ){
+
+                alert(
+                    "Please complete all B.E.P. Member Details before submitting."
+                );
+
+                return;
+
+            }
+
+
+            /* CHECK ALL QUESTIONS */
+
+            let unanswered = [];
+
+
+            for(
+                let i = 1;
+                i <= TOTAL_QUESTIONS;
+                i++
+            ){
+
+                const selected =
+                    document.querySelector(
+                        `input[name="q${i}"]:checked`
+                    );
+
+
+                if(!selected){
+
+                    unanswered.push(i);
+
+                }
+
+            }
+
+
+            if(unanswered.length > 0){
+
+                alert(
+                    "Please answer all questions before submitting.\n\n" +
+                    "Unanswered questions: " +
+                    unanswered.join(", ")
+                );
+
+                return;
+
+            }
+
+
+            clearInterval(timerInterval);
+
+
+            quizSubmitted = true;
+
+
+            await calculateScore(false);
 
         }
+    );
 
-    }
-
-
-    if(unanswered.length > 0){
-
-        alert(
-            "Please answer all questions before submitting.\n\n" +
-            "Unanswered questions: " +
-            unanswered.join(", ")
-        );
-
-        return;
-
-    }
-
-
-    clearInterval(timerInterval);
-
-    quizSubmitted = true;
-
-    calculateScore(false);
-
-});
 
 
 /* =========================
    CALCULATE SCORE
 ========================= */
 
-function calculateScore(timeExpired){
+async function calculateScore(timeExpired){
 
     const fullName =
-        document.getElementById("fullName").value.trim();
+        document
+        .getElementById("fullName")
+        .value
+        .trim();
+
+
+    const email =
+        document
+        .getElementById("email")
+        .value
+        .trim();
+
+
+    const phone =
+        document
+        .getElementById("phone")
+        .value
+        .trim();
+
+
+    const location =
+        document
+        .getElementById("location")
+        .value
+        .trim();
 
 
     let score = 0;
 
     let answeredQuestions = 0;
 
+    let correctCount = 0;
 
-    for(let i = 1; i <= TOTAL_QUESTIONS; i++){
+
+
+    /* =========================
+       CHECK ANSWERS
+    ========================= */
+
+    for(
+        let i = 1;
+        i <= TOTAL_QUESTIONS;
+        i++
+    ){
 
         const selected =
             document.querySelector(
@@ -1497,18 +2281,28 @@ function calculateScore(timeExpired){
 
             answeredQuestions++;
 
+
             if(
                 selected.value ===
                 correctAnswers[`q${i}`]
             ){
 
-                score += MARKS_PER_QUESTION;
+                score +=
+                    MARKS_PER_QUESTION;
+
+                correctCount++;
 
             }
 
         }
 
     }
+
+
+
+    const unanswered =
+        TOTAL_QUESTIONS -
+        answeredQuestions;
 
 
     const percentage =
@@ -1521,87 +2315,297 @@ function calculateScore(timeExpired){
         score >= PASS_MARK;
 
 
-    /* DISPLAY RESULT */
+    const resultStatus =
+        passed
+        ? "PASS"
+        : "NOT PASSED";
 
-    document.getElementById("learnerResult").innerHTML =
-        `Well done, <strong>${escapeHTML(fullName)}</strong>!`;
 
 
-    document.getElementById("score").textContent =
+    /* =========================
+       DISPLAY RESULT
+    ========================= */
+
+    document
+        .getElementById("learnerResult")
+        .innerHTML =
+        `Well done, <strong>${escapeHTML(fullName || "B.E.P. Member")}</strong>!`;
+
+
+    document
+        .getElementById("score")
+        .textContent =
         `${score} / ${TOTAL_MARKS} Marks`;
 
 
-    document.getElementById("percentage").innerHTML =
+    document
+        .getElementById("percentage")
+        .innerHTML =
         `<strong>Percentage:</strong> ${percentage}%`;
 
 
     const status =
-        document.getElementById("status");
+        document
+        .getElementById("status");
 
 
     if(passed){
 
         status.innerHTML =
-            '<span class="pass">✓ PASS</span>';
+        '<span class="pass">✓ PASS</span>';
 
-    }else{
+    }
+    else{
 
         status.innerHTML =
-            '<span class="fail">✗ NOT YET PASSED</span>';
+        '<span class="fail">✗ NOT YET PASSED</span>';
 
     }
 
 
-    /* TIME EXPIRED MESSAGE */
+
+    /* =========================
+       TIME MESSAGE
+    ========================= */
 
     const expiredMessage =
-        document.getElementById("expiredMessage");
+        document
+        .getElementById("expiredMessage");
 
 
     if(timeExpired){
 
         expiredMessage.innerHTML =
-            `⏰ TIME EXPIRED — Your quiz was submitted automatically.
-             You answered ${answeredQuestions} of ${TOTAL_QUESTIONS} questions.`;
+        `⏰ TIME EXPIRED — Your quiz was submitted automatically.
+        You answered ${answeredQuestions}
+        of ${TOTAL_QUESTIONS} questions.`;
 
-    }else{
+    }
+    else{
 
         expiredMessage.textContent =
-            `You answered all ${TOTAL_QUESTIONS} questions.`;
+        `You answered all ${TOTAL_QUESTIONS} questions.`;
 
     }
 
 
-    /* SHOW RESULT */
+
+    /* =========================
+       SHOW RESULT
+    ========================= */
 
     const result =
-        document.getElementById("result");
+        document
+        .getElementById("result");
 
-    result.style.display = "block";
+
+    result.style.display =
+        "block";
 
 
-    /* DISABLE QUIZ */
+
+    /* =========================
+       DISABLE QUIZ
+    ========================= */
 
     document
         .querySelectorAll("#quizForm input")
-        .forEach(input => {
+        .forEach(
+            input => {
 
-            input.disabled = true;
+                input.disabled = true;
 
-        });
-
-
-    document.getElementById("submitBtn").disabled = true;
+            }
+        );
 
 
-    /* SCROLL TO RESULT */
+    document
+        .getElementById("submitBtn")
+        .disabled = true;
+
+
+
+    /* =========================
+       SAVE TO SUPABASE
+    ========================= */
+
+    await saveQuizResult({
+
+        fullName:
+            fullName || "Not Provided",
+
+        email:
+            email || "Not Provided",
+
+        phone:
+            phone || "Not Provided",
+
+        location:
+            location || "Not Provided",
+
+        score:
+            score,
+
+        correctCount:
+            correctCount,
+
+        unanswered:
+            unanswered,
+
+        resultStatus:
+            resultStatus
+
+    });
+
+
+
+    /* =========================
+       SCROLL TO RESULT
+    ========================= */
 
     result.scrollIntoView({
+
         behavior:"smooth",
+
         block:"center"
+
     });
 
 }
+
+
+
+/* =========================
+   SAVE RESULT TO SUPABASE
+========================= */
+
+async function saveQuizResult(data){
+
+    if(resultSaved){
+
+        return;
+
+    }
+
+
+    const savingMessage =
+        document
+        .getElementById("savingMessage");
+
+
+    const databaseStatus =
+        document
+        .getElementById("databaseStatus");
+
+
+    savingMessage.style.display =
+        "block";
+
+
+    databaseStatus.textContent =
+        "";
+
+
+
+    try{
+
+        const { error } =
+            await supabaseClient
+            .from("bep_quiz_results")
+            .insert([
+
+                {
+
+                    member_name:
+                        data.fullName,
+
+                    member_email:
+                        data.email,
+
+                    member_phone:
+                        data.phone,
+
+                    member_location:
+                        data.location,
+
+                    score:
+                        data.score,
+
+                    total_marks:
+                        TOTAL_MARKS,
+
+                    correct_answers:
+                        data.correctCount,
+
+                    unanswered:
+                        data.unanswered,
+
+                    result:
+                        data.resultStatus
+
+                }
+
+            ]);
+
+
+        if(error){
+
+            console.error(
+                "Supabase error:",
+                error
+            );
+
+
+            databaseStatus.innerHTML =
+            '<span style="color:#dc3545;">' +
+            '⚠️ Your score was calculated, but the result could not be saved to the B.E.P. database. Please contact B.E.P.' +
+            '</span>';
+
+
+            savingMessage.style.display =
+                "none";
+
+
+            return;
+
+        }
+
+
+        resultSaved = true;
+
+
+        savingMessage.style.display =
+            "none";
+
+
+        databaseStatus.innerHTML =
+        '<span style="color:#198754;">' +
+        '✓ Your B.E.P. quiz result has been successfully saved.' +
+        '</span>';
+
+
+    }
+    catch(error){
+
+        console.error(
+            "Unexpected Supabase error:",
+            error
+        );
+
+
+        savingMessage.style.display =
+            "none";
+
+
+        databaseStatus.innerHTML =
+        '<span style="color:#dc3545;">' +
+        '⚠️ There was a problem connecting to the B.E.P. database.' +
+        '</span>';
+
+    }
+
+}
+
 
 
 /* =========================
@@ -1613,21 +2617,30 @@ function escapeHTML(text){
     const div =
         document.createElement("div");
 
-    div.textContent = text;
+
+    div.textContent =
+        text;
+
 
     return div.innerHTML;
 
 }
 
 
+
 /* =========================
    FOOTER YEAR
 ========================= */
 
-document.getElementById("year").textContent =
+document
+    .getElementById("year")
+    .textContent =
     new Date().getFullYear();
+
 
 </script>
 
+
 </body>
-    </html>
+
+</html>
