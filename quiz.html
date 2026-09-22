@@ -2482,10 +2482,97 @@ async function calculateScore(timeExpired){
 async function saveQuizResult(data){
 
     if(resultSaved){
-
         return;
+    }
+
+    const savingMessage =
+        document.getElementById("savingMessage");
+
+    const databaseStatus =
+        document.getElementById("databaseStatus");
+
+    savingMessage.style.display = "block";
+
+    databaseStatus.textContent = "";
+
+    try{
+
+        const { data: savedData, error } =
+            await supabaseClient
+            .from("bep_quiz_results")
+            .insert([
+                {
+                    member_name: data.fullName,
+                    member_email: data.email,
+                    member_phone: data.phone,
+                    member_location: data.location,
+
+                    score: data.score,
+
+                    total_marks: TOTAL_MARKS,
+
+                    correct_answers:
+                        data.correctCount,
+
+                    unanswered:
+                        data.unanswered,
+
+                    result:
+                        data.resultStatus,
+
+                    submitted_at:
+                        new Date().toISOString()
+                }
+            ])
+            .select();
+
+        if(error){
+
+            console.error(
+                "Supabase error:",
+                error
+            );
+
+            databaseStatus.innerHTML =
+            '<span style="color:#dc3545;">' +
+            '⚠️ Your score was calculated, but the result could not be saved to the B.E.P. database.' +
+            '</span>';
+
+            savingMessage.style.display = "none";
+
+            return;
+        }
+
+        resultSaved = true;
+
+        savingMessage.style.display = "none";
+
+        databaseStatus.innerHTML =
+        '<span style="color:#198754;">' +
+        '✓ Your B.E.P. quiz result has been successfully saved.' +
+        '</span>';
+
+        console.log(
+            "Quiz result saved:",
+            savedData
+        );
 
     }
+    catch(error){
+
+        console.error(
+            "Unexpected Supabase error:",
+            error
+        );
+
+        savingMessage.style.display = "none";
+
+        databaseStatus.innerHTML =
+        '<span style="color:#dc3545;">' +
+        '⚠️ There was a problem connecting to the B.E.P. database.' +
+        '</span>';
+    }
+}
 
 
     const savingMessage =
