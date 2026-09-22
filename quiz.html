@@ -2429,7 +2429,7 @@ async function calculateScore(timeExpired){
        SAVE TO SUPABASE
     ========================= */
 
-    await saveQuizResult({
+    async function saveQuizResult(data){
 
         fullName:
             fullName || "Not Provided",
