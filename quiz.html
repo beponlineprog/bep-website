@@ -1,19 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>B.E.P. Bible Quiz</title>
+<title>B.E.P. Bible Knowledge Quiz</title>
 
+<!-- Font Awesome -->
 <link rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
-<!-- SUPABASE -->
+<!-- Supabase -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
 
 <style>
 
@@ -23,48 +21,52 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
     padding:0;
 }
 
+html{
+    scroll-behavior:smooth;
+}
+
 body{
     font-family:Arial, Helvetica, sans-serif;
     background:#f4f8fc;
-    color:#1d2a35;
+    color:#222;
     line-height:1.6;
 }
-
 
 /* =========================
    HEADER
 ========================= */
 
 header{
-    background:#064a8a;
+    background:#063b73;
     color:white;
-    padding:15px 20px;
     position:sticky;
     top:0;
     z-index:1000;
-    box-shadow:0 3px 10px rgba(0,0,0,.15);
+    box-shadow:0 2px 10px rgba(0,0,0,.15);
 }
 
 .navbar{
     max-width:1200px;
     margin:auto;
     display:flex;
-    align-items:center;
     justify-content:space-between;
+    align-items:center;
+    padding:15px 20px;
 }
 
 .logo{
-    font-size:21px;
+    font-size:24px;
     font-weight:bold;
+    color:white;
 }
 
 .logo span{
-    color:#ffd700;
+    color:#f4c542;
 }
 
 .nav-links{
     display:flex;
-    gap:18px;
+    gap:20px;
     list-style:none;
 }
 
@@ -73,123 +75,122 @@ header{
     text-decoration:none;
     font-size:14px;
     font-weight:bold;
+    transition:.3s;
 }
 
 .nav-links a:hover{
-    color:#ffd700;
+    color:#f4c542;
 }
 
-.menu-btn{
+.menu-toggle{
     display:none;
     font-size:25px;
     cursor:pointer;
 }
 
-
 /* =========================
    HERO
 ========================= */
 
-.quiz-hero{
-    background:
-    linear-gradient(
-        rgba(0,65,125,.92),
-        rgba(0,65,125,.92)
-    );
+.hero{
+    background:linear-gradient(
+        rgba(3,48,95,.9),
+        rgba(3,48,95,.9)
+    ),
+    url("hero-banner.png");
+
+    background-size:cover;
+    background-position:center;
 
     color:white;
     text-align:center;
-    padding:40px 20px;
+
+    padding:80px 20px;
 }
 
-.quiz-hero h1{
-    font-size:30px;
-    margin-bottom:8px;
+.hero h1{
+    font-size:42px;
+    margin-bottom:15px;
 }
 
-.quiz-hero p{
-    font-size:16px;
+.hero p{
+    max-width:750px;
+    margin:auto;
+    font-size:18px;
 }
-
 
 /* =========================
-   MAIN CONTAINER
+   MAIN
 ========================= */
 
 .container{
-    max-width:950px;
-    margin:30px auto;
-    padding:0 15px;
+    max-width:1000px;
+    margin:auto;
+    padding:40px 20px;
 }
 
-
-/* =========================
-   QUIZ INFO
-========================= */
+.section-title{
+    text-align:center;
+    color:#063b73;
+    margin-bottom:25px;
+}
 
 .quiz-info{
     background:white;
+    padding:25px;
     border-radius:12px;
-    padding:20px;
-    margin-bottom:20px;
-    box-shadow:0 3px 12px rgba(0,0,0,.08);
-    border-left:5px solid #064a8a;
-}
-
-.quiz-info h2{
-    color:#064a8a;
-    margin-bottom:10px;
+    box-shadow:0 4px 15px rgba(0,0,0,.08);
+    margin-bottom:25px;
 }
 
 .quiz-info ul{
-    padding-left:20px;
+    margin:15px 0 0 20px;
 }
 
 .quiz-info li{
-    margin-bottom:5px;
+    margin-bottom:7px;
 }
-
 
 /* =========================
    TIMER
 ========================= */
 
 .timer-box{
-    background:#064a8a;
+    background:#063b73;
     color:white;
-    padding:18px;
-    border-radius:12px;
     text-align:center;
-    margin:20px 0;
-    box-shadow:0 4px 12px rgba(0,0,0,.15);
+    padding:25px;
+    border-radius:12px;
+    margin-bottom:30px;
 }
 
-.timer-title{
-    font-size:14px;
-    font-weight:bold;
+.timer-label{
+    font-size:17px;
     margin-bottom:5px;
 }
 
 #timer{
-    font-size:34px;
+    font-size:45px;
     font-weight:bold;
-    color:#ffd700;
     letter-spacing:2px;
 }
 
-.timer-warning{
-    background:#b8860b;
+#timerMessage{
+    margin-top:5px;
+    font-weight:bold;
 }
 
-.timer-danger{
+.timer-box.warning{
+    background:#d98c00;
+}
+
+.timer-box.danger{
     background:#b00020;
 }
 
-#timerMessage{
-    font-size:13px;
-    margin-top:5px;
+.timer-box.expired{
+    background:#555;
 }
-
 
 /* =========================
    FORM
@@ -197,31 +198,37 @@ header{
 
 .quiz-form{
     background:white;
-    padding:25px;
+    padding:30px;
     border-radius:12px;
-    box-shadow:0 3px 12px rgba(0,0,0,.08);
+    box-shadow:0 4px 15px rgba(0,0,0,.08);
 }
 
-.member-details-title{
-    color:#064a8a;
-    margin-bottom:18px;
-    border-bottom:2px solid #e4edf5;
-    padding-bottom:10px;
+.form-section-title{
+    color:#063b73;
+    margin-bottom:20px;
+    border-bottom:2px solid #f4c542;
+    padding-bottom:8px;
+}
+
+.member-details{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
+    margin-bottom:25px;
 }
 
 .form-group{
-    margin-bottom:20px;
+    display:flex;
+    flex-direction:column;
 }
 
 .form-group label{
-    display:block;
     font-weight:bold;
-    margin-bottom:7px;
+    margin-bottom:6px;
 }
 
 .form-group input{
-    width:100%;
-    padding:12px;
+    padding:13px;
     border:1px solid #ccc;
     border-radius:7px;
     font-size:15px;
@@ -229,79 +236,127 @@ header{
 
 .form-group input:focus{
     outline:none;
-    border-color:#064a8a;
-    box-shadow:0 0 0 2px rgba(6,74,138,.1);
+    border-color:#063b73;
+    box-shadow:0 0 0 2px rgba(6,59,115,.1);
 }
-
 
 /* =========================
-   SECTION DIVIDER
+   START BUTTON
 ========================= */
 
-.quiz-section-title{
-    background:#064a8a;
-    color:white;
-    padding:14px 16px;
-    border-radius:8px;
-    margin:25px 0 20px;
-    font-size:18px;
+.start-area{
+    text-align:center;
+    margin:25px 0 35px;
+    padding:20px;
+    background:#eef5fb;
+    border-radius:10px;
 }
 
+.start-btn{
+    background:#f4c542;
+    color:#063b73;
+    border:none;
+    padding:15px 30px;
+    border-radius:8px;
+    font-size:17px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.start-btn:hover{
+    background:#e3b52f;
+    transform:translateY(-1px);
+}
+
+.start-btn:disabled{
+    background:#aaa;
+    color:white;
+    cursor:not-allowed;
+    transform:none;
+}
+
+#startMessage{
+    margin-top:12px;
+    font-weight:bold;
+    color:#063b73;
+}
 
 /* =========================
    QUESTIONS
 ========================= */
 
+.quiz-fieldset{
+    border:none;
+    padding:0;
+    margin:0;
+    min-width:0;
+}
+
+.part-title{
+    background:#063b73;
+    color:white;
+    padding:15px;
+    border-radius:8px;
+    margin:30px 0 20px;
+}
+
 .question{
     margin-bottom:25px;
     padding:20px;
-    border:1px solid #d9e2ec;
+    border:1px solid #ddd;
     border-radius:10px;
-    background:#fbfdff;
+    background:#fafafa;
 }
 
 .question h3{
-    color:#064a8a;
-    margin-bottom:12px;
+    color:#063b73;
     font-size:17px;
+    margin-bottom:15px;
 }
 
 .option{
     display:block;
-    margin:9px 0;
     padding:9px;
+    margin:5px 0;
     border-radius:6px;
     cursor:pointer;
 }
 
 .option:hover{
-    background:#eef5fb;
+    background:#edf4fa;
 }
 
 .option input{
     margin-right:8px;
 }
 
+fieldset:disabled .question{
+    opacity:.55;
+}
 
 /* =========================
-   BUTTON
+   SUBMIT
 ========================= */
 
+.submit-area{
+    text-align:center;
+    margin-top:30px;
+}
+
 .submit-btn{
-    width:100%;
-    background:#064a8a;
+    background:#063b73;
     color:white;
     border:none;
-    padding:15px;
+    padding:15px 35px;
     border-radius:8px;
     font-size:17px;
     font-weight:bold;
     cursor:pointer;
-    margin-top:10px;
 }
 
 .submit-btn:hover{
-    background:#043665;
+    background:#042b54;
 }
 
 .submit-btn:disabled{
@@ -309,169 +364,155 @@ header{
     cursor:not-allowed;
 }
 
-
-/* =========================
-   SAVING MESSAGE
-========================= */
-
 #savingMessage{
     display:none;
-    margin-top:15px;
-    padding:12px;
-    background:#eef5fb;
-    color:#064a8a;
-    border-radius:7px;
     text-align:center;
+    margin-top:15px;
+    color:#063b73;
     font-weight:bold;
 }
-
 
 /* =========================
    RESULT
 ========================= */
 
-#result{
+.result-box{
     display:none;
-    margin-top:25px;
-    padding:25px;
+    margin-top:30px;
+    padding:30px;
     border-radius:12px;
     background:#eef7ee;
-    border:2px solid #198754;
+    border:2px solid #4b8f4b;
     text-align:center;
 }
 
-#result h2{
-    color:#064a8a;
-    margin-bottom:10px;
+.result-box h2{
+    color:#063b73;
+    margin-bottom:15px;
 }
 
-.score{
-    font-size:30px;
+.score-display{
+    font-size:38px;
     font-weight:bold;
-    color:#064a8a;
+    color:#063b73;
     margin:10px 0;
 }
 
-.pass{
-    color:#198754;
+.result-details{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+    margin-top:20px;
+}
+
+.result-detail{
+    background:white;
+    padding:12px;
+    border-radius:8px;
+}
+
+#status{
     font-size:22px;
     font-weight:bold;
+    margin-top:15px;
+}
+
+.pass{
+    color:green;
 }
 
 .fail{
-    color:#dc3545;
-    font-size:22px;
-    font-weight:bold;
+    color:#b00020;
 }
 
-.expired{
-    color:#dc3545;
-    font-weight:bold;
-    margin-top:8px;
-}
-
-.database-status{
-    font-size:13px;
+#databaseStatus{
     margin-top:15px;
-    color:#555;
+    font-weight:bold;
 }
-
 
 /* =========================
    CONTACT
 ========================= */
 
-.contact-section{
-    margin-top:35px;
-    background:#064a8a;
-    color:white;
-    padding:30px 20px;
-    border-radius:12px;
-    text-align:center;
+#contact{
+    margin-top:50px;
 }
 
-.contact-section h2{
+.contact-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+}
+
+.contact-card{
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    text-align:center;
+    box-shadow:0 3px 10px rgba(0,0,0,.08);
+}
+
+.contact-card i{
+    font-size:28px;
+    color:#063b73;
     margin-bottom:10px;
 }
 
-.contact-buttons{
-    display:flex;
-    flex-wrap:wrap;
-    justify-content:center;
-    gap:10px;
-    margin-top:20px;
+.contact-card h3{
+    color:#063b73;
+    margin-bottom:8px;
 }
 
-.contact-buttons a{
+.contact-card a{
+    color:#063b73;
     text-decoration:none;
-    color:white;
-    padding:11px 17px;
-    border-radius:7px;
     font-weight:bold;
-    background:#087f5b;
+    word-break:break-word;
 }
 
-.contact-buttons a:nth-child(2){
-    background:#198754;
+.contact-card a:hover{
+    color:#d49f00;
 }
-
-.contact-buttons a:nth-child(3){
-    background:#1877f2;
-}
-
-.contact-buttons a:nth-child(4){
-    background:#555;
-}
-
-.contact-buttons a:nth-child(5){
-    background:#6f42c1;
-}
-
-.contact-buttons a:hover{
-    opacity:.88;
-}
-
 
 /* =========================
    FOOTER
 ========================= */
 
 footer{
-    background:#032d52;
+    background:#062f5c;
     color:white;
-    padding:40px 20px 20px;
-    margin-top:30px;
+    margin-top:50px;
+    padding:45px 20px 20px;
 }
 
 .footer-container{
     max-width:1200px;
     margin:auto;
     display:grid;
-    grid-template-columns:
-        repeat(4,1fr);
+    grid-template-columns:repeat(4,1fr);
     gap:30px;
 }
 
 .footer-column h3{
-    color:#ffd700;
-    margin-bottom:12px;
+    color:#f4c542;
+    margin-bottom:15px;
 }
 
 .footer-column p{
+    margin-bottom:8px;
     font-size:14px;
-    margin-bottom:7px;
 }
 
 .footer-column a{
     display:block;
     color:white;
     text-decoration:none;
-    margin:7px 0;
+    margin-bottom:8px;
     font-size:14px;
 }
 
 .footer-column a:hover{
-    color:#ffd700;
+    color:#f4c542;
 }
 
 .footer-bottom{
@@ -479,33 +520,14 @@ footer{
     border-top:1px solid rgba(255,255,255,.2);
     margin-top:30px;
     padding-top:20px;
-    font-size:13px;
+    font-size:14px;
 }
-
-.footer-gold{
-    color:#ffd700;
-}
-
 
 /* =========================
    MOBILE
 ========================= */
 
-@media(max-width:900px){
-
-    .nav-links{
-        gap:10px;
-    }
-
-    .footer-container{
-        grid-template-columns:
-            repeat(2,1fr);
-    }
-
-}
-
-
-@media(max-width:768px){
+@media(max-width:800px){
 
     .nav-links{
         display:none;
@@ -513,7 +535,7 @@ footer{
         top:65px;
         left:0;
         width:100%;
-        background:#064a8a;
+        background:#063b73;
         flex-direction:column;
         padding:20px;
         gap:15px;
@@ -523,39 +545,60 @@ footer{
         display:flex;
     }
 
-    .menu-btn{
+    .menu-toggle{
         display:block;
     }
 
-    .quiz-hero h1{
-        font-size:25px;
+    .hero h1{
+        font-size:30px;
     }
+
+    .hero p{
+        font-size:16px;
+    }
+
+    .member-details{
+        grid-template-columns:1fr;
+    }
+
+    .contact-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .footer-container{
+        grid-template-columns:1fr 1fr;
+    }
+
+}
+
+@media(max-width:500px){
 
     .quiz-form{
-        padding:15px;
-    }
-
-    .question{
-        padding:15px;
+        padding:18px;
     }
 
     #timer{
-        font-size:29px;
+        font-size:38px;
+    }
+
+    .contact-grid{
+        grid-template-columns:1fr;
     }
 
     .footer-container{
         grid-template-columns:1fr;
     }
 
+    .result-details{
+        grid-template-columns:1fr;
+    }
+
 }
 
 </style>
-
 </head>
 
-
 <body>
-
 
 <!-- =========================
      HEADER
@@ -563,165 +606,150 @@ footer{
 
 <header>
 
-<div class="navbar">
+<nav class="navbar">
 
 <div class="logo">
-    B.E.P. <span>QUIZ</span>
+B.E.P. <span>📖</span>
 </div>
 
-
-<div class="menu-btn"
-     onclick="toggleMenu()">
-
-    <i class="fas fa-bars"></i>
-
+<div class="menu-toggle" id="menuToggle">
+<i class="fas fa-bars"></i>
 </div>
-
 
 <ul class="nav-links" id="navLinks">
 
 <li>
 <a href="index.html">
-<i class="fas fa-home"></i>
-Home
+<i class="fas fa-home"></i> Home
 </a>
 </li>
 
 <li>
 <a href="index.html#about">
-<i class="fas fa-book"></i>
-About
+<i class="fas fa-book-open"></i> About
 </a>
 </li>
 
 <li>
 <a href="index.html#vision">
-<i class="fas fa-eye"></i>
-Vision
+<i class="fas fa-eye"></i> Vision
 </a>
 </li>
 
 <li>
 <a href="index.html#mission">
-<i class="fas fa-bullseye"></i>
-Mission
+<i class="fas fa-bullseye"></i> Mission
 </a>
 </li>
 
 <li>
 <a href="index.html#sessions">
-<i class="fas fa-calendar"></i>
-Sessions
+<i class="fas fa-calendar"></i> Sessions
 </a>
 </li>
 
 <li>
 <a href="register.html">
-<i class="fas fa-user-plus"></i>
-B.E.P. Member
+<i class="fas fa-user-plus"></i> B.E.P. Member
 </a>
 </li>
 
 <li>
 <a href="quiz.html">
-<i class="fas fa-question-circle"></i>
-Quiz
+<i class="fas fa-question-circle"></i> Quiz
 </a>
 </li>
 
 <li>
 <a href="index.html#contact">
-<i class="fas fa-phone"></i>
-Contact
+<i class="fas fa-envelope"></i> Contact
 </a>
 </li>
 
 </ul>
 
-</div>
+</nav>
 
 </header>
-
 
 
 <!-- =========================
      HERO
 ========================= -->
 
-<section class="quiz-hero">
+<section class="hero">
 
 <h1>
-<i class="fas fa-book-open"></i>
+<i class="fas fa-book-bible"></i>
 B.E.P. Bible Knowledge Quiz
 </h1>
 
 <p>
-Test your understanding of Scripture, biblical doctrine and Christian discipleship.
+Test your understanding of Scripture, biblical doctrine
+and Christian discipleship.
 </p>
 
 </section>
 
 
-
-<div class="container">
-
-
 <!-- =========================
-     QUIZ INFORMATION
+     MAIN
 ========================= -->
+
+<main class="container">
+
+<h2 class="section-title">
+Bible Knowledge Assessment
+</h2>
+
 
 <div class="quiz-info">
 
-<h2>
-<i class="fas fa-circle-info"></i>
-Quiz Instructions
-</h2>
+<p>
+This assessment is designed to test your understanding
+of Scripture and important biblical teachings.
+</p>
 
 <ul>
 
 <li>
-There are
-<strong>20 multiple-choice questions.</strong>
+<strong>20 Questions</strong>
 </li>
 
 <li>
-Each question carries
-<strong>3 marks.</strong>
+<strong>3 Marks</strong> per question
 </li>
 
 <li>
-Total marks:
-<strong>60</strong>.
+<strong>Total: 60 Marks</strong>
 </li>
 
 <li>
-Pass mark:
-<strong>40/60</strong>.
+<strong>Pass Mark: 40 / 60</strong>
 </li>
 
 <li>
-All questions should be answered.
+<strong>Time Limit: 30 Minutes</strong>
 </li>
 
 <li>
-The quiz has a
-<strong>30-minute time limit.</strong>
+The timer begins only after you click
+<strong>Start Quiz</strong>.
 </li>
 
 <li>
-When the timer reaches zero,
-the quiz will be submitted automatically.
+If time reaches zero, the quiz will be
+<strong>submitted automatically</strong>.
 </li>
 
 <li>
-Unanswered questions at the end of the time limit
-will be marked incorrect.
+Unanswered questions are counted as incorrect
+when the timer expires.
 </li>
 
 </ul>
 
 </div>
-
 
 
 <!-- =========================
@@ -730,30 +758,20 @@ will be marked incorrect.
 
 <div class="timer-box" id="timerBox">
 
-<div class="timer-title">
-
+<div class="timer-label">
 <i class="fas fa-clock"></i>
-
 TIME REMAINING
-
 </div>
-
 
 <div id="timer" aria-live="polite">
-
 30:00
-
 </div>
-
 
 <div id="timerMessage">
-
-The quiz will automatically submit when time expires.
-
+Complete your details, then click Start Quiz.
 </div>
 
 </div>
-
 
 
 <!-- =========================
@@ -762,28 +780,18 @@ The quiz will automatically submit when time expires.
 
 <form id="quizForm" class="quiz-form">
 
-
-<!-- =========================
-     MEMBER DETAILS
-========================= -->
-
-<h2 class="member-details-title">
-
-<i class="fas fa-user-circle"></i>
-
+<h2 class="form-section-title">
+<i class="fas fa-user"></i>
 B.E.P. Member Details
-
 </h2>
 
+
+<div class="member-details">
 
 <div class="form-group">
 
 <label for="fullName">
-
-<i class="fas fa-user"></i>
-
 Full Name
-
 </label>
 
 <input
@@ -797,37 +805,27 @@ required
 </div>
 
 
-
 <div class="form-group">
 
 <label for="email">
-
-<i class="fas fa-envelope"></i>
-
 Email Address
-
 </label>
 
 <input
 type="email"
 id="email"
 name="email"
-placeholder="Enter your email address"
+placeholder="Enter your email"
 required
 >
 
 </div>
 
 
-
 <div class="form-group">
 
 <label for="phone">
-
-<i class="fas fa-phone"></i>
-
 Phone / WhatsApp Number
-
 </label>
 
 <input
@@ -841,54 +839,81 @@ required
 </div>
 
 
-
 <div class="form-group">
 
 <label for="location">
-
-<i class="fas fa-location-dot"></i>
-
 Location
-
 </label>
 
 <input
 type="text"
 id="location"
 name="location"
-placeholder="Enter your town/city"
+placeholder="City / Town"
 required
 >
 
 </div>
 
+</div>
 
 
-<!-- =========================
-     PART 1
-========================= -->
+<!-- START -->
 
-<div class="quiz-section-title">
+<div class="start-area">
 
-<i class="fas fa-layer-group"></i>
+<button
+type="button"
+class="start-btn"
+id="startBtn"
+>
 
-Part 1 — Biblical Foundations
+<i class="fas fa-play"></i>
+Start Quiz — 30 Minutes
+
+</button>
+
+<div id="startMessage">
+Complete all your details before starting the quiz.
+</div>
 
 </div>
 
 
+<!-- =========================
+     QUESTIONS
+========================= -->
 
-<!-- QUESTION 1 -->
+<fieldset
+id="quizQuestions"
+class="quiz-fieldset"
+disabled
+>
+
+
+<!-- PART 1 -->
+
+<div class="part-title">
+
+<h2>
+<i class="fas fa-book-open"></i>
+Part 1 — Scripture & Doctrine
+</h2>
+
+</div>
+
+
+<!-- Q1 -->
 
 <div class="question">
 
 <h3>
-1. According to Romans 4, what is Paul's main point concerning Abraham?
+1. According to Romans 4, what is Paul's central point concerning Abraham?
 </h3>
 
 <label class="option">
 <input type="radio" name="q1" value="A">
-A. Abraham was justified because he perfectly obeyed the Law.
+A. Abraham was justified because he obeyed every commandment.
 </label>
 
 <label class="option">
@@ -898,93 +923,90 @@ B. Abraham was counted righteous through faith.
 
 <label class="option">
 <input type="radio" name="q1" value="C">
-C. Abraham became righteous because of his wealth.
+C. Abraham became righteous through circumcision.
 </label>
 
 <label class="option">
 <input type="radio" name="q1" value="D">
-D. Abraham was justified because of circumcision alone.
+D. Abraham earned righteousness through sacrifice.
 </label>
 
 </div>
 
 
-
-<!-- QUESTION 2 -->
+<!-- Q2 -->
 
 <div class="question">
 
 <h3>
-2. In Exodus 19:5–6, Israel is described as what in God's covenant purpose?
+2. What was Israel's covenant calling in Exodus 19:5–6?
 </h3>
 
 <label class="option">
 <input type="radio" name="q2" value="A">
-A. A nation that would never experience suffering.
+A. To become a military kingdom.
 </label>
 
 <label class="option">
 <input type="radio" name="q2" value="B">
-B. A kingdom of priests and a holy nation.
+B. To be a kingdom of priests and a holy nation.
 </label>
 
 <label class="option">
 <input type="radio" name="q2" value="C">
-C. A nation exempt from God's commands.
+C. To rule over all surrounding nations.
 </label>
 
 <label class="option">
 <input type="radio" name="q2" value="D">
-D. A kingdom whose purpose was only political.
+D. To build the largest temple in the ancient world.
 </label>
 
 </div>
 
 
-
-<!-- QUESTION 3 -->
+<!-- Q3 -->
 
 <div class="question">
 
 <h3>
-3. Jesus' teaching in Mark 12:29–31 combines which two Old Testament commands?
+3. Which two commandments does Jesus identify as the greatest in Mark 12:29–31?
 </h3>
 
 <label class="option">
 <input type="radio" name="q3" value="A">
-A. Sabbath observance and sacrifice.
+A. Keep the Sabbath and honour your parents.
 </label>
 
 <label class="option">
 <input type="radio" name="q3" value="B">
-B. Love for God and love for one's neighbour.
+B. Love God and love your neighbour.
 </label>
 
 <label class="option">
 <input type="radio" name="q3" value="C">
-C. Tithing and fasting.
+C. Give offerings and fast regularly.
 </label>
 
 <label class="option">
 <input type="radio" name="q3" value="D">
-D. Circumcision and dietary laws.
+D. Pray and read Scripture every morning.
 </label>
 
 </div>
 
 
-
-<!-- QUESTION 4 -->
+<!-- Q4 -->
 
 <div class="question">
 
 <h3>
-4. What central theme is emphasized in Isaiah 53 concerning the Servant?
+4. What major theme is presented in Isaiah 53 concerning the Servant?
 </h3>
 
 <label class="option">
 <input type="radio" name="q4" value="A">
-A. The Servant gains political power over Israel.
+A. The Servant becomes wealthy through political power.
 </label>
 
 <label class="option">
@@ -994,93 +1016,90 @@ B. The Servant suffers on behalf of others.
 
 <label class="option">
 <input type="radio" name="q4" value="C">
-C. The Servant becomes wealthy through trade.
+C. The Servant establishes an earthly government.
 </label>
 
 <label class="option">
 <input type="radio" name="q4" value="D">
-D. The Servant avoids all human suffering.
+D. The Servant defeats Israel's enemies through military force.
 </label>
 
 </div>
 
 
-
-<!-- QUESTION 5 -->
+<!-- Q5 -->
 
 <div class="question">
 
 <h3>
-5. According to Jeremiah 31:31–34, what distinguishes the promised new covenant?
+5. What distinctive feature of the new covenant is emphasized in Jeremiah 31:31–34?
 </h3>
 
 <label class="option">
 <input type="radio" name="q5" value="A">
-A. God's law would be written on His people's hearts.
+A. God's law would be written on people's hearts.
 </label>
 
 <label class="option">
 <input type="radio" name="q5" value="B">
-B. The old covenant would simply be repeated without change.
+B. Israel would no longer need God's forgiveness.
 </label>
 
 <label class="option">
 <input type="radio" name="q5" value="C">
-C. Israel would no longer need to know God.
+C. The temple would become unnecessary because sacrifices would increase.
 </label>
 
 <label class="option">
 <input type="radio" name="q5" value="D">
-D. Forgiveness would no longer be necessary.
+D. Israel would become politically dominant over every nation.
 </label>
 
 </div>
 
 
-
-<!-- QUESTION 6 -->
+<!-- Q6 -->
 
 <div class="question">
 
 <h3>
-6. Hebrews 7 uses Melchizedek to explain what about Christ's priesthood?
+6. What does Hebrews 7 emphasize about Melchizedek's priesthood in relation to Christ?
 </h3>
 
 <label class="option">
 <input type="radio" name="q6" value="A">
-A. Christ's priesthood was temporary.
+A. Christ inherited the Levitical priesthood.
 </label>
 
 <label class="option">
 <input type="radio" name="q6" value="B">
-B. Christ has a permanent priesthood.
+B. Christ possesses a permanent and superior priesthood.
 </label>
 
 <label class="option">
 <input type="radio" name="q6" value="C">
-C. Christ served only as a Levitical priest.
+C. Melchizedek replaced Christ as High Priest.
 </label>
 
 <label class="option">
 <input type="radio" name="q6" value="D">
-D. Christ needed another priest to represent Him.
+D. Christ served only temporarily as priest.
 </label>
 
 </div>
 
 
-
-<!-- QUESTION 7 -->
+<!-- Q7 -->
 
 <div class="question">
 
 <h3>
-7. In Daniel 7:13–14, what is given to the “Son of Man”?
+7. In Daniel 7:13–14, what is given to the "Son of Man"?
 </h3>
 
 <label class="option">
 <input type="radio" name="q7" value="A">
-A. Only authority over Jerusalem.
+A. A temporary earthly kingdom over Israel.
 </label>
 
 <label class="option">
@@ -1090,24 +1109,23 @@ B. Everlasting dominion over peoples, nations and languages.
 
 <label class="option">
 <input type="radio" name="q7" value="C">
-C. Authority that ends after one generation.
+C. Authority only over the priests.
 </label>
 
 <label class="option">
 <input type="radio" name="q7" value="D">
-D. Authority limited to the temple.
+D. Authority over one city.
 </label>
 
 </div>
 
 
-
-<!-- QUESTION 8 -->
+<!-- Q8 -->
 
 <div class="question">
 
 <h3>
-8. In Matthew 5:17–20, how does Jesus describe His relationship to the Law and the Prophets?
+8. According to Matthew 5:17, what did Jesus say about the Law and the Prophets?
 </h3>
 
 <label class="option">
@@ -1117,29 +1135,28 @@ A. He came to fulfill them.
 
 <label class="option">
 <input type="radio" name="q8" value="B">
-B. He came to abolish every biblical command.
+B. He came to abolish them.
 </label>
 
 <label class="option">
 <input type="radio" name="q8" value="C">
-C. He taught that righteousness was unnecessary.
+C. They were no longer relevant to God's people.
 </label>
 
 <label class="option">
 <input type="radio" name="q8" value="D">
-D. He rejected the Old Testament completely.
+D. They applied only to Gentiles.
 </label>
 
 </div>
 
 
-
-<!-- QUESTION 9 -->
+<!-- Q9 -->
 
 <div class="question">
 
 <h3>
-9. What does Jesus' “vine and branches” teaching in John 15 emphasize?
+9. In John 15, what does Jesus' illustration of the vine and branches primarily teach?
 </h3>
 
 <label class="option">
@@ -1149,70 +1166,66 @@ A. The necessity of abiding in Christ.
 
 <label class="option">
 <input type="radio" name="q9" value="B">
-B. Independence from Christ.
+B. The importance of becoming wealthy.
 </label>
 
 <label class="option">
 <input type="radio" name="q9" value="C">
-C. Material wealth as the source of fruitfulness.
+C. That Christians should isolate themselves from society.
 </label>
 
 <label class="option">
 <input type="radio" name="q9" value="D">
-D. Religious status as the source of spiritual life.
+D. That spiritual growth happens without dependence on Christ.
 </label>
 
 </div>
 
 
-
-<!-- QUESTION 10 -->
+<!-- Q10 -->
 
 <div class="question">
 
 <h3>
-10. According to Romans 6, what does union with Christ's death and resurrection signify for believers?
+10. What does Romans 6 teach about believers' union with Christ in His death and resurrection?
 </h3>
 
 <label class="option">
 <input type="radio" name="q10" value="A">
-A. Permission to continue living under the dominion of sin.
+A. Believers remain permanently slaves to sin.
 </label>
 
 <label class="option">
 <input type="radio" name="q10" value="B">
-B. A new life in which believers are no longer to live as slaves to sin.
+B. Believers are called to new life and no longer live as slaves to sin.
 </label>
 
 <label class="option">
 <input type="radio" name="q10" value="C">
-C. Freedom from all responsibility toward God.
+C. Believers become physically immortal immediately.
 </label>
 
 <label class="option">
 <input type="radio" name="q10" value="D">
-D. A promise that believers will never face temptation.
+D. Believers no longer need God's grace.
 </label>
 
 </div>
 
 
+<!-- PART 2 -->
 
-<!-- =========================
-     PART 2
-========================= -->
+<div class="part-title">
 
-<div class="quiz-section-title">
-
-<i class="fas fa-book-bible"></i>
-
-Part 2 — Christian Doctrine & Discipleship
+<h2>
+<i class="fas fa-cross"></i>
+Part 2 — Christian Life & Discipleship
+</h2>
 
 </div>
 
 
-
-<!-- QUESTION 11 -->
+<!-- Q11 -->
 
 <div class="question">
 
@@ -1222,98 +1235,95 @@ Part 2 — Christian Doctrine & Discipleship
 
 <label class="option">
 <input type="radio" name="q11" value="A">
-A. “Lord of armies”
+A. "King of Israel"
 </label>
 
 <label class="option">
 <input type="radio" name="q11" value="B">
-B. “Abba, Father”
+B. "Abba, Father"
 </label>
 
 <label class="option">
 <input type="radio" name="q11" value="C">
-C. “King of Israel”
+C. "Lord of armies"
 </label>
 
 <label class="option">
 <input type="radio" name="q11" value="D">
-D. “Teacher of the nations”
+D. "Son of David"
 </label>
 
 </div>
 
 
-
-<!-- QUESTION 12 -->
+<!-- Q12 -->
 
 <div class="question">
 
 <h3>
-12. What does Paul's teaching in 1 Corinthians 12 imply about spiritual gifts?
+12. What does 1 Corinthians 12 teach concerning spiritual gifts?
 </h3>
 
 <label class="option">
 <input type="radio" name="q12" value="A">
-A. One gift makes a believer more valuable than another.
+A. Every believer receives exactly the same gift.
 </label>
 
 <label class="option">
 <input type="radio" name="q12" value="B">
-B. Different gifts are given by the Spirit for the functioning of one body.
+B. Different gifts are given by the Spirit for the one body.
 </label>
 
 <label class="option">
 <input type="radio" name="q12" value="C">
-C. Spiritual gifts eliminate the need for other believers.
+B. Spiritual gifts are earned through religious education.
 </label>
 
 <label class="option">
 <input type="radio" name="q12" value="D">
-D. Every Christian must have exactly the same gift.
+D. Only church leaders can receive spiritual gifts.
 </label>
 
 </div>
 
 
-
-<!-- QUESTION 13 -->
+<!-- Q13 -->
 
 <div class="question">
 
 <h3>
-13. What is Paul's argument in Galatians 2:16 regarding justification?
+13. According to Galatians 2:16, how is a person justified?
 </h3>
 
 <label class="option">
 <input type="radio" name="q13" value="A">
-A. People are justified by observing the Law perfectly.
+A. By keeping the law perfectly.
 </label>
 
 <label class="option">
 <input type="radio" name="q13" value="B">
-B. A person is justified through faith in Jesus Christ, not by works of the law.
+B. Through faith in Jesus Christ, not by works of the law.
 </label>
 
 <label class="option">
 <input type="radio" name="q13" value="C">
-C. Justification depends on social position.
+C. By performing enough religious ceremonies.
 </label>
 
 <label class="option">
 <input type="radio" name="q13" value="D">
-D. Faith has no relationship to justification.
+D. By belonging to a particular ethnic group.
 </label>
 
 </div>
 
 
-
-<!-- QUESTION 14 -->
+<!-- Q14 -->
 
 <div class="question">
 
 <h3>
-14. How should Ephesians 2:8–10 be understood as a whole?
+14. Which statement best summarizes Ephesians 2:8–10?
 </h3>
 
 <label class="option">
@@ -1323,66 +1333,64 @@ A. Salvation is earned through good works.
 
 <label class="option">
 <input type="radio" name="q14" value="B">
-B. Grace is unnecessary if someone does enough good deeds.
+B. Good works are unnecessary for Christian living.
 </label>
 
 <label class="option">
 <input type="radio" name="q14" value="C">
-C. Salvation is by grace through faith, and believers are created for good works.
+C. We are saved by grace through faith and created for good works.
 </label>
 
 <label class="option">
 <input type="radio" name="q14" value="D">
-D. Good works replace faith completely.
+D. Salvation depends entirely on human effort.
 </label>
 
 </div>
 
 
-
-<!-- QUESTION 15 -->
+<!-- Q15 -->
 
 <div class="question">
 
 <h3>
-15. What central example does Philippians 2:5–11 present?
+15. What is the central example presented in Philippians 2:5–11?
 </h3>
 
 <label class="option">
 <input type="radio" name="q15" value="A">
-A. Christ's pursuit of earthly political authority.
+A. Political leadership.
 </label>
 
 <label class="option">
 <input type="radio" name="q15" value="B">
-B. Christ's humility, obedience and subsequent exaltation.
+B. Christ's humility, obedience and exaltation.
 </label>
 
 <label class="option">
 <input type="radio" name="q15" value="C">
-C. The superiority of human achievement.
+C. Financial prosperity.
 </label>
 
 <label class="option">
 <input type="radio" name="q15" value="D">
-D. The importance of seeking personal recognition.
+D. Human achievement.
 </label>
 
 </div>
 
 
-
-<!-- QUESTION 16 -->
+<!-- Q16 -->
 
 <div class="question">
 
 <h3>
-16. What does Colossians 1:15–20 emphasize about Christ?
+16. What does Colossians 1:15–20 teach about Christ?
 </h3>
 
 <label class="option">
 <input type="radio" name="q16" value="A">
-A. Christ is one created being among many equal beings.
+A. Christ was merely one of many spiritual teachers.
 </label>
 
 <label class="option">
@@ -1392,93 +1400,90 @@ B. Christ has supremacy over creation and the church.
 
 <label class="option">
 <input type="radio" name="q16" value="C">
-C. Christ's authority applies only to Israel.
+C. Christ's authority ended after His resurrection.
 </label>
 
 <label class="option">
 <input type="radio" name="q16" value="D">
-D. Christ's work concerns only moral teaching.
+D. Christ has authority only over angels.
 </label>
 
 </div>
 
 
-
-<!-- QUESTION 17 -->
+<!-- Q17 -->
 
 <div class="question">
 
 <h3>
-17. According to Hebrews 4:14–16, why can believers approach God's throne with confidence?
+17. Why does Hebrews 4:14–16 encourage believers to approach God's throne with confidence?
 </h3>
 
 <label class="option">
 <input type="radio" name="q17" value="A">
-A. Because believers never experience temptation.
+A. Because believers are sinless.
 </label>
 
 <label class="option">
 <input type="radio" name="q17" value="B">
-B. Because Jesus is the great High Priest who sympathizes with human weakness.
+B. Because Jesus is the High Priest who sympathizes with human weakness.
 </label>
 
 <label class="option">
 <input type="radio" name="q17" value="C">
-C. Because human righteousness is sufficient.
+C. Because judgment no longer exists.
 </label>
 
 <label class="option">
 <input type="radio" name="q17" value="D">
-D. Because God's judgment no longer exists.
+D. Because believers do not need God's mercy.
 </label>
 
 </div>
 
 
-
-<!-- QUESTION 18 -->
+<!-- Q18 -->
 
 <div class="question">
 
 <h3>
-18. What point does James make in James 2 concerning faith?
+18. What point does James 2 make about faith?
 </h3>
 
 <label class="option">
 <input type="radio" name="q18" value="A">
-A. Genuine faith never affects behaviour.
+A. Faith and conduct are completely unrelated.
 </label>
 
 <label class="option">
 <input type="radio" name="q18" value="B">
-B. Faith without corresponding action is dead.
+B. Faith without action is dead.
 </label>
 
 <label class="option">
 <input type="radio" name="q18" value="C">
-C. Good works are completely unrelated to faith.
+C. Good works alone save a person.
 </label>
 
 <label class="option">
 <input type="radio" name="q18" value="D">
-D. Faith should be kept entirely private.
+D. Faith eliminates the need for obedience.
 </label>
 
 </div>
 
 
-
-<!-- QUESTION 19 -->
+<!-- Q19 -->
 
 <div class="question">
 
 <h3>
-19. According to 1 Peter 2:9, believers are described as what?
+19. What identity does 1 Peter 2:9 give to believers?
 </h3>
 
 <label class="option">
 <input type="radio" name="q19" value="A">
-A. A group whose purpose is only personal prosperity.
+A. Political rulers of the earth.
 </label>
 
 <label class="option">
@@ -1488,209 +1493,234 @@ B. A chosen people, royal priesthood and holy nation called to declare God's pra
 
 <label class="option">
 <input type="radio" name="q19" value="C">
-C. People without a spiritual calling.
+C. A group exempt from suffering.
 </label>
 
 <label class="option">
 <input type="radio" name="q19" value="D">
-D. A community separated from all responsibility toward others.
+D. A group that no longer needs fellowship.
 </label>
 
 </div>
 
 
-
-<!-- QUESTION 20 -->
+<!-- Q20 -->
 
 <div class="question">
 
 <h3>
-20. What is the central promise described in Revelation 21:1–4?
+20. What central promise is presented in Revelation 21:1–4?
 </h3>
 
 <label class="option">
 <input type="radio" name="q20" value="A">
-A. The present world will continue forever unchanged.
+A. Humanity will establish a perfect earthly government.
 </label>
 
 <label class="option">
 <input type="radio" name="q20" value="B">
-B. God will dwell with His people in the new creation, and death and suffering will be no more.
+B. God will dwell with His people in the new creation, where death and suffering are no more.
 </label>
 
 <label class="option">
 <input type="radio" name="q20" value="C">
-C. God's people will return permanently to the old covenant system.
+C. Christians will never experience difficulties before Christ returns.
 </label>
 
 <label class="option">
 <input type="radio" name="q20" value="D">
-D. Humanity will become independent from God.
+D. The old creation will continue forever unchanged.
 </label>
 
 </div>
 
+</fieldset>
 
 
-<!-- =========================
-     SUBMIT
-========================= -->
+<!-- SUBMIT -->
+
+<div class="submit-area">
 
 <button
 type="submit"
 class="submit-btn"
-id="submitBtn">
+id="submitBtn"
+disabled
+>
 
 <i class="fas fa-paper-plane"></i>
-
 Submit Quiz
 
 </button>
 
+</div>
+
 
 <div id="savingMessage">
-
 <i class="fas fa-spinner fa-spin"></i>
-
-Saving your B.E.P. quiz result...
-
+Saving your result...
 </div>
 
 
+<!-- RESULT -->
 
-<!-- =========================
-     RESULT
-========================= -->
-
-<div id="result">
+<div
+class="result-box"
+id="learnerResult"
+aria-live="polite"
+>
 
 <h2>
-
-<i class="fas fa-square-poll-vertical"></i>
-
+<i class="fas fa-trophy"></i>
 Quiz Result
-
 </h2>
 
-
-<p id="learnerResult"></p>
-
-
-<div class="score"
-     id="score">
+<div class="score-display" id="score">
+0 / 60 Marks
 </div>
 
-
-<p id="percentage"></p>
-
-
-<p id="status"></p>
-
-
-<p id="expiredMessage"
-   class="expired">
+<p>
+<strong>Percentage:</strong>
+<span id="percentage">0%</span>
 </p>
 
+<div class="result-details">
 
-<p id="databaseStatus"
-   class="database-status">
-</p>
+<div class="result-detail">
+<strong>Correct Answers</strong>
+<br>
+<span id="correctCountDisplay">0 / 20</span>
+</div>
+
+<div class="result-detail">
+<strong>Unanswered</strong>
+<br>
+<span id="unansweredDisplay">0</span>
+</div>
 
 </div>
 
+<div id="status">
+</div>
+
+<p id="expiredMessage"></p>
+
+<p id="submittedTime"></p>
+
+<p id="databaseStatus"></p>
+
+</div>
 
 </form>
-
 
 
 <!-- =========================
      CONTACT
 ========================= -->
 
-<section class="contact-section"
-         id="contact">
+<section id="contact">
 
-<h2>
-
-<i class="fas fa-headset"></i>
-
-Contact B.E.P.
-
+<h2 class="section-title">
+<i class="fas fa-envelope"></i>
+Contact Us
 </h2>
 
 
+<div class="contact-grid">
+
+
+<div class="contact-card">
+
+<i class="fab fa-whatsapp"></i>
+
+<h3>Omega</h3>
+
 <p>
-
-Have questions about the Biblical Empowerment Program?
-
-Contact us or join one of our Thursday sessions.
-
+WhatsApp
 </p>
 
+<a
+href="https://wa.me/27623508689"
+target="_blank"
+>
 
-<div class="contact-buttons">
+062 350 8689
+
+</a>
+
+</div>
 
 
-<a href="https://wa.me/27623508689"
-   target="_blank"
-   rel="noopener">
+<div class="contact-card">
 
 <i class="fab fa-whatsapp"></i>
 
-Omega
+<h3>Bro. KB</h3>
+
+<p>
+WhatsApp
+</p>
+
+<a
+href="https://wa.me/27832822644"
+target="_blank"
+>
+
+083 282 2644
 
 </a>
 
-
-<a href="https://wa.me/27832822644"
-   target="_blank"
-   rel="noopener">
-
-<i class="fab fa-whatsapp"></i>
-
-Bro. KB
-
-</a>
+</div>
 
 
-<a href="https://facebook.com/groups/1421853356307383/"
-   target="_blank"
-   rel="noopener">
-
-<i class="fab fa-facebook"></i>
-
-Facebook
-
-</a>
-
-
-<a href="mailto:bep.onlineprog@gmail.com">
+<div class="contact-card">
 
 <i class="fas fa-envelope"></i>
 
-Email
+<h3>Email</h3>
+
+<p>
+B.E.P. Email
+</p>
+
+<a
+href="mailto:bep.onlineprog@gmail.com"
+>
+
+bep.onlineprog@gmail.com
 
 </a>
 
+</div>
 
-<a href="https://teams.live.com/meet/936085799236?p=b66LnDUAB2Xkx2uQYp&eventType=community"
-   target="_blank"
-   rel="noopener">
 
-<i class="fab fa-microsoft"></i>
+<div class="contact-card">
 
-Microsoft Teams
+<i class="fab fa-facebook"></i>
+
+<h3>Facebook</h3>
+
+<p>
+Join our B.E.P. Group
+</p>
+
+<a
+href="https://facebook.com/groups/1421853356307383/"
+target="_blank"
+>
+
+Facebook Group
 
 </a>
+
+</div>
 
 
 </div>
 
 </section>
 
-
-</div>
-
+</main>
 
 
 <!-- =========================
@@ -1699,20 +1729,15 @@ Microsoft Teams
 
 <footer>
 
-
 <div class="footer-container">
 
-
-<!-- COLUMN 1 -->
 
 <div class="footer-column">
 
 <h3>B.E.P.</h3>
 
 <p>
-<strong>
 Biblical Empowerment Program
-</strong>
 </p>
 
 <p>
@@ -1727,134 +1752,105 @@ discipleship and Christian fellowship.
 </div>
 
 
-
-<!-- COLUMN 2 -->
-
 <div class="footer-column">
 
 <h3>Quick Links</h3>
 
 <a href="index.html">
-<i class="fas fa-home"></i>
-Home
+<i class="fas fa-home"></i> Home
 </a>
 
 <a href="index.html#about">
-<i class="fas fa-book"></i>
-About Us
+<i class="fas fa-book"></i> About Us
 </a>
 
 <a href="index.html#sessions">
-<i class="fas fa-calendar"></i>
-Sessions
+<i class="fas fa-calendar"></i> Sessions
 </a>
 
 <a href="register.html">
-<i class="fas fa-user-plus"></i>
-B.E.P. Member
+<i class="fas fa-user-plus"></i> B.E.P. Member
 </a>
 
 <a href="quiz.html">
-<i class="fas fa-question-circle"></i>
-Bible Quiz
+<i class="fas fa-question-circle"></i> Bible Quiz
 </a>
 
 </div>
 
-
-
-<!-- COLUMN 3 -->
-
-<div class="footer-column">
-
-<h3>Contact Us</h3>
-
-<a href="https://wa.me/27623508689"
-   target="_blank">
-
-<i class="fab fa-whatsapp"></i>
-Omega
-
-</a>
-
-<a href="https://wa.me/27832822644"
-   target="_blank">
-
-<i class="fab fa-whatsapp"></i>
-Bro. KB
-
-</a>
-
-<a href="mailto:bep.onlineprog@gmail.com">
-
-<i class="fas fa-envelope"></i>
-
-bep.onlineprog@gmail.com
-
-</a>
-
-</div>
-
-
-
-<!-- COLUMN 4 -->
 
 <div class="footer-column">
 
 <h3>Connect</h3>
 
-<a href="https://facebook.com/groups/1421853356307383/"
-   target="_blank">
+<a href="https://wa.me/27623508689" target="_blank">
+<i class="fab fa-whatsapp"></i> Omega
+</a>
+
+<a href="https://wa.me/27832822644" target="_blank">
+<i class="fab fa-whatsapp"></i> Bro. KB
+</a>
+
+<a href="mailto:bep.onlineprog@gmail.com">
+<i class="fas fa-envelope"></i> Email
+</a>
+
+<a
+href="https://facebook.com/groups/1421853356307383/"
+target="_blank"
+>
 
 <i class="fab fa-facebook"></i>
-
 Facebook Group
 
 </a>
 
-<a href="https://teams.live.com/meet/936085799236?p=b66LnDUAB2Xkx2uQYp&eventType=community"
-   target="_blank">
+</div>
 
-<i class="fab fa-microsoft"></i>
 
+<div class="footer-column">
+
+<h3>B.E.P. Sessions</h3>
+
+<p>
+<i class="fas fa-calendar-day"></i>
+Every Thursday
+</p>
+
+<p>
+<i class="fas fa-clock"></i>
+19:00 – 20:30
+</p>
+
+<p>
+<i class="fas fa-video"></i>
 Microsoft Teams
+</p>
+
+<a
+href="https://teams.live.com/meet/936085799236?p=b66LnDUAB2Xkx2uQYp&eventType=community"
+target="_blank"
+>
+
+Join Teams
 
 </a>
 
-<p>
-Thursday Sessions
-</p>
-
-<p>
-7:00 PM – 8:30 PM
-</p>
-
 </div>
 
 
 </div>
-
 
 
 <div class="footer-bottom">
 
-<p>
-
-<span class="footer-gold">
-
-© <span id="year"></span> B.E.P.
-
-</span>
-
+© <span id="year"></span>
+Biblical Empowerment Program (B.E.P.)
 All Rights Reserved.
-
-</p>
 
 </div>
 
-
 </footer>
-
 
 
 <!-- =========================
@@ -1863,18 +1859,15 @@ All Rights Reserved.
 
 <script>
 
-
-/* =========================
+/* =========================================
    SUPABASE CONNECTION
-========================= */
+========================================= */
 
 const SUPABASE_URL =
 "https://rukusaellqqwthzibyib.supabase.co";
 
-
 const SUPABASE_PUBLISHABLE_KEY =
 "sb_publishable_Co8_MoJOV14tXBkSWyXFTA_ULn1WRa5";
-
 
 const supabaseClient =
 window.supabase.createClient(
@@ -1883,39 +1876,57 @@ window.supabase.createClient(
 );
 
 
-
-/* =========================
+/* =========================================
    MOBILE MENU
-========================= */
+========================================= */
 
-function toggleMenu(){
+const menuToggle =
+document.getElementById("menuToggle");
 
-    document
-        .getElementById("navLinks")
-        .classList
-        .toggle("active");
+const navLinks =
+document.getElementById("navLinks");
 
-}
+menuToggle.addEventListener("click", function(){
+
+    navLinks.classList.toggle("active");
+
+});
 
 
+/* Close mobile menu after clicking a link */
 
-/* =========================
+document.querySelectorAll(".nav-links a")
+.forEach(function(link){
+
+    link.addEventListener("click", function(){
+
+        navLinks.classList.remove("active");
+
+    });
+
+});
+
+
+/* =========================================
    QUIZ SETTINGS
-========================= */
+========================================= */
 
 const TOTAL_QUESTIONS = 20;
 
 const MARKS_PER_QUESTION = 3;
 
-const TOTAL_MARKS = 60;
+const TOTAL_MARKS =
+TOTAL_QUESTIONS * MARKS_PER_QUESTION;
 
 const PASS_MARK = 40;
 
+const QUIZ_DURATION =
+30 * 60;
 
 
-/* =========================
+/* =========================================
    ANSWER KEY
-========================= */
+========================================= */
 
 const correctAnswers = {
 
@@ -1924,6 +1935,7 @@ const correctAnswers = {
     q3:"B",
     q4:"B",
     q5:"A",
+
     q6:"B",
     q7:"B",
     q8:"A",
@@ -1935,6 +1947,7 @@ const correctAnswers = {
     q13:"B",
     q14:"C",
     q15:"B",
+
     q16:"B",
     q17:"B",
     q18:"B",
@@ -1944,351 +1957,486 @@ const correctAnswers = {
 };
 
 
+/* =========================================
+   QUIZ STATE
+========================================= */
 
-/* =========================
-   TIMER
-========================= */
+let timeLeft = QUIZ_DURATION;
 
-let timeLeft = 30 * 60;
+let timerInterval = null;
 
-let timerInterval;
+let quizStarted = false;
 
 let quizSubmitted = false;
 
 let resultSaved = false;
 
 
+/* =========================================
+   ELEMENTS
+========================================= */
 
-/* =========================
-   UPDATE TIMER
-========================= */
+const quizForm =
+document.getElementById("quizForm");
 
-function updateTimer(){
+const startBtn =
+document.getElementById("startBtn");
+
+const submitBtn =
+document.getElementById("submitBtn");
+
+const quizQuestions =
+document.getElementById("quizQuestions");
+
+const timerBox =
+document.getElementById("timerBox");
+
+const timer =
+document.getElementById("timer");
+
+const timerMessage =
+document.getElementById("timerMessage");
+
+const startMessage =
+document.getElementById("startMessage");
+
+const savingMessage =
+document.getElementById("savingMessage");
+
+const resultBox =
+document.getElementById("learnerResult");
+
+
+/* =========================================
+   DISPLAY TIMER
+========================================= */
+
+function displayTimer(){
 
     const minutes =
-        Math.floor(timeLeft / 60);
-
+    Math.floor(timeLeft / 60);
 
     const seconds =
-        timeLeft % 60;
+    timeLeft % 60;
 
-
-    const formattedSeconds =
-        seconds
-        .toString()
-        .padStart(2,"0");
-
-
-    document
-        .getElementById("timer")
-        .textContent =
-        `${minutes}:${formattedSeconds}`;
-
-
-    const timerBox =
-        document.getElementById("timerBox");
-
-
-    /* 10 MINUTE WARNING */
-
-    if(
-        timeLeft <= 600 &&
-        timeLeft > 300
-    ){
-
-        timerBox
-            .classList
-            .add("timer-warning");
-
-
-        document
-            .getElementById("timerMessage")
-            .textContent =
-            "Time is running. Please continue with the quiz.";
-
-    }
-
-
-    /* 5 MINUTE WARNING */
-
-    if(
-        timeLeft <= 300 &&
-        timeLeft > 0
-    ){
-
-        timerBox
-            .classList
-            .remove("timer-warning");
-
-
-        timerBox
-            .classList
-            .add("timer-danger");
-
-
-        document
-            .getElementById("timerMessage")
-            .textContent =
-            "Less than 5 minutes remaining!";
-
-    }
-
-
-    /* TIME EXPIRED */
-
-    if(timeLeft <= 0){
-
-        clearInterval(timerInterval);
-
-
-        document
-            .getElementById("timer")
-            .textContent =
-            "00:00";
-
-
-        document
-            .getElementById("timerMessage")
-            .textContent =
-            "TIME EXPIRED — submitting your quiz...";
-
-
-        autoSubmitQuiz();
-
-
-        return;
-
-    }
-
-
-    timeLeft--;
+    timer.textContent =
+    String(minutes).padStart(2,"0")
+    + ":"
+    + String(seconds).padStart(2,"0");
 
 }
 
 
+/* =========================================
+   TIMER COLOUR / WARNING
+========================================= */
 
-/* =========================
-   START TIMER
-========================= */
+function updateTimerState(){
 
-updateTimer();
-
-timerInterval =
-    setInterval(
-        updateTimer,
-        1000
+    timerBox.classList.remove(
+        "warning",
+        "danger",
+        "expired"
     );
 
 
+    if(timeLeft === 0){
 
-/* =========================
-   AUTO SUBMIT
-========================= */
+        timerBox.classList.add("expired");
 
-function autoSubmitQuiz(){
-
-    if(quizSubmitted){
+        timerMessage.textContent =
+        "TIME EXPIRED — submitting your quiz...";
 
         return;
 
     }
 
+
+    if(timeLeft <= 300){
+
+        timerBox.classList.add("danger");
+
+        timerMessage.textContent =
+        "⚠️ Only 5 minutes remaining!";
+
+        return;
+
+    }
+
+
+    if(timeLeft <= 600){
+
+        timerBox.classList.add("warning");
+
+        timerMessage.textContent =
+        "⚠️ 10 minutes remaining.";
+
+        return;
+
+    }
+
+
+    timerMessage.textContent =
+    "Quiz is in progress. Give it your best.";
+
+}
+
+
+/* =========================================
+   START TIMER
+========================================= */
+
+function startTimer(){
+
+    if(quizStarted || quizSubmitted){
+        return;
+    }
+
+
+    quizStarted = true;
+
+    timeLeft = QUIZ_DURATION;
+
+    displayTimer();
+
+    updateTimerState();
+
+
+    timerInterval =
+    setInterval(function(){
+
+        if(quizSubmitted){
+
+            clearInterval(timerInterval);
+
+            timerInterval = null;
+
+            return;
+
+        }
+
+
+        timeLeft--;
+
+        if(timeLeft <= 0){
+
+            timeLeft = 0;
+
+            displayTimer();
+
+            updateTimerState();
+
+            clearInterval(timerInterval);
+
+            timerInterval = null;
+
+            submitQuiz(true);
+
+            return;
+
+        }
+
+
+        displayTimer();
+
+        updateTimerState();
+
+    },1000);
+
+}
+
+
+/* =========================================
+   STOP TIMER
+========================================= */
+
+function stopTimer(){
+
+    if(timerInterval !== null){
+
+        clearInterval(timerInterval);
+
+        timerInterval = null;
+
+    }
+
+}
+
+
+/* =========================================
+   MEMBER DETAILS
+========================================= */
+
+function getMemberDetails(){
+
+    return {
+
+        fullName:
+        document.getElementById("fullName")
+        .value.trim(),
+
+        email:
+        document.getElementById("email")
+        .value.trim(),
+
+        phone:
+        document.getElementById("phone")
+        .value.trim(),
+
+        location:
+        document.getElementById("location")
+        .value.trim()
+
+    };
+
+}
+
+
+/* =========================================
+   START QUIZ
+========================================= */
+
+startBtn.addEventListener("click", function(){
+
+    if(quizStarted){
+        return;
+    }
+
+
+    const fullName =
+    document.getElementById("fullName");
+
+    const email =
+    document.getElementById("email");
+
+    const phone =
+    document.getElementById("phone");
+
+    const location =
+    document.getElementById("location");
+
+
+    if(
+        !fullName.value.trim() ||
+        !email.value.trim() ||
+        !phone.value.trim() ||
+        !location.value.trim()
+    ){
+
+        alert(
+        "Please complete all B.E.P. Member details before starting the quiz."
+        );
+
+        return;
+
+    }
+
+
+    if(!email.checkValidity()){
+
+        alert(
+        "Please enter a valid email address."
+        );
+
+        email.focus();
+
+        return;
+
+    }
+
+
+    /* Lock member details */
+
+    fullName.disabled = true;
+
+    email.disabled = true;
+
+    phone.disabled = true;
+
+    location.disabled = true;
+
+
+    /* Enable questions */
+
+    quizQuestions.disabled = false;
+
+
+    /* Enable submit */
+
+    submitBtn.disabled = false;
+
+
+    /* Disable start */
+
+    startBtn.disabled = true;
+
+    startBtn.innerHTML =
+    '<i class="fas fa-check"></i> Quiz Started';
+
+
+    startMessage.textContent =
+    "Your 30-minute timer has started. Good luck!";
+
+
+    /* Start timer */
+
+    startTimer();
+
+
+    /* Scroll to first question */
+
+    setTimeout(function(){
+
+        const firstQuestion =
+        document.querySelector(".question");
+
+        if(firstQuestion){
+
+            firstQuestion.scrollIntoView({
+                behavior:"smooth",
+                block:"center"
+            });
+
+        }
+
+    },200);
+
+});
+
+
+/* =========================================
+   FIND UNANSWERED QUESTIONS
+========================================= */
+
+function getUnansweredQuestions(){
+
+    const unanswered = [];
+
+
+    for(let i = 1; i <= TOTAL_QUESTIONS; i++){
+
+        const selected =
+        document.querySelector(
+            'input[name="q' + i + '"]:checked'
+        );
+
+
+        if(!selected){
+
+            unanswered.push(i);
+
+        }
+
+    }
+
+
+    return unanswered;
+
+}
+
+
+/* =========================================
+   SUBMIT QUIZ
+========================================= */
+
+quizForm.addEventListener("submit", function(event){
+
+    event.preventDefault();
+
+    submitQuiz(false);
+
+});
+
+
+async function submitQuiz(isAutoSubmit){
+
+    if(quizSubmitted){
+        return;
+    }
+
+
+    if(!quizStarted){
+        return;
+    }
+
+
+    /* Manual submission */
+
+    if(!isAutoSubmit){
+
+        const unanswered =
+        getUnansweredQuestions();
+
+
+        if(unanswered.length > 0){
+
+            alert(
+                "Please answer all 20 questions before submitting.\n\n"
+                + "Unanswered questions: "
+                + unanswered.join(", ")
+            );
+
+            return;
+
+        }
+
+    }
+
+
+    /* Stop timer */
+
+    stopTimer();
+
+
+    /* Lock quiz */
 
     quizSubmitted = true;
 
 
-    calculateScore(true);
+    quizQuestions.disabled = true;
+
+    submitBtn.disabled = true;
+
+    startBtn.disabled = true;
+
+
+    await calculateAndDisplayResult(isAutoSubmit);
 
 }
 
 
+/* =========================================
+   CALCULATE RESULT
+========================================= */
 
-/* =========================
-   NORMAL SUBMISSION
-========================= */
-
-document
-    .getElementById("quizForm")
-    .addEventListener(
-        "submit",
-        async function(event){
-
-            event.preventDefault();
-
-
-            if(quizSubmitted){
-
-                return;
-
-            }
-
-
-            const fullName =
-                document
-                .getElementById("fullName")
-                .value
-                .trim();
-
-
-            const email =
-                document
-                .getElementById("email")
-                .value
-                .trim();
-
-
-            const phone =
-                document
-                .getElementById("phone")
-                .value
-                .trim();
-
-
-            const location =
-                document
-                .getElementById("location")
-                .value
-                .trim();
-
-
-            if(
-                !fullName ||
-                !email ||
-                !phone ||
-                !location
-            ){
-
-                alert(
-                    "Please complete all B.E.P. Member Details before submitting."
-                );
-
-                return;
-
-            }
-
-
-            /* CHECK ALL QUESTIONS */
-
-            let unanswered = [];
-
-
-            for(
-                let i = 1;
-                i <= TOTAL_QUESTIONS;
-                i++
-            ){
-
-                const selected =
-                    document.querySelector(
-                        `input[name="q${i}"]:checked`
-                    );
-
-
-                if(!selected){
-
-                    unanswered.push(i);
-
-                }
-
-            }
-
-
-            if(unanswered.length > 0){
-
-                alert(
-                    "Please answer all questions before submitting.\n\n" +
-                    "Unanswered questions: " +
-                    unanswered.join(", ")
-                );
-
-                return;
-
-            }
-
-
-            clearInterval(timerInterval);
-
-
-            quizSubmitted = true;
-
-
-            await calculateScore(false);
-
-        }
-    );
-
-
-
-/* =========================
-   CALCULATE SCORE
-========================= */
-
-async function calculateScore(timeExpired){
-
-    const fullName =
-        document
-        .getElementById("fullName")
-        .value
-        .trim();
-
-
-    const email =
-        document
-        .getElementById("email")
-        .value
-        .trim();
-
-
-    const phone =
-        document
-        .getElementById("phone")
-        .value
-        .trim();
-
-
-    const location =
-        document
-        .getElementById("location")
-        .value
-        .trim();
-
+async function calculateAndDisplayResult(isAutoSubmit){
 
     let score = 0;
 
-    let answeredQuestions = 0;
-
     let correctCount = 0;
 
+    let answeredCount = 0;
 
 
-    /* =========================
-       CHECK ANSWERS
-    ========================= */
-
-    for(
-        let i = 1;
-        i <= TOTAL_QUESTIONS;
-        i++
-    ){
+    for(let i = 1; i <= TOTAL_QUESTIONS; i++){
 
         const selected =
-            document.querySelector(
-                `input[name="q${i}"]:checked`
-            );
+        document.querySelector(
+            'input[name="q' + i + '"]:checked'
+        );
 
 
         if(selected){
 
-            answeredQuestions++;
+            answeredCount++;
 
 
             if(
                 selected.value ===
-                correctAnswers[`q${i}`]
+                correctAnswers["q" + i]
             ){
 
-                score +=
-                    MARKS_PER_QUESTION;
+                score += MARKS_PER_QUESTION;
 
                 correctCount++;
 
@@ -2299,185 +2447,140 @@ async function calculateScore(timeExpired){
     }
 
 
-
     const unanswered =
-        TOTAL_QUESTIONS -
-        answeredQuestions;
+    TOTAL_QUESTIONS - answeredCount;
 
 
     const percentage =
-        Math.round(
-            (score / TOTAL_MARKS) * 100
-        );
+    Math.round(
+        (score / TOTAL_MARKS) * 100
+    );
 
 
     const passed =
-        score >= PASS_MARK;
+    score >= PASS_MARK;
 
 
     const resultStatus =
-        passed
-        ? "PASS"
-        : "NOT PASSED";
+    passed ? "PASS" : "FAIL";
 
 
-
-    /* =========================
-       DISPLAY RESULT
-    ========================= */
-
-    document
-        .getElementById("learnerResult")
-        .innerHTML =
-        `Well done, <strong>${escapeHTML(fullName || "B.E.P. Member")}</strong>!`;
+    const submissionTime =
+    new Date().toISOString();
 
 
-    document
-        .getElementById("score")
-        .textContent =
-        `${score} / ${TOTAL_MARKS} Marks`;
+    /* Display score */
+
+    document.getElementById("score")
+    .textContent =
+    score + " / " + TOTAL_MARKS + " Marks";
 
 
-    document
-        .getElementById("percentage")
-        .innerHTML =
-        `<strong>Percentage:</strong> ${percentage}%`;
+    document.getElementById("percentage")
+    .textContent =
+    percentage + "%";
+
+
+    document.getElementById("correctCountDisplay")
+    .textContent =
+    correctCount + " / " + TOTAL_QUESTIONS;
+
+
+    document.getElementById("unansweredDisplay")
+    .textContent =
+    unanswered;
 
 
     const status =
-        document
-        .getElementById("status");
+    document.getElementById("status");
 
 
-    if(passed){
-
-        status.innerHTML =
-        '<span class="pass">✓ PASS</span>';
-
-    }
-    else{
-
-        status.innerHTML =
-        '<span class="fail">✗ NOT YET PASSED</span>';
-
-    }
+    status.textContent =
+    passed ? "✓ PASS" : "✗ FAIL";
 
 
-
-    /* =========================
-       TIME MESSAGE
-    ========================= */
-
-    const expiredMessage =
-        document
-        .getElementById("expiredMessage");
+    status.className =
+    passed ? "pass" : "fail";
 
 
-    if(timeExpired){
+    if(isAutoSubmit){
 
-        expiredMessage.innerHTML =
-        `⏰ TIME EXPIRED — Your quiz was submitted automatically.
-        You answered ${answeredQuestions}
-        of ${TOTAL_QUESTIONS} questions.`;
+        document.getElementById("expiredMessage")
+        .textContent =
+        "⏰ TIME EXPIRED — Your quiz was submitted automatically. "
+        + "You answered "
+        + answeredCount
+        + " of "
+        + TOTAL_QUESTIONS
+        + " questions.";
 
-    }
-    else{
+    }else{
 
-        expiredMessage.textContent =
-        `You answered all ${TOTAL_QUESTIONS} questions.`;
+        document.getElementById("expiredMessage")
+        .textContent =
+        "You successfully submitted your quiz.";
 
     }
 
 
-
-    /* =========================
-       SHOW RESULT
-    ========================= */
-
-    const result =
-        document
-        .getElementById("result");
-
-
-    result.style.display =
-        "block";
-
+    document.getElementById("submittedTime")
+    .textContent =
+    "Submission time: "
+    + new Date(submissionTime)
+    .toLocaleString(
+        "en-ZA",
+        {
+            dateStyle:"medium",
+            timeStyle:"short"
+        }
+    );
 
 
-    /* =========================
-       DISABLE QUIZ
-    ========================= */
+    /* Show result */
 
-    document
-        .querySelectorAll("#quizForm input")
-        .forEach(
-            input => {
-
-                input.disabled = true;
-
-            }
-        );
+    resultBox.style.display = "block";
 
 
-    document
-        .getElementById("submitBtn")
-        .disabled = true;
-
-
-
-    /* =========================
-       SAVE TO SUPABASE
-    ========================= */
-
-    async function saveQuizResult(data){
-
-        fullName:
-            fullName || "Not Provided",
-
-        email:
-            email || "Not Provided",
-
-        phone:
-            phone || "Not Provided",
-
-        location:
-            location || "Not Provided",
-
-        score:
-            score,
-
-        correctCount:
-            correctCount,
-
-        unanswered:
-            unanswered,
-
-        resultStatus:
-            resultStatus
-
+    resultBox.scrollIntoView({
+        behavior:"smooth",
+        block:"center"
     });
 
 
+    /* Save result */
 
-    /* =========================
-       SCROLL TO RESULT
-    ========================= */
+    await saveQuizResult({
 
-    result.scrollIntoView({
+        fullName:
+        getMemberDetails().fullName,
 
-        behavior:"smooth",
+        email:
+        getMemberDetails().email,
 
-        block:"center"
+        phone:
+        getMemberDetails().phone,
+
+        location:
+        getMemberDetails().location,
+
+        score:score,
+
+        correctCount:correctCount,
+
+        unanswered:unanswered,
+
+        resultStatus:resultStatus,
+
+        submittedAt:submissionTime
 
     });
 
 }
 
 
-
-/* =========================
-   SAVE RESULT TO SUPABASE
-========================= */
+/* =========================================
+   SAVE TO SUPABASE
+========================================= */
 
 async function saveQuizResult(data){
 
@@ -2485,154 +2588,56 @@ async function saveQuizResult(data){
         return;
     }
 
-    const savingMessage =
-        document.getElementById("savingMessage");
-
-    const databaseStatus =
-        document.getElementById("databaseStatus");
 
     savingMessage.style.display = "block";
 
-    databaseStatus.textContent = "";
 
-    try{
-
-        const { data: savedData, error } =
-            await supabaseClient
-            .from("bep_quiz_results")
-            .insert([
-                {
-                    member_name: data.fullName,
-                    member_email: data.email,
-                    member_phone: data.phone,
-                    member_location: data.location,
-
-                    score: data.score,
-
-                    total_marks: TOTAL_MARKS,
-
-                    correct_answers:
-                        data.correctCount,
-
-                    unanswered:
-                        data.unanswered,
-
-                    result:
-                        data.resultStatus,
-
-                    submitted_at:
-                        new Date().toISOString()
-                }
-            ])
-            .select();
-
-        if(error){
-
-            console.error(
-                "Supabase error:",
-                error
-            );
-
-            databaseStatus.innerHTML =
-            '<span style="color:#dc3545;">' +
-            '⚠️ Your score was calculated, but the result could not be saved to the B.E.P. database.' +
-            '</span>';
-
-            savingMessage.style.display = "none";
-
-            return;
-        }
-
-        resultSaved = true;
-
-        savingMessage.style.display = "none";
-
-        databaseStatus.innerHTML =
-        '<span style="color:#198754;">' +
-        '✓ Your B.E.P. quiz result has been successfully saved.' +
-        '</span>';
-
-        console.log(
-            "Quiz result saved:",
-            savedData
-        );
-
-    }
-    catch(error){
-
-        console.error(
-            "Unexpected Supabase error:",
-            error
-        );
-
-        savingMessage.style.display = "none";
-
-        databaseStatus.innerHTML =
-        '<span style="color:#dc3545;">' +
-        '⚠️ There was a problem connecting to the B.E.P. database.' +
-        '</span>';
-    }
-}
-
-
-    const savingMessage =
-        document
-        .getElementById("savingMessage");
-
-
-    const databaseStatus =
-        document
-        .getElementById("databaseStatus");
-
-
-    savingMessage.style.display =
-        "block";
-
-
-    databaseStatus.textContent =
-        "";
-
+    document.getElementById("databaseStatus")
+    .textContent = "";
 
 
     try{
 
         const { error } =
-            await supabaseClient
-            .from("bep_quiz_results")
-            .insert([
+        await supabaseClient
+        .from("bep_quiz_results")
+        .insert([
 
-                {
+            {
 
-                    member_name:
-                        data.fullName,
+                member_name:
+                data.fullName,
 
-                    member_email:
-                        data.email,
+                member_email:
+                data.email,
 
-                    member_phone:
-                        data.phone,
+                member_phone:
+                data.phone,
 
-                    member_location:
-                        data.location,
+                member_location:
+                data.location,
 
-                    score:
-                        data.score,
+                score:
+                data.score,
 
-                    total_marks:
-                        TOTAL_MARKS,
+                total_marks:
+                TOTAL_MARKS,
 
-                    correct_answers:
-                        data.correctCount,
+                correct_answers:
+                data.correctCount,
 
-                    unanswered:
-                        data.unanswered,
+                unanswered:
+                data.unanswered,
 
-                    result:
-                        data.resultStatus
+                result:
+                data.resultStatus,
 
-                }
+                submitted_at:
+                data.submittedAt
 
-            ]);
+            }
+
+        ]);
 
 
         if(error){
@@ -2642,16 +2647,15 @@ async function saveQuizResult(data){
                 error
             );
 
+            document.getElementById(
+                "databaseStatus"
+            ).textContent =
+            "⚠️ Result displayed, but it could not be saved to the database.";
 
-            databaseStatus.innerHTML =
-            '<span style="color:#dc3545;">' +
-            '⚠️ Your score was calculated, but the result could not be saved to the B.E.P. database. Please contact B.E.P.' +
-            '</span>';
-
-
-            savingMessage.style.display =
-                "none";
-
+            document.getElementById(
+                "databaseStatus"
+            ).style.color =
+            "#b00020";
 
             return;
 
@@ -2661,73 +2665,62 @@ async function saveQuizResult(data){
         resultSaved = true;
 
 
-        savingMessage.style.display =
-            "none";
+        document.getElementById(
+            "databaseStatus"
+        ).textContent =
+        "✓ Your quiz result has been saved successfully.";
+
+        document.getElementById(
+            "databaseStatus"
+        ).style.color =
+        "green";
 
 
-        databaseStatus.innerHTML =
-        '<span style="color:#198754;">' +
-        '✓ Your B.E.P. quiz result has been successfully saved.' +
-        '</span>';
-
-
-    }
-    catch(error){
+    }catch(error){
 
         console.error(
-            "Unexpected Supabase error:",
+            "Database connection error:",
             error
         );
 
 
-        savingMessage.style.display =
-            "none";
+        document.getElementById(
+            "databaseStatus"
+        ).textContent =
+        "⚠️ Result displayed, but there was a database connection problem.";
 
-
-        databaseStatus.innerHTML =
-        '<span style="color:#dc3545;">' +
-        '⚠️ There was a problem connecting to the B.E.P. database.' +
-        '</span>';
+        document.getElementById(
+            "databaseStatus"
+        ).style.color =
+        "#b00020";
 
     }
 
-}
 
-
-
-/* =========================
-   SECURITY / HTML ESCAPE
-========================= */
-
-function escapeHTML(text){
-
-    const div =
-        document.createElement("div");
-
-
-    div.textContent =
-        text;
-
-
-    return div.innerHTML;
+    savingMessage.style.display = "none";
 
 }
 
 
+/* =========================================
+   INITIAL TIMER
+========================================= */
 
-/* =========================
+displayTimer();
+
+updateTimerState();
+
+
+/* =========================================
    FOOTER YEAR
-========================= */
+========================================= */
 
-document
-    .getElementById("year")
-    .textContent =
-    new Date().getFullYear();
+document.getElementById("year")
+.textContent =
+new Date().getFullYear();
 
 
 </script>
 
-
 </body>
-
 </html>
