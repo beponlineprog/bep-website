@@ -1,22 +1,19 @@
-<<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
 
 <meta charset="UTF-8">
 
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>B.E.P. Member Registration</title>
 
 <meta name="description"
 content="Register as a member of the Biblical Empowerment Program - B.E.P.">
 
-<!-- Font Awesome -->
 <link rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-
 
 <style>
 
@@ -103,7 +100,6 @@ a{
     font-size:14px;
     font-weight:bold;
     padding:8px 5px;
-
     transition:0.3s;
 }
 
@@ -136,7 +132,6 @@ a{
 
     color:white;
     text-align:center;
-
     padding:75px 20px;
 }
 
@@ -176,9 +171,7 @@ a{
 
 .registration-card{
     background:white;
-
     padding:40px;
-
     border-radius:18px;
 
     box-shadow:
@@ -224,7 +217,8 @@ a{
     width:22px;
 }
 
-.form-group input{
+.form-group input,
+.form-group select{
     width:100%;
 
     padding:14px 15px;
@@ -236,14 +230,21 @@ a{
 
     outline:none;
 
+    background:white;
+
     transition:0.3s;
 }
 
-.form-group input:focus{
+.form-group input:focus,
+.form-group select:focus{
     border-color:#0066b3;
 
     box-shadow:
     0 0 0 3px rgba(0,102,179,0.10);
+}
+
+.form-group select{
+    cursor:pointer;
 }
 
 
@@ -369,17 +370,13 @@ a{
 
 .contact-section{
     background:#eef5fc;
-
     padding:65px 20px;
 }
 
 .section-title{
     text-align:center;
-
     color:#004d91;
-
     font-size:32px;
-
     margin-bottom:12px;
 }
 
@@ -389,18 +386,13 @@ a{
 
 .section-subtitle{
     text-align:center;
-
     max-width:700px;
-
-    margin:
-    0 auto 35px;
-
+    margin:0 auto 35px;
     color:#637381;
 }
 
 .contact-grid{
     max-width:1100px;
-
     margin:auto;
 
     display:grid;
@@ -413,11 +405,8 @@ a{
 
 .contact-card{
     background:white;
-
     padding:25px 15px;
-
     border-radius:14px;
-
     text-align:center;
 
     box-shadow:
@@ -426,23 +415,18 @@ a{
 
 .contact-card i{
     font-size:32px;
-
     color:#0066b3;
-
     margin-bottom:12px;
 }
 
 .contact-card h3{
     color:#004d91;
-
     margin-bottom:8px;
 }
 
 .contact-card a{
     color:#0066b3;
-
     font-weight:bold;
-
     word-break:break-word;
 }
 
@@ -457,16 +441,12 @@ a{
 
 footer{
     background:#002b52;
-
     color:#dcecff;
-
-    padding:
-    55px 20px 20px;
+    padding:55px 20px 20px;
 }
 
 .footer-grid{
     max-width:1150px;
-
     margin:auto;
 
     display:grid;
@@ -479,7 +459,6 @@ footer{
 
 .footer-column h3{
     color:#ffd700;
-
     margin-bottom:18px;
 }
 
@@ -489,7 +468,6 @@ footer{
 
 .footer-column a{
     color:#dcecff;
-
     transition:0.3s;
 }
 
@@ -499,25 +477,19 @@ footer{
 
 .footer-column i{
     color:#ffd700;
-
     width:20px;
-
     margin-right:5px;
 }
 
 .footer-bottom{
     max-width:1150px;
-
-    margin:
-    35px auto 0;
-
+    margin:35px auto 0;
     padding-top:20px;
 
     border-top:
     1px solid rgba(255,255,255,0.2);
 
     text-align:center;
-
     font-size:14px;
 }
 
@@ -630,7 +602,6 @@ footer{
 
 <div class="nav-container">
 
-
 <a href="index.html" class="logo">
 
 <i class="fa-solid fa-book-bible"></i>
@@ -649,97 +620,54 @@ B.E.P. Online
 
 <ul class="nav-links" id="navLinks">
 
-
 <li>
-
 <a href="index.html">
-
 <i class="fa-solid fa-house"></i>
-
 Home
-
 </a>
-
 </li>
 
-
 <li>
-
 <a href="index.html#about">
-
 <i class="fa-solid fa-circle-info"></i>
-
 About
-
 </a>
-
 </li>
 
-
 <li>
-
 <a href="index.html#vision">
-
 <i class="fa-solid fa-eye"></i>
-
 Vision
-
 </a>
-
 </li>
 
-
 <li>
-
 <a href="index.html#mission">
-
 <i class="fa-solid fa-bullseye"></i>
-
 Mission
-
 </a>
-
 </li>
 
-
 <li>
-
 <a href="index.html#sessions">
-
 <i class="fa-solid fa-calendar-days"></i>
-
 Sessions
-
 </a>
-
 </li>
 
-
 <li>
-
 <a href="quiz.html">
-
 <i class="fa-solid fa-pen-to-square"></i>
-
 Quiz
-
 </a>
-
 </li>
-
 
 <li>
-
 <a href="#contact">
-
 <i class="fa-solid fa-envelope"></i>
-
 Contact
-
 </a>
-
 </li>
-
 
 </ul>
 
@@ -783,9 +711,7 @@ discipleship and Christian fellowship.
 
 <div class="registration-container">
 
-
 <div class="registration-card">
-
 
 <h2>
 
@@ -805,11 +731,12 @@ to the B.E.P. member database.
 </p>
 
 
-
 <form id="registrationForm">
 
 
-<!-- FULL NAME -->
+<!-- =========================
+     FULL NAME
+========================= -->
 
 <div class="form-group">
 
@@ -834,7 +761,9 @@ required
 
 
 
-<!-- EMAIL -->
+<!-- =========================
+     EMAIL
+========================= -->
 
 <div class="form-group">
 
@@ -859,7 +788,9 @@ required
 
 
 
-<!-- PHONE -->
+<!-- =========================
+     PHONE
+========================= -->
 
 <div class="form-group">
 
@@ -884,7 +815,9 @@ required
 
 
 
-<!-- LOCATION -->
+<!-- =========================
+     LOCATION
+========================= -->
 
 <div class="form-group">
 
@@ -909,12 +842,77 @@ required
 
 
 
-<!-- SUBMIT -->
+<!-- =========================
+     HEARD ABOUT US
+========================= -->
+
+<div class="form-group">
+
+<label for="heardAbout">
+
+<i class="fa-solid fa-bullhorn"></i>
+
+Where did you hear about us?
+
+</label>
+
+<select
+id="heardAbout"
+name="heardAbout"
+required
+>
+
+<option value="">
+-- Select an option --
+</option>
+
+<option value="WhatsApp">
+WhatsApp
+</option>
+
+<option value="Facebook">
+Facebook
+</option>
+
+<option value="Friend / Family">
+Friend / Family
+</option>
+
+<option value="Church">
+Church
+</option>
+
+<option value="B.E.P. Member">
+B.E.P. Member
+</option>
+
+<option value="Microsoft Teams">
+Microsoft Teams
+</option>
+
+<option value="Website">
+Website
+</option>
+
+<option value="Other">
+Other
+</option>
+
+</select>
+
+</div>
+
+
+
+<!-- =========================
+     SUBMIT
+========================= -->
 
 <button
 type="submit"
 class="submit-btn"
-id="submitBtn">
+id="submitBtn"
+>
 
 <i class="fa-solid fa-user-plus"></i>
 
@@ -986,15 +984,13 @@ questions or assistance, please contact us.
 
 <i class="fa-brands fa-whatsapp"></i>
 
-<h3>
-
-Omega
-
-</h3>
+<h3>Omega</h3>
 
 <a
 href="https://wa.me/27623508689"
-target="_blank">
+target="_blank"
+rel="noopener"
+>
 
 062 350 8689
 
@@ -1010,15 +1006,13 @@ target="_blank">
 
 <i class="fa-brands fa-whatsapp"></i>
 
-<h3>
-
-Bro. KB
-
-</h3>
+<h3>Bro. KB</h3>
 
 <a
 href="https://wa.me/27832822644"
-target="_blank">
+target="_blank"
+rel="noopener"
+>
 
 083 282 2644
 
@@ -1034,15 +1028,13 @@ target="_blank">
 
 <i class="fa-brands fa-facebook"></i>
 
-<h3>
-
-Facebook Group
-
-</h3>
+<h3>Facebook Group</h3>
 
 <a
 href="https://facebook.com/groups/1421853356307383/"
-target="_blank">
+target="_blank"
+rel="noopener"
+>
 
 Join Our Group
 
@@ -1058,14 +1050,11 @@ Join Our Group
 
 <i class="fa-solid fa-envelope"></i>
 
-<h3>
-
-Email
-
-</h3>
+<h3>Email</h3>
 
 <a
-href="mailto:bep.onlineprog@gmail.com">
+href="mailto:bep.onlineprog@gmail.com"
+>
 
 bep.onlineprog@gmail.com
 
@@ -1086,7 +1075,6 @@ bep.onlineprog@gmail.com
 
 <footer>
 
-
 <div class="footer-grid">
 
 
@@ -1094,29 +1082,19 @@ bep.onlineprog@gmail.com
 
 <div class="footer-column">
 
-<h3>
-
-B.E.P.
-
-</h3>
+<h3>B.E.P.</h3>
 
 <p>
-
 Biblical Empowerment Program
-
 </p>
 
 <p>
-
 Building the Church of Christ
-
 </p>
 
 <p>
-
 Growing believers through God's Word,
 discipleship and Christian fellowship.
-
 </p>
 
 </div>
@@ -1127,103 +1105,56 @@ discipleship and Christian fellowship.
 
 <div class="footer-column">
 
-<h3>
-
-Quick Links
-
-</h3>
-
+<h3>Quick Links</h3>
 
 <p>
-
 <a href="index.html">
-
 <i class="fa-solid fa-house"></i>
-
 Home
-
 </a>
-
 </p>
 
-
 <p>
-
 <a href="index.html#about">
-
 <i class="fa-solid fa-circle-info"></i>
-
 About Us
-
 </a>
-
 </p>
 
-
 <p>
-
 <a href="index.html#vision">
-
 <i class="fa-solid fa-eye"></i>
-
 Vision
-
 </a>
-
 </p>
 
-
 <p>
-
 <a href="index.html#mission">
-
 <i class="fa-solid fa-bullseye"></i>
-
 Mission
-
 </a>
-
 </p>
 
-
 <p>
-
 <a href="index.html#sessions">
-
 <i class="fa-solid fa-calendar-days"></i>
-
 Sessions
-
 </a>
-
 </p>
 
-
 <p>
-
 <a href="register.html">
-
 <i class="fa-solid fa-user-plus"></i>
-
 Registration
-
 </a>
-
 </p>
-
 
 <p>
-
 <a href="quiz.html">
-
 <i class="fa-solid fa-pen-to-square"></i>
-
 Bible Quiz
-
 </a>
-
 </p>
-
 
 </div>
 
@@ -1233,18 +1164,15 @@ Bible Quiz
 
 <div class="footer-column">
 
-<h3>
-
-Connect
-
-</h3>
-
+<h3>Connect</h3>
 
 <p>
 
 <a
 href="https://wa.me/27623508689"
-target="_blank">
+target="_blank"
+rel="noopener"
+>
 
 <i class="fa-brands fa-whatsapp"></i>
 
@@ -1259,7 +1187,9 @@ Omega
 
 <a
 href="https://wa.me/27832822644"
-target="_blank">
+target="_blank"
+rel="noopener"
+>
 
 <i class="fa-brands fa-whatsapp"></i>
 
@@ -1272,8 +1202,7 @@ Bro. KB
 
 <p>
 
-<a
-href="mailto:bep.onlineprog@gmail.com">
+<a href="mailto:bep.onlineprog@gmail.com">
 
 <i class="fa-solid fa-envelope"></i>
 
@@ -1288,7 +1217,9 @@ Email
 
 <a
 href="https://facebook.com/groups/1421853356307383/"
-target="_blank">
+target="_blank"
+rel="noopener"
+>
 
 <i class="fa-brands fa-facebook"></i>
 
@@ -1306,12 +1237,7 @@ Facebook Group
 
 <div class="footer-column">
 
-<h3>
-
-B.E.P. Sessions
-
-</h3>
-
+<h3>B.E.P. Sessions</h3>
 
 <p>
 
@@ -1344,7 +1270,9 @@ Microsoft Teams
 
 <a
 href="https://teams.live.com/meet/936085799236?p=b66LnDUAB2Xkx2uQYp&eventType=community"
-target="_blank">
+target="_blank"
+rel="noopener"
+>
 
 <i class="fa-solid fa-video"></i>
 
@@ -1409,7 +1337,6 @@ window.supabase.createClient(
 );
 
 
-
 /* =========================
    MOBILE MENU
 ========================= */
@@ -1445,7 +1372,6 @@ document
 });
 
 
-
 /* =========================
    REGISTRATION
 ========================= */
@@ -1455,18 +1381,15 @@ document.getElementById(
     "registrationForm"
 );
 
-
 const registrationMessage =
 document.getElementById(
     "registrationMessage"
 );
 
-
 const submitBtn =
 document.getElementById(
     "submitBtn"
 );
-
 
 
 registrationForm.addEventListener(
@@ -1508,6 +1431,13 @@ async function(event){
         .trim();
 
 
+    const heardAbout =
+        document
+        .getElementById("heardAbout")
+        .value
+        .trim();
+
+
 
     /* =========================
        VALIDATION
@@ -1517,7 +1447,8 @@ async function(event){
         !fullName ||
         !email ||
         !phone ||
-        !location
+        !location ||
+        !heardAbout
     ){
 
         registrationMessage.className =
@@ -1564,7 +1495,8 @@ async function(event){
                     full_name: fullName,
                     email: email,
                     phone: phone,
-                    location: location
+                    location: location,
+                    heard_about: heardAbout
                 }
             ]);
 
@@ -1652,7 +1584,6 @@ async function(event){
     }
 
 });
-
 
 
 /* =========================
