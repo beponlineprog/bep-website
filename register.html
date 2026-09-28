@@ -793,3 +793,268 @@ footer{
 
 
 <!-- PART 3 STARTS HERE -->
+<!-- SUPABASE -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+
+const SUPABASE_URL =
+    "https://rukusaellqqwthzibyib.supabase.co";
+
+const SUPABASE_PUBLISHABLE_KEY =
+    "sb_publishable_Co8_MoJOV14tXBkSWyXFTA_ULn1WRa5";
+
+const supabaseClient =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_PUBLISHABLE_KEY
+    );
+
+
+/* REGISTRATION FORM */
+
+const registrationForm =
+    document.getElementById("registrationForm");
+
+const submitBtn =
+    document.getElementById("submitBtn");
+
+const successMessage =
+    document.getElementById("successMessage");
+
+const errorMessage =
+    document.getElementById("errorMessage");
+
+
+registrationForm.addEventListener(
+    "submit",
+    async function(event){
+
+        event.preventDefault();
+
+        successMessage.style.display = "none";
+        errorMessage.style.display = "none";
+
+        submitBtn.disabled = true;
+
+        submitBtn.innerHTML =
+            '<i class="fas fa-spinner fa-spin"></i> Registering...';
+
+
+        /* GET FORM DATA */
+
+        const fullName =
+            document.getElementById("fullName")
+            .value
+            .trim();
+
+        const email =
+            document.getElementById("email")
+            .value
+            .trim()
+            .toLowerCase();
+
+        const phone =
+            document.getElementById("phone")
+            .value
+            .trim();
+
+        const location =
+            document.getElementById("location")
+            .value
+            .trim();
+
+        const heardAbout =
+            document.getElementById("heardAbout")
+            .value;
+
+
+        try {
+
+            /* SAVE MEMBER TO SUPABASE */
+
+            const { data, error } =
+                await supabaseClient
+                .from("members")
+                .insert([
+                    {
+                        full_name: fullName,
+                        email: email,
+                        phone: phone,
+                        location: location,
+                        heard_about: heardAbout
+                    }
+                ])
+                .select(
+                    "id, member_number, full_name"
+                )
+                .single();
+
+
+            if(error){
+                throw error;
+            }
+
+
+            /* SUCCESS MESSAGE */
+
+            successMessage.innerHTML = `
+
+                <h3>
+                    <i class="fas fa-check-circle"></i>
+                    Registration Successful!
+                </h3>
+
+                <p>
+                    Welcome to the Biblical Empowerment
+                    Program, <strong>${escapeHTML(data.full_name)}</strong>.
+                </p>
+
+                <p>
+                    Your B.E.P. Member Number is:
+                </p>
+
+                <h2 style="
+                    font-size:30px;
+                    margin:12px 0;
+                    color:#063b78;
+                ">
+                    ${escapeHTML(data.member_number)}
+                </h2>
+
+                <p>
+                    Please keep your Member Number safe.
+                </p>
+
+                <button
+                    type="button"
+                    class="contact-btn"
+                    id="copyMemberNumber"
+                >
+                    <i class="fas fa-copy"></i>
+                    Copy Member Number
+                </button>
+
+            `;
+
+
+            successMessage.style.display = "block";
+
+
+            /* COPY MEMBER NUMBER */
+
+            const copyButton =
+                document.getElementById(
+                    "copyMemberNumber"
+                );
+
+
+            copyButton.addEventListener(
+                "click",
+                async function(){
+
+                    try {
+
+                        await navigator.clipboard.writeText(
+                            data.member_number
+                        );
+
+                        this.innerHTML =
+                            '<i class="fas fa-check"></i> Copied!';
+
+                    } catch(copyError){
+
+                        this.innerHTML =
+                            data.member_number;
+
+                    }
+
+                }
+            );
+
+
+            /* CLEAR FORM */
+
+            registrationForm.reset();
+
+
+        } catch(error){
+
+            console.error(
+                "B.E.P. Registration Error:",
+                error
+            );
+
+
+            errorMessage.innerHTML = `
+
+                <strong>
+                    <i class="fas fa-circle-exclamation"></i>
+                    Registration could not be completed.
+                </strong>
+
+                <br><br>
+
+                ${escapeHTML(
+                    error.message ||
+                    "Unknown error"
+                )}
+
+            `;
+
+
+            errorMessage.style.display = "block";
+
+
+        } finally {
+
+            submitBtn.disabled = false;
+
+            submitBtn.innerHTML =
+                '<i class="fas fa-user-plus"></i> Register as B.E.P. Member';
+
+        }
+
+    }
+);
+
+
+/* SECURITY:
+   Prevent database error messages from
+   being interpreted as HTML.
+*/
+
+function escapeHTML(value){
+
+    return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+}
+
+
+/* BACK TO TOP */
+
+document.querySelector(".back-top")
+    .addEventListener(
+        "click",
+        function(event){
+
+            event.preventDefault();
+
+            window.scrollTo({
+                top:0,
+                behavior:"smooth"
+            });
+
+        }
+    );
+
+</script>
+
+</body>
+</html>
