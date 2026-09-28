@@ -1,575 +1,354 @@
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>B.E.P. Member Registration</title>
 
-<meta name="description"
-content="Register as a member of the Biblical Empowerment Program - B.E.P.">
+<meta name="description" content="Register as a member of the Biblical Empowerment Program - B.E.P.">
 
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
 <style>
-
-/* =========================
-   RESET
-========================= */
-
 *{
+    box-sizing:border-box;
     margin:0;
     padding:0;
-    box-sizing:border-box;
 }
 
-html{
-    scroll-behavior:smooth;
+:root{
+    --blue:#063b78;
+    --dark-blue:#032653;
+    --gold:#d4a017;
+    --light:#f4f7fb;
+    --white:#ffffff;
+    --text:#263445;
+    --muted:#667085;
 }
 
 body{
-    font-family:Arial, Helvetica, sans-serif;
-    background:#f5f9ff;
-    color:#1b2a3a;
+    font-family:Arial,Helvetica,sans-serif;
+    background:var(--light);
+    color:var(--text);
     line-height:1.6;
 }
 
 a{
     text-decoration:none;
+    color:inherit;
 }
 
+.container{
+    width:92%;
+    max-width:1150px;
+    margin:auto;
+}
 
-/* =========================
-   NAVIGATION
-========================= */
+/* NAVIGATION */
 
 .navbar{
-    position:sticky;
-    top:0;
-    z-index:1000;
-
-    background:
-    linear-gradient(
-        90deg,
-        #003b73,
-        #0066b3,
-        #d4af37
-    );
-
-    box-shadow:
-    0 3px 12px rgba(0,0,0,0.2);
+    background:var(--dark-blue);
+    color:white;
+    padding:15px 0;
 }
 
-.nav-container{
-    max-width:1200px;
-    margin:auto;
-    padding:14px 20px;
-
+.nav-content{
     display:flex;
     align-items:center;
     justify-content:space-between;
+    gap:15px;
 }
 
 .logo{
-    color:white;
-    font-size:24px;
+    font-size:23px;
     font-weight:bold;
-
-    display:flex;
-    align-items:center;
-    gap:10px;
-}
-
-.logo i{
-    color:#ffd700;
+    color:var(--gold);
 }
 
 .nav-links{
     display:flex;
+    gap:22px;
     align-items:center;
-    gap:18px;
-    list-style:none;
 }
 
 .nav-links a{
     color:white;
     font-size:14px;
-    font-weight:bold;
-    padding:8px 5px;
-    transition:0.3s;
+    font-weight:600;
 }
 
 .nav-links a:hover{
-    color:#ffd700;
+    color:var(--gold);
 }
 
-.nav-links i{
-    margin-right:5px;
-}
-
-.menu-btn{
-    display:none;
-    color:white;
-    font-size:25px;
-    cursor:pointer;
-}
-
-
-/* =========================
-   PAGE HEADER
-========================= */
+/* PAGE HEADER */
 
 .page-header{
-    background:
-    linear-gradient(
-        rgba(0,43,82,0.88),
-        rgba(0,102,179,0.88)
-    );
-
+    background:linear-gradient(135deg,var(--blue),var(--dark-blue));
     color:white;
     text-align:center;
-    padding:75px 20px;
+    padding:55px 15px;
+    border-bottom:5px solid var(--gold);
 }
 
 .page-header h1{
-    font-size:42px;
+    font-size:32px;
     margin-bottom:10px;
-}
-
-.page-header h1 i{
-    color:#ffd700;
 }
 
 .page-header p{
-    font-size:18px;
-    max-width:750px;
-    margin:auto;
+    font-size:15px;
+    opacity:.95;
 }
 
-
-/* =========================
-   REGISTRATION SECTION
-========================= */
+/* REGISTRATION AREA */
 
 .registration-section{
-    padding:70px 20px;
+    padding:45px 0;
 }
-
-.registration-container{
-    max-width:800px;
-    margin:auto;
-}
-
-
-/* =========================
-   REGISTRATION CARD
-========================= */
 
 .registration-card{
     background:white;
-    padding:40px;
-    border-radius:18px;
-
-    box-shadow:
-    0 7px 25px rgba(0,0,0,0.10);
-
-    border-top:5px solid #0066b3;
+    max-width:750px;
+    margin:auto;
+    padding:30px;
+    border-radius:14px;
+    box-shadow:0 5px 25px rgba(0,0,0,.08);
 }
 
-.registration-card h2{
+.section-title{
+    color:var(--blue);
+    font-size:25px;
+    margin-bottom:8px;
     text-align:center;
-    color:#004d91;
-    margin-bottom:10px;
 }
 
-.registration-card h2 i{
-    color:#d4af37;
-}
-
-.registration-intro{
+.section-description{
+    color:var(--muted);
     text-align:center;
-    color:#637381;
-    margin-bottom:30px;
+    margin-bottom:25px;
+    font-size:14px;
 }
 
+.gold-line{
+    width:65px;
+    height:4px;
+    background:var(--gold);
+    margin:12px auto 22px;
+    border-radius:5px;
+}
 
-/* =========================
-   FORM
-========================= */
+/* FORM */
 
 .form-group{
-    margin-bottom:20px;
+    margin-bottom:18px;
 }
 
 .form-group label{
     display:block;
-    font-weight:bold;
-    color:#004d91;
+    font-weight:600;
     margin-bottom:7px;
-}
-
-.form-group label i{
-    color:#d4af37;
-    width:22px;
+    color:var(--dark-blue);
+    font-size:14px;
 }
 
 .form-group input,
 .form-group select{
     width:100%;
-
-    padding:14px 15px;
-
-    border:1px solid #cbd7e3;
-    border-radius:8px;
-
-    font-size:16px;
-
-    outline:none;
-
+    padding:13px;
+    border:1px solid #d5dce5;
+    border-radius:7px;
+    font-size:15px;
     background:white;
-
-    transition:0.3s;
+    outline:none;
 }
 
 .form-group input:focus,
 .form-group select:focus{
-    border-color:#0066b3;
-
-    box-shadow:
-    0 0 0 3px rgba(0,102,179,0.10);
+    border-color:var(--blue);
+    box-shadow:0 0 0 3px rgba(6,59,120,.10);
 }
-
-.form-group select{
-    cursor:pointer;
-}
-
-
-/* =========================
-   BUTTON
-========================= */
 
 .submit-btn{
     width:100%;
-
     border:none;
-
-    background:
-    linear-gradient(
-        90deg,
-        #003b73,
-        #0066b3
-    );
-
-    color:white;
-
     padding:15px;
-
-    border-radius:8px;
-
-    font-size:17px;
-
+    background:var(--blue);
+    color:white;
+    border-radius:7px;
+    font-size:16px;
     font-weight:bold;
-
     cursor:pointer;
-
-    transition:0.3s;
+    transition:.2s;
 }
 
 .submit-btn:hover{
-    background:
-    linear-gradient(
-        90deg,
-        #0066b3,
-        #003b73
-    );
-
-    transform:translateY(-2px);
+    background:var(--dark-blue);
 }
 
 .submit-btn:disabled{
-    opacity:0.7;
+    opacity:.6;
     cursor:not-allowed;
 }
 
-
-/* =========================
-   MESSAGE
-========================= */
-
-.registration-message{
+.message{
     display:none;
-
-    margin-top:20px;
-
     padding:15px;
-
-    border-radius:8px;
-
+    margin-top:20px;
+    border-radius:7px;
     text-align:center;
-
-    font-weight:bold;
+    font-weight:600;
+    overflow-wrap:anywhere;
 }
 
-.registration-message.success{
-    display:block;
-
-    background:#e8f8ee;
-    color:#176b35;
-
-    border:1px solid #a9dfba;
+.success{
+    background:#e8f7ed;
+    color:#176534;
+    border:1px solid #a8dfb8;
 }
 
-.registration-message.error{
-    display:block;
-
+.error{
     background:#fff0f0;
-    color:#a12626;
-
-    border:1px solid #e4aaaa;
+    color:#a32121;
+    border:1px solid #f1b7b7;
 }
 
-.registration-message.loading{
-    display:block;
-
-    background:#eef6ff;
-    color:#00549b;
-
-    border:1px solid #b8d8f5;
-}
-
-
-/* =========================
-   MEMBER NOTE
-========================= */
-
-.member-note{
-    margin-top:25px;
-
-    background:#f0f7ff;
-
-    padding:20px;
-
-    border-radius:10px;
-
-    text-align:center;
-}
-
-.member-note i{
-    color:#d4af37;
-    margin-right:5px;
-}
-
-
-/* =========================
-   CONTACT
-========================= */
+/* CONTACT */
 
 .contact-section{
-    background:#eef5fc;
-    padding:65px 20px;
+    padding:45px 0;
+    background:#eaf0f7;
 }
 
-.section-title{
+.contact-title{
     text-align:center;
-    color:#004d91;
-    font-size:32px;
-    margin-bottom:12px;
-}
-
-.section-title i{
-    color:#d4af37;
-}
-
-.section-subtitle{
-    text-align:center;
-    max-width:700px;
-    margin:0 auto 35px;
-    color:#637381;
+    color:var(--blue);
+    font-size:27px;
+    margin-bottom:25px;
 }
 
 .contact-grid{
-    max-width:1100px;
-    margin:auto;
-
     display:grid;
-
-    grid-template-columns:
-    repeat(4,1fr);
-
-    gap:20px;
+    grid-template-columns:repeat(2,1fr);
+    gap:18px;
 }
 
 .contact-card{
     background:white;
-    padding:25px 15px;
-    border-radius:14px;
+    padding:22px;
+    border-radius:10px;
     text-align:center;
-
-    box-shadow:
-    0 5px 18px rgba(0,0,0,0.08);
+    box-shadow:0 3px 12px rgba(0,0,0,.05);
 }
 
 .contact-card i{
-    font-size:32px;
-    color:#0066b3;
-    margin-bottom:12px;
+    font-size:27px;
+    color:var(--gold);
+    margin-bottom:10px;
 }
 
 .contact-card h3{
-    color:#004d91;
-    margin-bottom:8px;
+    color:var(--blue);
+    margin-bottom:6px;
 }
 
-.contact-card a{
-    color:#0066b3;
-    font-weight:bold;
-    word-break:break-word;
-}
-
-.contact-card a:hover{
-    color:#d4af37;
-}
-
-
-/* =========================
-   FOOTER
-========================= */
-
-footer{
-    background:#002b52;
-    color:#dcecff;
-    padding:55px 20px 20px;
-}
-
-.footer-grid{
-    max-width:1150px;
-    margin:auto;
-
-    display:grid;
-
-    grid-template-columns:
-    1.3fr 1fr 1fr 1fr;
-
-    gap:35px;
-}
-
-.footer-column h3{
-    color:#ffd700;
-    margin-bottom:18px;
-}
-
-.footer-column p{
-    margin-bottom:9px;
-}
-
-.footer-column a{
-    color:#dcecff;
-    transition:0.3s;
-}
-
-.footer-column a:hover{
-    color:#ffd700;
-}
-
-.footer-column i{
-    color:#ffd700;
-    width:20px;
-    margin-right:5px;
-}
-
-.footer-bottom{
-    max-width:1150px;
-    margin:35px auto 0;
-    padding-top:20px;
-
-    border-top:
-    1px solid rgba(255,255,255,0.2);
-
-    text-align:center;
+.contact-card p{
+    color:var(--muted);
     font-size:14px;
 }
 
-
-/* =========================
-   MOBILE
-========================= */
-
-@media(max-width:900px){
-
-    .nav-links{
-        position:absolute;
-
-        top:64px;
-        left:0;
-
-        width:100%;
-
-        background:#003b73;
-
-        display:none;
-
-        flex-direction:column;
-
-        align-items:flex-start;
-
-        padding:15px 25px;
-    }
-
-    .nav-links.active{
-        display:flex;
-    }
-
-    .nav-links li{
-        width:100%;
-    }
-
-    .nav-links a{
-        display:block;
-        width:100%;
-        padding:12px 5px;
-    }
-
-    .menu-btn{
-        display:block;
-    }
-
-    .contact-grid{
-        grid-template-columns:
-        repeat(2,1fr);
-    }
-
-    .footer-grid{
-        grid-template-columns:
-        repeat(2,1fr);
-    }
-
+.contact-btn{
+    display:inline-block;
+    margin-top:12px;
+    background:var(--blue);
+    color:white;
+    padding:10px 16px;
+    border-radius:6px;
+    font-size:14px;
+    font-weight:bold;
 }
 
+.contact-btn:hover{
+    background:var(--dark-blue);
+}
 
-@media(max-width:600px){
+/* FOOTER */
 
-    .page-header{
-        padding:55px 15px;
+footer{
+    background:var(--dark-blue);
+    color:white;
+    padding:40px 0 18px;
+}
+
+.footer-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:25px;
+}
+
+.footer-column h3{
+    color:var(--gold);
+    margin-bottom:15px;
+    font-size:17px;
+}
+
+.footer-column p,
+.footer-column a{
+    color:#e0e8f3;
+    font-size:13px;
+    display:block;
+    margin-bottom:9px;
+}
+
+.footer-column a:hover{
+    color:var(--gold);
+}
+
+.footer-bottom{
+    border-top:1px solid rgba(255,255,255,.2);
+    margin-top:30px;
+    padding-top:18px;
+    text-align:center;
+    font-size:12px;
+    color:#d0d9e6;
+}
+
+.back-top{
+    position:fixed;
+    right:18px;
+    bottom:18px;
+    background:var(--gold);
+    color:var(--dark-blue);
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    box-shadow:0 3px 10px rgba(0,0,0,.2);
+}
+
+/* MOBILE */
+
+@media(max-width:750px){
+    .nav-content{
+        flex-direction:column;
+    }
+
+    .nav-links{
+        flex-wrap:wrap;
+        justify-content:center;
+        gap:13px;
     }
 
     .page-header h1{
-        font-size:31px;
-    }
-
-    .page-header p{
-        font-size:16px;
-    }
-
-    .registration-section{
-        padding:45px 15px;
+        font-size:26px;
     }
 
     .registration-card{
-        padding:25px 20px;
+        padding:22px 17px;
     }
 
     .contact-grid{
@@ -577,1025 +356,58 @@ footer{
     }
 
     .footer-grid{
-        grid-template-columns:1fr;
+        grid-template-columns:repeat(2,1fr);
     }
-
-    .section-title{
-        font-size:27px;
-    }
-
 }
 
+@media(max-width:420px){
+    .footer-grid{
+        grid-template-columns:1fr;
+    }
+}
 </style>
-
 </head>
-
 
 <body>
 
-
-<!-- =========================
-     NAVIGATION
-========================= -->
+<!-- NAVIGATION -->
 
 <nav class="navbar">
+    <div class="container nav-content">
+        <a href="index.html" class="logo">
+            <i class="fas fa-cross"></i> B.E.P.
+        </a>
 
-<div class="nav-container">
-
-<a href="index.html" class="logo">
-
-<i class="fa-solid fa-book-bible"></i>
-
-B.E.P. Online
-
-</a>
-
-
-<div class="menu-btn" id="menuBtn">
-
-<i class="fa-solid fa-bars"></i>
-
-</div>
-
-
-<ul class="nav-links" id="navLinks">
-
-<li>
-<a href="index.html">
-<i class="fa-solid fa-house"></i>
-Home
-</a>
-</li>
-
-<li>
-<a href="index.html#about">
-<i class="fa-solid fa-circle-info"></i>
-About
-</a>
-</li>
-
-<li>
-<a href="index.html#vision">
-<i class="fa-solid fa-eye"></i>
-Vision
-</a>
-</li>
-
-<li>
-<a href="index.html#mission">
-<i class="fa-solid fa-bullseye"></i>
-Mission
-</a>
-</li>
-
-<li>
-<a href="index.html#sessions">
-<i class="fa-solid fa-calendar-days"></i>
-Sessions
-</a>
-</li>
-
-<li>
-<a href="quiz.html">
-<i class="fa-solid fa-pen-to-square"></i>
-Quiz
-</a>
-</li>
-
-<li>
-<a href="#contact">
-<i class="fa-solid fa-envelope"></i>
-Contact
-</a>
-</li>
-
-</ul>
-
-</div>
-
+        <div class="nav-links">
+            <a href="index.html"><i class="fas fa-home"></i> Home</a>
+            <a href="index.html#about">About Us</a>
+            <a href="index.html#contact">Contact</a>
+            <a href="register.html">Register</a>
+        </div>
+    </div>
 </nav>
 
+<!-- PAGE HEADER -->
 
+<header class="page-header">
+    <h1><i class="fas fa-user-plus"></i> Member Registration</h1>
+    <p>Join the Biblical Empowerment Program</p>
+    <p>Building the Church of Christ</p>
+</header>
 
-<!-- =========================
-     PAGE HEADER
-========================= -->
-
-<section class="page-header">
-
-<h1>
-
-<i class="fa-solid fa-user-plus"></i>
-
-B.E.P. Member Registration
-
-</h1>
-
-<p>
-
-Become part of the Biblical Empowerment Program
-and grow together through God's Word,
-discipleship and Christian fellowship.
-
-</p>
-
-</section>
-
-
-
-<!-- =========================
-     REGISTRATION
-========================= -->
+<!-- REGISTRATION SECTION -->
 
 <section class="registration-section">
-
-<div class="registration-container">
-
-<div class="registration-card">
-
-<h2>
-
-<i class="fa-solid fa-user-check"></i>
-
-Register as a B.E.P. Member
-
-</h2>
-
-
-<p class="registration-intro">
-
-Please complete the form below.
-Your registration will be securely submitted
-to the B.E.P. member database.
-
-</p>
-
-
-<form id="registrationForm">
-
-
-<!-- =========================
-     FULL NAME
-========================= -->
-
-<div class="form-group">
-
-<label for="fullName">
-
-<i class="fa-solid fa-user"></i>
-
-Full Name
-
-</label>
-
-<input
-type="text"
-id="fullName"
-name="fullName"
-placeholder="Enter your full name"
-autocomplete="name"
-required
->
-
-</div>
-
-
-
-<!-- =========================
-     EMAIL
-========================= -->
-
-<div class="form-group">
-
-<label for="email">
-
-<i class="fa-solid fa-envelope"></i>
-
-Email Address
-
-</label>
-
-<input
-type="email"
-id="email"
-name="email"
-placeholder="Enter your email address"
-autocomplete="email"
-required
->
-
-</div>
-
-
-
-<!-- =========================
-     PHONE
-========================= -->
-
-<div class="form-group">
-
-<label for="phone">
-
-<i class="fa-solid fa-phone"></i>
-
-Phone / WhatsApp Number
-
-</label>
-
-<input
-type="tel"
-id="phone"
-name="phone"
-placeholder="Enter your phone or WhatsApp number"
-autocomplete="tel"
-required
->
-
-</div>
-
-
-
-<!-- =========================
-     LOCATION
-========================= -->
-
-<div class="form-group">
-
-<label for="location">
-
-<i class="fa-solid fa-location-dot"></i>
-
-Location
-
-</label>
-
-<input
-type="text"
-id="location"
-name="location"
-placeholder="Enter your town / city"
-autocomplete="address-level2"
-required
->
-
-</div>
-
-
-
-<!-- =========================
-     HEARD ABOUT US
-========================= -->
-
-<div class="form-group">
-
-<label for="heardAbout">
-
-<i class="fa-solid fa-bullhorn"></i>
-
-Where did you hear about us?
-
-</label>
-
-<select
-id="heardAbout"
-name="heardAbout"
-required
->
-
-<option value="">
--- Select an option --
-</option>
-
-<option value="WhatsApp">
-WhatsApp
-</option>
-
-<option value="Facebook">
-Facebook
-</option>
-
-<option value="Friend / Family">
-Friend / Family
-</option>
-
-<option value="Church">
-Church
-</option>
-
-<option value="B.E.P. Member">
-B.E.P. Member
-</option>
-
-<option value="Microsoft Teams">
-Microsoft Teams
-</option>
-
-<option value="Website">
-Website
-</option>
-
-<option value="Other">
-Other
-</option>
-
-</select>
-
-</div>
-
-
-
-<!-- =========================
-     SUBMIT
-========================= -->
-
-<button
-type="submit"
-class="submit-btn"
-id="submitBtn"
->
-
-<i class="fa-solid fa-user-plus"></i>
-
-Register as B.E.P. Member
-
-</button>
-
-
-</form>
-
-
-
-<!-- MESSAGE -->
-
-<div
-id="registrationMessage"
-class="registration-message">
-</div>
-
-
-
-<div class="member-note">
-
-<i class="fa-solid fa-shield-halved"></i>
-
-Your registration information is submitted
-to the B.E.P. member database.
-
-</div>
-
-
-</div>
-
-</div>
-
-</section>
-
-
-
-<!-- =========================
-     CONTACT
-========================= -->
-
-<section id="contact" class="contact-section">
-
-<h2 class="section-title">
-
-<i class="fa-solid fa-envelope"></i>
-
-Contact Us
-
-</h2>
-
-
-<p class="section-subtitle">
-
-For registration, B.E.P. information,
-questions or assistance, please contact us.
-
-</p>
-
-
-<div class="contact-grid">
-
-
-<!-- OMEGA -->
-
-<div class="contact-card">
-
-<i class="fa-brands fa-whatsapp"></i>
-
-<h3>Omega</h3>
-
-<a
-href="https://wa.me/27623508689"
-target="_blank"
-rel="noopener"
->
-
-062 350 8689
-
-</a>
-
-</div>
-
-
-
-<!-- BRO KB -->
-
-<div class="contact-card">
-
-<i class="fa-brands fa-whatsapp"></i>
-
-<h3>Bro. KB</h3>
-
-<a
-href="https://wa.me/27832822644"
-target="_blank"
-rel="noopener"
->
-
-083 282 2644
-
-</a>
-
-</div>
-
-
-
-<!-- FACEBOOK -->
-
-<div class="contact-card">
-
-<i class="fa-brands fa-facebook"></i>
-
-<h3>Facebook Group</h3>
-
-<a
-href="https://facebook.com/groups/1421853356307383/"
-target="_blank"
-rel="noopener"
->
-
-Join Our Group
-
-</a>
-
-</div>
-
-
-
-<!-- EMAIL -->
-
-<div class="contact-card">
-
-<i class="fa-solid fa-envelope"></i>
-
-<h3>Email</h3>
-
-<a
-href="mailto:bep.onlineprog@gmail.com"
->
-
-bep.onlineprog@gmail.com
-
-</a>
-
-</div>
-
-
-</div>
-
-</section>
-
-
-
-<!-- =========================
-     FOOTER
-========================= -->
-
-<footer>
-
-<div class="footer-grid">
-
-
-<!-- B.E.P. -->
-
-<div class="footer-column">
-
-<h3>B.E.P.</h3>
-
-<p>
-Biblical Empowerment Program
-</p>
-
-<p>
-Building the Church of Christ
-</p>
-
-<p>
-Growing believers through God's Word,
-discipleship and Christian fellowship.
-</p>
-
-</div>
-
-
-
-<!-- QUICK LINKS -->
-
-<div class="footer-column">
-
-<h3>Quick Links</h3>
-
-<p>
-<a href="index.html">
-<i class="fa-solid fa-house"></i>
-Home
-</a>
-</p>
-
-<p>
-<a href="index.html#about">
-<i class="fa-solid fa-circle-info"></i>
-About Us
-</a>
-</p>
-
-<p>
-<a href="index.html#vision">
-<i class="fa-solid fa-eye"></i>
-Vision
-</a>
-</p>
-
-<p>
-<a href="index.html#mission">
-<i class="fa-solid fa-bullseye"></i>
-Mission
-</a>
-</p>
-
-<p>
-<a href="index.html#sessions">
-<i class="fa-solid fa-calendar-days"></i>
-Sessions
-</a>
-</p>
-
-<p>
-<a href="register.html">
-<i class="fa-solid fa-user-plus"></i>
-Registration
-</a>
-</p>
-
-<p>
-<a href="quiz.html">
-<i class="fa-solid fa-pen-to-square"></i>
-Bible Quiz
-</a>
-</p>
-
-</div>
-
-
-
-<!-- CONNECT -->
-
-<div class="footer-column">
-
-<h3>Connect</h3>
-
-<p>
-
-<a
-href="https://wa.me/27623508689"
-target="_blank"
-rel="noopener"
->
-
-<i class="fa-brands fa-whatsapp"></i>
-
-Omega
-
-</a>
-
-</p>
-
-
-<p>
-
-<a
-href="https://wa.me/27832822644"
-target="_blank"
-rel="noopener"
->
-
-<i class="fa-brands fa-whatsapp"></i>
-
-Bro. KB
-
-</a>
-
-</p>
-
-
-<p>
-
-<a href="mailto:bep.onlineprog@gmail.com">
-
-<i class="fa-solid fa-envelope"></i>
-
-Email
-
-</a>
-
-</p>
-
-
-<p>
-
-<a
-href="https://facebook.com/groups/1421853356307383/"
-target="_blank"
-rel="noopener"
->
-
-<i class="fa-brands fa-facebook"></i>
-
-Facebook Group
-
-</a>
-
-</p>
-
-</div>
-
-
-
-<!-- SESSIONS -->
-
-<div class="footer-column">
-
-<h3>B.E.P. Sessions</h3>
-
-<p>
-
-<i class="fa-solid fa-calendar-days"></i>
-
-Every Thursday
-
-</p>
-
-
-<p>
-
-<i class="fa-solid fa-clock"></i>
-
-19:00 – 20:30
-
-</p>
-
-
-<p>
-
-<i class="fa-brands fa-microsoft"></i>
-
-Microsoft Teams
-
-</p>
-
-
-<p>
-
-<a
-href="https://teams.live.com/meet/936085799236?p=b66LnDUAB2Xkx2uQYp&eventType=community"
-target="_blank"
-rel="noopener"
->
-
-<i class="fa-solid fa-video"></i>
-
-Join Teams
-
-</a>
-
-</p>
-
-</div>
-
-
-</div>
-
-
-
-<div class="footer-bottom">
-
-© <span id="year"></span>
-
-Biblical Empowerment Program (B.E.P.)
-
-All Rights Reserved.
-
-<br>
-
-Building the Church of Christ
-
-</div>
-
-
-</footer>
-
-
-
-<!-- =========================
-     SUPABASE
-========================= -->
-
-<script
-src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
-</script>
-
-
-<script>
-
-/* =========================
-   SUPABASE CONFIGURATION
-========================= */
-
-const SUPABASE_URL =
-"https://rukusaellqqwthzibyib.supabase.co";
-
-const SUPABASE_PUBLISHABLE_KEY =
-"sb_publishable_Co8_MoJOV14tXBkSWyXFTA_ULn1WRa5";
-
-
-const supabaseClient =
-window.supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_PUBLISHABLE_KEY
-);
-
-
-/* =========================
-   MOBILE MENU
-========================= */
-
-const menuBtn =
-document.getElementById("menuBtn");
-
-const navLinks =
-document.getElementById("navLinks");
-
-
-menuBtn.addEventListener(
-"click",
-function(){
-
-    navLinks.classList.toggle("active");
-
-});
-
-
-document
-.querySelectorAll(".nav-links a")
-.forEach(function(link){
-
-    link.addEventListener(
-    "click",
-    function(){
-
-        navLinks.classList.remove("active");
-
-    });
-
-});
-
-
-/* =========================
-   REGISTRATION
-========================= */
-
-const registrationForm =
-document.getElementById(
-    "registrationForm"
-);
-
-const registrationMessage =
-document.getElementById(
-    "registrationMessage"
-);
-
-const submitBtn =
-document.getElementById(
-    "submitBtn"
-);
-
-
-registrationForm.addEventListener(
-"submit",
-async function(event){
-
-    event.preventDefault();
-
-
-    /* =========================
-       GET FORM VALUES
-    ========================= */
-
-    const fullName =
-        document
-        .getElementById("fullName")
-        .value
-        .trim();
-
-
-    const email =
-        document
-        .getElementById("email")
-        .value
-        .trim();
-
-
-    const phone =
-        document
-        .getElementById("phone")
-        .value
-        .trim();
-
-
-    const location =
-        document
-        .getElementById("location")
-        .value
-        .trim();
-
-
-    const heardAbout =
-        document
-        .getElementById("heardAbout")
-        .value
-        .trim();
-
-
-
-    /* =========================
-       VALIDATION
-    ========================= */
-
-    if(
-        !fullName ||
-        !email ||
-        !phone ||
-        !location ||
-        !heardAbout
-    ){
-
-        registrationMessage.className =
-            "registration-message error";
-
-        registrationMessage.textContent =
-            "Please complete all required fields.";
-
-        return;
-
-    }
-
-
-
-    /* =========================
-       LOADING
-    ========================= */
-
-    submitBtn.disabled = true;
-
-    submitBtn.innerHTML =
-        '<i class="fa-solid fa-spinner fa-spin"></i> Registering...';
-
-
-    registrationMessage.className =
-        "registration-message loading";
-
-    registrationMessage.textContent =
-        "Submitting your B.E.P. membership registration...";
-
-
-
-    /* =========================
-       INSERT INTO SUPABASE
-    ========================= */
-
-    try{
-
-        const { error } =
-            await supabaseClient
-            .from("bep_members")
-            .insert([
-                {
-                    full_name: fullName,
-                    email: email,
-                    phone: phone,
-                    location: location,
-                    heard_about: heardAbout
-                }
-            ]);
-
-
-
-        /* =========================
-           ERROR
-        ========================= */
-
-        if(error){
-
-            console.error(
-                "Supabase registration error:",
-                error
-            );
-
-
-            registrationMessage.className =
-                "registration-message error";
-
-
-            registrationMessage.textContent =
-                "Registration could not be completed. Please try again or contact B.E.P. support.";
-
-            return;
-
-        }
-
-
-
-        /* =========================
-           SUCCESS
-        ========================= */
-
-        registrationMessage.className =
-            "registration-message success";
-
-
-        registrationMessage.innerHTML =
-
-            '<i class="fa-solid fa-circle-check"></i> ' +
-
-            'Registration successful! ' +
-
-            'Welcome to the B.E.P. family. 🙏';
-
-
-
-        /* Clear form */
-
-        registrationForm.reset();
-
-
-    }
-
-    catch(error){
-
-        console.error(
-            "Unexpected registration error:",
-            error
-        );
-
-
-        registrationMessage.className =
-            "registration-message error";
-
-
-        registrationMessage.textContent =
-            "Something went wrong. Please check your internet connection and try again.";
-
-    }
-
-
-    /* =========================
-       RESTORE BUTTON
-    ========================= */
-
-    finally{
-
-        submitBtn.disabled = false;
-
-        submitBtn.innerHTML =
-            '<i class="fa-solid fa-user-plus"></i> Register as B.E.P. Member';
-
-    }
-
-});
-
-
-/* =========================
-   FOOTER YEAR
-========================= */
-
-document.getElementById("year").textContent =
-    new Date().getFullYear();
-
-</script>
-
-
-</body>
-
-</html>
+    <div class="container">
+        <div class="registration-card">
+
+            <h2 class="section-title">Become a B.E.P. Member</h2>
+            <div class="gold-line"></div>
+
+            <p class="section-description">
+                Complete the registration form below.
+                Your unique B.E.P. Member Number will be generated automatically.
+            </p>
+
+<!-- PART 2 CONTINUES HERE -->
+           
