@@ -1,1 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
 
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>B.E.P. Member Portal</title>
+
+<meta name="description"
+      content="B.E.P. Member Portal - Biblical Empowerment Program">
+
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+
+<style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+:root{
+    --blue:#063b78;
+    --dark-blue:#032653;
+    --gold:#d4a017;
+    --light:#f4f7fb;
+    --white:#ffffff;
+    --text:#263445;
+    --muted:#667085;
+    --green:#16834b;
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:var(--light);
+    color:var(--text);
+    line-height:1.6;
+}
+
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+.container{
+    width:92%;
+    max-width:1100px;
+    margin:auto;
+}
+
+
+/* NAVIGATION */
+
+.navbar{
+    background:var(--dark-blue);
+    color:white;
+    padding:15px 0;
+}
+
+.nav-content{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
+}
+
+.logo{
+    font-size:23px;
+    font-weight:bold;
+    color:var(--gold);
+}
+
+.nav-links{
+    display:flex;
+    gap:20px;
+    align-items:center;
+}
+
+.nav-links a{
+    color:white;
+    font-size:14px;
+    font-weight:600;
+}
+
+.nav-links a:hover{
+    color:var(--gold);
+}
+
+
+/* HEADER */
+
+.portal-header{
+    background:linear-gradient(
+        135deg,
+        var(--blue),
+        var(--dark-blue)
+    );
+
+    color:white;
+    text-align:center;
+    padding:55px 15px;
+
+    border-bottom:5px solid var(--gold);
+}
+
+.portal-header h1{
+    font-size:32px;
+    margin-bottom:10px;
+}
+
+.portal-header p{
+    font-size:15px;
+}
+
+
+/* LOGIN AREA */
+
+.portal-section{
+    padding:45px 0;
+    min-height:500px;
+}
+
+.login-card{
+    background:white;
+    max-width:550px;
+    margin:auto;
+
+    padding:35px 30px;
+
+    border-radius:14px;
+
+    box-shadow:
+        0 5px 25px rgba(0,0,0,.08);
+
+    text-align:center;
+}
+
+.login-icon{
+    width:75px;
+    height:75px;
+
+    margin:0 auto 18px;
+
+    border-radius:50%;
+
+    background:var(--blue);
+    color:white;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:32px;
+}
+
+.login-card h2{
+    color:var(--blue);
+    margin-bottom:8px;
+}
+
+.login-card p{
+    color:var(--muted);
+    font-size:14px;
+    margin-bottom:25px;
+}
+
+
+/* INPUT */
+
+.form-group{
+    text-align:left;
+    margin-bottom:18px;
+}
+
+.form-group label{
+    display:block;
+
+    font-weight:600;
+
+    color:var(--dark-blue);
+
+    margin-bottom:7px;
+
+    font-size:14px;
+}
+
+.form-group input{
+    width:100%;
+
+    padding:14px;
+
+    border:1px solid #d5dce5;
+
+    border-radius:7px;
+
+    font-size:16px;
+
+    text-align:center;
+
+    text-transform:uppercase;
+
+    outline:none;
+}
+
+.form-group input:focus{
+    border-color:var(--blue);
+
+    box-shadow:
+        0 0 0 3px rgba(6,59,120,.10);
+}
+
+
+/* BUTTON */
+
+.portal-btn{
+    width:100%;
+
+    border:none;
+
+    padding:14px;
+
+    background:var(--blue);
+
+    color:white;
+
+    border-radius:7px;
+
+    font-size:16px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+}
+
+.portal-btn:hover{
+    background:var(--dark-blue);
+}
+
+.portal-btn:disabled{
+    opacity:.6;
+    cursor:not-allowed;
+}
+
+
+/* MESSAGE */
+
+.message{
+    display:none;
+
+    margin-top:20px;
+
+    padding:14px;
+
+    border-radius:7px;
+
+    font-size:14px;
+}
+
+.error{
+    background:#fff0f0;
+
+    color:#a32121;
+
+    border:1px solid #f1b7b7;
+}
+
+
+/* PROFILE WILL COME IN PART 2 */
+
+.profile-section{
+    display:none;
+
+    max-width:850px;
+
+    margin:auto;
+}
+
+.profile-card{
+    background:white;
+
+    border-radius:14px;
+
+    padding:30px;
+
+    box-shadow:
+        0 5px 25px rgba(0,0,0,.08);
+}
+
+
+/* FOOTER */
+
+footer{
+    background:var(--dark-blue);
+
+    color:white;
+
+    padding:35px 0 18px;
+}
+
+.footer-grid{
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    gap:25px;
+}
+
+.footer-column h3{
+    color:var(--gold);
+
+    margin-bottom:12px;
+
+    font-size:17px;
+}
+
+.footer-column p,
+.footer-column a{
+    color:#e0e8f3;
+
+    font-size:13px;
+
+    display:block;
+
+    margin-bottom:8px;
+}
+
+.footer-column a:hover{
+    color:var(--gold);
+}
+
+.footer-bottom{
+    border-top:
+        1px solid rgba(255,255,255,.2);
+
+    margin-top:25px;
+
+    padding-top:15px;
+
+    text-align:center;
+
+    font-size:12px;
+
+    color:#d0d9e6;
+}
+
+
+/* MOBILE */
+
+@media(max-width:750px){
+
+    .nav-content{
+        flex-direction:column;
+    }
+
+    .nav-links{
+        flex-wrap:wrap;
+        justify-content:center;
+        gap:12px;
+    }
+
+    .portal-header h1{
+        font-size:26px;
+    }
+
+    .login-card{
+        padding:25px 18px;
+    }
+
+    .footer-grid{
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+}
+
+@media(max-width:420px){
+
+    .footer-grid{
+        grid-template-columns:1fr;
+    }
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- NAVIGATION -->
+
+<nav class="navbar">
+
+    <div class="container nav-content">
+
+        <a href="index.html"
+           class="logo">
+
+            <i class="fas fa-cross"></i>
+            B.E.P.
+
+        </a>
+
+
+        <div class="nav-links">
+
+            <a href="index.html">
+                <i class="fas fa-home"></i>
+                Home
+            </a>
+
+            <a href="register.html">
+                <i class="fas fa-user-plus"></i>
+                Register
+            </a>
+
+            <a href="member.html">
+                <i class="fas fa-user"></i>
+                Member Portal
+            </a>
+
+        </div>
+
+    </div>
+
+</nav>
+
+
+<!-- HEADER -->
+
+<header class="portal-header">
+
+    <h1>
+        <i class="fas fa-id-card"></i>
+        B.E.P. Member Portal
+    </h1>
+
+    <p>
+        Welcome to the Biblical Empowerment Program
+    </p>
+
+    <p>
+        Building the Church of Christ
+    </p>
+
+</header>
+
+
+<!-- PORTAL -->
+
+<section class="portal-section">
+
+    <div class="container">
+
+
+        <!-- MEMBER LOGIN -->
+
+        <div
+            class="login-card"
+            id="loginCard"
+        >
+
+            <div class="login-icon">
+
+                <i class="fas fa-user"></i>
+
+            </div>
+
+
+            <h2>
+                Member Access
+            </h2>
+
+
+            <p>
+                Enter your B.E.P. Member Number
+                to access your member profile.
+            </p>
+
+
+            <form id="memberLoginForm">
+
+                <div class="form-group">
+
+                    <label for="memberNumber">
+
+                        <i class="fas fa-id-badge"></i>
+
+                        B.E.P. Member Number
+
+                    </label>
+
+
+                    <input
+                        type="text"
+                        id="memberNumber"
+                        placeholder="e.g. BEP-00005"
+                        autocomplete="off"
+                        required
+                    >
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="portal-btn"
+                    id="loginBtn"
+                >
+
+                    <i class="fas fa-sign-in-alt"></i>
+
+                    Access My Portal
+
+                </button>
+
+
+            </form>
+
+
+            <div
+                id="loginError"
+                class="message error">
+            </div>
+
+        </div>
+
+
+        <!-- PART 2 STARTS HERE -->
