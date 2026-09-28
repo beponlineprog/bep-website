@@ -837,3 +837,295 @@ footer{
                 color:#667085;
                 font-size:13px;
             ">
+<!-- SUPABASE -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+
+/* SUPABASE CONNECTION */
+
+const SUPABASE_URL =
+    "https://rukusaellqqwthzibyib.supabase.co";
+
+const SUPABASE_PUBLISHABLE_KEY =
+    "sb_publishable_Co8_MoJOV14tXBkSWyXFTA_ULn1WRa5";
+
+const supabaseClient =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_PUBLISHABLE_KEY
+    );
+
+
+/* ELEMENTS */
+
+const memberLoginForm =
+    document.getElementById("memberLoginForm");
+
+const memberNumberInput =
+    document.getElementById("memberNumber");
+
+const loginBtn =
+    document.getElementById("loginBtn");
+
+const loginCard =
+    document.getElementById("loginCard");
+
+const profileSection =
+    document.getElementById("profileSection");
+
+const loginError =
+    document.getElementById("loginError");
+
+const logoutBtn =
+    document.getElementById("logoutBtn");
+
+
+/* PROFILE ELEMENTS */
+
+const profileName =
+    document.getElementById("profileName");
+
+const profileMemberNumber =
+    document.getElementById("profileMemberNumber");
+
+const infoName =
+    document.getElementById("infoName");
+
+const infoEmail =
+    document.getElementById("infoEmail");
+
+const infoPhone =
+    document.getElementById("infoPhone");
+
+const infoLocation =
+    document.getElementById("infoLocation");
+
+const infoHeardAbout =
+    document.getElementById("infoHeardAbout");
+
+const infoStatus =
+    document.getElementById("infoStatus");
+
+
+/* ESCAPE HTML */
+
+function escapeHTML(value){
+
+    return String(value ?? "")
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+
+}
+
+
+/* MEMBER LOGIN */
+
+memberLoginForm.addEventListener(
+    "submit",
+    async function(event){
+
+        event.preventDefault();
+
+        loginError.style.display = "none";
+
+        const memberNumber =
+            memberNumberInput.value
+            .trim()
+            .toUpperCase();
+
+
+        if(!memberNumber){
+
+            loginError.textContent =
+                "Please enter your B.E.P. Member Number.";
+
+            loginError.style.display = "block";
+
+            return;
+        }
+
+
+        loginBtn.disabled = true;
+
+        loginBtn.innerHTML =
+            '<i class="fas fa-spinner fa-spin"></i> Checking...';
+
+
+        try{
+
+            const { data, error } =
+                await supabaseClient
+                .from("members")
+                .select(`
+                    id,
+                    member_number,
+                    full_name,
+                    email,
+                    phone,
+                    location,
+                    heard_about,
+                    status
+                `)
+                .eq(
+                    "member_number",
+                    memberNumber
+                )
+                .maybeSingle();
+
+
+            if(error){
+                throw error;
+            }
+
+
+            /* MEMBER NOT FOUND */
+
+            if(!data){
+
+                loginError.innerHTML = `
+                    <i class="fas fa-circle-exclamation"></i>
+                    Member Number <strong>
+                    ${escapeHTML(memberNumber)}
+                    </strong> was not found.
+                    Please check the number and try again.
+                `;
+
+                loginError.style.display = "block";
+
+                return;
+            }
+
+
+            /* LOAD PROFILE */
+
+            profileName.textContent =
+                data.full_name || "B.E.P. Member";
+
+            profileMemberNumber.textContent =
+                data.member_number || "-";
+
+            infoName.textContent =
+                data.full_name || "-";
+
+            infoEmail.textContent =
+                data.email || "-";
+
+            infoPhone.textContent =
+                data.phone || "-";
+
+            infoLocation.textContent =
+                data.location || "-";
+
+            infoHeardAbout.textContent =
+                data.heard_about || "-";
+
+
+            /* STATUS */
+
+            const memberStatus =
+                data.status || "Active";
+
+            infoStatus.textContent =
+                memberStatus;
+
+
+            if(
+                String(memberStatus)
+                .toLowerCase() === "active"
+            ){
+
+                infoStatus.style.color =
+                    "#16834b";
+
+            }else{
+
+                infoStatus.style.color =
+                    "#d4a017";
+
+            }
+
+
+            /* SHOW PROFILE */
+
+            loginCard.style.display = "none";
+
+            profileSection.style.display = "block";
+
+            window.scrollTo({
+                top:0,
+                behavior:"smooth"
+            });
+
+
+        }catch(error){
+
+            console.error(
+                "Member Portal Error:",
+                error
+            );
+
+
+            loginError.innerHTML = `
+                <strong>
+                    <i class="fas fa-circle-exclamation"></i>
+                    Could not access the Member Portal.
+                </strong>
+
+                <br><br>
+
+                ${escapeHTML(
+                    error.message ||
+                    "Unknown error"
+                )}
+            `;
+
+            loginError.style.display = "block";
+
+
+        }finally{
+
+            loginBtn.disabled = false;
+
+            loginBtn.innerHTML =
+                '<i class="fas fa-sign-in-alt"></i> Access My Portal';
+
+        }
+
+    }
+);
+
+
+/* EXIT PORTAL */
+
+logoutBtn.addEventListener(
+    "click",
+    function(){
+
+        profileSection.style.display = "none";
+
+        loginCard.style.display = "block";
+
+        memberLoginForm.reset();
+
+        loginError.style.display = "none";
+
+        memberNumberInput.focus();
+
+        window.scrollTo({
+            top:0,
+            behavior:"smooth"
+        });
+
+    }
+);
+
+</script>
+
+
+</body>
+        </html>
