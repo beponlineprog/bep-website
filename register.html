@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,9 +6,11 @@
 
 <title>B.E.P. Member Registration</title>
 
-<meta name="description" content="Register as a member of the Biblical Empowerment Program - B.E.P.">
+<meta name="description"
+content="Register as a member of the Biblical Empowerment Program - B.E.P.">
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
 <style>
 *{
@@ -103,7 +104,7 @@ a{
     opacity:.95;
 }
 
-/* REGISTRATION AREA */
+/* REGISTRATION */
 
 .registration-section{
     padding:45px 0;
@@ -181,7 +182,6 @@ a{
     font-size:16px;
     font-weight:bold;
     cursor:pointer;
-    transition:.2s;
 }
 
 .submit-btn:hover{
@@ -270,10 +270,6 @@ a{
     font-weight:bold;
 }
 
-.contact-btn:hover{
-    background:var(--dark-blue);
-}
-
 /* FOOTER */
 
 footer{
@@ -315,6 +311,8 @@ footer{
     color:#d0d9e6;
 }
 
+/* BACK TO TOP */
+
 .back-top{
     position:fixed;
     right:18px;
@@ -333,6 +331,7 @@ footer{
 /* MOBILE */
 
 @media(max-width:750px){
+
     .nav-content{
         flex-direction:column;
     }
@@ -361,6 +360,7 @@ footer{
 }
 
 @media(max-width:420px){
+
     .footer-grid{
         grid-template-columns:1fr;
     }
@@ -374,15 +374,29 @@ footer{
 
 <nav class="navbar">
     <div class="container nav-content">
+
         <a href="index.html" class="logo">
             <i class="fas fa-cross"></i> B.E.P.
         </a>
 
         <div class="nav-links">
-            <a href="index.html"><i class="fas fa-home"></i> Home</a>
-            <a href="index.html#about">About Us</a>
-            <a href="index.html#contact">Contact</a>
-            <a href="register.html">Register</a>
+
+            <a href="index.html">
+                <i class="fas fa-home"></i> Home
+            </a>
+
+            <a href="index.html#about">
+                About Us
+            </a>
+
+            <a href="index.html#contact">
+                Contact
+            </a>
+
+            <a href="register.html">
+                Register
+            </a>
+
         </div>
     </div>
 </nav>
@@ -390,360 +404,36 @@ footer{
 <!-- PAGE HEADER -->
 
 <header class="page-header">
-    <h1><i class="fas fa-user-plus"></i> Member Registration</h1>
+
+    <h1>
+        <i class="fas fa-user-plus"></i>
+        Member Registration
+    </h1>
+
     <p>Join the Biblical Empowerment Program</p>
+
     <p>Building the Church of Christ</p>
+
 </header>
 
 <!-- REGISTRATION SECTION -->
 
 <section class="registration-section">
+
     <div class="container">
+
         <div class="registration-card">
 
-            <h2 class="section-title">Become a B.E.P. Member</h2>
+            <h2 class="section-title">
+                Become a B.E.P. Member
+            </h2>
+
             <div class="gold-line"></div>
 
             <p class="section-description">
                 Complete the registration form below.
-                Your unique B.E.P. Member Number will be generated automatically.
+                Your unique B.E.P. Member Number will be
+                generated automatically.
             </p>
 
-<!-- PART 2 CONTINUES HERE -->
-           
-<!-- REGISTRATION FORM -->
-
-<form id="registrationForm">
-
-    <div class="form-group">
-        <label for="fullName">
-            <i class="fas fa-user"></i> Full Name
-        </label>
-        <input
-            type="text"
-            id="fullName"
-            name="fullName"
-            placeholder="Enter your full name"
-            required
-        >
-    </div>
-
-    <div class="form-group">
-        <label for="email">
-            <i class="fas fa-envelope"></i> Email Address
-        </label>
-        <input
-            type="email"
-            id="email"
-            name="email"
-            placeholder="Enter your email address"
-            required
-        >
-    </div>
-
-    <div class="form-group">
-        <label for="phone">
-            <i class="fas fa-phone"></i> Phone / WhatsApp Number
-        </label>
-        <input
-            type="tel"
-            id="phone"
-            name="phone"
-            placeholder="e.g. 062 350 8689"
-            required
-        >
-    </div>
-
-    <div class="form-group">
-        <label for="location">
-            <i class="fas fa-location-dot"></i> Location
-        </label>
-        <input
-            type="text"
-            id="location"
-            name="location"
-            placeholder="Town, Province"
-            required
-        >
-    </div>
-
-    <div class="form-group">
-        <label for="heardAbout">
-            <i class="fas fa-bullhorn"></i> How did you hear about B.E.P.?
-        </label>
-        <select id="heardAbout" name="heardAbout" required>
-            <option value="">Select an option</option>
-            <option value="Social Media">Social Media</option>
-            <option value="Friends">Friends</option>
-            <option value="Church">Church</option>
-            <option value="WhatsApp">WhatsApp</option>
-            <option value="Other">Other</option>
-        </select>
-    </div>
-
-    <button type="submit" class="submit-btn" id="submitBtn">
-        <i class="fas fa-user-plus"></i> Register as B.E.P. Member
-    </button>
-
-    <div id="successMessage" class="message success"></div>
-    <div id="errorMessage" class="message error"></div>
-
-</form>
-
-        </div>
-    </div>
-</section>
-
-<!-- CONTACT SECTION -->
-
-<section class="contact-section" id="contact">
-    <div class="container">
-
-        <h2 class="contact-title">Contact B.E.P.</h2>
-
-        <div class="contact-grid">
-
-            <div class="contact-card">
-                <i class="fab fa-whatsapp"></i>
-                <h3>Omega</h3>
-                <p>062 350 8689</p>
-                <a class="contact-btn"
-                   href="https://wa.me/27623508689"
-                   target="_blank"
-                   rel="noopener">
-                    <i class="fab fa-whatsapp"></i> WhatsApp Omega
-                </a>
-            </div>
-
-            <div class="contact-card">
-                <i class="fab fa-whatsapp"></i>
-                <h3>Bro. KB</h3>
-                <p>083 282 2644</p>
-                <a class="contact-btn"
-                   href="https://wa.me/27832822644"
-                   target="_blank"
-                   rel="noopener">
-                    <i class="fab fa-whatsapp"></i> WhatsApp Bro. KB
-                </a>
-            </div>
-
-            <div class="contact-card">
-                <i class="fas fa-envelope"></i>
-                <h3>Email Us</h3>
-                <p>bep.onlineprog@gmail.com</p>
-                <a class="contact-btn"
-                   href="mailto:bep.onlineprog@gmail.com">
-                    <i class="fas fa-paper-plane"></i> Send Email
-                </a>
-            </div>
-
-            <div class="contact-card">
-                <i class="fab fa-facebook"></i>
-                <h3>Facebook Community</h3>
-                <p>Join the B.E.P. Facebook Group</p>
-                <a class="contact-btn"
-                   href="https://facebook.com/groups/1421853356307383/"
-                   target="_blank"
-                   rel="noopener">
-                    <i class="fab fa-facebook"></i> Join Group
-                </a>
-            </div>
-
-        </div>
-    </div>
-</section>
-
-<!-- FOOTER -->
-
-<footer>
-    <div class="container">
-
-        <div class="footer-grid">
-
-            <div class="footer-column">
-                <h3><i class="fas fa-cross"></i> B.E.P.</h3>
-                <p>
-                    Biblical Empowerment Program.
-                    Building the Church of Christ through
-                    the teaching of God's Word.
-                </p>
-            </div>
-
-            <div class="footer-column">
-                <h3>Quick Links</h3>
-                <a href="index.html">Home</a>
-                <a href="index.html#about">About Us</a>
-                <a href="register.html">Member Registration</a>
-                <a href="index.html#contact">Contact Us</a>
-            </div>
-
-            <div class="footer-column">
-                <h3>Connect With Us</h3>
-                <a href="https://facebook.com/groups/1421853356307383/"
-                   target="_blank" rel="noopener">
-                    <i class="fab fa-facebook"></i> Facebook Group
-                </a>
-                <a href="mailto:bep.onlineprog@gmail.com">
-                    <i class="fas fa-envelope"></i> Email
-                </a>
-                <a href="https://teams.live.com/meet/936085799236?p=b66LnDUAB2Xkx2uQYp&eventType=community"
-                   target="_blank" rel="noopener">
-                    <i class="fas fa-video"></i> Microsoft Teams
-                </a>
-            </div>
-
-            <div class="footer-column">
-                <h3>Our Sessions</h3>
-                <p><i class="fas fa-calendar"></i> Every Thursday</p>
-                <p><i class="fas fa-clock"></i> 19:00 – 20:30</p>
-                <p><i class="fas fa-book-open"></i> Growing in God's Word</p>
-            </div>
-
-        </div>
-
-        <div class="footer-bottom">
-            <p>
-                © 2026 Biblical Empowerment Program.
-                All Rights Reserved.
-            </p>
-            <p>Building the Church of Christ</p>
-        </div>
-
-    </div>
-</footer>
-
-<a href="#" class="back-top" aria-label="Back to top">
-    <i class="fas fa-arrow-up"></i>
-</a>
-
-<!-- PART 3: SUPABASE CONNECTION AND MEMBER NUMBER -->
-    
-<!-- SUPABASE LIBRARY -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-<script>
-/* SUPABASE CONNECTION */
-
-const SUPABASE_URL = "https://rukusaellqqwthzibyib.supabase.co";
-
-const SUPABASE_KEY = "sb_publishable_Co8-MoJOV14tXBkSWyXFTA_ULn1WRa5";
-
-const supabaseClient = window.supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_KEY
-);
-
-/* REGISTRATION */
-
-const registrationForm = document.getElementById("registrationForm");
-const submitBtn = document.getElementById("submitBtn");
-const successMessage = document.getElementById("successMessage");
-const errorMessage = document.getElementById("errorMessage");
-
-registrationForm.addEventListener("submit", async function(event){
-
-    event.preventDefault();
-
-    successMessage.style.display = "none";
-    errorMessage.style.display = "none";
-
-    submitBtn.disabled = true;
-    submitBtn.innerHTML =
-        '<i class="fas fa-spinner fa-spin"></i> Registering...';
-
-    const fullName =
-        document.getElementById("fullName").value.trim();
-
-    const email =
-        document.getElementById("email").value.trim().toLowerCase();
-
-    const phone =
-        document.getElementById("phone").value.trim();
-
-    const location =
-        document.getElementById("location").value.trim();
-
-    const heardAbout =
-        document.getElementById("heardAbout").value;
-
-    try {
-
-        const { data, error } = await supabaseClient
-            .from("members")
-            .insert([
-                {
-                    full_name: fullName,
-                    email: email,
-                    phone: phone,
-                    location: location,
-                    heard_about: heardAbout
-                }
-            ])
-            .select("id, member_number, full_name")
-            .single();
-
-        if(error){
-            throw error;
-        }
-
-        successMessage.innerHTML = `
-            <h3><i class="fas fa-check-circle"></i> Registration Successful!</h3>
-
-            <p>Welcome to the Biblical Empowerment Program, ${data.full_name}.</p>
-
-            <p>Your B.E.P. Member Number is:</p>
-
-            <h2 style="font-size:28px;margin:12px 0;color:#063b78;">
-                ${data.member_number}
-            </h2>
-
-            <p>Please keep your Member Number safe.</p>
-
-            <button type="button"
-                class="contact-btn"
-                id="copyMemberNumber">
-                <i class="fas fa-copy"></i> Copy Member Number
-            </button>
-        `;
-
-        successMessage.style.display = "block";
-
-        document.getElementById("copyMemberNumber")
-            .addEventListener("click", async function(){
-
-                try {
-                    await navigator.clipboard.writeText(data.member_number);
-                    this.innerHTML = '<i class="fas fa-check"></i> Copied!';
-                } catch(copyError) {
-                    this.innerHTML = data.member_number;
-                }
-
-            });
-
-        registrationForm.reset();
-
-    } catch(error) {
-
-        console.error("Registration error:", error);
-
-        errorMessage.textContent =
-            "Registration could not be completed. Please check your details or contact B.E.P. Support. Error: " +
-            (error.message || "Unknown error");
-
-        errorMessage.style.display = "block";
-
-    } finally {
-
-        submitBtn.disabled = false;
-
-        submitBtn.innerHTML =
-            '<i class="fas fa-user-plus"></i> Register as B.E.P. Member';
-
-    }
-
-});
-</script>
-
-</body>
-</html>
-
+<!-- PART 2 STARTS HERE -->
