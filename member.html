@@ -27,6 +27,8 @@ body{
     line-height:1.6;
 }
 
+/* NAVIGATION */
+
 nav{
     background:#064b8d;
     padding:15px 5%;
@@ -58,6 +60,8 @@ nav{
     color:#d4a017;
 }
 
+/* HERO */
+
 .hero{
     background:linear-gradient(
         135deg,
@@ -78,11 +82,15 @@ nav{
     font-size:17px;
 }
 
+/* CONTAINER */
+
 .container{
     max-width:850px;
     margin:40px auto;
     padding:0 20px;
 }
+
+/* CARD */
 
 .card{
     background:#fff;
@@ -96,6 +104,8 @@ nav{
     color:#064b8d;
     margin-bottom:20px;
 }
+
+/* FORM */
 
 .form-group{
     margin-bottom:18px;
@@ -120,6 +130,8 @@ nav{
     outline:none;
     border-color:#064b8d;
 }
+
+/* BUTTON */
 
 .portal-btn{
     width:100%;
@@ -147,6 +159,10 @@ nav{
     background:#555;
 }
 
+.whatsapp-btn{
+    background:#16834b;
+}
+
 .forgot-btn{
     display:block;
     text-align:center;
@@ -155,6 +171,8 @@ nav{
     font-weight:bold;
     text-decoration:none;
 }
+
+/* MESSAGES */
 
 .message{
     padding:14px;
@@ -183,6 +201,8 @@ nav{
     color:#064b8d;
     border:1px solid #b9d5ed;
 }
+
+/* PROFILE */
 
 .profile-header{
     text-align:center;
@@ -231,11 +251,20 @@ nav{
     font-weight:bold;
 }
 
+/* LOADING */
+
 .loading{
     text-align:center;
     padding:20px;
     color:#064b8d;
 }
+
+.loading i{
+    font-size:30px;
+    margin-bottom:10px;
+}
+
+/* FOOTER */
 
 footer{
     background:#06365f;
@@ -262,9 +291,13 @@ footer h3{
     text-decoration:none;
 }
 
+/* HIDDEN */
+
 .hidden{
     display:none !important;
 }
+
+/* MOBILE */
 
 @media(max-width:600px){
 
@@ -276,6 +309,11 @@ footer h3{
         width:100%;
         justify-content:center;
         margin-top:12px;
+        gap:12px;
+    }
+
+    .nav-links a{
+        font-size:14px;
     }
 
     .card{
@@ -289,6 +327,11 @@ footer h3{
 </head>
 
 <body>
+
+
+<!-- =====================================
+     NAVIGATION
+===================================== -->
 
 <nav>
 
@@ -321,6 +364,10 @@ footer h3{
 </nav>
 
 
+<!-- =====================================
+     HERO
+===================================== -->
+
 <section class="hero">
 
     <h1>
@@ -337,16 +384,22 @@ footer h3{
 <div class="container">
 
 
-<!-- LOGIN -->
+<!-- =====================================
+     LOGIN CARD
+===================================== -->
 
 <div
     class="card"
     id="loginCard">
 
     <h2>
+
         <i class="fas fa-right-to-bracket"></i>
+
         Member Login
+
     </h2>
+
 
     <p style="margin-bottom:20px;">
 
@@ -362,11 +415,14 @@ footer h3{
     </div>
 
 
+    <!-- EMAIL -->
+
     <div class="form-group">
 
         <label for="memberEmail">
 
             <i class="fas fa-envelope"></i>
+
             Email Address
 
         </label>
@@ -381,11 +437,14 @@ footer h3{
     </div>
 
 
+    <!-- PASSWORD -->
+
     <div class="form-group">
 
         <label for="memberPassword">
 
             <i class="fas fa-lock"></i>
+
             Password
 
         </label>
@@ -400,16 +459,21 @@ footer h3{
     </div>
 
 
+    <!-- LOGIN -->
+
     <button
         type="button"
         class="portal-btn"
         id="loginBtn">
 
         <i class="fas fa-right-to-bracket"></i>
+
         Login to Member Portal
 
     </button>
 
+
+    <!-- FORGOT PASSWORD -->
 
     <a
         href="#"
@@ -417,6 +481,7 @@ footer h3{
         id="forgotPasswordBtn">
 
         <i class="fas fa-key"></i>
+
         Forgot Password?
 
     </a>
@@ -424,20 +489,26 @@ footer h3{
 </div>
 
 
-<!-- PASSWORD RESET -->
+<!-- =====================================
+     PASSWORD RESET
+===================================== -->
 
 <div
     class="card hidden"
     id="resetCard">
 
     <h2>
+
         <i class="fas fa-key"></i>
+
         Reset Password
+
     </h2>
+
 
     <p style="margin-bottom:20px;">
 
-        Enter your B.E.P. account email.
+        Enter your B.E.P. account email address.
         We will send you a password-reset link.
 
     </p>
@@ -452,7 +523,11 @@ footer h3{
     <div class="form-group">
 
         <label for="resetEmail">
+
+            <i class="fas fa-envelope"></i>
+
             Email Address
+
         </label>
 
         <input
@@ -469,6 +544,7 @@ footer h3{
         id="sendResetBtn">
 
         <i class="fas fa-paper-plane"></i>
+
         Send Reset Link
 
     </button>
@@ -480,6 +556,7 @@ footer h3{
         id="backToLoginBtn">
 
         <i class="fas fa-arrow-left"></i>
+
         Back to Login
 
     </button>
@@ -487,7 +564,9 @@ footer h3{
 </div>
 
 
-<!-- LOADING -->
+<!-- =====================================
+     LOADING
+===================================== -->
 
 <div
     class="card hidden"
@@ -506,11 +585,14 @@ footer h3{
 </div>
 
 
-<!-- MEMBER PROFILE -->
+<!-- =====================================
+     MEMBER PROFILE
+===================================== -->
 
 <div
     class="card hidden"
     id="profileSection">
+
 
     <div class="profile-header">
 
@@ -520,25 +602,35 @@ footer h3{
 
         </div>
 
+
         <h2>
+
             Welcome to B.E.P.
+
         </h2>
 
+
         <p>
+
             Your Member Portal
+
         </p>
 
     </div>
 
+
+    <!-- MEMBER NUMBER -->
 
     <div class="info-box">
 
         <span class="info-label">
 
             <i class="fas fa-id-card"></i>
+
             Member Number
 
         </span>
+
 
         <span
             class="info-value"
@@ -551,14 +643,18 @@ footer h3{
     </div>
 
 
+    <!-- FULL NAME -->
+
     <div class="info-box">
 
         <span class="info-label">
 
             <i class="fas fa-user"></i>
+
             Full Name
 
         </span>
+
 
         <span
             class="info-value"
@@ -571,14 +667,18 @@ footer h3{
     </div>
 
 
+    <!-- EMAIL -->
+
     <div class="info-box">
 
         <span class="info-label">
 
             <i class="fas fa-envelope"></i>
+
             Email
 
         </span>
+
 
         <span
             class="info-value"
@@ -591,14 +691,18 @@ footer h3{
     </div>
 
 
+    <!-- PHONE -->
+
     <div class="info-box">
 
         <span class="info-label">
 
             <i class="fas fa-phone"></i>
+
             Phone / WhatsApp
 
         </span>
+
 
         <span
             class="info-value"
@@ -611,14 +715,18 @@ footer h3{
     </div>
 
 
+    <!-- LOCATION -->
+
     <div class="info-box">
 
         <span class="info-label">
 
             <i class="fas fa-location-dot"></i>
+
             Location
 
         </span>
+
 
         <span
             class="info-value"
@@ -631,14 +739,18 @@ footer h3{
     </div>
 
 
+    <!-- SOURCE -->
+
     <div class="info-box">
 
         <span class="info-label">
 
             <i class="fas fa-share-nodes"></i>
+
             How You Heard About B.E.P.
 
         </span>
+
 
         <span
             class="info-value"
@@ -651,20 +763,24 @@ footer h3{
     </div>
 
 
+    <!-- STATUS -->
+
     <div class="info-box">
 
         <span class="info-label">
 
             <i class="fas fa-circle-check"></i>
+
             Member Status
 
         </span>
+
 
         <span
             class="info-value status-active"
             id="infoStatus">
 
-            -
+            Active
 
         </span>
 
@@ -674,43 +790,55 @@ footer h3{
     <br>
 
 
+    <!-- WHATSAPP -->
+
     <a
         href="https://wa.me/27623508689"
         target="_blank"
-        class="portal-btn"
+        class="portal-btn whatsapp-btn"
         style="
             display:block;
             text-align:center;
             text-decoration:none;
-            background:#16834b;
         ">
 
         <i class="fab fa-whatsapp"></i>
+
         Contact B.E.P.
 
     </a>
 
+
+    <!-- LOGOUT -->
 
     <button
         type="button"
         class="portal-btn secondary-btn"
         id="logoutBtn">
 
-        <i class="fas fa-right-to-bracket"></i>
+        <i class="fas fa-right-from-bracket"></i>
+
         Exit Portal
 
     </button>
 
-</div>
 
 </div>
 
+
+</div>
+
+
+<!-- =====================================
+     FOOTER
+===================================== -->
 
 <footer>
 
     <h3>
         Biblical Empowerment Program
     </h3>
+
 
     <p>
         Building the Church of Christ
@@ -720,6 +848,7 @@ footer h3{
     <div class="footer-contact">
 
         <i class="fas fa-phone"></i>
+
         Omega: 062 350 8689
 
     </div>
@@ -728,6 +857,7 @@ footer h3{
     <div class="footer-contact">
 
         <i class="fas fa-phone"></i>
+
         Bro. KB: 083 282 2644
 
     </div>
@@ -753,9 +883,12 @@ footer h3{
     </p>
 
 </footer>
-<!-- SUPABASE -->
+<!-- =====================================
+     SUPABASE
+===================================== -->
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 
 <script>
 
@@ -763,18 +896,12 @@ footer h3{
    SUPABASE CONFIGURATION
 ========================================= */
 
-/*
-   IMPORTANT:
-   Replace these with the SAME Supabase
-   URL and Publishable/Anon Key used by
-   your working B.E.P. website.
-*/
-
 const SUPABASE_URL =
-    "YOUR_SUPABASE_PROJECT_URL";
+    "https://rukusaellqqwthzibyib.supabase.co";
+
 
 const SUPABASE_ANON_KEY =
-    "YOUR_SUPABASE_ANON_KEY";
+    "sb_publishable_Co8_MoJOV14tXBkSWyXFTA_ULn1WRa5";
 
 
 const supabaseClient =
@@ -832,7 +959,7 @@ const resetMessage =
 
 
 /* =========================================
-   MESSAGE
+   SHOW MESSAGE
 ========================================= */
 
 function showMessage(
@@ -849,6 +976,10 @@ function showMessage(
 
 }
 
+
+/* =========================================
+   HIDE MESSAGE
+========================================= */
 
 function hideMessage(element){
 
@@ -908,51 +1039,98 @@ loginBtn.addEventListener(
         loginBtn.disabled =
             true;
 
+
         loginBtn.innerHTML =
-            '<i class="fas fa-spinner fa-spin"></i> Signing in...';
+            `
+            <i class="fas fa-spinner fa-spin"></i>
+            Signing in...
+            `;
 
 
-        const {
-            data,
-            error
-        } =
-        await supabaseClient.auth.signInWithPassword({
+        try{
 
-            email: email,
+            const {
+                data,
+                error
+            } =
+            await supabaseClient.auth.signInWithPassword({
 
-            password: password
+                email:email,
 
-        });
+                password:password
+
+            });
 
 
-        if(error){
+            if(error){
+
+                showMessage(
+                    loginMessage,
+                    `
+                    <strong>Login failed.</strong>
+                    <br><br>
+                    ${escapeHTML(error.message)}
+                    `,
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            if(!data.user){
+
+                showMessage(
+                    loginMessage,
+                    "Login failed. No user account was returned.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            showLoading();
+
+
+            await loadMemberProfile(
+                data.user
+            );
+
+
+        }catch(error){
+
+            console.error(
+                "Login error:",
+                error
+            );
+
 
             showMessage(
                 loginMessage,
                 `
-                <strong>Login failed.</strong>
-                <br>
+                <strong>Something went wrong.</strong>
+                <br><br>
                 ${escapeHTML(error.message)}
                 `,
                 "error"
             );
 
+        }finally{
+
             loginBtn.disabled =
                 false;
 
-            loginBtn.innerHTML =
-                '<i class="fas fa-right-to-bracket"></i> Login to Member Portal';
 
-            return;
+            loginBtn.innerHTML =
+                `
+                <i class="fas fa-right-to-bracket"></i>
+                Login to Member Portal
+                `;
 
         }
-
-
-        showLoading();
-
-        await loadMemberProfile(
-            data.user
-        );
 
     }
 );
@@ -966,34 +1144,54 @@ async function loadMemberProfile(user){
 
     try{
 
+        /*
+         * The authenticated email is used to find
+         * the corresponding record in the members
+         * table.
+         */
+
         const {
-            data: member,
+            data:member,
             error
         } =
         await supabaseClient
             .from("members")
             .select("*")
-            .eq("email", user.email)
+            .eq(
+                "email",
+                user.email
+            )
             .maybeSingle();
 
 
         if(error){
 
-            console.error(error);
+            console.error(
+                "Member query error:",
+                error
+            );
+
+
+            showLogin();
+
 
             showMessage(
                 loginMessage,
                 `
-                Your account is authenticated,
-                but we could not load your B.E.P.
-                member profile.
+                <strong>Login successful, but the
+                member profile could not be loaded.</strong>
+
                 <br><br>
+
+                ${escapeHTML(error.message)}
+
+                <br><br>
+
                 Please contact B.E.P. administration.
                 `,
                 "error"
             );
 
-            showLogin();
 
             return;
 
@@ -1002,96 +1200,182 @@ async function loadMemberProfile(user){
 
         if(!member){
 
+            showLogin();
+
+
             showMessage(
                 loginMessage,
                 `
-                Your email is authenticated,
-                but no matching B.E.P. member
-                record was found.
+                <strong>Member profile not found.</strong>
+
                 <br><br>
+
+                Your email is authenticated, but
+                there is no matching record in the
+                B.E.P. members table.
+
+                <br><br>
+
+                Email:
+                ${escapeHTML(user.email)}
+
+                <br><br>
+
                 Please contact B.E.P. administration.
                 `,
                 "error"
             );
 
-            showLogin();
 
             return;
 
         }
 
 
+        /* =====================================
+           MEMBER NUMBER
+        ===================================== */
+
         document.getElementById(
             "infoMemberNumber"
         ).textContent =
+
             member.member_number ||
+
             member.member_id ||
+
+            member.member_no ||
+
+            member.member_number_id ||
+
             "-";
+
+
+        /* =====================================
+           FULL NAME
+        ===================================== */
+
+        let fullName =
+            member.full_name;
+
+
+        if(!fullName){
+
+            fullName =
+                [
+                    member.name,
+                    member.surname
+                ]
+                .filter(Boolean)
+                .join(" ");
+
+        }
 
 
         document.getElementById(
             "infoFullName"
         ).textContent =
-            member.full_name ||
-            [
-                member.name,
-                member.surname
-            ]
-            .filter(Boolean)
-            .join(" ") ||
+
+            fullName ||
+
             "-";
 
+
+        /* =====================================
+           EMAIL
+        ===================================== */
 
         document.getElementById(
             "infoEmail"
         ).textContent =
+
             member.email ||
+
             user.email ||
+
             "-";
 
+
+        /* =====================================
+           PHONE
+        ===================================== */
 
         document.getElementById(
             "infoPhone"
         ).textContent =
+
             member.phone ||
+
+            member.phone_number ||
+
             member.whatsapp ||
+
+            member.whatsapp_number ||
+
             "-";
 
+
+        /* =====================================
+           LOCATION
+        ===================================== */
 
         document.getElementById(
             "infoLocation"
         ).textContent =
+
             member.location ||
+
             "-";
 
+
+        /* =====================================
+           HOW HEARD ABOUT B.E.P.
+        ===================================== */
 
         document.getElementById(
             "infoHeardAbout"
         ).textContent =
+
             member.heard_about ||
+
             member.how_did_you_hear ||
+
             member.source ||
+
             "-";
 
+
+        /* =====================================
+           STATUS
+        ===================================== */
 
         document.getElementById(
             "infoStatus"
         ).textContent =
+
             member.status ||
+
             "Active";
 
+
+        /* =====================================
+           DISPLAY PORTAL
+        ===================================== */
 
         loginCard.classList.add(
             "hidden"
         );
 
+
         resetCard.classList.add(
             "hidden"
         );
 
+
         loadingCard.classList.add(
             "hidden"
         );
+
 
         profileSection.classList.remove(
             "hidden"
@@ -1099,22 +1383,36 @@ async function loadMemberProfile(user){
 
 
         window.scrollTo({
+
             top:0,
+
             behavior:"smooth"
+
         });
 
 
     }catch(error){
 
-        console.error(error);
+        console.error(
+            "Profile error:",
+            error
+        );
+
+
+        showLogin();
+
 
         showMessage(
             loginMessage,
-            "Something went wrong while loading your member profile.",
+            `
+            <strong>Unable to load your profile.</strong>
+
+            <br><br>
+
+            ${escapeHTML(error.message)}
+            `,
             "error"
         );
-
-        showLogin();
 
     }
 
@@ -1131,26 +1429,36 @@ forgotPasswordBtn.addEventListener(
 
         event.preventDefault();
 
+
         resetEmail.value =
             memberEmail.value.trim();
+
 
         loginCard.classList.add(
             "hidden"
         );
 
+
         resetCard.classList.remove(
             "hidden"
         );
 
-        hideMessage(loginMessage);
-        hideMessage(resetMessage);
+
+        hideMessage(
+            loginMessage
+        );
+
+
+        hideMessage(
+            resetMessage
+        );
 
     }
 );
 
 
 /* =========================================
-   PASSWORD RESET
+   SEND PASSWORD RESET
 ========================================= */
 
 sendResetBtn.addEventListener(
@@ -1161,7 +1469,9 @@ sendResetBtn.addEventListener(
             resetEmail.value.trim();
 
 
-        hideMessage(resetMessage);
+        hideMessage(
+            resetMessage
+        );
 
 
         if(!email){
@@ -1180,53 +1490,87 @@ sendResetBtn.addEventListener(
         sendResetBtn.disabled =
             true;
 
+
         sendResetBtn.innerHTML =
-            '<i class="fas fa-spinner fa-spin"></i> Sending...';
+            `
+            <i class="fas fa-spinner fa-spin"></i>
+            Sending...
+            `;
 
 
-        const {
-            error
-        } =
-        await supabaseClient.auth.resetPasswordForEmail(
-            email,
-            {
-                redirectTo:
-                    "https://beponlineprog.github.io/bep-website/member.html"
+        try{
+
+            const {
+                error
+            } =
+            await supabaseClient.auth
+                .resetPasswordForEmail(
+                    email,
+                    {
+                        redirectTo:
+                        "https://beponlineprog.github.io/bep-website/member.html"
+                    }
+                );
+
+
+            if(error){
+
+                showMessage(
+                    resetMessage,
+                    escapeHTML(
+                        error.message
+                    ),
+                    "error"
+                );
+
+            }else{
+
+                showMessage(
+                    resetMessage,
+                    `
+                    <strong>
+                    Password reset email sent.
+                    </strong>
+
+                    <br><br>
+
+                    Check your email and open the
+                    password-reset link.
+
+                    <br><br>
+
+                    If you don't see it, check your
+                    spam or junk folder.
+                    `,
+                    "success"
+                );
+
             }
-        );
 
 
-        if(error){
+        }catch(error){
 
             showMessage(
                 resetMessage,
-                escapeHTML(error.message),
+                escapeHTML(
+                    error.message
+                ),
                 "error"
             );
 
-        }else{
+        }finally{
 
-            showMessage(
-                resetMessage,
+            sendResetBtn.disabled =
+                false;
+
+
+            sendResetBtn.innerHTML =
                 `
-                <strong>
-                    Password reset email sent.
-                </strong>
-                <br><br>
-                Check your email and open the
-                password-reset link.
-                `,
-                "success"
-            );
+                <i class="fas fa-paper-plane"></i>
+                Send Reset Link
+                `;
 
         }
-
-
-        sendResetBtn.disabled =
-            false;
-
-        sendResetBtn.innerHTML =
-            '<i class="fas fa-paper-plane"></i> Send Reset Link';
 
     }
 );
@@ -1244,11 +1588,15 @@ backToLoginBtn.addEventListener(
             "hidden"
         );
 
+
         loginCard.classList.remove(
             "hidden"
         );
 
-        hideMessage(resetMessage);
+
+        hideMessage(
+            resetMessage
+        );
 
     }
 );
@@ -1264,25 +1612,36 @@ logoutBtn.addEventListener(
 
         await supabaseClient.auth.signOut();
 
+
         profileSection.classList.add(
             "hidden"
         );
+
 
         loginCard.classList.remove(
             "hidden"
         );
 
+
         memberEmail.value =
             "";
+
 
         memberPassword.value =
             "";
 
-        hideMessage(loginMessage);
+
+        hideMessage(
+            loginMessage
+        );
+
 
         window.scrollTo({
+
             top:0,
+
             behavior:"smooth"
+
         });
 
     }
@@ -1299,13 +1658,16 @@ function showLogin(){
         "hidden"
     );
 
+
     profileSection.classList.add(
         "hidden"
     );
 
+
     resetCard.classList.add(
         "hidden"
     );
+
 
     loginCard.classList.remove(
         "hidden"
@@ -1324,13 +1686,16 @@ function showLoading(){
         "hidden"
     );
 
+
     resetCard.classList.add(
         "hidden"
     );
 
+
     profileSection.classList.add(
         "hidden"
     );
+
 
     loadingCard.classList.remove(
         "hidden"
@@ -1345,12 +1710,34 @@ function showLoading(){
 
 function escapeHTML(value){
 
-    return String(value ?? "")
-        .replace(/&/g,"&amp;")
-        .replace(/</g,"&lt;")
-        .replace(/>/g,"&gt;")
-        .replace(/"/g,"&quot;")
-        .replace(/'/g,"&#039;");
+    return String(
+        value ?? ""
+    )
+
+    .replace(
+        /&/g,
+        "&amp;"
+    )
+
+    .replace(
+        /</g,
+        "&lt;"
+    )
+
+    .replace(
+        />/g,
+        "&gt;"
+    )
+
+    .replace(
+        /"/g,
+        "&quot;"
+    )
+
+    .replace(
+        /'/g,
+        "&#039;"
+    );
 
 }
 
@@ -1361,18 +1748,34 @@ function escapeHTML(value){
 
 async function checkExistingSession(){
 
-    const {
-        data
-    } =
-    await supabaseClient.auth.getSession();
+    try{
+
+        const {
+            data
+        } =
+        await supabaseClient.auth.getSession();
 
 
-    if(data.session){
-
-        showLoading();
-
-        await loadMemberProfile(
+        if(
+            data &&
+            data.session &&
             data.session.user
+        ){
+
+            showLoading();
+
+
+            await loadMemberProfile(
+                data.session.user
+            );
+
+        }
+
+    }catch(error){
+
+        console.error(
+            "Session error:",
+            error
         );
 
     }
@@ -1384,7 +1787,7 @@ checkExistingSession();
 
 
 /* =========================================
-   AUTH STATE
+   AUTH STATE CHANGE
 ========================================= */
 
 supabaseClient.auth.onAuthStateChange(
@@ -1393,16 +1796,10 @@ supabaseClient.auth.onAuthStateChange(
         session
     ){
 
-        if(
-            event === "SIGNED_IN" &&
-            session
-        ){
-
-            await loadMemberProfile(
-                session.user
-            );
-
-        }
+        console.log(
+            "Auth event:",
+            event
+        );
 
 
         if(
@@ -1416,7 +1813,43 @@ supabaseClient.auth.onAuthStateChange(
     }
 );
 
+
+/* =========================================
+   ENTER KEY LOGIN
+========================================= */
+
+memberPassword.addEventListener(
+    "keydown",
+    function(event){
+
+        if(
+            event.key === "Enter"
+        ){
+
+            loginBtn.click();
+
+        }
+
+    }
+);
+
+
+memberEmail.addEventListener(
+    "keydown",
+    function(event){
+
+        if(
+            event.key === "Enter"
+        ){
+
+            memberPassword.focus();
+
+        }
+
+    }
+);
+
 </script>
 
 </body>
-</html>
+      </html>
