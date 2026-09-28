@@ -618,3 +618,132 @@ footer{
 
 <!-- PART 3: SUPABASE CONNECTION AND MEMBER NUMBER -->
     
+<!-- SUPABASE LIBRARY -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+/* SUPABASE CONNECTION */
+
+const SUPABASE_URL = "https://rukusaellqqwthzibyib.supabase.co";
+
+const SUPABASE_KEY = "sb_publishable_Co8-MoJOV14tXBkSWyXFTA_ULn1WRa5";
+
+const supabaseClient = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
+
+/* REGISTRATION */
+
+const registrationForm = document.getElementById("registrationForm");
+const submitBtn = document.getElementById("submitBtn");
+const successMessage = document.getElementById("successMessage");
+const errorMessage = document.getElementById("errorMessage");
+
+registrationForm.addEventListener("submit", async function(event){
+
+    event.preventDefault();
+
+    successMessage.style.display = "none";
+    errorMessage.style.display = "none";
+
+    submitBtn.disabled = true;
+    submitBtn.innerHTML =
+        '<i class="fas fa-spinner fa-spin"></i> Registering...';
+
+    const fullName =
+        document.getElementById("fullName").value.trim();
+
+    const email =
+        document.getElementById("email").value.trim().toLowerCase();
+
+    const phone =
+        document.getElementById("phone").value.trim();
+
+    const location =
+        document.getElementById("location").value.trim();
+
+    const heardAbout =
+        document.getElementById("heardAbout").value;
+
+    try {
+
+        const { data, error } = await supabaseClient
+            .from("members")
+            .insert([
+                {
+                    full_name: fullName,
+                    email: email,
+                    phone: phone,
+                    location: location,
+                    heard_about: heardAbout
+                }
+            ])
+            .select("id, member_number, full_name")
+            .single();
+
+        if(error){
+            throw error;
+        }
+
+        successMessage.innerHTML = `
+            <h3><i class="fas fa-check-circle"></i> Registration Successful!</h3>
+
+            <p>Welcome to the Biblical Empowerment Program, ${data.full_name}.</p>
+
+            <p>Your B.E.P. Member Number is:</p>
+
+            <h2 style="font-size:28px;margin:12px 0;color:#063b78;">
+                ${data.member_number}
+            </h2>
+
+            <p>Please keep your Member Number safe.</p>
+
+            <button type="button"
+                class="contact-btn"
+                id="copyMemberNumber">
+                <i class="fas fa-copy"></i> Copy Member Number
+            </button>
+        `;
+
+        successMessage.style.display = "block";
+
+        document.getElementById("copyMemberNumber")
+            .addEventListener("click", async function(){
+
+                try {
+                    await navigator.clipboard.writeText(data.member_number);
+                    this.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                } catch(copyError) {
+                    this.innerHTML = data.member_number;
+                }
+
+            });
+
+        registrationForm.reset();
+
+    } catch(error) {
+
+        console.error("Registration error:", error);
+
+        errorMessage.textContent =
+            "Registration could not be completed. Please check your details or contact B.E.P. Support. Error: " +
+            (error.message || "Unknown error");
+
+        errorMessage.style.display = "block";
+
+    } finally {
+
+        submitBtn.disabled = false;
+
+        submitBtn.innerHTML =
+            '<i class="fas fa-user-plus"></i> Register as B.E.P. Member';
+
+    }
+
+});
+</script>
+
+</body>
+</html>
+
