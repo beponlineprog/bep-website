@@ -753,3 +753,670 @@ footer h3{
     </p>
 
 </footer>
+<!-- SUPABASE -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+
+/* =========================================
+   SUPABASE CONFIGURATION
+========================================= */
+
+/*
+   IMPORTANT:
+   Replace these with the SAME Supabase
+   URL and Publishable/Anon Key used by
+   your working B.E.P. website.
+*/
+
+const SUPABASE_URL =
+    "YOUR_SUPABASE_PROJECT_URL";
+
+const SUPABASE_ANON_KEY =
+    "YOUR_SUPABASE_ANON_KEY";
+
+
+const supabaseClient =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_ANON_KEY
+    );
+
+
+/* =========================================
+   ELEMENTS
+========================================= */
+
+const loginCard =
+    document.getElementById("loginCard");
+
+const resetCard =
+    document.getElementById("resetCard");
+
+const loadingCard =
+    document.getElementById("loadingCard");
+
+const profileSection =
+    document.getElementById("profileSection");
+
+const loginBtn =
+    document.getElementById("loginBtn");
+
+const logoutBtn =
+    document.getElementById("logoutBtn");
+
+const forgotPasswordBtn =
+    document.getElementById("forgotPasswordBtn");
+
+const sendResetBtn =
+    document.getElementById("sendResetBtn");
+
+const backToLoginBtn =
+    document.getElementById("backToLoginBtn");
+
+const memberEmail =
+    document.getElementById("memberEmail");
+
+const memberPassword =
+    document.getElementById("memberPassword");
+
+const resetEmail =
+    document.getElementById("resetEmail");
+
+const loginMessage =
+    document.getElementById("loginMessage");
+
+const resetMessage =
+    document.getElementById("resetMessage");
+
+
+/* =========================================
+   MESSAGE
+========================================= */
+
+function showMessage(
+    element,
+    message,
+    type
+){
+
+    element.className =
+        "message " + type;
+
+    element.innerHTML =
+        message;
+
+}
+
+
+function hideMessage(element){
+
+    element.className =
+        "message";
+
+    element.innerHTML =
+        "";
+
+}
+
+
+/* =========================================
+   LOGIN
+========================================= */
+
+loginBtn.addEventListener(
+    "click",
+    async function(){
+
+        const email =
+            memberEmail.value.trim();
+
+        const password =
+            memberPassword.value;
+
+
+        hideMessage(loginMessage);
+
+
+        if(!email){
+
+            showMessage(
+                loginMessage,
+                "Please enter your email address.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        if(!password){
+
+            showMessage(
+                loginMessage,
+                "Please enter your password.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        loginBtn.disabled =
+            true;
+
+        loginBtn.innerHTML =
+            '<i class="fas fa-spinner fa-spin"></i> Signing in...';
+
+
+        const {
+            data,
+            error
+        } =
+        await supabaseClient.auth.signInWithPassword({
+
+            email: email,
+
+            password: password
+
+        });
+
+
+        if(error){
+
+            showMessage(
+                loginMessage,
+                `
+                <strong>Login failed.</strong>
+                <br>
+                ${escapeHTML(error.message)}
+                `,
+                "error"
+            );
+
+            loginBtn.disabled =
+                false;
+
+            loginBtn.innerHTML =
+                '<i class="fas fa-right-to-bracket"></i> Login to Member Portal';
+
+            return;
+
+        }
+
+
+        showLoading();
+
+        await loadMemberProfile(
+            data.user
+        );
+
+    }
+);
+
+
+/* =========================================
+   LOAD MEMBER PROFILE
+========================================= */
+
+async function loadMemberProfile(user){
+
+    try{
+
+        const {
+            data: member,
+            error
+        } =
+        await supabaseClient
+            .from("members")
+            .select("*")
+            .eq("email", user.email)
+            .maybeSingle();
+
+
+        if(error){
+
+            console.error(error);
+
+            showMessage(
+                loginMessage,
+                `
+                Your account is authenticated,
+                but we could not load your B.E.P.
+                member profile.
+                <br><br>
+                Please contact B.E.P. administration.
+                `,
+                "error"
+            );
+
+            showLogin();
+
+            return;
+
+        }
+
+
+        if(!member){
+
+            showMessage(
+                loginMessage,
+                `
+                Your email is authenticated,
+                but no matching B.E.P. member
+                record was found.
+                <br><br>
+                Please contact B.E.P. administration.
+                `,
+                "error"
+            );
+
+            showLogin();
+
+            return;
+
+        }
+
+
+        document.getElementById(
+            "infoMemberNumber"
+        ).textContent =
+            member.member_number ||
+            member.member_id ||
+            "-";
+
+
+        document.getElementById(
+            "infoFullName"
+        ).textContent =
+            member.full_name ||
+            [
+                member.name,
+                member.surname
+            ]
+            .filter(Boolean)
+            .join(" ") ||
+            "-";
+
+
+        document.getElementById(
+            "infoEmail"
+        ).textContent =
+            member.email ||
+            user.email ||
+            "-";
+
+
+        document.getElementById(
+            "infoPhone"
+        ).textContent =
+            member.phone ||
+            member.whatsapp ||
+            "-";
+
+
+        document.getElementById(
+            "infoLocation"
+        ).textContent =
+            member.location ||
+            "-";
+
+
+        document.getElementById(
+            "infoHeardAbout"
+        ).textContent =
+            member.heard_about ||
+            member.how_did_you_hear ||
+            member.source ||
+            "-";
+
+
+        document.getElementById(
+            "infoStatus"
+        ).textContent =
+            member.status ||
+            "Active";
+
+
+        loginCard.classList.add(
+            "hidden"
+        );
+
+        resetCard.classList.add(
+            "hidden"
+        );
+
+        loadingCard.classList.add(
+            "hidden"
+        );
+
+        profileSection.classList.remove(
+            "hidden"
+        );
+
+
+        window.scrollTo({
+            top:0,
+            behavior:"smooth"
+        });
+
+
+    }catch(error){
+
+        console.error(error);
+
+        showMessage(
+            loginMessage,
+            "Something went wrong while loading your member profile.",
+            "error"
+        );
+
+        showLogin();
+
+    }
+
+}
+
+
+/* =========================================
+   FORGOT PASSWORD
+========================================= */
+
+forgotPasswordBtn.addEventListener(
+    "click",
+    function(event){
+
+        event.preventDefault();
+
+        resetEmail.value =
+            memberEmail.value.trim();
+
+        loginCard.classList.add(
+            "hidden"
+        );
+
+        resetCard.classList.remove(
+            "hidden"
+        );
+
+        hideMessage(loginMessage);
+        hideMessage(resetMessage);
+
+    }
+);
+
+
+/* =========================================
+   PASSWORD RESET
+========================================= */
+
+sendResetBtn.addEventListener(
+    "click",
+    async function(){
+
+        const email =
+            resetEmail.value.trim();
+
+
+        hideMessage(resetMessage);
+
+
+        if(!email){
+
+            showMessage(
+                resetMessage,
+                "Please enter your email address.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        sendResetBtn.disabled =
+            true;
+
+        sendResetBtn.innerHTML =
+            '<i class="fas fa-spinner fa-spin"></i> Sending...';
+
+
+        const {
+            error
+        } =
+        await supabaseClient.auth.resetPasswordForEmail(
+            email,
+            {
+                redirectTo:
+                    "https://beponlineprog.github.io/bep-website/member.html"
+            }
+        );
+
+
+        if(error){
+
+            showMessage(
+                resetMessage,
+                escapeHTML(error.message),
+                "error"
+            );
+
+        }else{
+
+            showMessage(
+                resetMessage,
+                `
+                <strong>
+                    Password reset email sent.
+                </strong>
+                <br><br>
+                Check your email and open the
+                password-reset link.
+                `,
+                "success"
+            );
+
+        }
+
+
+        sendResetBtn.disabled =
+            false;
+
+        sendResetBtn.innerHTML =
+            '<i class="fas fa-paper-plane"></i> Send Reset Link';
+
+    }
+);
+
+
+/* =========================================
+   BACK TO LOGIN
+========================================= */
+
+backToLoginBtn.addEventListener(
+    "click",
+    function(){
+
+        resetCard.classList.add(
+            "hidden"
+        );
+
+        loginCard.classList.remove(
+            "hidden"
+        );
+
+        hideMessage(resetMessage);
+
+    }
+);
+
+
+/* =========================================
+   LOGOUT
+========================================= */
+
+logoutBtn.addEventListener(
+    "click",
+    async function(){
+
+        await supabaseClient.auth.signOut();
+
+        profileSection.classList.add(
+            "hidden"
+        );
+
+        loginCard.classList.remove(
+            "hidden"
+        );
+
+        memberEmail.value =
+            "";
+
+        memberPassword.value =
+            "";
+
+        hideMessage(loginMessage);
+
+        window.scrollTo({
+            top:0,
+            behavior:"smooth"
+        });
+
+    }
+);
+
+
+/* =========================================
+   SHOW LOGIN
+========================================= */
+
+function showLogin(){
+
+    loadingCard.classList.add(
+        "hidden"
+    );
+
+    profileSection.classList.add(
+        "hidden"
+    );
+
+    resetCard.classList.add(
+        "hidden"
+    );
+
+    loginCard.classList.remove(
+        "hidden"
+    );
+
+}
+
+
+/* =========================================
+   SHOW LOADING
+========================================= */
+
+function showLoading(){
+
+    loginCard.classList.add(
+        "hidden"
+    );
+
+    resetCard.classList.add(
+        "hidden"
+    );
+
+    profileSection.classList.add(
+        "hidden"
+    );
+
+    loadingCard.classList.remove(
+        "hidden"
+    );
+
+}
+
+
+/* =========================================
+   ESCAPE HTML
+========================================= */
+
+function escapeHTML(value){
+
+    return String(value ?? "")
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+
+}
+
+
+/* =========================================
+   CHECK EXISTING SESSION
+========================================= */
+
+async function checkExistingSession(){
+
+    const {
+        data
+    } =
+    await supabaseClient.auth.getSession();
+
+
+    if(data.session){
+
+        showLoading();
+
+        await loadMemberProfile(
+            data.session.user
+        );
+
+    }
+
+}
+
+
+checkExistingSession();
+
+
+/* =========================================
+   AUTH STATE
+========================================= */
+
+supabaseClient.auth.onAuthStateChange(
+    async function(
+        event,
+        session
+    ){
+
+        if(
+            event === "SIGNED_IN" &&
+            session
+        ){
+
+            await loadMemberProfile(
+                session.user
+            );
+
+        }
+
+
+        if(
+            event === "SIGNED_OUT"
+        ){
+
+            showLogin();
+
+        }
+
+    }
+);
+
+</script>
+
+</body>
+</html>
