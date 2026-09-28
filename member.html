@@ -131,10 +131,11 @@ nav{
     font-size:16px;
     font-weight:bold;
     cursor:pointer;
+    margin-top:8px;
 }
 
 .portal-btn:hover{
-    background:#043765;
+    opacity:.9;
 }
 
 .portal-btn:disabled{
@@ -144,130 +145,131 @@ nav{
 
 .secondary-btn{
     background:#555;
-    margin-top:15px;
 }
 
-.secondary-btn:hover{
-    background:#333;
+.forgot-btn{
+    display:block;
+    text-align:center;
+    margin-top:15px;
+    color:#064b8d;
+    font-weight:bold;
+    text-decoration:none;
 }
 
 .message{
-    padding:13px;
+    padding:14px;
     border-radius:8px;
-    margin-top:15px;
+    margin-bottom:18px;
     display:none;
 }
 
-.error{
-    background:#ffe5e5;
-    color:#a00000;
+.message.success{
+    display:block;
+    background:#e7f7ed;
+    color:#146c35;
+    border:1px solid #b7e4c7;
 }
 
-.success{
-    background:#e5f8ed;
-    color:#176b3a;
+.message.error{
+    display:block;
+    background:#fdeaea;
+    color:#9b1c1c;
+    border:1px solid #f5b5b5;
 }
 
-.info{
-    background:#e8f2ff;
+.message.info{
+    display:block;
+    background:#eaf3fb;
     color:#064b8d;
-}
-
-.otp-section{
-    display:none;
-}
-
-.profile-section{
-    display:none;
+    border:1px solid #b9d5ed;
 }
 
 .profile-header{
     text-align:center;
-    padding:25px;
-    background:#064b8d;
-    color:#fff;
-    border-radius:12px;
     margin-bottom:25px;
 }
 
 .profile-icon{
-    font-size:55px;
-    margin-bottom:10px;
+    width:80px;
+    height:80px;
+    border-radius:50%;
+    background:#064b8d;
+    color:#fff;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin:0 auto 15px;
+    font-size:35px;
 }
 
 .profile-header h2{
-    color:#fff;
-    margin:0;
-}
-
-.member-number{
-    display:inline-block;
-    margin-top:10px;
-    padding:7px 15px;
-    background:#d4a017;
-    color:#fff;
-    border-radius:20px;
-    font-weight:bold;
-}
-
-.info-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:15px;
+    margin-bottom:5px;
 }
 
 .info-box{
     background:#f7f9fc;
+    border:1px solid #e1e6ec;
+    border-radius:10px;
     padding:15px;
-    border-radius:9px;
-}
-
-.info-box i{
-    color:#064b8d;
-    margin-right:7px;
+    margin-bottom:12px;
 }
 
 .info-label{
     display:block;
-    font-size:13px;
-    color:#777;
-    margin-bottom:4px;
+    font-weight:bold;
+    color:#064b8d;
+    margin-bottom:5px;
 }
 
 .info-value{
-    font-weight:bold;
+    color:#333;
     word-break:break-word;
 }
 
 .status-active{
     color:#16834b;
+    font-weight:bold;
+}
+
+.loading{
+    text-align:center;
+    padding:20px;
+    color:#064b8d;
 }
 
 footer{
-    background:#063b70;
+    background:#06365f;
     color:#fff;
+    text-align:center;
     padding:35px 20px;
     margin-top:50px;
-    text-align:center;
 }
 
-footer a{
+footer h3{
+    margin-bottom:8px;
+}
+
+.footer-contact{
+    margin-top:10px;
+}
+
+.footer-contact i{
+    margin-right:7px;
+}
+
+.footer-contact a{
     color:#fff;
     text-decoration:none;
 }
 
-.footer-contact{
-    margin:10px 0;
+.hidden{
+    display:none !important;
 }
 
 @media(max-width:600px){
 
     .hero h1{
-        font-size:27px;
-    }
-
-    .info-grid{
-        grid-template-columns:1fr;
+        font-size:28px;
     }
 
     .nav-links{
@@ -277,7 +279,7 @@ footer a{
     }
 
     .card{
-        padding:20px;
+        padding:22px;
     }
 
 }
@@ -291,7 +293,6 @@ footer a{
 <nav>
 
     <div class="logo">
-        <i class="fas fa-book-bible"></i>
         B.E.P.
     </div>
 
@@ -310,8 +311,8 @@ footer a{
         </li>
 
         <li>
-            <a href="member.html">
-                Member Portal
+            <a href="quiz.html">
+                Bible Quiz
             </a>
         </li>
 
@@ -323,82 +324,36 @@ footer a{
 <section class="hero">
 
     <h1>
-        <i class="fas fa-user-shield"></i>
         B.E.P. Member Portal
     </h1>
 
     <p>
-        Secure access to your B.E.P. member profile
+        Welcome to the Biblical Empowerment Program
     </p>
 
 </section>
 
 
 <div class="container">
-      <!-- SECURE LOGIN -->
 
-<div class="card" id="loginCard">
+
+<!-- LOGIN -->
+
+<div
+    class="card"
+    id="loginCard">
 
     <h2>
-        <i class="fas fa-lock"></i>
-        Secure Member Login
+        <i class="fas fa-right-to-bracket"></i>
+        Member Login
     </h2>
 
     <p style="margin-bottom:20px;">
-        Enter your B.E.P. Member Number and the email
-        address registered with B.E.P.
+
+        Sign in using your B.E.P.
+        email address and password.
+
     </p>
-
-
-    <!-- MEMBER NUMBER -->
-
-    <div class="form-group">
-
-        <label for="memberNumber">
-            <i class="fas fa-id-badge"></i>
-            B.E.P. Member Number
-        </label>
-
-        <input
-            type="text"
-            id="memberNumber"
-            placeholder="e.g. BEP-00005"
-            autocomplete="off"
-            required
-        >
-
-    </div>
-
-
-    <!-- EMAIL -->
-
-    <div class="form-group">
-
-        <label for="memberEmail">
-            <i class="fas fa-envelope"></i>
-            Registered Email Address
-        </label>
-
-        <input
-            type="email"
-            id="memberEmail"
-            placeholder="Enter your registered email"
-            autocomplete="email"
-            required
-        >
-
-    </div>
-
-
-    <button
-        type="button"
-        class="portal-btn"
-        id="sendOtpBtn">
-
-        <i class="fas fa-paper-plane"></i>
-        Send Verification Code
-
-    </button>
 
 
     <div
@@ -406,41 +361,41 @@ footer a{
         class="message">
     </div>
 
-</div>
-
-
-
-<!-- OTP SECTION -->
-
-<div class="card otp-section" id="otpSection">
-
-    <h2>
-        <i class="fas fa-shield-halved"></i>
-        Verify Your Email
-    </h2>
-
-    <p>
-        A verification code has been sent to your
-        registered email address.
-    </p>
-
-    <br>
 
     <div class="form-group">
 
-        <label for="otpCode">
-            <i class="fas fa-key"></i>
-            Verification Code
+        <label for="memberEmail">
+
+            <i class="fas fa-envelope"></i>
+            Email Address
+
         </label>
 
         <input
-            type="text"
-            id="otpCode"
-            placeholder="Enter your verification code"
-            inputmode="numeric"
-            autocomplete="one-time-code"
-            maxlength="8"
-        >
+            type="email"
+            id="memberEmail"
+            placeholder="Enter your email address"
+            autocomplete="email"
+            required>
+
+    </div>
+
+
+    <div class="form-group">
+
+        <label for="memberPassword">
+
+            <i class="fas fa-lock"></i>
+            Password
+
+        </label>
+
+        <input
+            type="password"
+            id="memberPassword"
+            placeholder="Enter your password"
+            autocomplete="current-password"
+            required>
 
     </div>
 
@@ -448,10 +403,73 @@ footer a{
     <button
         type="button"
         class="portal-btn"
-        id="verifyOtpBtn">
+        id="loginBtn">
 
-        <i class="fas fa-check-circle"></i>
-        Verify & Access Portal
+        <i class="fas fa-right-to-bracket"></i>
+        Login to Member Portal
+
+    </button>
+
+
+    <a
+        href="#"
+        class="forgot-btn"
+        id="forgotPasswordBtn">
+
+        <i class="fas fa-key"></i>
+        Forgot Password?
+
+    </a>
+
+</div>
+
+
+<!-- PASSWORD RESET -->
+
+<div
+    class="card hidden"
+    id="resetCard">
+
+    <h2>
+        <i class="fas fa-key"></i>
+        Reset Password
+    </h2>
+
+    <p style="margin-bottom:20px;">
+
+        Enter your B.E.P. account email.
+        We will send you a password-reset link.
+
+    </p>
+
+
+    <div
+        id="resetMessage"
+        class="message">
+    </div>
+
+
+    <div class="form-group">
+
+        <label for="resetEmail">
+            Email Address
+        </label>
+
+        <input
+            type="email"
+            id="resetEmail"
+            placeholder="Enter your email address">
+
+    </div>
+
+
+    <button
+        type="button"
+        class="portal-btn"
+        id="sendResetBtn">
+
+        <i class="fas fa-paper-plane"></i>
+        Send Reset Link
 
     </button>
 
@@ -462,150 +480,193 @@ footer a{
         id="backToLoginBtn">
 
         <i class="fas fa-arrow-left"></i>
-        Back
+        Back to Login
 
     </button>
 
+</div>
 
-    <div
-        id="otpMessage"
-        class="message">
+
+<!-- LOADING -->
+
+<div
+    class="card hidden"
+    id="loadingCard">
+
+    <div class="loading">
+
+        <i class="fas fa-spinner fa-spin"></i>
+
+        <p>
+            Loading your B.E.P. Member Portal...
+        </p>
+
     </div>
 
 </div>
 
 
-
 <!-- MEMBER PROFILE -->
 
 <div
-    class="card profile-section"
+    class="card hidden"
     id="profileSection">
-
 
     <div class="profile-header">
 
         <div class="profile-icon">
-            <i class="fas fa-user-circle"></i>
+
+            <i class="fas fa-user"></i>
+
         </div>
 
-        <h2 id="profileName">
-            B.E.P. Member
+        <h2>
+            Welcome to B.E.P.
         </h2>
 
-        <div
-            class="member-number"
-            id="profileMemberNumber">
-            -
-        </div>
+        <p>
+            Your Member Portal
+        </p>
 
     </div>
 
 
-    <h2>
-        <i class="fas fa-id-card"></i>
-        My Member Profile
-    </h2>
+    <div class="info-box">
+
+        <span class="info-label">
+
+            <i class="fas fa-id-card"></i>
+            Member Number
+
+        </span>
+
+        <span
+            class="info-value"
+            id="infoMemberNumber">
+
+            -
+
+        </span>
+
+    </div>
 
 
-    <div class="info-grid">
+    <div class="info-box">
+
+        <span class="info-label">
+
+            <i class="fas fa-user"></i>
+            Full Name
+
+        </span>
+
+        <span
+            class="info-value"
+            id="infoFullName">
+
+            -
+
+        </span>
+
+    </div>
 
 
-        <div class="info-box">
+    <div class="info-box">
 
-            <span class="info-label">
-                <i class="fas fa-user"></i>
-                Full Name
-            </span>
+        <span class="info-label">
 
-            <span
-                class="info-value"
-                id="infoName">
-                -
-            </span>
+            <i class="fas fa-envelope"></i>
+            Email
 
-        </div>
+        </span>
 
+        <span
+            class="info-value"
+            id="infoEmail">
 
-        <div class="info-box">
+            -
 
-            <span class="info-label">
-                <i class="fas fa-envelope"></i>
-                Email
-            </span>
+        </span>
 
-            <span
-                class="info-value"
-                id="infoEmail">
-                -
-            </span>
-
-        </div>
+    </div>
 
 
-        <div class="info-box">
+    <div class="info-box">
 
-            <span class="info-label">
-                <i class="fas fa-phone"></i>
-                Phone / WhatsApp
-            </span>
+        <span class="info-label">
 
-            <span
-                class="info-value"
-                id="infoPhone">
-                -
-            </span>
+            <i class="fas fa-phone"></i>
+            Phone / WhatsApp
 
-        </div>
+        </span>
 
+        <span
+            class="info-value"
+            id="infoPhone">
 
-        <div class="info-box">
+            -
 
-            <span class="info-label">
-                <i class="fas fa-location-dot"></i>
-                Location
-            </span>
+        </span>
 
-            <span
-                class="info-value"
-                id="infoLocation">
-                -
-            </span>
-
-        </div>
+    </div>
 
 
-        <div class="info-box">
+    <div class="info-box">
 
-            <span class="info-label">
-                <i class="fas fa-share-nodes"></i>
-                How You Heard About B.E.P.
-            </span>
+        <span class="info-label">
 
-            <span
-                class="info-value"
-                id="infoHeardAbout">
-                -
-            </span>
+            <i class="fas fa-location-dot"></i>
+            Location
 
-        </div>
+        </span>
+
+        <span
+            class="info-value"
+            id="infoLocation">
+
+            -
+
+        </span>
+
+    </div>
 
 
-        <div class="info-box">
+    <div class="info-box">
 
-            <span class="info-label">
-                <i class="fas fa-circle-check"></i>
-                Member Status
-            </span>
+        <span class="info-label">
 
-            <span
-                class="info-value status-active"
-                id="infoStatus">
-                -
-            </span>
+            <i class="fas fa-share-nodes"></i>
+            How You Heard About B.E.P.
 
-        </div>
+        </span>
 
+        <span
+            class="info-value"
+            id="infoHeardAbout">
+
+            -
+
+        </span>
+
+    </div>
+
+
+    <div class="info-box">
+
+        <span class="info-label">
+
+            <i class="fas fa-circle-check"></i>
+            Member Status
+
+        </span>
+
+        <span
+            class="info-value status-active"
+            id="infoStatus">
+
+            -
+
+        </span>
 
     </div>
 
@@ -635,14 +696,12 @@ footer a{
         class="portal-btn secondary-btn"
         id="logoutBtn">
 
-        <i class="fas fa-right-from-bracket"></i>
+        <i class="fas fa-right-to-bracket"></i>
         Exit Portal
 
     </button>
 
-
 </div>
-
 
 </div>
 
@@ -657,634 +716,40 @@ footer a{
         Building the Church of Christ
     </p>
 
+
     <div class="footer-contact">
+
         <i class="fas fa-phone"></i>
         Omega: 062 350 8689
+
     </div>
 
+
     <div class="footer-contact">
+
         <i class="fas fa-phone"></i>
         Bro. KB: 083 282 2644
+
     </div>
+
 
     <div class="footer-contact">
+
         <i class="fas fa-envelope"></i>
+
         <a href="mailto:bep.onlineprog@gmail.com">
+
             bep.onlineprog@gmail.com
+
         </a>
+
     </div>
 
+
     <p style="margin-top:20px;">
+
         Thursday Sessions: 19:00 – 20:30
+
     </p>
 
 </footer>
-<!-- SUPABASE -->
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-<script>
-
-/* ================================
-   SUPABASE CONNECTION
-================================ */
-
-const SUPABASE_URL =
-    "https://rukusaellqqwthzibyib.supabase.co";
-
-const SUPABASE_PUBLISHABLE_KEY =
-    "sb_publishable_Co8_MoJOV14tXBkSWyXFTA_ULn1WRa5";
-
-const supabaseClient =
-    window.supabase.createClient(
-        SUPABASE_URL,
-        SUPABASE_PUBLISHABLE_KEY
-    );
-
-
-/* ================================
-   ELEMENTS
-================================ */
-
-const memberNumberInput =
-    document.getElementById("memberNumber");
-
-const memberEmailInput =
-    document.getElementById("memberEmail");
-
-const sendOtpBtn =
-    document.getElementById("sendOtpBtn");
-
-const verifyOtpBtn =
-    document.getElementById("verifyOtpBtn");
-
-const otpCodeInput =
-    document.getElementById("otpCode");
-
-const otpSection =
-    document.getElementById("otpSection");
-
-const loginCard =
-    document.getElementById("loginCard");
-
-const loginMessage =
-    document.getElementById("loginMessage");
-
-const otpMessage =
-    document.getElementById("otpMessage");
-
-const profileSection =
-    document.getElementById("profileSection");
-
-const logoutBtn =
-    document.getElementById("logoutBtn");
-
-const backToLoginBtn =
-    document.getElementById("backToLoginBtn");
-
-
-/* PROFILE */
-
-const profileName =
-    document.getElementById("profileName");
-
-const profileMemberNumber =
-    document.getElementById("profileMemberNumber");
-
-const infoName =
-    document.getElementById("infoName");
-
-const infoEmail =
-    document.getElementById("infoEmail");
-
-const infoPhone =
-    document.getElementById("infoPhone");
-
-const infoLocation =
-    document.getElementById("infoLocation");
-
-const infoHeardAbout =
-    document.getElementById("infoHeardAbout");
-
-const infoStatus =
-    document.getElementById("infoStatus");
-
-
-/* ================================
-   MESSAGE HELPERS
-================================ */
-
-function showMessage(
-    element,
-    message,
-    type
-){
-
-    element.className =
-        "message " + type;
-
-    element.innerHTML =
-        message;
-
-    element.style.display =
-        "block";
-}
-
-
-function hideMessage(element){
-
-    element.style.display =
-        "none";
-
-}
-
-
-/* ================================
-   SEND OTP
-================================ */
-
-sendOtpBtn.addEventListener(
-    "click",
-    async function(){
-
-        hideMessage(loginMessage);
-
-        const memberNumber =
-            memberNumberInput.value
-            .trim()
-            .toUpperCase();
-
-        const email =
-            memberEmailInput.value
-            .trim()
-            .toLowerCase();
-
-
-        if(!memberNumber){
-
-            showMessage(
-                loginMessage,
-                "Please enter your B.E.P. Member Number.",
-                "error"
-            );
-
-            return;
-        }
-
-
-        if(!email){
-
-            showMessage(
-                loginMessage,
-                "Please enter your registered email address.",
-                "error"
-            );
-
-            return;
-        }
-
-
-        sendOtpBtn.disabled =
-            true;
-
-        sendOtpBtn.innerHTML =
-            '<i class="fas fa-spinner fa-spin"></i> Sending...';
-
-
-        try{
-
-            /*
-             * We do NOT query the members table here.
-             *
-             * The table is protected by RLS.
-             *
-             * Supabase sends the OTP to the
-             * email entered by the member.
-             */
-
-            const { error } =
-                await supabaseClient.auth.signInWithOtp({
-                    email: email,
-                    options: {
-                        shouldCreateUser: false
-                    }
-                });
-
-
-            if(error){
-
-                throw error;
-
-            }
-
-
-            showMessage(
-                loginMessage,
-                `
-                <i class="fas fa-check-circle"></i>
-                Verification code sent.
-                Please check your email.
-                `,
-                "success"
-            );
-
-
-            loginCard.style.display =
-                "none";
-
-            otpSection.style.display =
-                "block";
-
-            otpCodeInput.focus();
-
-
-        }catch(error){
-
-            console.error(
-                "OTP Error:",
-                error
-            );
-
-
-            showMessage(
-                loginMessage,
-                `
-                <strong>
-                Unable to send verification code.
-                </strong>
-                <br>
-                ${escapeHTML(
-                    error.message ||
-                    "Please try again."
-                )}
-                `,
-                "error"
-            );
-
-
-        }finally{
-
-            sendOtpBtn.disabled =
-                false;
-
-            sendOtpBtn.innerHTML =
-                '<i class="fas fa-paper-plane"></i> Send Verification Code';
-
-        }
-
-    }
-);
-
-
-/* ================================
-   VERIFY OTP
-================================ */
-
-verifyOtpBtn.addEventListener(
-    "click",
-    async function(){
-
-        hideMessage(otpMessage);
-
-        const memberNumber =
-            memberNumberInput.value
-            .trim()
-            .toUpperCase();
-
-        const email =
-            memberEmailInput.value
-            .trim()
-            .toLowerCase();
-
-        const token =
-            otpCodeInput.value
-            .trim();
-
-
-        if(!token){
-
-            showMessage(
-                otpMessage,
-                "Please enter the verification code.",
-                "error"
-            );
-
-            return;
-        }
-
-
-        verifyOtpBtn.disabled =
-            true;
-
-        verifyOtpBtn.innerHTML =
-            '<i class="fas fa-spinner fa-spin"></i> Verifying...';
-
-
-        try{
-
-            /* VERIFY EMAIL OTP */
-
-            const { data: authData, error: authError } =
-                await supabaseClient.auth.verifyOtp({
-                    email: email,
-                    token: token,
-                    type: "email"
-                });
-
-
-            if(authError){
-
-                throw authError;
-
-            }
-
-
-            if(!authData.session){
-
-                throw new Error(
-                    "Authentication session was not created."
-                );
-
-            }
-
-
-            const user =
-                authData.user;
-
-
-            /*
-             * NOW we are authenticated.
-             *
-             * RLS will only return the member record
-             * whose auth_user_id equals auth.uid().
-             */
-
-            const { data: member, error: memberError } =
-                await supabaseClient
-                    .from("members")
-                    .select(`
-                        id,
-                        member_number,
-                        full_name,
-                        email,
-                        phone,
-                        location,
-                        heard_about,
-                        status
-                    `)
-                    .eq(
-                        "member_number",
-                        memberNumber
-                    )
-                    .eq(
-                        "auth_user_id",
-                        user.id
-                    )
-                    .maybeSingle();
-
-
-            if(memberError){
-
-                throw memberError;
-
-            }
-
-
-            if(!member){
-
-                await supabaseClient.auth.signOut();
-
-                throw new Error(
-                    "This Member Number is not linked to your authenticated account."
-                );
-
-            }
-
-
-            /* LOAD PROFILE */
-
-            profileName.textContent =
-                member.full_name ||
-                "B.E.P. Member";
-
-            profileMemberNumber.textContent =
-                member.member_number ||
-                "-";
-
-            infoName.textContent =
-                member.full_name ||
-                "-";
-
-            infoEmail.textContent =
-                member.email ||
-                "-";
-
-            infoPhone.textContent =
-                member.phone ||
-                "-";
-
-            infoLocation.textContent =
-                member.location ||
-                "-";
-
-            infoHeardAbout.textContent =
-                member.heard_about ||
-                "-";
-
-            const status =
-                member.status ||
-                "Active";
-
-            infoStatus.textContent =
-                status;
-
-
-            if(
-                String(status)
-                .toLowerCase() === "active"
-            ){
-
-                infoStatus.className =
-                    "info-value status-active";
-
-            }else{
-
-                infoStatus.className =
-                    "info-value";
-
-            }
-
-
-            /* SHOW PORTAL */
-
-            loginCard.style.display =
-                "none";
-
-            otpSection.style.display =
-                "none";
-
-            profileSection.style.display =
-                "block";
-
-
-            window.scrollTo({
-                top:0,
-                behavior:"smooth"
-            });
-
-
-        }catch(error){
-
-            console.error(
-                "Verification Error:",
-                error
-            );
-
-
-            showMessage(
-                otpMessage,
-                `
-                <strong>
-                <i class="fas fa-circle-exclamation"></i>
-                Verification failed.
-                </strong>
-                <br><br>
-                ${escapeHTML(
-                    error.message ||
-                    "Invalid verification code."
-                )}
-                `,
-                "error"
-            );
-
-
-        }finally{
-
-            verifyOtpBtn.disabled =
-                false;
-
-            verifyOtpBtn.innerHTML =
-                '<i class="fas fa-check-circle"></i> Verify & Access Portal';
-
-        }
-
-    }
-);
-
-
-/* ================================
-   BACK TO LOGIN
-================================ */
-
-backToLoginBtn.addEventListener(
-    "click",
-    function(){
-
-        otpSection.style.display =
-            "none";
-
-        loginCard.style.display =
-            "block";
-
-        otpCodeInput.value =
-            "";
-
-        hideMessage(otpMessage);
-
-    }
-);
-
-
-/* ================================
-   LOGOUT
-================================ */
-
-logoutBtn.addEventListener(
-    "click",
-    async function(){
-
-        await supabaseClient.auth.signOut();
-
-        profileSection.style.display =
-            "none";
-
-        otpSection.style.display =
-            "none";
-
-        loginCard.style.display =
-            "block";
-
-        memberNumberInput.value =
-            "";
-
-        memberEmailInput.value =
-            "";
-
-        otpCodeInput.value =
-            "";
-
-        hideMessage(loginMessage);
-
-        hideMessage(otpMessage);
-
-        memberNumberInput.focus();
-
-        window.scrollTo({
-            top:0,
-            behavior:"smooth"
-        });
-
-    }
-);
-
-
-/* ================================
-   ESCAPE HTML
-================================ */
-
-function escapeHTML(value){
-
-    return String(value ?? "")
-        .replace(/&/g,"&amp;")
-        .replace(/</g,"&lt;")
-        .replace(/>/g,"&gt;")
-        .replace(/"/g,"&quot;")
-        .replace(/'/g,"&#039;");
-
-}
-
-
-/* ================================
-   CHECK EXISTING SESSION
-================================ */
-
-async function checkExistingSession(){
-
-    const {
-        data: {
-            session
-        }
-    } = await supabaseClient.auth.getSession();
-
-
-    if(session){
-
-        /*
-         * We intentionally don't automatically
-         * display a member profile here.
-         *
-         * The member number must still be supplied
-         * so the correct member record is selected.
-         */
-
-    }
-
-}
-
-
-checkExistingSession();
-
-</script>
-
-</body>
-</html>
