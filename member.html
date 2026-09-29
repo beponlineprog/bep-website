@@ -1,500 +1,772 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>B.E.P. Member Portal</title>
+    <meta charset="UTF-8">
 
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-<style>
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-}
+    <title>B.E.P. Member Portal</title>
 
-body{
-    font-family:Arial,Helvetica,sans-serif;
-    background:#f4f8fc;
-    color:#222;
-    line-height:1.6;
-}
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
 
-nav{
-    background:#063970;
-    padding:15px 20px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    flex-wrap:wrap;
-}
+    <!-- Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-.logo{
-    color:white;
-    font-size:22px;
-    font-weight:bold;
-}
 
-.nav-links{
-    display:flex;
-    gap:15px;
-    flex-wrap:wrap;
-}
+    <style>
 
-.nav-links a{
-    color:white;
-    text-decoration:none;
-    font-size:14px;
-}
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-.nav-links a:hover{
-    color:#ffd700;
-}
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f4f8fc;
+            color: #222;
+            line-height: 1.6;
+        }
 
-.hero{
-    background:linear-gradient(135deg,#063970,#0b63b6);
-    color:white;
-    text-align:center;
-    padding:55px 20px;
-}
+        header {
+            background: #073b78;
+            color: white;
+            padding: 15px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
 
-.hero h1{
-    font-size:34px;
-    margin-bottom:10px;
-}
+        .nav-container {
+            max-width: 1100px;
+            margin: auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
 
-.hero p{
-    font-size:16px;
-}
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+        }
 
-.container{
-    max-width:900px;
-    margin:30px auto;
-    padding:0 18px;
-}
+        .logo span {
+            color: #d4af37;
+        }
 
-.card{
-    background:white;
-    border-radius:15px;
-    padding:25px;
-    margin-bottom:25px;
-    box-shadow:0 5px 18px rgba(0,0,0,.08);
-}
+        nav {
+            display: flex;
+            gap: 18px;
+            flex-wrap: wrap;
+        }
 
-.card h2{
-    color:#063970;
-    margin-bottom:10px;
-}
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+        }
 
-.card h3{
-    color:#063970;
-    margin-bottom:15px;
-}
+        nav a:hover {
+            color: #d4af37;
+        }
 
-.form-group{
-    margin-bottom:17px;
-}
+        .hero {
+            background: linear-gradient(
+                135deg,
+                #073b78,
+                #0b5aa5
+            );
+            color: white;
+            text-align: center;
+            padding: 55px 20px;
+        }
 
-label{
-    display:block;
-    font-weight:bold;
-    margin-bottom:6px;
-    color:#333;
-}
+        .hero h1 {
+            font-size: 34px;
+            margin-bottom: 10px;
+        }
 
-input{
-    width:100%;
-    padding:13px;
-    border:1px solid #ccc;
-    border-radius:8px;
-    font-size:15px;
-    outline:none;
-}
+        .hero p {
+            font-size: 17px;
+        }
 
-input:focus{
-    border-color:#0b63b6;
-    box-shadow:0 0 0 2px rgba(11,99,182,.1);
-}
+        .container {
+            width: 92%;
+            max-width: 900px;
+            margin: 35px auto;
+        }
 
-button{
-    border:none;
-    border-radius:8px;
-    padding:13px 20px;
-    font-size:15px;
-    font-weight:bold;
-    cursor:pointer;
-}
+        .card {
+            background: white;
+            border-radius: 14px;
+            padding: 28px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 18px rgba(0,0,0,0.08);
+        }
 
-.primary-btn{
-    background:#063970;
-    color:white;
-    width:100%;
-}
+        .card h2 {
+            color: #073b78;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
 
-.primary-btn:hover{
-    background:#0b63b6;
-}
+        .card h2 i {
+            color: #d4af37;
+            margin-right: 8px;
+        }
 
-.gold-btn{
-    background:#d9a400;
-    color:white;
-    width:100%;
-}
+        .form-group {
+            margin-bottom: 18px;
+        }
 
-.gold-btn:hover{
-    background:#b88900;
-}
+        label {
+            display: block;
+            margin-bottom: 7px;
+            font-weight: bold;
+            color: #333;
+        }
 
-.secondary-btn{
-    background:#555;
-    color:white;
-}
+        input {
+            width: 100%;
+            padding: 13px 14px;
+            border: 1px solid #ccd6e0;
+            border-radius: 8px;
+            font-size: 16px;
+            outline: none;
+        }
 
-.whatsapp-btn{
-    display:inline-block;
-    background:#25D366;
-    color:white;
-    padding:12px 18px;
-    border-radius:8px;
-    text-decoration:none;
-    font-weight:bold;
-    margin-top:15px;
-}
+        input:focus {
+            border-color: #073b78;
+            box-shadow: 0 0 0 2px rgba(7,59,120,0.08);
+        }
 
-.whatsapp-btn:hover{
-    opacity:.9;
-}
+        button {
+            width: 100%;
+            border: none;
+            border-radius: 8px;
+            padding: 14px 18px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+        }
 
-.link-btn{
-    background:none;
-    border:none;
-    color:#063970;
-    padding:8px 0;
-    font-weight:bold;
-    cursor:pointer;
-}
+        .primary-btn {
+            background: #073b78;
+            color: white;
+        }
 
-.link-btn:hover{
-    text-decoration:underline;
-}
+        .primary-btn:hover {
+            background: #052d5d;
+        }
 
-.message{
-    padding:12px 15px;
-    border-radius:8px;
-    margin-top:15px;
-    display:none;
-}
+        .secondary-btn {
+            background: #d4af37;
+            color: #111;
+            margin-top: 12px;
+        }
 
-.success{
-    background:#e8f7ed;
-    color:#146c2e;
-    border:1px solid #b7e1c1;
-}
+        .secondary-btn:hover {
+            background: #c39f2f;
+        }
 
-.error{
-    background:#fdecec;
-    color:#a51d2d;
-    border:1px solid #f2b8be;
-}
+        .whatsapp-btn {
+            display: inline-block;
+            width: 100%;
+            text-align: center;
+            background: #25D366;
+            color: white;
+            padding: 13px 18px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 15px;
+        }
 
-.info{
-    background:#eaf3fb;
-    color:#064b7a;
-    border:1px solid #b9d7ee;
-}
+        .whatsapp-btn:hover {
+            opacity: 0.9;
+        }
 
-.hidden{
-    display:none !important;
-}
+        .message {
+            display: none;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
 
-.profile-grid{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:15px;
-    margin-top:20px;
-}
+        .success {
+            display: block;
+            background: #e8f7ed;
+            color: #176b36;
+            border: 1px solid #a9dfba;
+        }
 
-.profile-item{
-    background:#f5f8fb;
-    padding:15px;
-    border-radius:10px;
-    border-left:4px solid #063970;
-}
+        .error {
+            display: block;
+            background: #fdecec;
+            color: #a12222;
+            border: 1px solid #efb0b0;
+        }
 
-.profile-item small{
-    display:block;
-    color:#666;
-    margin-bottom:3px;
-}
+        .info {
+            display: block;
+            background: #eaf3fb;
+            color: #174f7c;
+            border: 1px solid #b8d6ec;
+        }
 
-.profile-item strong{
-    color:#063970;
-    word-break:break-word;
-}
+        .profile-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
 
-.status{
-    display:inline-block;
-    background:#dff5e5;
-    color:#18763a;
-    padding:4px 10px;
-    border-radius:20px;
-    font-size:13px;
-}
+        .profile-item {
+            background: #f7f9fc;
+            border-left: 4px solid #d4af37;
+            padding: 15px;
+            border-radius: 7px;
+        }
 
-.actions{
-    margin-top:25px;
-    display:flex;
-    gap:10px;
-    flex-wrap:wrap;
-}
+        .profile-label {
+            display: block;
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 4px;
+            font-weight: bold;
+        }
 
-.loading{
-    text-align:center;
-    padding:25px;
-}
+        .profile-value {
+            display: block;
+            color: #073b78;
+            font-size: 16px;
+            font-weight: bold;
+            word-break: break-word;
+        }
 
-.spinner{
-    width:35px;
-    height:35px;
-    border:4px solid #ddd;
-    border-top:4px solid #063970;
-    border-radius:50%;
-    animation:spin 1s linear infinite;
-    margin:0 auto 12px;
-}
+        .member-number {
+            font-size: 22px;
+            color: #073b78;
+        }
 
-@keyframes spin{
-    to{
-        transform:rotate(360deg);
-    }
-}
+        .status {
+            display: inline-block;
+            background: #e8f7ed;
+            color: #176b36;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+        }
 
-footer{
-    background:#063970;
-    color:white;
-    text-align:center;
-    padding:30px 20px;
-    margin-top:40px;
-}
+        .portal-intro {
+            text-align: center;
+            margin-bottom: 25px;
+        }
 
-footer p{
-    margin:5px 0;
-}
+        .portal-intro i {
+            font-size: 50px;
+            color: #d4af37;
+            margin-bottom: 10px;
+        }
 
-.footer-links{
-    margin:15px 0;
-}
+        .portal-intro h2 {
+            margin-bottom: 5px;
+        }
 
-.footer-links a{
-    color:white;
-    margin:0 8px;
-    text-decoration:none;
-}
+        .small-text {
+            font-size: 13px;
+            color: #666;
+            margin-top: 10px;
+        }
 
-.footer-links a:hover{
-    color:#ffd700;
-}
+        .link-row {
+            text-align: center;
+            margin-top: 18px;
+        }
 
-@media(max-width:650px){
-    .hero h1{
-        font-size:28px;
-    }
+        .link-row a {
+            color: #073b78;
+            font-weight: bold;
+            text-decoration: none;
+        }
 
-    .profile-grid{
-        grid-template-columns:1fr;
-    }
+        .link-row a:hover {
+            color: #d4af37;
+        }
 
-    nav{
-        gap:10px;
-    }
+        .loading {
+            text-align: center;
+            padding: 20px;
+        }
 
-    .nav-links{
-        width:100%;
-        justify-content:center;
-    }
-}
-</style>
+        .loading i {
+            font-size: 30px;
+            color: #073b78;
+            margin-bottom: 10px;
+        }
+
+        footer {
+            background: #073b78;
+            color: white;
+            margin-top: 50px;
+            padding: 40px 20px 20px;
+        }
+
+        .footer-container {
+            max-width: 1100px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+
+        .footer-column h3 {
+            color: #d4af37;
+            margin-bottom: 14px;
+            font-size: 18px;
+        }
+
+        .footer-column p,
+        .footer-column a {
+            color: #e8eef5;
+            font-size: 14px;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .footer-column a:hover {
+            color: #d4af37;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 12px;
+            margin-top: 12px;
+        }
+
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 38px;
+            height: 38px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            color: white;
+        }
+
+        .social-icons a:hover {
+            background: #d4af37;
+            color: #073b78;
+        }
+
+        .footer-bottom {
+            max-width: 1100px;
+            margin: 30px auto 0;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            text-align: center;
+            font-size: 13px;
+            color: #dbe5ef;
+        }
+
+        #loginSection,
+        #forgotSection,
+        #passwordSection,
+        #loadingSection,
+        #profileSection {
+            display: none;
+        }
+
+        #loginSection {
+            display: block;
+        }
+
+        @media (max-width: 750px) {
+
+            .nav-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            nav {
+                justify-content: center;
+            }
+
+            .hero h1 {
+                font-size: 28px;
+            }
+
+            .profile-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-container {
+                grid-template-columns: 1fr 1fr;
+            }
+
+        }
+
+        @media (max-width: 480px) {
+
+            .card {
+                padding: 20px;
+            }
+
+            .footer-container {
+                grid-template-columns: 1fr;
+            }
+
+            .hero {
+                padding: 40px 15px;
+            }
+
+            .hero h1 {
+                font-size: 25px;
+            }
+
+        }
+
+    </style>
+
 </head>
+
 
 <body>
 
-<nav>
-    <div class="logo">
-        <i class="fas fa-book-bible"></i> B.E.P.
+
+<header>
+
+    <div class="nav-container">
+
+        <a href="index.html" class="logo">
+            B.E.<span>P.</span>
+        </a>
+
+        <nav>
+
+            <a href="index.html">
+                <i class="fa-solid fa-house"></i>
+                Home
+            </a>
+
+            <a href="register.html">
+                <i class="fa-solid fa-user-plus"></i>
+                Register
+            </a>
+
+            <a href="quiz.html">
+                <i class="fa-solid fa-book-open"></i>
+                Bible Quiz
+            </a>
+
+        </nav>
+
     </div>
 
-    <div class="nav-links">
-        <a href="index.html">
-            <i class="fas fa-home"></i> Home
-        </a>
+</header>
 
-        <a href="register.html">
-            <i class="fas fa-user-plus"></i> Register
-        </a>
-
-        <a href="quiz.html">
-            <i class="fas fa-question-circle"></i> Bible Quiz
-        </a>
-    </div>
-</nav>
 
 <section class="hero">
-    <h1>B.E.P. Member Portal</h1>
-    <p>Welcome to the Biblical Empowerment Program</p>
+
+    <h1>
+        <i class="fa-solid fa-user-shield"></i>
+        B.E.P. Member Portal
+    </h1>
+
+    <p>
+        Welcome to the Biblical Empowerment Program
+    </p>
+
 </section>
 
-<div class="container">
 
-    <!-- LOGIN CARD -->
-    <div class="card" id="loginCard">
+<main class="container">
 
-        <h2>
-            <i class="fas fa-right-to-bracket"></i>
-            Member Login
-        </h2>
 
-        <p>
-            Sign in using the email address and password associated
-            with your B.E.P. member account.
-        </p>
+    <!-- LOGIN SECTION -->
 
-        <br>
+    <section id="loginSection" class="card">
 
-        <div class="form-group">
-            <label for="loginEmail">Email Address</label>
-            <input
-                type="email"
-                id="loginEmail"
-                placeholder="Enter your email address"
-                autocomplete="email">
+        <div class="portal-intro">
+
+            <i class="fa-solid fa-circle-user"></i>
+
+            <h2>
+                Member Login
+            </h2>
+
+            <p>
+                Sign in to access your B.E.P. member profile.
+            </p>
+
         </div>
 
-        <div class="form-group">
-            <label for="loginPassword">Password</label>
-            <input
-                type="password"
-                id="loginPassword"
-                placeholder="Enter your password"
-                autocomplete="current-password">
-        </div>
 
-        <button class="primary-btn" id="loginBtn">
-            <i class="fas fa-sign-in-alt"></i>
-            Login
-        </button>
+        <div
+            id="loginMessage"
+            class="message"
+        ></div>
 
-        <div id="loginMessage" class="message"></div>
 
-        <div style="text-align:center;margin-top:15px;">
-            <button class="link-btn" id="showForgotBtn">
-                <i class="fas fa-key"></i>
+        <form id="loginForm">
+
+
+            <div class="form-group">
+
+                <label for="loginEmail">
+                    Email Address
+                </label>
+
+                <input
+                    type="email"
+                    id="loginEmail"
+                    placeholder="Enter your email address"
+                    autocomplete="email"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="loginPassword">
+                    Password
+                </label>
+
+                <input
+                    type="password"
+                    id="loginPassword"
+                    placeholder="Enter your password"
+                    autocomplete="current-password"
+                    required
+                >
+
+            </div>
+
+
+            <button
+                type="submit"
+                id="loginBtn"
+                class="primary-btn"
+            >
+
+                <i class="fa-solid fa-right-to-bracket"></i>
+                Login
+
+            </button>
+
+
+        </form>
+
+
+        <div class="link-row">
+
+            <a href="#" id="showForgot">
+
+                <i class="fa-solid fa-key"></i>
                 Forgot Password?
-            </button>
+
+            </a>
+
         </div>
 
-    </div>
+
+        <div class="link-row">
+
+            <a href="register.html">
+
+                <i class="fa-solid fa-user-plus"></i>
+                Create a B.E.P. Account
+
+            </a>
+
+        </div>
+
+    </section>
 
 
-    <!-- FORGOT PASSWORD CARD -->
-    <div class="card hidden" id="forgotCard">
+
+    <!-- FORGOT PASSWORD -->
+
+    <section
+        id="forgotSection"
+        class="card"
+    >
 
         <h2>
-            <i class="fas fa-unlock-alt"></i>
-            Reset Password
+
+            <i class="fa-solid fa-key"></i>
+            Reset Your Password
+
         </h2>
 
-        <p>
-            Enter your B.E.P. account email address and we will send
-            you a password-reset link.
-        </p>
 
-        <br>
+        <div
+            id="forgotMessage"
+            class="message"
+        ></div>
 
-        <div class="form-group">
-            <label for="resetEmail">Email Address</label>
 
-            <input
-                type="email"
-                id="resetEmail"
-                placeholder="Enter your email address"
-                autocomplete="email">
-        </div>
+        <form id="forgotForm">
 
-        <button class="gold-btn" id="sendResetBtn">
-            <i class="fas fa-paper-plane"></i>
-            Send Reset Link
-        </button>
 
-        <div id="resetMessage" class="message"></div>
+            <div class="form-group">
 
-        <div style="text-align:center;margin-top:15px;">
-            <button class="link-btn" id="backToLoginBtn">
-                <i class="fas fa-arrow-left"></i>
+                <label for="forgotEmail">
+                    Email Address
+                </label>
+
+                <input
+                    type="email"
+                    id="forgotEmail"
+                    placeholder="Enter your registered email"
+                    autocomplete="email"
+                    required
+                >
+
+            </div>
+
+
+            <button
+                type="submit"
+                id="forgotBtn"
+                class="primary-btn"
+            >
+
+                <i class="fa-solid fa-paper-plane"></i>
+                Send Reset Link
+
+            </button>
+
+
+        </form>
+
+
+        <div class="link-row">
+
+            <a href="#" id="backToLogin">
+
+                <i class="fa-solid fa-arrow-left"></i>
                 Back to Login
-            </button>
+
+            </a>
+
         </div>
 
-    </div>
+    </section>
 
 
-    <!-- NEW PASSWORD CARD -->
-    <div class="card hidden" id="newPasswordCard">
+
+    <!-- NEW PASSWORD -->
+
+    <section
+        id="passwordSection"
+        class="card"
+    >
 
         <h2>
-            <i class="fas fa-lock"></i>
+
+            <i class="fa-solid fa-lock"></i>
             Create New Password
+
         </h2>
 
-        <p>
-            Your password-reset link has been verified.
-            Please create a new password for your B.E.P. Member Portal.
-        </p>
 
-        <br>
-
-        <div class="form-group">
-            <label for="newPassword">
-                New Password
-            </label>
-
-            <input
-                type="password"
-                id="newPassword"
-                placeholder="Enter your new password"
-                autocomplete="new-password">
-        </div>
-
-        <div class="form-group">
-            <label for="confirmPassword">
-                Confirm New Password
-            </label>
-
-            <input
-                type="password"
-                id="confirmPassword"
-                placeholder="Confirm your new password"
-                autocomplete="new-password">
-        </div>
-
-        <button class="primary-btn" id="updatePasswordBtn">
-            <i class="fas fa-check-circle"></i>
-            Update Password
-        </button>
-
-        <div id="passwordMessage" class="message"></div>
-
-    </div>
+        <div
+            id="passwordMessage"
+            class="message"
+        ></div>
 
 
-    <!-- LOADING CARD -->
-    <div class="card hidden" id="loadingCard">
+        <form id="passwordForm">
+
+
+            <div class="form-group">
+
+                <label for="newPassword">
+                    New Password
+                </label>
+
+                <input
+                    type="password"
+                    id="newPassword"
+                    placeholder="Enter new password"
+                    autocomplete="new-password"
+                    minlength="8"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="confirmNewPassword">
+                    Confirm New Password
+                </label>
+
+                <input
+                    type="password"
+                    id="confirmNewPassword"
+                    placeholder="Confirm new password"
+                    autocomplete="new-password"
+                    minlength="8"
+                    required
+                >
+
+            </div>
+
+
+            <button
+                type="submit"
+                id="passwordBtn"
+                class="primary-btn"
+            >
+
+                <i class="fa-solid fa-lock"></i>
+                Update Password
+
+            </button>
+
+
+        </form>
+
+    </section>
+
+
+
+    <!-- LOADING SECTION -->
+
+    <section
+        id="loadingSection"
+        class="card"
+    >
 
         <div class="loading">
 
-            <div class="spinner"></div>
+            <i class="fa-solid fa-spinner fa-spin"></i>
+
+            <h2>
+                Loading Member Profile
+            </h2>
 
             <p>
                 Please wait...
@@ -502,1144 +774,217 @@ footer p{
 
         </div>
 
-    </div>
+    </section>
+
 
 
     <!-- MEMBER PROFILE -->
-    <div class="card hidden" id="profileCard">
 
-        <h2>
-            <i class="fas fa-user-circle"></i>
-            My B.E.P. Profile
-        </h2>
+    <section
+        id="profileSection"
+        class="card"
+    >
 
-        <p>
-            Welcome to your B.E.P. Member Portal.
-        </p>
+        <div class="portal-intro">
+
+            <i class="fa-solid fa-id-card"></i>
+
+            <h2>
+                Welcome,
+                <span id="welcomeName">
+                    B.E.P. Member
+                </span>
+            </h2>
+
+            <p>
+                Your B.E.P. member profile
+            </p>
+
+        </div>
+
+
+        <div
+            id="profileMessage"
+            class="message"
+        ></div>
+
 
         <div class="profile-grid">
 
-            <div class="profile-item">
-                <small>Member Number</small>
-                <strong id="profileMemberNumber">-</strong>
-            </div>
 
             <div class="profile-item">
-                <small>Full Name</small>
-                <strong id="profileFullName">-</strong>
+
+                <span class="profile-label">
+
+                    <i class="fa-solid fa-id-badge"></i>
+                    Member Number
+
+                </span>
+
+                <span
+                    id="memberNumber"
+                    class="profile-value member-number"
+                >
+                    -
+                </span>
+
             </div>
 
-            <div class="profile-item">
-                <small>Email</small>
-                <strong id="profileEmail">-</strong>
-            </div>
 
             <div class="profile-item">
-                <small>Phone / WhatsApp</small>
-                <strong id="profilePhone">-</strong>
+
+                <span class="profile-label">
+
+                    <i class="fa-solid fa-user"></i>
+                    Full Name
+
+                </span>
+
+                <span
+                    id="fullName"
+                    class="profile-value"
+                >
+                    -
+                </span>
+
             </div>
 
-            <div class="profile-item">
-                <small>Location</small>
-                <strong id="profileLocation">-</strong>
-            </div>
 
             <div class="profile-item">
-                <small>How You Heard About B.E.P.</small>
-                <strong id="profileSource">-</strong>
+
+                <span class="profile-label">
+
+                    <i class="fa-solid fa-envelope"></i>
+                    Email
+
+                </span>
+
+                <span
+                    id="email"
+                    class="profile-value"
+                >
+                    -
+                </span>
+
             </div>
 
+
             <div class="profile-item">
-                <small>Member Status</small>
-                <strong>
-                    <span class="status" id="profileStatus">
-                        Active
-                    </span>
-                </strong>
+
+                <span class="profile-label">
+
+                    <i class="fa-brands fa-whatsapp"></i>
+                    Phone / WhatsApp
+
+                </span>
+
+                <span
+                    id="phone"
+                    class="profile-value"
+                >
+                    -
+                </span>
+
             </div>
+
+
+            <div class="profile-item">
+
+                <span class="profile-label">
+
+                    <i class="fa-solid fa-location-dot"></i>
+                    Location
+
+                </span>
+
+                <span
+                    id="location"
+                    class="profile-value"
+                >
+                    -
+                </span>
+
+            </div>
+
+
+            <div class="profile-item">
+
+                <span class="profile-label">
+
+                    <i class="fa-solid fa-circle-info"></i>
+                    How You Heard About B.E.P.
+
+                </span>
+
+                <span
+                    id="heardAbout"
+                    class="profile-value"
+                >
+                    -
+                </span>
+
+            </div>
+
+
+            <div class="profile-item">
+
+                <span class="profile-label">
+
+                    <i class="fa-solid fa-shield-halved"></i>
+                    Member Status
+
+                </span>
+
+                <span
+                    id="memberStatus"
+                    class="profile-value"
+                >
+                    -
+                </span>
+
+            </div>
+
 
         </div>
 
-        <div class="actions">
 
-            <a
-                href="https://wa.me/27623508689"
-                target="_blank"
-                class="whatsapp-btn">
+        <a
+            id="whatsappBtn"
+            class="whatsapp-btn"
+            href="#"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
 
-                <i class="fab fa-whatsapp"></i>
-                Contact B.E.P. on WhatsApp
+            <i class="fa-brands fa-whatsapp"></i>
+            Contact B.E.P. on WhatsApp
 
-            </a>
-
-            <button
-                class="secondary-btn"
-                id="logoutBtn">
-
-                <i class="fas fa-sign-out-alt"></i>
-                Logout
-
-            </button>
-
-        </div>
-
-        <div id="profileMessage" class="message"></div>
-
-    </div>
-
-</div>
-
-
-<footer>
-
-    <h3>B.E.P. — Biblical Empowerment Program</h3>
-
-    <p>
-        Building the Church of Christ
-    </p>
-
-    <div class="footer-links">
-
-        <a href="index.html">
-            Home
         </a>
 
-        <a href="register.html">
-            Register
-        </a>
 
-        <a href="quiz.html">
-            Bible Quiz
-        </a>
+        <button
+            id="logoutBtn"
+            class="secondary-btn"
+            type="button"
+        >
 
-        <a href="https://www.facebook.com/groups/1421853356307383/"
-           target="_blank">
-            Facebook
-        </a>
+            <i class="fa-solid fa-right-from-bracket"></i>
+            Logout
 
-    </div>
+        </button>
 
-    <p>
-        <i class="fas fa-envelope"></i>
-        bep.onlineprog@gmail.com
-    </p>
 
-    <p>
-        <i class="fab fa-whatsapp"></i>
-        Omega: 062 350 8689
-    </p>
+        <p
+            class="small-text"
+            style="text-align:center;"
+        >
 
-    <p style="margin-top:15px;">
-        © 2026 Biblical Empowerment Program. All Rights Reserved.
-    </p>
+            Keep your B.E.P. account details secure.
 
-</footer>
+        </p>
 
 
-<!-- Supabase JavaScript -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    </section>
 
-<script src="member.js"></script>
 
-</body>
-                                                       </html><script>
-/* =========================================
-   B.E.P. SUPABASE CONFIGURATION
-========================================= */
-
-const SUPABASE_URL =
-    "https://rukusaellqqwthzibyib.supabase.co";
-
-const SUPABASE_KEY =
-    "sb_publishable_Co8_MoJOV14tXBkSWyXFTA_ULn1WRa5";
-
-const supabaseClient =
-    window.supabase.createClient(
-        SUPABASE_URL,
-        SUPABASE_KEY
-    );
-
-
-/* =========================================
-   PAGE ELEMENTS
-========================================= */
-
-const loginCard =
-    document.getElementById("loginCard");
-
-const forgotCard =
-    document.getElementById("forgotCard");
-
-const newPasswordCard =
-    document.getElementById("newPasswordCard");
-
-const loadingCard =
-    document.getElementById("loadingCard");
-
-const profileCard =
-    document.getElementById("profileCard");
-
-const loginMessage =
-    document.getElementById("loginMessage");
-
-const resetMessage =
-    document.getElementById("resetMessage");
-
-const passwordMessage =
-    document.getElementById("passwordMessage");
-
-const profileMessage =
-    document.getElementById("profileMessage");
-
-
-/* =========================================
-   HELPER FUNCTIONS
-========================================= */
-
-function showMessage(element, message, type){
-
-    element.textContent = message;
-
-    element.className =
-        "message " + type;
-
-    element.style.display = "block";
-}
-
-
-function hideMessage(element){
-
-    element.style.display = "none";
-
-}
-
-
-function hideAllCards(){
-
-    loginCard.classList.add("hidden");
-
-    forgotCard.classList.add("hidden");
-
-    newPasswordCard.classList.add("hidden");
-
-    loadingCard.classList.add("hidden");
-
-    profileCard.classList.add("hidden");
-
-}
-
-
-function showLogin(){
-
-    hideAllCards();
-
-    loginCard.classList.remove("hidden");
-
-}
-
-
-function showForgotPassword(){
-
-    hideAllCards();
-
-    forgotCard.classList.remove("hidden");
-
-}
-
-
-function showNewPassword(){
-
-    hideAllCards();
-
-    newPasswordCard.classList.remove("hidden");
-
-}
-
-
-function showLoading(){
-
-    hideAllCards();
-
-    loadingCard.classList.remove("hidden");
-
-}
-
-
-function showProfile(){
-
-    hideAllCards();
-
-    profileCard.classList.remove("hidden");
-
-}
-
-
-/* =========================================
-   FORGOT PASSWORD BUTTON
-========================================= */
-
-document
-.getElementById("showForgotBtn")
-.addEventListener("click", function(){
-
-    hideMessage(loginMessage);
-
-    const email =
-        document.getElementById("loginEmail").value.trim();
-
-    document.getElementById("resetEmail").value =
-        email;
-
-    showForgotPassword();
-
-});
-
-
-/* =========================================
-   BACK TO LOGIN
-========================================= */
-
-document
-.getElementById("backToLoginBtn")
-.addEventListener("click", function(){
-
-    hideMessage(resetMessage);
-
-    showLogin();
-
-});
-
-
-/* =========================================
-   SEND PASSWORD RESET EMAIL
-========================================= */
-
-document
-.getElementById("sendResetBtn")
-.addEventListener("click", async function(){
-
-    const email =
-        document.getElementById("resetEmail")
-        .value
-        .trim();
-
-    hideMessage(resetMessage);
-
-    if(!email){
-
-        showMessage(
-            resetMessage,
-            "Please enter your email address.",
-            "error"
-        );
-
-        return;
-    }
-
-
-    const button =
-        document.getElementById("sendResetBtn");
-
-    button.disabled = true;
-
-    button.innerHTML =
-        '<i class="fas fa-spinner fa-spin"></i> Sending...';
-
-
-    try{
-
-        const { error } =
-            await supabaseClient.auth
-            .resetPasswordForEmail(
-                email,
-                {
-                    redirectTo:
-                    "https://beponlineprog.github.io/bep-website/member.html"
-                }
-            );
-
-
-        if(error){
-
-            throw error;
-
-        }
-
-
-        showMessage(
-            resetMessage,
-            "Password reset link sent! Please check your email and tap the reset link.",
-            "success"
-        );
-
-
-    }catch(error){
-
-        console.error(
-            "Reset email error:",
-            error
-        );
-
-        showMessage(
-            resetMessage,
-            error.message ||
-            "Unable to send password reset email.",
-            "error"
-        );
-
-    }
-
-
-    button.disabled = false;
-
-    button.innerHTML =
-        '<i class="fas fa-paper-plane"></i> Send Reset Link';
-
-});
-
-
-/* =========================================
-   SUPABASE AUTH STATE LISTENER
-========================================= */
-
-supabaseClient.auth.onAuthStateChange(
-    async function(event, session){
-
-        console.log(
-            "Auth event:",
-            event
-        );
-
-
-        /*
-           PASSWORD RECOVERY
-
-           This is the important part.
-
-           When the member clicks the reset
-           link in their email, Supabase creates
-           a recovery session.
-
-           We show the New Password screen
-           instead of sending them to the
-           normal profile screen.
-        */
-
-        if(event === "PASSWORD_RECOVERY"){
-
-            showNewPassword();
-
-            return;
-        }
-
-
-        /*
-           SIGNED OUT
-        */
-
-        if(event === "SIGNED_OUT"){
-
-            showLogin();
-
-            return;
-        }
-
-    }
-);
-
-
-/* =========================================
-   UPDATE PASSWORD
-========================================= */
-
-document
-.getElementById("updatePasswordBtn")
-.addEventListener("click", async function(){
-
-    const newPassword =
-        document.getElementById("newPassword")
-        .value;
-
-    const confirmPassword =
-        document.getElementById("confirmPassword")
-        .value;
-
-
-    hideMessage(passwordMessage);
-
-
-    /* CHECK PASSWORD */
-
-    if(!newPassword){
-
-        showMessage(
-            passwordMessage,
-            "Please enter a new password.",
-            "error"
-        );
-
-        return;
-    }
-
-
-    /* MINIMUM LENGTH */
-
-    if(newPassword.length < 6){
-
-        showMessage(
-            passwordMessage,
-            "Your password must contain at least 6 characters.",
-            "error"
-        );
-
-        return;
-    }
-
-
-    /* MATCH CHECK */
-
-    if(newPassword !== confirmPassword){
-
-        showMessage(
-            passwordMessage,
-            "The passwords do not match.",
-            "error"
-        );
-
-        return;
-    }
-
-
-    const button =
-        document.getElementById(
-            "updatePasswordBtn"
-        );
-
-
-    button.disabled = true;
-
-    button.innerHTML =
-        '<i class="fas fa-spinner fa-spin"></i> Updating...';
-
-
-    try{
-
-        const { error } =
-            await supabaseClient.auth
-            .updateUser({
-
-                password: newPassword
-
-            });
-
-
-        if(error){
-
-            throw error;
-
-        }
-
-
-        showMessage(
-            passwordMessage,
-            "Password updated successfully! You can now use your new password to log in.",
-            "success"
-        );
-
-
-        /*
-           Clear password fields
-        */
-
-        document.getElementById(
-            "newPassword"
-        ).value = "";
-
-        document.getElementById(
-            "confirmPassword"
-        ).value = "";
-
-
-        /*
-           Wait briefly, then show login
-        */
-
-        setTimeout(async function(){
-
-            await supabaseClient.auth.signOut();
-
-            showLogin();
-
-            showMessage(
-                loginMessage,
-                "Your password has been changed successfully. Please log in with your new password.",
-                "success"
-            );
-
-        }, 1800);
-
-
-    }catch(error){
-
-        console.error(
-            "Password update error:",
-            error
-        );
-
-        showMessage(
-            passwordMessage,
-            error.message ||
-            "Unable to update your password.",
-            "error"
-        );
-
-    }
-
-
-    button.disabled = false;
-
-    button.innerHTML =
-        '<i class="fas fa-check-circle"></i> Update Password';
-
-});
-
-
-/* =========================================
-   NORMAL LOGIN
-========================================= */
-
-document
-.getElementById("loginBtn")
-.addEventListener("click", loginMember);
-
-
-async function loginMember(){
-
-    const email =
-        document.getElementById("loginEmail")
-        .value
-        .trim();
-
-    const password =
-        document.getElementById("loginPassword")
-        .value;
-
-
-    hideMessage(loginMessage);
-
-
-    if(!email){
-
-        showMessage(
-            loginMessage,
-            "Please enter your email address.",
-            "error"
-        );
-
-        return;
-    }
-
-
-    if(!password){
-
-        showMessage(
-            loginMessage,
-            "Please enter your password.",
-            "error"
-        );
-
-        return;
-    }
-
-
-    const button =
-        document.getElementById("loginBtn");
-
-
-    button.disabled = true;
-
-    button.innerHTML =
-        '<i class="fas fa-spinner fa-spin"></i> Logging in...';
-
-
-    try{
-
-        const { data, error } =
-            await supabaseClient.auth
-            .signInWithPassword({
-
-                email: email,
-
-                password: password
-
-            });
-
-
-        if(error){
-
-            throw error;
-
-        }
-
-
-        console.log(
-            "Login successful:",
-            data.user.email
-        );
-
-
-        await loadMemberProfile(
-            data.user
-        );
-
-
-    }catch(error){
-
-        console.error(
-            "Login error:",
-            error
-        );
-
-
-        let message =
-            error.message ||
-            "Unable to log in.";
-
-
-        if(
-            message.toLowerCase()
-            .includes("invalid login credentials")
-        ){
-
-            message =
-                "Invalid email or password. Please check your details and try again.";
-
-        }
-
-
-        if(
-            message.toLowerCase()
-            .includes("email not confirmed")
-        ){
-
-            message =
-                "Your email address has not been confirmed. Please check your email.";
-
-        }
-
-
-        showMessage(
-            loginMessage,
-            message,
-            "error"
-        );
-
-    }
-
-
-    button.disabled = false;
-
-    button.innerHTML =
-        '<i class="fas fa-sign-in-alt"></i> Login';
-
-}
-
-
-/* =========================================
-   LOAD MEMBER PROFILE
-========================================= */
-
-async function loadMemberProfile(user){
-
-    showLoading();
-
-
-    try{
-
-        /*
-           Search the members table using
-           the authenticated email.
-        */
-
-        const { data: member, error } =
-            await supabaseClient
-            .from("members")
-            .select("*")
-            .eq("email", user.email)
-            .maybeSingle();
-
-
-        if(error){
-
-            throw error;
-
-        }
-
-
-        if(!member){
-
-            showLogin();
-
-            showMessage(
-                loginMessage,
-                "Login successful, but your B.E.P. member profile was not found. Please contact B.E.P. administration.",
-                "error"
-            );
-
-            return;
-        }
-
-
-        /*
-           MEMBER NUMBER
-        */
-
-        document.getElementById(
-            "profileMemberNumber"
-        ).textContent =
-
-            member.member_number ||
-            member.member_id ||
-            member.member_no ||
-            member.member_number_id ||
-            "-";
-
-
-        /*
-           FULL NAME
-        */
-
-        let fullName =
-            member.full_name;
-
-
-        if(!fullName){
-
-            const name =
-                member.name || "";
-
-            const surname =
-                member.surname || "";
-
-            fullName =
-                (name + " " + surname)
-                .trim();
-
-        }
-
-
-        document.getElementById(
-            "profileFullName"
-        ).textContent =
-            fullName || "-";
-
-
-        /*
-           EMAIL
-        */
-
-        document.getElementById(
-            "profileEmail"
-        ).textContent =
-            member.email ||
-            user.email ||
-            "-";
-
-
-        /*
-           PHONE
-        */
-
-        document.getElementById(
-            "profilePhone"
-        ).textContent =
-
-            member.phone ||
-            member.phone_number ||
-            member.whatsapp ||
-            member.whatsapp_number ||
-            "-";
-
-
-        /*
-           LOCATION
-        */
-
-        document.getElementById(
-            "profileLocation"
-        ).textContent =
-
-            member.location ||
-            "-";
-
-
-        /*
-           SOURCE
-        */
-
-        document.getElementById(
-            "profileSource"
-        ).textContent =
-
-            member.heard_about ||
-            member.how_did_you_hear ||
-            member.source ||
-            "-";
-
-
-        /*
-           STATUS
-        */
-
-        document.getElementById(
-            "profileStatus"
-        ).textContent =
-
-            member.status ||
-            "Active";
-
-
-        /*
-           Show profile
-        */
-
-        showProfile();
-
-    }catch(error){
-
-        console.error(
-            "Profile loading error:",
-            error
-        );
-
-
-        showLogin();
-
-
-        showMessage(
-            loginMessage,
-            "Your login was successful, but we could not load your member profile. Error: " +
-            error.message,
-            "error"
-        );
-
-    }
-
-}
-
-
-/* =========================================
-   LOGOUT
-========================================= */
-
-document
-.getElementById("logoutBtn")
-.addEventListener("click", async function(){
-
-    const button =
-        document.getElementById("logoutBtn");
-
-
-    button.disabled = true;
-
-    button.innerHTML =
-        '<i class="fas fa-spinner fa-spin"></i> Logging out...';
-
-
-    const { error } =
-        await supabaseClient.auth.signOut();
-
-
-    if(error){
-
-        console.error(
-            "Logout error:",
-            error
-        );
-
-        button.disabled = false;
-
-        button.innerHTML =
-            '<i class="fas fa-sign-out-alt"></i> Logout';
-
-        return;
-    }
-
-
-    showLogin();
-
-    document.getElementById(
-        "loginPassword"
-    ).value = "";
-
-
-    showMessage(
-        loginMessage,
-        "You have been logged out successfully.",
-        "success"
-    );
-
-
-    button.disabled = false;
-
-    button.innerHTML =
-        '<i class="fas fa-sign-out-alt"></i> Logout';
-
-});
-
-
-/* =========================================
-   ENTER KEY LOGIN
-========================================= */
-
-document
-.getElementById("loginPassword")
-.addEventListener("keydown", function(event){
-
-    if(event.key === "Enter"){
-
-        loginMember();
-
-    }
-
-});
-
-
-/* =========================================
-   ENTER KEY RESET EMAIL
-========================================= */
-
-document
-.getElementById("resetEmail")
-.addEventListener("keydown", function(event){
-
-    if(event.key === "Enter"){
-
-        document
-        .getElementById("sendResetBtn")
-        .click();
-
-    }
-
-});
-
-
-/* =========================================
-   ENTER KEY NEW PASSWORD
-========================================= */
-
-document
-.getElementById("confirmPassword")
-.addEventListener("keydown", function(event){
-
-    if(event.key === "Enter"){
-
-        document
-        .getElementById("updatePasswordBtn")
-        .click();
-
-    }
-
-});
-
-
-/* =========================================
-   CHECK EXISTING SESSION
-========================================= */
-
-async function checkExistingSession(){
-
-    try{
-
-        /*
-           First check whether the URL contains
-           a password recovery session.
-
-           Supabase recovery links normally
-           contain access information in the URL.
-        */
-
-        const hash =
-            window.location.hash;
-
-
-        const search =
-            window.location.search;
-
-
-        const recoveryDetected =
-
-            hash.includes("type=recovery") ||
-
-            search.includes("type=recovery");
-
-
-        if(recoveryDetected){
-
-            console.log(
-                "Password recovery detected."
-            );
-
-            /*
-               Give Supabase time to process the
-               recovery session and trigger
-               PASSWORD_RECOVERY.
-            */
-
-            setTimeout(function(){
-
-                showNewPassword();
-
-            }, 500);
-
-
-            return;
-        }
-
-
-        /*
-           Normal existing session
-        */
-
-        const {
-            data: {
-                session
-            }
-        } =
-            await supabaseClient.auth
-            .getSession();
-
-
-        if(session && session.user){
-
-            await loadMemberProfile(
-                session.user
-            );
-
-        }else{
-
-            showLogin();
-
-        }
-
-    }catch(error){
-
-        console.error(
-            "Session check error:",
-            error
-        );
-
-        showLogin();
-
-    }
-
-}
-
-
-/* =========================================
-   START PORTAL
-========================================= */
-
-checkExistingSession();
-
-                                                             </script>
+</main>
