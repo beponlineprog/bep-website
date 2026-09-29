@@ -1965,3 +1965,1202 @@
 
         }
     );
+/* ==========================================
+       LOAD MEMBER PROFILE
+       ========================================== */
+
+    async function loadMemberProfile(user) {
+
+        if (!user || !user.id) {
+
+            showSection(
+                loginSection
+            );
+
+            return;
+
+        }
+
+
+        showSection(
+            loadingSection
+        );
+
+
+        try {
+
+            console.log(
+                "Loading B.E.P. member profile for Auth User:",
+                user.id
+            );
+
+
+            /*
+             * IMPORTANT:
+             *
+             * The member profile is now found
+             * using the Supabase Auth UUID.
+             *
+             * This matches the RLS policy:
+             *
+             * auth_user_id = auth.uid()
+             */
+
+            const {
+                data: member,
+                error
+            } =
+                await supabaseClient
+                    .from("members")
+                    .select("*")
+                    .eq(
+                        "auth_user_id",
+                        user.id
+                    )
+                    .maybeSingle();
+
+
+            if (error) {
+
+                console.error(
+                    "Member profile query error:",
+                    error
+                );
+
+                throw error;
+
+            }
+
+
+            /*
+             * If Auth login succeeds but there is
+             * no matching B.E.P. profile.
+             */
+
+            if (!member) {
+
+                showSection(
+                    loginSection
+                );
+
+
+                showMessage(
+                    loginMessage,
+                    "error",
+                    `
+                    <i class="fa-solid fa-circle-exclamation"></i>
+
+                    <strong>Member Profile Not Found</strong>
+
+                    <br><br>
+
+                    Your B.E.P. account was authenticated,
+                    but your member profile could not be found.
+
+                    <br><br>
+
+                    Please contact the B.E.P. administrator
+                    for assistance.
+                    `
+                );
+
+
+                return;
+
+            }
+
+
+
+            /* ==========================================
+               MEMBER NUMBER
+               ========================================== */
+
+            const memberNumber =
+                member.member_number ||
+                member.member_id ||
+                member.member_no ||
+                member.member_number_id ||
+                "-";
+
+
+            document.getElementById(
+                "memberNumber"
+            ).textContent =
+                memberNumber;
+
+
+
+            /* ==========================================
+               FULL NAME
+               ========================================== */
+
+            const fullName =
+                member.full_name ||
+                user.user_metadata?.full_name ||
+                "-";
+
+
+            document.getElementById(
+                "fullName"
+            ).textContent =
+                fullName;
+
+
+            document.getElementById(
+                "welcomeName"
+            ).textContent =
+                fullName;
+
+
+
+            /* ==========================================
+               EMAIL
+               ========================================== */
+
+            document.getElementById(
+                "email"
+            ).textContent =
+                member.email ||
+                user.email ||
+                "-";
+
+
+
+            /* ==========================================
+               PHONE / WHATSAPP
+               ========================================== */
+
+            const phone =
+                member.phone ||
+                member.phone_number ||
+                member.whatsapp ||
+                member.whatsapp_number ||
+                user.user_metadata?.phone ||
+                "-";
+
+
+            document.getElementById(
+                "phone"
+            ).textContent =
+                phone;
+
+
+
+            /* ==========================================
+               LOCATION
+               ========================================== */
+
+            document.getElementById(
+                "location"
+            ).textContent =
+                member.location ||
+                user.user_metadata?.location ||
+                "-";
+
+
+
+            /* ==========================================
+               HOW THEY HEARD ABOUT B.E.P.
+               ========================================== */
+
+            document.getElementById(
+                "heardAbout"
+            ).textContent =
+                member.heard_about ||
+                user.user_metadata?.heard_about ||
+                "-";
+
+
+
+            /* ==========================================
+               MEMBER STATUS
+               ========================================== */
+
+            const status =
+                member.status ||
+                "active";
+
+
+            const statusElement =
+                document.getElementById(
+                    "memberStatus"
+                );
+
+
+            statusElement.innerHTML =
+                `
+                <span class="status">
+                    ${escapeHTML(status)}
+                </span>
+                `;
+
+
+
+            /* ==========================================
+               WHATSAPP BUTTON
+               ========================================== */
+
+            const whatsappButton =
+                document.getElementById(
+                    "whatsappBtn"
+                );
+
+
+            whatsappButton.href =
+                "https://wa.me/27623508689";
+
+
+
+            /* ==========================================
+               SHOW MEMBER PROFILE
+               ========================================== */
+
+            showSection(
+                profileSection
+            );
+
+        }
+
+        catch (error) {
+
+            console.error(
+                "B.E.P. Member Profile Error:",
+                error
+            );
+
+
+            showSection(
+                loginSection
+            );
+
+
+            showMessage(
+                loginMessage,
+                "error",
+                `
+                <i class="fa-solid fa-circle-exclamation"></i>
+
+                <strong>Profile Loading Failed</strong>
+
+                <br><br>
+
+                We could not load your B.E.P. member profile.
+
+                <br><br>
+
+                ${escapeHTML(
+                    error.message ||
+                    "Please try again."
+                )}
+                `
+            );
+
+        }
+
+    }
+
+
+
+    /* ==========================================
+       LOGOUT
+       ========================================== */
+
+    logoutBtn.addEventListener(
+        "click",
+        async function() {
+
+            logoutBtn.disabled =
+                true;
+
+
+            logoutBtn.innerHTML =
+                '<i class="fa-solid fa-spinner fa-spin"></i> Logging out...';
+
+
+            try {
+
+                const {
+                    error
+                } =
+                    await supabaseClient
+                        .auth
+                        .signOut();
+
+
+                if (error) {
+
+                    throw error;
+
+                }
+
+            }
+
+            catch (error) {
+
+                console.error(
+                    "B.E.P. Logout Error:",
+                    error
+                );
+
+
+                logoutBtn.disabled =
+                    false;
+
+
+                logoutBtn.innerHTML =
+                    '<i class="fa-solid fa-right-from-bracket"></i> Logout';
+
+
+                alert(
+                    "Logout could not be completed. Please try again."
+                );
+
+            }
+
+        }
+    );
+
+
+
+    /* ==========================================
+       AUTH STATE CHANGES
+       ========================================== */
+
+    supabaseClient.auth.onAuthStateChange(
+        async function(event, session) {
+
+            console.log(
+                "B.E.P. Auth Event:",
+                event
+            );
+
+
+            /*
+             * Password recovery
+             */
+
+            if (
+                event ===
+                "PASSWORD_RECOVERY"
+            ) {
+
+                showSection(
+                    passwordSection
+                );
+
+                return;
+
+            }
+
+
+            /*
+             * User logged out
+             */
+
+            if (
+                event ===
+                "SIGNED_OUT"
+            ) {
+
+                showSection(
+                    loginSection
+                );
+
+
+                loginForm.reset();
+
+
+                return;
+
+            }
+
+
+            /*
+             * User successfully logged in
+             */
+
+            if (
+                event === "SIGNED_IN" &&
+                session &&
+                session.user
+            ) {
+
+                await loadMemberProfile(
+                    session.user
+                );
+
+            }
+
+        }
+    );
+
+
+
+    /* ==========================================
+       CHECK EXISTING LOGIN SESSION
+       ========================================== */
+
+    async function checkExistingSession() {
+
+        try {
+
+            const {
+                data,
+                error
+            } =
+                await supabaseClient
+                    .auth
+                    .getSession();
+
+
+            if (error) {
+
+                console.error(
+                    "Session check error:",
+                    error
+                );
+
+
+                showSection(
+                    loginSection
+                );
+
+
+                return;
+
+            }
+
+
+            if (
+                data &&
+                data.session &&
+                data.session.user
+            ) {
+
+                await loadMemberProfile(
+                    data.session.user
+                );
+
+            }
+
+            else {
+
+                showSection(
+                    loginSection
+                );
+
+            }
+
+        }
+
+        catch (error) {
+
+            console.error(
+                "B.E.P. Session Error:",
+                error
+            );
+
+
+            showSection(
+                loginSection
+            );
+
+        }
+
+    }
+
+
+
+    /* ==========================================
+       PASSWORD RECOVERY URL
+       ========================================== */
+
+    function checkRecoveryURL() {
+
+        const hash =
+            window.location.hash || "";
+
+
+        const search =
+            window.location.search || "";
+
+
+        if (
+            hash.includes(
+                "type=recovery"
+            ) ||
+            search.includes(
+                "type=recovery"
+            )
+        ) {
+
+            showSection(
+                passwordSection
+            );
+
+        }
+
+    }
+
+
+
+    /* ==========================================
+       ENTER KEY SUPPORT
+       ========================================== */
+
+    document
+        .getElementById(
+            "loginPassword"
+        )
+        .addEventListener(
+            "keypress",
+            function(event) {
+
+                if (
+                    event.key === "Enter"
+                ) {
+
+                    loginForm.requestSubmit();
+
+                }
+
+            }
+        );
+
+
+
+    document
+        .getElementById(
+            "forgotEmail"
+        )
+        .addEventListener(
+            "keypress",
+            function(event) {
+
+                if (
+                    event.key === "Enter"
+                ) {
+
+                    forgotForm.requestSubmit();
+
+                }
+
+            }
+        );
+
+
+
+    /* ==========================================
+       START B.E.P. MEMBER PORTAL
+       ========================================== */
+
+    checkRecoveryURL();
+
+    checkExistingSession();
+
+
+</script>
+
+
+</body>
+/* ==========================================
+       LOAD MEMBER PROFILE
+       ========================================== */
+
+    async function loadMemberProfile(user) {
+
+        if (!user || !user.id) {
+
+            showSection(
+                loginSection
+            );
+
+            return;
+
+        }
+
+
+        showSection(
+            loadingSection
+        );
+
+
+        try {
+
+            console.log(
+                "Loading B.E.P. member profile for Auth User:",
+                user.id
+            );
+
+
+            /*
+             * IMPORTANT:
+             *
+             * The member profile is now found
+             * using the Supabase Auth UUID.
+             *
+             * This matches the RLS policy:
+             *
+             * auth_user_id = auth.uid()
+             */
+
+            const {
+                data: member,
+                error
+            } =
+                await supabaseClient
+                    .from("members")
+                    .select("*")
+                    .eq(
+                        "auth_user_id",
+                        user.id
+                    )
+                    .maybeSingle();
+
+
+            if (error) {
+
+                console.error(
+                    "Member profile query error:",
+                    error
+                );
+
+                throw error;
+
+            }
+
+
+            /*
+             * If Auth login succeeds but there is
+             * no matching B.E.P. profile.
+             */
+
+            if (!member) {
+
+                showSection(
+                    loginSection
+                );
+
+
+                showMessage(
+                    loginMessage,
+                    "error",
+                    `
+                    <i class="fa-solid fa-circle-exclamation"></i>
+
+                    <strong>Member Profile Not Found</strong>
+
+                    <br><br>
+
+                    Your B.E.P. account was authenticated,
+                    but your member profile could not be found.
+
+                    <br><br>
+
+                    Please contact the B.E.P. administrator
+                    for assistance.
+                    `
+                );
+
+
+                return;
+
+            }
+
+
+
+            /* ==========================================
+               MEMBER NUMBER
+               ========================================== */
+
+            const memberNumber =
+                member.member_number ||
+                member.member_id ||
+                member.member_no ||
+                member.member_number_id ||
+                "-";
+
+
+            document.getElementById(
+                "memberNumber"
+            ).textContent =
+                memberNumber;
+
+
+
+            /* ==========================================
+               FULL NAME
+               ========================================== */
+
+            const fullName =
+                member.full_name ||
+                user.user_metadata?.full_name ||
+                "-";
+
+
+            document.getElementById(
+                "fullName"
+            ).textContent =
+                fullName;
+
+
+            document.getElementById(
+                "welcomeName"
+            ).textContent =
+                fullName;
+
+
+
+            /* ==========================================
+               EMAIL
+               ========================================== */
+
+            document.getElementById(
+                "email"
+            ).textContent =
+                member.email ||
+                user.email ||
+                "-";
+
+
+
+            /* ==========================================
+               PHONE / WHATSAPP
+               ========================================== */
+
+            const phone =
+                member.phone ||
+                member.phone_number ||
+                member.whatsapp ||
+                member.whatsapp_number ||
+                user.user_metadata?.phone ||
+                "-";
+
+
+            document.getElementById(
+                "phone"
+            ).textContent =
+                phone;
+
+
+
+            /* ==========================================
+               LOCATION
+               ========================================== */
+
+            document.getElementById(
+                "location"
+            ).textContent =
+                member.location ||
+                user.user_metadata?.location ||
+                "-";
+
+
+
+            /* ==========================================
+               HOW THEY HEARD ABOUT B.E.P.
+               ========================================== */
+
+            document.getElementById(
+                "heardAbout"
+            ).textContent =
+                member.heard_about ||
+                user.user_metadata?.heard_about ||
+                "-";
+
+
+
+            /* ==========================================
+               MEMBER STATUS
+               ========================================== */
+
+            const status =
+                member.status ||
+                "active";
+
+
+            const statusElement =
+                document.getElementById(
+                    "memberStatus"
+                );
+
+
+            statusElement.innerHTML =
+                `
+                <span class="status">
+                    ${escapeHTML(status)}
+                </span>
+                `;
+
+
+
+            /* ==========================================
+               WHATSAPP BUTTON
+               ========================================== */
+
+            const whatsappButton =
+                document.getElementById(
+                    "whatsappBtn"
+                );
+
+
+            whatsappButton.href =
+                "https://wa.me/27623508689";
+
+
+
+            /* ==========================================
+               SHOW MEMBER PROFILE
+               ========================================== */
+
+            showSection(
+                profileSection
+            );
+
+        }
+
+        catch (error) {
+
+            console.error(
+                "B.E.P. Member Profile Error:",
+                error
+            );
+
+
+            showSection(
+                loginSection
+            );
+
+
+            showMessage(
+                loginMessage,
+                "error",
+                `
+                <i class="fa-solid fa-circle-exclamation"></i>
+
+                <strong>Profile Loading Failed</strong>
+
+                <br><br>
+
+                We could not load your B.E.P. member profile.
+
+                <br><br>
+
+                ${escapeHTML(
+                    error.message ||
+                    "Please try again."
+                )}
+                `
+            );
+
+        }
+
+    }
+
+
+
+    /* ==========================================
+       LOGOUT
+       ========================================== */
+
+    logoutBtn.addEventListener(
+        "click",
+        async function() {
+
+            logoutBtn.disabled =
+                true;
+
+
+            logoutBtn.innerHTML =
+                '<i class="fa-solid fa-spinner fa-spin"></i> Logging out...';
+
+
+            try {
+
+                const {
+                    error
+                } =
+                    await supabaseClient
+                        .auth
+                        .signOut();
+
+
+                if (error) {
+
+                    throw error;
+
+                }
+
+            }
+
+            catch (error) {
+
+                console.error(
+                    "B.E.P. Logout Error:",
+                    error
+                );
+
+
+                logoutBtn.disabled =
+                    false;
+
+
+                logoutBtn.innerHTML =
+                    '<i class="fa-solid fa-right-from-bracket"></i> Logout';
+
+
+                alert(
+                    "Logout could not be completed. Please try again."
+                );
+
+            }
+
+        }
+    );
+
+
+
+    /* ==========================================
+       AUTH STATE CHANGES
+       ========================================== */
+
+    supabaseClient.auth.onAuthStateChange(
+        async function(event, session) {
+
+            console.log(
+                "B.E.P. Auth Event:",
+                event
+            );
+
+
+            /*
+             * Password recovery
+             */
+
+            if (
+                event ===
+                "PASSWORD_RECOVERY"
+            ) {
+
+                showSection(
+                    passwordSection
+                );
+
+                return;
+
+            }
+
+
+            /*
+             * User logged out
+             */
+
+            if (
+                event ===
+                "SIGNED_OUT"
+            ) {
+
+                showSection(
+                    loginSection
+                );
+
+
+                loginForm.reset();
+
+
+                return;
+
+            }
+
+
+            /*
+             * User successfully logged in
+             */
+
+            if (
+                event === "SIGNED_IN" &&
+                session &&
+                session.user
+            ) {
+
+                await loadMemberProfile(
+                    session.user
+                );
+
+            }
+
+        }
+    );
+
+
+
+    /* ==========================================
+       CHECK EXISTING LOGIN SESSION
+       ========================================== */
+
+    async function checkExistingSession() {
+
+        try {
+
+            const {
+                data,
+                error
+            } =
+                await supabaseClient
+                    .auth
+                    .getSession();
+
+
+            if (error) {
+
+                console.error(
+                    "Session check error:",
+                    error
+                );
+
+
+                showSection(
+                    loginSection
+                );
+
+
+                return;
+
+            }
+
+
+            if (
+                data &&
+                data.session &&
+                data.session.user
+            ) {
+
+                await loadMemberProfile(
+                    data.session.user
+                );
+
+            }
+
+            else {
+
+                showSection(
+                    loginSection
+                );
+
+            }
+
+        }
+
+        catch (error) {
+
+            console.error(
+                "B.E.P. Session Error:",
+                error
+            );
+
+
+            showSection(
+                loginSection
+            );
+
+        }
+
+    }
+
+
+
+    /* ==========================================
+       PASSWORD RECOVERY URL
+       ========================================== */
+
+    function checkRecoveryURL() {
+
+        const hash =
+            window.location.hash || "";
+
+
+        const search =
+            window.location.search || "";
+
+
+        if (
+            hash.includes(
+                "type=recovery"
+            ) ||
+            search.includes(
+                "type=recovery"
+            )
+        ) {
+
+            showSection(
+                passwordSection
+            );
+
+        }
+
+    }
+
+
+
+    /* ==========================================
+       ENTER KEY SUPPORT
+       ========================================== */
+
+    document
+        .getElementById(
+            "loginPassword"
+        )
+        .addEventListener(
+            "keypress",
+            function(event) {
+
+                if (
+                    event.key === "Enter"
+                ) {
+
+                    loginForm.requestSubmit();
+
+                }
+
+            }
+        );
+
+
+
+    document
+        .getElementById(
+            "forgotEmail"
+        )
+        .addEventListener(
+            "keypress",
+            function(event) {
+
+                if (
+                    event.key === "Enter"
+                ) {
+
+                    forgotForm.requestSubmit();
+
+                }
+
+            }
+        );
+
+
+
+    /* ==========================================
+       START B.E.P. MEMBER PORTAL
+       ========================================== */
+
+    checkRecoveryURL();
+
+    checkExistingSession();
+
+
+</script>
+
+
+</body>
+
+</html>
+</html>
