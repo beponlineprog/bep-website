@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -40,7 +39,6 @@ header {
 .logo {
     font-size: 22px;
     font-weight: bold;
-    color: #ffffff;
 }
 
 .logo span {
@@ -119,7 +117,8 @@ label {
     color: #24364d;
 }
 
-input, select {
+input,
+select {
     width: 100%;
     padding: 14px;
     border: 1px solid #ccd5e1;
@@ -129,9 +128,17 @@ input, select {
     outline: none;
 }
 
-input:focus, select:focus {
+input:focus,
+select:focus {
     border-color: #1261a8;
     box-shadow: 0 0 0 3px rgba(18,97,168,0.12);
+}
+
+.password-note {
+    display: block;
+    margin-top: 7px;
+    color: #64748b;
+    font-size: 13px;
 }
 
 button {
@@ -144,7 +151,6 @@ button {
     font-size: 17px;
     font-weight: bold;
     cursor: pointer;
-    transition: 0.2s;
 }
 
 button:hover {
@@ -191,6 +197,17 @@ button:disabled {
     font-size: 14px;
 }
 
+.login-link {
+    text-align: center;
+    margin-top: 22px;
+}
+
+.login-link a {
+    color: #073b78;
+    font-weight: bold;
+    text-decoration: none;
+}
+
 footer {
     background: #062b57;
     color: white;
@@ -206,6 +223,7 @@ footer a {
 }
 
 @media(max-width:600px) {
+
     header {
         justify-content: center;
         text-align: center;
@@ -230,270 +248,247 @@ footer a {
 <body>
 
 <header>
-    <div class="logo">
-        <i class="fa-solid fa-book-bible"></i>
-        B.E.P. <span>Online</span>
-    </div>
 
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="quiz.html">Bible Quiz</a>
-        <a href="member.html">Member Portal</a>
-    </nav>
+<div class="logo">
+    <i class="fa-solid fa-book-bible"></i>
+    B.E.P. <span>Online</span>
+</div>
+
+<nav>
+    <a href="index.html">Home</a>
+    <a href="quiz.html">Bible Quiz</a>
+    <a href="member.html">Member Portal</a>
+</nav>
+
 </header>
 
 <section class="hero">
-    <i class="fa-solid fa-user-plus"></i>
 
-    <h1>Join B.E.P.</h1>
+<i class="fa-solid fa-user-plus"></i>
 
-    <p>
-        Biblical Empowerment Program
-        <br>
-        Building the Church of Christ
-        <br>
-        Growing in God's Word. Growing in Faith.
-    </p>
+<h1>Join B.E.P.</h1>
+
+<p>
+    Biblical Empowerment Program
+    <br>
+    Building the Church of Christ
+    <br>
+    Growing in God's Word. Growing in Faith.
+</p>
+
 </section>
 
 <main class="container">
 
 <div class="card">
 
-    <h2>Member Registration</h2>
+<h2>Member Registration</h2>
 
-    <p class="subtitle">
-        Complete the form below to register with
-        the Biblical Empowerment Program.
-    </p>
+<p class="subtitle">
+    Complete the form below to create your B.E.P. member account.
+</p>
 
-    <form id="registerForm">
+<form id="registerForm">
 
-        <div class="form-group">
-            <label for="full_name">
-                <i class="fa-solid fa-user"></i>
-                Full Name
-            </label>
+<div class="form-group">
 
-            <input
-                type="text"
-                id="full_name"
-                name="full_name"
-                placeholder="Enter your full name"
-                autocomplete="name"
-                required
-                minlength="3">
-        </div>
+<label for="full_name">
+    <i class="fa-solid fa-user"></i>
+    Full Name
+</label>
 
-        <div class="form-group">
-            <label for="email">
-                <i class="fa-solid fa-envelope"></i>
-                Email Address
-            </label>
-
-            <input
-                type="email"
-                id="email"
-                name="email"
-                placeholder="example@email.com"
-                autocomplete="email"
-                required>
-        </div>
-
-        <div class="form-group">
-            <label for="phone">
-                <i class="fa-brands fa-whatsapp"></i>
-                Phone / WhatsApp Number
-            </label>
-
-            <input
-                type="tel"
-                id="phone"
-                name="phone"
-                placeholder="e.g. 062 350 8689"
-                autocomplete="tel"
-                required>
-        </div>
-
-        <div class="form-group">
-            <label for="location">
-                <i class="fa-solid fa-location-dot"></i>
-                Location
-            </label>
-
-            <input
-                type="text"
-                id="location"
-                name="location"
-                placeholder="Town / City / Province"
-                required>
-        </div>
-
-        <div class="form-group">
-            <label for="heard_about">
-                How did you hear about B.E.P.?
-            </label>
-
-            <select id="heard_about" name="heard_about" required>
-                <option value="">Select an option</option>
-                <option value="Facebook">Facebook</option>
-                <option value="WhatsApp">WhatsApp</option>
-                <option value="Friends">Friends</option>
-                <option value="Church">Church</option>
-                <option value="Social Media">Other Social Media</option>
-                <option value="Other">Other</option>
-            </select>
-        </div>
-
-        <button type="submit" id="submitBtn">
-            <i class="fa-solid fa-paper-plane"></i>
-            Submit Registration
-        </button>
-
-    </form>
-
-    <div id="message" role="status" aria-live="polite"></div>
-
-    <div class="note">
-        <i class="fa-solid fa-circle-info"></i>
-        Your registration will be submitted for processing.
-        Your B.E.P. member number will be confirmed separately.
-    </div>
+<input
+    type="text"
+    id="full_name"
+    name="full_name"
+    placeholder="Enter your full name"
+    autocomplete="name"
+    required
+    minlength="3"
+    maxlength="100">
 
 </div>
+
+<div class="form-group">
+
+<label for="email">
+    <i class="fa-solid fa-envelope"></i>
+    Email Address
+</label>
+
+<input
+    type="email"
+    id="email"
+    name="email"
+    placeholder="example@email.com"
+    autocomplete="email"
+    required
+    maxlength="254">
+
+</div>
+
+<div class="form-group">
+
+<label for="password">
+    <i class="fa-solid fa-lock"></i>
+    Create Password
+</label>
+
+<input
+    type="password"
+    id="password"
+    name="password"
+    placeholder="Create a password"
+    autocomplete="new-password"
+    required
+    minlength="8"
+    maxlength="72">
+
+<small class="password-note">
+    Password must contain at least 8 characters.
+</small>
+
+</div>
+
+<div class="form-group">
+
+<label for="confirm_password">
+    <i class="fa-solid fa-lock"></i>
+    Confirm Password
+</label>
+
+<input
+    type="password"
+    id="confirm_password"
+    name="confirm_password"
+    placeholder="Enter your password again"
+    autocomplete="new-password"
+    required
+    minlength="8"
+    maxlength="72">
+
+</div>
+
+<div class="form-group">
+
+<label for="phone">
+    <i class="fa-brands fa-whatsapp"></i>
+    Phone / WhatsApp Number
+</label>
+
+<input
+    type="tel"
+    id="phone"
+    name="phone"
+    placeholder="e.g. 062 350 8689"
+    autocomplete="tel"
+    required
+    maxlength="30">
+
+</div>
+
+<div class="form-group">
+
+<label for="location">
+    <i class="fa-solid fa-location-dot"></i>
+    Location
+</label>
+
+<input
+    type="text"
+    id="location"
+    name="location"
+    placeholder="Town / City / Province"
+    required
+    maxlength="150">
+
+</div>
+
+<div class="form-group">
+
+<label for="heard_about">
+    <i class="fa-solid fa-circle-question"></i>
+    How did you hear about B.E.P.?
+</label>
+
+<select
+    id="heard_about"
+    name="heard_about"
+    required>
+
+<option value="">Select an option</option>
+<option value="Facebook">Facebook</option>
+<option value="WhatsApp">WhatsApp</option>
+<option value="Friends">Friends</option>
+<option value="Church">Church</option>
+<option value="Social Media">Other Social Media</option>
+<option value="Other">Other</option>
+
+</select>
+
+</div>
+
+<button
+    type="submit"
+    id="submitBtn">
+
+<i class="fa-solid fa-user-plus"></i>
+Create B.E.P. Account
+
+</button>
+
+</form>
+
+<div
+    id="message"
+    role="status"
+    aria-live="polite">
+</div>
+
+<div class="note">
+
+<i class="fa-solid fa-circle-info"></i>
+
+<strong>Important:</strong>
+
+After registration, B.E.P. will send a confirmation
+email to your email address. Please confirm your email
+before logging into the Member Portal.
+
+</div>
+
+<div class="login-link">
+
+Already have a B.E.P. account?
+
+<a href="member.html">
+    Go to Member Portal
+</a>
+
+</div>
+
+</div>
+
 </main>
 
 <footer>
-    <strong>B.E.P. — Biblical Empowerment Program</strong>
-    <br>
-    Building the Church of Christ
-    <br>
-    <a href="mailto:bep.onlineprog@gmail.com">
-        bep.onlineprog@gmail.com
-    </a>
-    <br>
-    © 2026 B.E.P. All Rights Reserved.
+
+<strong>
+    B.E.P. — Biblical Empowerment Program
+</strong>
+
+<br>
+
+Building the Church of Christ
+
+<br>
+
+<a href="mailto:bep.onlineprog@gmail.com">
+    bep.onlineprog@gmail.com
+</a>
+
+<br>
+
+© 2026 B.E.P. All Rights Reserved.
+
 </footer>
-<script>
-const SUPABASE_URL =
-    "https://rukusaellqqwthzibyib.supabase.co";
-
-const SUPABASE_KEY =
-    "sb_publishable_Co8_MoJOV14tXBkSWyXFTA_ULn1WRa5";
-
-const supabaseClient = window.supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_KEY
-);
-
-const form = document.getElementById("registerForm");
-const message = document.getElementById("message");
-const submitBtn = document.getElementById("submitBtn");
-
-form.addEventListener("submit", async function(event) {
-
-    event.preventDefault();
-
-    message.className = "";
-    message.style.display = "none";
-
-    submitBtn.disabled = true;
-    submitBtn.innerHTML =
-        '<i class="fa-solid fa-spinner fa-spin"></i> Submitting...';
-
-    const full_name =
-        document.getElementById("full_name").value.trim();
-
-    const email =
-        document.getElementById("email").value.trim().toLowerCase();
-
-    const phone =
-        document.getElementById("phone").value.trim();
-
-    const location =
-        document.getElementById("location").value.trim();
-
-    const heard_about =
-        document.getElementById("heard_about").value;
-
-    try {
-
-        const { error } = await supabaseClient
-            .from("members")
-            .insert([
-                {
-                    full_name: full_name,
-                    email: email,
-                    phone: phone,
-                    location: location,
-                    heard_about: heard_about
-                }
-            ]);
-
-        if (error) {
-            throw error;
-        }
-
-        message.className = "success";
-
-        message.innerHTML = `
-            <i class="fa-solid fa-circle-check"></i>
-            <strong>Registration Submitted Successfully!</strong>
-            <br><br>
-            Thank you, ${escapeHTML(full_name)}.
-            <br>
-            Your B.E.P. registration has been received.
-            <br>
-            Please await confirmation of your member number.
-            <br><br>
-            Welcome to the B.E.P. family!
-        `;
-
-        form.reset();
-
-    } catch (error) {
-
-        console.error("Registration error:", error);
-
-        message.className = "error";
-
-        if (error.code === "23505") {
-
-            message.textContent =
-                "This email or registration information may already exist. Please contact B.E.P. for assistance.";
-
-        } else if (error.code === "42501") {
-
-            message.textContent =
-                "Registration permission is still blocked by the database. Please contact the B.E.P. administrator.";
-
-        } else {
-
-            message.textContent =
-                "Registration could not be completed: " + error.message;
-        }
-
-    } finally {
-
-        submitBtn.disabled = false;
-
-        submitBtn.innerHTML =
-            '<i class="fa-solid fa-paper-plane"></i> Submit Registration';
-    }
-});
-
-function escapeHTML(value) {
-    return String(value).replace(/[&<>"']/g, function(char) {
-        return {
-            "&": "&amp;",
-            "<": "&lt;",
-            ">": "&gt;",
-            '"': "&quot;",
-            "'": "&#039;"
-        }[char];
-    });
-}
-</script>
-
-</body>
-</html>
