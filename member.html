@@ -988,3 +988,980 @@
 
 
 </main>
+<!-- ==========================================
+     FOOTER
+     ========================================== -->
+
+<footer>
+
+    <div class="footer-container">
+
+
+        <!-- COLUMN 1 -->
+
+        <div class="footer-column">
+
+            <h3>
+                B.E.P.
+            </h3>
+
+            <p>
+                Biblical Empowerment Program
+            </p>
+
+            <p>
+                Building the Church of Christ
+            </p>
+
+
+            <div class="social-icons">
+
+                <a
+                    href="https://facebook.com/groups/1421853356307383/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Facebook"
+                >
+
+                    <i class="fa-brands fa-facebook-f"></i>
+
+                </a>
+
+
+                <a
+                    href="mailto:bep.onlineprog@gmail.com"
+                    aria-label="Email"
+                >
+
+                    <i class="fa-solid fa-envelope"></i>
+
+                </a>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- COLUMN 2 -->
+
+        <div class="footer-column">
+
+            <h3>
+                Quick Links
+            </h3>
+
+
+            <a href="index.html">
+
+                <i class="fa-solid fa-house"></i>
+                Home
+
+            </a>
+
+
+            <a href="register.html">
+
+                <i class="fa-solid fa-user-plus"></i>
+                Register
+
+            </a>
+
+
+            <a href="quiz.html">
+
+                <i class="fa-solid fa-book-open"></i>
+                Bible Quiz
+
+            </a>
+
+
+            <a href="member.html">
+
+                <i class="fa-solid fa-user"></i>
+                Member Portal
+
+            </a>
+
+        </div>
+
+
+
+        <!-- COLUMN 3 -->
+
+        <div class="footer-column">
+
+            <h3>
+                Contact Us
+            </h3>
+
+
+            <p>
+
+                <i class="fa-solid fa-user"></i>
+                Omega
+
+            </p>
+
+
+            <a
+                href="https://wa.me/27623508689"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+
+                <i class="fa-brands fa-whatsapp"></i>
+                062 350 8689
+
+            </a>
+
+
+            <p>
+
+                <i class="fa-solid fa-user"></i>
+                Bro. KB
+
+            </p>
+
+
+            <a href="tel:+27832822644">
+
+                <i class="fa-solid fa-phone"></i>
+                083 282 2644
+
+            </a>
+
+        </div>
+
+
+
+        <!-- COLUMN 4 -->
+
+        <div class="footer-column">
+
+            <h3>
+                B.E.P. Online
+            </h3>
+
+
+            <p>
+
+                <i class="fa-solid fa-clock"></i>
+                Thursday Sessions
+
+            </p>
+
+
+            <p>
+
+                <i class="fa-solid fa-calendar-days"></i>
+                19:00 – 20:30
+
+            </p>
+
+
+            <a
+                href="https://teams.live.com/meet/936085799236?p=b66LnDUAB2Xkx2uQYp&eventType=community"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+
+                <i class="fa-solid fa-video"></i>
+                Join Microsoft Teams
+
+            </a>
+
+
+            <a href="mailto:bep.onlineprog@gmail.com">
+
+                <i class="fa-solid fa-envelope"></i>
+                bep.onlineprog@gmail.com
+
+            </a>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="footer-bottom">
+
+        © 2026 Biblical Empowerment Program (B.E.P.).
+        All Rights Reserved.
+
+        <br>
+
+        Building the Church of Christ.
+
+    </div>
+
+</footer>
+
+
+
+<!-- ==========================================
+     SUPABASE MEMBER PORTAL JAVASCRIPT
+     ========================================== -->
+
+<script>
+
+    /* ==========================================
+       SUPABASE CONFIGURATION
+       ========================================== */
+
+    const SUPABASE_URL =
+        "https://rukusaellqqwthzibyib.supabase.co";
+
+    const SUPABASE_KEY =
+        "sb_publishable_Co8_MoJOV14tXBkSWyXFTA_ULn1WRa5";
+
+
+    const supabaseClient =
+        window.supabase.createClient(
+            SUPABASE_URL,
+            SUPABASE_KEY
+        );
+
+
+
+    /* ==========================================
+       PAGE SECTIONS
+       ========================================== */
+
+    const loginSection =
+        document.getElementById(
+            "loginSection"
+        );
+
+    const forgotSection =
+        document.getElementById(
+            "forgotSection"
+        );
+
+    const passwordSection =
+        document.getElementById(
+            "passwordSection"
+        );
+
+    const loadingSection =
+        document.getElementById(
+            "loadingSection"
+        );
+
+    const profileSection =
+        document.getElementById(
+            "profileSection"
+        );
+
+
+
+    /* ==========================================
+       FORMS
+       ========================================== */
+
+    const loginForm =
+        document.getElementById(
+            "loginForm"
+        );
+
+    const forgotForm =
+        document.getElementById(
+            "forgotForm"
+        );
+
+    const passwordForm =
+        document.getElementById(
+            "passwordForm"
+        );
+
+
+
+    /* ==========================================
+       MESSAGES
+       ========================================== */
+
+    const loginMessage =
+        document.getElementById(
+            "loginMessage"
+        );
+
+    const forgotMessage =
+        document.getElementById(
+            "forgotMessage"
+        );
+
+    const passwordMessage =
+        document.getElementById(
+            "passwordMessage"
+        );
+
+
+
+    /* ==========================================
+       BUTTONS
+       ========================================== */
+
+    const loginBtn =
+        document.getElementById(
+            "loginBtn"
+        );
+
+    const forgotBtn =
+        document.getElementById(
+            "forgotBtn"
+        );
+
+    const passwordBtn =
+        document.getElementById(
+            "passwordBtn"
+        );
+
+    const logoutBtn =
+        document.getElementById(
+            "logoutBtn"
+        );
+
+
+
+    /* ==========================================
+       MESSAGE FUNCTION
+       ========================================== */
+
+    function showMessage(
+        element,
+        type,
+        html
+    ) {
+
+        element.className =
+            "message " + type;
+
+        element.innerHTML =
+            html;
+
+        element.style.display =
+            "block";
+
+    }
+
+
+
+    function hideMessage(element) {
+
+        element.className =
+            "message";
+
+        element.innerHTML =
+            "";
+
+        element.style.display =
+            "none";
+
+    }
+
+
+
+    /* ==========================================
+       SECURITY:
+       ESCAPE DISPLAYED USER DATA
+       ========================================== */
+
+    function escapeHTML(value) {
+
+        return String(
+            value ?? ""
+        ).replace(
+            /[&<>"']/g,
+            function(char) {
+
+                return {
+
+                    "&": "&amp;",
+                    "<": "&lt;",
+                    ">": "&gt;",
+                    '"': "&quot;",
+                    "'": "&#039;"
+
+                }[char];
+
+            }
+        );
+
+    }
+
+
+
+    /* ==========================================
+       SECTION NAVIGATION
+       ========================================== */
+
+    function showSection(section) {
+
+        loginSection.style.display =
+            "none";
+
+        forgotSection.style.display =
+            "none";
+
+        passwordSection.style.display =
+            "none";
+
+        loadingSection.style.display =
+            "none";
+
+        profileSection.style.display =
+            "none";
+
+
+        section.style.display =
+            "block";
+
+    }
+
+
+
+    /* ==========================================
+       FORGOT PASSWORD PAGE
+       ========================================== */
+
+    document
+        .getElementById("showForgot")
+        .addEventListener(
+            "click",
+            function(event) {
+
+                event.preventDefault();
+
+                hideMessage(
+                    loginMessage
+                );
+
+                showSection(
+                    forgotSection
+                );
+
+            }
+        );
+
+
+
+    /* ==========================================
+       BACK TO LOGIN
+       ========================================== */
+
+    document
+        .getElementById("backToLogin")
+        .addEventListener(
+            "click",
+            function(event) {
+
+                event.preventDefault();
+
+                hideMessage(
+                    forgotMessage
+                );
+
+                showSection(
+                    loginSection
+                );
+
+            }
+        );
+
+
+
+    /* ==========================================
+       MEMBER LOGIN
+       ========================================== */
+
+    loginForm.addEventListener(
+        "submit",
+        async function(event) {
+
+            event.preventDefault();
+
+
+            hideMessage(
+                loginMessage
+            );
+
+
+            loginBtn.disabled =
+                true;
+
+
+            loginBtn.innerHTML =
+                '<i class="fa-solid fa-spinner fa-spin"></i> Logging in...';
+
+
+
+            const email =
+                document
+                    .getElementById(
+                        "loginEmail"
+                    )
+                    .value
+                    .trim()
+                    .toLowerCase();
+
+
+            const password =
+                document
+                    .getElementById(
+                        "loginPassword"
+                    )
+                    .value;
+
+
+
+            try {
+
+                if (!email) {
+
+                    throw new Error(
+                        "Please enter your email address."
+                    );
+
+                }
+
+
+                if (!password) {
+
+                    throw new Error(
+                        "Please enter your password."
+                    );
+
+                }
+
+
+
+                const {
+                    data,
+                    error
+                } =
+                    await supabaseClient
+                        .auth
+                        .signInWithPassword({
+
+                            email: email,
+
+                            password: password
+
+                        });
+
+
+
+                if (error) {
+
+                    throw error;
+
+                }
+
+
+
+                if (
+                    !data ||
+                    !data.user
+                ) {
+
+                    throw new Error(
+                        "Login could not be completed."
+                    );
+
+                }
+
+
+
+                await loadMemberProfile(
+                    data.user
+                );
+
+            }
+
+            catch (error) {
+
+                console.error(
+                    "B.E.P. Login Error:",
+                    error
+                );
+
+
+                let errorMessage =
+                    "Login could not be completed. Please try again.";
+
+
+                if (
+                    error &&
+                    error.message
+                ) {
+
+                    const msg =
+                        error.message
+                            .toLowerCase();
+
+
+                    if (
+                        msg.includes(
+                            "invalid login credentials"
+                        )
+                    ) {
+
+                        errorMessage =
+                            "The email address or password is incorrect.";
+
+                    }
+
+                    else if (
+                        msg.includes(
+                            "email not confirmed"
+                        )
+                    ) {
+
+                        errorMessage =
+                            "Please confirm your email address before logging in.";
+
+                    }
+
+                    else {
+
+                        errorMessage =
+                            error.message;
+
+                    }
+
+                }
+
+
+                showMessage(
+                    loginMessage,
+                    "error",
+                    `
+                    <i class="fa-solid fa-circle-exclamation"></i>
+                    <strong>Login Not Completed</strong>
+                    <br><br>
+                    ${escapeHTML(
+                        errorMessage
+                    )}
+                    `
+                );
+
+            }
+
+            finally {
+
+                loginBtn.disabled =
+                    false;
+
+
+                loginBtn.innerHTML =
+                    '<i class="fa-solid fa-right-to-bracket"></i> Login';
+
+            }
+
+        }
+    );
+
+
+
+    /* ==========================================
+       FORGOT PASSWORD
+       ========================================== */
+
+    forgotForm.addEventListener(
+        "submit",
+        async function(event) {
+
+            event.preventDefault();
+
+
+            hideMessage(
+                forgotMessage
+            );
+
+
+            forgotBtn.disabled =
+                true;
+
+
+            forgotBtn.innerHTML =
+                '<i class="fa-solid fa-spinner fa-spin"></i> Sending...';
+
+
+
+            const email =
+                document
+                    .getElementById(
+                        "forgotEmail"
+                    )
+                    .value
+                    .trim()
+                    .toLowerCase();
+
+
+
+            try {
+
+                if (!email) {
+
+                    throw new Error(
+                        "Please enter your email address."
+                    );
+
+                }
+
+
+
+                const {
+                    error
+                } =
+                    await supabaseClient
+                        .auth
+                        .resetPasswordForEmail(
+                            email,
+                            {
+
+                                redirectTo:
+                                    "https://beponlineprog.github.io/bep-website/member.html"
+
+                            }
+                        );
+
+
+
+                if (error) {
+
+                    throw error;
+
+                }
+
+
+
+                showMessage(
+                    forgotMessage,
+                    "success",
+                    `
+                    <i class="fa-solid fa-circle-check"></i>
+                    <strong>Reset Link Sent</strong>
+                    <br><br>
+                    If the email address is registered,
+                    a password reset link has been sent.
+                    <br><br>
+                    Please check your inbox and follow
+                    the instructions.
+                    `
+                );
+
+            }
+
+            catch (error) {
+
+                console.error(
+                    "B.E.P. Password Reset Error:",
+                    error
+                );
+
+
+                showMessage(
+                    forgotMessage,
+                    "error",
+                    `
+                    <i class="fa-solid fa-circle-exclamation"></i>
+                    <strong>Password Reset Failed</strong>
+                    <br><br>
+                    ${escapeHTML(
+                        error.message ||
+                        "Please try again."
+                    )}
+                    `
+                );
+
+            }
+
+            finally {
+
+                forgotBtn.disabled =
+                    false;
+
+
+                forgotBtn.innerHTML =
+                    '<i class="fa-solid fa-paper-plane"></i> Send Reset Link';
+
+            }
+
+        }
+    );
+
+
+
+    /* ==========================================
+       PASSWORD UPDATE
+       ========================================== */
+
+    passwordForm.addEventListener(
+        "submit",
+        async function(event) {
+
+            event.preventDefault();
+
+
+            hideMessage(
+                passwordMessage
+            );
+
+
+            passwordBtn.disabled =
+                true;
+
+
+            passwordBtn.innerHTML =
+                '<i class="fa-solid fa-spinner fa-spin"></i> Updating...';
+
+
+
+            const newPassword =
+                document
+                    .getElementById(
+                        "newPassword"
+                    )
+                    .value;
+
+
+            const confirmPassword =
+                document
+                    .getElementById(
+                        "confirmNewPassword"
+                    )
+                    .value;
+
+
+
+            try {
+
+                if (
+                    newPassword.length < 8
+                ) {
+
+                    throw new Error(
+                        "Your new password must contain at least 8 characters."
+                    );
+
+                }
+
+
+                if (
+                    newPassword !==
+                    confirmPassword
+                ) {
+
+                    throw new Error(
+                        "The passwords do not match."
+                    );
+
+                }
+
+
+
+                const {
+                    error
+                } =
+                    await supabaseClient
+                        .auth
+                        .updateUser({
+
+                            password:
+                                newPassword
+
+                        });
+
+
+
+                if (error) {
+
+                    throw error;
+
+                }
+
+
+
+                showMessage(
+                    passwordMessage,
+                    "success",
+                    `
+                    <i class="fa-solid fa-circle-check"></i>
+                    <strong>Password Updated Successfully</strong>
+                    <br><br>
+                    Your password has been changed.
+                    `
+                );
+
+
+                passwordForm.reset();
+
+
+
+                setTimeout(
+                    async function() {
+
+                        const {
+                            data
+                        } =
+                            await supabaseClient
+                                .auth
+                                .getUser();
+
+
+                        if (
+                            data &&
+                            data.user
+                        ) {
+
+                            await loadMemberProfile(
+                                data.user
+                            );
+
+                        }
+
+                    },
+                    1200
+                );
+
+            }
+
+            catch (error) {
+
+                console.error(
+                    "B.E.P. Password Update Error:",
+                    error
+                );
+
+
+                showMessage(
+                    passwordMessage,
+                    "error",
+                    `
+                    <i class="fa-solid fa-circle-exclamation"></i>
+                    <strong>Password Update Failed</strong>
+                    <br><br>
+                    ${escapeHTML(
+                        error.message ||
+                        "Please try again."
+                    )}
+                    `
+                );
+
+            }
+
+            finally {
+
+                passwordBtn.disabled =
+                    false;
+
+
+                passwordBtn.innerHTML =
+                    '<i class="fa-solid fa-lock"></i> Update Password';
+
+            }
+
+        }
+    );
