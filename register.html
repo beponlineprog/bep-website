@@ -492,3 +492,463 @@ Building the Church of Christ
 © 2026 B.E.P. All Rights Reserved.
 
 </footer>
+<script>
+
+/* =========================================================
+   SUPABASE CONFIGURATION
+   ========================================================= */
+
+const SUPABASE_URL =
+    "https://rukusaellqqwthzibyib.supabase.co";
+
+const SUPABASE_KEY =
+    "sb_publishable_Co8_MoJOV14tXBkSWyXFTA_ULn1WRa5";
+
+const supabaseClient =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
+
+
+/* =========================================================
+   PAGE ELEMENTS
+   ========================================================= */
+
+const form =
+    document.getElementById("registerForm");
+
+const message =
+    document.getElementById("message");
+
+const submitBtn =
+    document.getElementById("submitBtn");
+
+
+/* =========================================================
+   SHOW MESSAGE
+   ========================================================= */
+
+function showMessage(type, html) {
+
+    message.className = type;
+
+    message.innerHTML = html;
+
+    message.style.display = "block";
+
+}
+
+
+/* =========================================================
+   ESCAPE HTML
+   ========================================================= */
+
+function escapeHTML(value) {
+
+    return String(value).replace(
+        /[&<>"']/g,
+        function(char) {
+
+            return {
+                "&": "&amp;",
+                "<": "&lt;",
+                ">": "&gt;",
+                '"': "&quot;",
+                "'": "&#039;"
+            }[char];
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   REGISTRATION FORM
+   ========================================================= */
+
+form.addEventListener(
+    "submit",
+    async function(event) {
+
+        event.preventDefault();
+
+
+        /* Clear previous message */
+
+        message.className = "";
+
+        message.style.display = "none";
+
+
+        /* Disable submit button */
+
+        submitBtn.disabled = true;
+
+        submitBtn.innerHTML =
+            '<i class="fa-solid fa-spinner fa-spin"></i> Creating Account...';
+
+
+        /* =====================================================
+           READ FORM VALUES
+           ===================================================== */
+
+        const full_name =
+            document
+                .getElementById("full_name")
+                .value
+                .trim();
+
+
+        const email =
+            document
+                .getElementById("email")
+                .value
+                .trim()
+                .toLowerCase();
+
+
+        const password =
+            document
+                .getElementById("password")
+                .value;
+
+
+        const confirm_password =
+            document
+                .getElementById("confirm_password")
+                .value;
+
+
+        const phone =
+            document
+                .getElementById("phone")
+                .value
+                .trim();
+
+
+        const location =
+            document
+                .getElementById("location")
+                .value
+                .trim();
+
+
+        const heard_about =
+            document
+                .getElementById("heard_about")
+                .value;
+
+
+        try {
+
+            /* =================================================
+               VALIDATION
+               ================================================= */
+
+            if (full_name.length < 3) {
+
+                throw new Error(
+                    "Please enter your full name."
+                );
+
+            }
+
+
+            if (!email) {
+
+                throw new Error(
+                    "Please enter your email address."
+                );
+
+            }
+
+
+            if (password.length < 8) {
+
+                throw new Error(
+                    "Your password must contain at least 8 characters."
+                );
+
+            }
+
+
+            if (password !== confirm_password) {
+
+                throw new Error(
+                    "The passwords do not match."
+                );
+
+            }
+
+
+            if (!phone) {
+
+                throw new Error(
+                    "Please enter your phone or WhatsApp number."
+                );
+
+            }
+
+
+            if (!location) {
+
+                throw new Error(
+                    "Please enter your location."
+                );
+
+            }
+
+
+            if (!heard_about) {
+
+                throw new Error(
+                    "Please select how you heard about B.E.P."
+                );
+
+            }
+
+
+            /* =================================================
+               CREATE SUPABASE AUTH ACCOUNT
+               ================================================= */
+
+            const {
+                data,
+                error
+            } = await supabaseClient.auth.signUp({
+
+                email: email,
+
+                password: password,
+
+                options: {
+
+                    emailRedirectTo:
+                        "https://beponlineprog.github.io/bep-website/member.html",
+
+                    data: {
+
+                        full_name: full_name,
+
+                        phone: phone,
+
+                        location: location,
+
+                        heard_about: heard_about
+
+                    }
+
+                }
+
+            });
+
+
+            /* =================================================
+               CHECK FOR SUPABASE ERROR
+               ================================================= */
+
+            if (error) {
+
+                throw error;
+
+            }
+
+
+            /* =================================================
+               CHECK AUTH USER
+               ================================================= */
+
+            if (!data || !data.user) {
+
+                throw new Error(
+                    "The account could not be created. Please try again."
+                );
+
+            }
+
+
+            /* =================================================
+               SUCCESS MESSAGE
+               ================================================= */
+
+            showMessage(
+                "success",
+                `
+                <i class="fa-solid fa-circle-check"></i>
+
+                <strong>
+                    Registration Successful!
+                </strong>
+
+                <br><br>
+
+                Thank you,
+                ${escapeHTML(full_name)}.
+
+                <br><br>
+
+                Your B.E.P. account has been created.
+
+                <br><br>
+
+                <strong>
+                    Please check your email.
+                </strong>
+
+                <br>
+
+                A confirmation link has been sent to:
+
+                <br>
+
+                <strong>
+                    ${escapeHTML(email)}
+                </strong>
+
+                <br><br>
+
+                Click the confirmation link in your email.
+                After confirming your email, you can log in
+                through the B.E.P. Member Portal.
+
+                <br><br>
+
+                <a
+                    href="member.html"
+                    style="
+                        display:inline-block;
+                        background:#073b78;
+                        color:white;
+                        padding:12px 18px;
+                        border-radius:7px;
+                        text-decoration:none;
+                        font-weight:bold;
+                    ">
+
+                    <i class="fa-solid fa-right-to-bracket"></i>
+                    Go to Member Portal
+
+                </a>
+                `
+            );
+
+
+            /* Clear the registration form */
+
+            form.reset();
+
+
+        } catch (error) {
+
+            console.error(
+                "B.E.P. Registration Error:",
+                error
+            );
+
+
+            let errorMessage =
+                "Registration could not be completed. Please try again.";
+
+
+            /* =================================================
+               FRIENDLY ERROR HANDLING
+               ================================================= */
+
+            if (error.message) {
+
+                const msg =
+                    error.message.toLowerCase();
+
+
+                if (
+                    msg.includes("already registered") ||
+                    msg.includes("user already registered")
+                ) {
+
+                    errorMessage =
+                        "An account with this email address already exists. Please use the Member Portal to log in or reset your password.";
+
+                }
+
+                else if (
+                    msg.includes("password")
+                ) {
+
+                    errorMessage =
+                        error.message;
+
+                }
+
+                else if (
+                    msg.includes("email")
+                ) {
+
+                    errorMessage =
+                        error.message;
+
+                }
+
+                else if (
+                    msg.includes("duplicate") ||
+                    error.code === "23505"
+                ) {
+
+                    errorMessage =
+                        "This email is already registered with B.E.P. Please use another email address or contact B.E.P. for assistance.";
+
+                }
+
+                else if (
+                    error.code === "42501"
+                ) {
+
+                    errorMessage =
+                        "Registration permission is currently blocked by the database. Please contact the B.E.P. administrator.";
+
+                }
+
+                else {
+
+                    errorMessage =
+                        error.message;
+
+                }
+
+            }
+
+
+            showMessage(
+                "error",
+                `
+                <i class="fa-solid fa-circle-exclamation"></i>
+
+                <strong>
+                    Registration Not Completed
+                </strong>
+
+                <br><br>
+
+                ${escapeHTML(errorMessage)}
+                `
+            );
+
+
+        } finally {
+
+            /* =================================================
+               RESTORE BUTTON
+               ================================================= */
+
+            submitBtn.disabled = false;
+
+            submitBtn.innerHTML =
+                '<i class="fa-solid fa-user-plus"></i> Create B.E.P. Account';
+
+        }
+
+    }
+);
+
+</script>
