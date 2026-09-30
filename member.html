@@ -251,6 +251,7 @@ button{
   word-break:break-word;
 }
 
+
 /* DIGITAL MEMBER CARD */
 
 .member-card-wrapper{
@@ -419,6 +420,96 @@ button{
   text-align:right;
 }
 
+
+/* COURSES */
+
+.courses-intro{
+  color:#666;
+  margin-bottom:20px;
+  line-height:1.6;
+}
+
+.courses-list{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:20px;
+}
+
+.course-card{
+  border:1px solid #e0e6ed;
+  border-radius:12px;
+  padding:20px;
+  background:#fbfcfe;
+  transition:.2s;
+}
+
+.course-card:hover{
+  transform:translateY(-2px);
+  box-shadow:0 8px 20px rgba(0,0,0,.08);
+}
+
+.course-icon{
+  width:50px;
+  height:50px;
+  border-radius:12px;
+  background:#063b73;
+  color:#d4af37;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:22px;
+  margin-bottom:15px;
+}
+
+.course-title{
+  color:#063b73;
+  font-size:19px;
+  font-weight:bold;
+  margin-bottom:10px;
+}
+
+.course-description{
+  color:#666;
+  font-size:14px;
+  line-height:1.6;
+  margin-bottom:15px;
+}
+
+.course-meta{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-bottom:17px;
+}
+
+.course-meta span{
+  background:#eaf1f8;
+  color:#164c7d;
+  border-radius:20px;
+  padding:6px 10px;
+  font-size:12px;
+  font-weight:bold;
+}
+
+.course-status{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  color:#176b2c;
+  font-size:12px;
+  font-weight:bold;
+  margin-bottom:15px;
+}
+
+.course-status i{
+  color:#2b9b43;
+}
+
+.course-button{
+  width:100%;
+}
+
+
 /* FOOTER */
 
 footer{
@@ -485,6 +576,7 @@ footer a:hover{
   }
 }
 
+
 @media(max-width:750px){
 
   .nav-container{
@@ -503,6 +595,10 @@ footer a:hover{
     grid-template-columns:1fr;
   }
 
+  .courses-list{
+    grid-template-columns:1fr;
+  }
+
   .footer-grid{
     grid-template-columns:1fr 1fr;
   }
@@ -512,6 +608,7 @@ footer a:hover{
   }
 
 }
+
 
 @media(max-width:500px){
 
@@ -556,34 +653,46 @@ footer a:hover{
 </style>
 </head>
 
+
 <body>
+
 
 <header>
 
 <div class="nav-container">
 
 <div class="logo">
+
 <i class="fa-solid fa-book-bible"></i>
+
 <span>B.E.P. Member Portal</span>
+
 </div>
 
+
 <nav>
+
 <a href="index.html">
-<i class="fa-solid fa-house"></i> Home
+<i class="fa-solid fa-house"></i>
+Home
 </a>
 
 <a href="register.html">
-<i class="fa-solid fa-user-plus"></i> Register
+<i class="fa-solid fa-user-plus"></i>
+Register
 </a>
 
 <a href="quiz.html">
-<i class="fa-solid fa-pen-to-square"></i> Quiz
+<i class="fa-solid fa-pen-to-square"></i>
+Quiz
 </a>
+
 </nav>
 
 </div>
 
 </header>
+
 
 
 <section class="hero">
@@ -600,6 +709,7 @@ Biblical Empowerment Program — Building the Church of Christ
 </section>
 
 
+
 <main class="container">
 
 
@@ -613,6 +723,7 @@ Member Login
 </h2>
 
 <div id="loginMessage" class="message"></div>
+
 
 <form id="loginForm">
 
@@ -701,6 +812,7 @@ Reset Your Password
 Enter your registered email address and we will send you a secure password reset link.
 </p>
 
+
 <form id="forgotForm">
 
 <div class="form-group">
@@ -718,6 +830,7 @@ placeholder="Enter your registered email"
 
 </div>
 
+
 <div class="button-row">
 
 <button
@@ -729,6 +842,7 @@ class="btn-primary"
 Send Reset Link
 
 </button>
+
 
 <button
 type="button"
@@ -761,6 +875,7 @@ Create New Password
 </h2>
 
 <div id="resetMessage" class="message"></div>
+
 
 <form id="resetForm">
 
@@ -868,8 +983,11 @@ Your B.E.P. digital membership card.
 <div class="member-brand">
 
 <div class="member-brand-icon">
+
 <i class="fa-solid fa-book-bible"></i>
+
 </div>
+
 
 <div>
 
@@ -884,6 +1002,7 @@ Biblical Empowerment Program
 </div>
 
 </div>
+
 
 <div class="member-card-title">
 Member
@@ -901,6 +1020,7 @@ id="cardFullName"
 Member Name
 </div>
 
+
 <div
 class="member-number"
 id="cardMemberNumber"
@@ -910,6 +1030,7 @@ BEP-00000
 
 
 <div class="member-details">
+
 
 <div class="member-detail">
 
@@ -991,6 +1112,7 @@ Active Member
 
 </div>
 
+
 <div class="member-card-motto">
 Building the Church of Christ
 </div>
@@ -998,6 +1120,65 @@ Building the Church of Christ
 </div>
 
 </div>
+
+</div>
+
+</div>
+
+
+
+<!-- COURSES -->
+
+<div class="card">
+
+<h2>
+<i class="fa-solid fa-book-open"></i>
+B.E.P. Courses
+</h2>
+
+<p class="courses-intro">
+Grow in God's Word through B.E.P. Bible courses designed to strengthen your faith, understanding, discipleship, prayer, and Christian character.
+</p>
+
+
+<div id="coursesMessage" class="message"></div>
+
+
+<div
+id="coursesLoading"
+class="loading"
+>
+
+<div class="spinner"></div>
+
+<p>
+Loading available courses...
+</p>
+
+</div>
+
+
+<div
+id="coursesList"
+class="courses-list"
+>
+</div>
+
+
+<div
+id="noCourses"
+class="center hidden"
+style="padding:25px;color:#666;"
+>
+
+<i
+class="fa-solid fa-book-open"
+style="font-size:35px;color:#d4af37;margin-bottom:12px;"
+></i>
+
+<p>
+There are no published courses available at the moment.
+</p>
 
 </div>
 
@@ -1115,7 +1296,6 @@ id="profileStatus"
 
 </div>
 
-
 </div>
 
 
@@ -1166,6 +1346,7 @@ Edit Profile
 </h2>
 
 <div id="editMessage" class="message"></div>
+
 
 <p style="margin-bottom:20px;color:#666;">
 You can update your phone number and location below.
@@ -1247,6 +1428,10 @@ Cancel
 
 
 
+</main>
+
+
+
 <footer>
 
 <div class="footer-grid">
@@ -1311,7 +1496,10 @@ Contact
 <p>
 <i class="fa-brands fa-whatsapp"></i>
 Omega:
-<a href="https://wa.me/27623508689" target="_blank">
+<a
+href="https://wa.me/27623508689"
+target="_blank"
+>
 062 350 8689
 </a>
 </p>
@@ -1324,7 +1512,9 @@ Bro. KB:
 
 <p>
 <i class="fa-solid fa-envelope"></i>
-<a href="mailto:bep.onlineprog@gmail.com">
+<a
+href="mailto:bep.onlineprog@gmail.com"
+>
 bep.onlineprog@gmail.com
 </a>
 </p>
@@ -1382,6 +1572,7 @@ All Rights Reserved.
 </footer>
 
 
+
 <script>
 
 const SUPABASE_URL =
@@ -1424,19 +1615,26 @@ document.getElementById("editProfileSection");
 
 
 
-/* MESSAGE FUNCTION */
+/* MESSAGE */
 
-function showMessage(elementId,message,type){
+function showMessage(
+  elementId,
+  message,
+  type
+){
 
   const element =
   document.getElementById(elementId);
 
-  element.textContent = message;
+  element.textContent =
+  message;
 
   element.className =
   "message " + type;
 
-  element.style.display = "block";
+  element.style.display =
+  "block";
+
 }
 
 
@@ -1445,12 +1643,14 @@ function hideMessage(elementId){
   const element =
   document.getElementById(elementId);
 
-  element.style.display = "none";
+  element.style.display =
+  "none";
+
 }
 
 
 
-/* RECOVERY DETECTION */
+/* RECOVERY */
 
 function hasRecoveryParameters(){
 
@@ -1476,11 +1676,14 @@ function hasRecoveryParameters(){
 
 document
 .getElementById("loginForm")
-.addEventListener("submit",async function(event){
+.addEventListener(
+"submit",
+async function(event){
 
   event.preventDefault();
 
   hideMessage("loginMessage");
+
 
   const email =
   document
@@ -1488,15 +1691,21 @@ document
   .value
   .trim();
 
+
   const password =
   document
   .getElementById("loginPassword")
   .value;
 
-  const loginBtn =
-  document.getElementById("loginBtn");
 
-  loginBtn.disabled = true;
+  const loginBtn =
+  document
+  .getElementById("loginBtn");
+
+
+  loginBtn.disabled =
+  true;
+
 
   loginBtn.innerHTML =
   '<i class="fa-solid fa-spinner fa-spin"></i> Logging in...';
@@ -1523,7 +1732,9 @@ document
     data.user;
 
 
-    await loadMemberProfile(currentUser);
+    await loadMemberProfile(
+      currentUser
+    );
 
 
   }catch(error){
@@ -1537,7 +1748,8 @@ document
 
   }finally{
 
-    loginBtn.disabled = false;
+    loginBtn.disabled =
+    false;
 
     loginBtn.innerHTML =
     '<i class="fa-solid fa-right-to-bracket"></i> Login';
@@ -1548,17 +1760,25 @@ document
 
 
 
-/* FORGOT PASSWORD BUTTON */
+/* FORGOT BUTTON */
 
 document
 .getElementById("showForgotBtn")
-.addEventListener("click",function(){
+.addEventListener(
+"click",
+function(){
 
-  loginSection.classList.add("hidden");
+  loginSection.classList.add(
+    "hidden"
+  );
 
-  forgotSection.classList.remove("hidden");
+  forgotSection.classList.remove(
+    "hidden"
+  );
 
-  resetSection.classList.add("hidden");
+  resetSection.classList.add(
+    "hidden"
+  );
 
 });
 
@@ -1568,25 +1788,34 @@ document
 
 document
 .getElementById("backToLoginBtn")
-.addEventListener("click",function(){
+.addEventListener(
+"click",
+function(){
 
-  forgotSection.classList.add("hidden");
+  forgotSection.classList.add(
+    "hidden"
+  );
 
-  loginSection.classList.remove("hidden");
+  loginSection.classList.remove(
+    "hidden"
+  );
 
 });
 
 
 
-/* FORGOT PASSWORD FORM */
+/* FORGOT PASSWORD */
 
 document
 .getElementById("forgotForm")
-.addEventListener("submit",async function(event){
+.addEventListener(
+"submit",
+async function(event){
 
   event.preventDefault();
 
   hideMessage("forgotMessage");
+
 
   const email =
   document
@@ -1640,7 +1869,9 @@ document
 
 document
 .getElementById("resetForm")
-.addEventListener("submit",async function(event){
+.addEventListener(
+"submit",
+async function(event){
 
   event.preventDefault();
 
@@ -1651,6 +1882,7 @@ document
   document
   .getElementById("newPassword")
   .value;
+
 
   const confirmPassword =
   document
@@ -1727,25 +1959,30 @@ document
     );
 
 
-    setTimeout(async function(){
+    setTimeout(
+    async function(){
 
       await supabaseClient.auth.signOut();
 
-      resetSection.classList.add("hidden");
+      resetSection.classList.add(
+        "hidden"
+      );
 
-      loginSection.classList.remove("hidden");
+      loginSection.classList.remove(
+        "hidden"
+      );
 
       document
       .getElementById("loginEmail")
-      .value =
-      "";
+      .value = "";
 
       document
       .getElementById("loginPassword")
-      .value =
-      "";
+      .value = "";
 
-    },1800);
+    },
+    1800
+    );
 
 
   }catch(error){
@@ -1767,17 +2004,29 @@ document
 
 async function loadMemberProfile(user){
 
-  loginSection.classList.add("hidden");
+  loginSection.classList.add(
+    "hidden"
+  );
 
-  forgotSection.classList.add("hidden");
+  forgotSection.classList.add(
+    "hidden"
+  );
 
-  resetSection.classList.add("hidden");
+  resetSection.classList.add(
+    "hidden"
+  );
 
-  editProfileSection.classList.add("hidden");
+  editProfileSection.classList.add(
+    "hidden"
+  );
 
-  loadingSection.classList.remove("hidden");
+  loadingSection.classList.remove(
+    "hidden"
+  );
 
-  profileSection.classList.add("hidden");
+  profileSection.classList.add(
+    "hidden"
+  );
 
 
   try{
@@ -1811,19 +2060,33 @@ async function loadMemberProfile(user){
     member;
 
 
-    displayMemberProfile(member);
+    displayMemberProfile(
+      member
+    );
 
 
-    loadingSection.classList.add("hidden");
+    loadingSection.classList.add(
+      "hidden"
+    );
 
-    profileSection.classList.remove("hidden");
+    profileSection.classList.remove(
+      "hidden"
+    );
+
+
+    await loadCourses();
 
 
   }catch(error){
 
-    loadingSection.classList.add("hidden");
+    loadingSection.classList.add(
+      "hidden"
+    );
 
-    loginSection.classList.remove("hidden");
+    loginSection.classList.remove(
+      "hidden"
+    );
+
 
     showMessage(
       "loginMessage",
@@ -1838,9 +2101,11 @@ async function loadMemberProfile(user){
 
 
 
-/* DISPLAY MEMBER DATA */
+/* DISPLAY MEMBER */
 
-function displayMemberProfile(member){
+function displayMemberProfile(
+  member
+){
 
   const memberNumber =
   member.member_number || "-";
@@ -1861,69 +2126,98 @@ function displayMemberProfile(member){
   member.status || "-";
 
 
-  /* PROFILE */
-
   document
-  .getElementById("profileMemberNumber")
+  .getElementById(
+    "profileMemberNumber"
+  )
   .textContent =
   memberNumber;
 
+
   document
-  .getElementById("profileFullName")
+  .getElementById(
+    "profileFullName"
+  )
   .textContent =
   fullName;
 
+
   document
-  .getElementById("profileEmail")
+  .getElementById(
+    "profileEmail"
+  )
   .textContent =
   email;
 
+
   document
-  .getElementById("profilePhone")
+  .getElementById(
+    "profilePhone"
+  )
   .textContent =
   phone;
 
+
   document
-  .getElementById("profileLocation")
+  .getElementById(
+    "profileLocation"
+  )
   .textContent =
   location;
 
+
   document
-  .getElementById("profileStatus")
+  .getElementById(
+    "profileStatus"
+  )
   .textContent =
   status;
 
 
-  /* DIGITAL CARD */
-
   document
-  .getElementById("cardFullName")
+  .getElementById(
+    "cardFullName"
+  )
   .textContent =
   fullName;
 
+
   document
-  .getElementById("cardMemberNumber")
+  .getElementById(
+    "cardMemberNumber"
+  )
   .textContent =
   memberNumber;
 
+
   document
-  .getElementById("cardEmail")
+  .getElementById(
+    "cardEmail"
+  )
   .textContent =
   email;
 
+
   document
-  .getElementById("cardPhone")
+  .getElementById(
+    "cardPhone"
+  )
   .textContent =
   phone;
 
+
   document
-  .getElementById("cardLocation")
+  .getElementById(
+    "cardLocation"
+  )
   .textContent =
   location;
 
 
   const cardStatus =
-  document.getElementById("cardStatus");
+  document.getElementById(
+    "cardStatus"
+  );
 
 
   const statusText =
@@ -1950,9 +2244,11 @@ function displayMemberProfile(member){
 
 
 
-/* BASIC HTML ESCAPE */
+/* HTML ESCAPE */
 
-function escapeHtml(value){
+function escapeHtml(
+  value
+){
 
   return String(value)
   .replace(/&/g,"&amp;")
@@ -1965,11 +2261,240 @@ function escapeHtml(value){
 
 
 
+/* LOAD COURSES */
+
+async function loadCourses(){
+
+  const coursesLoading =
+  document.getElementById(
+    "coursesLoading"
+  );
+
+  const coursesList =
+  document.getElementById(
+    "coursesList"
+  );
+
+  const noCourses =
+  document.getElementById(
+    "noCourses"
+  );
+
+
+  coursesLoading.classList.remove(
+    "hidden"
+  );
+
+  coursesList.innerHTML = "";
+
+  noCourses.classList.add(
+    "hidden"
+  );
+
+  hideMessage(
+    "coursesMessage"
+  );
+
+
+  try{
+
+    const {
+      data:courses,
+      error
+    } =
+    await supabaseClient
+    .from("courses")
+    .select(
+      "id,title,description,duration,lessons,status,created_at"
+    )
+    .eq(
+      "status",
+      "Published"
+    )
+    .order(
+      "id",
+      {
+        ascending:true
+      }
+    );
+
+
+    if(error){
+      throw error;
+    }
+
+
+    coursesLoading.classList.add(
+      "hidden"
+    );
+
+
+    if(!courses || courses.length === 0){
+
+      noCourses.classList.remove(
+        "hidden"
+      );
+
+      return;
+
+    }
+
+
+    courses.forEach(
+      function(course){
+
+        const courseCard =
+        document.createElement(
+          "div"
+        );
+
+        courseCard.className =
+        "course-card";
+
+
+        const title =
+        escapeHtml(
+          course.title ||
+          "B.E.P. Course"
+        );
+
+
+        const description =
+        escapeHtml(
+          course.description ||
+          "B.E.P. Bible course."
+        );
+
+
+        const duration =
+        escapeHtml(
+          course.duration ||
+          "Not specified"
+        );
+
+
+        const lessons =
+        Number(
+          course.lessons || 0
+        );
+
+
+        courseCard.innerHTML = `
+
+          <div class="course-icon">
+            <i class="fa-solid fa-book-bible"></i>
+          </div>
+
+          <div class="course-title">
+            ${title}
+          </div>
+
+          <div class="course-description">
+            ${description}
+          </div>
+
+          <div class="course-meta">
+
+            <span>
+              <i class="fa-regular fa-clock"></i>
+              ${duration}
+            </span>
+
+            <span>
+              <i class="fa-solid fa-list-check"></i>
+              ${lessons} Lessons
+            </span>
+
+          </div>
+
+          <div class="course-status">
+
+            <i class="fa-solid fa-circle-check"></i>
+
+            Published
+
+          </div>
+
+          <button
+            type="button"
+            class="btn-primary course-button"
+            data-course-id="${course.id}"
+          >
+
+            <i class="fa-solid fa-book-open"></i>
+
+            View Course
+
+          </button>
+
+        `;
+
+
+        coursesList.appendChild(
+          courseCard
+        );
+
+      }
+    );
+
+
+    document
+    .querySelectorAll(
+      ".course-button"
+    )
+    .forEach(
+      function(button){
+
+        button.addEventListener(
+          "click",
+          function(){
+
+            const courseId =
+            button.getAttribute(
+              "data-course-id"
+            );
+
+
+            showMessage(
+              "coursesMessage",
+              "Course lessons will be added in the next step. Course ID: " + courseId,
+              "info"
+            );
+
+          }
+        );
+
+      }
+    );
+
+
+  }catch(error){
+
+    coursesLoading.classList.add(
+      "hidden"
+    );
+
+
+    showMessage(
+      "coursesMessage",
+      error.message ||
+      "Unable to load B.E.P. courses.",
+      "error"
+    );
+
+  }
+
+}
+
+
+
 /* EDIT PROFILE */
 
 document
 .getElementById("editProfileBtn")
-.addEventListener("click",function(){
+.addEventListener(
+"click",
+function(){
 
   if(!currentMember){
     return;
@@ -1988,9 +2513,15 @@ document
   currentMember.location || "";
 
 
-  hideMessage("editMessage");
+  hideMessage(
+    "editMessage"
+  );
 
-  editProfileSection.classList.remove("hidden");
+
+  editProfileSection.classList.remove(
+    "hidden"
+  );
+
 
   editProfileSection.scrollIntoView({
     behavior:"smooth",
@@ -2005,9 +2536,13 @@ document
 
 document
 .getElementById("cancelEditBtn")
-.addEventListener("click",function(){
+.addEventListener(
+"click",
+function(){
 
-  editProfileSection.classList.add("hidden");
+  editProfileSection.classList.add(
+    "hidden"
+  );
 
 });
 
@@ -2017,11 +2552,15 @@ document
 
 document
 .getElementById("editProfileForm")
-.addEventListener("submit",async function(event){
+.addEventListener(
+"submit",
+async function(event){
 
   event.preventDefault();
 
-  hideMessage("editMessage");
+  hideMessage(
+    "editMessage"
+  );
 
 
   const phone =
@@ -2047,10 +2586,16 @@ document
     await supabaseClient
     .from("members")
     .update({
-      phone:phone || null,
-      location:location || null
+      phone:
+      phone || null,
+
+      location:
+      location || null
     })
-    .eq("auth_user_id",currentUser.id)
+    .eq(
+      "auth_user_id",
+      currentUser.id
+    )
     .select()
     .single();
 
@@ -2064,7 +2609,9 @@ document
     data;
 
 
-    displayMemberProfile(data);
+    displayMemberProfile(
+      data
+    );
 
 
     showMessage(
@@ -2074,11 +2621,16 @@ document
     );
 
 
-    setTimeout(function(){
+    setTimeout(
+      function(){
 
-      editProfileSection.classList.add("hidden");
+        editProfileSection.classList.add(
+          "hidden"
+        );
 
-    },1200);
+      },
+      1200
+    );
 
 
   }catch(error){
@@ -2100,7 +2652,9 @@ document
 
 document
 .getElementById("logoutBtn")
-.addEventListener("click",async function(){
+.addEventListener(
+"click",
+async function(){
 
   try{
 
@@ -2119,44 +2673,78 @@ document
 /* AUTH STATE */
 
 supabaseClient.auth.onAuthStateChange(
-async function(event,session){
+async function(
+  event,
+  session
+){
 
-  if(event === "PASSWORD_RECOVERY"){
+  if(
+    event ===
+    "PASSWORD_RECOVERY"
+  ){
 
-    loginSection.classList.add("hidden");
+    loginSection.classList.add(
+      "hidden"
+    );
 
-    forgotSection.classList.add("hidden");
+    forgotSection.classList.add(
+      "hidden"
+    );
 
-    loadingSection.classList.add("hidden");
+    loadingSection.classList.add(
+      "hidden"
+    );
 
-    profileSection.classList.add("hidden");
+    profileSection.classList.add(
+      "hidden"
+    );
 
-    editProfileSection.classList.add("hidden");
+    editProfileSection.classList.add(
+      "hidden"
+    );
 
-    resetSection.classList.remove("hidden");
+    resetSection.classList.remove(
+      "hidden"
+    );
 
     return;
 
   }
 
 
-  if(event === "SIGNED_OUT"){
+  if(
+    event ===
+    "SIGNED_OUT"
+  ){
 
     currentUser = null;
 
     currentMember = null;
 
-    profileSection.classList.add("hidden");
 
-    loadingSection.classList.add("hidden");
+    profileSection.classList.add(
+      "hidden"
+    );
 
-    editProfileSection.classList.add("hidden");
+    loadingSection.classList.add(
+      "hidden"
+    );
 
-    resetSection.classList.add("hidden");
+    editProfileSection.classList.add(
+      "hidden"
+    );
 
-    forgotSection.classList.add("hidden");
+    resetSection.classList.add(
+      "hidden"
+    );
 
-    loginSection.classList.remove("hidden");
+    forgotSection.classList.add(
+      "hidden"
+    );
+
+    loginSection.classList.remove(
+      "hidden"
+    );
 
     return;
 
@@ -2171,6 +2759,7 @@ async function(event,session){
     currentUser =
     session.user;
 
+
     await loadMemberProfile(
       session.user
     );
@@ -2181,31 +2770,39 @@ async function(event,session){
 
 
 
-/* INITIAL PAGE LOAD */
+/* INITIALIZE */
 
 async function initializePage(){
 
   try{
 
-    /*
-      If the URL contains password-recovery
-      parameters, let Supabase establish the
-      recovery session and show the password form.
-    */
+    if(
+      hasRecoveryParameters()
+    ){
 
-    if(hasRecoveryParameters()){
+      loadingSection.classList.remove(
+        "hidden"
+      );
 
-      loadingSection.classList.remove("hidden");
+      loginSection.classList.add(
+        "hidden"
+      );
 
-      loginSection.classList.add("hidden");
+      forgotSection.classList.add(
+        "hidden"
+      );
 
-      forgotSection.classList.add("hidden");
+      profileSection.classList.add(
+        "hidden"
+      );
 
-      profileSection.classList.add("hidden");
+      editProfileSection.classList.add(
+        "hidden"
+      );
 
-      editProfileSection.classList.add("hidden");
-
-      resetSection.classList.add("hidden");
+      resetSection.classList.add(
+        "hidden"
+      );
 
     }
 
@@ -2222,7 +2819,9 @@ async function initializePage(){
     }
 
 
-    if(data?.session){
+    if(
+      data?.session
+    ){
 
       currentUser =
       data.session.user;
@@ -2232,9 +2831,13 @@ async function initializePage(){
         hasRecoveryParameters()
       ){
 
-        loadingSection.classList.add("hidden");
+        loadingSection.classList.add(
+          "hidden"
+        );
 
-        resetSection.classList.remove("hidden");
+        resetSection.classList.remove(
+          "hidden"
+        );
 
       }else{
 
@@ -2248,12 +2851,8 @@ async function initializePage(){
       hasRecoveryParameters()
     ){
 
-      /*
-        Give Supabase a moment to process
-        the recovery URL/session.
-      */
-
-      setTimeout(async function(){
+      setTimeout(
+      async function(){
 
         const {
           data:retryData
@@ -2261,16 +2860,25 @@ async function initializePage(){
         await supabaseClient.auth.getSession();
 
 
-        loadingSection.classList.add("hidden");
+        loadingSection.classList.add(
+          "hidden"
+        );
 
 
-        if(retryData?.session){
+        if(
+          retryData?.session
+        ){
 
-          resetSection.classList.remove("hidden");
+          resetSection.classList.remove(
+            "hidden"
+          );
 
         }else{
 
-          loginSection.classList.remove("hidden");
+          loginSection.classList.remove(
+            "hidden"
+          );
+
 
           showMessage(
             "loginMessage",
@@ -2280,7 +2888,9 @@ async function initializePage(){
 
         }
 
-      },1000);
+      },
+      1000
+      );
 
     }
 
@@ -2291,9 +2901,15 @@ async function initializePage(){
       error
     );
 
-    loadingSection.classList.add("hidden");
 
-    loginSection.classList.remove("hidden");
+    loadingSection.classList.add(
+      "hidden"
+    );
+
+
+    loginSection.classList.remove(
+      "hidden"
+    );
 
   }
 
