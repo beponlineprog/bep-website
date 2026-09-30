@@ -38,7 +38,6 @@
     header p {
       margin: 7px 0 0;
       font-size: 14px;
-      opacity: 0.95;
     }
 
     .container {
@@ -176,17 +175,6 @@
       overflow: hidden;
     }
 
-    .member-card:after {
-      content: "";
-      position: absolute;
-      width: 160px;
-      height: 160px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.08);
-      right: -45px;
-      top: -45px;
-    }
-
     .member-card h2 {
       color: white;
       margin-bottom: 5px;
@@ -306,22 +294,35 @@
 <body>
 
 <header>
-  <h1><i class="fa-solid fa-book-open"></i> B.E.P. Member Portal</h1>
+  <h1>
+    <i class="fa-solid fa-book-open"></i>
+    B.E.P. Member Portal
+  </h1>
+
   <p>Building the Church of Christ</p>
 </header>
+
 
 <div class="container">
 
   <!-- LOGIN -->
   <section id="loginSection" class="card">
 
-    <h2><i class="fa-solid fa-right-to-bracket"></i> Member Login</h2>
+    <h2>
+      <i class="fa-solid fa-right-to-bracket"></i>
+      Member Login
+    </h2>
 
-    <p>Sign in to access your B.E.P. member profile and courses.</p>
+    <p>
+      Sign in to access your B.E.P. member profile and courses.
+    </p>
 
     <form id="loginForm">
 
-      <label for="loginEmail">Email Address</label>
+      <label for="loginEmail">
+        Email Address
+      </label>
+
       <input
         type="email"
         id="loginEmail"
@@ -329,7 +330,10 @@
         required
       >
 
-      <label for="loginPassword">Password</label>
+      <label for="loginPassword">
+        Password
+      </label>
+
       <input
         type="password"
         id="loginPassword"
@@ -337,32 +341,51 @@
         required
       >
 
-      <button type="submit" class="primary-btn">
+      <button
+        type="submit"
+        class="primary-btn"
+      >
         <i class="fa-solid fa-right-to-bracket"></i>
         Login
       </button>
 
     </form>
 
-    <button id="forgotPasswordBtn" class="secondary-btn">
+    <button
+      id="forgotPasswordBtn"
+      class="secondary-btn"
+    >
       Forgot Password?
     </button>
 
-    <div id="loginMessage" class="message"></div>
+    <div
+      id="loginMessage"
+      class="message"
+    ></div>
 
   </section>
 
 
   <!-- FORGOT PASSWORD -->
-  <section id="forgotSection" class="card hidden">
+  <section
+    id="forgotSection"
+    class="card hidden"
+  >
 
-    <h2><i class="fa-solid fa-key"></i> Reset Password</h2>
+    <h2>
+      <i class="fa-solid fa-key"></i>
+      Reset Password
+    </h2>
 
-    <p>Enter your registered email address and we will send you a password reset link.</p>
+    <p>
+      Enter your registered email address and we will send you a password reset link.
+    </p>
 
     <form id="forgotForm">
 
-      <label for="forgotEmail">Email Address</label>
+      <label for="forgotEmail">
+        Email Address
+      </label>
 
       <input
         type="email"
@@ -371,31 +394,50 @@
         required
       >
 
-      <button type="submit" class="primary-btn">
+      <button
+        type="submit"
+        class="primary-btn"
+      >
         Send Reset Link
       </button>
 
     </form>
 
-    <button id="backToLoginFromForgot" class="secondary-btn">
+    <button
+      id="backToLoginFromForgot"
+      class="secondary-btn"
+    >
       Back to Login
     </button>
 
-    <div id="forgotMessage" class="message"></div>
+    <div
+      id="forgotMessage"
+      class="message"
+    ></div>
 
   </section>
 
 
   <!-- PASSWORD RECOVERY -->
-  <section id="recoverySection" class="card hidden">
+  <section
+    id="recoverySection"
+    class="card hidden"
+  >
 
-    <h2><i class="fa-solid fa-lock"></i> Create New Password</h2>
+    <h2>
+      <i class="fa-solid fa-lock"></i>
+      Create New Password
+    </h2>
 
-    <p>Enter your new password below.</p>
+    <p>
+      Enter your new password below.
+    </p>
 
     <form id="recoveryForm">
 
-      <label for="newPassword">New Password</label>
+      <label for="newPassword">
+        New Password
+      </label>
 
       <input
         type="password"
@@ -405,7 +447,9 @@
         required
       >
 
-      <label for="confirmPassword">Confirm New Password</label>
+      <label for="confirmPassword">
+        Confirm New Password
+      </label>
 
       <input
         type="password"
@@ -415,52 +459,105 @@
         required
       >
 
-      <button type="submit" class="primary-btn">
+      <button
+        type="submit"
+        class="primary-btn"
+      >
         Update Password
       </button>
 
     </form>
 
-    <div id="recoveryMessage" class="message"></div>
+    <div
+      id="recoveryMessage"
+      class="message"
+    ></div>
 
   </section>
 
 
   <!-- LOADING -->
-  <section id="loadingSection" class="card hidden">
+  <section
+    id="loadingSection"
+    class="card hidden"
+  >
 
     <div class="loading">
+
       <i class="fa-solid fa-spinner fa-spin"></i>
+
       Loading your member portal...
+
     </div>
 
   </section>
 
 
   <!-- PROFILE -->
-  <section id="profileSection" class="hidden">
+  <section
+    id="profileSection"
+    class="hidden"
+  >
 
-    <!-- MEMBER CARD -->
+    <!-- DIGITAL MEMBER CARD -->
     <div class="card">
 
-      <h2><i class="fa-solid fa-id-card"></i> Digital Member Card</h2>
+      <h2>
+        <i class="fa-solid fa-id-card"></i>
+        Digital Member Card
+      </h2>
 
       <div class="member-card">
 
         <h2>B.E.P.</h2>
-        <div>Biblical Empowerment Program</div>
 
-        <div class="label">MEMBER NUMBER</div>
-        <div id="cardMemberNumber" class="value member-number">—</div>
+        <div>
+          Biblical Empowerment Program
+        </div>
 
-        <div class="label">MEMBER NAME</div>
-        <div id="cardMemberName" class="value">—</div>
+        <div class="label">
+          MEMBER NUMBER
+        </div>
 
-        <div class="label">EMAIL</div>
-        <div id="cardMemberEmail" class="value">—</div>
+        <div
+          id="cardMemberNumber"
+          class="value member-number"
+        >
+          —
+        </div>
 
-        <div class="label">STATUS</div>
-        <div id="cardMemberStatus" class="value">—</div>
+        <div class="label">
+          MEMBER NAME
+        </div>
+
+        <div
+          id="cardMemberName"
+          class="value"
+        >
+          —
+        </div>
+
+        <div class="label">
+          EMAIL
+        </div>
+
+        <div
+          id="cardMemberEmail"
+          class="value"
+        >
+          —
+        </div>
+
+        <div class="label">
+          STATUS
+        </div>
+
+        <div
+          id="cardMemberStatus"
+          class="value"
+        >
+          —
+        </div>
 
       </div>
 
@@ -480,16 +577,21 @@
       </p>
 
       <div id="coursesContainer">
+
         <div class="loading">
           Loading courses...
         </div>
+
       </div>
 
     </div>
 
 
     <!-- LESSONS -->
-    <div id="lessonsSection" class="card hidden">
+    <div
+      id="lessonsSection"
+      class="card hidden"
+    >
 
       <button
         id="backToCoursesBtn"
@@ -506,9 +608,11 @@
       <p id="lessonsCourseDescription"></p>
 
       <div id="lessonsContainer">
+
         <div class="loading">
           Loading lessons...
         </div>
+
       </div>
 
     </div>
@@ -525,43 +629,98 @@
       <div class="profile-grid">
 
         <div class="profile-item">
-          <strong>Member Number</strong>
-          <span id="profileMemberNumber">—</span>
+
+          <strong>
+            Member Number
+          </strong>
+
+          <span id="profileMemberNumber">
+            —
+          </span>
+
         </div>
 
-        <div class="profile-item">
-          <strong>Full Name</strong>
-          <span id="profileFullName">—</span>
-        </div>
 
         <div class="profile-item">
-          <strong>Email</strong>
-          <span id="profileEmail">—</span>
+
+          <strong>
+            Full Name
+          </strong>
+
+          <span id="profileFullName">
+            —
+          </span>
+
         </div>
 
-        <div class="profile-item">
-          <strong>Phone / WhatsApp</strong>
-          <span id="profilePhone">—</span>
-        </div>
 
         <div class="profile-item">
-          <strong>Location</strong>
-          <span id="profileLocation">—</span>
+
+          <strong>
+            Email
+          </strong>
+
+          <span id="profileEmail">
+            —
+          </span>
+
         </div>
 
+
         <div class="profile-item">
-          <strong>Status</strong>
-          <span id="profileStatus">—</span>
+
+          <strong>
+            Phone / WhatsApp
+          </strong>
+
+          <span id="profilePhone">
+            —
+          </span>
+
+        </div>
+
+
+        <div class="profile-item">
+
+          <strong>
+            Location
+          </strong>
+
+          <span id="profileLocation">
+            —
+          </span>
+
+        </div>
+
+
+        <div class="profile-item">
+
+          <strong>
+            Status
+          </strong>
+
+          <span id="profileStatus">
+            —
+          </span>
+
         </div>
 
       </div>
 
-      <button id="editProfileBtn" class="primary-btn">
+
+      <button
+        id="editProfileBtn"
+        class="primary-btn"
+      >
         <i class="fa-solid fa-pen"></i>
         Edit Profile
       </button>
 
-      <button id="logoutBtn" class="danger-btn">
+
+      <button
+        id="logoutBtn"
+        class="danger-btn"
+      >
         <i class="fa-solid fa-right-from-bracket"></i>
         Logout
       </button>
@@ -570,7 +729,10 @@
 
 
     <!-- EDIT PROFILE -->
-    <div id="editProfileSection" class="card hidden">
+    <div
+      id="editProfileSection"
+      class="card hidden"
+    >
 
       <h2>
         <i class="fa-solid fa-user-pen"></i>
@@ -579,7 +741,9 @@
 
       <form id="editProfileForm">
 
-        <label for="editPhone">Phone / WhatsApp</label>
+        <label for="editPhone">
+          Phone / WhatsApp
+        </label>
 
         <input
           type="text"
@@ -587,7 +751,10 @@
           placeholder="Enter phone number"
         >
 
-        <label for="editLocation">Location</label>
+
+        <label for="editLocation">
+          Location
+        </label>
 
         <input
           type="text"
@@ -595,9 +762,14 @@
           placeholder="Enter your location"
         >
 
-        <button type="submit" class="success-btn">
+
+        <button
+          type="submit"
+          class="success-btn"
+        >
           Save Changes
         </button>
+
 
         <button
           type="button"
@@ -609,7 +781,10 @@
 
       </form>
 
-      <div id="editMessage" class="message"></div>
+      <div
+        id="editMessage"
+        class="message"
+      ></div>
 
     </div>
 
@@ -620,9 +795,15 @@
 
 <footer>
 
-  <p><strong>B.E.P. — Biblical Empowerment Program</strong></p>
+  <p>
+    <strong>
+      B.E.P. — Biblical Empowerment Program
+    </strong>
+  </p>
 
-  <p>Building the Church of Christ</p>
+  <p>
+    Building the Church of Christ
+  </p>
 
   <p>
     © 2026 B.E.P. All Rights Reserved.
@@ -641,7 +822,7 @@
     "https://rukusaellqqwthzibyib.supabase.co";
 
   const SUPABASE_KEY =
-    "sb_publishable_Co8_MoJOV14tXBWyXyFTA_ULn1WRa5";
+    "sb_publishable_Co8_MoJOV14tXBkSWyXFTA_ULn1WRa5";
 
   const supabaseClient =
     window.supabase.createClient(
@@ -707,9 +888,14 @@
      MESSAGE FUNCTION
   ========================================================= */
 
-  function showMessage(element, message, type) {
+  function showMessage(
+    element,
+    message,
+    type
+  ) {
 
-    element.textContent = message;
+    element.textContent =
+      message;
 
     element.className =
       "message " + type;
@@ -728,10 +914,15 @@
       event.preventDefault();
 
       const email =
-        document.getElementById("loginEmail").value.trim();
+        document
+          .getElementById("loginEmail")
+          .value
+          .trim();
 
       const password =
-        document.getElementById("loginPassword").value;
+        document
+          .getElementById("loginPassword")
+          .value;
 
       showMessage(
         loginMessage,
@@ -759,7 +950,9 @@
         return;
       }
 
-      await loadMemberProfile(data.user);
+      await loadMemberProfile(
+        data.user
+      );
 
     }
   );
@@ -775,9 +968,13 @@
       "click",
       function() {
 
-        loginSection.classList.add("hidden");
+        loginSection.classList.add(
+          "hidden"
+        );
 
-        forgotSection.classList.remove("hidden");
+        forgotSection.classList.remove(
+          "hidden"
+        );
 
       }
     );
@@ -789,9 +986,13 @@
       "click",
       function() {
 
-        forgotSection.classList.add("hidden");
+        forgotSection.classList.add(
+          "hidden"
+        );
 
-        loginSection.classList.remove("hidden");
+        loginSection.classList.remove(
+          "hidden"
+        );
 
       }
     );
@@ -861,7 +1062,10 @@
           .getElementById("confirmPassword")
           .value;
 
-      if (password !== confirmPassword) {
+      if (
+        password !==
+        confirmPassword
+      ) {
 
         showMessage(
           recoveryMessage,
@@ -904,15 +1108,25 @@
      LOAD MEMBER PROFILE
   ========================================================= */
 
-  async function loadMemberProfile(user) {
+  async function loadMemberProfile(
+    user
+  ) {
 
-    loginSection.classList.add("hidden");
+    loginSection.classList.add(
+      "hidden"
+    );
 
-    forgotSection.classList.add("hidden");
+    forgotSection.classList.add(
+      "hidden"
+    );
 
-    recoverySection.classList.add("hidden");
+    recoverySection.classList.add(
+      "hidden"
+    );
 
-    loadingSection.classList.remove("hidden");
+    loadingSection.classList.remove(
+      "hidden"
+    );
 
     const {
       data: member,
@@ -921,12 +1135,17 @@
     await supabaseClient
       .from("members")
       .select("*")
-      .eq("auth_user_id", user.id)
+      .eq(
+        "auth_user_id",
+        user.id
+      )
       .maybeSingle();
 
     if (error) {
 
-      loadingSection.classList.add("hidden");
+      loadingSection.classList.add(
+        "hidden"
+      );
 
       showMessage(
         loginMessage,
@@ -934,14 +1153,18 @@
         "error"
       );
 
-      loginSection.classList.remove("hidden");
+      loginSection.classList.remove(
+        "hidden"
+      );
 
       return;
     }
 
     if (!member) {
 
-      loadingSection.classList.add("hidden");
+      loadingSection.classList.add(
+        "hidden"
+      );
 
       showMessage(
         loginMessage,
@@ -949,18 +1172,26 @@
         "error"
       );
 
-      loginSection.classList.remove("hidden");
+      loginSection.classList.remove(
+        "hidden"
+      );
 
       return;
     }
 
-    displayMemberProfile(member);
+    displayMemberProfile(
+      member
+    );
 
     await loadCourses();
 
-    loadingSection.classList.add("hidden");
+    loadingSection.classList.add(
+      "hidden"
+    );
 
-    profileSection.classList.remove("hidden");
+    profileSection.classList.remove(
+      "hidden"
+    );
 
   }
 
@@ -969,69 +1200,83 @@
      DISPLAY MEMBER PROFILE
   ========================================================= */
 
-  function displayMemberProfile(member) {
+  function displayMemberProfile(
+    member
+  ) {
 
     document.getElementById(
       "profileMemberNumber"
     ).textContent =
-      member.member_number || "—";
+      member.member_number ||
+      "—";
 
     document.getElementById(
       "profileFullName"
     ).textContent =
-      member.full_name || "—";
+      member.full_name ||
+      "—";
 
     document.getElementById(
       "profileEmail"
     ).textContent =
-      member.email || "—";
+      member.email ||
+      "—";
 
     document.getElementById(
       "profilePhone"
     ).textContent =
-      member.phone || "—";
+      member.phone ||
+      "—";
 
     document.getElementById(
       "profileLocation"
     ).textContent =
-      member.location || "—";
+      member.location ||
+      "—";
 
     document.getElementById(
       "profileStatus"
     ).textContent =
-      member.status || "—";
+      member.status ||
+      "—";
 
 
     document.getElementById(
       "cardMemberNumber"
     ).textContent =
-      member.member_number || "—";
+      member.member_number ||
+      "—";
 
     document.getElementById(
       "cardMemberName"
     ).textContent =
-      member.full_name || "—";
+      member.full_name ||
+      "—";
 
     document.getElementById(
       "cardMemberEmail"
     ).textContent =
-      member.email || "—";
+      member.email ||
+      "—";
 
     document.getElementById(
       "cardMemberStatus"
     ).textContent =
-      member.status || "—";
+      member.status ||
+      "—";
 
 
     document.getElementById(
       "editPhone"
     ).value =
-      member.phone || "";
+      member.phone ||
+      "";
 
     document.getElementById(
       "editLocation"
     ).value =
-      member.location || "";
+      member.location ||
+      "";
 
   }
 
@@ -1075,14 +1320,19 @@
       coursesContainer.innerHTML =
         `
           <div class="message error">
-            ${escapeHtml(error.message)}
+            ${escapeHtml(
+              error.message
+            )}
           </div>
         `;
 
       return;
     }
 
-    if (!courses || courses.length === 0) {
+    if (
+      !courses ||
+      courses.length === 0
+    ) {
 
       coursesContainer.innerHTML =
         `
@@ -1094,13 +1344,16 @@
       return;
     }
 
-    coursesContainer.innerHTML = "";
+    coursesContainer.innerHTML =
+      "";
 
     courses.forEach(
       function(course) {
 
         const card =
-          document.createElement("div");
+          document.createElement(
+            "div"
+          );
 
         card.className =
           "course-card";
@@ -1109,28 +1362,37 @@
           `
             <h3>
               <i class="fa-solid fa-book"></i>
-              ${escapeHtml(course.title)}
+              ${escapeHtml(
+                course.title
+              )}
             </h3>
 
             <div class="course-description">
-              ${escapeHtml(course.description || "")}
+              ${escapeHtml(
+                course.description || ""
+              )}
             </div>
 
             <div class="course-meta">
 
               <span class="badge">
                 <i class="fa-solid fa-clock"></i>
-                ${escapeHtml(course.duration || "—")}
+                ${escapeHtml(
+                  course.duration || "—"
+                )}
               </span>
 
               <span class="badge">
                 <i class="fa-solid fa-list"></i>
-                ${course.lessons || 0} Lessons
+                ${course.lessons || 0}
+                Lessons
               </span>
 
               <span class="badge">
                 <i class="fa-solid fa-circle-check"></i>
-                ${escapeHtml(course.status || "")}
+                ${escapeHtml(
+                  course.status || ""
+                )}
               </span>
 
             </div>
@@ -1144,13 +1406,18 @@
             </button>
           `;
 
-        coursesContainer.appendChild(card);
+        coursesContainer.appendChild(
+          card
+        );
 
       }
     );
 
+
     document
-      .querySelectorAll(".view-course-btn")
+      .querySelectorAll(
+        ".view-course-btn"
+      )
       .forEach(
         function(button) {
 
@@ -1165,7 +1432,9 @@
                   )
                 );
 
-              openCourse(courseId);
+              openCourse(
+                courseId
+              );
 
             }
           );
@@ -1180,19 +1449,27 @@
      OPEN COURSE
   ========================================================= */
 
-  async function openCourse(courseId) {
+  async function openCourse(
+    courseId
+  ) {
 
-    lessonsSection.classList.remove("hidden");
+    lessonsSection.classList.remove(
+      "hidden"
+    );
 
     document
-      .querySelectorAll(".course-card")
+      .querySelectorAll(
+        ".course-card"
+      )
       .forEach(
         function(card) {
 
-          card.style.display = "none";
+          card.style.display =
+            "none";
 
         }
       );
+
 
     lessonsContainer.innerHTML =
       `
@@ -1228,7 +1505,9 @@
       lessonsContainer.innerHTML =
         `
           <div class="message error">
-            ${escapeHtml(courseError.message)}
+            ${escapeHtml(
+              courseError.message
+            )}
           </div>
         `;
 
@@ -1254,10 +1533,12 @@
     ).textContent =
       course.title;
 
+
     document.getElementById(
       "lessonsCourseDescription"
     ).textContent =
-      course.description || "";
+      course.description ||
+      "";
 
 
     const {
@@ -1286,7 +1567,9 @@
       lessonsContainer.innerHTML =
         `
           <div class="message error">
-            ${escapeHtml(lessonsError.message)}
+            ${escapeHtml(
+              lessonsError.message
+            )}
           </div>
         `;
 
@@ -1294,7 +1577,10 @@
     }
 
 
-    if (!lessons || lessons.length === 0) {
+    if (
+      !lessons ||
+      lessons.length === 0
+    ) {
 
       lessonsContainer.innerHTML =
         `
@@ -1307,13 +1593,17 @@
     }
 
 
-    lessonsContainer.innerHTML = "";
+    lessonsContainer.innerHTML =
+      "";
+
 
     lessons.forEach(
       function(lesson) {
 
         const lessonCard =
-          document.createElement("div");
+          document.createElement(
+            "div"
+          );
 
         lessonCard.className =
           "lesson-card";
@@ -1321,15 +1611,20 @@
         lessonCard.innerHTML =
           `
             <div class="lesson-number">
-              LESSON ${lesson.lesson_number}
+              LESSON
+              ${lesson.lesson_number}
             </div>
 
             <h3>
-              ${escapeHtml(lesson.title)}
+              ${escapeHtml(
+                lesson.title
+              )}
             </h3>
 
             <div class="lesson-content">
-              ${formatLessonContent(lesson.content || "")}
+              ${formatLessonContent(
+                lesson.content || ""
+              )}
             </div>
           `;
 
@@ -1355,26 +1650,35 @@
   ========================================================= */
 
   document
-    .getElementById("backToCoursesBtn")
+    .getElementById(
+      "backToCoursesBtn"
+    )
     .addEventListener(
       "click",
       function() {
 
-        lessonsSection.classList.add("hidden");
+        lessonsSection.classList.add(
+          "hidden"
+        );
 
         document
-          .querySelectorAll(".course-card")
+          .querySelectorAll(
+            ".course-card"
+          )
           .forEach(
             function(card) {
 
-              card.style.display = "block";
+              card.style.display =
+                "block";
 
             }
           );
 
         window.scrollTo({
           top:
-            coursesContainer.parentElement.offsetTop - 20,
+            coursesContainer
+              .parentElement
+              .offsetTop - 20,
           behavior: "smooth"
         });
 
@@ -1387,19 +1691,27 @@
   ========================================================= */
 
   document
-    .getElementById("editProfileBtn")
+    .getElementById(
+      "editProfileBtn"
+    )
     .addEventListener(
       "click",
       function() {
 
         document
-          .getElementById("editProfileSection")
-          .classList.remove("hidden");
+          .getElementById(
+            "editProfileSection"
+          )
+          .classList.remove(
+            "hidden"
+          );
 
         window.scrollTo({
           top:
             document
-              .getElementById("editProfileSection")
+              .getElementById(
+                "editProfileSection"
+              )
               .offsetTop - 20,
           behavior: "smooth"
         });
@@ -1409,14 +1721,20 @@
 
 
   document
-    .getElementById("cancelEditBtn")
+    .getElementById(
+      "cancelEditBtn"
+    )
     .addEventListener(
       "click",
       function() {
 
         document
-          .getElementById("editProfileSection")
-          .classList.add("hidden");
+          .getElementById(
+            "editProfileSection"
+          )
+          .classList.add(
+            "hidden"
+          );
 
       }
     );
@@ -1435,6 +1753,7 @@
       } =
       await supabaseClient.auth.getUser();
 
+
       if (!user) {
 
         showMessage(
@@ -1446,15 +1765,21 @@
         return;
       }
 
+
       const phone =
         document
-          .getElementById("editPhone")
+          .getElementById(
+            "editPhone"
+          )
           .value
           .trim();
 
+
       const location =
         document
-          .getElementById("editLocation")
+          .getElementById(
+            "editLocation"
+          )
           .value
           .trim();
 
@@ -1509,18 +1834,26 @@
   ========================================================= */
 
   document
-    .getElementById("logoutBtn")
+    .getElementById(
+      "logoutBtn"
+    )
     .addEventListener(
       "click",
       async function() {
 
         await supabaseClient.auth.signOut();
 
-        profileSection.classList.add("hidden");
+        profileSection.classList.add(
+          "hidden"
+        );
 
-        lessonsSection.classList.add("hidden");
+        lessonsSection.classList.add(
+          "hidden"
+        );
 
-        loginSection.classList.remove("hidden");
+        loginSection.classList.remove(
+          "hidden"
+        );
 
         document.getElementById(
           "loginPassword"
@@ -1534,14 +1867,31 @@
      ESCAPE HTML
   ========================================================= */
 
-  function escapeHtml(value) {
+  function escapeHtml(
+    value
+  ) {
 
     return String(value)
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;")
-      .replace(/'/g, "&#039;");
+      .replace(
+        /&/g,
+        "&amp;"
+      )
+      .replace(
+        /</g,
+        "&lt;"
+      )
+      .replace(
+        />/g,
+        "&gt;"
+      )
+      .replace(
+        /"/g,
+        "&quot;"
+      )
+      .replace(
+        /'/g,
+        "&#039;"
+      );
 
   }
 
@@ -1550,10 +1900,16 @@
      FORMAT LESSON CONTENT
   ========================================================= */
 
-  function formatLessonContent(value) {
+  function formatLessonContent(
+    value
+  ) {
 
-    return escapeHtml(value)
-      .replace(/\n/g, "<br>");
+    return escapeHtml(
+      value
+    ).replace(
+      /\n/g,
+      "<br>"
+    );
 
   }
 
@@ -1563,22 +1919,35 @@
   ========================================================= */
 
   supabaseClient.auth.onAuthStateChange(
-    async function(event, session) {
+    async function(
+      event,
+      session
+    ) {
 
       if (
-        event === "PASSWORD_RECOVERY"
+        event ===
+        "PASSWORD_RECOVERY"
       ) {
 
-        loginSection.classList.add("hidden");
+        loginSection.classList.add(
+          "hidden"
+        );
 
-        forgotSection.classList.add("hidden");
+        forgotSection.classList.add(
+          "hidden"
+        );
 
-        profileSection.classList.add("hidden");
+        profileSection.classList.add(
+          "hidden"
+        );
 
-        recoverySection.classList.remove("hidden");
+        recoverySection.classList.remove(
+          "hidden"
+        );
 
         return;
       }
+
 
       if (
         session &&
@@ -1586,7 +1955,8 @@
       ) {
 
         if (
-          event === "SIGNED_IN"
+          event ===
+          "SIGNED_IN"
         ) {
 
           await loadMemberProfile(
@@ -1612,8 +1982,10 @@
     } =
     await supabaseClient.auth.getSession();
 
+
     const session =
       data.session;
+
 
     if (
       session &&
