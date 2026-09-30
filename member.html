@@ -17,42 +17,71 @@ header{background:#073b78;color:white;padding:15px 20px;position:sticky;top:0;z-
 nav{display:flex;gap:18px;flex-wrap:wrap}
 nav a{color:white;text-decoration:none;font-weight:bold;font-size:14px}
 nav a:hover{color:#d4af37}
+
 .hero{background:linear-gradient(135deg,#073b78,#0b5aa5);color:white;text-align:center;padding:55px 20px}
 .hero h1{font-size:34px;margin-bottom:10px}
 .hero p{font-size:17px}
+
 .container{width:92%;max-width:900px;margin:35px auto}
 .card{background:white;border-radius:14px;padding:28px;margin-bottom:25px;box-shadow:0 5px 18px #00000014}
 .card h2{color:#073b78;margin-bottom:20px;font-size:24px}
 .card h2 i{color:#d4af37;margin-right:8px}
+
 .form-group{margin-bottom:18px}
 label{display:block;margin-bottom:7px;font-weight:bold;color:#333}
 input{width:100%;padding:13px 14px;border:1px solid #ccd6e0;border-radius:8px;font-size:16px;outline:none}
 input:focus{border-color:#073b78;box-shadow:0 0 0 2px #073b7814}
+
 button{width:100%;border:0;border-radius:8px;padding:14px 18px;font-size:16px;font-weight:bold;cursor:pointer;transition:.2s}
 button:disabled{opacity:.6;cursor:not-allowed}
 .primary-btn{background:#073b78;color:white}
 .primary-btn:hover{background:#052d5d}
 .secondary-btn{background:#d4af37;color:#111;margin-top:12px}
+.secondary-btn:hover{background:#c49f2f}
+
+.edit-btn{background:#073b78;color:white;margin-top:15px}
+.edit-btn:hover{background:#052d5d}
+
+.cancel-btn{background:#eef2f6;color:#073b78;margin-top:12px}
+.cancel-btn:hover{background:#dfe7ef}
+
 .whatsapp-btn{display:inline-block;width:100%;text-align:center;background:#25D366;color:white;padding:13px 18px;border-radius:8px;text-decoration:none;font-weight:bold;margin-top:15px}
+
 .message{display:none;padding:15px;border-radius:8px;margin-bottom:20px;font-weight:500}
 .success{display:block;background:#e8f7ed;color:#176b36;border:1px solid #a9dfba}
 .error{display:block;background:#fdecec;color:#a12222;border:1px solid #efb0b0}
 .info{display:block;background:#eaf3fb;color:#174f7c;border:1px solid #b8d6ec}
+
 .profile-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}
 .profile-item{background:#f7f9fc;border-left:4px solid #d4af37;padding:15px;border-radius:7px}
 .profile-label{display:block;font-size:13px;color:#666;margin-bottom:4px;font-weight:bold}
 .profile-value{display:block;color:#073b78;font-size:16px;font-weight:bold;word-break:break-word}
 .member-number{font-size:22px}
+
 .status{display:inline-block;background:#e8f7ed;color:#176b36;padding:5px 12px;border-radius:20px;font-size:14px}
+
 .portal-intro{text-align:center;margin-bottom:25px}
 .portal-intro i{font-size:50px;color:#d4af37;margin-bottom:10px}
 .portal-intro h2{margin-bottom:5px}
+
 .small-text{font-size:13px;color:#666;margin-top:10px}
 .link-row{text-align:center;margin-top:18px}
 .link-row a{color:#073b78;font-weight:bold;text-decoration:none}
 .link-row a:hover{color:#d4af37}
+
+.edit-note{
+  background:#fff8df;
+  border:1px solid #ead48a;
+  color:#6b5710;
+  padding:12px 14px;
+  border-radius:8px;
+  margin-bottom:18px;
+  font-size:14px;
+}
+
 .loading{text-align:center;padding:20px}
 .loading i{font-size:30px;color:#073b78;margin-bottom:10px}
+
 footer{background:#073b78;color:white;margin-top:50px;padding:40px 20px 20px}
 .footer-container{max-width:1100px;margin:auto;display:grid;grid-template-columns:repeat(4,1fr);gap:30px}
 .footer-column h3{color:#d4af37;margin-bottom:14px;font-size:18px}
@@ -61,605 +90,22 @@ footer{background:#073b78;color:white;margin-top:50px;padding:40px 20px 20px}
 .social-icons{display:flex;gap:12px;margin-top:12px}
 .social-icons a{display:flex;align-items:center;justify-content:center;width:38px;height:38px;background:#ffffff1a;border-radius:50%;color:white}
 .footer-bottom{max-width:1100px;margin:30px auto 0;padding-top:20px;border-top:1px solid #ffffff33;text-align:center;font-size:13px;color:#dbe5ef}
-#loginSection,#forgotSection,#passwordSection,#loadingSection,#profileSection{display:none}
-@media(max-width:750px){.nav-container{flex-direction:column}nav{justify-content:center}.hero h1{font-size:28px}.profile-grid{grid-template-columns:1fr}.footer-container{grid-template-columns:1fr 1fr}}
-@media(max-width:480px){.card{padding:20px}.footer-container{grid-template-columns:1fr}.hero{padding:40px 15px}.hero h1{font-size:25px}}
+
+#loginSection,#forgotSection,#passwordSection,#loadingSection,#profileSection,#editProfileSection{display:none}
+
+@media(max-width:750px){
+.nav-container{flex-direction:column}
+nav{justify-content:center}
+.hero h1{font-size:28px}
+.profile-grid{grid-template-columns:1fr}
+.footer-container{grid-template-columns:1fr 1fr}
+}
+
+@media(max-width:480px){
+.card{padding:20px}
+.footer-container{grid-template-columns:1fr}
+.hero{padding:40px 15px}
+.hero h1{font-size:25px}
+}
 </style>
 </head>
-
-<body>
-<header>
-<div class="nav-container">
-<a href="index.html" class="logo">B.E.<span>P.</span></a>
-<nav>
-<a href="index.html"><i class="fa-solid fa-house"></i> Home</a>
-<a href="register.html"><i class="fa-solid fa-user-plus"></i> Register</a>
-<a href="quiz.html"><i class="fa-solid fa-book-open"></i> Bible Quiz</a>
-</nav>
-</div>
-</header>
-
-<section class="hero">
-<h1><i class="fa-solid fa-user-shield"></i> B.E.P. Member Portal</h1>
-<p>Welcome to the Biblical Empowerment Program</p>
-</section>
-
-<main class="container">
-
-<section id="loginSection" class="card">
-<div class="portal-intro">
-<i class="fa-solid fa-circle-user"></i>
-<h2>Member Login</h2>
-<p>Sign in to access your B.E.P. member profile.</p>
-</div>
-<div id="loginMessage" class="message"></div>
-<form id="loginForm">
-<div class="form-group">
-<label for="loginEmail">Email Address</label>
-<input type="email" id="loginEmail" placeholder="Enter your email address" autocomplete="email" required>
-</div>
-<div class="form-group">
-<label for="loginPassword">Password</label>
-<input type="password" id="loginPassword" placeholder="Enter your password" autocomplete="current-password" required>
-</div>
-<button type="submit" id="loginBtn" class="primary-btn"><i class="fa-solid fa-right-to-bracket"></i> Login</button>
-</form>
-<div class="link-row"><a href="#" id="showForgot"><i class="fa-solid fa-key"></i> Forgot Password?</a></div>
-<div class="link-row"><a href="register.html"><i class="fa-solid fa-user-plus"></i> Create a B.E.P. Account</a></div>
-</section>
-
-<section id="forgotSection" class="card">
-<h2><i class="fa-solid fa-key"></i> Reset Your Password</h2>
-<div id="forgotMessage" class="message"></div>
-<form id="forgotForm">
-<div class="form-group">
-<label for="forgotEmail">Email Address</label>
-<input type="email" id="forgotEmail" placeholder="Enter your registered email" autocomplete="email" required>
-</div>
-<button type="submit" id="forgotBtn" class="primary-btn"><i class="fa-solid fa-paper-plane"></i> Send Reset Link</button>
-</form>
-<div class="link-row"><a href="#" id="backToLogin"><i class="fa-solid fa-arrow-left"></i> Back to Login</a></div>
-</section>
-
-<section id="passwordSection" class="card">
-<h2><i class="fa-solid fa-lock"></i> Create New Password</h2>
-<div id="passwordMessage" class="message"></div>
-<p class="small-text" style="margin-bottom:18px">Enter your new password below. Use at least 8 characters.</p>
-<form id="passwordForm">
-<div class="form-group">
-<label for="newPassword">New Password</label>
-<input type="password" id="newPassword" placeholder="Enter new password" autocomplete="new-password" minlength="8" required>
-</div>
-<div class="form-group">
-<label for="confirmNewPassword">Confirm New Password</label>
-<input type="password" id="confirmNewPassword" placeholder="Confirm new password" autocomplete="new-password" minlength="8" required>
-</div>
-<button type="submit" id="passwordBtn" class="primary-btn"><i class="fa-solid fa-lock"></i> Update Password</button>
-</form>
-</section>
-
-<section id="loadingSection" class="card">
-<div class="loading">
-<i class="fa-solid fa-spinner fa-spin"></i>
-<h2>Loading Member Profile</h2>
-<p>Please wait...</p>
-</div>
-</section>
-<section id="profileSection" class="card">
-<div class="portal-intro">
-<i class="fa-solid fa-id-card"></i>
-<h2>Welcome, <span id="welcomeName">B.E.P. Member</span></h2>
-<p>Your B.E.P. member profile</p>
-</div>
-
-<div id="profileMessage" class="message"></div>
-
-<div class="profile-grid">
-<div class="profile-item">
-<span class="profile-label"><i class="fa-solid fa-id-badge"></i> Member Number</span>
-<span id="memberNumber" class="profile-value member-number">-</span>
-</div>
-<div class="profile-item">
-<span class="profile-label"><i class="fa-solid fa-user"></i> Full Name</span>
-<span id="fullName" class="profile-value">-</span>
-</div>
-<div class="profile-item">
-<span class="profile-label"><i class="fa-solid fa-envelope"></i> Email</span>
-<span id="email" class="profile-value">-</span>
-</div>
-<div class="profile-item">
-<span class="profile-label"><i class="fa-brands fa-whatsapp"></i> Phone / WhatsApp</span>
-<span id="phone" class="profile-value">-</span>
-</div>
-<div class="profile-item">
-<span class="profile-label"><i class="fa-solid fa-location-dot"></i> Location</span>
-<span id="location" class="profile-value">-</span>
-</div>
-<div class="profile-item">
-<span class="profile-label"><i class="fa-solid fa-circle-info"></i> How You Heard About B.E.P.</span>
-<span id="heardAbout" class="profile-value">-</span>
-</div>
-<div class="profile-item">
-<span class="profile-label"><i class="fa-solid fa-shield-halved"></i> Member Status</span>
-<span id="memberStatus" class="profile-value">-</span>
-</div>
-</div>
-
-<a id="whatsappBtn" class="whatsapp-btn" href="#" target="_blank" rel="noopener noreferrer">
-<i class="fa-brands fa-whatsapp"></i> Contact B.E.P. on WhatsApp
-</a>
-
-<button id="logoutBtn" class="secondary-btn" type="button">
-<i class="fa-solid fa-right-from-bracket"></i> Logout
-</button>
-
-<p class="small-text" style="text-align:center">Keep your B.E.P. account details secure.</p>
-</section>
-</main>
-
-<footer>
-<div class="footer-container">
-<div class="footer-column">
-<h3>B.E.P.</h3>
-<p>Biblical Empowerment Program</p>
-<p>Building the Church of Christ</p>
-<div class="social-icons">
-<a href="https://facebook.com/groups/1421853356307383/" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-<a href="mailto:bep.onlineprog@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
-</div>
-</div>
-
-<div class="footer-column">
-<h3>Quick Links</h3>
-<a href="index.html"><i class="fa-solid fa-house"></i> Home</a>
-<a href="register.html"><i class="fa-solid fa-user-plus"></i> Register</a>
-<a href="quiz.html"><i class="fa-solid fa-book-open"></i> Bible Quiz</a>
-<a href="member.html"><i class="fa-solid fa-user"></i> Member Portal</a>
-</div>
-
-<div class="footer-column">
-<h3>Contact Us</h3>
-<p><i class="fa-solid fa-user"></i> Omega</p>
-<a href="https://wa.me/27623508689" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp"></i> 062 350 8689</a>
-<p><i class="fa-solid fa-user"></i> Bro. KB</p>
-<a href="tel:+27832822644"><i class="fa-solid fa-phone"></i> 083 282 2644</a>
-</div>
-
-<div class="footer-column">
-<h3>B.E.P. Online</h3>
-<p><i class="fa-solid fa-clock"></i> Thursday Sessions</p>
-<p><i class="fa-solid fa-calendar-days"></i> 19:00 – 20:30</p>
-<a href="https://teams.live.com/meet/936085799236?p=b66LnDUAB2Xkx2uQYp&eventType=community" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-video"></i> Join Microsoft Teams</a>
-<a href="mailto:bep.onlineprog@gmail.com"><i class="fa-solid fa-envelope"></i> bep.onlineprog@gmail.com</a>
-</div>
-</div>
-
-<div class="footer-bottom">
-© 2026 Biblical Empowerment Program (B.E.P.). All Rights Reserved.
-<br>Building the Church of Christ.
-</div>
-</footer>
-
-<script>
-/* SUPABASE CONFIGURATION */
-const SUPABASE_URL = "https://rukusaellqqwthzibyib.supabase.co";
-const SUPABASE_KEY = "sb_publishable_Co8_MoJOV14tXBkSWyXFTA_ULn1WRa5";
-
-const supabaseClient = window.supabase.createClient(
-  SUPABASE_URL,
-  SUPABASE_KEY
-);
-
-/* PAGE SECTIONS */
-const loginSection = document.getElementById("loginSection");
-const forgotSection = document.getElementById("forgotSection");
-const passwordSection = document.getElementById("passwordSection");
-const loadingSection = document.getElementById("loadingSection");
-const profileSection = document.getElementById("profileSection");
-
-/* FORMS */
-const loginForm = document.getElementById("loginForm");
-const forgotForm = document.getElementById("forgotForm");
-const passwordForm = document.getElementById("passwordForm");
-
-/* MESSAGES */
-const loginMessage = document.getElementById("loginMessage");
-const forgotMessage = document.getElementById("forgotMessage");
-const passwordMessage = document.getElementById("passwordMessage");
-
-/* BUTTONS */
-const loginBtn = document.getElementById("loginBtn");
-const forgotBtn = document.getElementById("forgotBtn");
-const passwordBtn = document.getElementById("passwordBtn");
-const logoutBtn = document.getElementById("logoutBtn");
-
-/* RECOVERY STATE */
-let recoveryMode = false;
-let recoverySessionReady = false;
-
-/* MESSAGE HELPERS */
-function showMessage(element, type, html) {
-  element.className = "message " + type;
-  element.innerHTML = html;
-  element.style.display = "block";
-}
-
-function hideMessage(element) {
-  element.className = "message";
-  element.innerHTML = "";
-  element.style.display = "none";
-}
-
-function escapeHTML(value) {
-  return String(value ?? "").replace(/[&<>"']/g, function(char) {
-    return {
-      "&": "&amp;",
-      "<": "&lt;",
-      ">": "&gt;",
-      '"': "&quot;",
-      "'": "&#039;"
-    }[char];
-  });
-}
-
-/* SECTION NAVIGATION */
-function showSection(section) {
-  [
-    loginSection,
-    forgotSection,
-    passwordSection,
-    loadingSection,
-    profileSection
-  ].forEach(item => item.style.display = "none");
-
-  section.style.display = "block";
-}
-
-/* CHECK WHETHER THIS IS A PASSWORD RECOVERY LINK */
-function hasRecoveryParameters() {
-  const params = new URLSearchParams(window.location.search);
-  const hash = window.location.hash || "";
-
-  return (
-    params.has("code") ||
-    params.get("type") === "recovery" ||
-    hash.includes("type=recovery")
-  );
-}
-
-/* OPEN FORGOT PASSWORD */
-document.getElementById("showForgot").addEventListener("click", function(event) {
-  event.preventDefault();
-  hideMessage(loginMessage);
-  hideMessage(forgotMessage);
-  showSection(forgotSection);
-});
-
-/* BACK TO LOGIN */
-document.getElementById("backToLogin").addEventListener("click", function(event) {
-  event.preventDefault();
-  hideMessage(forgotMessage);
-  showSection(loginSection);
-});
-
-/* MEMBER LOGIN */
-loginForm.addEventListener("submit", async function(event) {
-  event.preventDefault();
-  hideMessage(loginMessage);
-
-  loginBtn.disabled = true;
-  loginBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Logging in...';
-
-  const email = document.getElementById("loginEmail").value.trim().toLowerCase();
-  const password = document.getElementById("loginPassword").value;
-
-  try {
-    const { data, error } = await supabaseClient.auth.signInWithPassword({
-      email,
-      password
-    });
-
-    if (error) throw error;
-    if (!data?.user) throw new Error("Login could not be completed.");
-
-    await loadMemberProfile(data.user);
-  } catch (error) {
-    console.error("B.E.P. Login Error:", error);
-
-    let message = error.message || "Please try again.";
-    if (message.toLowerCase().includes("invalid login credentials")) {
-      message = "The email address or password is incorrect.";
-    } else if (message.toLowerCase().includes("email not confirmed")) {
-      message = "Please confirm your email address before logging in.";
-    }
-
-    showMessage(loginMessage, "error",
-      `<strong>Login Not Completed</strong><br><br>${escapeHTML(message)}`
-    );
-  } finally {
-    loginBtn.disabled = false;
-    loginBtn.innerHTML = '<i class="fa-solid fa-right-to-bracket"></i> Login';
-  }
-});
-
-/* FORGOT PASSWORD — SEND RESET EMAIL */
-forgotForm.addEventListener("submit", async function(event) {
-  event.preventDefault();
-  hideMessage(forgotMessage);
-
-  forgotBtn.disabled = true;
-  forgotBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending...';
-
-  const email = document.getElementById("forgotEmail").value.trim().toLowerCase();
-
-  try {
-    const { error } = await supabaseClient.auth.resetPasswordForEmail(email, {
-      redirectTo: "https://beponlineprog.github.io/bep-website/member.html"
-    });
-
-    if (error) throw error;
-
-    showMessage(forgotMessage, "success",
-      `<strong><i class="fa-solid fa-circle-check"></i> Reset Link Sent</strong>
-      <br><br>If the email address is registered, a password reset link has been sent.
-      Please check your inbox and follow the instructions.`
-    );
-  } catch (error) {
-    console.error("B.E.P. Password Reset Error:", error);
-    showMessage(forgotMessage, "error",
-      `<strong>Password Reset Failed</strong><br><br>${escapeHTML(error.message || "Please try again.")}`
-    );
-  } finally {
-    forgotBtn.disabled = false;
-    forgotBtn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Send Reset Link';
-  }
-});
-    /* UPDATE PASSWORD */
-passwordForm.addEventListener("submit", async function(event) {
-  event.preventDefault();
-  hideMessage(passwordMessage);
-
-  passwordBtn.disabled = true;
-  passwordBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Updating...';
-
-  const newPassword = document.getElementById("newPassword").value;
-  const confirmPassword = document.getElementById("confirmNewPassword").value;
-
-  try {
-    if (newPassword.length < 8) {
-      throw new Error("Your new password must contain at least 8 characters.");
-    }
-
-    if (newPassword !== confirmPassword) {
-      throw new Error("The passwords do not match.");
-    }
-
-    /* Confirm that Supabase has a valid recovery session */
-    const { data: sessionData, error: sessionError } =
-      await supabaseClient.auth.getSession();
-
-    if (sessionError) throw sessionError;
-
-    if (!sessionData?.session) {
-      throw new Error(
-        "Your password reset session is missing or expired. Please request a new reset link."
-      );
-    }
-
-    const { error } = await supabaseClient.auth.updateUser({
-      password: newPassword
-    });
-
-    if (error) throw error;
-
-    recoveryMode = false;
-    recoverySessionReady = false;
-    passwordForm.reset();
-
-    showMessage(passwordMessage, "success",
-      `<strong><i class="fa-solid fa-circle-check"></i> Password Updated Successfully</strong>
-      <br><br>Your password has been changed.
-      <br><br>You can now log in using your new password.`
-    );
-
-    setTimeout(async function() {
-      await supabaseClient.auth.signOut();
-      showSection(loginSection);
-      showMessage(loginMessage, "success",
-        "Your password has been changed. Please log in with your new password."
-      );
-    }, 1800);
-
-  } catch (error) {
-    console.error("B.E.P. Password Update Error:", error);
-
-    showMessage(passwordMessage, "error",
-      `<strong>Password Update Failed</strong><br><br>${escapeHTML(error.message || "Please try again.")}`
-    );
-  } finally {
-    passwordBtn.disabled = false;
-    passwordBtn.innerHTML = '<i class="fa-solid fa-lock"></i> Update Password';
-  }
-});
-
-/* LOAD MEMBER PROFILE */
-async function loadMemberProfile(user) {
-  if (!user?.id) {
-    showSection(loginSection);
-    return;
-  }
-
-  showSection(loadingSection);
-
-  try {
-    const { data: member, error } = await supabaseClient
-      .from("members")
-      .select("*")
-      .eq("auth_user_id", user.id)
-      .maybeSingle();
-
-    if (error) throw error;
-
-    if (!member) {
-      showSection(loginSection);
-      showMessage(loginMessage, "error",
-        `<strong>Member Profile Not Found</strong>
-        <br><br>Your B.E.P. account was authenticated, but your member profile could not be found.
-        Please contact the B.E.P. administrator.`
-      );
-      return;
-    }
-
-    const fullName = member.full_name || user.user_metadata?.full_name || "-";
-
-    document.getElementById("memberNumber").textContent =
-      member.member_number || "-";
-
-    document.getElementById("fullName").textContent = fullName;
-    document.getElementById("welcomeName").textContent = fullName;
-    document.getElementById("email").textContent = member.email || user.email || "-";
-    document.getElementById("phone").textContent =
-      member.phone || user.user_metadata?.phone || "-";
-    document.getElementById("location").textContent =
-      member.location || user.user_metadata?.location || "-";
-    document.getElementById("heardAbout").textContent =
-      member.heard_about || user.user_metadata?.heard_about || "-";
-
-    document.getElementById("memberStatus").innerHTML =
-      `<span class="status">${escapeHTML(member.status || "active")}</span>`;
-
-    document.getElementById("whatsappBtn").href = "https://wa.me/27623508689";
-
-    showSection(profileSection);
-
-  } catch (error) {
-    console.error("B.E.P. Member Profile Error:", error);
-
-    showSection(loginSection);
-    showMessage(loginMessage, "error",
-      `<strong>Profile Loading Failed</strong><br><br>${escapeHTML(error.message || "Please try again.")}`
-    );
-  }
-}
-
-/* LOGOUT */
-logoutBtn.addEventListener("click", async function() {
-  logoutBtn.disabled = true;
-  logoutBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Logging out...';
-
-  try {
-    const { error } = await supabaseClient.auth.signOut();
-    if (error) throw error;
-
-    recoveryMode = false;
-    recoverySessionReady = false;
-    showSection(loginSection);
-    loginForm.reset();
-
-  } catch (error) {
-    console.error("B.E.P. Logout Error:", error);
-    alert("Logout could not be completed. Please try again.");
-  } finally {
-    logoutBtn.disabled = false;
-    logoutBtn.innerHTML = '<i class="fa-solid fa-right-from-bracket"></i> Logout';
-  }
-});
-
-/* SUPABASE AUTH EVENTS */
-supabaseClient.auth.onAuthStateChange(function(event, session) {
-  console.log("B.E.P. Auth Event:", event);
-
-  if (event === "PASSWORD_RECOVERY") {
-    recoveryMode = true;
-    recoverySessionReady = !!session;
-    hideMessage(passwordMessage);
-    showSection(passwordSection);
-    return;
-  }
-
-  if (event === "SIGNED_OUT") {
-    if (!recoveryMode) {
-      showSection(loginSection);
-      loginForm.reset();
-    }
-    return;
-  }
-
-  if (event === "SIGNED_IN" && session?.user) {
-    if (recoveryMode || hasRecoveryParameters()) {
-      recoveryMode = true;
-      recoverySessionReady = true;
-      showSection(passwordSection);
-      return;
-    }
-
-    /* Run outside the Auth event callback */
-    setTimeout(function() {
-      loadMemberProfile(session.user);
-    }, 0);
-  }
-});
-
-/* INITIAL PAGE CHECK */
-async function initializePortal() {
-  recoveryMode = hasRecoveryParameters();
-
-  if (recoveryMode) {
-    showSection(passwordSection);
-    showMessage(passwordMessage, "info",
-      "Checking your password reset link. Please wait..."
-    );
-  } else {
-    showSection(loginSection);
-  }
-
-  try {
-    const { data, error } = await supabaseClient.auth.getSession();
-
-    if (error) throw error;
-
-    if (recoveryMode) {
-      if (data?.session) {
-        recoverySessionReady = true;
-        hideMessage(passwordMessage);
-        showSection(passwordSection);
-      }
-      /* If no session yet, the PASSWORD_RECOVERY event can still open the form. */
-      return;
-    }
-
-    if (data?.session?.user) {
-      await loadMemberProfile(data.session.user);
-    } else {
-      showSection(loginSection);
-    }
-
-  } catch (error) {
-    console.error("B.E.P. Session Initialization Error:", error);
-
-    if (recoveryMode) {
-      showSection(passwordSection);
-      showMessage(passwordMessage, "error",
-        "We could not verify the reset session. Please open the latest reset email link or request a new one."
-      );
-    } else {
-      showSection(loginSection);
-    }
-  }
-}
-
-/* ENTER KEY SUPPORT */
-document.getElementById("loginPassword").addEventListener("keypress", function(event) {
-  if (event.key === "Enter") loginForm.requestSubmit();
-});
-
-document.getElementById("forgotEmail").addEventListener("keypress", function(event) {
-  if (event.key === "Enter") forgotForm.requestSubmit();
-});
-
-/* START PORTAL */
-initializePortal();
-</script>
-
-</body>
-</html>
