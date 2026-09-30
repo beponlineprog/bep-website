@@ -6,286 +6,463 @@
 
   <title>B.E.P. Member Portal</title>
 
-  <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="icon" href="banner.png">
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+  >
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <style>
     * {
       box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
     body {
-      margin: 0;
       font-family: Arial, Helvetica, sans-serif;
       background: #f4f7fb;
-      color: #1f2937;
+      color: #172033;
+      line-height: 1.6;
     }
 
     header {
-      background: linear-gradient(135deg, #063970, #0b5cad);
+      background: linear-gradient(135deg, #063b73, #0b5cab);
       color: white;
-      padding: 22px 18px;
-      text-align: center;
+      padding: 18px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.15);
     }
 
-    header h1 {
-      margin: 0;
-      font-size: 27px;
+    .header-inner {
+      max-width: 1100px;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
     }
 
-    header p {
-      margin: 7px 0 0;
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand img {
+      width: 48px;
+      height: 48px;
+      object-fit: contain;
+      border-radius: 8px;
+      background: white;
+      padding: 3px;
+    }
+
+    .brand h1 {
+      font-size: 20px;
+    }
+
+    .brand p {
+      font-size: 12px;
+      opacity: 0.9;
+    }
+
+    .logout-btn {
+      border: none;
+      background: #d4af37;
+      color: #111;
+      padding: 10px 16px;
+      border-radius: 7px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .logout-btn:hover {
+      opacity: 0.9;
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 30px auto;
+      padding: 0 18px 50px;
+    }
+
+    .welcome {
+      background: white;
+      border-radius: 14px;
+      padding: 25px;
+      margin-bottom: 25px;
+      box-shadow: 0 3px 15px rgba(0,0,0,0.07);
+      border-left: 5px solid #d4af37;
+    }
+
+    .welcome h2 {
+      color: #063b73;
+      margin-bottom: 5px;
+    }
+
+    .section {
+      background: white;
+      border-radius: 14px;
+      padding: 25px;
+      margin-bottom: 25px;
+      box-shadow: 0 3px 15px rgba(0,0,0,0.07);
+    }
+
+    .section-title {
+      color: #063b73;
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .profile-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 15px;
+    }
+
+    .profile-item {
+      background: #f5f8fc;
+      padding: 15px;
+      border-radius: 9px;
+    }
+
+    .profile-item strong {
+      display: block;
+      color: #063b73;
+      margin-bottom: 4px;
+      font-size: 13px;
+    }
+
+    .profile-item span {
+      word-break: break-word;
+    }
+
+    .btn {
+      border: none;
+      border-radius: 7px;
+      padding: 11px 17px;
+      cursor: pointer;
+      font-weight: bold;
+      margin-top: 15px;
+    }
+
+    .btn-primary {
+      background: #063b73;
+      color: white;
+    }
+
+    .btn-gold {
+      background: #d4af37;
+      color: #111;
+    }
+
+    .btn-secondary {
+      background: #e9eef5;
+      color: #063b73;
+    }
+
+    .btn:hover {
+      opacity: 0.9;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: bold;
+      color: #063b73;
+      margin-bottom: 6px;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccd5e0;
+      border-radius: 7px;
+      font-size: 15px;
+    }
+
+    .message {
+      margin-top: 12px;
+      padding: 10px;
+      border-radius: 7px;
+      display: none;
+    }
+
+    .success {
+      background: #e5f7e9;
+      color: #176b2c;
+    }
+
+    .error {
+      background: #fde8e8;
+      color: #a11a1a;
+    }
+
+    .courses-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .course-card {
+      border: 1px solid #dbe3ed;
+      border-radius: 12px;
+      padding: 20px;
+      background: #fbfcfe;
+    }
+
+    .course-card h3 {
+      color: #063b73;
+      margin-bottom: 10px;
+    }
+
+    .course-card p {
+      color: #4e5b6c;
+      margin-bottom: 12px;
+    }
+
+    .course-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 5px 9px;
+      border-radius: 20px;
+      background: #e8f0fa;
+      color: #063b73;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .badge.gold {
+      background: #f7edc8;
+      color: #725b00;
+    }
+
+    .lesson-view {
+      display: none;
+    }
+
+    .course-header {
+      background: linear-gradient(135deg, #063b73, #0b5cab);
+      color: white;
+      padding: 25px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+    }
+
+    .course-header h2 {
+      margin-bottom: 5px;
+    }
+
+    .progress-box {
+      margin-top: 18px;
+    }
+
+    .progress-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+      margin-bottom: 7px;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 13px;
+      background: rgba(255,255,255,0.25);
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: #d4af37;
+      border-radius: 20px;
+      transition: width 0.4s ease;
+    }
+
+    .lesson-card {
+      border: 1px solid #dbe3ed;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 16px;
+      background: #fff;
+    }
+
+    .lesson-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 15px;
+      margin-bottom: 12px;
+    }
+
+    .lesson-number {
+      color: #d4af37;
+      font-weight: bold;
       font-size: 14px;
     }
 
-    .container {
-      width: 94%;
-      max-width: 900px;
-      margin: 25px auto;
+    .lesson-card h3 {
+      color: #063b73;
+      margin: 3px 0;
     }
 
-    .card {
+    .lesson-content {
+      white-space: pre-line;
+      color: #39485b;
+      margin-top: 10px;
+    }
+
+    .completed-label {
+      color: #18752e;
+      font-size: 13px;
+      font-weight: bold;
+      white-space: nowrap;
+    }
+
+    .completion-btn {
+      margin-top: 16px;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 7px;
+      background: #063b73;
+      color: white;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .completion-btn.completed {
+      background: #188038;
+    }
+
+    .completion-btn:disabled {
+      cursor: default;
+      opacity: 0.9;
+    }
+
+    .member-card {
+      max-width: 520px;
+      margin: auto;
+      border-radius: 18px;
+      overflow: hidden;
+      background: linear-gradient(135deg, #063b73, #0b5cab);
+      color: white;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+    }
+
+    .card-top {
+      padding: 25px;
+      text-align: center;
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .card-top img {
+      width: 75px;
+      height: 75px;
+      object-fit: contain;
       background: white;
-      border-radius: 15px;
-      padding: 22px;
-      margin-bottom: 20px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+      border-radius: 10px;
+      padding: 5px;
+      margin-bottom: 10px;
     }
 
-    .card h2 {
-      color: #063970;
-      margin-top: 0;
+    .card-top h2 {
+      margin-bottom: 3px;
     }
 
-    .card h3 {
-      color: #063970;
+    .card-body {
+      padding: 25px;
+    }
+
+    .card-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      padding: 9px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.15);
+    }
+
+    .card-row:last-child {
+      border-bottom: none;
+    }
+
+    .card-row span:first-child {
+      opacity: 0.75;
+    }
+
+    .card-row span:last-child {
+      font-weight: bold;
+      text-align: right;
+    }
+
+    footer {
+      background: #063b73;
+      color: white;
+      text-align: center;
+      padding: 25px 15px;
+      margin-top: 40px;
+    }
+
+    footer strong {
+      color: #d4af37;
+    }
+
+    .loading {
+      text-align: center;
+      padding: 20px;
+      color: #68778a;
     }
 
     .hidden {
       display: none !important;
     }
 
-    label {
-      display: block;
-      margin-top: 13px;
-      margin-bottom: 6px;
-      font-weight: bold;
-      font-size: 14px;
-    }
-
-    input {
-      width: 100%;
-      padding: 12px;
-      border: 1px solid #ccd5e0;
-      border-radius: 8px;
-      font-size: 15px;
-      outline: none;
-    }
-
-    input:focus {
-      border-color: #0b5cad;
-    }
-
-    button {
-      border: none;
-      border-radius: 8px;
-      padding: 12px 18px;
-      font-size: 15px;
-      cursor: pointer;
-      margin-top: 15px;
-    }
-
-    .primary-btn {
-      background: #063970;
-      color: white;
-    }
-
-    .primary-btn:hover {
-      background: #0b5cad;
-    }
-
-    .secondary-btn {
-      background: #e8eef7;
-      color: #063970;
-    }
-
-    .danger-btn {
-      background: #b42318;
-      color: white;
-    }
-
-    .success-btn {
-      background: #198754;
-      color: white;
-    }
-
-    .message {
-      margin-top: 15px;
-      padding: 12px;
-      border-radius: 8px;
-      display: none;
-      font-size: 14px;
-    }
-
-    .message.success {
-      display: block;
-      background: #e8f7ee;
-      color: #146c43;
-    }
-
-    .message.error {
-      display: block;
-      background: #fdecec;
-      color: #a61b1b;
-    }
-
-    .profile-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 14px;
-    }
-
-    .profile-item {
-      background: #f7f9fc;
-      border-radius: 10px;
-      padding: 14px;
-    }
-
-    .profile-item strong {
-      display: block;
-      color: #063970;
-      margin-bottom: 5px;
-    }
-
-    .member-number {
-      font-size: 24px;
-      font-weight: bold;
-      color: #063970;
-      letter-spacing: 1px;
-    }
-
-    .member-card {
-      border-radius: 18px;
-      padding: 25px;
-      color: white;
-      background: linear-gradient(135deg, #063970, #0b5cad);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .member-card h2 {
-      color: white;
-      margin-bottom: 5px;
-    }
-
-    .member-card .label {
-      font-size: 12px;
-      opacity: 0.8;
-      margin-top: 13px;
-    }
-
-    .member-card .value {
-      font-size: 16px;
-      font-weight: bold;
-      margin-top: 3px;
-    }
-
-    .course-card {
-      border: 1px solid #dce4ef;
-      border-radius: 14px;
-      padding: 18px;
-      margin-bottom: 15px;
-      background: #fbfcfe;
-    }
-
-    .course-card h3 {
-      margin-top: 0;
-      margin-bottom: 8px;
-    }
-
-    .course-description {
-      color: #555;
-      line-height: 1.6;
-      font-size: 14px;
-    }
-
-    .course-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 12px;
-    }
-
-    .badge {
-      background: #e9f1fb;
-      color: #063970;
-      padding: 7px 10px;
-      border-radius: 20px;
-      font-size: 12px;
-      font-weight: bold;
-    }
-
-    .lesson-card {
-      border-left: 5px solid #063970;
-      background: #f8fafc;
-      padding: 18px;
-      border-radius: 10px;
-      margin-bottom: 15px;
-    }
-
-    .lesson-number {
-      font-size: 13px;
-      font-weight: bold;
-      color: #0b5cad;
-      margin-bottom: 5px;
-    }
-
-    .lesson-card h3 {
-      margin: 5px 0 12px;
-    }
-
-    .lesson-content {
-      line-height: 1.7;
-      color: #404040;
-      font-size: 15px;
-    }
-
-    .back-course-btn {
-      margin-bottom: 18px;
-    }
-
-    footer {
-      background: #063970;
-      color: white;
-      text-align: center;
-      padding: 22px 15px;
-      margin-top: 40px;
-    }
-
-    footer p {
-      margin: 5px 0;
-      font-size: 13px;
-    }
-
-    .loading {
-      text-align: center;
-      padding: 25px;
-      color: #666;
-    }
-
     @media (max-width: 650px) {
-      .profile-grid {
-        grid-template-columns: 1fr;
+      .header-inner {
+        align-items: flex-start;
       }
 
-      .card {
+      .brand h1 {
+        font-size: 17px;
+      }
+
+      .logout-btn {
+        padding: 8px 11px;
+        font-size: 12px;
+      }
+
+      .section {
         padding: 18px;
       }
 
-      header h1 {
-        font-size: 23px;
+      .lesson-top {
+        flex-direction: column;
+      }
+
+      .card-row {
+        flex-direction: column;
+        gap: 2px;
+      }
+
+      .card-row span:last-child {
+        text-align: left;
       }
     }
   </style>
@@ -294,529 +471,257 @@
 <body>
 
 <header>
-  <h1>
-    <i class="fa-solid fa-book-open"></i>
-    B.E.P. Member Portal
-  </h1>
+  <div class="header-inner">
 
-  <p>Building the Church of Christ</p>
-</header>
-
-
-<div class="container">
-
-  <!-- LOGIN -->
-  <section id="loginSection" class="card">
-
-    <h2>
-      <i class="fa-solid fa-right-to-bracket"></i>
-      Member Login
-    </h2>
-
-    <p>
-      Sign in to access your B.E.P. member profile and courses.
-    </p>
-
-    <form id="loginForm">
-
-      <label for="loginEmail">
-        Email Address
-      </label>
-
-      <input
-        type="email"
-        id="loginEmail"
-        placeholder="Enter your email"
-        required
-      >
-
-      <label for="loginPassword">
-        Password
-      </label>
-
-      <input
-        type="password"
-        id="loginPassword"
-        placeholder="Enter your password"
-        required
-      >
-
-      <button
-        type="submit"
-        class="primary-btn"
-      >
-        <i class="fa-solid fa-right-to-bracket"></i>
-        Login
-      </button>
-
-    </form>
-
-    <button
-      id="forgotPasswordBtn"
-      class="secondary-btn"
-    >
-      Forgot Password?
-    </button>
-
-    <div
-      id="loginMessage"
-      class="message"
-    ></div>
-
-  </section>
-
-
-  <!-- FORGOT PASSWORD -->
-  <section
-    id="forgotSection"
-    class="card hidden"
-  >
-
-    <h2>
-      <i class="fa-solid fa-key"></i>
-      Reset Password
-    </h2>
-
-    <p>
-      Enter your registered email address and we will send you a password reset link.
-    </p>
-
-    <form id="forgotForm">
-
-      <label for="forgotEmail">
-        Email Address
-      </label>
-
-      <input
-        type="email"
-        id="forgotEmail"
-        placeholder="Enter your registered email"
-        required
-      >
-
-      <button
-        type="submit"
-        class="primary-btn"
-      >
-        Send Reset Link
-      </button>
-
-    </form>
-
-    <button
-      id="backToLoginFromForgot"
-      class="secondary-btn"
-    >
-      Back to Login
-    </button>
-
-    <div
-      id="forgotMessage"
-      class="message"
-    ></div>
-
-  </section>
-
-
-  <!-- PASSWORD RECOVERY -->
-  <section
-    id="recoverySection"
-    class="card hidden"
-  >
-
-    <h2>
-      <i class="fa-solid fa-lock"></i>
-      Create New Password
-    </h2>
-
-    <p>
-      Enter your new password below.
-    </p>
-
-    <form id="recoveryForm">
-
-      <label for="newPassword">
-        New Password
-      </label>
-
-      <input
-        type="password"
-        id="newPassword"
-        placeholder="Enter new password"
-        minlength="6"
-        required
-      >
-
-      <label for="confirmPassword">
-        Confirm New Password
-      </label>
-
-      <input
-        type="password"
-        id="confirmPassword"
-        placeholder="Confirm new password"
-        minlength="6"
-        required
-      >
-
-      <button
-        type="submit"
-        class="primary-btn"
-      >
-        Update Password
-      </button>
-
-    </form>
-
-    <div
-      id="recoveryMessage"
-      class="message"
-    ></div>
-
-  </section>
-
-
-  <!-- LOADING -->
-  <section
-    id="loadingSection"
-    class="card hidden"
-  >
-
-    <div class="loading">
-
-      <i class="fa-solid fa-spinner fa-spin"></i>
-
-      Loading your member portal...
-
+    <div class="brand">
+      <img src="banner.png" alt="B.E.P.">
+      <div>
+        <h1>B.E.P. Member Portal</h1>
+        <p>Building the Church of Christ</p>
+      </div>
     </div>
 
+    <button class="logout-btn" id="logoutBtn">
+      <i class="fa-solid fa-right-from-bracket"></i>
+      Logout
+    </button>
+
+  </div>
+</header>
+
+<main>
+
+  <!-- WELCOME -->
+  <section class="welcome">
+    <h2>
+      Welcome, <span id="welcomeName">B.E.P. Member</span>
+    </h2>
+    <p>Welcome to your Biblical Empowerment Program member portal.</p>
   </section>
 
 
   <!-- PROFILE -->
-  <section
-    id="profileSection"
-    class="hidden"
-  >
+  <section class="section">
 
-    <!-- DIGITAL MEMBER CARD -->
-    <div class="card">
+    <h2 class="section-title">
+      <i class="fa-solid fa-user"></i>
+      My Profile
+    </h2>
 
-      <h2>
-        <i class="fa-solid fa-id-card"></i>
-        Digital Member Card
-      </h2>
-
-      <div class="member-card">
-
-        <h2>B.E.P.</h2>
-
-        <div>
-          Biblical Empowerment Program
-        </div>
-
-        <div class="label">
-          MEMBER NUMBER
-        </div>
-
-        <div
-          id="cardMemberNumber"
-          class="value member-number"
-        >
-          —
-        </div>
-
-        <div class="label">
-          MEMBER NAME
-        </div>
-
-        <div
-          id="cardMemberName"
-          class="value"
-        >
-          —
-        </div>
-
-        <div class="label">
-          EMAIL
-        </div>
-
-        <div
-          id="cardMemberEmail"
-          class="value"
-        >
-          —
-        </div>
-
-        <div class="label">
-          STATUS
-        </div>
-
-        <div
-          id="cardMemberStatus"
-          class="value"
-        >
-          —
-        </div>
-
-      </div>
-
+    <div id="profileLoading" class="loading">
+      Loading your profile...
     </div>
 
-
-    <!-- COURSES -->
-    <div class="card">
-
-      <h2>
-        <i class="fa-solid fa-graduation-cap"></i>
-        B.E.P. Courses
-      </h2>
-
-      <p>
-        Access your B.E.P. Bible courses and lessons below.
-      </p>
-
-      <div id="coursesContainer">
-
-        <div class="loading">
-          Loading courses...
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <!-- LESSONS -->
-    <div
-      id="lessonsSection"
-      class="card hidden"
-    >
-
-      <button
-        id="backToCoursesBtn"
-        class="secondary-btn back-course-btn"
-      >
-        <i class="fa-solid fa-arrow-left"></i>
-        Back to Courses
-      </button>
-
-      <h2 id="lessonsCourseTitle">
-        Course Lessons
-      </h2>
-
-      <p id="lessonsCourseDescription"></p>
-
-      <div id="lessonsContainer">
-
-        <div class="loading">
-          Loading lessons...
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <!-- PROFILE INFORMATION -->
-    <div class="card">
-
-      <h2>
-        <i class="fa-solid fa-user"></i>
-        My Profile
-      </h2>
+    <div id="profileContent" class="hidden">
 
       <div class="profile-grid">
 
         <div class="profile-item">
-
-          <strong>
-            Member Number
-          </strong>
-
-          <span id="profileMemberNumber">
-            —
-          </span>
-
+          <strong>Member Number</strong>
+          <span id="memberNumber">—</span>
         </div>
 
-
         <div class="profile-item">
-
-          <strong>
-            Full Name
-          </strong>
-
-          <span id="profileFullName">
-            —
-          </span>
-
+          <strong>Full Name</strong>
+          <span id="fullName">—</span>
         </div>
 
-
         <div class="profile-item">
-
-          <strong>
-            Email
-          </strong>
-
-          <span id="profileEmail">
-            —
-          </span>
-
+          <strong>Email</strong>
+          <span id="email">—</span>
         </div>
 
-
         <div class="profile-item">
-
-          <strong>
-            Phone / WhatsApp
-          </strong>
-
-          <span id="profilePhone">
-            —
-          </span>
-
+          <strong>Phone / WhatsApp</strong>
+          <span id="phone">—</span>
         </div>
 
-
         <div class="profile-item">
-
-          <strong>
-            Location
-          </strong>
-
-          <span id="profileLocation">
-            —
-          </span>
-
+          <strong>Location</strong>
+          <span id="location">—</span>
         </div>
 
-
         <div class="profile-item">
-
-          <strong>
-            Status
-          </strong>
-
-          <span id="profileStatus">
-            —
-          </span>
-
+          <strong>Status</strong>
+          <span id="status">—</span>
         </div>
 
       </div>
 
-
-      <button
-        id="editProfileBtn"
-        class="primary-btn"
-      >
+      <button class="btn btn-primary" id="editProfileBtn">
         <i class="fa-solid fa-pen"></i>
         Edit Profile
       </button>
 
-
-      <button
-        id="logoutBtn"
-        class="danger-btn"
-      >
-        <i class="fa-solid fa-right-from-bracket"></i>
-        Logout
-      </button>
-
     </div>
 
+    <div id="profileError" class="message error"></div>
 
-    <!-- EDIT PROFILE -->
-    <div
-      id="editProfileSection"
-      class="card hidden"
-    >
-
-      <h2>
-        <i class="fa-solid fa-user-pen"></i>
-        Edit Profile
-      </h2>
-
-      <form id="editProfileForm">
-
-        <label for="editPhone">
-          Phone / WhatsApp
-        </label>
-
-        <input
-          type="text"
-          id="editPhone"
-          placeholder="Enter phone number"
-        >
+  </section>
 
 
-        <label for="editLocation">
-          Location
-        </label>
+  <!-- EDIT PROFILE -->
+  <section class="section hidden" id="editProfileSection">
 
-        <input
-          type="text"
-          id="editLocation"
-          placeholder="Enter your location"
-        >
+    <h2 class="section-title">
+      <i class="fa-solid fa-user-pen"></i>
+      Edit Profile
+    </h2>
+
+    <div class="form-group">
+      <label>Phone / WhatsApp</label>
+      <input type="text" id="editPhone" placeholder="Phone / WhatsApp number">
+    </div>
+
+    <div class="form-group">
+      <label>Location</label>
+      <input type="text" id="editLocation" placeholder="Your location">
+    </div>
+
+    <button class="btn btn-primary" id="saveProfileBtn">
+      <i class="fa-solid fa-floppy-disk"></i>
+      Save Changes
+    </button>
+
+    <button class="btn btn-secondary" id="cancelEditBtn">
+      Cancel
+    </button>
+
+    <div id="profileUpdateMessage" class="message"></div>
+
+  </section>
 
 
-        <button
-          type="submit"
-          class="success-btn"
-        >
-          Save Changes
-        </button>
+  <!-- DIGITAL MEMBER CARD -->
+  <section class="section">
 
+    <h2 class="section-title">
+      <i class="fa-solid fa-id-card"></i>
+      Digital Member Card
+    </h2>
 
-        <button
-          type="button"
-          id="cancelEditBtn"
-          class="secondary-btn"
-        >
-          Cancel
-        </button>
+    <div class="member-card">
 
-      </form>
+      <div class="card-top">
+        <img src="banner.png" alt="B.E.P. Logo">
+        <h2>B.E.P.</h2>
+        <p>Biblical Empowerment Program</p>
+      </div>
 
-      <div
-        id="editMessage"
-        class="message"
-      ></div>
+      <div class="card-body">
+
+        <div class="card-row">
+          <span>Member</span>
+          <span id="cardName">—</span>
+        </div>
+
+        <div class="card-row">
+          <span>Member Number</span>
+          <span id="cardNumber">—</span>
+        </div>
+
+        <div class="card-row">
+          <span>Email</span>
+          <span id="cardEmail">—</span>
+        </div>
+
+        <div class="card-row">
+          <span>Status</span>
+          <span id="cardStatus">—</span>
+        </div>
+
+      </div>
 
     </div>
 
   </section>
 
-</div>
+
+  <!-- COURSES -->
+  <section class="section" id="coursesSection">
+
+    <h2 class="section-title">
+      <i class="fa-solid fa-book-bible"></i>
+      B.E.P. Courses
+    </h2>
+
+    <p style="margin-bottom:20px;">
+      Grow in God's Word through our Bible courses and lessons.
+    </p>
+
+    <div id="coursesLoading" class="loading">
+      Loading courses...
+    </div>
+
+    <div id="coursesGrid" class="courses-grid"></div>
+
+    <div id="coursesError" class="message error"></div>
+
+  </section>
+
+
+  <!-- LESSON VIEW -->
+  <section class="section lesson-view" id="lessonView">
+
+    <div class="course-header">
+
+      <h2 id="lessonCourseTitle">Course</h2>
+
+      <p id="lessonCourseDescription"></p>
+
+      <div class="course-meta" style="margin-top:12px;">
+        <span class="badge gold" id="lessonCourseDuration">—</span>
+        <span class="badge gold" id="lessonCourseLessons">—</span>
+      </div>
+
+      <div class="progress-box">
+
+        <div class="progress-label">
+          <span>Your Progress</span>
+          <span id="progressText">0 / 0 completed</span>
+        </div>
+
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <button class="btn btn-secondary" id="backToCoursesBtn">
+      <i class="fa-solid fa-arrow-left"></i>
+      Back to Courses
+    </button>
+
+    <div id="lessonsLoading" class="loading">
+      Loading lessons...
+    </div>
+
+    <div id="lessonsContainer"></div>
+
+    <div id="lessonsError" class="message error"></div>
+
+  </section>
+
+</main>
 
 
 <footer>
-
   <p>
-    <strong>
-      B.E.P. — Biblical Empowerment Program
-    </strong>
+    <strong>B.E.P. — Biblical Empowerment Program</strong>
   </p>
-
-  <p>
-    Building the Church of Christ
+  <p>Building the Church of Christ</p>
+  <p style="margin-top:8px;">
+    Growing in God's Word. Growing in Faith. Growing Together.
   </p>
-
-  <p>
-    © 2026 B.E.P. All Rights Reserved.
-  </p>
-
 </footer>
 
 
 <script>
-
   /* =========================================================
-     SUPABASE CONFIGURATION
-  ========================================================= */
+     SUPABASE CONNECTION
+     ========================================================= */
 
   const SUPABASE_URL =
     "https://rukusaellqqwthzibyib.supabase.co";
@@ -832,1174 +737,1034 @@
 
 
   /* =========================================================
+     GLOBAL VARIABLES
+     ========================================================= */
+
+  let currentUser = null;
+  let currentMember = null;
+  let currentCourse = null;
+  let currentLessons = [];
+  let currentProgress = {};
+
+
+  /* =========================================================
      ELEMENTS
-  ========================================================= */
+     ========================================================= */
 
-  const loginSection =
-    document.getElementById("loginSection");
+  const welcomeName =
+    document.getElementById("welcomeName");
 
-  const forgotSection =
-    document.getElementById("forgotSection");
+  const profileLoading =
+    document.getElementById("profileLoading");
 
-  const recoverySection =
-    document.getElementById("recoverySection");
+  const profileContent =
+    document.getElementById("profileContent");
 
-  const loadingSection =
-    document.getElementById("loadingSection");
+  const profileError =
+    document.getElementById("profileError");
 
-  const profileSection =
-    document.getElementById("profileSection");
+  const coursesLoading =
+    document.getElementById("coursesLoading");
 
-  const lessonsSection =
-    document.getElementById("lessonsSection");
+  const coursesGrid =
+    document.getElementById("coursesGrid");
 
-  const loginForm =
-    document.getElementById("loginForm");
+  const coursesError =
+    document.getElementById("coursesError");
 
-  const forgotForm =
-    document.getElementById("forgotForm");
+  const lessonView =
+    document.getElementById("lessonView");
 
-  const recoveryForm =
-    document.getElementById("recoveryForm");
-
-  const editProfileForm =
-    document.getElementById("editProfileForm");
-
-  const loginMessage =
-    document.getElementById("loginMessage");
-
-  const forgotMessage =
-    document.getElementById("forgotMessage");
-
-  const recoveryMessage =
-    document.getElementById("recoveryMessage");
-
-  const editMessage =
-    document.getElementById("editMessage");
-
-  const coursesContainer =
-    document.getElementById("coursesContainer");
+  const lessonsLoading =
+    document.getElementById("lessonsLoading");
 
   const lessonsContainer =
     document.getElementById("lessonsContainer");
 
+  const lessonsError =
+    document.getElementById("lessonsError");
+
 
   /* =========================================================
-     MESSAGE FUNCTION
-  ========================================================= */
+     SHOW MESSAGE
+     ========================================================= */
 
-  function showMessage(
-    element,
-    message,
-    type
-  ) {
+  function showMessage(element, message, type) {
 
-    element.textContent =
-      message;
+    element.textContent = message;
 
     element.className =
       "message " + type;
+
+    element.style.display = "block";
+  }
+
+
+  function hideMessage(element) {
+
+    element.style.display = "none";
 
   }
 
 
   /* =========================================================
-     LOGIN
-  ========================================================= */
-
-  loginForm.addEventListener(
-    "submit",
-    async function(event) {
-
-      event.preventDefault();
-
-      const email =
-        document
-          .getElementById("loginEmail")
-          .value
-          .trim();
-
-      const password =
-        document
-          .getElementById("loginPassword")
-          .value;
-
-      showMessage(
-        loginMessage,
-        "Logging in...",
-        "success"
-      );
-
-      const {
-        data,
-        error
-      } =
-      await supabaseClient.auth.signInWithPassword({
-        email: email,
-        password: password
-      });
-
-      if (error) {
-
-        showMessage(
-          loginMessage,
-          error.message,
-          "error"
-        );
-
-        return;
-      }
-
-      await loadMemberProfile(
-        data.user
-      );
-
-    }
-  );
-
-
-  /* =========================================================
-     FORGOT PASSWORD
-  ========================================================= */
-
-  document
-    .getElementById("forgotPasswordBtn")
-    .addEventListener(
-      "click",
-      function() {
-
-        loginSection.classList.add(
-          "hidden"
-        );
-
-        forgotSection.classList.remove(
-          "hidden"
-        );
-
-      }
-    );
-
-
-  document
-    .getElementById("backToLoginFromForgot")
-    .addEventListener(
-      "click",
-      function() {
-
-        forgotSection.classList.add(
-          "hidden"
-        );
-
-        loginSection.classList.remove(
-          "hidden"
-        );
-
-      }
-    );
-
-
-  forgotForm.addEventListener(
-    "submit",
-    async function(event) {
-
-      event.preventDefault();
-
-      const email =
-        document
-          .getElementById("forgotEmail")
-          .value
-          .trim();
-
-      const {
-        error
-      } =
-      await supabaseClient.auth.resetPasswordForEmail(
-        email,
-        {
-          redirectTo:
-            "https://beponlineprog.github.io/bep-website/member.html"
-        }
-      );
-
-      if (error) {
-
-        showMessage(
-          forgotMessage,
-          error.message,
-          "error"
-        );
-
-        return;
-      }
-
-      showMessage(
-        forgotMessage,
-        "Password reset link sent. Please check your email.",
-        "success"
-      );
-
-    }
-  );
-
-
-  /* =========================================================
-     PASSWORD RECOVERY
-  ========================================================= */
-
-  recoveryForm.addEventListener(
-    "submit",
-    async function(event) {
-
-      event.preventDefault();
-
-      const password =
-        document
-          .getElementById("newPassword")
-          .value;
-
-      const confirmPassword =
-        document
-          .getElementById("confirmPassword")
-          .value;
-
-      if (
-        password !==
-        confirmPassword
-      ) {
-
-        showMessage(
-          recoveryMessage,
-          "Passwords do not match.",
-          "error"
-        );
-
-        return;
-      }
-
-      const {
-        error
-      } =
-      await supabaseClient.auth.updateUser({
-        password: password
-      });
-
-      if (error) {
-
-        showMessage(
-          recoveryMessage,
-          error.message,
-          "error"
-        );
-
-        return;
-      }
-
-      showMessage(
-        recoveryMessage,
-        "Password updated successfully.",
-        "success"
-      );
-
-    }
-  );
-
-
-  /* =========================================================
      LOAD MEMBER PROFILE
-  ========================================================= */
+     ========================================================= */
 
-  async function loadMemberProfile(
-    user
-  ) {
+  async function loadMemberProfile(user) {
 
-    loginSection.classList.add(
-      "hidden"
-    );
-
-    forgotSection.classList.add(
-      "hidden"
-    );
-
-    recoverySection.classList.add(
-      "hidden"
-    );
-
-    loadingSection.classList.remove(
-      "hidden"
-    );
+    profileLoading.classList.remove("hidden");
+    profileContent.classList.add("hidden");
+    hideMessage(profileError);
 
     const {
-      data: member,
+      data,
       error
-    } =
-    await supabaseClient
+    } = await supabaseClient
       .from("members")
-      .select("*")
-      .eq(
-        "auth_user_id",
-        user.id
-      )
-      .maybeSingle();
+      .select(`
+        id,
+        member_number,
+        full_name,
+        email,
+        phone,
+        location,
+        heard_about,
+        status,
+        is_test,
+        auth_user_id
+      `)
+      .eq("auth_user_id", user.id)
+      .single();
 
     if (error) {
 
-      loadingSection.classList.add(
-        "hidden"
-      );
+      console.error(error);
 
       showMessage(
-        loginMessage,
-        error.message,
+        profileError,
+        "Unable to load your member profile.",
         "error"
       );
 
-      loginSection.classList.remove(
-        "hidden"
-      );
+      profileLoading.classList.add("hidden");
 
       return;
     }
 
-    if (!member) {
+    currentMember = data;
 
-      loadingSection.classList.add(
-        "hidden"
-      );
+    displayMemberProfile(data);
 
-      showMessage(
-        loginMessage,
-        "Your member profile could not be found.",
-        "error"
-      );
-
-      loginSection.classList.remove(
-        "hidden"
-      );
-
-      return;
-    }
-
-    displayMemberProfile(
-      member
-    );
-
-    await loadCourses();
-
-    loadingSection.classList.add(
-      "hidden"
-    );
-
-    profileSection.classList.remove(
-      "hidden"
-    );
-
+    profileLoading.classList.add("hidden");
+    profileContent.classList.remove("hidden");
   }
 
 
   /* =========================================================
      DISPLAY MEMBER PROFILE
-  ========================================================= */
+     ========================================================= */
 
-  function displayMemberProfile(
-    member
-  ) {
+  function displayMemberProfile(member) {
 
-    document.getElementById(
-      "profileMemberNumber"
-    ).textContent =
-      member.member_number ||
-      "—";
+    document.getElementById("memberNumber").textContent =
+      member.member_number || "—";
 
-    document.getElementById(
-      "profileFullName"
-    ).textContent =
-      member.full_name ||
-      "—";
+    document.getElementById("fullName").textContent =
+      member.full_name || "—";
 
-    document.getElementById(
-      "profileEmail"
-    ).textContent =
-      member.email ||
-      "—";
+    document.getElementById("email").textContent =
+      member.email || "—";
 
-    document.getElementById(
-      "profilePhone"
-    ).textContent =
-      member.phone ||
-      "—";
+    document.getElementById("phone").textContent =
+      member.phone || "—";
 
-    document.getElementById(
-      "profileLocation"
-    ).textContent =
-      member.location ||
-      "—";
+    document.getElementById("location").textContent =
+      member.location || "—";
 
-    document.getElementById(
-      "profileStatus"
-    ).textContent =
-      member.status ||
-      "—";
+    document.getElementById("status").textContent =
+      member.status || "—";
+
+    welcomeName.textContent =
+      member.full_name || "B.E.P. Member";
 
 
-    document.getElementById(
-      "cardMemberNumber"
-    ).textContent =
-      member.member_number ||
-      "—";
+    document.getElementById("cardName").textContent =
+      member.full_name || "—";
 
-    document.getElementById(
-      "cardMemberName"
-    ).textContent =
-      member.full_name ||
-      "—";
+    document.getElementById("cardNumber").textContent =
+      member.member_number || "—";
 
-    document.getElementById(
-      "cardMemberEmail"
-    ).textContent =
-      member.email ||
-      "—";
+    document.getElementById("cardEmail").textContent =
+      member.email || "—";
 
-    document.getElementById(
-      "cardMemberStatus"
-    ).textContent =
-      member.status ||
-      "—";
+    document.getElementById("cardStatus").textContent =
+      member.status || "—";
 
 
-    document.getElementById(
-      "editPhone"
-    ).value =
-      member.phone ||
-      "";
+    document.getElementById("editPhone").value =
+      member.phone || "";
 
-    document.getElementById(
-      "editLocation"
-    ).value =
-      member.location ||
-      "";
-
+    document.getElementById("editLocation").value =
+      member.location || "";
   }
 
 
   /* =========================================================
      LOAD COURSES
-  ========================================================= */
+     ========================================================= */
 
   async function loadCourses() {
 
-    coursesContainer.innerHTML =
-      `
-        <div class="loading">
-          <i class="fa-solid fa-spinner fa-spin"></i>
-          Loading courses...
-        </div>
-      `;
+    coursesLoading.classList.remove("hidden");
+    coursesGrid.innerHTML = "";
+    hideMessage(coursesError);
 
     const {
-      data: courses,
+      data,
       error
-    } =
-    await supabaseClient
+    } = await supabaseClient
       .from("courses")
-      .select(
-        "id,title,description,duration,lessons,status,created_at"
-      )
-      .eq(
-        "status",
-        "Published"
-      )
-      .order(
-        "id",
-        {
-          ascending: true
-        }
-      );
+      .select(`
+        id,
+        title,
+        description,
+        duration,
+        lessons,
+        status,
+        created_at
+      `)
+      .eq("status", "Published")
+      .order("id", {
+        ascending: true
+      });
+
+    coursesLoading.classList.add("hidden");
 
     if (error) {
 
-      coursesContainer.innerHTML =
-        `
-          <div class="message error">
-            ${escapeHtml(
-              error.message
-            )}
-          </div>
-        `;
+      console.error(error);
+
+      showMessage(
+        coursesError,
+        "Unable to load courses.",
+        "error"
+      );
 
       return;
     }
 
-    if (
-      !courses ||
-      courses.length === 0
-    ) {
+    if (!data || data.length === 0) {
 
-      coursesContainer.innerHTML =
-        `
-          <div class="loading">
-            No published courses are currently available.
-          </div>
-        `;
+      coursesGrid.innerHTML = `
+        <div class="loading">
+          No published courses are currently available.
+        </div>
+      `;
 
       return;
     }
 
-    coursesContainer.innerHTML =
-      "";
+    data.forEach(course => {
 
-    courses.forEach(
-      function(course) {
+      const card =
+        document.createElement("div");
 
-        const card =
-          document.createElement(
-            "div"
-          );
+      card.className = "course-card";
 
-        card.className =
-          "course-card";
+      card.innerHTML = `
+        <h3>${escapeHtml(course.title)}</h3>
 
-        card.innerHTML =
-          `
-            <h3>
-              <i class="fa-solid fa-book"></i>
-              ${escapeHtml(
-                course.title
-              )}
-            </h3>
+        <p>
+          ${escapeHtml(course.description || "")}
+        </p>
 
-            <div class="course-description">
-              ${escapeHtml(
-                course.description || ""
-              )}
-            </div>
+        <div class="course-meta">
 
-            <div class="course-meta">
+          <span class="badge">
+            <i class="fa-regular fa-clock"></i>
+            ${escapeHtml(course.duration || "—")}
+          </span>
 
-              <span class="badge">
-                <i class="fa-solid fa-clock"></i>
-                ${escapeHtml(
-                  course.duration || "—"
-                )}
-              </span>
+          <span class="badge">
+            <i class="fa-solid fa-book"></i>
+            ${course.lessons || 0} Lessons
+          </span>
 
-              <span class="badge">
-                <i class="fa-solid fa-list"></i>
-                ${course.lessons || 0}
-                Lessons
-              </span>
+          <span class="badge gold">
+            ${escapeHtml(course.status)}
+          </span>
 
-              <span class="badge">
-                <i class="fa-solid fa-circle-check"></i>
-                ${escapeHtml(
-                  course.status || ""
-                )}
-              </span>
+        </div>
 
-            </div>
+        <button
+          class="btn btn-primary view-course-btn"
+          data-course-id="${course.id}"
+        >
+          <i class="fa-solid fa-book-open"></i>
+          View Course
+        </button>
+      `;
 
-            <button
-              class="primary-btn view-course-btn"
-              data-course-id="${course.id}"
-            >
-              <i class="fa-solid fa-book-open"></i>
-              View Course
-            </button>
-          `;
-
-        coursesContainer.appendChild(
-          card
-        );
-
-      }
-    );
+      coursesGrid.appendChild(card);
+    });
 
 
     document
-      .querySelectorAll(
-        ".view-course-btn"
-      )
-      .forEach(
-        function(button) {
+      .querySelectorAll(".view-course-btn")
+      .forEach(button => {
 
-          button.addEventListener(
-            "click",
-            function() {
+        button.addEventListener(
+          "click",
+          () => {
 
-              const courseId =
-                Number(
-                  this.getAttribute(
-                    "data-course-id"
-                  )
-                );
+            const courseId =
+              Number(button.dataset.courseId);
 
-              openCourse(
-                courseId
-              );
+            openCourse(courseId);
+          }
+        );
 
-            }
-          );
-
-        }
-      );
-
+      });
   }
 
 
   /* =========================================================
      OPEN COURSE
-  ========================================================= */
+     ========================================================= */
 
-  async function openCourse(
-    courseId
-  ) {
-
-    lessonsSection.classList.remove(
-      "hidden"
-    );
+  async function openCourse(courseId) {
 
     document
-      .querySelectorAll(
-        ".course-card"
-      )
-      .forEach(
-        function(card) {
+      .getElementById("coursesSection")
+      .classList.add("hidden");
 
-          card.style.display =
-            "none";
+    lessonView.style.display = "block";
 
-        }
-      );
+    lessonsContainer.innerHTML = "";
 
+    lessonsLoading.classList.remove("hidden");
 
-    lessonsContainer.innerHTML =
-      `
-        <div class="loading">
-          <i class="fa-solid fa-spinner fa-spin"></i>
-          Loading lessons...
-        </div>
-      `;
-
+    hideMessage(lessonsError);
 
     const {
       data: course,
       error: courseError
-    } =
-    await supabaseClient
+    } = await supabaseClient
       .from("courses")
-      .select(
-        "id,title,description,duration,lessons,status"
-      )
-      .eq(
-        "id",
-        courseId
-      )
-      .eq(
-        "status",
-        "Published"
-      )
-      .maybeSingle();
+      .select(`
+        id,
+        title,
+        description,
+        duration,
+        lessons,
+        status
+      `)
+      .eq("id", courseId)
+      .eq("status", "Published")
+      .single();
 
 
     if (courseError) {
 
-      lessonsContainer.innerHTML =
-        `
-          <div class="message error">
-            ${escapeHtml(
-              courseError.message
-            )}
-          </div>
-        `;
+      console.error(courseError);
+
+      lessonsLoading.classList.add("hidden");
+
+      showMessage(
+        lessonsError,
+        "Unable to load this course.",
+        "error"
+      );
 
       return;
     }
 
 
-    if (!course) {
-
-      lessonsContainer.innerHTML =
-        `
-          <div class="message error">
-            Course not found.
-          </div>
-        `;
-
-      return;
-    }
+    currentCourse = course;
 
 
-    document.getElementById(
-      "lessonsCourseTitle"
-    ).textContent =
-      course.title;
+    document.getElementById("lessonCourseTitle")
+      .textContent = course.title;
+
+    document.getElementById("lessonCourseDescription")
+      .textContent = course.description || "";
+
+    document.getElementById("lessonCourseDuration")
+      .textContent =
+      course.duration || "—";
+
+    document.getElementById("lessonCourseLessons")
+      .textContent =
+      `${course.lessons || 0} Lessons`;
 
 
-    document.getElementById(
-      "lessonsCourseDescription"
-    ).textContent =
-      course.description ||
-      "";
-
+    /* LOAD LESSONS */
 
     const {
       data: lessons,
-      error: lessonsError
-    } =
-    await supabaseClient
+      error: lessonsErrorData
+    } = await supabaseClient
       .from("course_lessons")
-      .select(
-        "id,course_id,lesson_number,title,content,created_at"
-      )
-      .eq(
-        "course_id",
-        courseId
-      )
-      .order(
-        "lesson_number",
-        {
-          ascending: true
-        }
+      .select(`
+        id,
+        course_id,
+        lesson_number,
+        title,
+        content,
+        created_at
+      `)
+      .eq("course_id", courseId)
+      .order("lesson_number", {
+        ascending: true
+      });
+
+
+    if (lessonsErrorData) {
+
+      console.error(lessonsErrorData);
+
+      lessonsLoading.classList.add("hidden");
+
+      showMessage(
+        lessonsError,
+        "Unable to load the course lessons.",
+        "error"
       );
 
+      return;
+    }
 
-    if (lessonsError) {
 
-      lessonsContainer.innerHTML =
-        `
-          <div class="message error">
-            ${escapeHtml(
-              lessonsError.message
-            )}
-          </div>
-        `;
+    currentLessons = lessons || [];
+
+
+    /* LOAD SAVED PROGRESS */
+
+    await loadCourseProgress(courseId);
+
+
+    lessonsLoading.classList.add("hidden");
+
+    renderLessons();
+
+    updateProgress();
+  }
+
+
+  /* =========================================================
+     LOAD COURSE PROGRESS
+     ========================================================= */
+
+  async function loadCourseProgress(courseId) {
+
+    currentProgress = {};
+
+
+    const {
+      data,
+      error
+    } = await supabaseClient
+      .from("course_progress")
+      .select(`
+        id,
+        auth_user_id,
+        course_id,
+        lesson_id,
+        completed,
+        completed_at
+      `)
+      .eq("auth_user_id", currentUser.id)
+      .eq("course_id", courseId);
+
+
+    if (error) {
+
+      console.error(
+        "Progress loading error:",
+        error
+      );
 
       return;
     }
 
 
-    if (
-      !lessons ||
-      lessons.length === 0
-    ) {
+    (data || []).forEach(progress => {
 
-      lessonsContainer.innerHTML =
-        `
-          <div class="loading">
-            No lessons are currently available for this course.
-          </div>
-        `;
+      currentProgress[
+        progress.lesson_id
+      ] = progress;
+
+    });
+  }
+
+
+  /* =========================================================
+     RENDER LESSONS
+     ========================================================= */
+
+  function renderLessons() {
+
+    lessonsContainer.innerHTML = "";
+
+
+    if (currentLessons.length === 0) {
+
+      lessonsContainer.innerHTML = `
+        <div class="loading">
+          No lessons are available for this course yet.
+        </div>
+      `;
 
       return;
     }
 
 
-    lessonsContainer.innerHTML =
-      "";
+    currentLessons.forEach(lesson => {
+
+      const progress =
+        currentProgress[lesson.id];
+
+      const completed =
+        progress &&
+        progress.completed === true;
 
 
-    lessons.forEach(
-      function(lesson) {
+      const card =
+        document.createElement("div");
 
-        const lessonCard =
-          document.createElement(
-            "div"
-          );
+      card.className =
+        "lesson-card";
 
-        lessonCard.className =
-          "lesson-card";
 
-        lessonCard.innerHTML =
+      const completedText =
+        completed
+          ? `
+            <span class="completed-label">
+              <i class="fa-solid fa-circle-check"></i>
+              Completed
+            </span>
           `
+          : "";
+
+
+      const buttonText =
+        completed
+          ? `
+            <i class="fa-solid fa-circle-check"></i>
+            Completed
+          `
+          : `
+            <i class="fa-solid fa-check"></i>
+            Mark as Completed
+          `;
+
+
+      card.innerHTML = `
+
+        <div class="lesson-top">
+
+          <div>
+
             <div class="lesson-number">
-              LESSON
-              ${lesson.lesson_number}
+              LESSON ${lesson.lesson_number}
             </div>
 
             <h3>
-              ${escapeHtml(
-                lesson.title
-              )}
+              ${escapeHtml(lesson.title)}
             </h3>
 
-            <div class="lesson-content">
-              ${formatLessonContent(
-                lesson.content || ""
-              )}
-            </div>
-          `;
+          </div>
 
-        lessonsContainer.appendChild(
-          lessonCard
+          ${completedText}
+
+        </div>
+
+
+        <div class="lesson-content">
+          ${escapeHtml(lesson.content || "")}
+        </div>
+
+
+        <button
+          class="completion-btn ${completed ? "completed" : ""}"
+          data-lesson-id="${lesson.id}"
+          ${completed ? "disabled" : ""}
+        >
+          ${buttonText}
+        </button>
+
+      `;
+
+
+      lessonsContainer.appendChild(card);
+
+    });
+
+
+    document
+      .querySelectorAll(".completion-btn:not(:disabled)")
+      .forEach(button => {
+
+        button.addEventListener(
+          "click",
+          async () => {
+
+            const lessonId =
+              Number(button.dataset.lessonId);
+
+            await markLessonCompleted(
+              lessonId,
+              button
+            );
+
+          }
         );
 
-      }
+      });
+  }
+
+
+  /* =========================================================
+     MARK LESSON COMPLETED
+     ========================================================= */
+
+  async function markLessonCompleted(
+    lessonId,
+    button
+  ) {
+
+    if (!currentUser || !currentCourse) {
+      return;
+    }
+
+
+    button.disabled = true;
+
+    button.innerHTML = `
+      <i class="fa-solid fa-spinner fa-spin"></i>
+      Saving...
+    `;
+
+
+    const existing =
+      currentProgress[lessonId];
+
+
+    let result;
+
+
+    if (existing) {
+
+      result =
+        await supabaseClient
+          .from("course_progress")
+          .update({
+            completed: true,
+            completed_at: new Date().toISOString()
+          })
+          .eq("id", existing.id)
+          .eq("auth_user_id", currentUser.id);
+
+    } else {
+
+      result =
+        await supabaseClient
+          .from("course_progress")
+          .insert({
+            auth_user_id: currentUser.id,
+            course_id: currentCourse.id,
+            lesson_id: lessonId,
+            completed: true,
+            completed_at: new Date().toISOString()
+          });
+
+    }
+
+
+    if (result.error) {
+
+      console.error(
+        "Completion save error:",
+        result.error
+      );
+
+      button.disabled = false;
+
+      button.innerHTML = `
+        <i class="fa-solid fa-check"></i>
+        Mark as Completed
+      `;
+
+      alert(
+        "The lesson could not be marked as completed. Please try again."
+      );
+
+      return;
+    }
+
+
+    /* Reload saved progress */
+
+    await loadCourseProgress(
+      currentCourse.id
     );
 
 
-    window.scrollTo({
-      top:
-        lessonsSection.offsetTop - 20,
-      behavior: "smooth"
-    });
+    renderLessons();
 
+    updateProgress();
+  }
+
+
+  /* =========================================================
+     UPDATE PROGRESS
+     ========================================================= */
+
+  function updateProgress() {
+
+    const total =
+      currentLessons.length;
+
+
+    const completed =
+      currentLessons.filter(lesson => {
+
+        const progress =
+          currentProgress[lesson.id];
+
+        return progress &&
+               progress.completed === true;
+
+      }).length;
+
+
+    const percentage =
+      total > 0
+        ? Math.round(
+            (completed / total) * 100
+          )
+        : 0;
+
+
+    document.getElementById("progressText")
+      .textContent =
+      `${completed} / ${total} completed`;
+
+
+    document.getElementById("progressFill")
+      .style.width =
+      `${percentage}%`;
   }
 
 
   /* =========================================================
      BACK TO COURSES
-  ========================================================= */
+     ========================================================= */
 
   document
-    .getElementById(
-      "backToCoursesBtn"
-    )
+    .getElementById("backToCoursesBtn")
     .addEventListener(
       "click",
-      function() {
+      () => {
 
-        lessonsSection.classList.add(
-          "hidden"
-        );
+        lessonView.style.display = "none";
 
         document
-          .querySelectorAll(
-            ".course-card"
-          )
-          .forEach(
-            function(card) {
-
-              card.style.display =
-                "block";
-
-            }
-          );
+          .getElementById("coursesSection")
+          .classList.remove("hidden");
 
         window.scrollTo({
-          top:
-            coursesContainer
-              .parentElement
-              .offsetTop - 20,
+          top: 0,
           behavior: "smooth"
         });
-
       }
     );
 
 
   /* =========================================================
      EDIT PROFILE
-  ========================================================= */
+     ========================================================= */
 
   document
-    .getElementById(
-      "editProfileBtn"
-    )
+    .getElementById("editProfileBtn")
     .addEventListener(
       "click",
-      function() {
+      () => {
 
         document
-          .getElementById(
-            "editProfileSection"
-          )
-          .classList.remove(
-            "hidden"
-          );
+          .getElementById("editProfileSection")
+          .classList.remove("hidden");
 
-        window.scrollTo({
-          top:
-            document
-              .getElementById(
-                "editProfileSection"
-              )
-              .offsetTop - 20,
-          behavior: "smooth"
-        });
-
+        document
+          .getElementById("editProfileSection")
+          .scrollIntoView({
+            behavior: "smooth"
+          });
       }
     );
 
 
+  /* =========================================================
+     CANCEL EDIT
+     ========================================================= */
+
   document
-    .getElementById(
-      "cancelEditBtn"
-    )
+    .getElementById("cancelEditBtn")
     .addEventListener(
       "click",
-      function() {
+      () => {
 
         document
-          .getElementById(
-            "editProfileSection"
-          )
-          .classList.add(
-            "hidden"
-          );
+          .getElementById("editProfileSection")
+          .classList.add("hidden");
 
+        hideMessage(
+          document.getElementById(
+            "profileUpdateMessage"
+          )
+        );
       }
     );
 
 
-  editProfileForm.addEventListener(
-    "submit",
-    async function(event) {
+  /* =========================================================
+     SAVE PROFILE
+     ========================================================= */
 
-      event.preventDefault();
+  document
+    .getElementById("saveProfileBtn")
+    .addEventListener(
+      "click",
+      async () => {
 
-      const {
-        data: {
-          user
+        if (!currentUser || !currentMember) {
+          return;
         }
-      } =
-      await supabaseClient.auth.getUser();
 
 
-      if (!user) {
+        const phone =
+          document
+            .getElementById("editPhone")
+            .value
+            .trim();
+
+
+        const location =
+          document
+            .getElementById("editLocation")
+            .value
+            .trim();
+
+
+        const saveButton =
+          document.getElementById(
+            "saveProfileBtn"
+          );
+
+
+        saveButton.disabled = true;
+
+        saveButton.innerHTML = `
+          <i class="fa-solid fa-spinner fa-spin"></i>
+          Saving...
+        `;
+
+
+        const {
+          data,
+          error
+        } = await supabaseClient
+          .from("members")
+          .update({
+            phone: phone,
+            location: location
+          })
+          .eq("auth_user_id", currentUser.id)
+          .select()
+          .single();
+
+
+        saveButton.disabled = false;
+
+        saveButton.innerHTML = `
+          <i class="fa-solid fa-floppy-disk"></i>
+          Save Changes
+        `;
+
+
+        if (error) {
+
+          console.error(error);
+
+          showMessage(
+            document.getElementById(
+              "profileUpdateMessage"
+            ),
+            "Unable to update your profile.",
+            "error"
+          );
+
+          return;
+        }
+
+
+        currentMember = data;
+
+        displayMemberProfile(data);
+
 
         showMessage(
-          editMessage,
-          "You are not logged in.",
-          "error"
+          document.getElementById(
+            "profileUpdateMessage"
+          ),
+          "Your profile has been updated successfully.",
+          "success"
         );
 
-        return;
+
+        setTimeout(() => {
+
+          document
+            .getElementById(
+              "editProfileSection"
+            )
+            .classList.add("hidden");
+
+        }, 1200);
+
       }
-
-
-      const phone =
-        document
-          .getElementById(
-            "editPhone"
-          )
-          .value
-          .trim();
-
-
-      const location =
-        document
-          .getElementById(
-            "editLocation"
-          )
-          .value
-          .trim();
-
-
-      const {
-        data: updatedMember,
-        error
-      } =
-      await supabaseClient
-        .from("members")
-        .update({
-          phone: phone,
-          location: location
-        })
-        .eq(
-          "auth_user_id",
-          user.id
-        )
-        .select("*")
-        .single();
-
-
-      if (error) {
-
-        showMessage(
-          editMessage,
-          error.message,
-          "error"
-        );
-
-        return;
-      }
-
-
-      displayMemberProfile(
-        updatedMember
-      );
-
-
-      showMessage(
-        editMessage,
-        "Profile updated successfully.",
-        "success"
-      );
-
-    }
-  );
+    );
 
 
   /* =========================================================
      LOGOUT
-  ========================================================= */
+     ========================================================= */
 
   document
-    .getElementById(
-      "logoutBtn"
-    )
+    .getElementById("logoutBtn")
     .addEventListener(
       "click",
-      async function() {
+      async () => {
 
-        await supabaseClient.auth.signOut();
-
-        profileSection.classList.add(
-          "hidden"
-        );
-
-        lessonsSection.classList.add(
-          "hidden"
-        );
-
-        loginSection.classList.remove(
-          "hidden"
-        );
-
-        document.getElementById(
-          "loginPassword"
-        ).value = "";
-
-      }
-    );
+        const {
+          error
+        } = await supabaseClient.auth.signOut();
 
 
-  /* =========================================================
-     ESCAPE HTML
-  ========================================================= */
+        if (error) {
 
-  function escapeHtml(
-    value
-  ) {
+          console.error(error);
 
-    return String(value)
-      .replace(
-        /&/g,
-        "&amp;"
-      )
-      .replace(
-        /</g,
-        "&lt;"
-      )
-      .replace(
-        />/g,
-        "&gt;"
-      )
-      .replace(
-        /"/g,
-        "&quot;"
-      )
-      .replace(
-        /'/g,
-        "&#039;"
-      );
-
-  }
-
-
-  /* =========================================================
-     FORMAT LESSON CONTENT
-  ========================================================= */
-
-  function formatLessonContent(
-    value
-  ) {
-
-    return escapeHtml(
-      value
-    ).replace(
-      /\n/g,
-      "<br>"
-    );
-
-  }
-
-
-  /* =========================================================
-     AUTH STATE
-  ========================================================= */
-
-  supabaseClient.auth.onAuthStateChange(
-    async function(
-      event,
-      session
-    ) {
-
-      if (
-        event ===
-        "PASSWORD_RECOVERY"
-      ) {
-
-        loginSection.classList.add(
-          "hidden"
-        );
-
-        forgotSection.classList.add(
-          "hidden"
-        );
-
-        profileSection.classList.add(
-          "hidden"
-        );
-
-        recoverySection.classList.remove(
-          "hidden"
-        );
-
-        return;
-      }
-
-
-      if (
-        session &&
-        session.user
-      ) {
-
-        if (
-          event ===
-          "SIGNED_IN"
-        ) {
-
-          await loadMemberProfile(
-            session.user
+          alert(
+            "Unable to log out. Please try again."
           );
 
+          return;
         }
 
-      }
 
-    }
-  );
+        window.location.href =
+          "member.html";
+      }
+    );
 
 
   /* =========================================================
-     INITIAL SESSION CHECK
-  ========================================================= */
+     HTML ESCAPE
+     ========================================================= */
+
+  function escapeHtml(value) {
+
+    if (value === null ||
+        value === undefined) {
+
+      return "";
+    }
+
+
+    return String(value)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  }
+
+
+  /* =========================================================
+     AUTH SESSION
+     ========================================================= */
 
   async function initializePortal() {
 
     const {
-      data
-    } =
-    await supabaseClient.auth.getSession();
+      data,
+      error
+    } = await supabaseClient.auth.getSession();
+
+
+    if (error) {
+
+      console.error(error);
+
+      alert(
+        "Unable to check your login session."
+      );
+
+      return;
+    }
 
 
     const session =
       data.session;
 
 
-    if (
-      session &&
-      session.user
-    ) {
+    if (!session) {
 
-      await loadMemberProfile(
-        session.user
-      );
+      window.location.href =
+        "index.html";
 
+      return;
     }
 
+
+    currentUser =
+      session.user;
+
+
+    await loadMemberProfile(
+      currentUser
+    );
+
+
+    await loadCourses();
   }
 
+
+  /* =========================================================
+     AUTH STATE CHANGES
+     ========================================================= */
+
+  supabaseClient.auth.onAuthStateChange(
+    (event, session) => {
+
+      if (
+        event === "SIGNED_OUT" ||
+        !session
+      ) {
+
+        window.location.href =
+          "index.html";
+      }
+
+    }
+  );
+
+
+  /* =========================================================
+     START PORTAL
+     ========================================================= */
 
   initializePortal();
 
