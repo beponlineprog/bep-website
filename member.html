@@ -109,3 +109,554 @@ nav{justify-content:center}
 }
 </style>
 </head>
+<body>
+
+<header>
+<div class="nav-container">
+<a href="index.html" class="logo">B.E.<span>P.</span></a>
+
+<nav>
+<a href="index.html"><i class="fa-solid fa-house"></i> Home</a>
+<a href="register.html"><i class="fa-solid fa-user-plus"></i> Register</a>
+<a href="quiz.html"><i class="fa-solid fa-book-open"></i> Bible Quiz</a>
+</nav>
+</div>
+</header>
+
+<section class="hero">
+<h1><i class="fa-solid fa-user-shield"></i> B.E.P. Member Portal</h1>
+<p>Welcome to the Biblical Empowerment Program</p>
+</section>
+
+<main class="container">
+
+<!-- LOGIN -->
+<section id="loginSection" class="card">
+
+<div class="portal-intro">
+<i class="fa-solid fa-circle-user"></i>
+<h2>Member Login</h2>
+<p>Sign in to access your B.E.P. member profile.</p>
+</div>
+
+<div id="loginMessage" class="message"></div>
+
+<form id="loginForm">
+
+<div class="form-group">
+<label for="loginEmail">Email Address</label>
+<input
+type="email"
+id="loginEmail"
+placeholder="Enter your email address"
+autocomplete="email"
+required>
+</div>
+
+<div class="form-group">
+<label for="loginPassword">Password</label>
+<input
+type="password"
+id="loginPassword"
+placeholder="Enter your password"
+autocomplete="current-password"
+required>
+</div>
+
+<button type="submit" id="loginBtn" class="primary-btn">
+<i class="fa-solid fa-right-to-bracket"></i> Login
+</button>
+
+</form>
+
+<div class="link-row">
+<a href="#" id="showForgot">
+<i class="fa-solid fa-key"></i> Forgot Password?
+</a>
+</div>
+
+<div class="link-row">
+<a href="register.html">
+<i class="fa-solid fa-user-plus"></i> Create a B.E.P. Account
+</a>
+</div>
+
+</section>
+
+
+<!-- FORGOT PASSWORD -->
+<section id="forgotSection" class="card">
+
+<h2>
+<i class="fa-solid fa-key"></i> Reset Your Password
+</h2>
+
+<div id="forgotMessage" class="message"></div>
+
+<form id="forgotForm">
+
+<div class="form-group">
+<label for="forgotEmail">Email Address</label>
+<input
+type="email"
+id="forgotEmail"
+placeholder="Enter your registered email"
+autocomplete="email"
+required>
+</div>
+
+<button type="submit" id="forgotBtn" class="primary-btn">
+<i class="fa-solid fa-paper-plane"></i> Send Reset Link
+</button>
+
+</form>
+
+<div class="link-row">
+<a href="#" id="backToLogin">
+<i class="fa-solid fa-arrow-left"></i> Back to Login
+</a>
+</div>
+
+</section>
+
+
+<!-- CREATE NEW PASSWORD -->
+<section id="passwordSection" class="card">
+
+<h2>
+<i class="fa-solid fa-lock"></i> Create New Password
+</h2>
+
+<div id="passwordMessage" class="message"></div>
+
+<p class="small-text" style="margin-bottom:18px">
+Enter your new password below. Use at least 8 characters.
+</p>
+
+<form id="passwordForm">
+
+<div class="form-group">
+<label for="newPassword">New Password</label>
+<input
+type="password"
+id="newPassword"
+placeholder="Enter new password"
+autocomplete="new-password"
+minlength="8"
+required>
+</div>
+
+<div class="form-group">
+<label for="confirmNewPassword">Confirm New Password</label>
+<input
+type="password"
+id="confirmNewPassword"
+placeholder="Confirm new password"
+autocomplete="new-password"
+minlength="8"
+required>
+</div>
+
+<button type="submit" id="passwordBtn" class="primary-btn">
+<i class="fa-solid fa-lock"></i> Update Password
+</button>
+
+</form>
+
+</section>
+
+
+<!-- LOADING -->
+<section id="loadingSection" class="card">
+
+<div class="loading">
+<i class="fa-solid fa-spinner fa-spin"></i>
+<h2>Loading Member Profile</h2>
+<p>Please wait...</p>
+</div>
+
+</section>
+
+
+<!-- MEMBER PROFILE -->
+<section id="profileSection" class="card">
+
+<div class="portal-intro">
+
+<i class="fa-solid fa-id-card"></i>
+
+<h2>
+Welcome, <span id="welcomeName">B.E.P. Member</span>
+</h2>
+
+<p>Your B.E.P. member profile</p>
+
+</div>
+
+<div id="profileMessage" class="message"></div>
+
+
+<div class="profile-grid">
+
+<!-- MEMBER NUMBER -->
+<div class="profile-item">
+
+<span class="profile-label">
+<i class="fa-solid fa-id-badge"></i> Member Number
+</span>
+
+<span id="memberNumber" class="profile-value member-number">
+-
+</span>
+
+</div>
+
+
+<!-- FULL NAME -->
+<div class="profile-item">
+
+<span class="profile-label">
+<i class="fa-solid fa-user"></i> Full Name
+</span>
+
+<span id="fullName" class="profile-value">
+-
+</span>
+
+</div>
+
+
+<!-- EMAIL -->
+<div class="profile-item">
+
+<span class="profile-label">
+<i class="fa-solid fa-envelope"></i> Email
+</span>
+
+<span id="email" class="profile-value">
+-
+</span>
+
+</div>
+
+
+<!-- PHONE -->
+<div class="profile-item">
+
+<span class="profile-label">
+<i class="fa-brands fa-whatsapp"></i> Phone / WhatsApp
+</span>
+
+<span id="phone" class="profile-value">
+-
+</span>
+
+</div>
+
+
+<!-- LOCATION -->
+<div class="profile-item">
+
+<span class="profile-label">
+<i class="fa-solid fa-location-dot"></i> Location
+</span>
+
+<span id="location" class="profile-value">
+-
+</span>
+
+</div>
+
+
+<!-- HOW HEARD -->
+<div class="profile-item">
+
+<span class="profile-label">
+<i class="fa-solid fa-circle-info"></i>
+How You Heard About B.E.P.
+</span>
+
+<span id="heardAbout" class="profile-value">
+-
+</span>
+
+</div>
+
+
+<!-- STATUS -->
+<div class="profile-item">
+
+<span class="profile-label">
+<i class="fa-solid fa-shield-halved"></i> Member Status
+</span>
+
+<span id="memberStatus" class="profile-value">
+-
+</span>
+
+</div>
+
+</div>
+
+
+<!-- EDIT PROFILE BUTTON -->
+<button
+id="editProfileBtn"
+class="edit-btn"
+type="button">
+
+<i class="fa-solid fa-pen-to-square"></i>
+Edit Profile
+
+</button>
+
+
+<a
+id="whatsappBtn"
+class="whatsapp-btn"
+href="#"
+target="_blank"
+rel="noopener noreferrer">
+
+<i class="fa-brands fa-whatsapp"></i>
+Contact B.E.P. on WhatsApp
+
+</a>
+
+
+<button
+id="logoutBtn"
+class="secondary-btn"
+type="button">
+
+<i class="fa-solid fa-right-from-bracket"></i>
+Logout
+
+</button>
+
+<p class="small-text" style="text-align:center">
+Keep your B.E.P. account details secure.
+</p>
+
+</section>
+
+
+<!-- EDIT PROFILE -->
+<section id="editProfileSection" class="card">
+
+<h2>
+<i class="fa-solid fa-user-pen"></i>
+Edit My Profile
+</h2>
+
+<div id="editMessage" class="message"></div>
+
+<div class="edit-note">
+<i class="fa-solid fa-shield-halved"></i>
+You can update your Phone / WhatsApp number and Location.
+Your Member Number, Full Name, Email and Member Status cannot be changed here.
+</div>
+
+
+<form id="editProfileForm">
+
+<div class="form-group">
+
+<label for="editPhone">
+<i class="fa-brands fa-whatsapp"></i>
+Phone / WhatsApp
+</label>
+
+<input
+type="text"
+id="editPhone"
+placeholder="Enter your phone or WhatsApp number"
+autocomplete="tel">
+
+</div>
+
+
+<div class="form-group">
+
+<label for="editLocation">
+<i class="fa-solid fa-location-dot"></i>
+Location
+</label>
+
+<input
+type="text"
+id="editLocation"
+placeholder="Enter your location"
+autocomplete="address-level2">
+
+</div>
+
+
+<button
+type="submit"
+id="saveProfileBtn"
+class="primary-btn">
+
+<i class="fa-solid fa-floppy-disk"></i>
+Save Changes
+
+</button>
+
+
+<button
+type="button"
+id="cancelEditBtn"
+class="cancel-btn">
+
+<i class="fa-solid fa-xmark"></i>
+Cancel
+
+</button>
+
+</form>
+
+</section>
+
+</main>
+
+
+<!-- FOOTER -->
+<footer>
+
+<div class="footer-container">
+
+<div class="footer-column">
+
+<h3>B.E.P.</h3>
+
+<p>Biblical Empowerment Program</p>
+
+<p>Building the Church of Christ</p>
+
+<div class="social-icons">
+
+<a
+href="https://facebook.com/groups/1421853356307383/"
+target="_blank"
+rel="noopener noreferrer"
+aria-label="Facebook">
+
+<i class="fa-brands fa-facebook-f"></i>
+
+</a>
+
+<a
+href="mailto:bep.onlineprog@gmail.com"
+aria-label="Email">
+
+<i class="fa-solid fa-envelope"></i>
+
+</a>
+
+</div>
+
+</div>
+
+
+<div class="footer-column">
+
+<h3>Quick Links</h3>
+
+<a href="index.html">
+<i class="fa-solid fa-house"></i> Home
+</a>
+
+<a href="register.html">
+<i class="fa-solid fa-user-plus"></i> Register
+</a>
+
+<a href="quiz.html">
+<i class="fa-solid fa-book-open"></i> Bible Quiz
+</a>
+
+<a href="member.html">
+<i class="fa-solid fa-user"></i> Member Portal
+</a>
+
+</div>
+
+
+<div class="footer-column">
+
+<h3>Contact Us</h3>
+
+<p>
+<i class="fa-solid fa-user"></i> Omega
+</p>
+
+<a
+href="https://wa.me/27623508689"
+target="_blank"
+rel="noopener noreferrer">
+
+<i class="fa-brands fa-whatsapp"></i>
+062 350 8689
+
+</a>
+
+<p>
+<i class="fa-solid fa-user"></i> Bro. KB
+</p>
+
+<a href="tel:+27832822644">
+
+<i class="fa-solid fa-phone"></i>
+083 282 2644
+
+</a>
+
+</div>
+
+
+<div class="footer-column">
+
+<h3>B.E.P. Online</h3>
+
+<p>
+<i class="fa-solid fa-clock"></i>
+Thursday Sessions
+</p>
+
+<p>
+<i class="fa-solid fa-calendar-days"></i>
+19:00 – 20:30
+</p>
+
+<a
+href="https://teams.live.com/meet/936085799236?p=b66LnDUAB2Xkx2uQYp&eventType=community"
+target="_blank"
+rel="noopener noreferrer">
+
+<i class="fa-solid fa-video"></i>
+Join Microsoft Teams
+
+</a>
+
+<a href="mailto:bep.onlineprog@gmail.com">
+
+<i class="fa-solid fa-envelope"></i>
+bep.onlineprog@gmail.com
+
+</a>
+
+</div>
+
+</div>
+
+
+<div class="footer-bottom">
+
+© 2026 Biblical Empowerment Program (B.E.P.). All Rights Reserved.
+
+<br>
+
+Building the Church of Christ.
+
+</div>
+
+</footer>
