@@ -86,6 +86,11 @@
       opacity: 0.9;
     }
 
+    .logout-btn:disabled {
+      opacity: 0.7;
+      cursor: wait;
+    }
+
     main {
       max-width: 1100px;
       margin: 30px auto;
@@ -152,6 +157,11 @@
       cursor: pointer;
       font-weight: bold;
       margin-top: 15px;
+    }
+
+    .btn:disabled {
+      opacity: 0.7;
+      cursor: wait;
     }
 
     .btn-primary {
@@ -435,6 +445,7 @@
     }
 
     @media (max-width: 650px) {
+
       .header-inner {
         align-items: flex-start;
       }
@@ -489,14 +500,20 @@
   </div>
 </header>
 
+
 <main>
 
   <!-- WELCOME -->
   <section class="welcome">
+
     <h2>
       Welcome, <span id="welcomeName">B.E.P. Member</span>
     </h2>
-    <p>Welcome to your Biblical Empowerment Program member portal.</p>
+
+    <p>
+      Welcome to your Biblical Empowerment Program member portal.
+    </p>
+
   </section>
 
 
@@ -569,18 +586,38 @@
     </h2>
 
     <div class="form-group">
-      <label>Phone / WhatsApp</label>
-      <input type="text" id="editPhone" placeholder="Phone / WhatsApp number">
+
+      <label for="editPhone">
+        Phone / WhatsApp
+      </label>
+
+      <input
+        type="text"
+        id="editPhone"
+        placeholder="Phone / WhatsApp number"
+      >
+
     </div>
 
     <div class="form-group">
-      <label>Location</label>
-      <input type="text" id="editLocation" placeholder="Your location">
+
+      <label for="editLocation">
+        Location
+      </label>
+
+      <input
+        type="text"
+        id="editLocation"
+        placeholder="Your location"
+      >
+
     </div>
 
     <button class="btn btn-primary" id="saveProfileBtn">
+
       <i class="fa-solid fa-floppy-disk"></i>
       Save Changes
+
     </button>
 
     <button class="btn btn-secondary" id="cancelEditBtn">
@@ -603,9 +640,18 @@
     <div class="member-card">
 
       <div class="card-top">
-        <img src="banner.png" alt="B.E.P. Logo">
+
+        <img
+          src="banner.png"
+          alt="B.E.P. Logo"
+        >
+
         <h2>B.E.P.</h2>
-        <p>Biblical Empowerment Program</p>
+
+        <p>
+          Biblical Empowerment Program
+        </p>
+
       </div>
 
       <div class="card-body">
@@ -665,42 +711,85 @@
 
     <div class="course-header">
 
-      <h2 id="lessonCourseTitle">Course</h2>
+      <h2 id="lessonCourseTitle">
+        Course
+      </h2>
 
       <p id="lessonCourseDescription"></p>
 
-      <div class="course-meta" style="margin-top:12px;">
-        <span class="badge gold" id="lessonCourseDuration">—</span>
-        <span class="badge gold" id="lessonCourseLessons">—</span>
+      <div
+        class="course-meta"
+        style="margin-top:12px;"
+      >
+
+        <span
+          class="badge gold"
+          id="lessonCourseDuration"
+        >
+          —
+        </span>
+
+        <span
+          class="badge gold"
+          id="lessonCourseLessons"
+        >
+          —
+        </span>
+
       </div>
 
       <div class="progress-box">
 
         <div class="progress-label">
-          <span>Your Progress</span>
-          <span id="progressText">0 / 0 completed</span>
+
+          <span>
+            Your Progress
+          </span>
+
+          <span id="progressText">
+            0 / 0 completed
+          </span>
+
         </div>
 
         <div class="progress-bar">
-          <div class="progress-fill" id="progressFill"></div>
+
+          <div
+            class="progress-fill"
+            id="progressFill"
+          ></div>
+
         </div>
 
       </div>
 
     </div>
 
-    <button class="btn btn-secondary" id="backToCoursesBtn">
+
+    <button
+      class="btn btn-secondary"
+      id="backToCoursesBtn"
+    >
+
       <i class="fa-solid fa-arrow-left"></i>
       Back to Courses
+
     </button>
 
-    <div id="lessonsLoading" class="loading">
+
+    <div
+      id="lessonsLoading"
+      class="loading"
+    >
       Loading lessons...
     </div>
 
     <div id="lessonsContainer"></div>
 
-    <div id="lessonsError" class="message error"></div>
+    <div
+      id="lessonsError"
+      class="message error"
+    ></div>
 
   </section>
 
@@ -708,291 +797,458 @@
 
 
 <footer>
+
   <p>
-    <strong>B.E.P. — Biblical Empowerment Program</strong>
+    <strong>
+      B.E.P. — Biblical Empowerment Program
+    </strong>
   </p>
-  <p>Building the Church of Christ</p>
+
+  <p>
+    Building the Church of Christ
+  </p>
+
   <p style="margin-top:8px;">
     Growing in God's Word. Growing in Faith. Growing Together.
   </p>
+
 </footer>
 
 
 <script>
-  /* =========================================================
-     SUPABASE CONNECTION
-     ========================================================= */
 
-  const SUPABASE_URL =
-    "https://rukusaellqqwthzibyib.supabase.co";
+/* =========================================================
+   SUPABASE CONNECTION
+   ========================================================= */
 
-  const SUPABASE_KEY =
-    "sb_publishable_Co8_MoJOV14tXBkSWyXFTA_ULn1WRa5";
+const SUPABASE_URL =
+  "https://rukusaellqqwthzibyib.supabase.co";
 
-  const supabaseClient =
-    window.supabase.createClient(
-      SUPABASE_URL,
-      SUPABASE_KEY
+const SUPABASE_KEY =
+  "sb_publishable_Co8_MoJOV14tXBkSWyXFTA_ULn1WRa5";
+
+const supabaseClient =
+  window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+  );
+
+
+/* =========================================================
+   GLOBAL VARIABLES
+   ========================================================= */
+
+let currentUser = null;
+let currentMember = null;
+let currentCourse = null;
+let currentLessons = [];
+let currentProgress = {};
+
+let portalInitialized = false;
+let redirectingToLogin = false;
+
+
+/* =========================================================
+   ELEMENTS
+   ========================================================= */
+
+const welcomeName =
+  document.getElementById("welcomeName");
+
+const profileLoading =
+  document.getElementById("profileLoading");
+
+const profileContent =
+  document.getElementById("profileContent");
+
+const profileError =
+  document.getElementById("profileError");
+
+const coursesLoading =
+  document.getElementById("coursesLoading");
+
+const coursesGrid =
+  document.getElementById("coursesGrid");
+
+const coursesError =
+  document.getElementById("coursesError");
+
+const lessonView =
+  document.getElementById("lessonView");
+
+const lessonsLoading =
+  document.getElementById("lessonsLoading");
+
+const lessonsContainer =
+  document.getElementById("lessonsContainer");
+
+const lessonsError =
+  document.getElementById("lessonsError");
+
+
+/* =========================================================
+   SHOW MESSAGE
+   ========================================================= */
+
+function showMessage(
+  element,
+  message,
+  type
+) {
+
+  element.textContent = message;
+
+  element.className =
+    "message " + type;
+
+  element.style.display =
+    "block";
+}
+
+
+/* =========================================================
+   HIDE MESSAGE
+   ========================================================= */
+
+function hideMessage(element) {
+
+  element.style.display =
+    "none";
+}
+
+
+/* =========================================================
+   LOAD MEMBER PROFILE
+   ========================================================= */
+
+async function loadMemberProfile(user) {
+
+  profileLoading.classList.remove(
+    "hidden"
+  );
+
+  profileContent.classList.add(
+    "hidden"
+  );
+
+  hideMessage(profileError);
+
+
+  const {
+    data,
+    error
+  } = await supabaseClient
+    .from("members")
+    .select(`
+      id,
+      member_number,
+      full_name,
+      email,
+      phone,
+      location,
+      heard_about,
+      status,
+      is_test,
+      auth_user_id
+    `)
+    .eq(
+      "auth_user_id",
+      user.id
+    )
+    .maybeSingle();
+
+
+  if (error) {
+
+    console.error(
+      "Member profile error:",
+      error
+    );
+
+    showMessage(
+      profileError,
+      "Unable to load your member profile. Please contact B.E.P. administration.",
+      "error"
+    );
+
+    profileLoading.classList.add(
+      "hidden"
+    );
+
+    return false;
+  }
+
+
+  if (!data) {
+
+    console.error(
+      "No member profile found for auth user:",
+      user.id
+    );
+
+    showMessage(
+      profileError,
+      "Your login is valid, but no B.E.P. member profile is linked to this account yet.",
+      "error"
+    );
+
+    profileLoading.classList.add(
+      "hidden"
+    );
+
+    return false;
+  }
+
+
+  currentMember =
+    data;
+
+
+  displayMemberProfile(
+    data
+  );
+
+
+  profileLoading.classList.add(
+    "hidden"
+  );
+
+  profileContent.classList.remove(
+    "hidden"
+  );
+
+  return true;
+}
+
+
+/* =========================================================
+   DISPLAY MEMBER PROFILE
+   ========================================================= */
+
+function displayMemberProfile(
+  member
+) {
+
+  document.getElementById(
+    "memberNumber"
+  ).textContent =
+    member.member_number ||
+    "—";
+
+
+  document.getElementById(
+    "fullName"
+  ).textContent =
+    member.full_name ||
+    "—";
+
+
+  document.getElementById(
+    "email"
+  ).textContent =
+    member.email ||
+    "—";
+
+
+  document.getElementById(
+    "phone"
+  ).textContent =
+    member.phone ||
+    "—";
+
+
+  document.getElementById(
+    "location"
+  ).textContent =
+    member.location ||
+    "—";
+
+
+  document.getElementById(
+    "status"
+  ).textContent =
+    member.status ||
+    "—";
+
+
+  welcomeName.textContent =
+    member.full_name ||
+    "B.E.P. Member";
+
+
+  document.getElementById(
+    "cardName"
+  ).textContent =
+    member.full_name ||
+    "—";
+
+
+  document.getElementById(
+    "cardNumber"
+  ).textContent =
+    member.member_number ||
+    "—";
+
+
+  document.getElementById(
+    "cardEmail"
+  ).textContent =
+    member.email ||
+    "—";
+
+
+  document.getElementById(
+    "cardStatus"
+  ).textContent =
+    member.status ||
+    "—";
+
+
+  document.getElementById(
+    "editPhone"
+  ).value =
+    member.phone ||
+    "";
+
+
+  document.getElementById(
+    "editLocation"
+  ).value =
+    member.location ||
+    "";
+}
+
+
+/* =========================================================
+   LOAD COURSES
+   ========================================================= */
+
+async function loadCourses() {
+
+  coursesLoading.classList.remove(
+    "hidden"
+  );
+
+  coursesGrid.innerHTML =
+    "";
+
+  hideMessage(
+    coursesError
+  );
+
+
+  const {
+    data,
+    error
+  } = await supabaseClient
+    .from("courses")
+    .select(`
+      id,
+      title,
+      description,
+      duration,
+      lessons,
+      status,
+      created_at
+    `)
+    .eq(
+      "status",
+      "Published"
+    )
+    .order(
+      "id",
+      {
+        ascending: true
+      }
     );
 
 
-  /* =========================================================
-     GLOBAL VARIABLES
-     ========================================================= */
-
-  let currentUser = null;
-  let currentMember = null;
-  let currentCourse = null;
-  let currentLessons = [];
-  let currentProgress = {};
+  coursesLoading.classList.add(
+    "hidden"
+  );
 
 
-  /* =========================================================
-     ELEMENTS
-     ========================================================= */
+  if (error) {
 
-  const welcomeName =
-    document.getElementById("welcomeName");
-
-  const profileLoading =
-    document.getElementById("profileLoading");
-
-  const profileContent =
-    document.getElementById("profileContent");
-
-  const profileError =
-    document.getElementById("profileError");
-
-  const coursesLoading =
-    document.getElementById("coursesLoading");
-
-  const coursesGrid =
-    document.getElementById("coursesGrid");
-
-  const coursesError =
-    document.getElementById("coursesError");
-
-  const lessonView =
-    document.getElementById("lessonView");
-
-  const lessonsLoading =
-    document.getElementById("lessonsLoading");
-
-  const lessonsContainer =
-    document.getElementById("lessonsContainer");
-
-  const lessonsError =
-    document.getElementById("lessonsError");
-
-
-  /* =========================================================
-     SHOW MESSAGE
-     ========================================================= */
-
-  function showMessage(element, message, type) {
-
-    element.textContent = message;
-
-    element.className =
-      "message " + type;
-
-    element.style.display = "block";
-  }
-
-
-  function hideMessage(element) {
-
-    element.style.display = "none";
-
-  }
-
-
-  /* =========================================================
-     LOAD MEMBER PROFILE
-     ========================================================= */
-
-  async function loadMemberProfile(user) {
-
-    profileLoading.classList.remove("hidden");
-    profileContent.classList.add("hidden");
-    hideMessage(profileError);
-
-    const {
-      data,
+    console.error(
+      "Courses error:",
       error
-    } = await supabaseClient
-      .from("members")
-      .select(`
-        id,
-        member_number,
-        full_name,
-        email,
-        phone,
-        location,
-        heard_about,
-        status,
-        is_test,
-        auth_user_id
-      `)
-      .eq("auth_user_id", user.id)
-      .single();
+    );
 
-    if (error) {
+    showMessage(
+      coursesError,
+      "Unable to load courses.",
+      "error"
+    );
 
-      console.error(error);
-
-      showMessage(
-        profileError,
-        "Unable to load your member profile.",
-        "error"
-      );
-
-      profileLoading.classList.add("hidden");
-
-      return;
-    }
-
-    currentMember = data;
-
-    displayMemberProfile(data);
-
-    profileLoading.classList.add("hidden");
-    profileContent.classList.remove("hidden");
+    return;
   }
 
 
-  /* =========================================================
-     DISPLAY MEMBER PROFILE
-     ========================================================= */
+  if (!data ||
+      data.length === 0) {
 
-  function displayMemberProfile(member) {
+    coursesGrid.innerHTML = `
+      <div class="loading">
+        No published courses are currently available.
+      </div>
+    `;
 
-    document.getElementById("memberNumber").textContent =
-      member.member_number || "—";
-
-    document.getElementById("fullName").textContent =
-      member.full_name || "—";
-
-    document.getElementById("email").textContent =
-      member.email || "—";
-
-    document.getElementById("phone").textContent =
-      member.phone || "—";
-
-    document.getElementById("location").textContent =
-      member.location || "—";
-
-    document.getElementById("status").textContent =
-      member.status || "—";
-
-    welcomeName.textContent =
-      member.full_name || "B.E.P. Member";
-
-
-    document.getElementById("cardName").textContent =
-      member.full_name || "—";
-
-    document.getElementById("cardNumber").textContent =
-      member.member_number || "—";
-
-    document.getElementById("cardEmail").textContent =
-      member.email || "—";
-
-    document.getElementById("cardStatus").textContent =
-      member.status || "—";
-
-
-    document.getElementById("editPhone").value =
-      member.phone || "";
-
-    document.getElementById("editLocation").value =
-      member.location || "";
+    return;
   }
 
 
-  /* =========================================================
-     LOAD COURSES
-     ========================================================= */
-
-  async function loadCourses() {
-
-    coursesLoading.classList.remove("hidden");
-    coursesGrid.innerHTML = "";
-    hideMessage(coursesError);
-
-    const {
-      data,
-      error
-    } = await supabaseClient
-      .from("courses")
-      .select(`
-        id,
-        title,
-        description,
-        duration,
-        lessons,
-        status,
-        created_at
-      `)
-      .eq("status", "Published")
-      .order("id", {
-        ascending: true
-      });
-
-    coursesLoading.classList.add("hidden");
-
-    if (error) {
-
-      console.error(error);
-
-      showMessage(
-        coursesError,
-        "Unable to load courses.",
-        "error"
-      );
-
-      return;
-    }
-
-    if (!data || data.length === 0) {
-
-      coursesGrid.innerHTML = `
-        <div class="loading">
-          No published courses are currently available.
-        </div>
-      `;
-
-      return;
-    }
-
-    data.forEach(course => {
+  data.forEach(
+    course => {
 
       const card =
-        document.createElement("div");
+        document.createElement(
+          "div"
+        );
 
-      card.className = "course-card";
+      card.className =
+        "course-card";
+
 
       card.innerHTML = `
-        <h3>${escapeHtml(course.title)}</h3>
+
+        <h3>
+          ${escapeHtml(course.title)}
+        </h3>
 
         <p>
-          ${escapeHtml(course.description || "")}
+          ${escapeHtml(
+            course.description || ""
+          )}
         </p>
 
         <div class="course-meta">
 
           <span class="badge">
+
             <i class="fa-regular fa-clock"></i>
-            ${escapeHtml(course.duration || "—")}
+
+            ${escapeHtml(
+              course.duration || "—"
+            )}
+
           </span>
 
           <span class="badge">
+
             <i class="fa-solid fa-book"></i>
-            ${course.lessons || 0} Lessons
+
+            ${course.lessons || 0}
+            Lessons
+
           </span>
 
           <span class="badge gold">
-            ${escapeHtml(course.status)}
+
+            ${escapeHtml(
+              course.status
+            )}
+
           </span>
 
         </div>
@@ -1001,229 +1257,329 @@
           class="btn btn-primary view-course-btn"
           data-course-id="${course.id}"
         >
+
           <i class="fa-solid fa-book-open"></i>
           View Course
+
         </button>
+
       `;
 
-      coursesGrid.appendChild(card);
-    });
+
+      coursesGrid.appendChild(
+        card
+      );
+    }
+  );
 
 
-    document
-      .querySelectorAll(".view-course-btn")
-      .forEach(button => {
+  document
+    .querySelectorAll(
+      ".view-course-btn"
+    )
+    .forEach(
+      button => {
 
         button.addEventListener(
           "click",
           () => {
 
             const courseId =
-              Number(button.dataset.courseId);
+              Number(
+                button.dataset.courseId
+              );
 
-            openCourse(courseId);
+            openCourse(
+              courseId
+            );
+
           }
         );
 
-      });
+      }
+    );
+}
+
+
+/* =========================================================
+   OPEN COURSE
+   ========================================================= */
+
+async function openCourse(
+  courseId
+) {
+
+  document
+    .getElementById(
+      "coursesSection"
+    )
+    .classList.add(
+      "hidden"
+    );
+
+
+  lessonView.style.display =
+    "block";
+
+
+  lessonsContainer.innerHTML =
+    "";
+
+
+  lessonsLoading.classList.remove(
+    "hidden"
+  );
+
+
+  hideMessage(
+    lessonsError
+  );
+
+
+  const {
+    data: course,
+    error: courseError
+  } = await supabaseClient
+    .from("courses")
+    .select(`
+      id,
+      title,
+      description,
+      duration,
+      lessons,
+      status
+    `)
+    .eq(
+      "id",
+      courseId
+    )
+    .eq(
+      "status",
+      "Published"
+    )
+    .single();
+
+
+  if (courseError) {
+
+    console.error(
+      "Course loading error:",
+      courseError
+    );
+
+    lessonsLoading.classList.add(
+      "hidden"
+    );
+
+    showMessage(
+      lessonsError,
+      "Unable to load this course.",
+      "error"
+    );
+
+    return;
   }
 
 
-  /* =========================================================
-     OPEN COURSE
-     ========================================================= */
-
-  async function openCourse(courseId) {
-
-    document
-      .getElementById("coursesSection")
-      .classList.add("hidden");
-
-    lessonView.style.display = "block";
-
-    lessonsContainer.innerHTML = "";
-
-    lessonsLoading.classList.remove("hidden");
-
-    hideMessage(lessonsError);
-
-    const {
-      data: course,
-      error: courseError
-    } = await supabaseClient
-      .from("courses")
-      .select(`
-        id,
-        title,
-        description,
-        duration,
-        lessons,
-        status
-      `)
-      .eq("id", courseId)
-      .eq("status", "Published")
-      .single();
+  currentCourse =
+    course;
 
 
-    if (courseError) {
-
-      console.error(courseError);
-
-      lessonsLoading.classList.add("hidden");
-
-      showMessage(
-        lessonsError,
-        "Unable to load this course.",
-        "error"
-      );
-
-      return;
-    }
+  document.getElementById(
+    "lessonCourseTitle"
+  ).textContent =
+    course.title;
 
 
-    currentCourse = course;
+  document.getElementById(
+    "lessonCourseDescription"
+  ).textContent =
+    course.description ||
+    "";
 
 
-    document.getElementById("lessonCourseTitle")
-      .textContent = course.title;
-
-    document.getElementById("lessonCourseDescription")
-      .textContent = course.description || "";
-
-    document.getElementById("lessonCourseDuration")
-      .textContent =
-      course.duration || "—";
-
-    document.getElementById("lessonCourseLessons")
-      .textContent =
-      `${course.lessons || 0} Lessons`;
+  document.getElementById(
+    "lessonCourseDuration"
+  ).textContent =
+    course.duration ||
+    "—";
 
 
-    /* LOAD LESSONS */
+  document.getElementById(
+    "lessonCourseLessons"
+  ).textContent =
+    `${course.lessons || 0} Lessons`;
 
-    const {
-      data: lessons,
-      error: lessonsErrorData
-    } = await supabaseClient
-      .from("course_lessons")
-      .select(`
-        id,
-        course_id,
-        lesson_number,
-        title,
-        content,
-        created_at
-      `)
-      .eq("course_id", courseId)
-      .order("lesson_number", {
+
+  /* =======================================================
+     LOAD LESSONS
+     ======================================================= */
+
+  const {
+    data: lessons,
+    error: lessonsErrorData
+  } = await supabaseClient
+    .from("course_lessons")
+    .select(`
+      id,
+      course_id,
+      lesson_number,
+      title,
+      content,
+      created_at
+    `)
+    .eq(
+      "course_id",
+      courseId
+    )
+    .order(
+      "lesson_number",
+      {
         ascending: true
-      });
+      }
+    );
 
 
-    if (lessonsErrorData) {
+  if (lessonsErrorData) {
 
-      console.error(lessonsErrorData);
+    console.error(
+      "Lessons loading error:",
+      lessonsErrorData
+    );
 
-      lessonsLoading.classList.add("hidden");
+    lessonsLoading.classList.add(
+      "hidden"
+    );
 
-      showMessage(
-        lessonsError,
-        "Unable to load the course lessons.",
-        "error"
-      );
+    showMessage(
+      lessonsError,
+      "Unable to load the course lessons.",
+      "error"
+    );
 
-      return;
-    }
-
-
-    currentLessons = lessons || [];
-
-
-    /* LOAD SAVED PROGRESS */
-
-    await loadCourseProgress(courseId);
-
-
-    lessonsLoading.classList.add("hidden");
-
-    renderLessons();
-
-    updateProgress();
+    return;
   }
 
 
-  /* =========================================================
-     LOAD COURSE PROGRESS
-     ========================================================= */
-
-  async function loadCourseProgress(courseId) {
-
-    currentProgress = {};
+  currentLessons =
+    lessons || [];
 
 
-    const {
-      data,
+  /* =======================================================
+     LOAD SAVED PROGRESS
+     ======================================================= */
+
+  await loadCourseProgress(
+    courseId
+  );
+
+
+  lessonsLoading.classList.add(
+    "hidden"
+  );
+
+
+  renderLessons();
+
+  updateProgress();
+}
+
+
+/* =========================================================
+   LOAD COURSE PROGRESS
+   ========================================================= */
+
+async function loadCourseProgress(
+  courseId
+) {
+
+  currentProgress =
+    {};
+
+
+  if (!currentUser) {
+    return;
+  }
+
+
+  const {
+    data,
+    error
+  } = await supabaseClient
+    .from("course_progress")
+    .select(`
+      id,
+      auth_user_id,
+      course_id,
+      lesson_id,
+      completed,
+      completed_at
+    `)
+    .eq(
+      "auth_user_id",
+      currentUser.id
+    )
+    .eq(
+      "course_id",
+      courseId
+    );
+
+
+  if (error) {
+
+    console.error(
+      "Progress loading error:",
       error
-    } = await supabaseClient
-      .from("course_progress")
-      .select(`
-        id,
-        auth_user_id,
-        course_id,
-        lesson_id,
-        completed,
-        completed_at
-      `)
-      .eq("auth_user_id", currentUser.id)
-      .eq("course_id", courseId);
+    );
+
+    return;
+  }
 
 
-    if (error) {
-
-      console.error(
-        "Progress loading error:",
-        error
-      );
-
-      return;
-    }
-
-
-    (data || []).forEach(progress => {
+  (data || []).forEach(
+    progress => {
 
       currentProgress[
         progress.lesson_id
       ] = progress;
 
-    });
+    }
+  );
+}
+
+
+/* =========================================================
+   RENDER LESSONS
+   ========================================================= */
+
+function renderLessons() {
+
+  lessonsContainer.innerHTML =
+    "";
+
+
+  if (
+    currentLessons.length === 0
+  ) {
+
+    lessonsContainer.innerHTML = `
+      <div class="loading">
+        No lessons are available for this course yet.
+      </div>
+    `;
+
+    return;
   }
 
 
-  /* =========================================================
-     RENDER LESSONS
-     ========================================================= */
-
-  function renderLessons() {
-
-    lessonsContainer.innerHTML = "";
-
-
-    if (currentLessons.length === 0) {
-
-      lessonsContainer.innerHTML = `
-        <div class="loading">
-          No lessons are available for this course yet.
-        </div>
-      `;
-
-      return;
-    }
-
-
-    currentLessons.forEach(lesson => {
+  currentLessons.forEach(
+    lesson => {
 
       const progress =
-        currentProgress[lesson.id];
+        currentProgress[
+          lesson.id
+        ];
+
 
       const completed =
         progress &&
@@ -1231,7 +1587,10 @@
 
 
       const card =
-        document.createElement("div");
+        document.createElement(
+          "div"
+        );
+
 
       card.className =
         "lesson-card";
@@ -1241,8 +1600,10 @@
         completed
           ? `
             <span class="completed-label">
+
               <i class="fa-solid fa-circle-check"></i>
               Completed
+
             </span>
           `
           : "";
@@ -1267,11 +1628,18 @@
           <div>
 
             <div class="lesson-number">
-              LESSON ${lesson.lesson_number}
+
+              LESSON
+              ${escapeHtml(
+                lesson.lesson_number
+              )}
+
             </div>
 
             <h3>
-              ${escapeHtml(lesson.title)}
+              ${escapeHtml(
+                lesson.title
+              )}
             </h3>
 
           </div>
@@ -1282,36 +1650,52 @@
 
 
         <div class="lesson-content">
-          ${escapeHtml(lesson.content || "")}
+
+          ${escapeHtml(
+            lesson.content || ""
+          )}
+
         </div>
 
 
         <button
-          class="completion-btn ${completed ? "completed" : ""}"
+          class="completion-btn
+          ${completed ? "completed" : ""}"
           data-lesson-id="${lesson.id}"
           ${completed ? "disabled" : ""}
         >
+
           ${buttonText}
+
         </button>
 
       `;
 
 
-      lessonsContainer.appendChild(card);
+      lessonsContainer.appendChild(
+        card
+      );
 
-    });
+    }
+  );
 
 
-    document
-      .querySelectorAll(".completion-btn:not(:disabled)")
-      .forEach(button => {
+  document
+    .querySelectorAll(
+      ".completion-btn:not(:disabled)"
+    )
+    .forEach(
+      button => {
 
         button.addEventListener(
           "click",
           async () => {
 
             const lessonId =
-              Number(button.dataset.lessonId);
+              Number(
+                button.dataset.lessonId
+              );
+
 
             await markLessonCompleted(
               lessonId,
@@ -1321,409 +1705,612 @@
           }
         );
 
-      });
+      }
+    );
+}
+
+
+/* =========================================================
+   MARK LESSON COMPLETED
+   ========================================================= */
+
+async function markLessonCompleted(
+  lessonId,
+  button
+) {
+
+  if (
+    !currentUser ||
+    !currentCourse
+  ) {
+    return;
   }
 
 
-  /* =========================================================
-     MARK LESSON COMPLETED
-     ========================================================= */
-
-  async function markLessonCompleted(
-    lessonId,
-    button
-  ) {
-
-    if (!currentUser || !currentCourse) {
-      return;
-    }
+  button.disabled =
+    true;
 
 
-    button.disabled = true;
+  button.innerHTML = `
+    <i class="fa-solid fa-spinner fa-spin"></i>
+    Saving...
+  `;
+
+
+  const existing =
+    currentProgress[
+      lessonId
+    ];
+
+
+  let result;
+
+
+  if (existing) {
+
+    result =
+      await supabaseClient
+        .from("course_progress")
+        .update({
+          completed: true,
+          completed_at:
+            new Date().toISOString()
+        })
+        .eq(
+          "id",
+          existing.id
+        )
+        .eq(
+          "auth_user_id",
+          currentUser.id
+        );
+
+  } else {
+
+    result =
+      await supabaseClient
+        .from("course_progress")
+        .insert({
+          auth_user_id:
+            currentUser.id,
+
+          course_id:
+            currentCourse.id,
+
+          lesson_id:
+            lessonId,
+
+          completed:
+            true,
+
+          completed_at:
+            new Date().toISOString()
+        });
+
+  }
+
+
+  if (result.error) {
+
+    console.error(
+      "Completion save error:",
+      result.error
+    );
+
+
+    button.disabled =
+      false;
+
 
     button.innerHTML = `
-      <i class="fa-solid fa-spinner fa-spin"></i>
-      Saving...
+      <i class="fa-solid fa-check"></i>
+      Mark as Completed
     `;
 
 
-    const existing =
-      currentProgress[lessonId];
-
-
-    let result;
-
-
-    if (existing) {
-
-      result =
-        await supabaseClient
-          .from("course_progress")
-          .update({
-            completed: true,
-            completed_at: new Date().toISOString()
-          })
-          .eq("id", existing.id)
-          .eq("auth_user_id", currentUser.id);
-
-    } else {
-
-      result =
-        await supabaseClient
-          .from("course_progress")
-          .insert({
-            auth_user_id: currentUser.id,
-            course_id: currentCourse.id,
-            lesson_id: lessonId,
-            completed: true,
-            completed_at: new Date().toISOString()
-          });
-
-    }
-
-
-    if (result.error) {
-
-      console.error(
-        "Completion save error:",
-        result.error
-      );
-
-      button.disabled = false;
-
-      button.innerHTML = `
-        <i class="fa-solid fa-check"></i>
-        Mark as Completed
-      `;
-
-      alert(
-        "The lesson could not be marked as completed. Please try again."
-      );
-
-      return;
-    }
-
-
-    /* Reload saved progress */
-
-    await loadCourseProgress(
-      currentCourse.id
+    alert(
+      "The lesson could not be marked as completed. Please try again."
     );
 
 
-    renderLessons();
-
-    updateProgress();
+    return;
   }
 
 
-  /* =========================================================
-     UPDATE PROGRESS
-     ========================================================= */
-
-  function updateProgress() {
-
-    const total =
-      currentLessons.length;
+  await loadCourseProgress(
+    currentCourse.id
+  );
 
 
-    const completed =
-      currentLessons.filter(lesson => {
+  renderLessons();
+
+  updateProgress();
+}
+
+
+/* =========================================================
+   UPDATE PROGRESS
+   ========================================================= */
+
+function updateProgress() {
+
+  const total =
+    currentLessons.length;
+
+
+  const completed =
+    currentLessons.filter(
+      lesson => {
 
         const progress =
-          currentProgress[lesson.id];
-
-        return progress &&
-               progress.completed === true;
-
-      }).length;
+          currentProgress[
+            lesson.id
+          ];
 
 
-    const percentage =
-      total > 0
-        ? Math.round(
-            (completed / total) * 100
-          )
-        : 0;
+        return (
+          progress &&
+          progress.completed === true
+        );
+
+      }
+    ).length;
 
 
-    document.getElementById("progressText")
-      .textContent =
-      `${completed} / ${total} completed`;
+  const percentage =
+    total > 0
+      ? Math.round(
+          (completed / total) * 100
+        )
+      : 0;
 
 
-    document.getElementById("progressFill")
-      .style.width =
-      `${percentage}%`;
-  }
+  document.getElementById(
+    "progressText"
+  ).textContent =
+    `${completed} / ${total} completed`;
 
 
-  /* =========================================================
-     BACK TO COURSES
-     ========================================================= */
+  document.getElementById(
+    "progressFill"
+  ).style.width =
+    `${percentage}%`;
+}
 
-  document
-    .getElementById("backToCoursesBtn")
-    .addEventListener(
-      "click",
-      () => {
 
-        lessonView.style.display = "none";
+/* =========================================================
+   BACK TO COURSES
+   ========================================================= */
 
-        document
-          .getElementById("coursesSection")
-          .classList.remove("hidden");
+document
+  .getElementById(
+    "backToCoursesBtn"
+  )
+  .addEventListener(
+    "click",
+    () => {
 
-        window.scrollTo({
-          top: 0,
+      lessonView.style.display =
+        "none";
+
+
+      document
+        .getElementById(
+          "coursesSection"
+        )
+        .classList.remove(
+          "hidden"
+        );
+
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+
+    }
+  );
+
+
+/* =========================================================
+   EDIT PROFILE
+   ========================================================= */
+
+document
+  .getElementById(
+    "editProfileBtn"
+  )
+  .addEventListener(
+    "click",
+    () => {
+
+      document
+        .getElementById(
+          "editProfileSection"
+        )
+        .classList.remove(
+          "hidden"
+        );
+
+
+      document
+        .getElementById(
+          "editProfileSection"
+        )
+        .scrollIntoView({
           behavior: "smooth"
         });
-      }
-    );
+
+    }
+  );
 
 
-  /* =========================================================
-     EDIT PROFILE
-     ========================================================= */
+/* =========================================================
+   CANCEL EDIT
+   ========================================================= */
 
-  document
-    .getElementById("editProfileBtn")
-    .addEventListener(
-      "click",
-      () => {
+document
+  .getElementById(
+    "cancelEditBtn"
+  )
+  .addEventListener(
+    "click",
+    () => {
 
-        document
-          .getElementById("editProfileSection")
-          .classList.remove("hidden");
-
-        document
-          .getElementById("editProfileSection")
-          .scrollIntoView({
-            behavior: "smooth"
-          });
-      }
-    );
-
-
-  /* =========================================================
-     CANCEL EDIT
-     ========================================================= */
-
-  document
-    .getElementById("cancelEditBtn")
-    .addEventListener(
-      "click",
-      () => {
-
-        document
-          .getElementById("editProfileSection")
-          .classList.add("hidden");
-
-        hideMessage(
-          document.getElementById(
-            "profileUpdateMessage"
-          )
+      document
+        .getElementById(
+          "editProfileSection"
+        )
+        .classList.add(
+          "hidden"
         );
+
+
+      hideMessage(
+        document.getElementById(
+          "profileUpdateMessage"
+        )
+      );
+
+    }
+  );
+
+
+/* =========================================================
+   SAVE PROFILE
+   ========================================================= */
+
+document
+  .getElementById(
+    "saveProfileBtn"
+  )
+  .addEventListener(
+    "click",
+    async () => {
+
+      if (
+        !currentUser ||
+        !currentMember
+      ) {
+        return;
       }
-    );
 
 
-  /* =========================================================
-     SAVE PROFILE
-     ========================================================= */
-
-  document
-    .getElementById("saveProfileBtn")
-    .addEventListener(
-      "click",
-      async () => {
-
-        if (!currentUser || !currentMember) {
-          return;
-        }
+      const phone =
+        document
+          .getElementById(
+            "editPhone"
+          )
+          .value
+          .trim();
 
 
-        const phone =
-          document
-            .getElementById("editPhone")
-            .value
-            .trim();
+      const location =
+        document
+          .getElementById(
+            "editLocation"
+          )
+          .value
+          .trim();
 
 
-        const location =
-          document
-            .getElementById("editLocation")
-            .value
-            .trim();
+      const saveButton =
+        document.getElementById(
+          "saveProfileBtn"
+        );
 
 
-        const saveButton =
-          document.getElementById(
-            "saveProfileBtn"
-          );
+      saveButton.disabled =
+        true;
 
 
-        saveButton.disabled = true;
-
-        saveButton.innerHTML = `
-          <i class="fa-solid fa-spinner fa-spin"></i>
-          Saving...
-        `;
+      saveButton.innerHTML = `
+        <i class="fa-solid fa-spinner fa-spin"></i>
+        Saving...
+      `;
 
 
-        const {
-          data,
+      const {
+        data,
+        error
+      } = await supabaseClient
+        .from("members")
+        .update({
+          phone: phone,
+          location: location
+        })
+        .eq(
+          "auth_user_id",
+          currentUser.id
+        )
+        .select()
+        .single();
+
+
+      saveButton.disabled =
+        false;
+
+
+      saveButton.innerHTML = `
+        <i class="fa-solid fa-floppy-disk"></i>
+        Save Changes
+      `;
+
+
+      if (error) {
+
+        console.error(
+          "Profile update error:",
           error
-        } = await supabaseClient
-          .from("members")
-          .update({
-            phone: phone,
-            location: location
-          })
-          .eq("auth_user_id", currentUser.id)
-          .select()
-          .single();
-
-
-        saveButton.disabled = false;
-
-        saveButton.innerHTML = `
-          <i class="fa-solid fa-floppy-disk"></i>
-          Save Changes
-        `;
-
-
-        if (error) {
-
-          console.error(error);
-
-          showMessage(
-            document.getElementById(
-              "profileUpdateMessage"
-            ),
-            "Unable to update your profile.",
-            "error"
-          );
-
-          return;
-        }
-
-
-        currentMember = data;
-
-        displayMemberProfile(data);
+        );
 
 
         showMessage(
           document.getElementById(
             "profileUpdateMessage"
           ),
-          "Your profile has been updated successfully.",
-          "success"
+          "Unable to update your profile.",
+          "error"
         );
 
 
-        setTimeout(() => {
+        return;
+      }
+
+
+      currentMember =
+        data;
+
+
+      displayMemberProfile(
+        data
+      );
+
+
+      showMessage(
+        document.getElementById(
+          "profileUpdateMessage"
+        ),
+        "Your profile has been updated successfully.",
+        "success"
+      );
+
+
+      setTimeout(
+        () => {
 
           document
             .getElementById(
               "editProfileSection"
             )
-            .classList.add("hidden");
+            .classList.add(
+              "hidden"
+            );
 
-        }, 1200);
+        },
+        1200
+      );
 
-      }
-    );
-
-
-  /* =========================================================
-     LOGOUT
-     ========================================================= */
-
-  document
-    .getElementById("logoutBtn")
-    .addEventListener(
-      "click",
-      async () => {
-
-        const {
-          error
-        } = await supabaseClient.auth.signOut();
-
-
-        if (error) {
-
-          console.error(error);
-
-          alert(
-            "Unable to log out. Please try again."
-          );
-
-          return;
-        }
-
-
-        window.location.href =
-          "member.html";
-      }
-    );
-
-
-  /* =========================================================
-     HTML ESCAPE
-     ========================================================= */
-
-  function escapeHtml(value) {
-
-    if (value === null ||
-        value === undefined) {
-
-      return "";
     }
+  );
 
 
-    return String(value)
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;")
-      .replace(/'/g, "&#039;");
+/* =========================================================
+   LOGOUT
+   ========================================================= */
+
+document
+  .getElementById(
+    "logoutBtn"
+  )
+  .addEventListener(
+    "click",
+    async () => {
+
+      const logoutButton =
+        document.getElementById(
+          "logoutBtn"
+        );
+
+
+      logoutButton.disabled =
+        true;
+
+
+      logoutButton.innerHTML = `
+        <i class="fa-solid fa-spinner fa-spin"></i>
+        Logging out...
+      `;
+
+
+      const {
+        error
+      } =
+        await supabaseClient.auth.signOut();
+
+
+      if (error) {
+
+        console.error(
+          "Logout error:",
+          error
+        );
+
+
+        logoutButton.disabled =
+          false;
+
+
+        logoutButton.innerHTML = `
+          <i class="fa-solid fa-right-from-bracket"></i>
+          Logout
+        `;
+
+
+        alert(
+          "Unable to log out. Please try again."
+        );
+
+
+        return;
+      }
+
+
+      /*
+        Go directly to the public login/home page.
+        The SIGNED_OUT listener will also handle this,
+        but this makes logout immediate.
+      */
+
+      window.location.replace(
+        "index.html"
+      );
+
+    }
+  );
+
+
+/* =========================================================
+   HTML ESCAPE
+   ========================================================= */
+
+function escapeHtml(value) {
+
+  if (
+    value === null ||
+    value === undefined
+  ) {
+
+    return "";
   }
 
 
-  /* =========================================================
-     AUTH SESSION
-     ========================================================= */
+  return String(value)
+    .replace(
+      /&/g,
+      "&amp;"
+    )
+    .replace(
+      /</g,
+      "&lt;"
+    )
+    .replace(
+      />/g,
+      "&gt;"
+    )
+    .replace(
+      /"/g,
+      "&quot;"
+    )
+    .replace(
+      /'/g,
+      "&#039;"
+    );
+}
 
-  async function initializePortal() {
+
+/* =========================================================
+   AUTH SESSION
+   ========================================================= */
+
+async function initializePortal() {
+
+  if (portalInitialized) {
+    return;
+  }
+
+
+  portalInitialized =
+    true;
+
+
+  console.log(
+    "B.E.P. Portal: checking authentication session..."
+  );
+
+
+  try {
 
     const {
       data,
       error
-    } = await supabaseClient.auth.getSession();
+    } =
+      await supabaseClient.auth.getSession();
 
 
     if (error) {
 
-      console.error(error);
+      console.error(
+        "Session check error:",
+        error
+      );
+
+
+      portalInitialized =
+        false;
+
 
       alert(
         "Unable to check your login session."
       );
+
 
       return;
     }
 
 
     const session =
-      data.session;
+      data?.session || null;
 
+
+    /*
+      IMPORTANT:
+      Only redirect when getSession() confirms
+      that there is no authenticated session.
+
+      We do NOT redirect simply because the
+      auth-state listener temporarily receives
+      a null session during page startup.
+    */
 
     if (!session) {
 
-      window.location.href =
-        "index.html";
+      if (!redirectingToLogin) {
+
+        redirectingToLogin =
+          true;
+
+
+        console.log(
+          "B.E.P. Portal: no active session. Returning to login page."
+        );
+
+
+        window.location.replace(
+          "index.html"
+        );
+      }
+
 
       return;
     }
@@ -1733,40 +2320,125 @@
       session.user;
 
 
+    console.log(
+      "B.E.P. Portal: authenticated user:",
+      currentUser.id
+    );
+
+
+    /*
+      Load the member profile first.
+      The portal remains open even if the
+      profile cannot be found.
+    */
+
     await loadMemberProfile(
       currentUser
     );
 
 
+    /*
+      Courses are loaded separately.
+      A course/database problem will not
+      redirect the user to the homepage.
+    */
+
     await loadCourses();
+
+
+    console.log(
+      "B.E.P. Portal: initialization complete."
+    );
+
+  } catch (error) {
+
+    console.error(
+      "B.E.P. Portal initialization error:",
+      error
+    );
+
+
+    portalInitialized =
+      false;
+
+
+    showMessage(
+      profileError,
+      "The member portal could not finish loading. Please refresh the page.",
+      "error"
+    );
+
+
+    profileLoading.classList.add(
+      "hidden"
+    );
+
   }
+}
 
 
-  /* =========================================================
-     AUTH STATE CHANGES
-     ========================================================= */
+/* =========================================================
+   AUTH STATE CHANGES
+   ========================================================= */
 
-  supabaseClient.auth.onAuthStateChange(
-    (event, session) => {
+/*
+  IMPORTANT FIX:
 
-      if (
-        event === "SIGNED_OUT" ||
-        !session
-      ) {
+  The previous code contained:
 
-        window.location.href =
-          "index.html";
+      event === "SIGNED_OUT" || !session
+
+  The "!session" condition could fire while Supabase
+  was still restoring the existing login session.
+
+  That caused the portal to open briefly and then
+  immediately redirect to index.html.
+
+  We now react ONLY to an actual SIGNED_OUT event.
+*/
+
+supabaseClient.auth.onAuthStateChange(
+  (event, session) => {
+
+    console.log(
+      "B.E.P. Auth event:",
+      event
+    );
+
+
+    if (
+      event === "SIGNED_OUT"
+    ) {
+
+      currentUser =
+        null;
+
+      currentMember =
+        null;
+
+
+      if (!redirectingToLogin) {
+
+        redirectingToLogin =
+          true;
+
+
+        window.location.replace(
+          "index.html"
+        );
       }
 
     }
-  );
+
+  }
+);
 
 
-  /* =========================================================
-     START PORTAL
-     ========================================================= */
+/* =========================================================
+   START PORTAL
+   ========================================================= */
 
-  initializePortal();
+initializePortal();
 
 </script>
 
