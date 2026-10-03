@@ -1259,14 +1259,9 @@ async function saveResult(
 
     try {
 
-        const {
-            data,
-            error
-        } = await supabaseClient
-            .from("bep_public_quiz_results")
-            .insert(record)
-            .select()
-            .single();
+        const { error } = await supabaseClient
+    .from("bep_public_quiz_results")
+    .insert(record);
 
 
         if (error) {
