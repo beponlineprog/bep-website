@@ -1,10 +1,11 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>B.E.P. Online Bible Assessment</title>
+<title>B.E.P. Bible Assessment</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
@@ -15,50 +16,40 @@
 
 body {
     margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
+    padding: 20px;
+    font-family: Arial, sans-serif;
     background: #f0f4f8;
     color: #222;
-    line-height: 1.6;
+}
+
+.container {
+    max-width: 850px;
+    margin: auto;
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
 }
 
 header {
-    background: linear-gradient(135deg, #003b73, #0066b3);
-    color: white;
     text-align: center;
-    padding: 30px 15px;
+    background: #073b78;
+    color: white;
+    padding: 25px 15px;
+    border-radius: 10px;
+    margin-bottom: 25px;
 }
 
 header h1 {
-    margin: 0;
-    font-size: 28px;
+    margin: 0 0 10px;
 }
 
 header p {
     margin: 5px 0;
 }
 
-.container {
-    max-width: 900px;
-    width: 94%;
-    margin: 25px auto;
-}
-
-.card {
-    background: white;
-    padding: 25px;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-    margin-bottom: 20px;
-}
-
 h2 {
-    color: #003b73;
-}
-
-label {
-    display: block;
-    font-weight: bold;
-    margin: 14px 0 6px;
+    color: #073b78;
 }
 
 input[type="text"],
@@ -66,34 +57,57 @@ input[type="email"],
 input[type="tel"] {
     width: 100%;
     padding: 13px;
-    border: 1px solid #bbb;
-    border-radius: 7px;
+    margin: 7px 0 16px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
     font-size: 16px;
 }
 
-input:focus {
-    outline: none;
-    border-color: #0066b3;
+label.field-label {
+    display: block;
+    font-weight: bold;
 }
 
-button,
-.home-button {
-    display: inline-block;
-    padding: 13px 22px;
+.question {
+    border: 1px solid #ddd;
+    padding: 18px;
+    margin: 18px 0;
+    border-radius: 8px;
+    background: #fafafa;
+}
+
+.question h3 {
+    margin-top: 0;
+    color: #073b78;
+}
+
+.option {
+    display: block;
+    padding: 10px;
+    margin: 5px 0;
+    background: white;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.option:hover {
+    background: #eef5ff;
+}
+
+button {
     border: none;
+    padding: 14px 22px;
     border-radius: 7px;
-    background: #0066b3;
+    background: #073b78;
     color: white;
     font-size: 16px;
-    font-weight: bold;
     cursor: pointer;
-    text-decoration: none;
-    text-align: center;
+    margin: 8px 5px 8px 0;
 }
 
-button:hover,
-.home-button:hover {
-    background: #004c89;
+button:hover {
+    background: #0b58a5;
 }
 
 button:disabled {
@@ -101,123 +115,82 @@ button:disabled {
     cursor: not-allowed;
 }
 
-.home-button {
-    background: #003b73;
-    margin-top: 20px;
-}
-
-#quizSection,
-#resultSection {
-    display: none;
-}
-
 #timer {
     position: sticky;
-    top: 0;
+    top: 5px;
     z-index: 5;
     background: #fff3cd;
-    color: #664d03;
-    border: 1px solid #ffecb5;
-    padding: 14px;
-    text-align: center;
+    color: #7a4b00;
+    border: 1px solid #ffe08a;
+    padding: 12px;
     border-radius: 8px;
-    font-size: 22px;
+    text-align: center;
+    font-size: 20px;
     font-weight: bold;
-    margin-bottom: 20px;
 }
 
-.question {
-    border: 1px solid #ddd;
-    background: #fafafa;
-    padding: 18px;
-    border-radius: 9px;
-    margin-bottom: 18px;
-}
-
-.question-title {
-    font-weight: bold;
-    color: #003b73;
-    margin-bottom: 12px;
-}
-
-.option {
-    display: block;
-    padding: 10px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: normal;
-    margin: 5px 0;
-}
-
-.option:hover {
-    background: #eaf3fc;
-}
-
-.option input {
-    margin-right: 10px;
+#result {
+    display: none;
+    margin-top: 25px;
+    padding: 25px;
+    border-radius: 10px;
+    background: #eef5ff;
+    text-align: center;
 }
 
 .success {
-    background: #e9f7ef;
-    border-left: 5px solid #198754;
-    padding: 20px;
-    border-radius: 8px;
+    color: #137333;
 }
 
-.warning {
-    background: #fff8e1;
-    border-left: 5px solid #ffc107;
-    padding: 20px;
-    border-radius: 8px;
+.failure {
+    color: #b3261e;
 }
 
-.error-box {
-    background: #f8d7da;
-    color: #842029;
-    border: 1px solid #f5c2c7;
-    border-radius: 8px;
-    padding: 16px;
-    margin-top: 20px;
+#technical {
+    display: none;
+    text-align: left;
+    overflow-wrap: anywhere;
+    background: #fff;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    margin-top: 15px;
+}
+
+#technical p {
+    margin: 7px 0;
+}
+
+#status {
+    margin-top: 15px;
+    padding: 12px;
+    border-radius: 6px;
+    display: none;
     overflow-wrap: anywhere;
 }
 
-.score {
-    font-size: 34px;
-    font-weight: bold;
-    color: #003b73;
-    text-align: center;
-    margin: 20px 0;
+.status-error {
+    background: #fde8e7;
+    color: #a40000;
 }
 
-.center {
-    text-align: center;
+.status-success {
+    background: #e6f4ea;
+    color: #137333;
 }
 
 .small {
-    color: #666;
     font-size: 14px;
-}
-
-footer {
-    background: #003b73;
-    color: white;
-    text-align: center;
-    padding: 25px 15px;
-    margin-top: 40px;
+    color: #555;
 }
 
 @media(max-width:600px) {
-    header h1 {
-        font-size: 23px;
+    body {
+        padding: 8px;
     }
 
-    .card {
-        padding: 18px;
-    }
-
-    button,
-    .home-button {
-        width: 100%;
+    .container {
+        padding: 15px;
     }
 }
 </style>
@@ -225,144 +198,99 @@ footer {
 
 <body>
 
-<header>
-    <h1>B.E.P. Online Bible Assessment</h1>
-    <p>Biblical Empowerment Program</p>
-    <p>Building the Church of Christ</p>
-</header>
-
 <div class="container">
 
-<!-- PARTICIPANT REGISTRATION -->
+<header>
+    <h1>B.E.P. Bible Assessment</h1>
+    <p>Biblical Empowerment Program</p>
+    <p>Building the Church of Christ</p>
+    <p>Growing in God's Word. Growing in Faith. Growing Together.</p>
+</header>
 
-<section id="detailsSection" class="card">
+<section id="registration">
 
-    <h2>Participant Registration</h2>
+    <h2>Participant Details</h2>
 
-    <p>
-        Welcome to the B.E.P. Online Bible Assessment.
-        Please complete your details before beginning.
-    </p>
+    <p>Please complete your details before starting the assessment.</p>
 
-    <label for="visitorName">Full Name *</label>
-    <input
-        type="text"
-        id="visitorName"
-        placeholder="Enter your full name"
-        autocomplete="name"
-        required
-    >
+    <form id="participantForm">
 
-    <label for="visitorEmail">Email Address *</label>
-    <input
-        type="email"
-        id="visitorEmail"
-        placeholder="Enter your email address"
-        autocomplete="email"
-        required
-    >
+        <label class="field-label" for="visitorName">Full Name</label>
+        <input type="text" id="visitorName" required>
 
-    <label for="visitorPhone">Phone / WhatsApp *</label>
-    <input
-        type="tel"
-        id="visitorPhone"
-        placeholder="Enter your phone number"
-        autocomplete="tel"
-        required
-    >
+        <label class="field-label" for="visitorEmail">Email Address</label>
+        <input type="email" id="visitorEmail" required>
 
-    <label for="visitorLocation">Location *</label>
-    <input
-        type="text"
-        id="visitorLocation"
-        placeholder="Town, City or Province"
-        autocomplete="address-level2"
-        required
-    >
+        <label class="field-label" for="visitorPhone">Phone / WhatsApp</label>
+        <input type="tel" id="visitorPhone" required>
 
-    <br><br>
+        <label class="field-label" for="visitorLocation">Location</label>
+        <input type="text" id="visitorLocation" required>
 
-    <button
-        type="button"
-        id="startButton"
-        onclick="startAssessment()"
-    >
-        Start Assessment
-    </button>
+        <button type="submit">Start Assessment</button>
 
-    <div id="detailsError"
-         class="error-box"
-         style="display:none;">
-    </div>
-
+    </form>
 </section>
 
+<section id="assessment" style="display:none;">
 
-<!-- ASSESSMENT -->
+    <div id="timer">Time Remaining: 30:00</div>
 
-<section id="quizSection" class="card">
-
-    <div id="timer">
-        Time Remaining: 30:00
-    </div>
-
-    <h2>Assessment Questions</h2>
+    <h2>Bible Knowledge Assessment</h2>
 
     <p>
-        Select one answer for each question.
-        Each correct answer carries 3 marks.
+        Answer all 20 questions. Each question carries 3 marks.
+        Total: 60 marks. Pass mark: 40.
     </p>
 
-    <p><strong>Pass Mark: 40 / 60</strong></p>
+    <form id="quizForm">
 
-    <form id="quizForm"></form>
+        <div id="questions"></div>
 
-    <button
-        type="button"
-        id="submitButton"
-        onclick="submitAssessment(false)"
-    >
-        Submit Assessment
-    </button>
+        <button type="submit" id="submitButton">
+            Submit Assessment
+        </button>
 
+    </form>
 </section>
 
+<div id="status"></div>
 
-<!-- RESULTS -->
+<section id="result">
 
-<section id="resultSection" class="card">
+    <h2 id="resultHeading">Assessment Result</h2>
 
-    <div id="resultContent"></div>
+    <h1 id="scoreDisplay"></h1>
 
-    <div id="saveStatus"></div>
+    <p id="resultMessage"></p>
 
-    <div class="center">
-        <a
-            href="index.html"
-            class="home-button"
-        >
-            🏠 Return to B.E.P. Home Page
-        </a>
+    <p id="correctDisplay"></p>
+    <p id="unansweredDisplay"></p>
+    <p id="percentageDisplay"></p>
+    <p id="timeDisplay"></p>
+
+    <div id="technical">
+        <h3>Technical Information</h3>
+        <p><strong>Error code:</strong> <span id="errorCode"></span></p>
+        <p><strong>Message:</strong> <span id="errorMessage"></span></p>
+        <p><strong>Details:</strong> <span id="errorDetails"></span></p>
+        <p><strong>Hint:</strong> <span id="errorHint"></span></p>
     </div>
+
+    <br>
+
+    <button onclick="goHome()">Return to B.E.P. Home Page</button>
 
 </section>
 
 </div>
 
-<footer>
-    <strong>B.E.P. — Biblical Empowerment Program</strong>
-    <br>
-    Building the Church of Christ
-    <br><br>
-    © 2026 B.E.P. Online Program
-</footer>
-
-
 <script>
+"use strict";
 
-/* =========================================
-   1. SUPABASE CONNECTION
-========================================= */
+/* =====================================
+   SUPABASE CONFIGURATION
+===================================== */
 
 const SUPABASE_URL =
 "https://rukusaellqqwthzibyib.supabase.co";
@@ -370,1043 +298,452 @@ const SUPABASE_URL =
 const SUPABASE_ANON_KEY =
 "sb_publishable_Co8-MoJOV14tXBkSWyXFTA_ULn1WRa5";
 
-const supabaseClient =
-window.supabase.createClient(
+const supabaseClient = window.supabase.createClient(
     SUPABASE_URL,
     SUPABASE_ANON_KEY
 );
 
-
-/* =========================================
-   2. ASSESSMENT SETTINGS
-========================================= */
+/* =====================================
+   ASSESSMENT SETTINGS
+===================================== */
 
 const TOTAL_QUESTIONS = 20;
 const MARKS_PER_QUESTION = 3;
 const TOTAL_MARKS = 60;
 const PASS_MARK = 40;
-const TIME_LIMIT = 30 * 60;
+const TIME_LIMIT_SECONDS = 30 * 60;
 
-
-/* =========================================
-   3. PARTICIPANT DATA
-========================================= */
-
-let participantName = "";
-let participantEmail = "";
-let participantPhone = "";
-let participantLocation = "";
-
+let participant = {};
+let timeRemaining = TIME_LIMIT_SECONDS;
 let timerInterval = null;
-let remainingSeconds = TIME_LIMIT;
+let startedAt = null;
+let submitted = false;
 
-let assessmentStarted = false;
-let assessmentSubmitted = false;
-
-let startTime = null;
-
-
-/* =========================================
-   4. NEW BIBLE QUESTIONS
-========================================= */
+/* =====================================
+   BIBLE QUESTIONS
+===================================== */
 
 const questions = [
 
 {
-question:
-"According to Genesis 12:1–3, what did God promise Abram?",
-
-options: [
-"That he would become king of Egypt",
-"That God would make him a great nation and bless all families through him",
-"That he would never experience hardship",
-"That he would rule over every nation"
-],
-
-answer: 1
+    question: "Who was called by God to leave his country and go to a land God would show him?",
+    options: ["Moses", "Abraham", "David", "Isaac"],
+    answer: 1
 },
 
 {
-question:
-"According to Exodus 3:14, what name did God reveal to Moses?",
-
-options: [
-"The Almighty King",
-"I AM WHO I AM",
-"The Prince of Egypt",
-"The God of Abraham only"
-],
-
-answer: 1
+    question: "What was the name of the mountain where Moses received the Ten Commandments?",
+    options: ["Mount Carmel", "Mount Zion", "Mount Sinai", "Mount Olives"],
+    answer: 2
 },
 
 {
-question:
-"According to Joshua 1:8, what should Joshua meditate on day and night?",
-
-options: [
-"The riches of the land",
-"The words of God's Law",
-"The strength of his army",
-"The traditions of Egypt"
-],
-
-answer: 1
+    question: "Who succeeded Moses as the leader of Israel?",
+    options: ["Aaron", "Joshua", "Caleb", "Samuel"],
+    answer: 1
 },
 
 {
-question:
-"According to 1 Samuel 16:7, what does God look at when choosing a person?",
-
-options: [
-"Physical appearance",
-"Family wealth",
-"The heart",
-"Social position"
-],
-
-answer: 2
+    question: "Who anointed David as king?",
+    options: ["Nathan", "Elijah", "Samuel", "Isaiah"],
+    answer: 2
 },
 
 {
-question:
-"According to Psalm 23:1, who is David's shepherd?",
-
-options: [
-"The king of Israel",
-"The Lord",
-"Samuel",
-"Abraham"
-],
-
-answer: 1
+    question: "In Psalm 23, the Lord is described as what?",
+    options: ["My King", "My Shepherd", "My Judge", "My Warrior"],
+    answer: 1
 },
 
 {
-question:
-"According to Proverbs 3:5–6, what should believers do?",
-
-options: [
-"Trust in the Lord with all their heart",
-"Depend only on their own understanding",
-"Avoid seeking God's direction",
-"Trust only in material possessions"
-],
-
-answer: 0
+    question: "According to Proverbs 3:5, we should trust in the Lord with all our what?",
+    options: ["Strength", "Heart", "Understanding", "Wealth"],
+    answer: 1
 },
 
 {
-question:
-"According to Isaiah 40:31, what will those who wait upon the Lord do?",
-
-options: [
-"Become wealthy immediately",
-"Renew their strength",
-"Never face difficulties",
-"Become rulers of nations"
-],
-
-answer: 1
+    question: "According to Isaiah 40:31, those who hope in the Lord will renew their what?",
+    options: ["Courage", "Strength", "Wisdom", "Riches"],
+    answer: 1
 },
 
 {
-question:
-"According to Matthew 4:19, what did Jesus promise His disciples?",
-
-options: [
-"Political authority",
-"To make them fishers of people",
-"Earthly riches",
-"Freedom from all responsibility"
-],
-
-answer: 1
+    question: "How many days and nights did Jesus fast in the wilderness?",
+    options: ["7", "12", "30", "40"],
+    answer: 3
 },
 
 {
-question:
-"According to Matthew 6:33, what should believers seek first?",
-
-options: [
-"Earthly wealth",
-"Human recognition",
-"The kingdom of God and His righteousness",
-"Political influence"
-],
-
-answer: 2
+    question: "According to Matthew 6, where should we store our treasures?",
+    options: ["On earth", "In heaven", "In the temple", "In banks"],
+    answer: 1
 },
 
 {
-question:
-"According to Matthew 7:24–25, who is like a wise man building his house on rock?",
-
-options: [
-"Someone who hears Jesus' words and puts them into practice",
-"Someone who hears but ignores Jesus",
-"Someone who depends only on wealth",
-"Someone who avoids obedience"
-],
-
-answer: 0
+    question: "In Matthew 7, Jesus teaches that the wise man built his house on what?",
+    options: ["Sand", "Wood", "Rock", "Clay"],
+    answer: 2
 },
 
 {
-question:
-"According to Luke 15:20, what did the father do when he saw his returning son?",
-
-options: [
-"He rejected him",
-"He ignored him",
-"He ran to him, embraced him and kissed him",
-"He sent him away"
-],
-
-answer: 2
+    question: "In the parable of the lost son, who welcomed the son home?",
+    options: ["His brother", "His father", "His neighbour", "His servant"],
+    answer: 1
 },
 
 {
-question:
-"According to John 3:16, why did God give His only Son?",
-
-options: [
-"To establish an earthly government",
-"Because He loved the world",
-"To remove the need for faith",
-"To make everyone wealthy"
-],
-
-answer: 1
+    question: "According to John 3:16, God gave His only begotten what?",
+    options: ["Prophet", "Angel", "Son", "Disciple"],
+    answer: 2
 },
 
 {
-question:
-"According to John 14:6, how did Jesus describe Himself?",
-
-options: [
-"The way, the truth and the life",
-"A prophet without authority",
-"An earthly ruler",
-"A teacher without a mission"
-],
-
-answer: 0
+    question: "Jesus said, 'I am the way, the truth, and the what?'",
+    options: ["Light", "Life", "Shepherd", "Door"],
+    answer: 1
 },
 
 {
-question:
-"According to Acts 1:8, what would the Holy Spirit give the disciples?",
-
-options: [
-"Political authority",
-"Power to become wealthy",
-"Power to be witnesses of Jesus",
-"Freedom from serving others"
-],
-
-answer: 2
+    question: "What did Jesus promise His disciples would receive when the Holy Spirit came upon them?",
+    options: ["Wealth", "Power", "Fame", "Political authority"],
+    answer: 1
 },
 
 {
-question:
-"According to Acts 2:42, what did the early believers devote themselves to?",
-
-options: [
-"Personal fame",
-"The apostles' teaching, fellowship, breaking of bread and prayers",
-"Political debates",
-"Building personal kingdoms"
-],
-
-answer: 1
+    question: "On the day of Pentecost, the disciples were filled with whom?",
+    options: ["The crowd", "The Holy Spirit", "The angels", "The prophets"],
+    answer: 1
 },
 
 {
-question:
-"According to Romans 12:2, how are believers transformed?",
-
-options: [
-"By copying the world",
-"By renewing their minds",
-"By pursuing popularity",
-"By avoiding God's Word"
-],
-
-answer: 1
+    question: "According to Romans 12:2, believers should be transformed by the renewing of their what?",
+    options: ["Body", "Mind", "House", "Position"],
+    answer: 1
 },
 
 {
-question:
-"According to 1 Corinthians 13:4–7, what does love do?",
-
-options: [
-"Boasts and seeks its own way",
-"Is patient and kind",
-"Envy and keeps records of wrongs",
-"Delights in wrongdoing"
-],
-
-answer: 1
+    question: "According to 1 Corinthians 13, the greatest of faith, hope and love is what?",
+    options: ["Faith", "Hope", "Love", "Knowledge"],
+    answer: 2
 },
 
 {
-question:
-"According to Galatians 5:22–23, which of the following is part of the fruit of the Spirit?",
-
-options: [
-"Jealousy",
-"Hatred",
-"Self-control",
-"Selfish ambition"
-],
-
-answer: 2
+    question: "Which of the following is listed as the fruit of the Spirit in Galatians 5?",
+    options: ["Jealousy", "Kindness", "Pride", "Anger"],
+    answer: 1
 },
 
 {
-question:
-"According to Ephesians 6:11, what should believers put on?",
-
-options: [
-"The full armour of God",
-"Earthly riches",
-"Human authority",
-"Political influence"
-],
-
-answer: 0
+    question: "According to Ephesians 6, what is the sword of the Spirit?",
+    options: ["Prayer", "The Word of God", "Faith", "Righteousness"],
+    answer: 1
 },
 
 {
-question:
-"According to 2 Timothy 3:16, what is Scripture useful for?",
-
-options: [
-"Entertainment only",
-"Teaching, rebuking, correcting and training in righteousness",
-"Replacing prayer",
-"Promoting personal fame"
-],
-
-answer: 1
+    question: "According to 2 Timothy 3:16, all Scripture is given by what?",
+    options: ["Human wisdom", "Inspiration of God", "Tradition", "The prophets alone"],
+    answer: 1
 }
 
 ];
 
+/* =====================================
+   DISPLAY QUESTIONS
+===================================== */
 
-/* =========================================
-   5. START ASSESSMENT
-========================================= */
+function displayQuestions() {
 
-function startAssessment() {
+    const questionsContainer =
+        document.getElementById("questions");
 
-    const errorBox =
-    document.getElementById("detailsError");
+    questionsContainer.innerHTML = "";
 
-    errorBox.style.display = "none";
+    questions.forEach((item, index) => {
 
-    participantName =
-    document.getElementById("visitorName").value.trim();
+        const questionDiv = document.createElement("div");
+        questionDiv.className = "question";
 
-    participantEmail =
-    document.getElementById("visitorEmail").value.trim();
+        const heading = document.createElement("h3");
+        heading.textContent =
+            "Question " + (index + 1) + " of " + TOTAL_QUESTIONS;
 
-    participantPhone =
-    document.getElementById("visitorPhone").value.trim();
+        questionDiv.appendChild(heading);
 
-    participantLocation =
-    document.getElementById("visitorLocation").value.trim();
+        const questionText = document.createElement("p");
+        questionText.textContent = item.question;
 
+        questionDiv.appendChild(questionText);
+
+        item.options.forEach((option, optionIndex) => {
+
+            const label = document.createElement("label");
+            label.className = "option";
+
+            const radio = document.createElement("input");
+            radio.type = "radio";
+            radio.name = "question" + index;
+            radio.value = optionIndex;
+
+            label.appendChild(radio);
+            label.appendChild(
+                document.createTextNode(
+                    " " + String.fromCharCode(65 + optionIndex) +
+                    ". " + option
+                )
+            );
+
+            questionDiv.appendChild(label);
+        });
+
+        questionsContainer.appendChild(questionDiv);
+    });
+}
+
+/* =====================================
+   START ASSESSMENT
+===================================== */
+
+document.getElementById("participantForm")
+.addEventListener("submit", function(event) {
+
+    event.preventDefault();
+
+    participant = {
+        name: document.getElementById("visitorName").value.trim(),
+        email: document.getElementById("visitorEmail").value.trim().toLowerCase(),
+        phone: document.getElementById("visitorPhone").value.trim(),
+        location: document.getElementById("visitorLocation").value.trim()
+    };
 
     if (
-        !participantName ||
-        !participantEmail ||
-        !participantPhone ||
-        !participantLocation
+        !participant.name ||
+        !participant.email ||
+        !participant.phone ||
+        !participant.location
     ) {
-
-        errorBox.textContent =
-        "Please complete all participant details.";
-
-        errorBox.style.display = "block";
-
+        alert("Please complete all participant details.");
         return;
     }
 
+    document.getElementById("registration").style.display = "none";
+    document.getElementById("assessment").style.display = "block";
 
-    const emailPattern =
-    /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    displayQuestions();
 
-    if (!emailPattern.test(participantEmail)) {
-
-        errorBox.textContent =
-        "Please enter a valid email address.";
-
-        errorBox.style.display = "block";
-
-        return;
-    }
-
-
-    assessmentStarted = true;
-
-    assessmentSubmitted = false;
-
-    startTime = Date.now();
-
-    document.getElementById(
-        "detailsSection"
-    ).style.display = "none";
-
-    document.getElementById(
-        "quizSection"
-    ).style.display = "block";
-
-
-    buildQuiz();
+    startedAt = Date.now();
 
     startTimer();
 
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-    });
-}
+    window.scrollTo(0, 0);
+});
 
-
-/* =========================================
-   6. DISPLAY QUESTIONS
-========================================= */
-
-function buildQuiz() {
-
-    const form =
-    document.getElementById("quizForm");
-
-    form.innerHTML = "";
-
-    questions.forEach((question, index) => {
-
-        const box =
-        document.createElement("div");
-
-        box.className = "question";
-
-
-        const title =
-        document.createElement("div");
-
-        title.className = "question-title";
-
-        title.textContent =
-        `Question ${index + 1}: ${question.question}`;
-
-        box.appendChild(title);
-
-
-        question.options.forEach((option, optionIndex) => {
-
-            const label =
-            document.createElement("label");
-
-            label.className = "option";
-
-
-            const radio =
-            document.createElement("input");
-
-            radio.type = "radio";
-
-            radio.name = `question_${index}`;
-
-            radio.value = optionIndex;
-
-
-            label.appendChild(radio);
-
-            label.appendChild(
-                document.createTextNode(option)
-            );
-
-            box.appendChild(label);
-        });
-
-
-        form.appendChild(box);
-    });
-}
-
-
-/* =========================================
-   7. TIMER
-========================================= */
+/* =====================================
+   TIMER
+===================================== */
 
 function startTimer() {
 
-    remainingSeconds = TIME_LIMIT;
-
     updateTimerDisplay();
 
-    clearInterval(timerInterval);
+    timerInterval = setInterval(function() {
 
-    timerInterval = setInterval(() => {
-
-        remainingSeconds--;
+        timeRemaining--;
 
         updateTimerDisplay();
 
-        if (remainingSeconds <= 0) {
-
+        if (timeRemaining <= 0) {
             clearInterval(timerInterval);
-
             submitAssessment(true);
         }
 
     }, 1000);
 }
 
-
 function updateTimerDisplay() {
 
-    const minutes =
-    Math.floor(remainingSeconds / 60);
+    const minutes = Math.floor(timeRemaining / 60);
+    const seconds = timeRemaining % 60;
 
-    const seconds =
-    remainingSeconds % 60;
-
-    const timer =
-    document.getElementById("timer");
-
-    timer.textContent =
-    "Time Remaining: " +
-    String(minutes).padStart(2, "0") +
-    ":" +
-    String(seconds).padStart(2, "0");
-
-
-    if (remainingSeconds <= 300) {
-
-        timer.style.background = "#f8d7da";
-
-        timer.style.color = "#842029";
-    }
+    document.getElementById("timer").textContent =
+        "Time Remaining: " +
+        String(minutes).padStart(2, "0") +
+        ":" +
+        String(seconds).padStart(2, "0");
 }
 
+/* =====================================
+   SUBMIT ASSESSMENT
+===================================== */
 
-/* =========================================
-   8. SUBMIT AND GRADE
-========================================= */
+document.getElementById("quizForm")
+.addEventListener("submit", function(event) {
+
+    event.preventDefault();
+
+    submitAssessment(false);
+});
 
 async function submitAssessment(autoSubmitted) {
 
-    if (
-        !assessmentStarted ||
-        assessmentSubmitted
-    ) {
-        return;
-    }
+    if (submitted) return;
 
-
-    if (!autoSubmitted) {
-
-        const confirmed =
-        confirm("Are you sure you want to submit your assessment?");
-
-        if (!confirmed) {
-            return;
-        }
-    }
-
-
-    assessmentSubmitted = true;
+    submitted = true;
 
     clearInterval(timerInterval);
 
+    document.getElementById("submitButton").disabled = true;
 
-    document.getElementById(
-        "submitButton"
-    ).disabled = true;
-
-
-    const timeTakenSeconds =
-    Math.min(
-        TIME_LIMIT,
-        Math.max(
-            0,
-            Math.floor(
-                (Date.now() - startTime) / 1000
-            )
-        )
+    const elapsedSeconds = Math.min(
+        TIME_LIMIT_SECONDS,
+        Math.max(0, Math.floor((Date.now() - startedAt) / 1000))
     );
 
-
     let correctAnswers = 0;
-
     let unanswered = 0;
-
 
     questions.forEach((question, index) => {
 
-        const selected =
-        document.querySelector(
-            `input[name="question_${index}"]:checked`
+        const selected = document.querySelector(
+            'input[name="question' + index + '"]:checked'
         );
 
-
         if (!selected) {
-
             unanswered++;
-
-            return;
-        }
-
-
-        if (
-            Number(selected.value) ===
-            question.answer
-        ) {
-
+        } else if (Number(selected.value) === question.answer) {
             correctAnswers++;
         }
     });
 
+    const score = correctAnswers * MARKS_PER_QUESTION;
 
-    const score =
-    correctAnswers * MARKS_PER_QUESTION;
-
-
-    const percentage =
-    Math.round(
+    const percentage = Math.round(
         (score / TOTAL_MARKS) * 100
     );
 
+    const passed = score >= PASS_MARK;
 
-    const result =
-    score >= PASS_MARK ? "PASS" : "FAIL";
-
-
-    showResult(
-        score,
-        correctAnswers,
-        unanswered,
-        percentage,
-        result,
-        timeTakenSeconds,
-        autoSubmitted
-    );
-
-
-    await saveResult(
-        score,
-        correctAnswers,
-        unanswered,
-        percentage,
-        result,
-        timeTakenSeconds
-    );
-}
-
-
-/* =========================================
-   9. DISPLAY RESULT
-========================================= */
-
-function showResult(
-    score,
-    correctAnswers,
-    unanswered,
-    percentage,
-    result,
-    timeTaken,
-    autoSubmitted
-) {
-
-    document.getElementById(
-        "quizSection"
-    ).style.display = "none";
-
-    document.getElementById(
-        "resultSection"
-    ).style.display = "block";
-
-
-    const minutes =
-    Math.floor(timeTaken / 60);
-
-    const seconds =
-    timeTaken % 60;
-
-
-    let html = "";
-
-
-    if (result === "PASS") {
-
-        html = `
-
-        <div class="success">
-
-            <h2>🎉 Congratulations! You Passed!</h2>
-
-            <p>Dear <strong>${escapeHtml(participantName)}</strong>,</p>
-
-            <p>
-                You have successfully completed
-                the B.E.P. Online Bible Assessment.
-            </p>
-
-            <div class="score">
-                ${score} / 60
-            </div>
-
-            <p><strong>Result:</strong> PASS</p>
-
-            <p><strong>Percentage:</strong> ${percentage}%</p>
-
-            <p><strong>Correct Answers:</strong> ${correctAnswers}/20</p>
-
-            <p><strong>Unanswered:</strong> ${unanswered}</p>
-
-            <p>
-                <strong>Time Taken:</strong>
-                ${minutes} minutes ${seconds} seconds
-            </p>
-
-            <hr>
-
-            <h3>A Message of Encouragement</h3>
-
-            <p>
-                Your effort in studying God's Word
-                is appreciated. Continue growing
-                in faith, wisdom, obedience and
-                your relationship with Jesus Christ.
-            </p>
-
-            <p>
-                "Let the word of Christ dwell in you
-                richly in all wisdom."
-                <strong>— Colossians 3:16</strong>
-            </p>
-
-            <p>
-                Keep learning. Keep growing.
-                Keep serving.
-            </p>
-
-            <strong>
-                B.E.P. — Biblical Empowerment Program
-            </strong>
-
-            <br>
-            Building the Church of Christ
-
-        </div>
-
-        `;
-
-    } else {
-
-        html = `
-
-        <div class="warning">
-
-            <h2>🙏 Keep Growing in God's Word</h2>
-
-            <p>Dear <strong>${escapeHtml(participantName)}</strong>,</p>
-
-            <p>
-                Your B.E.P. Online Bible Assessment
-                has been completed.
-            </p>
-
-            <div class="score">
-                ${score} / 60
-            </div>
-
-            <p><strong>Result:</strong> NOT YET PASSED</p>
-
-            <p><strong>Percentage:</strong> ${percentage}%</p>
-
-            <p><strong>Correct Answers:</strong> ${correctAnswers}/20</p>
-
-            <p><strong>Unanswered:</strong> ${unanswered}</p>
-
-            <p>
-                The pass mark is 40 out of 60.
-            </p>
-
-            <hr>
-
-            <h3>Do Not Give Up!</h3>
-
-            <p>
-                This is an opportunity to learn,
-                review Scripture and strengthen
-                your understanding of God's Word.
-            </p>
-
-            <p>
-                "Let us not become weary in doing good,
-                for at the proper time we will reap
-                a harvest if we do not give up."
-                <strong>— Galatians 6:9</strong>
-            </p>
-
-            <p>
-                Keep studying. Keep growing.
-                Keep trusting God.
-            </p>
-
-            <strong>
-                B.E.P. — Biblical Empowerment Program
-            </strong>
-
-            <br>
-            Building the Church of Christ
-
-        </div>
-
-        `;
-    }
-
-
-    if (autoSubmitted) {
-
-        html += `
-        <div class="warning" style="margin-top:20px;">
-            Your assessment was automatically submitted
-            because the 30-minute time limit expired.
-        </div>
-        `;
-    }
-
-
-    document.getElementById(
-        "resultContent"
-    ).innerHTML = html;
-
-
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-    });
-}
-
-
-/* =========================================
-   10. SAVE TO SUPABASE
-========================================= */
-
-async function saveResult(
-    score,
-    correctAnswers,
-    unanswered,
-    percentage,
-    result,
-    timeTakenSeconds
-) {
-
-    const saveStatus =
-    document.getElementById("saveStatus");
-
-
-    saveStatus.innerHTML =
-    "<p>Saving your assessment result...</p>";
-
+    const resultText = passed ? "Pass" : "Fail";
 
     const record = {
-
-        visitor_name: participantName,
-
-        visitor_email: participantEmail,
-
-        visitor_phone: participantPhone,
-
-        visitor_location: participantLocation,
-
+        visitor_name: participant.name,
+        visitor_email: participant.email,
+        visitor_phone: participant.phone,
+        visitor_location: participant.location,
         score: score,
-
         total_marks: TOTAL_MARKS,
-
         correct_answers: correctAnswers,
-
         unanswered: unanswered,
-
         percentage: percentage,
-
-        result: result,
-
-        time_taken_seconds: timeTakenSeconds
-
+        result: resultText,
+        time_taken_seconds: elapsedSeconds
     };
 
+    document.getElementById("assessment").style.display = "none";
+    document.getElementById("result").style.display = "block";
 
-    console.log(
-        "B.E.P. submission record:",
-        record
-    );
+    document.getElementById("scoreDisplay").textContent =
+        score + " / " + TOTAL_MARKS;
 
+    document.getElementById("resultHeading").textContent =
+        passed ? "Congratulations!" : "Assessment Completed";
+
+    document.getElementById("resultHeading").className =
+        passed ? "success" : "failure";
+
+    document.getElementById("resultMessage").textContent =
+        passed
+        ? "You have passed the B.E.P. Bible Assessment."
+        : "You did not reach the pass mark of 40. Keep studying God's Word and continue growing in faith.";
+
+    document.getElementById("correctDisplay").textContent =
+        "Correct answers: " + correctAnswers + " out of 20";
+
+    document.getElementById("unansweredDisplay").textContent =
+        "Unanswered questions: " + unanswered;
+
+    document.getElementById("percentageDisplay").textContent =
+        "Percentage: " + percentage + "%";
+
+    document.getElementById("timeDisplay").textContent =
+        "Time taken: " + formatTime(elapsedSeconds);
+
+    window.scrollTo(0, 0);
+
+    await saveResult(record);
+}
+
+/* =====================================
+   SAVE RESULT TO SUPABASE
+===================================== */
+
+async function saveResult(record) {
+
+    const statusBox = document.getElementById("status");
+
+    statusBox.style.display = "block";
+    statusBox.className = "";
+    statusBox.textContent = "Saving your assessment result...";
 
     try {
 
-        const { error } =
-        await supabaseClient
+        const { error } = await supabaseClient
             .from("bep_public_quiz_results")
             .insert(record);
 
-
         if (error) {
-
-            console.error(
-                "B.E.P. DATABASE ERROR:",
-                error
-            );
-
-
-            saveStatus.innerHTML = `
-
-            <div class="error-box">
-
-                <strong>
-                    Your assessment was completed,
-                    but the database could not save
-                    your result.
-                </strong>
-
-                <p>
-                    Please contact B.E.P. support.
-                </p>
-
-                <details>
-                    <summary>
-                        Technical information
-                    </summary>
-
-                    <p>
-                        Error code:
-                        ${escapeHtml(error.code || "N/A")}
-                    </p>
-
-                    <p>
-                        Message:
-                        ${escapeHtml(error.message || "N/A")}
-                    </p>
-
-                    <p>
-                        Details:
-                        ${escapeHtml(error.details || "N/A")}
-                    </p>
-
-                    <p>
-                        Hint:
-                        ${escapeHtml(error.hint || "N/A")}
-                    </p>
-
-                </details>
-
-            </div>
-
-            `;
-
-            return;
+            throw error;
         }
 
+        statusBox.className = "status-success";
 
-        console.log(
-            "B.E.P. RESULT SAVED SUCCESSFULLY"
-        );
+        statusBox.textContent =
+            "Your assessment result has been saved successfully. Thank you for participating in B.E.P.";
 
-
-        saveStatus.innerHTML = `
-
-        <div class="success" style="margin-top:20px;">
-
-            <h3>✅ Assessment Saved Successfully!</h3>
-
-            <p>
-                Your assessment result has been
-                recorded in the B.E.P. database.
-            </p>
-
-        </div>
-
-        `;
+        document.getElementById("technical").style.display = "none";
 
     } catch (error) {
 
-        console.error(
-            "UNEXPECTED DATABASE ERROR:",
-            error
-        );
+        console.error("B.E.P. assessment save error:", error);
 
+        statusBox.className = "status-error";
 
-        saveStatus.innerHTML = `
+        statusBox.textContent =
+            "Your assessment was completed, but the database could not save your result. Please contact B.E.P. support.";
 
-        <div class="error-box">
+        document.getElementById("technical").style.display = "block";
 
-            <strong>
-                Database connection error.
-            </strong>
+        document.getElementById("errorCode").textContent =
+            error.code || "N/A";
 
-            <p>
-                Your assessment was completed,
-                but saving could not be confirmed.
-            </p>
+        document.getElementById("errorMessage").textContent =
+            error.message || "Unknown error";
 
-            <details>
-                <summary>Technical information</summary>
+        document.getElementById("errorDetails").textContent =
+            error.details || "N/A";
 
-                <p>
-                    ${escapeHtml(
-                        error.message || String(error)
-                    )}
-                </p>
-
-            </details>
-
-        </div>
-
-        `;
+        document.getElementById("errorHint").textContent =
+            error.hint || "N/A";
     }
 }
 
+/* =====================================
+   HELPER FUNCTIONS
+===================================== */
 
-/* =========================================
-   11. SAFE TEXT DISPLAY
-========================================= */
+function formatTime(seconds) {
 
-function escapeHtml(value) {
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = seconds % 60;
 
-    return String(value)
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
+    return minutes + " minutes " +
+        remainingSeconds + " seconds";
 }
 
+function goHome() {
 
-/* =========================================
-   12. PREVENT ACCIDENTAL EXIT
-========================================= */
-
-window.addEventListener(
-    "beforeunload",
-    function(event) {
-
-        if (
-            assessmentStarted &&
-            !assessmentSubmitted
-        ) {
-
-            event.preventDefault();
-
-            event.returnValue = "";
-        }
-    }
-);
+    window.location.href =
+        "https://beponlineprog.github.io/bep-website/";
+}
 
 </script>
 
