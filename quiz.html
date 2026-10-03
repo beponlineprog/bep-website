@@ -4,8 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>B.E.P. Online Bible Quiz</title>
+  <title>B.E.P. Online Bible Assessment</title>
 
+  <!-- Supabase -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <style>
@@ -15,261 +16,316 @@
 
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
+      font-family: Arial, Helvetica, sans-serif;
       background: #f4f7fb;
-      color: #222;
+      color: #1f2937;
+      line-height: 1.6;
     }
 
     header {
-      background: linear-gradient(135deg, #063970, #0b5fa5);
+      background: linear-gradient(135deg, #0b3d91, #1769aa);
       color: white;
       text-align: center;
-      padding: 30px 15px;
+      padding: 35px 20px;
     }
 
     header h1 {
       margin: 0 0 8px;
-      font-size: 30px;
+      font-size: 32px;
     }
 
     header p {
       margin: 5px 0;
+      font-size: 17px;
     }
 
     .container {
-      max-width: 900px;
-      margin: 25px auto;
-      padding: 0 15px;
+      width: 94%;
+      max-width: 1000px;
+      margin: 25px auto 50px;
     }
 
     .card {
       background: white;
-      border-radius: 12px;
+      border-radius: 14px;
       padding: 25px;
-      margin-bottom: 20px;
-      box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+      margin-bottom: 22px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
     }
 
     .card h2 {
-      color: #063970;
       margin-top: 0;
+      color: #0b3d91;
     }
 
     .instructions {
-      background: #eef6ff;
-      border-left: 5px solid #0b5fa5;
+      border-left: 5px solid #d4a017;
     }
 
-    .field {
+    .instructions ul {
+      padding-left: 22px;
+    }
+
+    .important {
+      background: #fff8dc;
+      border: 1px solid #e5c75a;
+      padding: 15px;
+      border-radius: 8px;
+      margin-top: 15px;
+    }
+
+    .form-group {
       margin-bottom: 18px;
     }
 
-    .field label {
+    .form-group label {
       display: block;
       font-weight: bold;
       margin-bottom: 7px;
     }
 
-    .field input {
+    .form-group input {
       width: 100%;
-      padding: 12px;
-      border: 1px solid #bbb;
-      border-radius: 7px;
+      padding: 13px;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
       font-size: 16px;
     }
 
-    .timer {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: #063970;
-      color: white;
-      text-align: center;
-      padding: 14px;
-      font-size: 22px;
-      font-weight: bold;
+    .form-group input:focus {
+      outline: none;
+      border-color: #1769aa;
+      box-shadow: 0 0 0 2px rgba(23,105,170,0.12);
+    }
+
+    .required {
+      color: #c62828;
+    }
+
+    .start-btn,
+    .submit-btn,
+    .home-btn {
+      display: inline-block;
+      border: none;
       border-radius: 8px;
+      padding: 14px 24px;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+      text-decoration: none;
+      transition: 0.2s;
+    }
+
+    .start-btn {
+      background: #0b3d91;
+      color: white;
+      width: 100%;
+    }
+
+    .start-btn:hover {
+      background: #082f70;
+    }
+
+    .submit-btn {
+      background: #1769aa;
+      color: white;
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    .submit-btn:hover {
+      background: #0e548b;
+    }
+
+    .home-btn {
+      background: #0b3d91;
+      color: white;
+      margin-top: 20px;
+    }
+
+    .home-btn:hover {
+      background: #082f70;
+    }
+
+    .error-message {
+      display: none;
+      background: #ffe7e7;
+      color: #a40000;
+      border: 1px solid #e0a0a0;
+      padding: 13px;
+      border-radius: 8px;
+      margin-bottom: 18px;
+      font-weight: bold;
+    }
+
+    .success-message {
+      display: none;
+      background: #e8f7e8;
+      color: #176b17;
+      border: 1px solid #9bd39b;
+      padding: 13px;
+      border-radius: 8px;
+      margin-bottom: 18px;
+      font-weight: bold;
+    }
+
+    /* TIMER */
+
+    .timer {
+      display: none;
+      position: sticky;
+      top: 10px;
+      z-index: 100;
+      background: #fff;
+      border: 3px solid #0b3d91;
+      color: #0b3d91;
+      text-align: center;
+      padding: 12px;
+      border-radius: 10px;
       margin-bottom: 20px;
+      font-size: 24px;
+      font-weight: bold;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+    }
+
+    .timer.warning {
+      border-color: #c62828;
+      color: #c62828;
+    }
+
+    /* QUESTIONS */
+
+    #quizSection {
+      display: none;
     }
 
     .question {
-      margin-bottom: 28px;
-      padding-bottom: 22px;
-      border-bottom: 1px solid #ddd;
-    }
-
-    .question:last-child {
-      border-bottom: none;
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 22px;
+      margin-bottom: 20px;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.07);
+      border-left: 5px solid #1769aa;
     }
 
     .question h3 {
-      font-size: 18px;
-      line-height: 1.5;
-      margin-bottom: 14px;
+      margin-top: 0;
+      color: #0b3d91;
     }
 
     .option {
       display: block;
-      margin: 9px 0;
-      padding: 11px;
-      border: 1px solid #ddd;
-      border-radius: 7px;
+      padding: 11px 12px;
+      margin: 8px 0;
+      border: 1px solid #d7dee8;
+      border-radius: 8px;
       cursor: pointer;
-      background: #fafafa;
+      transition: 0.15s;
     }
 
     .option:hover {
-      background: #eef6ff;
+      background: #f0f6ff;
+      border-color: #1769aa;
     }
 
     .option input {
-      margin-right: 10px;
+      margin-right: 9px;
     }
 
-    .submit-btn,
-    .home-btn {
-      display: block;
-      width: 100%;
-      padding: 16px;
-      background: #063970;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      font-size: 18px;
+    .progress {
+      text-align: center;
       font-weight: bold;
-      cursor: pointer;
-      text-align: center;
-      text-decoration: none;
-    }
-
-    .submit-btn:hover,
-    .home-btn:hover {
-      background: #0b5fa5;
-    }
-
-    .submit-btn:disabled {
-      background: #888;
-      cursor: not-allowed;
-    }
-
-    .message {
-      display: none;
-      padding: 20px;
-      border-radius: 10px;
+      color: #0b3d91;
       margin-bottom: 20px;
-      text-align: center;
     }
 
-    .success {
-      display: block;
-      background: #eaf8ee;
-      border: 1px solid #65b879;
-      color: #175c28;
-    }
+    /* RESULT */
 
-    .error {
-      display: block;
-      background: #fff0f0;
-      border: 1px solid #d66;
-      color: #8b1e1e;
-    }
-
-    .result {
+    #resultSection {
       display: none;
-      padding: 30px 25px;
-      border-radius: 12px;
+    }
+
+    .result-card {
+      text-align: center;
       background: white;
-      margin-top: 20px;
-      box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+      border-radius: 14px;
+      padding: 35px 25px;
+      box-shadow: 0 5px 18px rgba(0,0,0,0.1);
     }
 
-    .result-header {
-      text-align: center;
-    }
-
-    .result-header h1 {
-      color: #063970;
+    .result-card h2 {
+      color: #0b3d91;
       font-size: 30px;
-      margin-bottom: 10px;
     }
 
-    .result-header h2 {
-      color: #0b5fa5;
-      margin-top: 5px;
-    }
-
-    .result-message {
-      line-height: 1.7;
-      font-size: 16px;
-      text-align: center;
-      margin: 25px auto;
-      max-width: 750px;
-    }
-
-    .result-message blockquote {
-      margin: 25px auto;
-      padding: 18px;
-      background: #f4f7fb;
-      border-left: 5px solid #0b5fa5;
-      font-style: italic;
-      max-width: 650px;
+    .participant-name {
+      font-size: 22px;
+      font-weight: bold;
+      margin: 15px 0;
     }
 
     .score-box {
-      text-align: center;
-      background: #eef6ff;
-      border-radius: 12px;
-      padding: 20px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
       margin: 25px 0;
     }
 
-    .score {
-      font-size: 42px;
-      font-weight: bold;
-      color: #063970;
-      margin: 10px 0;
+    .score-item {
+      background: #f1f6fc;
+      padding: 15px;
+      border-radius: 9px;
     }
 
-    .passed {
-      color: #16803c;
-      font-size: 25px;
-      font-weight: bold;
+    .score-item strong {
+      display: block;
+      font-size: 24px;
+      color: #0b3d91;
     }
 
-    .failed {
-      color: #b42318;
-      font-size: 25px;
-      font-weight: bold;
-    }
-
-    .home-btn {
+    .result-message {
       margin-top: 25px;
+      text-align: left;
+      background: #f8fafc;
+      padding: 20px;
+      border-radius: 10px;
     }
 
-    footer {
+    .result-message h3 {
+      color: #0b3d91;
       text-align: center;
-      background: #063970;
-      color: white;
-      padding: 25px 15px;
-      margin-top: 40px;
+    }
+
+    .verse {
+      margin-top: 20px;
+      padding: 15px;
+      background: #fff8dc;
+      border-left: 4px solid #d4a017;
+      font-style: italic;
+    }
+
+    .footer {
+      text-align: center;
+      color: #64748b;
+      padding: 25px;
+      font-size: 14px;
     }
 
     @media (max-width: 600px) {
-
       header h1 {
-        font-size: 24px;
+        font-size: 25px;
       }
 
       .card {
         padding: 18px;
       }
 
-      .timer {
-        font-size: 19px;
+      .score-box {
+        grid-template-columns: 1fr;
       }
 
-      .result-header h1 {
-        font-size: 25px;
+      .timer {
+        font-size: 21px;
       }
     }
   </style>
@@ -278,414 +334,985 @@
 <body>
 
 <header>
-  <h1>B.E.P. Online Bible Quiz</h1>
-  <p>Growing in God's Word. Growing in Faith. Growing Together.</p>
-  <p><strong>Biblical Empowerment Program</strong></p>
+  <h1>B.E.P. Online Bible Assessment</h1>
+  <p>Biblical Empowerment Program</p>
+  <p>Building the Church of Christ</p>
 </header>
 
 <div class="container">
 
-  <div id="message" class="message"></div>
+  <!-- =====================================================
+       INSTRUCTIONS
+       ===================================================== -->
 
-  <div class="card instructions">
+  <div class="card instructions" id="instructionsCard">
+
     <h2>Assessment Instructions</h2>
 
-    <p><strong>Total Questions:</strong> 20</p>
-    <p><strong>Marks per Question:</strong> 3</p>
-    <p><strong>Total Marks:</strong> 60</p>
-    <p><strong>Pass Mark:</strong> 40/60</p>
-    <p><strong>Time Allowed:</strong> 30 minutes</p>
+    <ul>
+      <li>This assessment contains <strong>20 questions</strong>.</li>
+      <li>Each question carries <strong>3 marks</strong>.</li>
+      <li>Total marks: <strong>60</strong>.</li>
+      <li>The pass mark is <strong>40 out of 60</strong>.</li>
+      <li>You have <strong>30 minutes</strong> to complete the assessment.</li>
+      <li>Select only one answer for each question.</li>
+      <li>Unanswered questions receive zero marks.</li>
+      <li>Once the assessment begins, the timer will start.</li>
+      <li>When the timer reaches zero, the assessment will be submitted automatically.</li>
+    </ul>
 
-    <p>
-      Answer all questions carefully. Once you submit the assessment,
-      your result will be calculated and saved.
-    </p>
+    <div class="important">
+      <strong>Important:</strong>
+      Please enter your participant details below before starting the assessment.
+      The questions will remain locked until you click
+      <strong>Start Assessment</strong>.
+    </div>
+
   </div>
 
-  <div class="card">
+
+  <!-- =====================================================
+       PARTICIPANT DETAILS
+       ===================================================== -->
+
+  <div class="card" id="participantCard">
+
     <h2>Participant Details</h2>
 
-    <div class="field">
-      <label for="participantName">Full Name *</label>
-      <input type="text" id="participantName" required>
+    <p>Please complete all required information before starting.</p>
+
+    <div id="detailsError" class="error-message"></div>
+
+    <div class="form-group">
+      <label for="participantName">
+        Full Name <span class="required">*</span>
+      </label>
+
+      <input
+        type="text"
+        id="participantName"
+        placeholder="Enter your full name"
+        autocomplete="name"
+      >
     </div>
 
-    <div class="field">
-      <label for="email">Email Address *</label>
-      <input type="email" id="email" required>
+    <div class="form-group">
+      <label for="participantEmail">
+        Email Address <span class="required">*</span>
+      </label>
+
+      <input
+        type="email"
+        id="participantEmail"
+        placeholder="Enter your email address"
+        autocomplete="email"
+      >
     </div>
 
-    <div class="field">
-      <label for="phone">Phone / WhatsApp *</label>
-      <input type="text" id="phone" required>
+    <div class="form-group">
+      <label for="participantPhone">
+        Phone / WhatsApp <span class="required">*</span>
+      </label>
+
+      <input
+        type="tel"
+        id="participantPhone"
+        placeholder="Enter your phone or WhatsApp number"
+        autocomplete="tel"
+      >
     </div>
 
-    <div class="field">
-      <label for="location">Location *</label>
-      <input type="text" id="location" required>
-    </div>
-  </div>
+    <div class="form-group">
+      <label for="participantLocation">
+        Location <span class="required">*</span>
+      </label>
 
-  <div class="timer">
-    Time Remaining: <span id="timer">30:00</span>
-  </div>
-
-  <form id="quizForm">
-
-    <div class="card">
-
-      <div class="question">
-        <h3>1. According to Romans 4, how was Abraham counted as righteous?</h3>
-        <label class="option"><input type="radio" name="q1" value="A"> A. By keeping the Law perfectly</label>
-        <label class="option"><input type="radio" name="q1" value="B"> B. Through faith</label>
-        <label class="option"><input type="radio" name="q1" value="C"> C. Through wealth</label>
-        <label class="option"><input type="radio" name="q1" value="D"> D. Through religious position</label>
-      </div>
-
-      <div class="question">
-        <h3>2. According to Exodus 19:5–6, Israel was called to be what?</h3>
-        <label class="option"><input type="radio" name="q2" value="A"> A. A nation of warriors</label>
-        <label class="option"><input type="radio" name="q2" value="B"> B. A kingdom of priests and a holy nation</label>
-        <label class="option"><input type="radio" name="q2" value="C"> C. The richest nation</label>
-        <label class="option"><input type="radio" name="q2" value="D"> D. A political kingdom</label>
-      </div>
-
-      <div class="question">
-        <h3>3. According to Mark 12:29–31, what are the greatest commandments?</h3>
-        <label class="option"><input type="radio" name="q3" value="A"> A. Fast and pray every day</label>
-        <label class="option"><input type="radio" name="q3" value="B"> B. Love God and love your neighbour</label>
-        <label class="option"><input type="radio" name="q3" value="C"> C. Give money to the poor</label>
-        <label class="option"><input type="radio" name="q3" value="D"> D. Attend church every day</label>
-      </div>
-
-      <div class="question">
-        <h3>4. What does Isaiah 53 teach about the suffering Servant?</h3>
-        <label class="option"><input type="radio" name="q4" value="A"> A. He suffered because of His own sin</label>
-        <label class="option"><input type="radio" name="q4" value="B"> B. He suffers on behalf of others</label>
-        <label class="option"><input type="radio" name="q4" value="C"> C. He avoided suffering</label>
-        <label class="option"><input type="radio" name="q4" value="D"> D. He became a political ruler</label>
-      </div>
-
-      <div class="question">
-        <h3>5. According to Jeremiah 31:31–34, where would God write His law?</h3>
-        <label class="option"><input type="radio" name="q5" value="A"> A. On their hearts</label>
-        <label class="option"><input type="radio" name="q5" value="B"> B. On buildings</label>
-        <label class="option"><input type="radio" name="q5" value="C"> C. On stones only</label>
-        <label class="option"><input type="radio" name="q5" value="D"> D. On government documents</label>
-      </div>
-
-      <div class="question">
-        <h3>6. According to Hebrews 7, what is distinctive about Christ's priesthood?</h3>
-        <label class="option"><input type="radio" name="q6" value="A"> A. It lasted only one year</label>
-        <label class="option"><input type="radio" name="q6" value="B"> B. His priesthood is permanent and superior</label>
-        <label class="option"><input type="radio" name="q6" value="C"> C. It depended on earthly priests</label>
-        <label class="option"><input type="radio" name="q6" value="D"> D. It ended at the resurrection</label>
-      </div>
-
-      <div class="question">
-        <h3>7. According to Daniel 7:13–14, what was given to the Son of Man?</h3>
-        <label class="option"><input type="radio" name="q7" value="A"> A. A temporary kingdom</label>
-        <label class="option"><input type="radio" name="q7" value="B"> B. Everlasting dominion over peoples and nations</label>
-        <label class="option"><input type="radio" name="q7" value="C"> C. A military army only</label>
-        <label class="option"><input type="radio" name="q7" value="D"> D. The temple treasury</label>
-      </div>
-
-      <div class="question">
-        <h3>8. According to Matthew 5:17, what did Jesus say He came to do?</h3>
-        <label class="option"><input type="radio" name="q8" value="A"> A. Fulfill the Law and the Prophets</label>
-        <label class="option"><input type="radio" name="q8" value="B"> B. Abolish the Law</label>
-        <label class="option"><input type="radio" name="q8" value="C"> C. Replace the prophets</label>
-        <label class="option"><input type="radio" name="q8" value="D"> D. Establish a political government</label>
-      </div>
-
-      <div class="question">
-        <h3>9. According to John 15, what must believers do to bear fruit?</h3>
-        <label class="option"><input type="radio" name="q9" value="A"> A. Abide in Christ</label>
-        <label class="option"><input type="radio" name="q9" value="B"> B. Become wealthy</label>
-        <label class="option"><input type="radio" name="q9" value="C"> C. Avoid other people</label>
-        <label class="option"><input type="radio" name="q9" value="D"> D. Follow political leaders</label>
-      </div>
-
-      <div class="question">
-        <h3>10. According to Romans 6, believers are called to what kind of life?</h3>
-        <label class="option"><input type="radio" name="q10" value="A"> A. A life controlled by sin</label>
-        <label class="option"><input type="radio" name="q10" value="B"> B. New life and freedom from slavery to sin</label>
-        <label class="option"><input type="radio" name="q10" value="C"> C. A life without responsibility</label>
-        <label class="option"><input type="radio" name="q10" value="D"> D. A life without faith</label>
-      </div>
-
-      <div class="question">
-        <h3>11. According to Romans 8:15–17, believers can call God what?</h3>
-        <label class="option"><input type="radio" name="q11" value="A"> A. King David</label>
-        <label class="option"><input type="radio" name="q11" value="B"> B. Abba, Father</label>
-        <label class="option"><input type="radio" name="q11" value="C"> C. Teacher Moses</label>
-        <label class="option"><input type="radio" name="q11" value="D"> D. High Priest</label>
-      </div>
-
-      <div class="question">
-        <h3>12. According to 1 Corinthians 12, why are spiritual gifts given?</h3>
-        <label class="option"><input type="radio" name="q12" value="A"> A. To make one person superior</label>
-        <label class="option"><input type="radio" name="q12" value="B"> B. To build up one body</label>
-        <label class="option"><input type="radio" name="q12" value="C"> C. To create competition</label>
-        <label class="option"><input type="radio" name="q12" value="D"> D. To gain wealth</label>
-      </div>
-
-      <div class="question">
-        <h3>13. According to Galatians 2:16, how is a person justified?</h3>
-        <label class="option"><input type="radio" name="q13" value="A"> A. By works of the Law</label>
-        <label class="option"><input type="radio" name="q13" value="B"> B. Through faith in Jesus Christ</label>
-        <label class="option"><input type="radio" name="q13" value="C"> C. Through human approval</label>
-        <label class="option"><input type="radio" name="q13" value="D"> D. Through wealth</label>
-      </div>
-
-      <div class="question">
-        <h3>14. According to Ephesians 2:8–10, believers are created for what?</h3>
-        <label class="option"><input type="radio" name="q14" value="A"> A. Political success</label>
-        <label class="option"><input type="radio" name="q14" value="B"> B. Personal fame</label>
-        <label class="option"><input type="radio" name="q14" value="C"> C. Good works prepared by God</label>
-        <label class="option"><input type="radio" name="q14" value="D"> D. Material wealth</label>
-      </div>
-
-      <div class="question">
-        <h3>15. What does Philippians 2:5–11 emphasize about Christ?</h3>
-        <label class="option"><input type="radio" name="q15" value="A"> A. His earthly wealth</label>
-        <label class="option"><input type="radio" name="q15" value="B"> B. His humility, obedience and exaltation</label>
-        <label class="option"><input type="radio" name="q15" value="C"> C. His political authority</label>
-        <label class="option"><input type="radio" name="q15" value="D"> D. His military power</label>
-      </div>
-
-      <div class="question">
-        <h3>16. According to Colossians 1:15–20, what is emphasized about Christ?</h3>
-        <label class="option"><input type="radio" name="q16" value="A"> A. His political position</label>
-        <label class="option"><input type="radio" name="q16" value="B"> B. His supremacy over creation and the church</label>
-        <label class="option"><input type="radio" name="q16" value="C"> C. His earthly wealth</label>
-        <label class="option"><input type="radio" name="q16" value="D"> D. His human achievements</label>
-      </div>
-
-      <div class="question">
-        <h3>17. According to Hebrews 4:14–16, what does Jesus do as High Priest?</h3>
-        <label class="option"><input type="radio" name="q17" value="A"> A. Avoids human weakness</label>
-        <label class="option"><input type="radio" name="q17" value="B"> B. Sympathizes with our weaknesses</label>
-        <label class="option"><input type="radio" name="q17" value="C"> C. Rejects sinners</label>
-        <label class="option"><input type="radio" name="q17" value="D"> D. Removes the need for prayer</label>
-      </div>
-
-      <div class="question">
-        <h3>18. According to James 2, what is faith without action?</h3>
-        <label class="option"><input type="radio" name="q18" value="A"> A. Powerful</label>
-        <label class="option"><input type="radio" name="q18" value="B"> B. Dead</label>
-        <label class="option"><input type="radio" name="q18" value="C"> C. Complete</label>
-        <label class="option"><input type="radio" name="q18" value="D"> D. Perfect</label>
-      </div>
-
-      <div class="question">
-        <h3>19. According to 1 Peter 2:9, believers are described as what?</h3>
-        <label class="option"><input type="radio" name="q19" value="A"> A. A political army</label>
-        <label class="option"><input type="radio" name="q19" value="B"> B. A chosen people, royal priesthood and holy nation</label>
-        <label class="option"><input type="radio" name="q19" value="C"> C. A wealthy organisation</label>
-        <label class="option"><input type="radio" name="q19" value="D"> D. A political kingdom</label>
-      </div>
-
-      <div class="question">
-        <h3>20. According to Revelation 21:1–4, what will God do with His people?</h3>
-        <label class="option"><input type="radio" name="q20" value="A"> A. Send them away</label>
-        <label class="option"><input type="radio" name="q20" value="B"> B. Dwell with them and remove death and suffering</label>
-        <label class="option"><input type="radio" name="q20" value="C"> C. Give them earthly kingdoms</label>
-        <label class="option"><input type="radio" name="q20" value="D"> D. Remove them from His presence</label>
-      </div>
-
+      <input
+        type="text"
+        id="participantLocation"
+        placeholder="Enter your location"
+        autocomplete="address-level2"
+      >
     </div>
 
-    <button type="submit" id="submitButton" class="submit-btn">
-      Submit Assessment
+    <button
+      type="button"
+      class="start-btn"
+      id="startAssessmentBtn"
+    >
+      🚀 Start Assessment
     </button>
 
-  </form>
+  </div>
 
 
-  <!-- ==========================================================
-       RESULT SECTION
-       ========================================================== -->
+  <!-- =====================================================
+       TIMER
+       ===================================================== -->
 
-  <div id="result" class="result">
-
-    <div class="result-header">
-
-      <h1 id="resultTitle">
-        CONGRATULATIONS!
-      </h1>
-
-      <h2 id="resultSubtitle">
-        Growing in God's Word. Growing in Faith. Growing Together.
-      </h2>
-
-      <p>
-        <strong id="resultParticipantName"></strong>
-      </p>
-
-    </div>
+  <div class="timer" id="timer">
+    ⏱ Time Remaining: <span id="timerDisplay">30:00</span>
+  </div>
 
 
-    <div class="score-box">
+  <!-- =====================================================
+       QUIZ SECTION
+       ===================================================== -->
 
-      <div class="score">
-        <span id="score">0</span>/60
+  <div id="quizSection">
+
+    <div class="card">
+      <div class="progress">
+        B.E.P. Online Bible Assessment — 20 Questions
       </div>
 
       <p>
-        <strong>Correct Answers:</strong>
-        <span id="correct">0</span>/20
+        <strong>Participant:</strong>
+        <span id="quizParticipantName"></span>
       </p>
+    </div>
+
+
+    <!-- QUESTION 1 -->
+
+    <div class="question">
+
+      <h3>Question 1 of 20</h3>
 
       <p>
-        <strong>Unanswered:</strong>
-        <span id="unanswered">0</span>/20
+        According to Romans 4, how was Abraham counted as righteous?
       </p>
 
-      <p>
-        <strong>Time Taken:</strong>
-        <span id="timeTaken">00:00</span>
-      </p>
+      <label class="option">
+        <input type="radio" name="q1" value="A">
+        A. Through keeping the law
+      </label>
 
-      <p id="passStatus"></p>
+      <label class="option">
+        <input type="radio" name="q1" value="B">
+        B. Through faith
+      </label>
+
+      <label class="option">
+        <input type="radio" name="q1" value="C">
+        C. Through sacrifices
+      </label>
+
+      <label class="option">
+        <input type="radio" name="q1" value="D">
+        D. Through religious traditions
+      </label>
 
     </div>
 
 
-    <!-- PASS MESSAGE -->
+    <!-- QUESTION 2 -->
 
-    <div id="passMessage" class="result-message">
+    <div class="question">
 
-      <h2>🎉 Congratulations! You Passed!</h2>
-
-      <p>
-        We celebrate your successful completion of the
-        <strong>B.E.P. Online Bible Assessment</strong>.
-      </p>
+      <h3>Question 2 of 20</h3>
 
       <p>
-        Your result reflects the time and effort you have invested
-        in studying God's Word. May this assessment not only mark
-        an achievement, but also encourage you to continue growing
-        in faith, wisdom, obedience, and your relationship with Christ.
+        According to Exodus 19:5–6, Israel was called to be what?
       </p>
 
-      <p>
-        <strong>
-          Thank you for taking part in the B.E.P. Online Bible Assessment.
-        </strong>
-      </p>
+      <label class="option">
+        <input type="radio" name="q2" value="A">
+        A. A nation of warriors
+      </label>
 
-      <p>
-        We truly appreciate your participation and your commitment
-        to learning and growing in God's Word.
-      </p>
+      <label class="option">
+        <input type="radio" name="q2" value="B">
+        B. A kingdom of priests and a holy nation
+      </label>
 
-      <blockquote>
-        “Let the word of Christ dwell in you richly in all wisdom.”
-        <br>
-        <strong>— Colossians 3:16</strong>
-      </blockquote>
+      <label class="option">
+        <input type="radio" name="q2" value="C">
+        C. A kingdom of kings
+      </label>
 
-      <p>
-        Keep learning. Keep growing. Keep serving.
-        <br>
-        <strong>
-          May God continue to bless you and strengthen you in your walk with Him.
-        </strong>
-      </p>
-
-      <p>
-        <strong>B.E.P. — Biblical Empowerment Program</strong>
-        <br>
-        <em>Building the Church of Christ</em>
-      </p>
+      <label class="option">
+        <input type="radio" name="q2" value="D">
+        D. A nation without laws
+      </label>
 
     </div>
 
 
-    <!-- NOT PASSED MESSAGE -->
+    <!-- QUESTION 3 -->
 
-    <div id="failMessage" class="result-message">
+    <div class="question">
 
-      <h2>🙏 Keep Growing in God's Word</h2>
-
-      <p>
-        Thank you for taking the time to complete the
-        <strong>B.E.P. Online Bible Assessment</strong>.
-      </p>
+      <h3>Question 3 of 20</h3>
 
       <p>
-        Although you did not reach the pass mark on this attempt,
-        this is <strong>not the end of your journey</strong>.
-        Every question is an opportunity to learn, and every step
-        in God's Word helps us grow in faith and understanding.
+        According to Mark 12:29–31, what are the two greatest commandments?
       </p>
 
-      <p>
-        Take some time to go back to the Scriptures, review what
-        you have learned, and continue growing.
-        <strong>Do not be discouraged.</strong>
-        Keep learning, keep praying, and keep pressing forward.
-      </p>
+      <label class="option">
+        <input type="radio" name="q3" value="A">
+        A. Give and sacrifice
+      </label>
 
-      <blockquote>
-        “Let us not become weary in doing good, for at the proper time
-        we will reap a harvest if we do not give up.”
-        <br>
-        <strong>— Galatians 6:9</strong>
-      </blockquote>
+      <label class="option">
+        <input type="radio" name="q3" value="B">
+        B. Love God and love your neighbour
+      </label>
 
-      <p>
-        <strong>
-          Thank you for participating in the B.E.P. Online Bible Assessment.
-        </strong>
-      </p>
+      <label class="option">
+        <input type="radio" name="q3" value="C">
+        C. Fast and pray
+      </label>
 
-      <p>
-        We appreciate your commitment to learning God's Word.
-      </p>
-
-      <p>
-        Keep studying. Keep growing. Keep trusting God.
-      </p>
-
-      <p>
-        <strong>B.E.P. — Biblical Empowerment Program</strong>
-        <br>
-        <em>Building the Church of Christ</em>
-      </p>
+      <label class="option">
+        <input type="radio" name="q3" value="D">
+        D. Serve and preach
+      </label>
 
     </div>
 
 
-    <a href="index.html" class="home-btn">
-      🏠 Return to Home Page
-    </a>
+    <!-- QUESTION 4 -->
+
+    <div class="question">
+
+      <h3>Question 4 of 20</h3>
+
+      <p>
+        What does Isaiah 53 teach about the suffering Servant?
+      </p>
+
+      <label class="option">
+        <input type="radio" name="q4" value="A">
+        A. He suffers only for Himself
+      </label>
+
+      <label class="option">
+        <input type="radio" name="q4" value="B">
+        B. He suffers on behalf of others
+      </label>
+
+      <label class="option">
+        <input type="radio" name="q4" value="C">
+        C. He becomes a political ruler
+      </label>
+
+      <label class="option">
+        <input type="radio" name="q4" value="D">
+        D. He avoids suffering completely
+      </label>
+
+    </div>
+
+
+    <!-- QUESTION 5 -->
+
+    <div class="question">
+
+      <h3>Question 5 of 20</h3>
+
+      <p>
+        What does Jeremiah 31:31–34 say about the new covenant?
+      </p>
+
+      <label class="option">
+        <input type="radio" name="q5" value="A">
+        A. God's law would be written on people's hearts
+      </label>
+
+      <label class="option">
+        <input type="radio" name="q5" value="B">
+        B. The law would be completely removed
+      </label>
+
+      <label class="option">
+        <input type="radio" name="q5" value="C">
+        C. Israel would have no relationship with God
+      </label>
+
+      <label class="option">
+        <input type="radio" name="q5" value="D">
+        D. The covenant would apply only to kings
+      </label>
+
+    </div>
+
+
+    <!-- QUESTION 6 -->
+
+    <div class="question">
+
+      <h3>Question 6 of 20</h3>
+
+      <p>
+        According to Hebrews 7, what is special about Christ's priesthood?
+      </p>
+
+      <label class="option">
+        <input type="radio" name="q6" value="A">
+        A. It lasted only one year
+      </label>
+
+      <label class="option">
+        <input type="radio" name="q6" value="B">
+        B. His priesthood is permanent and superior
+      </label>
+
+      <label class="option">
+        <input type="radio" name="q6" value="C">
+        C. It was limited to the temple
+      </label>
+
+      <label class="option">
+        <input type="radio" name="q6" value="D">
+        D. It depended on earthly priests
+      </label>
+
+    </div>
+
+
+    <!-- QUESTION 7 -->
+
+    <div class="question">
+
+      <h3>Question 7 of 20</h3>
+
+      <p>
+        According to Daniel 7:13–14, what was given to the Son of Man?
+      </p>
+
+      <label class="option">
+        <input type="radio" name="q7" value="A">
+        A. Temporary authority
+      </label>
+
+      <label class="option">
+        <input type="radio" name="q7" value="B">
+        B. Everlasting dominion over peoples and nations
+      </label>
+
+      <label class="option">
+        <input type="radio" name="q7" value="C">
+        C. Authority over one city only
+      </label>
+
+      <label class="option">
+        <input type="radio" name="q7" value="D">
+        D. Authority over angels only
+      </label>
+
+    </div>
+
+
+    <!-- QUESTION 8 -->
+
+    <div class="question">
+
+      <h3>Question 8 of 20</h3>
+
+      <p>
+        According to Matthew 5:17, why did Jesus come?
+      </p>
+
+      <label class="option">
+        <input type="radio" name="q8" value="A">
+        A. To fulfill the Law and the Prophets
+      </label>
+
+      <label class="option">
+        <input type="radio" name="q8" value="B">
+        B. To destroy the Law and the Prophets
+      </label>
+
+      <label class="option">
+        <input type="radio" name="q8" value="C">
+        C. To replace Scripture
+      </label>
+
+      <label class="option">
+        <input type="radio" name="q8" value="D">
+        D. To abolish God's commandments
+      </label>
+
+    </div>
+
+
+    <!-- QUESTION 9 -->
+
+    <div class="question">
+
+      <h3>Question 9 of 20</h3>
+
+      <p>
+        According to John 15, what must believers do to bear spiritual fruit?
+      </p>
+
+      <label class="option">
+        <input type="radio" name="q9" value="A">
+        A. Abide in Christ
+      </label>
+
+      <label class="option">
+        <input type="radio" name="q9" value="B">
+        B. Depend only on themselves
+      </label>
+
+      <label class="option">
+        <input type="radio" name="q9" value="C">
+        C. Avoid other believers
+      </label>
+
+      <label class="option">
+        <input type="radio" name="q9" value="D">
+        D. Follow worldly wisdom
+      </label>
+
+    </div>
+
+
+    <!-- QUESTION 10 -->
+
+    <div class="question">
+
+      <h3>Question 10 of 20</h3>
+
+      <p>
+        What does Romans 6 teach about believers and sin?
+      </p>
+
+      <label class="option">
+        <input type="radio" name="q10" value="A">
+        A. Believers should continue living as slaves to sin
+      </label>
+
+      <label class="option">
+        <input type="radio" name="q10" value="B">
+        B. Believers should live a new life and be free from slavery to sin
+      </label>
+
+      <label class="option">
+        <input type="radio" name="q10" value="C">
+        C. Sin has no consequences
+      </label>
+
+      <label class="option">
+        <input type="radio" name="q10" value="D">
+        D. Grace means obedience is unnecessary
+      </label>
+
+    </div>
+
+
+    <!-- QUESTION 11 -->
+
+    <div class="question">
+
+      <h3>Question 11 of 20</h3>
+
+      <p>
+        According to Romans 8:15–17, what can believers call God?
+      </p>
+
+      <label class="option">
+        <input type="radio" name="q11" value="A">
+        A. Teacher only
+      </label>
+
+      <label class="option">
+        <input type="radio" name="q11" value="B">
+        B. Abba, Father
+      </label>
+
+      <label class="option">
+        <input type="radio" name="q11" value="C">
+        C. King David
+      </label>
+
+      <label class="option">
+        <input type="radio" name="q11" value="D">
+        D. Moses
+      </label>
+
+    </div>
+
+
+    <!-- QUESTION 12 -->
+
+    <div class="question">
+
+      <h3>Question 12 of 20</h3>
+
+      <p>
+        According to 1 Corinthians 12, what is the purpose of spiritual gifts?
+      </p>
+
+      <label class="option">
+        <input type="radio" name="q12" value="A">
+        A. To make one believer superior to others
+      </label>
+
+      <label class="option">
+        <input type="radio" name="q12" value="B">
+        B. To build up one body
+      </label>
+
+      <label class="option">
+        <input type="radio" name="q12" value="C">
+        C. To gain personal fame
+      </label>
+
+      <label class="option">
+        <input type="radio" name="q12" value="D">
+        D. To replace faith
+      </label>
+
+    </div>
+
+
+    <!-- QUESTION 13 -->
+
+    <div class="question">
+
+      <h3>Question 13 of 20</h3>
+
+      <p>
+        According to Galatians 2:16, how is a person justified?
+      </p>
+
+      <label class="option">
+        <input type="radio" name="q13" value="A">
+        A. By human achievement
+      </label>
+
+      <label class="option">
+        <input type="radio" name="q13" value="B">
+        B. Through faith in Jesus Christ
+      </label>
+
+      <label class="option">
+        <input type="radio" name="q13" value="C">
+        C. Through wealth
+      </label>
+
+      <label class="option">
+        <input type="radio" name="q13" value="D">
+        D. Through social status
+      </label>
+
+    </div>
+
+
+    <!-- QUESTION 14 -->
+
+    <div class="question">
+
+      <h3>Question 14 of 20</h3>
+
+      <p>
+        According to Ephesians 2:8–10, believers are created in Christ Jesus for what?
+      </p>
+
+      <label class="option">
+        <input type="radio" name="q14" value="A">
+        A. Personal glory
+      </label>
+
+      <label class="option">
+        <input type="radio" name="q14" value="B">
+        B. Worldly success
+      </label>
+
+      <label class="option">
+        <input type="radio" name="q14" value="C">
+        C. Good works prepared by God
+      </label>
+
+      <label class="option">
+        <input type="radio" name="q14" value="D">
+        D. Political power
+      </label>
+
+    </div>
+
+
+    <!-- QUESTION 15 -->
+
+    <div class="question">
+
+      <h3>Question 15 of 20</h3>
+
+      <p>
+        What is a major theme of Philippians 2:5–11?
+      </p>
+
+      <label class="option">
+        <input type="radio" name="q15" value="A">
+        A. Human wealth
+      </label>
+
+      <label class="option">
+        <input type="radio" name="q15" value="B">
+        B. Christ's humility, obedience and exaltation
+      </label>
+
+      <label class="option">
+        <input type="radio" name="q15" value="C">
+        C. Political leadership
+      </label>
+
+      <label class="option">
+        <input type="radio" name="q15" value="D">
+        D. Religious competition
+      </label>
+
+    </div>
+
+
+    <!-- QUESTION 16 -->
+
+    <div class="question">
+
+      <h3>Question 16 of 20</h3>
+
+      <p>
+        According to Colossians 1:15–20, what does Scripture teach about Christ?
+      </p>
+
+      <label class="option">
+        <input type="radio" name="q16" value="A">
+        A. Christ is only a teacher
+      </label>
+
+      <label class="option">
+        <input type="radio" name="q16" value="B">
+        B. Christ is supreme over creation and the church
+      </label>
+
+      <label class="option">
+        <input type="radio" name="q16" value="C">
+        C. Christ has no authority
+      </label>
+
+      <label class="option">
+        <input type="radio" name="q16" value="D">
+        D. Christ is one of many equal saviours
+      </label>
+
+    </div>
+
+
+    <!-- QUESTION 17 -->
+
+    <div class="question">
+
+      <h3>Question 17 of 20</h3>
+
+      <p>
+        According to Hebrews 4:14–16, what is Jesus able to do as our High Priest?
+      </p>
+
+      <label class="option">
+        <input type="radio" name="q17" value="A">
+        A. Ignore human weaknesses
+      </label>
+
+      <label class="option">
+        <input type="radio" name="q17" value="B">
+        B. Sympathize with our weaknesses
+      </label>
+
+      <label class="option">
+        <input type="radio" name="q17" value="C">
+        C. Remove all human responsibility
+      </label>
+
+      <label class="option">
+        <input type="radio" name="q17" value="D">
+        D. Prevent people from approaching God
+      </label>
+
+    </div>
+
+
+    <!-- QUESTION 18 -->
+
+    <div class="question">
+
+      <h3>Question 18 of 20</h3>
+
+      <p>
+        According to James 2, what does faith without action demonstrate?
+      </p>
+
+      <label class="option">
+        <input type="radio" name="q18" value="A">
+        A. Perfect faith
+      </label>
+
+      <label class="option">
+        <input type="radio" name="q18" value="B">
+        B. Faith without action is dead
+      </label>
+
+      <label class="option">
+        <input type="radio" name="q18" value="C">
+        C. Faith is unnecessary
+      </label>
+
+      <label class="option">
+        <input type="radio" name="q18" value="D">
+        D. Works are more important than God
+      </label>
+
+    </div>
+
+
+    <!-- QUESTION 19 -->
+
+    <div class="question">
+
+      <h3>Question 19 of 20</h3>
+
+      <p>
+        According to 1 Peter 2:9, believers are described as what?
+      </p>
+
+      <label class="option">
+        <input type="radio" name="q19" value="A">
+        A. Ordinary citizens only
+      </label>
+
+      <label class="option">
+        <input type="radio" name="q19" value="B">
+        B. A chosen people, royal priesthood and holy nation
+      </label>
+
+      <label class="option">
+        <input type="radio" name="q19" value="C">
+        C. A political organisation
+      </label>
+
+      <label class="option">
+        <input type="radio" name="q19" value="D">
+        D. A group without purpose
+      </label>
+
+    </div>
+
+
+    <!-- QUESTION 20 -->
+
+    <div class="question">
+
+      <h3>Question 20 of 20</h3>
+
+      <p>
+        According to Revelation 21:1–4, what will God ultimately do?
+      </p>
+
+      <label class="option">
+        <input type="radio" name="q20" value="A">
+        A. Abandon His people
+      </label>
+
+      <label class="option">
+        <input type="radio" name="q20" value="B">
+        B. Dwell with His people and remove death and suffering
+      </label>
+
+      <label class="option">
+        <input type="radio" name="q20" value="C">
+        C. Destroy His promises
+      </label>
+
+      <label class="option">
+        <input type="radio" name="q20" value="D">
+        D. Return believers to the old covenant
+      </label>
+
+    </div>
+
+
+    <button
+      type="button"
+      class="submit-btn"
+      id="submitQuizBtn"
+    >
+      ✅ Submit Assessment
+    </button>
+
+  </div>
+
+
+  <!-- =====================================================
+       RESULT SECTION
+       ===================================================== -->
+
+  <div id="resultSection">
+
+    <div class="result-card">
+
+      <h2 id="resultTitle"></h2>
+
+      <div class="participant-name">
+        <span id="resultParticipantName"></span>
+      </div>
+
+      <div class="score-box">
+
+        <div class="score-item">
+          Score
+          <strong>
+            <span id="resultScore"></span>/60
+          </strong>
+        </div>
+
+        <div class="score-item">
+          Correct
+          <strong>
+            <span id="resultCorrect"></span>
+          </strong>
+        </div>
+
+        <div class="score-item">
+          Unanswered
+          <strong>
+            <span id="resultUnanswered"></span>
+          </strong>
+        </div>
+
+        <div class="score-item">
+          Time Taken
+          <strong id="resultTime"></strong>
+        </div>
+
+      </div>
+
+      <div class="result-message">
+
+        <div id="passMessage" style="display:none;">
+
+          <h3>🎉 Congratulations! You Passed!</h3>
+
+          <p>
+            We celebrate your successful completion of the
+            <strong>B.E.P. Online Bible Assessment.</strong>
+          </p>
+
+          <p>
+            Your result reflects the time and effort you have invested
+            in studying God's Word. May this assessment not only mark
+            an achievement, but also encourage you to continue growing
+            in faith, wisdom, obedience, and your relationship with Christ.
+          </p>
+
+          <p>
+            Thank you for taking part in the B.E.P. Online Bible Assessment.
+            We truly appreciate your participation and your commitment
+            to learning and growing in God's Word.
+          </p>
+
+          <div class="verse">
+            "Let the word of Christ dwell in you richly in all wisdom."
+            — Colossians 3:16
+          </div>
+
+          <p>
+            <strong>
+              Keep learning. Keep growing. Keep serving.
+            </strong>
+          </p>
+
+          <p>
+            May God continue to bless you and strengthen you
+            in your walk with Him.
+          </p>
+
+          <p>
+            <strong>
+              B.E.P. — Biblical Empowerment Program<br>
+              Building the Church of Christ
+            </strong>
+          </p>
+
+        </div>
+
+
+        <div id="failMessage" style="display:none;">
+
+          <h3>🙏 Keep Growing in God's Word</h3>
+
+          <p>
+            Thank you for taking the time to complete the
+            <strong>B.E.P. Online Bible Assessment.</strong>
+          </p>
+
+          <p>
+            Although you did not reach the pass mark on this attempt,
+            this is not the end of your journey. Every question is an
+            opportunity to learn, and every step in God's Word helps
+            us grow in faith and understanding.
+          </p>
+
+          <p>
+            Take some time to go back to the Scriptures, review what
+            you have learned, and continue growing. Do not be discouraged.
+            Keep learning, keep praying, and keep pressing forward.
+          </p>
+
+          <div class="verse">
+            "Let us not become weary in doing good, for at the proper
+            time we will reap a harvest if we do not give up."
+            — Galatians 6:9
+          </div>
+
+          <p>
+            Thank you for participating in the B.E.P. Online Bible Assessment.
+          </p>
+
+          <p>
+            We appreciate your commitment to learning God's Word.
+          </p>
+
+          <p>
+            <strong>
+              Keep studying. Keep growing. Keep trusting God.
+            </strong>
+          </p>
+
+          <p>
+            <strong>
+              B.E.P. — Biblical Empowerment Program<br>
+              Building the Church of Christ
+            </strong>
+          </p>
+
+        </div>
+
+      </div>
+
+      <a href="index.html" class="home-btn">
+        🏠 Return to Home Page
+      </a>
+
+    </div>
 
   </div>
 
 </div>
 
 
-<footer>
-
-  <p>
-    <strong>B.E.P. — Biblical Empowerment Program</strong>
-  </p>
-
-  <p>
-    Building the Church of Christ
-  </p>
-
-</footer>
+<div class="footer">
+  B.E.P. — Biblical Empowerment Program<br>
+  Building the Church of Christ
+</div>
 
 
 <script>
 
-  /* ============================================================
+  /* =====================================================
      SUPABASE CONNECTION
-     ============================================================ */
+     ===================================================== */
 
   const SUPABASE_URL =
     "https://rukusaellqqwthzibyib.supabase.co";
@@ -700,127 +1327,405 @@
     );
 
 
-  /* ============================================================
-     ANSWER KEY
-     ============================================================ */
+  /* =====================================================
+     QUIZ SETTINGS
+     ===================================================== */
+
+  const TOTAL_QUESTIONS = 20;
+
+  const MARKS_PER_QUESTION = 3;
+
+  const TOTAL_MARKS =
+    TOTAL_QUESTIONS * MARKS_PER_QUESTION;
+
+  const PASS_MARK = 40;
+
+  const TOTAL_TIME_SECONDS = 30 * 60;
+
+
+  /* =====================================================
+     CORRECT ANSWERS
+     ===================================================== */
 
   const correctAnswers = {
+
     q1: "B",
     q2: "B",
     q3: "B",
     q4: "B",
     q5: "A",
+
     q6: "B",
     q7: "B",
     q8: "A",
     q9: "A",
     q10: "B",
+
     q11: "B",
     q12: "B",
     q13: "B",
     q14: "C",
     q15: "B",
+
     q16: "B",
     q17: "B",
     q18: "B",
     q19: "B",
     q20: "B"
+
   };
 
 
-  /* ============================================================
-     QUIZ SETTINGS
-     ============================================================ */
+  /* =====================================================
+     VARIABLES
+     ===================================================== */
 
-  const TOTAL_QUESTIONS = 20;
-  const MARKS_PER_QUESTION = 3;
-  const PASS_MARK = 40;
-
-  let timeRemaining = 30 * 60;
   let timerInterval = null;
+
+  let timeRemaining =
+    TOTAL_TIME_SECONDS;
+
+  let quizStarted = false;
+
   let quizSubmitted = false;
 
+  let quizStartTime = null;
 
-  /* ============================================================
-     TIMER
-     ============================================================ */
 
-  function updateTimer() {
+  /* =====================================================
+     DOM ELEMENTS
+     ===================================================== */
 
-    const minutes =
-      Math.floor(timeRemaining / 60);
+  const participantNameInput =
+    document.getElementById("participantName");
 
-    const seconds =
-      timeRemaining % 60;
+  const participantEmailInput =
+    document.getElementById("participantEmail");
 
-    document.getElementById("timer").textContent =
-      String(minutes).padStart(2, "0") +
-      ":" +
-      String(seconds).padStart(2, "0");
+  const participantPhoneInput =
+    document.getElementById("participantPhone");
+
+  const participantLocationInput =
+    document.getElementById("participantLocation");
+
+  const detailsError =
+    document.getElementById("detailsError");
+
+  const startAssessmentBtn =
+    document.getElementById("startAssessmentBtn");
+
+  const quizSection =
+    document.getElementById("quizSection");
+
+  const timer =
+    document.getElementById("timer");
+
+  const timerDisplay =
+    document.getElementById("timerDisplay");
+
+  const participantCard =
+    document.getElementById("participantCard");
+
+  const instructionsCard =
+    document.getElementById("instructionsCard");
+
+  const submitQuizBtn =
+    document.getElementById("submitQuizBtn");
+
+  const resultSection =
+    document.getElementById("resultSection");
+
+
+  /* =====================================================
+     VALIDATE PARTICIPANT DETAILS
+     ===================================================== */
+
+  function validateParticipantDetails() {
+
+    const name =
+      participantNameInput.value.trim();
+
+    const email =
+      participantEmailInput.value.trim();
+
+    const phone =
+      participantPhoneInput.value.trim();
+
+    const location =
+      participantLocationInput.value.trim();
+
+
+    if (!name) {
+
+      showDetailsError(
+        "Please enter your full name."
+      );
+
+      participantNameInput.focus();
+
+      return false;
+    }
+
+
+    if (!email) {
+
+      showDetailsError(
+        "Please enter your email address."
+      );
+
+      participantEmailInput.focus();
+
+      return false;
+    }
+
+
+    const emailPattern =
+      /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailPattern.test(email)) {
+
+      showDetailsError(
+        "Please enter a valid email address."
+      );
+
+      participantEmailInput.focus();
+
+      return false;
+    }
+
+
+    if (!phone) {
+
+      showDetailsError(
+        "Please enter your phone or WhatsApp number."
+      );
+
+      participantPhoneInput.focus();
+
+      return false;
+    }
+
+
+    if (!location) {
+
+      showDetailsError(
+        "Please enter your location."
+      );
+
+      participantLocationInput.focus();
+
+      return false;
+    }
+
+
+    detailsError.style.display =
+      "none";
+
+    return true;
   }
 
 
-  function startTimer() {
+  /* =====================================================
+     SHOW DETAILS ERROR
+     ===================================================== */
 
-    updateTimer();
+  function showDetailsError(message) {
 
-    timerInterval = setInterval(function () {
+    detailsError.textContent =
+      message;
 
-      if (timeRemaining <= 0) {
+    detailsError.style.display =
+      "block";
 
-        clearInterval(timerInterval);
-
-        if (!quizSubmitted) {
-          submitQuiz(true);
-        }
-
-        return;
-      }
-
-      timeRemaining--;
-
-      updateTimer();
-
-    }, 1000);
-  }
-
-
-  /* ============================================================
-     MESSAGE
-     ============================================================ */
-
-  function showMessage(message, type) {
-
-    const messageBox =
-      document.getElementById("message");
-
-    messageBox.textContent = message;
-
-    messageBox.className =
-      "message " + type;
-
-    messageBox.scrollIntoView({
-      behavior: "smooth",
-      block: "center"
+    window.scrollTo({
+      top: participantCard.offsetTop - 20,
+      behavior: "smooth"
     });
   }
 
 
-  /* ============================================================
+  /* =====================================================
+     START ASSESSMENT
+     ===================================================== */
+
+  startAssessmentBtn.addEventListener(
+    "click",
+    startAssessment
+  );
+
+
+  function startAssessment() {
+
+    if (!validateParticipantDetails()) {
+      return;
+    }
+
+
+    if (quizStarted) {
+      return;
+    }
+
+
+    quizStarted = true;
+
+    quizSubmitted = false;
+
+    quizStartTime =
+      Date.now();
+
+    timeRemaining =
+      TOTAL_TIME_SECONDS;
+
+
+    const participantName =
+      participantNameInput.value.trim();
+
+
+    document.getElementById(
+      "quizParticipantName"
+    ).textContent =
+      participantName;
+
+
+    /*
+     * Hide instructions and participant
+     * details once assessment starts.
+     */
+
+    instructionsCard.style.display =
+      "none";
+
+    participantCard.style.display =
+      "none";
+
+
+    /*
+     * Show the timer and questions.
+     */
+
+    timer.style.display =
+      "block";
+
+    quizSection.style.display =
+      "block";
+
+
+    /*
+     * Scroll to the beginning
+     * of the assessment.
+     */
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+
+
+    updateTimerDisplay();
+
+    timerInterval =
+      setInterval(
+        updateTimer,
+        1000
+      );
+
+  }
+
+
+  /* =====================================================
+     TIMER
+     ===================================================== */
+
+  function updateTimer() {
+
+    if (!quizStarted ||
+        quizSubmitted) {
+
+      return;
+    }
+
+
+    timeRemaining--;
+
+
+    updateTimerDisplay();
+
+
+    if (timeRemaining <= 300) {
+
+      timer.classList.add(
+        "warning"
+      );
+
+    }
+
+
+    if (timeRemaining <= 0) {
+
+      clearInterval(
+        timerInterval
+      );
+
+      alert(
+        "Your 30-minute assessment time has ended. Your assessment will now be submitted automatically."
+      );
+
+      submitQuiz(true);
+
+    }
+
+  }
+
+
+  /* =====================================================
+     DISPLAY TIMER
+     ===================================================== */
+
+  function updateTimerDisplay() {
+
+    const minutes =
+      Math.floor(
+        timeRemaining / 60
+      );
+
+    const seconds =
+      timeRemaining % 60;
+
+
+    timerDisplay.textContent =
+      String(minutes).padStart(2, "0")
+      + ":" +
+      String(seconds).padStart(2, "0");
+
+  }
+
+
+  /* =====================================================
      CALCULATE RESULT
-     ============================================================ */
+     ===================================================== */
 
   function calculateResult() {
 
-    let correctAnswersCount = 0;
+    let correctCount = 0;
+
     let unansweredCount = 0;
 
-    for (let i = 1; i <= TOTAL_QUESTIONS; i++) {
+
+    for (
+      let i = 1;
+      i <= TOTAL_QUESTIONS;
+      i++
+    ) {
+
+      const questionName =
+        "q" + i;
+
 
       const selected =
         document.querySelector(
-          `input[name="q${i}"]:checked`
+          `input[name="${questionName}"]:checked`
         );
+
 
       if (!selected) {
 
@@ -829,308 +1734,274 @@
         continue;
       }
 
+
       if (
         selected.value ===
-        correctAnswers[`q${i}`]
+        correctAnswers[questionName]
       ) {
 
-        correctAnswersCount++;
+        correctCount++;
+
       }
+
     }
 
+
     const score =
-      correctAnswersCount *
+      correctCount *
       MARKS_PER_QUESTION;
+
 
     const passed =
       score >= PASS_MARK;
 
+
+    let timeTakenSeconds;
+
+
+    if (quizStartTime) {
+
+      timeTakenSeconds =
+        Math.floor(
+          (Date.now() - quizStartTime) / 1000
+        );
+
+    } else {
+
+      timeTakenSeconds =
+        TOTAL_TIME_SECONDS -
+        timeRemaining;
+
+    }
+
+
+    if (
+      timeTakenSeconds < 0
+    ) {
+
+      timeTakenSeconds = 0;
+
+    }
+
+
+    if (
+      timeTakenSeconds >
+      TOTAL_TIME_SECONDS
+    ) {
+
+      timeTakenSeconds =
+        TOTAL_TIME_SECONDS;
+
+    }
+
+
     return {
-      correctAnswersCount,
-      unansweredCount,
-      score,
-      passed
+
+      score: score,
+
+      correctAnswersCount:
+        correctCount,
+
+      unansweredCount:
+        unansweredCount,
+
+      passed: passed,
+
+      timeTakenSeconds:
+        timeTakenSeconds
+
     };
+
   }
 
 
-  /* ============================================================
+  /* =====================================================
      FORMAT TIME
-     ============================================================ */
+     ===================================================== */
 
   function formatTime(seconds) {
 
     const minutes =
-      Math.floor(seconds / 60);
+      Math.floor(
+        seconds / 60
+      );
 
     const remainingSeconds =
       seconds % 60;
 
+
     return (
-      String(minutes).padStart(2, "0") +
-      ":" +
+      String(minutes).padStart(2, "0")
+      + ":" +
       String(remainingSeconds).padStart(2, "0")
     );
+
   }
 
 
-  /* ============================================================
-     SHOW PERSONALIZED RESULT
-     ============================================================ */
+  /* =====================================================
+     SUBMIT BUTTON
+     ===================================================== */
 
-  function showResult(
-    participantName,
-    result,
-    timeTakenSeconds
-  ) {
+  submitQuizBtn.addEventListener(
+    "click",
+    function() {
 
-    document.getElementById("score").textContent =
-      result.score;
+      submitQuiz(false);
 
-    document.getElementById("correct").textContent =
-      result.correctAnswersCount;
-
-    document.getElementById("unanswered").textContent =
-      result.unansweredCount;
-
-    document.getElementById("timeTaken").textContent =
-      formatTime(timeTakenSeconds);
-
-    document.getElementById("resultParticipantName").textContent =
-      participantName;
-
-
-    const resultTitle =
-      document.getElementById("resultTitle");
-
-    const resultSubtitle =
-      document.getElementById("resultSubtitle");
-
-    const passStatus =
-      document.getElementById("passStatus");
-
-    const passMessage =
-      document.getElementById("passMessage");
-
-    const failMessage =
-      document.getElementById("failMessage");
-
-
-    if (result.passed) {
-
-      resultTitle.textContent =
-        "🎉 CONGRATULATIONS! YOU PASSED";
-
-      resultSubtitle.textContent =
-        "Growing in God's Word. Growing in Faith. Growing Together.";
-
-      passStatus.textContent =
-        "PASSED";
-
-      passStatus.className =
-        "passed";
-
-      passMessage.style.display =
-        "block";
-
-      failMessage.style.display =
-        "none";
-
-    } else {
-
-      resultTitle.textContent =
-        "🙏 KEEP GROWING IN GOD'S WORD";
-
-      resultSubtitle.textContent =
-        "Growing in God's Word. Growing in Faith. Growing Together.";
-
-      passStatus.textContent =
-        "NOT PASSED";
-
-      passStatus.className =
-        "failed";
-
-      passMessage.style.display =
-        "none";
-
-      failMessage.style.display =
-        "block";
     }
+  );
 
 
-    document.getElementById("quizForm").style.display =
-      "none";
-
-    document.querySelector(".instructions").style.display =
-      "none";
-
-    document.querySelector(".container > .card:nth-of-type(2)").style.display =
-      "none";
-
-    document.querySelector(".timer").style.display =
-      "none";
-
-    document.getElementById("result").style.display =
-      "block";
-
-    document
-      .getElementById("result")
-      .scrollIntoView({
-        behavior: "smooth",
-        block: "start"
-      });
-  }
-
-
-  /* ============================================================
+  /* =====================================================
      SUBMIT QUIZ
-     ============================================================ */
+     ===================================================== */
 
   async function submitQuiz(autoSubmitted = false) {
 
-    if (quizSubmitted) {
-      return;
-    }
+    if (!quizStarted) {
 
-    const participantName =
-      document
-        .getElementById("participantName")
-        .value
-        .trim();
-
-    const email =
-      document
-        .getElementById("email")
-        .value
-        .trim()
-        .toLowerCase();
-
-    const phone =
-      document
-        .getElementById("phone")
-        .value
-        .trim();
-
-    const location =
-      document
-        .getElementById("location")
-        .value
-        .trim();
-
-
-    if (
-      !participantName ||
-      !email ||
-      !phone ||
-      !location
-    ) {
-
-      showMessage(
-        "Please complete all participant details before submitting.",
-        "error"
+      alert(
+        "Please enter your participant details and start the assessment first."
       );
 
       return;
     }
 
 
-    const confirmSubmission =
-      autoSubmitted
-        ? true
-        : confirm(
-            "Are you sure you want to submit your assessment?"
-          );
-
-
-    if (!confirmSubmission) {
+    if (quizSubmitted) {
       return;
+    }
+
+
+    if (!autoSubmitted) {
+
+      const confirmation =
+        confirm(
+          "Are you sure you want to submit your assessment?\n\nYou will not be able to change your answers after submission."
+        );
+
+
+      if (!confirmation) {
+        return;
+      }
+
     }
 
 
     quizSubmitted = true;
 
-    clearInterval(timerInterval);
 
+    if (timerInterval) {
 
-    const submitButton =
-      document.getElementById("submitButton");
+      clearInterval(
+        timerInterval
+      );
 
-    submitButton.disabled = true;
-
-    submitButton.textContent =
-      "Submitting Assessment...";
+    }
 
 
     const result =
       calculateResult();
 
 
-    const timeTakenSeconds =
-      (30 * 60) - timeRemaining;
+    const participantName =
+      participantNameInput.value.trim();
 
+    const email =
+      participantEmailInput.value.trim();
+
+    const phone =
+      participantPhoneInput.value.trim();
+
+    const location =
+      participantLocationInput.value.trim();
+
+
+    /*
+     * Save assessment result
+     * to Supabase.
+     */
 
     try {
 
-      const { data, error } =
-        await supabaseClient
-          .from("bep_public_quiz_results")
-          .insert({
+      const {
+        data,
+        error
+      } = await supabaseClient
+        .from(
+          "bep_public_quiz_results"
+        )
+        .insert({
 
-            participant_name:
-              participantName,
+          participant_name:
+            participantName,
 
-            email:
-              email,
+          email:
+            email,
 
-            phone:
-              phone,
+          phone:
+            phone,
 
-            location:
-              location,
+          location:
+            location,
 
-            score:
-              result.score,
+          score:
+            result.score,
 
-            correct_answers:
-              result.correctAnswersCount,
+          correct_answers:
+            result.correctAnswersCount,
 
-            unanswered:
-              result.unansweredCount,
+          unanswered:
+            result.unansweredCount,
 
-            total_questions:
-              TOTAL_QUESTIONS,
+          total_questions:
+            TOTAL_QUESTIONS,
 
-            passed:
-              result.passed,
+          passed:
+            result.passed,
 
-            time_taken_seconds:
-              timeTakenSeconds
+          time_taken_seconds:
+            result.timeTakenSeconds
 
-          })
-          .select(
-            "id, participant_name, score, correct_answers, unanswered, total_questions, passed, time_taken_seconds, submitted_at"
-          )
-          .single();
+        })
+        .select(
+          "id, participant_name, score, correct_answers, unanswered, total_questions, passed, time_taken_seconds, submitted_at"
+        )
+        .single();
 
 
       if (error) {
 
         console.error(
-          "Supabase error:",
+          "Supabase save error:",
           error
         );
 
-        quizSubmitted = false;
 
-        submitButton.disabled = false;
+        /*
+         * The result is still shown to the
+         * participant, but we tell them that
+         * saving failed.
+         */
 
-        submitButton.textContent =
-          "Submit Assessment";
-
-        showMessage(
-          "The assessment could not be saved. Please try again.",
-          "error"
+        showResult(
+          participantName,
+          result
         );
+
+
+        setTimeout(
+          function() {
+
+            alert(
+              "Your assessment was completed, but the result could not be saved to the B.E.P. database.\n\nPlease contact B.E.P. support."
+            );
+
+          },
+          500
+        );
+
 
         return;
       }
@@ -1142,63 +2013,177 @@
       );
 
 
-      showMessage(
-        "Your assessment was successfully submitted and saved.",
-        "success"
+      showResult(
+        participantName,
+        result
+      );
+
+    }
+
+    catch (error) {
+
+      console.error(
+        "Unexpected save error:",
+        error
       );
 
 
       showResult(
         participantName,
-        result,
-        timeTakenSeconds
+        result
       );
 
 
-    } catch (error) {
+      setTimeout(
+        function() {
 
-      console.error(
-        "Unexpected submission error:",
-        error
+          alert(
+            "Your assessment was completed, but there was a problem saving the result."
+          );
+
+        },
+        500
       );
 
-      quizSubmitted = false;
-
-      submitButton.disabled = false;
-
-      submitButton.textContent =
-        "Submit Assessment";
-
-      showMessage(
-        "An unexpected error occurred while saving the assessment.",
-        "error"
-      );
     }
+
   }
 
 
-  /* ============================================================
-     FORM SUBMISSION
-     ============================================================ */
+  /* =====================================================
+     SHOW RESULT
+     ===================================================== */
 
-  document
-    .getElementById("quizForm")
-    .addEventListener(
-      "submit",
-      function(event) {
+  function showResult(
+    participantName,
+    result
+  ) {
+
+    quizSection.style.display =
+      "none";
+
+    timer.style.display =
+      "none";
+
+    participantCard.style.display =
+      "none";
+
+    instructionsCard.style.display =
+      "none";
+
+
+    resultSection.style.display =
+      "block";
+
+
+    document.getElementById(
+      "resultParticipantName"
+    ).textContent =
+      participantName;
+
+
+    document.getElementById(
+      "resultScore"
+    ).textContent =
+      result.score;
+
+
+    document.getElementById(
+      "resultCorrect"
+    ).textContent =
+      result.correctAnswersCount;
+
+
+    document.getElementById(
+      "resultUnanswered"
+    ).textContent =
+      result.unansweredCount;
+
+
+    document.getElementById(
+      "resultTime"
+    ).textContent =
+      formatTime(
+        result.timeTakenSeconds
+      );
+
+
+    const resultTitle =
+      document.getElementById(
+        "resultTitle"
+      );
+
+
+    const passMessage =
+      document.getElementById(
+        "passMessage"
+      );
+
+
+    const failMessage =
+      document.getElementById(
+        "failMessage"
+      );
+
+
+    if (result.passed) {
+
+      resultTitle.textContent =
+        "🎉 Congratulations! You Passed!";
+
+
+      passMessage.style.display =
+        "block";
+
+
+      failMessage.style.display =
+        "none";
+
+    }
+
+    else {
+
+      resultTitle.textContent =
+        "🙏 Keep Growing in God's Word";
+
+
+      passMessage.style.display =
+        "none";
+
+
+      failMessage.style.display =
+        "block";
+
+    }
+
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+
+  }
+
+
+  /* =====================================================
+     PREVENT ACCIDENTAL ENTER SUBMISSION
+     ===================================================== */
+
+  document.addEventListener(
+    "keydown",
+    function(event) {
+
+      if (
+        event.key === "Enter" &&
+        event.target.tagName === "INPUT"
+      ) {
 
         event.preventDefault();
 
-        submitQuiz(false);
       }
-    );
 
-
-  /* ============================================================
-     START QUIZ
-     ============================================================ */
-
-  startTimer();
+    }
+  );
 
 </script>
 
