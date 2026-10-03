@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,7 +24,7 @@ body {
 .container {
     max-width: 850px;
     margin: auto;
-    background: white;
+    background: #fff;
     padding: 25px;
     border-radius: 12px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.08);
@@ -45,11 +44,17 @@ header h1 {
 }
 
 header p {
-    margin: 5px 0;
+    margin: 6px 0;
 }
 
 h2 {
     color: #073b78;
+}
+
+.field-label {
+    display: block;
+    font-weight: bold;
+    margin-top: 10px;
 }
 
 input[type="text"],
@@ -57,42 +62,10 @@ input[type="email"],
 input[type="tel"] {
     width: 100%;
     padding: 13px;
-    margin: 7px 0 16px;
+    margin: 7px 0 12px;
     border: 1px solid #ccc;
     border-radius: 6px;
     font-size: 16px;
-}
-
-label.field-label {
-    display: block;
-    font-weight: bold;
-}
-
-.question {
-    border: 1px solid #ddd;
-    padding: 18px;
-    margin: 18px 0;
-    border-radius: 8px;
-    background: #fafafa;
-}
-
-.question h3 {
-    margin-top: 0;
-    color: #073b78;
-}
-
-.option {
-    display: block;
-    padding: 10px;
-    margin: 5px 0;
-    background: white;
-    border: 1px solid #eee;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.option:hover {
-    background: #eef5ff;
 }
 
 button {
@@ -118,7 +91,7 @@ button:disabled {
 #timer {
     position: sticky;
     top: 5px;
-    z-index: 5;
+    z-index: 10;
     background: #fff3cd;
     color: #7a4b00;
     border: 1px solid #ffe08a;
@@ -127,6 +100,34 @@ button:disabled {
     text-align: center;
     font-size: 20px;
     font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.question {
+    border: 1px solid #ddd;
+    padding: 18px;
+    margin: 18px 0;
+    border-radius: 8px;
+    background: #fafafa;
+}
+
+.question h3 {
+    margin-top: 0;
+    color: #073b78;
+}
+
+.option {
+    display: block;
+    padding: 11px;
+    margin: 6px 0;
+    background: white;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.option:hover {
+    background: #eef5ff;
 }
 
 #result {
@@ -146,37 +147,39 @@ button:disabled {
     color: #b3261e;
 }
 
-#technical {
-    display: none;
-    text-align: left;
-    overflow-wrap: anywhere;
-    background: #fff;
-    padding: 15px;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    margin-top: 15px;
-}
-
-#technical p {
-    margin: 7px 0;
-}
-
 #status {
-    margin-top: 15px;
-    padding: 12px;
-    border-radius: 6px;
     display: none;
+    margin-top: 20px;
+    padding: 14px;
+    border-radius: 7px;
     overflow-wrap: anywhere;
+}
+
+.status-success {
+    display: block !important;
+    background: #e6f4ea;
+    color: #137333;
 }
 
 .status-error {
+    display: block !important;
     background: #fde8e7;
     color: #a40000;
 }
 
-.status-success {
-    background: #e6f4ea;
-    color: #137333;
+#technical {
+    display: none;
+    text-align: left;
+    background: white;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 7px;
+    margin-top: 15px;
+    overflow-wrap: anywhere;
+}
+
+#technical p {
+    margin: 7px 0;
 }
 
 .small {
@@ -184,13 +187,17 @@ button:disabled {
     color: #555;
 }
 
-@media(max-width:600px) {
+@media (max-width: 600px) {
     body {
         padding: 8px;
     }
 
     .container {
         padding: 15px;
+    }
+
+    header {
+        padding: 20px 10px;
     }
 }
 </style>
@@ -207,249 +214,560 @@ button:disabled {
     <p>Growing in God's Word. Growing in Faith. Growing Together.</p>
 </header>
 
+
+<!-- =========================================
+     PARTICIPANT REGISTRATION
+========================================= -->
+
 <section id="registration">
 
     <h2>Participant Details</h2>
 
-    <p>Please complete your details before starting the assessment.</p>
+    <p>
+        Please complete your details before starting the assessment.
+    </p>
 
     <form id="participantForm">
 
-        <label class="field-label" for="visitorName">Full Name</label>
-        <input type="text" id="visitorName" required>
+        <label class="field-label" for="visitorName">
+            Full Name
+        </label>
 
-        <label class="field-label" for="visitorEmail">Email Address</label>
-        <input type="email" id="visitorEmail" required>
+        <input
+            type="text"
+            id="visitorName"
+            autocomplete="name"
+            required
+        >
 
-        <label class="field-label" for="visitorPhone">Phone / WhatsApp</label>
-        <input type="tel" id="visitorPhone" required>
 
-        <label class="field-label" for="visitorLocation">Location</label>
-        <input type="text" id="visitorLocation" required>
+        <label class="field-label" for="visitorEmail">
+            Email Address
+        </label>
 
-        <button type="submit">Start Assessment</button>
+        <input
+            type="email"
+            id="visitorEmail"
+            autocomplete="email"
+            required
+        >
+
+
+        <label class="field-label" for="visitorPhone">
+            Phone / WhatsApp
+        </label>
+
+        <input
+            type="tel"
+            id="visitorPhone"
+            autocomplete="tel"
+            required
+        >
+
+
+        <label class="field-label" for="visitorLocation">
+            Location
+        </label>
+
+        <input
+            type="text"
+            id="visitorLocation"
+            autocomplete="address-level2"
+            required
+        >
+
+
+        <button type="submit">
+            Start Assessment
+        </button>
 
     </form>
+
 </section>
+
+
+<!-- =========================================
+     ASSESSMENT
+========================================= -->
 
 <section id="assessment" style="display:none;">
 
-    <div id="timer">Time Remaining: 30:00</div>
+    <div id="timer">
+        Time Remaining: 30:00
+    </div>
 
     <h2>Bible Knowledge Assessment</h2>
 
     <p>
-        Answer all 20 questions. Each question carries 3 marks.
-        Total: 60 marks. Pass mark: 40.
+        Answer all 20 questions.
+        Each question carries 3 marks.
+        Total: 60 marks.
+        Pass mark: 40 marks.
+    </p>
+
+    <p class="small">
+        You have 30 minutes to complete the assessment.
     </p>
 
     <form id="quizForm">
 
         <div id="questions"></div>
 
-        <button type="submit" id="submitButton">
+        <button
+            type="submit"
+            id="submitButton"
+        >
             Submit Assessment
         </button>
 
     </form>
+
 </section>
+
+
+<!-- =========================================
+     DATABASE STATUS
+========================================= -->
 
 <div id="status"></div>
 
+
+<!-- =========================================
+     RESULT
+========================================= -->
+
 <section id="result">
 
-    <h2 id="resultHeading">Assessment Result</h2>
+    <h2 id="resultHeading">
+        Assessment Result
+    </h2>
 
-    <h1 id="scoreDisplay"></h1>
+    <h1 id="scoreDisplay">
+        0 / 60
+    </h1>
 
     <p id="resultMessage"></p>
 
     <p id="correctDisplay"></p>
+
     <p id="unansweredDisplay"></p>
+
     <p id="percentageDisplay"></p>
+
     <p id="timeDisplay"></p>
 
+
+    <!-- Technical error information -->
+
     <div id="technical">
+
         <h3>Technical Information</h3>
-        <p><strong>Error code:</strong> <span id="errorCode"></span></p>
-        <p><strong>Message:</strong> <span id="errorMessage"></span></p>
-        <p><strong>Details:</strong> <span id="errorDetails"></span></p>
-        <p><strong>Hint:</strong> <span id="errorHint"></span></p>
+
+        <p>
+            <strong>Error code:</strong>
+            <span id="errorCode"></span>
+        </p>
+
+        <p>
+            <strong>Message:</strong>
+            <span id="errorMessage"></span>
+        </p>
+
+        <p>
+            <strong>Details:</strong>
+            <span id="errorDetails"></span>
+        </p>
+
+        <p>
+            <strong>Hint:</strong>
+            <span id="errorHint"></span>
+        </p>
+
     </div>
+
 
     <br>
 
-    <button onclick="goHome()">Return to B.E.P. Home Page</button>
+    <button onclick="goHome()">
+        Return to B.E.P. Home Page
+    </button>
 
 </section>
 
 </div>
 
+
 <script>
+
+/* =========================================================
+   SUPABASE CONNECTION
+   =========================================================
+
+   IMPORTANT:
+   This is the NEW standalone bep_quiz project.
+
+   It is NOT connected to the B.E.P. Member Portal project.
+========================================================= */
+
 "use strict";
 
-/* =====================================
-   SUPABASE CONFIGURATION
-===================================== */
 
 const SUPABASE_URL =
-"https://rukusaellqqwthzibyib.supabase.co";
+"https://onyuntiwzfknunlrcpus.supabase.co";
+
 
 const SUPABASE_ANON_KEY =
-"sb_publishable_Co8-MoJOV14tXBkSWyXFTA_ULn1WRa5";
+"sb_publishable_nu-I2N0Zez_LgdQhH_qgQQ_v5hjczO0";
 
-const supabaseClient = window.supabase.createClient(
+
+const supabaseClient =
+window.supabase.createClient(
     SUPABASE_URL,
     SUPABASE_ANON_KEY
 );
 
-/* =====================================
+
+/* =========================================================
    ASSESSMENT SETTINGS
-===================================== */
+========================================================= */
 
 const TOTAL_QUESTIONS = 20;
+
 const MARKS_PER_QUESTION = 3;
+
 const TOTAL_MARKS = 60;
+
 const PASS_MARK = 40;
+
 const TIME_LIMIT_SECONDS = 30 * 60;
 
+
+/* =========================================================
+   VARIABLES
+========================================================= */
+
 let participant = {};
+
 let timeRemaining = TIME_LIMIT_SECONDS;
+
 let timerInterval = null;
+
 let startedAt = null;
+
 let submitted = false;
 
-/* =====================================
+
+/* =========================================================
    BIBLE QUESTIONS
-===================================== */
+========================================================= */
 
 const questions = [
 
-{
-    question: "Who was called by God to leave his country and go to a land God would show him?",
-    options: ["Moses", "Abraham", "David", "Isaac"],
-    answer: 1
-},
+    {
+        question:
+        "Who was called by God to leave his country and go to a land God would show him?",
 
-{
-    question: "What was the name of the mountain where Moses received the Ten Commandments?",
-    options: ["Mount Carmel", "Mount Zion", "Mount Sinai", "Mount Olives"],
-    answer: 2
-},
+        options: [
+            "Moses",
+            "Abraham",
+            "David",
+            "Isaac"
+        ],
 
-{
-    question: "Who succeeded Moses as the leader of Israel?",
-    options: ["Aaron", "Joshua", "Caleb", "Samuel"],
-    answer: 1
-},
+        answer: 1
+    },
 
-{
-    question: "Who anointed David as king?",
-    options: ["Nathan", "Elijah", "Samuel", "Isaiah"],
-    answer: 2
-},
 
-{
-    question: "In Psalm 23, the Lord is described as what?",
-    options: ["My King", "My Shepherd", "My Judge", "My Warrior"],
-    answer: 1
-},
+    {
+        question:
+        "What was the name of the mountain where Moses received the Ten Commandments?",
 
-{
-    question: "According to Proverbs 3:5, we should trust in the Lord with all our what?",
-    options: ["Strength", "Heart", "Understanding", "Wealth"],
-    answer: 1
-},
+        options: [
+            "Mount Carmel",
+            "Mount Zion",
+            "Mount Sinai",
+            "Mount Olives"
+        ],
 
-{
-    question: "According to Isaiah 40:31, those who hope in the Lord will renew their what?",
-    options: ["Courage", "Strength", "Wisdom", "Riches"],
-    answer: 1
-},
+        answer: 2
+    },
 
-{
-    question: "How many days and nights did Jesus fast in the wilderness?",
-    options: ["7", "12", "30", "40"],
-    answer: 3
-},
 
-{
-    question: "According to Matthew 6, where should we store our treasures?",
-    options: ["On earth", "In heaven", "In the temple", "In banks"],
-    answer: 1
-},
+    {
+        question:
+        "Who succeeded Moses as the leader of Israel?",
 
-{
-    question: "In Matthew 7, Jesus teaches that the wise man built his house on what?",
-    options: ["Sand", "Wood", "Rock", "Clay"],
-    answer: 2
-},
+        options: [
+            "Aaron",
+            "Joshua",
+            "Caleb",
+            "Samuel"
+        ],
 
-{
-    question: "In the parable of the lost son, who welcomed the son home?",
-    options: ["His brother", "His father", "His neighbour", "His servant"],
-    answer: 1
-},
+        answer: 1
+    },
 
-{
-    question: "According to John 3:16, God gave His only begotten what?",
-    options: ["Prophet", "Angel", "Son", "Disciple"],
-    answer: 2
-},
 
-{
-    question: "Jesus said, 'I am the way, the truth, and the what?'",
-    options: ["Light", "Life", "Shepherd", "Door"],
-    answer: 1
-},
+    {
+        question:
+        "Who anointed David as king?",
 
-{
-    question: "What did Jesus promise His disciples would receive when the Holy Spirit came upon them?",
-    options: ["Wealth", "Power", "Fame", "Political authority"],
-    answer: 1
-},
+        options: [
+            "Nathan",
+            "Elijah",
+            "Samuel",
+            "Isaiah"
+        ],
 
-{
-    question: "On the day of Pentecost, the disciples were filled with whom?",
-    options: ["The crowd", "The Holy Spirit", "The angels", "The prophets"],
-    answer: 1
-},
+        answer: 2
+    },
 
-{
-    question: "According to Romans 12:2, believers should be transformed by the renewing of their what?",
-    options: ["Body", "Mind", "House", "Position"],
-    answer: 1
-},
 
-{
-    question: "According to 1 Corinthians 13, the greatest of faith, hope and love is what?",
-    options: ["Faith", "Hope", "Love", "Knowledge"],
-    answer: 2
-},
+    {
+        question:
+        "In Psalm 23, the Lord is described as what?",
 
-{
-    question: "Which of the following is listed as the fruit of the Spirit in Galatians 5?",
-    options: ["Jealousy", "Kindness", "Pride", "Anger"],
-    answer: 1
-},
+        options: [
+            "My King",
+            "My Shepherd",
+            "My Judge",
+            "My Warrior"
+        ],
 
-{
-    question: "According to Ephesians 6, what is the sword of the Spirit?",
-    options: ["Prayer", "The Word of God", "Faith", "Righteousness"],
-    answer: 1
-},
+        answer: 1
+    },
 
-{
-    question: "According to 2 Timothy 3:16, all Scripture is given by what?",
-    options: ["Human wisdom", "Inspiration of God", "Tradition", "The prophets alone"],
-    answer: 1
-}
+
+    {
+        question:
+        "According to Proverbs 3:5, we should trust in the Lord with all our what?",
+
+        options: [
+            "Strength",
+            "Heart",
+            "Understanding",
+            "Wealth"
+        ],
+
+        answer: 1
+    },
+
+
+    {
+        question:
+        "According to Isaiah 40:31, those who hope in the Lord will renew their what?",
+
+        options: [
+            "Courage",
+            "Strength",
+            "Wisdom",
+            "Riches"
+        ],
+
+        answer: 1
+    },
+
+
+    {
+        question:
+        "How many days and nights did Jesus fast in the wilderness?",
+
+        options: [
+            "7",
+            "12",
+            "30",
+            "40"
+        ],
+
+        answer: 3
+    },
+
+
+    {
+        question:
+        "According to Matthew 6, where should we store our treasures?",
+
+        options: [
+            "On earth",
+            "In heaven",
+            "In the temple",
+            "In banks"
+        ],
+
+        answer: 1
+    },
+
+
+    {
+        question:
+        "In Matthew 7, Jesus teaches that the wise man built his house on what?",
+
+        options: [
+            "Sand",
+            "Wood",
+            "Rock",
+            "Clay"
+        ],
+
+        answer: 2
+    },
+
+
+    {
+        question:
+        "In the parable of the lost son, who welcomed the son home?",
+
+        options: [
+            "His brother",
+            "His father",
+            "His neighbour",
+            "His servant"
+        ],
+
+        answer: 1
+    },
+
+
+    {
+        question:
+        "According to John 3:16, God gave His only begotten what?",
+
+        options: [
+            "Prophet",
+            "Angel",
+            "Son",
+            "Disciple"
+        ],
+
+        answer: 2
+    },
+
+
+    {
+        question:
+        "Jesus said, 'I am the way, the truth, and the what?'",
+
+        options: [
+            "Light",
+            "Life",
+            "Shepherd",
+            "Door"
+        ],
+
+        answer: 1
+    },
+
+
+    {
+        question:
+        "What did Jesus promise His disciples would receive when the Holy Spirit came upon them?",
+
+        options: [
+            "Wealth",
+            "Power",
+            "Fame",
+            "Political authority"
+        ],
+
+        answer: 1
+    },
+
+
+    {
+        question:
+        "On the day of Pentecost, the disciples were filled with whom?",
+
+        options: [
+            "The crowd",
+            "The Holy Spirit",
+            "The angels",
+            "The prophets"
+        ],
+
+        answer: 1
+    },
+
+
+    {
+        question:
+        "According to Romans 12:2, believers should be transformed by the renewing of their what?",
+
+        options: [
+            "Body",
+            "Mind",
+            "House",
+            "Position"
+        ],
+
+        answer: 1
+    },
+
+
+    {
+        question:
+        "According to 1 Corinthians 13, the greatest of faith, hope and love is what?",
+
+        options: [
+            "Faith",
+            "Hope",
+            "Love",
+            "Knowledge"
+        ],
+
+        answer: 2
+    },
+
+
+    {
+        question:
+        "Which of the following is listed as the fruit of the Spirit in Galatians 5?",
+
+        options: [
+            "Jealousy",
+            "Kindness",
+            "Pride",
+            "Anger"
+        ],
+
+        answer: 1
+    },
+
+
+    {
+        question:
+        "According to Ephesians 6, what is the sword of the Spirit?",
+
+        options: [
+            "Prayer",
+            "The Word of God",
+            "Faith",
+            "Righteousness"
+        ],
+
+        answer: 1
+    },
+
+
+    {
+        question:
+        "According to 2 Timothy 3:16, all Scripture is given by what?",
+
+        options: [
+            "Human wisdom",
+            "Inspiration of God",
+            "Tradition",
+            "The prophets alone"
+        ],
+
+        answer: 1
+    }
 
 ];
 
-/* =====================================
+
+/* =========================================================
    DISPLAY QUESTIONS
-===================================== */
+========================================================= */
 
 function displayQuestions() {
 
@@ -458,291 +776,593 @@ function displayQuestions() {
 
     questionsContainer.innerHTML = "";
 
-    questions.forEach((item, index) => {
 
-        const questionDiv = document.createElement("div");
+    questions.forEach(function(item, index) {
+
+        const questionDiv =
+            document.createElement("div");
+
         questionDiv.className = "question";
 
-        const heading = document.createElement("h3");
+
+        const heading =
+            document.createElement("h3");
+
         heading.textContent =
-            "Question " + (index + 1) + " of " + TOTAL_QUESTIONS;
+            "Question " +
+            (index + 1) +
+            " of " +
+            TOTAL_QUESTIONS;
 
         questionDiv.appendChild(heading);
 
-        const questionText = document.createElement("p");
-        questionText.textContent = item.question;
+
+        const questionText =
+            document.createElement("p");
+
+        questionText.textContent =
+            item.question;
 
         questionDiv.appendChild(questionText);
 
-        item.options.forEach((option, optionIndex) => {
 
-            const label = document.createElement("label");
-            label.className = "option";
+        item.options.forEach(
+            function(option, optionIndex) {
 
-            const radio = document.createElement("input");
-            radio.type = "radio";
-            radio.name = "question" + index;
-            radio.value = optionIndex;
+                const label =
+                    document.createElement("label");
 
-            label.appendChild(radio);
-            label.appendChild(
-                document.createTextNode(
-                    " " + String.fromCharCode(65 + optionIndex) +
-                    ". " + option
-                )
-            );
+                label.className = "option";
 
-            questionDiv.appendChild(label);
-        });
 
-        questionsContainer.appendChild(questionDiv);
+                const radio =
+                    document.createElement("input");
+
+                radio.type = "radio";
+
+                radio.name =
+                    "question" + index;
+
+                radio.value =
+                    optionIndex;
+
+
+                label.appendChild(radio);
+
+
+                label.appendChild(
+                    document.createTextNode(
+                        " " +
+                        String.fromCharCode(
+                            65 + optionIndex
+                        ) +
+                        ". " +
+                        option
+                    )
+                );
+
+
+                questionDiv.appendChild(label);
+
+            }
+        );
+
+
+        questionsContainer.appendChild(
+            questionDiv
+        );
+
     });
+
 }
 
-/* =====================================
+
+/* =========================================================
    START ASSESSMENT
-===================================== */
+========================================================= */
 
-document.getElementById("participantForm")
-.addEventListener("submit", function(event) {
+document
+.getElementById("participantForm")
+.addEventListener(
+    "submit",
+    function(event) {
 
-    event.preventDefault();
+        event.preventDefault();
 
-    participant = {
-        name: document.getElementById("visitorName").value.trim(),
-        email: document.getElementById("visitorEmail").value.trim().toLowerCase(),
-        phone: document.getElementById("visitorPhone").value.trim(),
-        location: document.getElementById("visitorLocation").value.trim()
-    };
 
-    if (
-        !participant.name ||
-        !participant.email ||
-        !participant.phone ||
-        !participant.location
-    ) {
-        alert("Please complete all participant details.");
-        return;
+        participant = {
+
+            name:
+            document
+            .getElementById("visitorName")
+            .value
+            .trim(),
+
+            email:
+            document
+            .getElementById("visitorEmail")
+            .value
+            .trim()
+            .toLowerCase(),
+
+            phone:
+            document
+            .getElementById("visitorPhone")
+            .value
+            .trim(),
+
+            location:
+            document
+            .getElementById("visitorLocation")
+            .value
+            .trim()
+
+        };
+
+
+        if (
+            !participant.name ||
+            !participant.email ||
+            !participant.phone ||
+            !participant.location
+        ) {
+
+            alert(
+                "Please complete all participant details."
+            );
+
+            return;
+        }
+
+
+        document
+        .getElementById("registration")
+        .style.display = "none";
+
+
+        document
+        .getElementById("assessment")
+        .style.display = "block";
+
+
+        displayQuestions();
+
+
+        startedAt = Date.now();
+
+
+        startTimer();
+
+
+        window.scrollTo(0, 0);
+
     }
+);
 
-    document.getElementById("registration").style.display = "none";
-    document.getElementById("assessment").style.display = "block";
 
-    displayQuestions();
-
-    startedAt = Date.now();
-
-    startTimer();
-
-    window.scrollTo(0, 0);
-});
-
-/* =====================================
+/* =========================================================
    TIMER
-===================================== */
+========================================================= */
 
 function startTimer() {
 
     updateTimerDisplay();
 
-    timerInterval = setInterval(function() {
 
-        timeRemaining--;
+    timerInterval =
+        setInterval(
+            function() {
 
-        updateTimerDisplay();
+                timeRemaining--;
 
-        if (timeRemaining <= 0) {
-            clearInterval(timerInterval);
-            submitAssessment(true);
-        }
 
-    }, 1000);
+                updateTimerDisplay();
+
+
+                if (timeRemaining <= 0) {
+
+                    clearInterval(
+                        timerInterval
+                    );
+
+
+                    submitAssessment(true);
+
+                }
+
+            },
+            1000
+        );
 }
+
 
 function updateTimerDisplay() {
 
-    const minutes = Math.floor(timeRemaining / 60);
-    const seconds = timeRemaining % 60;
+    const minutes =
+        Math.floor(
+            timeRemaining / 60
+        );
 
-    document.getElementById("timer").textContent =
+
+    const seconds =
+        timeRemaining % 60;
+
+
+    document
+    .getElementById("timer")
+    .textContent =
         "Time Remaining: " +
         String(minutes).padStart(2, "0") +
         ":" +
         String(seconds).padStart(2, "0");
+
 }
 
-/* =====================================
-   SUBMIT ASSESSMENT
-===================================== */
 
-document.getElementById("quizForm")
-.addEventListener("submit", function(event) {
+/* =========================================================
+   SUBMIT BUTTON
+========================================================= */
 
-    event.preventDefault();
+document
+.getElementById("quizForm")
+.addEventListener(
+    "submit",
+    function(event) {
 
-    submitAssessment(false);
-});
+        event.preventDefault();
+
+        submitAssessment(false);
+
+    }
+);
+
+
+/* =========================================================
+   CALCULATE AND SUBMIT ASSESSMENT
+========================================================= */
 
 async function submitAssessment(autoSubmitted) {
 
-    if (submitted) return;
+    if (submitted) {
+        return;
+    }
+
 
     submitted = true;
 
+
     clearInterval(timerInterval);
 
-    document.getElementById("submitButton").disabled = true;
 
-    const elapsedSeconds = Math.min(
-        TIME_LIMIT_SECONDS,
-        Math.max(0, Math.floor((Date.now() - startedAt) / 1000))
-    );
+    document
+    .getElementById("submitButton")
+    .disabled = true;
 
-    let correctAnswers = 0;
-    let unanswered = 0;
 
-    questions.forEach((question, index) => {
-
-        const selected = document.querySelector(
-            'input[name="question' + index + '"]:checked'
+    const elapsedSeconds =
+        Math.min(
+            TIME_LIMIT_SECONDS,
+            Math.max(
+                0,
+                Math.floor(
+                    (Date.now() - startedAt) / 1000
+                )
+            )
         );
 
-        if (!selected) {
-            unanswered++;
-        } else if (Number(selected.value) === question.answer) {
-            correctAnswers++;
+
+    let correctAnswers = 0;
+
+    let unanswered = 0;
+
+
+    questions.forEach(
+        function(question, index) {
+
+            const selected =
+                document.querySelector(
+                    'input[name="question' +
+                    index +
+                    '"]:checked'
+                );
+
+
+            if (!selected) {
+
+                unanswered++;
+
+            }
+            else if (
+                Number(selected.value) ===
+                question.answer
+            ) {
+
+                correctAnswers++;
+
+            }
+
         }
-    });
-
-    const score = correctAnswers * MARKS_PER_QUESTION;
-
-    const percentage = Math.round(
-        (score / TOTAL_MARKS) * 100
     );
 
-    const passed = score >= PASS_MARK;
 
-    const resultText = passed ? "Pass" : "Fail";
+    const score =
+        correctAnswers *
+        MARKS_PER_QUESTION;
+
+
+    const percentage =
+        Math.round(
+            (score / TOTAL_MARKS) * 100
+        );
+
+
+    const passed =
+        score >= PASS_MARK;
+
+
+    const resultText =
+        passed ? "Pass" : "Fail";
+
 
     const record = {
-        visitor_name: participant.name,
-        visitor_email: participant.email,
-        visitor_phone: participant.phone,
-        visitor_location: participant.location,
-        score: score,
-        total_marks: TOTAL_MARKS,
-        correct_answers: correctAnswers,
-        unanswered: unanswered,
-        percentage: percentage,
-        result: resultText,
-        time_taken_seconds: elapsedSeconds
+
+        visitor_name:
+            participant.name,
+
+        visitor_email:
+            participant.email,
+
+        visitor_phone:
+            participant.phone,
+
+        visitor_location:
+            participant.location,
+
+        score:
+            score,
+
+        total_marks:
+            TOTAL_MARKS,
+
+        correct_answers:
+            correctAnswers,
+
+        unanswered:
+            unanswered,
+
+        percentage:
+            percentage,
+
+        result:
+            resultText,
+
+        time_taken_seconds:
+            elapsedSeconds
+
     };
 
-    document.getElementById("assessment").style.display = "none";
-    document.getElementById("result").style.display = "block";
 
-    document.getElementById("scoreDisplay").textContent =
-        score + " / " + TOTAL_MARKS;
+    /* Show result */
 
-    document.getElementById("resultHeading").textContent =
-        passed ? "Congratulations!" : "Assessment Completed";
+    document
+    .getElementById("assessment")
+    .style.display = "none";
 
-    document.getElementById("resultHeading").className =
-        passed ? "success" : "failure";
 
-    document.getElementById("resultMessage").textContent =
+    document
+    .getElementById("result")
+    .style.display = "block";
+
+
+    document
+    .getElementById("scoreDisplay")
+    .textContent =
+        score +
+        " / " +
+        TOTAL_MARKS;
+
+
+    document
+    .getElementById("resultHeading")
+    .textContent =
+        passed
+        ? "Congratulations!"
+        : "Assessment Completed";
+
+
+    document
+    .getElementById("resultHeading")
+    .className =
+        passed
+        ? "success"
+        : "failure";
+
+
+    document
+    .getElementById("resultMessage")
+    .textContent =
         passed
         ? "You have passed the B.E.P. Bible Assessment."
         : "You did not reach the pass mark of 40. Keep studying God's Word and continue growing in faith.";
 
-    document.getElementById("correctDisplay").textContent =
-        "Correct answers: " + correctAnswers + " out of 20";
 
-    document.getElementById("unansweredDisplay").textContent =
-        "Unanswered questions: " + unanswered;
+    document
+    .getElementById("correctDisplay")
+    .textContent =
+        "Correct answers: " +
+        correctAnswers +
+        " out of 20";
 
-    document.getElementById("percentageDisplay").textContent =
-        "Percentage: " + percentage + "%";
 
-    document.getElementById("timeDisplay").textContent =
-        "Time taken: " + formatTime(elapsedSeconds);
+    document
+    .getElementById("unansweredDisplay")
+    .textContent =
+        "Unanswered questions: " +
+        unanswered;
+
+
+    document
+    .getElementById("percentageDisplay")
+    .textContent =
+        "Percentage: " +
+        percentage +
+        "%";
+
+
+    document
+    .getElementById("timeDisplay")
+    .textContent =
+        "Time taken: " +
+        formatTime(elapsedSeconds);
+
 
     window.scrollTo(0, 0);
 
+
+    /* Save to NEW bep_quiz project */
+
     await saveResult(record);
+
 }
 
-/* =====================================
-   SAVE RESULT TO SUPABASE
-===================================== */
+
+/* =========================================================
+   SAVE RESULT
+========================================================= */
 
 async function saveResult(record) {
 
-    const statusBox = document.getElementById("status");
+    const statusBox =
+        document.getElementById("status");
+
 
     statusBox.style.display = "block";
+
     statusBox.className = "";
-    statusBox.textContent = "Saving your assessment result...";
+
+    statusBox.textContent =
+        "Saving your assessment result...";
+
 
     try {
 
-        const { error } = await supabaseClient
+        const response =
+            await supabaseClient
             .from("bep_public_quiz_results")
             .insert(record);
 
+
+        const error =
+            response.error;
+
+
         if (error) {
+
             throw error;
+
         }
 
-        statusBox.className = "status-success";
+
+        statusBox.className =
+            "status-success";
+
 
         statusBox.textContent =
             "Your assessment result has been saved successfully. Thank you for participating in B.E.P.";
 
-        document.getElementById("technical").style.display = "none";
 
-    } catch (error) {
+        document
+        .getElementById("technical")
+        .style.display = "none";
 
-        console.error("B.E.P. assessment save error:", error);
 
-        statusBox.className = "status-error";
+    }
+    catch (error) {
+
+        console.error(
+            "B.E.P. assessment save error:",
+            error
+        );
+
+
+        statusBox.className =
+            "status-error";
+
 
         statusBox.textContent =
             "Your assessment was completed, but the database could not save your result. Please contact B.E.P. support.";
 
-        document.getElementById("technical").style.display = "block";
 
-        document.getElementById("errorCode").textContent =
-            error.code || "N/A";
+        document
+        .getElementById("technical")
+        .style.display = "block";
 
-        document.getElementById("errorMessage").textContent =
-            error.message || "Unknown error";
 
-        document.getElementById("errorDetails").textContent =
-            error.details || "N/A";
+        document
+        .getElementById("errorCode")
+        .textContent =
+            error.code ||
+            "N/A";
 
-        document.getElementById("errorHint").textContent =
-            error.hint || "N/A";
+
+        document
+        .getElementById("errorMessage")
+        .textContent =
+            error.message ||
+            "Unknown error";
+
+
+        document
+        .getElementById("errorDetails")
+        .textContent =
+            error.details ||
+            "N/A";
+
+
+        document
+        .getElementById("errorHint")
+        .textContent =
+            error.hint ||
+            "N/A";
+
     }
+
 }
 
-/* =====================================
-   HELPER FUNCTIONS
-===================================== */
+
+/* =========================================================
+   FORMAT TIME
+========================================================= */
 
 function formatTime(seconds) {
 
-    const minutes = Math.floor(seconds / 60);
-    const remainingSeconds = seconds % 60;
+    const minutes =
+        Math.floor(seconds / 60);
 
-    return minutes + " minutes " +
-        remainingSeconds + " seconds";
+
+    const remainingSeconds =
+        seconds % 60;
+
+
+    return (
+        minutes +
+        " minutes " +
+        remainingSeconds +
+        " seconds"
+    );
+
 }
+
+
+/* =========================================================
+   RETURN HOME
+========================================================= */
 
 function goHome() {
 
     window.location.href =
         "https://beponlineprog.github.io/bep-website/";
+
 }
 
 </script>
