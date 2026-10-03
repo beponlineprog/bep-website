@@ -1,8 +1,10 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>B.E.P. Online Bible Quiz</title>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -125,7 +127,9 @@
       margin-right: 10px;
     }
 
-    .submit-btn {
+    .submit-btn,
+    .home-btn {
+      display: block;
       width: 100%;
       padding: 16px;
       background: #063970;
@@ -135,9 +139,12 @@
       font-size: 18px;
       font-weight: bold;
       cursor: pointer;
+      text-align: center;
+      text-decoration: none;
     }
 
-    .submit-btn:hover {
+    .submit-btn:hover,
+    .home-btn:hover {
       background: #0b5fa5;
     }
 
@@ -170,43 +177,74 @@
 
     .result {
       display: none;
-      text-align: center;
-      padding: 25px;
+      padding: 30px 25px;
       border-radius: 12px;
-      background: #eef6ff;
+      background: white;
       margin-top: 20px;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.08);
     }
 
-    .result h2 {
+    .result-header {
+      text-align: center;
+    }
+
+    .result-header h1 {
       color: #063970;
+      font-size: 30px;
+      margin-bottom: 10px;
+    }
+
+    .result-header h2 {
+      color: #0b5fa5;
+      margin-top: 5px;
+    }
+
+    .result-message {
+      line-height: 1.7;
+      font-size: 16px;
+      text-align: center;
+      margin: 25px auto;
+      max-width: 750px;
+    }
+
+    .result-message blockquote {
+      margin: 25px auto;
+      padding: 18px;
+      background: #f4f7fb;
+      border-left: 5px solid #0b5fa5;
+      font-style: italic;
+      max-width: 650px;
+    }
+
+    .score-box {
+      text-align: center;
+      background: #eef6ff;
+      border-radius: 12px;
+      padding: 20px;
+      margin: 25px 0;
     }
 
     .score {
-      font-size: 40px;
+      font-size: 42px;
       font-weight: bold;
-      margin: 15px 0;
+      color: #063970;
+      margin: 10px 0;
     }
 
     .passed {
       color: #16803c;
-      font-size: 24px;
+      font-size: 25px;
       font-weight: bold;
     }
 
     .failed {
       color: #b42318;
-      font-size: 24px;
+      font-size: 25px;
       font-weight: bold;
     }
 
-    .back-btn {
-      display: inline-block;
-      margin-top: 20px;
-      padding: 12px 20px;
-      background: #063970;
-      color: white;
-      text-decoration: none;
-      border-radius: 7px;
+    .home-btn {
+      margin-top: 25px;
     }
 
     footer {
@@ -218,6 +256,7 @@
     }
 
     @media (max-width: 600px) {
+
       header h1 {
         font-size: 24px;
       }
@@ -228,6 +267,10 @@
 
       .timer {
         font-size: 19px;
+      }
+
+      .result-header h1 {
+        font-size: 25px;
       }
     }
   </style>
@@ -460,32 +503,187 @@
 
   </form>
 
-  <div id="result" class="result">
-    <h2>Assessment Result</h2>
 
-    <div class="score">
-      <span id="score">0</span>/60
+  <!-- ==========================================================
+       RESULT SECTION
+       ========================================================== -->
+
+  <div id="result" class="result">
+
+    <div class="result-header">
+
+      <h1 id="resultTitle">
+        CONGRATULATIONS!
+      </h1>
+
+      <h2 id="resultSubtitle">
+        Growing in God's Word. Growing in Faith. Growing Together.
+      </h2>
+
+      <p>
+        <strong id="resultParticipantName"></strong>
+      </p>
+
     </div>
 
-    <p><strong>Correct Answers:</strong> <span id="correct">0</span>/20</p>
-    <p><strong>Unanswered:</strong> <span id="unanswered">0</span>/20</p>
-    <p><strong>Time Taken:</strong> <span id="timeTaken">0</span></p>
 
-    <p id="passStatus"></p>
+    <div class="score-box">
 
-    <a href="index.html" class="back-btn">
-      Back to B.E.P.
+      <div class="score">
+        <span id="score">0</span>/60
+      </div>
+
+      <p>
+        <strong>Correct Answers:</strong>
+        <span id="correct">0</span>/20
+      </p>
+
+      <p>
+        <strong>Unanswered:</strong>
+        <span id="unanswered">0</span>/20
+      </p>
+
+      <p>
+        <strong>Time Taken:</strong>
+        <span id="timeTaken">00:00</span>
+      </p>
+
+      <p id="passStatus"></p>
+
+    </div>
+
+
+    <!-- PASS MESSAGE -->
+
+    <div id="passMessage" class="result-message">
+
+      <h2>🎉 Congratulations! You Passed!</h2>
+
+      <p>
+        We celebrate your successful completion of the
+        <strong>B.E.P. Online Bible Assessment</strong>.
+      </p>
+
+      <p>
+        Your result reflects the time and effort you have invested
+        in studying God's Word. May this assessment not only mark
+        an achievement, but also encourage you to continue growing
+        in faith, wisdom, obedience, and your relationship with Christ.
+      </p>
+
+      <p>
+        <strong>
+          Thank you for taking part in the B.E.P. Online Bible Assessment.
+        </strong>
+      </p>
+
+      <p>
+        We truly appreciate your participation and your commitment
+        to learning and growing in God's Word.
+      </p>
+
+      <blockquote>
+        “Let the word of Christ dwell in you richly in all wisdom.”
+        <br>
+        <strong>— Colossians 3:16</strong>
+      </blockquote>
+
+      <p>
+        Keep learning. Keep growing. Keep serving.
+        <br>
+        <strong>
+          May God continue to bless you and strengthen you in your walk with Him.
+        </strong>
+      </p>
+
+      <p>
+        <strong>B.E.P. — Biblical Empowerment Program</strong>
+        <br>
+        <em>Building the Church of Christ</em>
+      </p>
+
+    </div>
+
+
+    <!-- NOT PASSED MESSAGE -->
+
+    <div id="failMessage" class="result-message">
+
+      <h2>🙏 Keep Growing in God's Word</h2>
+
+      <p>
+        Thank you for taking the time to complete the
+        <strong>B.E.P. Online Bible Assessment</strong>.
+      </p>
+
+      <p>
+        Although you did not reach the pass mark on this attempt,
+        this is <strong>not the end of your journey</strong>.
+        Every question is an opportunity to learn, and every step
+        in God's Word helps us grow in faith and understanding.
+      </p>
+
+      <p>
+        Take some time to go back to the Scriptures, review what
+        you have learned, and continue growing.
+        <strong>Do not be discouraged.</strong>
+        Keep learning, keep praying, and keep pressing forward.
+      </p>
+
+      <blockquote>
+        “Let us not become weary in doing good, for at the proper time
+        we will reap a harvest if we do not give up.”
+        <br>
+        <strong>— Galatians 6:9</strong>
+      </blockquote>
+
+      <p>
+        <strong>
+          Thank you for participating in the B.E.P. Online Bible Assessment.
+        </strong>
+      </p>
+
+      <p>
+        We appreciate your commitment to learning God's Word.
+      </p>
+
+      <p>
+        Keep studying. Keep growing. Keep trusting God.
+      </p>
+
+      <p>
+        <strong>B.E.P. — Biblical Empowerment Program</strong>
+        <br>
+        <em>Building the Church of Christ</em>
+      </p>
+
+    </div>
+
+
+    <a href="index.html" class="home-btn">
+      🏠 Return to Home Page
     </a>
+
   </div>
 
 </div>
 
+
 <footer>
-  <p><strong>B.E.P. — Biblical Empowerment Program</strong></p>
-  <p>Building the Church of Christ</p>
+
+  <p>
+    <strong>B.E.P. — Biblical Empowerment Program</strong>
+  </p>
+
+  <p>
+    Building the Church of Christ
+  </p>
+
 </footer>
 
+
 <script>
+
   /* ============================================================
      SUPABASE CONNECTION
      ============================================================ */
@@ -537,7 +735,6 @@
 
   const TOTAL_QUESTIONS = 20;
   const MARKS_PER_QUESTION = 3;
-  const TOTAL_MARKS = 60;
   const PASS_MARK = 40;
 
   let timeRemaining = 30 * 60;
@@ -679,6 +876,114 @@
 
 
   /* ============================================================
+     SHOW PERSONALIZED RESULT
+     ============================================================ */
+
+  function showResult(
+    participantName,
+    result,
+    timeTakenSeconds
+  ) {
+
+    document.getElementById("score").textContent =
+      result.score;
+
+    document.getElementById("correct").textContent =
+      result.correctAnswersCount;
+
+    document.getElementById("unanswered").textContent =
+      result.unansweredCount;
+
+    document.getElementById("timeTaken").textContent =
+      formatTime(timeTakenSeconds);
+
+    document.getElementById("resultParticipantName").textContent =
+      participantName;
+
+
+    const resultTitle =
+      document.getElementById("resultTitle");
+
+    const resultSubtitle =
+      document.getElementById("resultSubtitle");
+
+    const passStatus =
+      document.getElementById("passStatus");
+
+    const passMessage =
+      document.getElementById("passMessage");
+
+    const failMessage =
+      document.getElementById("failMessage");
+
+
+    if (result.passed) {
+
+      resultTitle.textContent =
+        "🎉 CONGRATULATIONS! YOU PASSED";
+
+      resultSubtitle.textContent =
+        "Growing in God's Word. Growing in Faith. Growing Together.";
+
+      passStatus.textContent =
+        "PASSED";
+
+      passStatus.className =
+        "passed";
+
+      passMessage.style.display =
+        "block";
+
+      failMessage.style.display =
+        "none";
+
+    } else {
+
+      resultTitle.textContent =
+        "🙏 KEEP GROWING IN GOD'S WORD";
+
+      resultSubtitle.textContent =
+        "Growing in God's Word. Growing in Faith. Growing Together.";
+
+      passStatus.textContent =
+        "NOT PASSED";
+
+      passStatus.className =
+        "failed";
+
+      passMessage.style.display =
+        "none";
+
+      failMessage.style.display =
+        "block";
+    }
+
+
+    document.getElementById("quizForm").style.display =
+      "none";
+
+    document.querySelector(".instructions").style.display =
+      "none";
+
+    document.querySelector(".container > .card:nth-of-type(2)").style.display =
+      "none";
+
+    document.querySelector(".timer").style.display =
+      "none";
+
+    document.getElementById("result").style.display =
+      "block";
+
+    document
+      .getElementById("result")
+      .scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+  }
+
+
+  /* ============================================================
      SUBMIT QUIZ
      ============================================================ */
 
@@ -713,21 +1018,13 @@
         .value
         .trim();
 
+
     if (
       !participantName ||
       !email ||
       !phone ||
       !location
     ) {
-
-      if (autoSubmitted) {
-        showMessage(
-          "Time has expired, but your participant details are incomplete. Please complete the required details and submit.",
-          "error"
-        );
-
-        return;
-      }
 
       showMessage(
         "Please complete all participant details before submitting.",
@@ -745,6 +1042,7 @@
             "Are you sure you want to submit your assessment?"
           );
 
+
     if (!confirmSubmission) {
       return;
     }
@@ -753,6 +1051,7 @@
     quizSubmitted = true;
 
     clearInterval(timerInterval);
+
 
     const submitButton =
       document.getElementById("submitButton");
@@ -777,6 +1076,7 @@
         await supabaseClient
           .from("bep_public_quiz_results")
           .insert({
+
             participant_name:
               participantName,
 
@@ -806,6 +1106,7 @@
 
             time_taken_seconds:
               timeTakenSeconds
+
           })
           .select(
             "id, participant_name, score, correct_answers, unanswered, total_questions, passed, time_taken_seconds, submitted_at"
@@ -836,50 +1137,10 @@
       }
 
 
-      /* ========================================================
-         SHOW RESULT
-         ======================================================== */
-
-      document.getElementById("score").textContent =
-        result.score;
-
-      document.getElementById("correct").textContent =
-        result.correctAnswersCount;
-
-      document.getElementById("unanswered").textContent =
-        result.unansweredCount;
-
-      document.getElementById("timeTaken").textContent =
-        formatTime(timeTakenSeconds);
-
-
-      const passStatus =
-        document.getElementById("passStatus");
-
-
-      if (result.passed) {
-
-        passStatus.textContent =
-          "PASSED — Congratulations!";
-
-        passStatus.className =
-          "passed";
-
-      } else {
-
-        passStatus.textContent =
-          "NOT PASSED — Keep studying God's Word and try again.";
-
-        passStatus.className =
-          "failed";
-      }
-
-
-      document.getElementById("quizForm").style.display =
-        "none";
-
-      document.getElementById("result").style.display =
-        "block";
+      console.log(
+        "Assessment saved successfully:",
+        data
+      );
 
 
       showMessage(
@@ -888,18 +1149,12 @@
       );
 
 
-      document
-        .getElementById("result")
-        .scrollIntoView({
-          behavior: "smooth",
-          block: "start"
-        });
-
-
-      console.log(
-        "Assessment saved successfully:",
-        data
+      showResult(
+        participantName,
+        result,
+        timeTakenSeconds
       );
+
 
     } catch (error) {
 
