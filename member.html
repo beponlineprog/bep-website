@@ -10,59 +10,47 @@
   <style>
     * {
       box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
     body {
-      margin: 0;
       font-family: Arial, Helvetica, sans-serif;
-      background: #f4f7fb;
-      color: #1f2937;
+      background: linear-gradient(135deg, #061b3a, #0b4f9c);
+      min-height: 100vh;
+      color: #222;
     }
 
-    header {
-      background: linear-gradient(135deg, #063b78, #0b63b6);
+    .header {
+      background: #061b3a;
       color: white;
-      padding: 25px 20px;
+      padding: 18px 20px;
       text-align: center;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+      border-bottom: 4px solid #d4af37;
     }
 
-    header h1 {
-      margin: 0;
+    .header h1 {
       font-size: 28px;
+      margin-bottom: 5px;
     }
 
-    header p {
-      margin: 8px 0 0;
+    .header p {
+      color: #d4af37;
       font-size: 14px;
-      opacity: 0.95;
-    }
-
-    .gold-line {
-      width: 80px;
-      height: 4px;
-      background: #d4af37;
-      margin: 15px auto 0;
-      border-radius: 10px;
     }
 
     .container {
       width: 94%;
-      max-width: 900px;
+      max-width: 1000px;
       margin: 30px auto;
     }
 
     .card {
       background: white;
-      border-radius: 15px;
+      border-radius: 16px;
       padding: 25px;
-      margin-bottom: 25px;
-      box-shadow: 0 4px 18px rgba(0,0,0,0.08);
-    }
-
-    .card h2 {
-      margin-top: 0;
-      color: #063b78;
+      margin-bottom: 20px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.2);
     }
 
     .login-card {
@@ -70,173 +58,151 @@
       margin: 40px auto;
     }
 
+    h2 {
+      color: #063b78;
+      margin-bottom: 10px;
+    }
+
+    h3 {
+      color: #063b78;
+      margin-bottom: 15px;
+    }
+
+    .subtitle {
+      color: #666;
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+
     label {
       display: block;
-      font-weight: bold;
       margin-top: 15px;
       margin-bottom: 6px;
-      color: #374151;
+      font-weight: bold;
+      color: #333;
     }
 
     input,
     select {
       width: 100%;
       padding: 13px;
-      border: 1px solid #cbd5e1;
+      border: 1px solid #ccc;
       border-radius: 8px;
-      font-size: 15px;
+      font-size: 16px;
       outline: none;
     }
 
     input:focus,
     select:focus {
-      border-color: #0b63b6;
-      box-shadow: 0 0 0 3px rgba(11,99,182,0.12);
+      border-color: #0b4f9c;
+      box-shadow: 0 0 0 2px rgba(11,79,156,0.1);
     }
 
     button {
-      width: 100%;
       border: none;
       border-radius: 8px;
       padding: 13px 18px;
-      margin-top: 15px;
       font-size: 15px;
       font-weight: bold;
       cursor: pointer;
+      margin-top: 15px;
       transition: 0.2s;
     }
 
     button:hover {
+      opacity: 0.9;
       transform: translateY(-1px);
     }
 
-    .primary-btn {
-      background: #063b78;
+    .btn-primary {
+      background: #0b4f9c;
       color: white;
+      width: 100%;
     }
 
-    .primary-btn:hover {
-      background: #052f60;
-    }
-
-    .gold-btn {
+    .btn-gold {
       background: #d4af37;
-      color: #111827;
+      color: #061b3a;
     }
 
-    .gold-btn:hover {
-      background: #bd9825;
-    }
-
-    .secondary-btn {
-      background: #e5e7eb;
-      color: #1f2937;
-    }
-
-    .secondary-btn:hover {
-      background: #d1d5db;
-    }
-
-    .danger-btn {
-      background: #b91c1c;
+    .btn-danger {
+      background: #b3261e;
       color: white;
     }
 
-    .danger-btn:hover {
-      background: #991b1b;
+    .btn-secondary {
+      background: #e9eef5;
+      color: #063b78;
     }
 
     .button-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
+      display: flex;
       gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .button-row button {
+      flex: 1;
+      min-width: 150px;
     }
 
     .message {
       display: none;
-      padding: 13px;
+      padding: 12px;
       border-radius: 8px;
-      margin: 15px 0;
-      font-size: 14px;
+      margin-top: 15px;
       line-height: 1.5;
       word-break: break-word;
     }
 
-    .message.success {
-      display: block;
-      background: #dcfce7;
-      color: #166534;
-      border: 1px solid #86efac;
+    .success {
+      background: #e8f5e9;
+      color: #1b5e20;
+      border: 1px solid #a5d6a7;
     }
 
-    .message.error {
-      display: block;
-      background: #fee2e2;
-      color: #991b1b;
-      border: 1px solid #fca5a5;
+    .error {
+      background: #ffebee;
+      color: #b71c1c;
+      border: 1px solid #ef9a9a;
     }
 
-    .message.info {
-      display: block;
-      background: #dbeafe;
-      color: #1e40af;
-      border: 1px solid #93c5fd;
+    .info {
+      background: #e3f2fd;
+      color: #0d47a1;
+      border: 1px solid #90caf9;
     }
 
-    .small-text {
-      font-size: 13px;
-      color: #6b7280;
-      line-height: 1.5;
-      margin-top: 10px;
+    .login-links {
+      text-align: center;
+      margin-top: 18px;
     }
 
-    .portal {
-      display: none;
+    .login-links button {
+      background: none;
+      color: #0b4f9c;
+      padding: 5px;
+      margin: 3px;
+      font-weight: bold;
     }
 
-    .welcome {
-      background: linear-gradient(135deg, #063b78, #0b63b6);
-      color: white;
-      border-radius: 15px;
-      padding: 25px;
-      margin-bottom: 25px;
-    }
-
-    .welcome h2 {
-      color: white;
-      margin-top: 0;
-    }
-
-    .profile-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
+    .portal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       gap: 15px;
+      flex-wrap: wrap;
     }
 
-    .profile-item {
-      background: #f8fafc;
-      border-radius: 10px;
-      padding: 15px;
-      border-left: 4px solid #d4af37;
-    }
-
-    .profile-item strong {
-      display: block;
-      color: #063b78;
-      font-size: 13px;
-      margin-bottom: 5px;
-    }
-
-    .profile-item span {
-      font-size: 15px;
-      word-break: break-word;
+    .portal-header .welcome {
+      flex: 1;
     }
 
     .member-card {
-      border: 2px solid #d4af37;
-      border-radius: 15px;
+      background: linear-gradient(135deg, #063b78, #0b4f9c);
+      color: white;
+      border-radius: 16px;
       padding: 25px;
-      background: linear-gradient(135deg, #ffffff, #f8fafc);
       position: relative;
       overflow: hidden;
     }
@@ -244,98 +210,113 @@
     .member-card::after {
       content: "B.E.P.";
       position: absolute;
-      right: 15px;
-      bottom: 5px;
-      font-size: 55px;
+      right: 20px;
+      bottom: 10px;
+      font-size: 60px;
       font-weight: bold;
-      color: rgba(6,59,120,0.05);
+      opacity: 0.08;
     }
 
-    .member-card h3 {
-      margin-top: 0;
-      color: #063b78;
+    .member-card h2 {
+      color: #d4af37;
+      margin-bottom: 20px;
     }
 
     .member-number {
       font-size: 24px;
       font-weight: bold;
       color: #d4af37;
-      margin: 10px 0;
+      margin-bottom: 18px;
+    }
+
+    .member-detail {
+      margin: 9px 0;
+      line-height: 1.5;
+    }
+
+    .member-detail strong {
+      color: #d4af37;
     }
 
     .status-badge {
       display: inline-block;
       padding: 6px 12px;
       border-radius: 20px;
-      background: #fef3c7;
-      color: #92400e;
-      font-size: 13px;
+      background: #d4af37;
+      color: #061b3a;
       font-weight: bold;
+      font-size: 13px;
+      margin-top: 8px;
     }
 
-    .course-placeholder {
-      background: #f8fafc;
-      padding: 20px;
-      border-radius: 10px;
-      border-left: 4px solid #063b78;
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .info-box {
+      background: #f5f8fc;
+      border-left: 5px solid #0b4f9c;
+      padding: 18px;
+      border-radius: 8px;
+    }
+
+    .info-box p {
+      line-height: 1.6;
+      color: #555;
     }
 
     .loading {
       text-align: center;
-      padding: 20px;
-      color: #6b7280;
-    }
-
-    .spinner {
-      width: 22px;
-      height: 22px;
-      border: 3px solid #d1d5db;
-      border-top-color: #063b78;
-      border-radius: 50%;
-      animation: spin 0.8s linear infinite;
-      display: inline-block;
-      vertical-align: middle;
-      margin-right: 8px;
-    }
-
-    @keyframes spin {
-      to {
-        transform: rotate(360deg);
-      }
-    }
-
-    footer {
-      background: #063b78;
-      color: white;
-      text-align: center;
-      padding: 25px 15px;
-      margin-top: 50px;
-    }
-
-    footer p {
-      margin: 6px 0;
-      font-size: 13px;
+      padding: 30px;
+      color: #063b78;
+      font-weight: bold;
     }
 
     .hidden {
       display: none !important;
     }
 
-    @media (max-width: 650px) {
-      .profile-grid {
-        grid-template-columns: 1fr;
-      }
+    .footer {
+      text-align: center;
+      color: white;
+      padding: 25px 15px;
+      margin-top: 30px;
+      font-size: 14px;
+    }
 
-      .button-row {
-        grid-template-columns: 1fr;
+    .footer strong {
+      color: #d4af37;
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        width: 96%;
       }
 
       .card {
         padding: 18px;
       }
 
-      header h1 {
+      .header h1 {
         font-size: 23px;
+      }
+
+      .member-card {
+        padding: 20px;
+      }
+
+      .member-number {
+        font-size: 20px;
+      }
+
+      .button-row {
+        flex-direction: column;
+      }
+
+      .button-row button {
+        width: 100%;
       }
     }
   </style>
@@ -343,623 +324,476 @@
 
 <body>
 
-<header>
-  <h1>📖 B.E.P. Member Portal</h1>
-  <p>Building the Church of Christ</p>
-  <div class="gold-line"></div>
-</header>
-
-<main class="container">
-
-  <!-- LOGIN -->
-  <section id="loginSection" class="card login-card">
-
-    <h2>Member Login</h2>
-
-    <p class="small-text">
-      Sign in using the email address and password you used when registering
-      for the Biblical Empowerment Program.
-    </p>
-
-    <div id="loginMessage" class="message"></div>
-
-    <label for="loginEmail">Email Address</label>
-    <input
-      type="email"
-      id="loginEmail"
-      autocomplete="email"
-      placeholder="Enter your email address"
-    >
-
-    <label for="loginPassword">Password</label>
-    <input
-      type="password"
-      id="loginPassword"
-      autocomplete="current-password"
-      placeholder="Enter your password"
-    >
-
-    <button id="loginBtn" class="primary-btn">
-      Login
-    </button>
-
-    <div class="button-row">
-      <button id="forgotPasswordBtn" class="gold-btn">
-        Forgot Password
-      </button>
-
-      <button id="resendVerificationBtn" class="secondary-btn">
-        Resend Verification Email
-      </button>
-    </div>
-
-    <p class="small-text">
-      Your email must be verified before you can enter the member portal.
-    </p>
-
-  </section>
+  <!-- HEADER -->
+  <header class="header">
+    <h1>📖 B.E.P. Member Portal</h1>
+    <p>Building the Church of Christ</p>
+  </header>
 
 
-  <!-- PORTAL -->
-  <section id="portalSection" class="portal">
+  <main class="container">
 
-    <div class="welcome">
-      <h2>Welcome to the B.E.P. Member Portal</h2>
-      <p id="welcomeText">
-        Loading your member profile...
+    <!-- =========================
+         LOGIN SECTION
+    ========================== -->
+    <section id="loginSection" class="card login-card">
+
+      <h2>Member Login</h2>
+
+      <p class="subtitle">
+        Sign in to access your B.E.P. member profile.
       </p>
-    </div>
 
+      <form id="loginForm">
 
-    <!-- PROFILE -->
-    <div class="card">
+        <label for="loginEmail">Email Address</label>
+        <input
+          type="email"
+          id="loginEmail"
+          autocomplete="email"
+          required
+          placeholder="Enter your email"
+        >
 
-      <h2>My Profile</h2>
+        <label for="loginPassword">Password</label>
+        <input
+          type="password"
+          id="loginPassword"
+          autocomplete="current-password"
+          required
+          placeholder="Enter your password"
+        >
 
-      <div id="profileMessage" class="message"></div>
+        <button type="submit" class="btn-primary" id="loginBtn">
+          Login
+        </button>
 
-      <div id="profileLoading" class="loading">
-        <span class="spinner"></span>
-        Loading your profile...
+      </form>
+
+      <div class="login-links">
+
+        <button type="button" id="forgotPasswordBtn">
+          Forgot Password?
+        </button>
+
+        <button type="button" id="resendVerificationBtn">
+          Resend Verification Email
+        </button>
+
       </div>
 
-      <div id="profileContent" class="hidden">
+      <div id="loginMessage" class="message"></div>
 
-        <div class="profile-grid">
+    </section>
 
-          <div class="profile-item">
-            <strong>Full Name</strong>
-            <span id="profileFullName">-</span>
+
+    <!-- =========================
+         PORTAL SECTION
+    ========================== -->
+    <section id="portalSection" class="hidden">
+
+      <!-- PORTAL HEADER -->
+      <div class="card portal-header">
+
+        <div class="welcome">
+          <h2>Welcome to the B.E.P. Member Portal</h2>
+          <p id="welcomeText">
+            Your member information is loading...
+          </p>
+        </div>
+
+        <button type="button" id="logoutBtn" class="btn-danger">
+          Logout
+        </button>
+
+      </div>
+
+
+      <!-- MEMBER CARD -->
+      <div class="card">
+
+        <div id="memberLoading" class="loading">
+          Loading your member profile...
+        </div>
+
+        <div id="memberCard" class="member-card hidden">
+
+          <h2>B.E.P. MEMBER</h2>
+
+          <div class="member-number" id="cardMemberNumber">
+            B.E.P. MEMBER
           </div>
 
-          <div class="profile-item">
-            <strong>Email Address</strong>
-            <span id="profileEmail">-</span>
+          <div class="member-detail">
+            <strong>Name:</strong>
+            <span id="cardFullName"></span>
           </div>
 
-          <div class="profile-item">
+          <div class="member-detail">
+            <strong>Email:</strong>
+            <span id="cardEmail"></span>
+          </div>
+
+          <div class="member-detail">
+            <strong>Phone:</strong>
+            <span id="cardPhone"></span>
+          </div>
+
+          <div class="member-detail">
+            <strong>Location:</strong>
+            <span id="cardLocation"></span>
+          </div>
+
+          <div class="member-detail">
+            <strong>Member Status:</strong>
+            <br>
+            <span class="status-badge" id="cardStatus"></span>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- PROFILE -->
+      <div class="card">
+
+        <h3>My Profile</h3>
+
+        <p class="subtitle">
+          You can update your phone number and location.
+          Your name, email, member number and membership status are protected.
+        </p>
+
+        <form id="profileForm">
+
+          <label for="profileFullName">Full Name</label>
+          <input
+            type="text"
+            id="profileFullName"
+            readonly
+          >
+
+          <label for="profileEmail">Email Address</label>
+          <input
+            type="email"
+            id="profileEmail"
+            readonly
+          >
+
+          <label for="profilePhone">Phone Number</label>
+          <input
+            type="text"
+            id="profilePhone"
+            placeholder="Enter your phone number"
+          >
+
+          <label for="profileLocation">Location</label>
+          <input
+            type="text"
+            id="profileLocation"
+            placeholder="Enter your location"
+          >
+
+          <button
+            type="submit"
+            class="btn-gold"
+            id="saveProfileBtn"
+          >
+            Save Profile Changes
+          </button>
+
+        </form>
+
+        <div id="profileMessage" class="message"></div>
+
+      </div>
+
+
+      <!-- MEMBER INFORMATION -->
+      <div class="card">
+
+        <h3>Membership Information</h3>
+
+        <div class="grid">
+
+          <div class="info-box">
             <strong>Member Number</strong>
-            <span id="profileMemberNumber">Pending</span>
+            <p id="infoMemberNumber">Loading...</p>
           </div>
 
-          <div class="profile-item">
-            <strong>Status</strong>
-            <span id="profileStatus">Pending</span>
+          <div class="info-box">
+            <strong>Membership Status</strong>
+            <p id="infoStatus">Loading...</p>
           </div>
 
-          <div class="profile-item">
-            <strong>Phone</strong>
-            <span id="profilePhone">-</span>
+          <div class="info-box">
+            <strong>How You Heard About B.E.P.</strong>
+            <p id="infoHeardAbout">Loading...</p>
           </div>
 
-          <div class="profile-item">
-            <strong>Location</strong>
-            <span id="profileLocation">-</span>
-          </div>
-
-          <div class="profile-item">
-            <strong>Heard About B.E.P.</strong>
-            <span id="profileHeardAbout">-</span>
-          </div>
-
-          <div class="profile-item">
+          <div class="info-box">
             <strong>Email Verification</strong>
-            <span id="profileVerification">Verified</span>
+            <p id="infoVerification">Loading...</p>
           </div>
 
         </div>
 
-        <button id="editProfileBtn" class="gold-btn">
-          Edit Phone & Location
-        </button>
-
       </div>
 
-    </div>
 
+      <!-- COURSES -->
+      <div class="card">
 
-    <!-- EDIT PROFILE -->
-    <div id="editProfileCard" class="card hidden">
+        <h3>My B.E.P. Courses</h3>
 
-      <h2>Edit Profile</h2>
+        <div class="info-box">
 
-      <div id="editMessage" class="message"></div>
+          <p>
+            Your B.E.P. courses and assessments will appear here as they
+            become available.
+          </p>
 
-      <label for="editPhone">Phone Number</label>
-      <input
-        type="tel"
-        id="editPhone"
-        placeholder="Enter your phone number"
-      >
-
-      <label for="editLocation">Location</label>
-      <input
-        type="text"
-        id="editLocation"
-        placeholder="Enter your location"
-      >
-
-      <div class="button-row">
-
-        <button id="saveProfileBtn" class="primary-btn">
-          Save Changes
-        </button>
-
-        <button id="cancelEditBtn" class="secondary-btn">
-          Cancel
-        </button>
-
-      </div>
-
-    </div>
-
-
-    <!-- DIGITAL MEMBER CARD -->
-    <div class="card">
-
-      <h2>Digital Member Card</h2>
-
-      <div class="member-card">
-
-        <h3>
-          BIBLICAL EMPOWERMENT PROGRAM
-        </h3>
-
-        <p>
-          <strong>Building the Church of Christ</strong>
-        </p>
-
-        <div class="member-number" id="cardMemberNumber">
-          BEP-PENDING
         </div>
 
-        <p>
-          <strong>Name:</strong>
-          <span id="cardName">-</span>
-        </p>
-
-        <p>
-          <strong>Email:</strong>
-          <span id="cardEmail">-</span>
-        </p>
-
-        <p>
-          <strong>Status:</strong>
-          <span id="cardStatus" class="status-badge">Pending</span>
-        </p>
-
       </div>
 
-    </div>
+    </section>
 
+  </main>
 
-    <!-- COURSES -->
-    <div class="card">
 
-      <h2>My B.E.P. Courses</h2>
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p>
+      <strong>B.E.P.</strong> — Biblical Empowerment Program
+    </p>
 
-      <div class="course-placeholder">
+    <p>
+      Building the Church of Christ
+    </p>
 
-        <h3>Courses & Assessments</h3>
+    <p>
+      Contact: Omega — 062 350 8689
+    </p>
 
-        <p>
-          Your B.E.P. courses and member assessments will appear here
-          as they become available.
-        </p>
+    <p>
+      © 2026 Biblical Empowerment Program
+    </p>
+  </footer>
 
-        <p class="small-text">
-          The public B.E.P. Bible Quiz remains available separately.
-        </p>
 
-      </div>
+  <!-- =========================
+       FIREBASE
+  ========================== -->
+  <script type="module">
 
-    </div>
+    import { initializeApp }
+      from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
 
+    import {
+      getAuth,
+      signInWithEmailAndPassword,
+      signOut,
+      sendPasswordResetEmail,
+      sendEmailVerification,
+      onAuthStateChanged,
+      reload
+    } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js";
 
-    <!-- LOGOUT -->
-    <div class="card">
+    import {
+      getFirestore,
+      doc,
+      getDoc,
+      updateDoc
+    } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
 
-      <button id="logoutBtn" class="danger-btn">
-        Logout
-      </button>
 
-    </div>
+    /* =========================================================
+       FIREBASE CONFIGURATION
 
-  </section>
+       IMPORTANT:
+       This is the NEW working API key.
+    ========================================================= */
 
-</main>
+    const firebaseConfig = {
 
+      apiKey: "AIzaSyAn-zNZFuOurJyv5WJvCilUKsEkrhF7DJs",
 
-<footer>
-  <p><strong>B.E.P. — Biblical Empowerment Program</strong></p>
-  <p>Building the Church of Christ</p>
-  <p>Omega: 062 350 8689</p>
-  <p>Bro. KB: 083 282 2644</p>
-  <p>&copy; 2026 B.E.P. All Rights Reserved.</p>
-</footer>
+      authDomain:
+        "beponlineprog-8b8bb.firebaseapp.com",
 
+      projectId:
+        "beponlineprog-8b8bb",
 
-<!-- FIREBASE -->
-<script type="module">
+      storageBucket:
+        "beponlineprog-8b8bb.firebasestorage.app",
 
-  import { initializeApp }
-    from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
+      messagingSenderId:
+        "312026634976",
 
-  import {
-    getAuth,
-    signInWithEmailAndPassword,
-    signOut,
-    sendPasswordResetEmail,
-    sendEmailVerification,
-    onAuthStateChanged
-  } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js";
+      appId:
+        "1:312026634976:web:5497f071e8f0e6618fce85",
 
-  import {
-    getFirestore,
-    doc,
-    getDoc,
-    updateDoc
-  } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
+      measurementId:
+        "G-LDX5CZ68MH"
+    };
 
 
-  /* =========================================================
-     FIREBASE CONFIGURATION
-     ========================================================= */
+    /* =========================================================
+       INITIALIZE FIREBASE
+    ========================================================= */
 
-  const firebaseConfig = {
-    apiKey: "AIzaSyC3N-DrY4mv4M32TMIt2_9bt3OAqmhDk3Y",
-    authDomain: "beponlineprog-8b8bb.firebaseapp.com",
-    projectId: "beponlineprog-8b8bb",
-    storageBucket: "beponlineprog-8b8bb.firebasestorage.app",
-    messagingSenderId: "312026634976",
-    appId: "1:312026634976:web:5497f071e8f0e6618fce85",
-    measurementId: "G-LDX5CZ68MH"
-  };
+    const app = initializeApp(firebaseConfig);
 
+    const auth = getAuth(app);
 
-  const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
 
-  const auth = getAuth(app);
 
-  const db = getFirestore(app);
+    /* =========================================================
+       DOM ELEMENTS
+    ========================================================= */
 
+    const loginSection =
+      document.getElementById("loginSection");
 
-  /* =========================================================
-     ELEMENTS
-     ========================================================= */
+    const portalSection =
+      document.getElementById("portalSection");
 
-  const loginSection =
-    document.getElementById("loginSection");
+    const loginForm =
+      document.getElementById("loginForm");
 
-  const portalSection =
-    document.getElementById("portalSection");
+    const loginEmail =
+      document.getElementById("loginEmail");
 
-  const loginEmail =
-    document.getElementById("loginEmail");
+    const loginPassword =
+      document.getElementById("loginPassword");
 
-  const loginPassword =
-    document.getElementById("loginPassword");
+    const loginBtn =
+      document.getElementById("loginBtn");
 
-  const loginBtn =
-    document.getElementById("loginBtn");
+    const loginMessage =
+      document.getElementById("loginMessage");
 
-  const forgotPasswordBtn =
-    document.getElementById("forgotPasswordBtn");
+    const forgotPasswordBtn =
+      document.getElementById("forgotPasswordBtn");
 
-  const resendVerificationBtn =
-    document.getElementById("resendVerificationBtn");
+    const resendVerificationBtn =
+      document.getElementById("resendVerificationBtn");
 
-  const logoutBtn =
-    document.getElementById("logoutBtn");
+    const logoutBtn =
+      document.getElementById("logoutBtn");
 
-  const loginMessage =
-    document.getElementById("loginMessage");
+    const memberLoading =
+      document.getElementById("memberLoading");
 
-  const profileMessage =
-    document.getElementById("profileMessage");
+    const memberCard =
+      document.getElementById("memberCard");
 
-  const editMessage =
-    document.getElementById("editMessage");
+    const profileForm =
+      document.getElementById("profileForm");
 
-  const profileLoading =
-    document.getElementById("profileLoading");
+    const profileMessage =
+      document.getElementById("profileMessage");
 
-  const profileContent =
-    document.getElementById("profileContent");
+    const saveProfileBtn =
+      document.getElementById("saveProfileBtn");
 
-  const editProfileCard =
-    document.getElementById("editProfileCard");
 
-  const editProfileBtn =
-    document.getElementById("editProfileBtn");
+    /* =========================================================
+       MESSAGE FUNCTIONS
+    ========================================================= */
 
-  const saveProfileBtn =
-    document.getElementById("saveProfileBtn");
+    function showMessage(element, message, type) {
 
-  const cancelEditBtn =
-    document.getElementById("cancelEditBtn");
+      element.textContent = message;
 
+      element.className = "message " + type;
 
-  /* =========================================================
-     MESSAGE FUNCTION
-     ========================================================= */
-
-  function showMessage(element, message, type) {
-
-    element.className = "message " + type;
-
-    element.innerHTML = message;
-
-  }
-
-
-  function clearMessage(element) {
-
-    element.className = "message";
-
-    element.innerHTML = "";
-
-  }
-
-
-  /* =========================================================
-     FIREBASE ERROR DIAGNOSTIC
-     ========================================================= */
-
-  function getFirebaseError(error) {
-
-    console.error("Firebase error:", error);
-
-    const code =
-      error?.code || "unknown-error";
-
-    const message =
-      error?.message || "No Firebase error message was returned.";
-
-    return `
-      <strong>Firebase error detected</strong><br>
-      Code: <strong>${code}</strong><br>
-      Message: ${message}
-    `;
-  }
-
-
-  /* =========================================================
-     LOGIN
-     ========================================================= */
-
-  loginBtn.addEventListener("click", async () => {
-
-    const email =
-      loginEmail.value.trim();
-
-    const password =
-      loginPassword.value;
-
-
-    clearMessage(loginMessage);
-
-
-    if (!email || !password) {
-
-      showMessage(
-        loginMessage,
-        "Please enter your email address and password.",
-        "error"
-      );
-
-      return;
+      element.style.display = "block";
     }
 
 
-    loginBtn.disabled = true;
+    function hideMessage(element) {
 
-    loginBtn.textContent = "Signing in...";
+      element.style.display = "none";
 
-
-    try {
-
-      console.log("Attempting Firebase login:", email);
+      element.textContent = "";
+    }
 
 
-      const credential =
-        await signInWithEmailAndPassword(
-          auth,
-          email,
-          password
-        );
+    /* =========================================================
+       FIREBASE ERROR MESSAGE
+    ========================================================= */
 
+    function firebaseError(error) {
 
-      const user =
-        credential.user;
+      console.error("Firebase error:", error);
 
+      let message = "Something went wrong.";
 
-      console.log("Firebase login successful.");
-      console.log("UID:", user.uid);
-      console.log("Email:", user.email);
+      switch (error.code) {
 
+        case "auth/invalid-credential":
+          message =
+            "The email or password is incorrect.";
+          break;
 
-      await user.reload();
+        case "auth/invalid-login-credentials":
+          message =
+            "The email or password is incorrect.";
+          break;
 
-      await user.getIdToken(true);
+        case "auth/user-not-found":
+          message =
+            "No B.E.P. account was found with this email address.";
+          break;
 
+        case "auth/wrong-password":
+          message =
+            "The password is incorrect.";
+          break;
 
-      console.log(
-        "Email verified:",
-        user.emailVerified
-      );
+        case "auth/too-many-requests":
+          message =
+            "Too many attempts were made. Please wait a while and try again.";
+          break;
 
+        case "auth/network-request-failed":
+          message =
+            "Network connection problem. Please check your internet connection.";
+          break;
 
-      if (!user.emailVerified) {
+        case "auth/api-key-not-valid":
+          message =
+            "Firebase API key is not valid. Please check the Firebase configuration.";
+          break;
 
-        showMessage(
-          loginMessage,
-          `
-          Your email address has not been verified yet.<br><br>
-          Please check your email for the Firebase verification message,
-          or use <strong>Resend Verification Email</strong>.
-          `,
-          "error"
-        );
+        case "auth/email-already-in-use":
+          message =
+            "An account already exists with this email address.";
+          break;
 
-
-        try {
-
-          await sendEmailVerification(user);
-
-          console.log(
-            "Verification email automatically sent."
-          );
-
-        } catch (verificationError) {
-
-          console.error(
-            "Automatic verification email failed:",
-            verificationError
-          );
-
-        }
-
-
-        await signOut(auth);
-
-        return;
+        default:
+          message =
+            error.message ||
+            "An unexpected Firebase error occurred.";
       }
 
-
-      showMessage(
-        loginMessage,
-        "Login successful. Loading your member portal...",
-        "success"
-      );
-
-
-      await loadMemberProfile(user);
-
-
-    } catch (error) {
-
-      showMessage(
-        loginMessage,
-        getFirebaseError(error),
-        "error"
-      );
-
-    } finally {
-
-      loginBtn.disabled = false;
-
-      loginBtn.textContent = "Login";
-
-    }
-
-  });
-
-
-  /* =========================================================
-     FORGOT PASSWORD
-     ========================================================= */
-
-  forgotPasswordBtn.addEventListener("click", async () => {
-
-    const email =
-      loginEmail.value.trim();
-
-
-    clearMessage(loginMessage);
-
-
-    if (!email) {
-
-      showMessage(
-        loginMessage,
-        "Please enter your email address first.",
-        "error"
-      );
-
-      loginEmail.focus();
-
-      return;
+      return message;
     }
 
 
-    forgotPasswordBtn.disabled = true;
+    /* =========================================================
+       LOGIN
+    ========================================================= */
 
-    forgotPasswordBtn.textContent =
-      "Sending...";
+    loginForm.addEventListener("submit", async (event) => {
 
+      event.preventDefault();
 
-    try {
-
-      console.log(
-        "Sending password reset email to:",
-        email
-      );
-
-
-      await sendPasswordResetEmail(
-        auth,
-        email
-      );
-
-
-      showMessage(
-        loginMessage,
-        `
-        Password reset email sent successfully.<br><br>
-        Please check your inbox and spam/junk folder.
-        `,
-        "success"
-      );
-
-
-    } catch (error) {
-
-      showMessage(
-        loginMessage,
-        getFirebaseError(error),
-        "error"
-      );
-
-    } finally {
-
-      forgotPasswordBtn.disabled = false;
-
-      forgotPasswordBtn.textContent =
-        "Forgot Password";
-
-    }
-
-  });
-
-
-  /* =========================================================
-     RESEND VERIFICATION EMAIL
-     ========================================================= */
-
-  resendVerificationBtn.addEventListener(
-    "click",
-    async () => {
+      hideMessage(loginMessage);
 
       const email =
         loginEmail.value.trim();
@@ -967,38 +801,22 @@
       const password =
         loginPassword.value;
 
-
-      clearMessage(loginMessage);
-
-
       if (!email || !password) {
 
         showMessage(
           loginMessage,
-          `
-          Enter your email address and password first,
-          then click <strong>Resend Verification Email</strong>.
-          `,
+          "Please enter your email address and password.",
           "error"
         );
 
         return;
       }
 
+      loginBtn.disabled = true;
 
-      resendVerificationBtn.disabled = true;
-
-      resendVerificationBtn.textContent =
-        "Sending...";
-
+      loginBtn.textContent = "Signing in...";
 
       try {
-
-        console.log(
-          "Signing in temporarily to resend verification:",
-          email
-        );
-
 
         const credential =
           await signInWithEmailAndPassword(
@@ -1007,388 +825,241 @@
             password
           );
 
-
         const user =
           credential.user;
 
+        await reload(user);
 
-        await user.reload();
-
-
-        if (user.emailVerified) {
+        if (!user.emailVerified) {
 
           showMessage(
             loginMessage,
-            "This email address is already verified. You can now log in.",
-            "success"
+            "Your email address has not been verified yet. A new verification email will be sent.",
+            "info"
           );
 
+          try {
+
+            await sendEmailVerification(user);
+
+          } catch (verificationError) {
+
+            console.error(
+              "Verification email error:",
+              verificationError
+            );
+          }
 
           await signOut(auth);
+
+          loginBtn.disabled = false;
+
+          loginBtn.textContent = "Login";
 
           return;
         }
 
-
-        await sendEmailVerification(user);
-
-
-        console.log(
-          "Verification email sent successfully."
-        );
-
+        await user.getIdToken(true);
 
         showMessage(
           loginMessage,
-          `
-          Verification email sent successfully.<br><br>
-          Please check your inbox and spam/junk folder.
-          `,
+          "Login successful. Loading your B.E.P. profile...",
           "success"
         );
 
-
-        await signOut(auth);
-
+        await loadMemberProfile(user);
 
       } catch (error) {
 
         showMessage(
           loginMessage,
-          getFirebaseError(error),
+          firebaseError(error),
           "error"
         );
-
-
-        try {
-
-          await signOut(auth);
-
-        } catch (signOutError) {
-
-          console.error(
-            "Sign-out after verification error failed:",
-            signOutError
-          );
-
-        }
 
       } finally {
 
-        resendVerificationBtn.disabled = false;
+        loginBtn.disabled = false;
+
+        loginBtn.textContent = "Login";
+      }
+
+    });
+
+
+    /* =========================================================
+       FORGOT PASSWORD
+    ========================================================= */
+
+    forgotPasswordBtn.addEventListener(
+      "click",
+      async () => {
+
+        hideMessage(loginMessage);
+
+        const email =
+          loginEmail.value.trim();
+
+        if (!email) {
+
+          showMessage(
+            loginMessage,
+            "Please enter your email address first, then click Forgot Password.",
+            "info"
+          );
+
+          loginEmail.focus();
+
+          return;
+        }
+
+        forgotPasswordBtn.disabled = true;
+
+        forgotPasswordBtn.textContent =
+          "Sending...";
+
+        try {
+
+          await sendPasswordResetEmail(
+            auth,
+            email
+          );
+
+          showMessage(
+            loginMessage,
+            "Password reset email sent. Please check your inbox and spam/junk folder.",
+            "success"
+          );
+
+        } catch (error) {
+
+          showMessage(
+            loginMessage,
+            firebaseError(error),
+            "error"
+          );
+
+        } finally {
+
+          forgotPasswordBtn.disabled = false;
+
+          forgotPasswordBtn.textContent =
+            "Forgot Password?";
+        }
+
+      }
+    );
+
+
+    /* =========================================================
+       RESEND VERIFICATION EMAIL
+    ========================================================= */
+
+    resendVerificationBtn.addEventListener(
+      "click",
+      async () => {
+
+        hideMessage(loginMessage);
+
+        const email =
+          loginEmail.value.trim();
+
+        const password =
+          loginPassword.value;
+
+        if (!email || !password) {
+
+          showMessage(
+            loginMessage,
+            "Enter your email address and password first, then click Resend Verification Email.",
+            "info"
+          );
+
+          return;
+        }
+
+        resendVerificationBtn.disabled = true;
 
         resendVerificationBtn.textContent =
-          "Resend Verification Email";
+          "Sending...";
+
+        try {
+
+          const credential =
+            await signInWithEmailAndPassword(
+              auth,
+              email,
+              password
+            );
+
+          const user =
+            credential.user;
+
+          await reload(user);
+
+          if (user.emailVerified) {
+
+            showMessage(
+              loginMessage,
+              "Your email address is already verified. You can log in normally.",
+              "success"
+            );
+
+            await signOut(auth);
+
+            return;
+          }
+
+          await sendEmailVerification(user);
+
+          await signOut(auth);
+
+          showMessage(
+            loginMessage,
+            "A new verification email has been sent. Please check your inbox and spam/junk folder.",
+            "success"
+          );
+
+        } catch (error) {
+
+          showMessage(
+            loginMessage,
+            firebaseError(error),
+            "error"
+          );
+
+        } finally {
+
+          resendVerificationBtn.disabled = false;
+
+          resendVerificationBtn.textContent =
+            "Resend Verification Email";
+        }
 
       }
+    );
 
-    }
-  );
 
+    /* =========================================================
+       LOAD MEMBER PROFILE
+    ========================================================= */
 
-  /* =========================================================
-     LOAD MEMBER PROFILE
-     ========================================================= */
-
-  async function loadMemberProfile(user) {
-
-    try {
-
-      profileLoading.classList.remove("hidden");
-
-      profileContent.classList.add("hidden");
-
-
-      console.log(
-        "Loading Firestore member profile for UID:",
-        user.uid
-      );
-
-
-      const memberRef =
-        doc(
-          db,
-          "members",
-          user.uid
-        );
-
-
-      const snapshot =
-        await getDoc(memberRef);
-
-
-      if (!snapshot.exists()) {
-
-        showMessage(
-          profileMessage,
-          `
-          Your Firebase account is valid, but no B.E.P. member
-          profile was found for this account.<br><br>
-          UID: <strong>${user.uid}</strong>
-          `,
-          "error"
-        );
-
-        return;
-      }
-
-
-      const member =
-        snapshot.data();
-
-
-      console.log(
-        "Firestore member profile:",
-        member
-      );
-
-
-      /* SECURITY CHECK */
-
-      if (member.uid !== user.uid) {
-
-        showMessage(
-          profileMessage,
-          "Security check failed: this profile does not belong to the signed-in account.",
-          "error"
-        );
-
-        return;
-      }
-
-
-      if (
-        member.email &&
-        member.email.toLowerCase() !==
-        user.email.toLowerCase()
-      ) {
-
-        showMessage(
-          profileMessage,
-          "Security check failed: the member profile email does not match the Firebase account.",
-          "error"
-        );
-
-        return;
-      }
-
-
-      /* DISPLAY PROFILE */
-
-      document.getElementById(
-        "profileFullName"
-      ).textContent =
-        member.fullName || "-";
-
-
-      document.getElementById(
-        "profileEmail"
-      ).textContent =
-        member.email || user.email || "-";
-
-
-      document.getElementById(
-        "profileMemberNumber"
-      ).textContent =
-        member.memberNumber || "Pending";
-
-
-      document.getElementById(
-        "profileStatus"
-      ).textContent =
-        member.status || "Pending";
-
-
-      document.getElementById(
-        "profilePhone"
-      ).textContent =
-        member.phone || "-";
-
-
-      document.getElementById(
-        "profileLocation"
-      ).textContent =
-        member.location || "-";
-
-
-      document.getElementById(
-        "profileHeardAbout"
-      ).textContent =
-        member.heardAbout || "-";
-
-
-      document.getElementById(
-        "profileVerification"
-      ).textContent =
-        user.emailVerified
-          ? "Verified"
-          : "Not Verified";
-
-
-      /* WELCOME */
-
-      document.getElementById(
-        "welcomeText"
-      ).textContent =
-        `Welcome, ${member.fullName || "B.E.P. Member"}.`;
-
-
-      /* DIGITAL CARD */
-
-      document.getElementById(
-        "cardMemberNumber"
-      ).textContent =
-        member.memberNumber || "BEP-PENDING";
-
-
-      document.getElementById(
-        "cardName"
-      ).textContent =
-        member.fullName || "-";
-
-
-      document.getElementById(
-        "cardEmail"
-      ).textContent =
-        member.email || user.email || "-";
-
-
-      document.getElementById(
-        "cardStatus"
-      ).textContent =
-        member.status || "Pending";
-
-
-      /* EDIT FIELDS */
-
-      document.getElementById(
-        "editPhone"
-      ).value =
-        member.phone || "";
-
-
-      document.getElementById(
-        "editLocation"
-      ).value =
-        member.location || "";
-
-
-      profileLoading.classList.add("hidden");
-
-      profileContent.classList.remove("hidden");
-
-
-      loginSection.style.display = "none";
-
-      portalSection.style.display = "block";
-
-
-      clearMessage(profileMessage);
-
-
-    } catch (error) {
-
-      profileLoading.classList.add("hidden");
-
-      showMessage(
-        profileMessage,
-        getFirebaseError(error),
-        "error"
-      );
-
-    }
-
-  }
-
-
-  /* =========================================================
-     EDIT PROFILE
-     ========================================================= */
-
-  editProfileBtn.addEventListener(
-    "click",
-    () => {
-
-      clearMessage(editMessage);
-
-      editProfileCard.classList.remove("hidden");
-
-      editProfileCard.scrollIntoView({
-        behavior: "smooth",
-        block: "start"
-      });
-
-    }
-  );
-
-
-  /* =========================================================
-     CANCEL EDIT
-     ========================================================= */
-
-  cancelEditBtn.addEventListener(
-    "click",
-    () => {
-
-      editProfileCard.classList.add("hidden");
-
-      clearMessage(editMessage);
-
-    }
-  );
-
-
-  /* =========================================================
-     SAVE PROFILE
-     ========================================================= */
-
-  saveProfileBtn.addEventListener(
-    "click",
-    async () => {
-
-      const user =
-        auth.currentUser;
-
-
-      if (!user) {
-
-        showMessage(
-          editMessage,
-          "Your session has expired. Please log in again.",
-          "error"
-        );
-
-        return;
-      }
-
-
-      const phone =
-        document.getElementById(
-          "editPhone"
-        ).value.trim();
-
-
-      const location =
-        document.getElementById(
-          "editLocation"
-        ).value.trim();
-
-
-      clearMessage(editMessage);
-
-
-      saveProfileBtn.disabled = true;
-
-      saveProfileBtn.textContent =
-        "Saving...";
-
+    async function loadMemberProfile(user) {
 
       try {
 
-        await user.reload();
+        if (!user) {
+          return;
+        }
 
-        await user.getIdToken(true);
+        await reload(user);
 
+        if (!user.emailVerified) {
+
+          await signOut(auth);
+
+          return;
+        }
 
         const memberRef =
           doc(
@@ -1397,234 +1068,434 @@
             user.uid
           );
 
+        const memberSnapshot =
+          await getDoc(memberRef);
 
-        await updateDoc(
-          memberRef,
-          {
-            phone: phone,
-            location: location
-          }
-        );
+        if (!memberSnapshot.exists()) {
 
-
-        showMessage(
-          editMessage,
-          "Your profile has been updated successfully.",
-          "success"
-        );
-
-
-        await loadMemberProfile(
-          auth.currentUser
-        );
-
-
-        setTimeout(() => {
-
-          editProfileCard.classList.add(
-            "hidden"
+          throw new Error(
+            "Your Firebase account is valid, but no B.E.P. member profile was found."
           );
+        }
 
-        }, 1000);
-
-
-      } catch (error) {
-
-        showMessage(
-          editMessage,
-          getFirebaseError(error),
-          "error"
-        );
-
-      } finally {
-
-        saveProfileBtn.disabled = false;
-
-        saveProfileBtn.textContent =
-          "Save Changes";
-
-      }
-
-    }
-  );
+        const member =
+          memberSnapshot.data();
 
 
-  /* =========================================================
-     LOGOUT
-     ========================================================= */
+        /* =====================================================
+           SECURITY CHECKS
+        ===================================================== */
 
-  logoutBtn.addEventListener(
-    "click",
-    async () => {
+        if (member.uid !== user.uid) {
 
-      try {
-
-        await signOut(auth);
-
-        portalSection.style.display =
-          "none";
-
-        loginSection.style.display =
-          "block";
-
-        loginEmail.value = "";
-
-        loginPassword.value = "";
-
-        clearMessage(loginMessage);
-
-        window.scrollTo({
-          top: 0,
-          behavior: "smooth"
-        });
-
-
-      } catch (error) {
-
-        showMessage(
-          profileMessage,
-          getFirebaseError(error),
-          "error"
-        );
-
-      }
-
-    }
-  );
-
-
-  /* =========================================================
-     FIREBASE AUTH STATE
-     ========================================================= */
-
-  onAuthStateChanged(
-    auth,
-    async (user) => {
-
-      console.log(
-        "Firebase auth state changed:",
-        user
-      );
-
-
-      if (!user) {
-
-        loginSection.style.display =
-          "block";
-
-        portalSection.style.display =
-          "none";
-
-        return;
-      }
-
-
-      try {
-
-        await user.reload();
-
-        await user.getIdToken(true);
-
-
-        if (!user.emailVerified) {
-
-          loginSection.style.display =
-            "block";
-
-          portalSection.style.display =
-            "none";
-
-
-          showMessage(
-            loginMessage,
-            `
-            Your email address has not been verified yet.
-            Please verify your email before entering the B.E.P. Member Portal.
-            `,
-            "error"
+          throw new Error(
+            "Security check failed: member profile does not belong to this account."
           );
-
-
-          await signOut(auth);
-
-          return;
         }
 
 
-        await loadMemberProfile(user);
+        if (
+          member.email &&
+          member.email.toLowerCase() !==
+          user.email.toLowerCase()
+        ) {
 
+          throw new Error(
+            "Security check failed: member email does not match the authenticated account."
+          );
+        }
+
+
+        /* =====================================================
+           DISPLAY PROFILE
+        ===================================================== */
+
+        document.getElementById(
+          "welcomeText"
+        ).textContent =
+          "Welcome, " +
+          (member.fullName || user.email) +
+          ".";
+
+
+        document.getElementById(
+          "profileFullName"
+        ).value =
+          member.fullName || "";
+
+
+        document.getElementById(
+          "profileEmail"
+        ).value =
+          member.email || user.email || "";
+
+
+        document.getElementById(
+          "profilePhone"
+        ).value =
+          member.phone || "";
+
+
+        document.getElementById(
+          "profileLocation"
+        ).value =
+          member.location || "";
+
+
+        /* =====================================================
+           MEMBER CARD
+        ===================================================== */
+
+        document.getElementById(
+          "cardMemberNumber"
+        ).textContent =
+          member.memberNumber ||
+          "B.E.P. MEMBER";
+
+
+        document.getElementById(
+          "cardFullName"
+        ).textContent =
+          member.fullName || "Not available";
+
+
+        document.getElementById(
+          "cardEmail"
+        ).textContent =
+          member.email || user.email || "";
+
+
+        document.getElementById(
+          "cardPhone"
+        ).textContent =
+          member.phone || "Not provided";
+
+
+        document.getElementById(
+          "cardLocation"
+        ).textContent =
+          member.location || "Not provided";
+
+
+        document.getElementById(
+          "cardStatus"
+        ).textContent =
+          member.status || "Pending";
+
+
+        /* =====================================================
+           MEMBERSHIP INFORMATION
+        ===================================================== */
+
+        document.getElementById(
+          "infoMemberNumber"
+        ).textContent =
+          member.memberNumber ||
+          "Not assigned";
+
+
+        document.getElementById(
+          "infoStatus"
+        ).textContent =
+          member.status ||
+          "Pending";
+
+
+        document.getElementById(
+          "infoHeardAbout"
+        ).textContent =
+          member.heardAbout ||
+          "Not provided";
+
+
+        document.getElementById(
+          "infoVerification"
+        ).textContent =
+          user.emailVerified
+            ? "Verified"
+            : "Not verified";
+
+
+        /* =====================================================
+           SHOW PORTAL
+        ===================================================== */
+
+        memberLoading.classList.add(
+          "hidden"
+        );
+
+        memberCard.classList.remove(
+          "hidden"
+        );
+
+        loginSection.classList.add(
+          "hidden"
+        );
+
+        portalSection.classList.remove(
+          "hidden"
+        );
 
       } catch (error) {
 
         console.error(
-          "Authentication state error:",
+          "Profile loading error:",
           error
         );
 
+        loginSection.classList.remove(
+          "hidden"
+        );
+
+        portalSection.classList.add(
+          "hidden"
+        );
 
         showMessage(
           loginMessage,
-          getFirebaseError(error),
+          error.message ||
+          "Unable to load your B.E.P. member profile.",
           "error"
         );
+      }
 
+    }
+
+
+    /* =========================================================
+       UPDATE PROFILE
+       ONLY PHONE + LOCATION CAN BE CHANGED
+    ========================================================= */
+
+    profileForm.addEventListener(
+      "submit",
+      async (event) => {
+
+        event.preventDefault();
+
+        hideMessage(profileMessage);
+
+        const user =
+          auth.currentUser;
+
+        if (!user) {
+
+          showMessage(
+            profileMessage,
+            "Your session has expired. Please log in again.",
+            "error"
+          );
+
+          return;
+        }
+
+        saveProfileBtn.disabled = true;
+
+        saveProfileBtn.textContent =
+          "Saving...";
+
+        try {
+
+          await reload(user);
+
+          if (!user.emailVerified) {
+
+            throw new Error(
+              "Your email address must be verified before updating your profile."
+            );
+          }
+
+          const phone =
+            document.getElementById(
+              "profilePhone"
+            ).value.trim();
+
+          const location =
+            document.getElementById(
+              "profileLocation"
+            ).value.trim();
+
+
+          const memberRef =
+            doc(
+              db,
+              "members",
+              user.uid
+            );
+
+
+          await updateDoc(
+            memberRef,
+            {
+              phone: phone,
+              location: location
+            }
+          );
+
+
+          /* Update card immediately */
+
+          document.getElementById(
+            "cardPhone"
+          ).textContent =
+            phone || "Not provided";
+
+
+          document.getElementById(
+            "cardLocation"
+          ).textContent =
+            location || "Not provided";
+
+
+          showMessage(
+            profileMessage,
+            "Your profile has been updated successfully.",
+            "success"
+          );
+
+        } catch (error) {
+
+          console.error(
+            "Profile update error:",
+            error
+          );
+
+          showMessage(
+            profileMessage,
+            firebaseError(error),
+            "error"
+          );
+
+        } finally {
+
+          saveProfileBtn.disabled = false;
+
+          saveProfileBtn.textContent =
+            "Save Profile Changes";
+        }
+
+      }
+    );
+
+
+    /* =========================================================
+       LOGOUT
+    ========================================================= */
+
+    logoutBtn.addEventListener(
+      "click",
+      async () => {
+
+        logoutBtn.disabled = true;
+
+        logoutBtn.textContent =
+          "Logging out...";
 
         try {
 
           await signOut(auth);
 
-        } catch (signOutError) {
-
-          console.error(
-            "Sign-out failed:",
-            signOutError
+          portalSection.classList.add(
+            "hidden"
           );
 
+          loginSection.classList.remove(
+            "hidden"
+          );
+
+          loginForm.reset();
+
+          hideMessage(loginMessage);
+
+          showMessage(
+            loginMessage,
+            "You have been logged out successfully.",
+            "success"
+          );
+
+        } catch (error) {
+
+          showMessage(
+            loginMessage,
+            firebaseError(error),
+            "error"
+          );
+
+        } finally {
+
+          logoutBtn.disabled = false;
+
+          logoutBtn.textContent =
+            "Logout";
         }
 
       }
-
-    }
-  );
+    );
 
 
-  /* =========================================================
-     ENTER KEY LOGIN
-     ========================================================= */
+    /* =========================================================
+       AUTH STATE MONITOR
+    ========================================================= */
 
-  loginPassword.addEventListener(
-    "keydown",
-    (event) => {
+    onAuthStateChanged(
+      auth,
+      async (user) => {
 
-      if (event.key === "Enter") {
+        console.log(
+          "Firebase auth state:",
+          user ? user.email : "No user"
+        );
 
-        loginBtn.click();
+        if (!user) {
+
+          loginSection.classList.remove(
+            "hidden"
+          );
+
+          portalSection.classList.add(
+            "hidden"
+          );
+
+          return;
+        }
+
+
+        try {
+
+          await reload(user);
+
+          if (!user.emailVerified) {
+
+            await signOut(auth);
+
+            return;
+          }
+
+          await user.getIdToken(true);
+
+          await loadMemberProfile(user);
+
+        } catch (error) {
+
+          console.error(
+            "Authentication state error:",
+            error
+          );
+
+          await signOut(auth);
+
+          showMessage(
+            loginMessage,
+            error.message ||
+            "Unable to verify your account.",
+            "error"
+          );
+        }
 
       }
+    );
 
-    }
-  );
-
-
-  loginEmail.addEventListener(
-    "keydown",
-    (event) => {
-
-      if (event.key === "Enter") {
-
-        loginBtn.click();
-
-      }
-
-    }
-  );
-
-
-  console.log(
-    "B.E.P. Firebase Member Portal initialized successfully."
-  );
-
-</script>
+  </script>
 
 </body>
 </html>
