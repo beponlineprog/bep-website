@@ -13,8 +13,6 @@
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
   >
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
   <style>
     * {
       box-sizing: border-box;
@@ -214,6 +212,21 @@
       color: #d4af37;
     }
 
+    .verification-note {
+      display: none;
+      margin-top: 18px;
+      padding: 15px;
+      border-radius: 8px;
+      background: #fff8df;
+      color: #6b5600;
+      border: 1px solid #ead68a;
+    }
+
+    .verification-note strong {
+      display: block;
+      margin-bottom: 5px;
+    }
+
     @media (max-width: 600px) {
 
       .header-inner {
@@ -243,6 +256,7 @@
 
     <div class="brand">
       <img src="../banner.png" alt="B.E.P.">
+
       <div>
         <h1>B.E.P. Member Registration</h1>
         <p>Building the Church of Christ</p>
@@ -293,6 +307,7 @@
           placeholder="Enter your full name"
           required
           autocomplete="name"
+          maxlength="100"
         >
 
       </div>
@@ -311,6 +326,7 @@
           placeholder="Enter your email address"
           required
           autocomplete="email"
+          maxlength="254"
         >
 
       </div>
@@ -329,6 +345,7 @@
           placeholder="Enter your phone or WhatsApp number"
           required
           autocomplete="tel"
+          maxlength="30"
         >
 
       </div>
@@ -346,6 +363,7 @@
           name="location"
           placeholder="City / Town / Area"
           required
+          maxlength="100"
         >
 
       </div>
@@ -354,10 +372,15 @@
       <div class="form-group">
 
         <label for="heardAbout">
-          How did you hear about B.E.P.? <span class="required">*</span>
+          How did you hear about B.E.P.?
+          <span class="required">*</span>
         </label>
 
-        <select id="heardAbout" name="heardAbout" required>
+        <select
+          id="heardAbout"
+          name="heardAbout"
+          required
+        >
 
           <option value="">
             Select an option
@@ -449,15 +472,31 @@
         class="submit-btn"
         id="registerBtn"
       >
-
         <i class="fa-solid fa-user-plus"></i>
         Register as B.E.P. Member
-
       </button>
 
 
-      <div id="message" class="message"></div>
+      <div
+        id="message"
+        class="message"
+        role="alert"
+      ></div>
 
+
+      <div
+        id="verificationNote"
+        class="verification-note"
+      >
+        <strong>
+          <i class="fa-solid fa-envelope"></i>
+          Check your email
+        </strong>
+
+        A verification email has been sent to your registered
+        email address. Click the verification link before trying
+        to access the B.E.P. Member Portal.
+      </div>
 
     </form>
 
@@ -494,46 +533,111 @@
 </footer>
 
 
-<script>
+<!-- =========================================================
+     FIREBASE
+     ========================================================= -->
+
+<script type="module">
+
+  import { initializeApp }
+    from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
+
+  import {
+    getAuth,
+    createUserWithEmailAndPassword,
+    sendEmailVerification,
+    signOut
+  } from
+    "https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js";
+
+  import {
+    getFirestore,
+    doc,
+    setDoc,
+    serverTimestamp
+  } from
+    "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
+
 
   /* =========================================================
-     SUPABASE CONNECTION
+     FIREBASE CONFIGURATION
      ========================================================= */
 
-  const SUPABASE_URL =
-    "https://rukusaellqqwthzibyib.supabase.co";
+  const firebaseConfig = {
 
-  const SUPABASE_KEY =
-    "sb_publishable_Co8-MoJOV14tXBkSWyXFTA_ULn1WRa5";
+    apiKey:
+      "AIzaSyC3N-DrY4mv4M32TMIt2_9btO3AqmhDk3Y",
 
-  const supabaseClient =
-    window.supabase.createClient(
-      SUPABASE_URL,
-      SUPABASE_KEY
+    authDomain:
+      "beponlineprog-8b8bb.firebaseapp.com",
+
+    projectId:
+      "beponlineprog-8b8bb",
+
+    storageBucket:
+      "beponlineprog-8b8bb.firebasestorage.app",
+
+    messagingSenderId:
+      "312026634976",
+
+    appId:
+      "1:312026634976:web:5497f071e8f0e6618fce85",
+
+    measurementId:
+      "G-LDX5CZ68MH"
+  };
+
+
+  /* =========================================================
+     INITIALIZE FIREBASE
+     ========================================================= */
+
+  const app =
+    initializeApp(firebaseConfig);
+
+  const auth =
+    getAuth(app);
+
+  const db =
+    getFirestore(app);
+
+
+  /* =========================================================
+     FORM ELEMENTS
+     ========================================================= */
+
+  const registrationForm =
+    document.getElementById(
+      "registrationForm"
+    );
+
+  const registerBtn =
+    document.getElementById(
+      "registerBtn"
+    );
+
+  const message =
+    document.getElementById(
+      "message"
+    );
+
+  const verificationNote =
+    document.getElementById(
+      "verificationNote"
     );
 
 
   /* =========================================================
-     ELEMENTS
+     SHOW MESSAGE
      ========================================================= */
 
-  const registrationForm =
-    document.getElementById("registrationForm");
+  function showMessage(
+    text,
+    type
+  ) {
 
-  const registerBtn =
-    document.getElementById("registerBtn");
-
-  const message =
-    document.getElementById("message");
-
-
-  /* =========================================================
-     MESSAGE
-     ========================================================= */
-
-  function showMessage(text, type) {
-
-    message.textContent = text;
+    message.textContent =
+      text;
 
     message.className =
       "message " + type;
@@ -541,11 +645,32 @@
   }
 
 
+  /* =========================================================
+     HIDE MESSAGE
+     ========================================================= */
+
   function hideMessage() {
 
-    message.textContent = "";
+    message.textContent =
+      "";
 
-    message.className = "message";
+    message.className =
+      "message";
+
+  }
+
+
+  /* =========================================================
+     RESET BUTTON
+     ========================================================= */
+
+  function resetButton() {
+
+    registerBtn.disabled =
+      false;
+
+    registerBtn.innerHTML =
+      '<i class="fa-solid fa-user-plus"></i> Register as B.E.P. Member';
 
   }
 
@@ -562,37 +687,52 @@
 
       hideMessage();
 
+      verificationNote.style.display =
+        "none";
+
+
+      /* =====================================================
+         GET FORM VALUES
+         ===================================================== */
+
       const fullName =
-        document.getElementById("fullName")
+        document
+          .getElementById("fullName")
           .value
           .trim();
 
       const email =
-        document.getElementById("email")
+        document
+          .getElementById("email")
           .value
           .trim()
           .toLowerCase();
 
       const phone =
-        document.getElementById("phone")
+        document
+          .getElementById("phone")
           .value
           .trim();
 
       const location =
-        document.getElementById("location")
+        document
+          .getElementById("location")
           .value
           .trim();
 
       const heardAbout =
-        document.getElementById("heardAbout")
+        document
+          .getElementById("heardAbout")
           .value;
 
       const password =
-        document.getElementById("password")
+        document
+          .getElementById("password")
           .value;
 
       const confirmPassword =
-        document.getElementById("confirmPassword")
+        document
+          .getElementById("confirmPassword")
           .value;
 
 
@@ -645,126 +785,225 @@
          DISABLE BUTTON
          ===================================================== */
 
-      registerBtn.disabled = true;
+      registerBtn.disabled =
+        true;
 
       registerBtn.innerHTML =
         '<i class="fa-solid fa-spinner fa-spin"></i> Registering...';
 
 
+      let createdUser = null;
+
+
       try {
 
         /* ===================================================
-           CREATE SUPABASE AUTH ACCOUNT
+           CREATE FIREBASE AUTH ACCOUNT
            =================================================== */
 
-        const {
-          data,
-          error
-        } = await supabaseClient.auth.signUp({
+        const userCredential =
+          await createUserWithEmailAndPassword(
+            auth,
+            email,
+            password
+          );
 
-          email: email,
 
-          password: password,
+        createdUser =
+          userCredential.user;
 
-          options: {
 
-            emailRedirectTo:
-              "https://beponlineprog.github.io/bep-website/registr/member.html",
+        /* ===================================================
+           CREATE FIRESTORE PROFILE
+           =================================================== */
 
-            data: {
+        await setDoc(
+          doc(
+            db,
+            "members",
+            createdUser.uid
+          ),
+          {
 
-              full_name: fullName,
+            uid:
+              createdUser.uid,
 
-              phone: phone,
+            memberNumber:
+              "",
 
-              location: location,
+            fullName:
+              fullName,
 
-              heard_about: heardAbout
+            email:
+              email,
 
-            }
+            phone:
+              phone,
+
+            location:
+              location,
+
+            heardAbout:
+              heardAbout,
+
+            status:
+              "Pending",
+
+            emailVerified:
+              false,
+
+            createdAt:
+              serverTimestamp()
 
           }
-
-        });
-
-
-        if (error) {
-
-          console.error(
-            "Registration error:",
-            error
-          );
-
-          showMessage(
-            error.message,
-            "error"
-          );
-
-          return;
-        }
+        );
 
 
         /* ===================================================
-           CHECK RESULT
+           SEND EMAIL VERIFICATION
            =================================================== */
 
-        if (!data.user) {
-
-          showMessage(
-            "Registration could not be completed. Please try again.",
-            "error"
-          );
-
-          return;
-        }
+        await sendEmailVerification(
+          createdUser
+        );
 
 
         /* ===================================================
-           EMAIL CONFIRMATION ENABLED
+           SUCCESS
            =================================================== */
-
-        if (
-          data.user.identities &&
-          data.user.identities.length === 0
-        ) {
-
-          showMessage(
-            "An account with this email already exists. Please use another email address or sign in to your existing account.",
-            "error"
-          );
-
-          return;
-        }
-
 
         showMessage(
-          "Registration successful! Please check your email and click the confirmation link to activate your B.E.P. account.",
+          "Registration successful! Your B.E.P. account has been created. Please check your email and click the verification link before signing in.",
           "success"
         );
+
+
+        verificationNote.style.display =
+          "block";
 
 
         registrationForm.reset();
 
 
+        /*
+         * Sign the newly registered user out.
+         *
+         * This prevents the registration page from leaving
+         * an authenticated session open while the email is
+         * still unverified.
+         */
+
+        await signOut(auth);
+
+
       } catch (error) {
 
         console.error(
-          "Unexpected registration error:",
+          "Firebase registration error:",
           error
         );
 
-        showMessage(
-          "Something went wrong during registration. Please try again.",
-          "error"
-        );
+
+        /* ===================================================
+           IF AUTH ACCOUNT WAS CREATED BUT FIRESTORE FAILED
+           =================================================== */
+
+        if (
+          createdUser &&
+          error.code &&
+          error.code.startsWith(
+            "permission-denied"
+          )
+        ) {
+
+          showMessage(
+            "Your Firebase account was created, but your member profile could not be saved. Please contact B.E.P. support before registering again.",
+            "error"
+          );
+
+        }
+
+
+        else {
+
+          let errorMessage =
+            "Registration could not be completed. Please try again.";
+
+
+          switch (
+            error.code
+          ) {
+
+
+            case "auth/email-already-in-use":
+
+              errorMessage =
+                "An account with this email already exists. Please use your existing account or use another email address.";
+
+              break;
+
+
+            case "auth/invalid-email":
+
+              errorMessage =
+                "Please enter a valid email address.";
+
+              break;
+
+
+            case "auth/weak-password":
+
+              errorMessage =
+                "Your password is too weak. Please use at least 6 characters.";
+
+              break;
+
+
+            case "auth/network-request-failed":
+
+              errorMessage =
+                "Network error. Please check your internet connection and try again.";
+
+              break;
+
+
+            case "auth/too-many-requests":
+
+              errorMessage =
+                "Too many registration attempts. Please wait a while and try again.";
+
+              break;
+
+
+            case "permission-denied":
+
+              errorMessage =
+                "Registration was blocked by the database security rules. Please contact B.E.P. support.";
+
+              break;
+
+
+            case "failed-precondition":
+
+              errorMessage =
+                "The B.E.P. database is not ready yet. Please try again later.";
+
+              break;
+
+          }
+
+
+          showMessage(
+            errorMessage,
+            "error"
+          );
+
+        }
 
 
       } finally {
 
-        registerBtn.disabled = false;
-
-        registerBtn.innerHTML =
-          '<i class="fa-solid fa-user-plus"></i> Register as B.E.P. Member';
+        resetButton();
 
       }
 
