@@ -6,107 +6,63 @@
 
   <title>B.E.P. Member Registration</title>
 
-  <link rel="icon" href="../banner.png">
-
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-  >
-
   <style>
     * {
       box-sizing: border-box;
-      margin: 0;
-      padding: 0;
     }
 
     body {
+      margin: 0;
       font-family: Arial, Helvetica, sans-serif;
-      background: #f4f7fb;
-      color: #172033;
-      line-height: 1.6;
+      background: linear-gradient(135deg, #003b73, #0066b3);
+      min-height: 100vh;
+      color: #222;
     }
 
-    header {
-      background: linear-gradient(135deg, #063b73, #0b5cab);
-      color: white;
+    .header {
+      background: #ffffff;
       padding: 18px 20px;
-      box-shadow: 0 3px 12px rgba(0,0,0,0.15);
+      text-align: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.15);
     }
 
-    .header-inner {
-      max-width: 900px;
-      margin: auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 15px;
+    .header h1 {
+      margin: 0;
+      color: #003b73;
+      font-size: 28px;
     }
 
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .brand img {
-      width: 52px;
-      height: 52px;
-      object-fit: contain;
-      background: white;
-      border-radius: 8px;
-      padding: 4px;
-    }
-
-    .brand h1 {
-      font-size: 20px;
-    }
-
-    .brand p {
-      font-size: 12px;
-      opacity: 0.9;
-    }
-
-    .back-btn {
-      text-decoration: none;
-      background: #d4af37;
-      color: #111;
-      padding: 10px 15px;
-      border-radius: 7px;
+    .header p {
+      margin: 6px 0 0;
+      color: #b8860b;
       font-weight: bold;
-      white-space: nowrap;
     }
 
-    main {
-      max-width: 700px;
+    .container {
+      width: 100%;
+      max-width: 650px;
       margin: 35px auto;
-      padding: 0 18px 50px;
+      padding: 0 15px;
     }
 
-    .registration-card {
-      background: white;
+    .card {
+      background: #ffffff;
       border-radius: 15px;
       padding: 30px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.2);
     }
 
-    .title {
+    .card h2 {
       text-align: center;
-      color: #063b73;
+      color: #003b73;
+      margin-top: 0;
       margin-bottom: 8px;
     }
 
     .subtitle {
       text-align: center;
-      color: #667085;
-      margin-bottom: 28px;
-    }
-
-    .section-title {
-      color: #063b73;
-      margin: 25px 0 15px;
-      border-bottom: 2px solid #d4af37;
-      padding-bottom: 7px;
+      color: #666;
+      margin-bottom: 25px;
     }
 
     .form-group {
@@ -115,182 +71,155 @@
 
     label {
       display: block;
+      margin-bottom: 7px;
       font-weight: bold;
-      color: #063b73;
-      margin-bottom: 6px;
-    }
-
-    .required {
-      color: #c62828;
+      color: #003b73;
     }
 
     input,
     select {
       width: 100%;
       padding: 13px;
-      border: 1px solid #ccd5e0;
+      border: 1px solid #ccc;
       border-radius: 7px;
       font-size: 15px;
-      background: white;
+      outline: none;
+      background: #fff;
     }
 
     input:focus,
     select:focus {
-      outline: none;
-      border-color: #0b5cab;
-      box-shadow: 0 0 0 2px rgba(11,92,171,0.1);
+      border-color: #0066b3;
+      box-shadow: 0 0 0 2px rgba(0,102,179,0.12);
     }
 
-    .password-help {
+    .password-note {
       font-size: 12px;
-      color: #68778a;
+      color: #666;
       margin-top: 5px;
     }
 
-    .submit-btn {
+    button {
       width: 100%;
-      border: none;
-      background: #063b73;
-      color: white;
       padding: 14px;
-      border-radius: 8px;
-      cursor: pointer;
+      border: none;
+      border-radius: 7px;
+      background: #003b73;
+      color: #ffffff;
       font-size: 16px;
       font-weight: bold;
-      margin-top: 10px;
-    }
-
-    .submit-btn:hover {
-      background: #0b5cab;
-    }
-
-    .submit-btn:disabled {
-      opacity: 0.65;
-      cursor: not-allowed;
-    }
-
-    .secondary-btn {
-      width: 100%;
-      border: 2px solid #063b73;
-      background: white;
-      color: #063b73;
-      padding: 12px;
-      border-radius: 8px;
       cursor: pointer;
-      font-size: 15px;
-      font-weight: bold;
-      margin-top: 10px;
+      margin-top: 8px;
     }
 
-    .secondary-btn:hover {
-      background: #f0f5fb;
+    button:hover {
+      background: #002b55;
     }
 
-    .secondary-btn:disabled {
-      opacity: 0.65;
+    button:disabled {
+      background: #888;
       cursor: not-allowed;
     }
 
     .message {
       display: none;
-      margin-top: 18px;
-      padding: 13px;
-      border-radius: 8px;
+      padding: 14px;
+      margin-bottom: 20px;
+      border-radius: 7px;
+      font-size: 14px;
+      line-height: 1.5;
     }
 
     .success {
-      display: block;
-      background: #e5f7e9;
-      color: #176b2c;
+      background: #e8f7e8;
+      border: 1px solid #75b875;
+      color: #276327;
     }
 
     .error {
-      display: block;
-      background: #fde8e8;
-      color: #a11a1a;
+      background: #fdeaea;
+      border: 1px solid #d66;
+      color: #8a1f1f;
     }
 
-    .login-link {
+    .verification-box {
+      display: none;
+      margin-top: 20px;
+      padding: 18px;
+      background: #fff8df;
+      border: 1px solid #d6ad35;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .verification-box h3 {
+      color: #8a6500;
+      margin-top: 0;
+    }
+
+    .verification-box p {
+      color: #555;
+      line-height: 1.5;
+    }
+
+    .secondary-button {
+      background: #b8860b;
+      margin-top: 10px;
+    }
+
+    .secondary-button:hover {
+      background: #916d08;
+    }
+
+    .portal-button {
+      display: inline-block;
+      width: 100%;
+      padding: 13px;
+      margin-top: 10px;
+      border-radius: 7px;
+      background: #003b73;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .portal-button:hover {
+      background: #002b55;
+    }
+
+    .bottom-links {
       text-align: center;
       margin-top: 22px;
-      color: #667085;
     }
 
-    .login-link a {
-      color: #063b73;
+    .bottom-links a {
+      color: #003b73;
       font-weight: bold;
       text-decoration: none;
     }
 
-    footer {
-      background: #063b73;
-      color: white;
+    .bottom-links a:hover {
+      text-decoration: underline;
+    }
+
+    .footer {
       text-align: center;
-      padding: 25px 15px;
-      margin-top: 20px;
-    }
-
-    footer strong {
-      color: #d4af37;
-    }
-
-    .verification-note {
-      display: none;
-      margin-top: 18px;
-      padding: 15px;
-      border-radius: 8px;
-      background: #fff8df;
-      color: #6b5600;
-      border: 1px solid #ead68a;
-    }
-
-    .verification-note strong {
-      display: block;
-      margin-bottom: 5px;
-    }
-
-    .resend-box {
-      margin-top: 30px;
+      color: #ffffff;
       padding: 20px;
-      border-radius: 10px;
-      background: #f7f9fc;
-      border: 1px solid #d9e1ea;
+      font-size: 13px;
     }
 
-    .resend-box h3 {
-      color: #063b73;
-      margin-bottom: 8px;
-    }
-
-    .resend-box p {
-      color: #667085;
-      font-size: 14px;
-      margin-bottom: 15px;
-    }
-
-    .small-note {
-      font-size: 12px;
-      color: #68778a;
-      margin-top: 8px;
+    .required {
+      color: #c00;
     }
 
     @media (max-width: 600px) {
-
-      .header-inner {
-        align-items: flex-start;
+      .card {
+        padding: 22px 18px;
       }
 
-      .brand h1 {
-        font-size: 17px;
-      }
-
-      .back-btn {
-        padding: 8px 10px;
-        font-size: 12px;
-      }
-
-      .registration-card {
-        padding: 20px;
+      .header h1 {
+        font-size: 24px;
       }
     }
   </style>
@@ -298,813 +227,372 @@
 
 <body>
 
-<header>
-
-  <div class="header-inner">
-
-    <div class="brand">
-
-      <img
-        src="../banner.png"
-        alt="B.E.P."
-      >
-
-      <div>
-
-        <h1>B.E.P. Member Registration</h1>
-
-        <p>
-          Building the Church of Christ
-        </p>
-
-      </div>
-
-    </div>
-
-    <a
-      href="../index.html"
-      class="back-btn"
-    >
-      <i class="fa-solid fa-house"></i>
-      B.E.P.
-    </a>
-
+  <div class="header">
+    <h1>B.E.P.</h1>
+    <p>Building the Church of Christ</p>
   </div>
 
-</header>
+  <div class="container">
 
+    <div class="card">
 
-<main>
+      <h2>Member Registration</h2>
 
-  <div class="registration-card">
-
-    <h2 class="title">
-
-      <i class="fa-solid fa-user-plus"></i>
-
-      Become a B.E.P. Member
-
-    </h2>
-
-
-    <p class="subtitle">
-
-      Register for your Biblical Empowerment Program member account.
-
-    </p>
-
-
-    <!-- =====================================================
-         REGISTRATION FORM
-         ===================================================== -->
-
-    <form id="registrationForm">
-
-      <h3 class="section-title">
-
-        <i class="fa-solid fa-user"></i>
-
-        Personal Information
-
-      </h3>
-
-
-      <div class="form-group">
-
-        <label for="fullName">
-
-          Full Name
-          <span class="required">*</span>
-
-        </label>
-
-        <input
-          type="text"
-          id="fullName"
-          name="fullName"
-          placeholder="Enter your full name"
-          required
-          autocomplete="name"
-          maxlength="100"
-        >
-
-      </div>
-
-
-      <div class="form-group">
-
-        <label for="email">
-
-          Email Address
-          <span class="required">*</span>
-
-        </label>
-
-        <input
-          type="email"
-          id="email"
-          name="email"
-          placeholder="Enter your email address"
-          required
-          autocomplete="email"
-          maxlength="254"
-        >
-
-      </div>
-
-
-      <div class="form-group">
-
-        <label for="phone">
-
-          Phone / WhatsApp
-          <span class="required">*</span>
-
-        </label>
-
-        <input
-          type="tel"
-          id="phone"
-          name="phone"
-          placeholder="Enter your phone or WhatsApp number"
-          required
-          autocomplete="tel"
-          maxlength="30"
-        >
-
-      </div>
-
-
-      <div class="form-group">
-
-        <label for="location">
-
-          Location
-          <span class="required">*</span>
-
-        </label>
-
-        <input
-          type="text"
-          id="location"
-          name="location"
-          placeholder="City / Town / Area"
-          required
-          maxlength="100"
-        >
-
-      </div>
-
-
-      <div class="form-group">
-
-        <label for="heardAbout">
-
-          How did you hear about B.E.P.?
-
-          <span class="required">*</span>
-
-        </label>
-
-        <select
-          id="heardAbout"
-          name="heardAbout"
-          required
-        >
-
-          <option value="">
-            Select an option
-          </option>
-
-          <option value="Facebook">
-            Facebook
-          </option>
-
-          <option value="WhatsApp">
-            WhatsApp
-          </option>
-
-          <option value="Friend or Family">
-            Friend or Family
-          </option>
-
-          <option value="B.E.P. Member">
-            B.E.P. Member
-          </option>
-
-          <option value="Church">
-            Church
-          </option>
-
-          <option value="Google">
-            Google
-          </option>
-
-          <option value="Other">
-            Other
-          </option>
-
-        </select>
-
-      </div>
-
-
-      <h3 class="section-title">
-
-        <i class="fa-solid fa-lock"></i>
-
-        Create Your Password
-
-      </h3>
-
-
-      <div class="form-group">
-
-        <label for="password">
-
-          Password
-          <span class="required">*</span>
-
-        </label>
-
-        <input
-          type="password"
-          id="password"
-          name="password"
-          placeholder="Create a password"
-          minlength="6"
-          required
-          autocomplete="new-password"
-        >
-
-        <div class="password-help">
-
-          Password must contain at least 6 characters.
-
-        </div>
-
-      </div>
-
-
-      <div class="form-group">
-
-        <label for="confirmPassword">
-
-          Confirm Password
-          <span class="required">*</span>
-
-        </label>
-
-        <input
-          type="password"
-          id="confirmPassword"
-          name="confirmPassword"
-          placeholder="Confirm your password"
-          minlength="6"
-          required
-          autocomplete="new-password"
-        >
-
-      </div>
-
-
-      <button
-        type="submit"
-        class="submit-btn"
-        id="registerBtn"
-      >
-
-        <i class="fa-solid fa-user-plus"></i>
-
-        Register as B.E.P. Member
-
-      </button>
-
-
-      <div
-        id="message"
-        class="message"
-        role="alert"
-      ></div>
-
-
-      <div
-        id="verificationNote"
-        class="verification-note"
-      >
-
-        <strong>
-
-          <i class="fa-solid fa-envelope"></i>
-
-          Check your email
-
-        </strong>
-
-        A verification email has been sent to your registered
-        email address.
-
-        <br><br>
-
-        Click the verification link before trying to access
-        the B.E.P. Member Portal.
-
-        <br><br>
-
-        If you do not see the email, check your
-        <strong>Spam/Junk</strong> folder.
-
-      </div>
-
-    </form>
-
-
-    <!-- =====================================================
-         RESEND VERIFICATION EMAIL
-         ===================================================== -->
-
-    <div class="resend-box">
-
-      <h3>
-
-        <i class="fa-solid fa-envelope-circle-check"></i>
-
-        Didn't receive the verification email?
-
-      </h3>
-
-
-      <p>
-
-        If you have already registered but did not receive
-        your verification email, enter your registered email
-        address and password below.
-
+      <p class="subtitle">
+        Create your B.E.P. Member account
       </p>
 
+      <!-- Error / success messages -->
+      <div id="message" class="message"></div>
 
-      <div class="form-group">
+      <form id="registrationForm">
 
-        <label for="resendEmail">
+        <div class="form-group">
+          <label for="fullName">
+            Full Name <span class="required">*</span>
+          </label>
 
-          Registered Email Address
+          <input
+            type="text"
+            id="fullName"
+            required
+            autocomplete="name"
+            placeholder="Enter your full name"
+          >
+        </div>
 
-        </label>
+        <div class="form-group">
+          <label for="email">
+            Email Address <span class="required">*</span>
+          </label>
 
-        <input
-          type="email"
-          id="resendEmail"
-          placeholder="Enter your registered email"
-          autocomplete="email"
-          maxlength="254"
+          <input
+            type="email"
+            id="email"
+            required
+            autocomplete="email"
+            placeholder="Enter your email address"
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="phone">
+            Phone Number <span class="required">*</span>
+          </label>
+
+          <input
+            type="tel"
+            id="phone"
+            required
+            autocomplete="tel"
+            placeholder="Enter your phone number"
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="location">
+            Location <span class="required">*</span>
+          </label>
+
+          <input
+            type="text"
+            id="location"
+            required
+            autocomplete="address-level2"
+            placeholder="Town / City / Province"
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="heardAbout">
+            How did you hear about B.E.P.? <span class="required">*</span>
+          </label>
+
+          <select id="heardAbout" required>
+            <option value="">-- Select --</option>
+            <option value="Facebook">Facebook</option>
+            <option value="WhatsApp">WhatsApp</option>
+            <option value="Friend or Family">Friend or Family</option>
+            <option value="B.E.P. Member">B.E.P. Member</option>
+            <option value="Church">Church</option>
+            <option value="Google">Google</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="password">
+            Password <span class="required">*</span>
+          </label>
+
+          <input
+            type="password"
+            id="password"
+            required
+            minlength="6"
+            autocomplete="new-password"
+            placeholder="Create a password"
+          >
+
+          <div class="password-note">
+            Password must contain at least 6 characters.
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="confirmPassword">
+            Confirm Password <span class="required">*</span>
+          </label>
+
+          <input
+            type="password"
+            id="confirmPassword"
+            required
+            minlength="6"
+            autocomplete="new-password"
+            placeholder="Confirm your password"
+          >
+        </div>
+
+        <button type="submit" id="registerButton">
+          Register as B.E.P. Member
+        </button>
+
+      </form>
+
+      <!-- Verification section -->
+      <div id="verificationBox" class="verification-box">
+
+        <h3>Registration Successful</h3>
+
+        <p>
+          Your B.E.P. account has been created successfully.
+        </p>
+
+        <p>
+          A verification email has been sent to
+          <strong id="registeredEmail"></strong>.
+        </p>
+
+        <p>
+          Please check your inbox and also your
+          <strong>Spam/Junk</strong> folder.
+        </p>
+
+        <p>
+          After verifying your email, you can log in to the
+          B.E.P. Member Portal.
+        </p>
+
+        <!-- CORRECT MEMBER PORTAL LINK -->
+        <a href="member.html" class="portal-button">
+          Go to Member Portal
+        </a>
+
+        <button
+          type="button"
+          id="resendButton"
+          class="secondary-button"
         >
+          Resend Verification Email
+        </button>
 
       </div>
 
-
-      <div class="form-group">
-
-        <label for="resendPassword">
-
-          Password
-
-        </label>
-
-        <input
-          type="password"
-          id="resendPassword"
-          placeholder="Enter your password"
-          autocomplete="current-password"
-        >
-
+      <div class="bottom-links">
+        Already have a B.E.P. account?
+        <a href="member.html">Go to Member Portal</a>
       </div>
-
-
-      <button
-        type="button"
-        class="secondary-btn"
-        id="resendBtn"
-      >
-
-        <i class="fa-solid fa-paper-plane"></i>
-
-        Resend Verification Email
-
-      </button>
-
-
-      <div
-        id="resendMessage"
-        class="message"
-        role="alert"
-      ></div>
-
-
-      <div class="small-note">
-
-        Your password is used only to authenticate your Firebase
-        account. It is never stored by this page.
-
-      </div>
-
-    </div>
-
-
-    <div class="login-link">
-
-      Already have a B.E.P. account?
-
-      <a href="member.html">
-
-        Go to Member Portal
-
-      </a>
 
     </div>
 
   </div>
 
-</main>
-
-
-<footer>
-
-  <p>
-
-    <strong>
-      B.E.P. — Biblical Empowerment Program
-    </strong>
-
-  </p>
-
-  <p>
+  <div class="footer">
+    © 2026 Biblical Empowerment Program
+    <br>
     Building the Church of Christ
-  </p>
+  </div>
 
-  <p style="margin-top:8px;">
 
-    Growing in God's Word.
-    Growing in Faith.
-    Growing Together.
+  <!-- Firebase -->
+  <script type="module">
 
-  </p>
+    import {
+      initializeApp
+    } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
 
-</footer>
+    import {
+      getAuth,
+      createUserWithEmailAndPassword,
+      sendEmailVerification,
+      signInWithEmailAndPassword,
+      signOut
+    } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js";
 
+    import {
+      getFirestore,
+      doc,
+      setDoc,
+      serverTimestamp
+    } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
 
-<!-- =========================================================
-     FIREBASE
-     ========================================================= -->
 
-<script type="module">
+    // =========================================================
+    // FIREBASE CONFIGURATION
+    // =========================================================
 
-  /* =========================================================
-     FIREBASE IMPORTS
-     ========================================================= */
+    const firebaseConfig = {
+      apiKey: "AIzaSyC3N-DrY4mv4M32TMIt2_9btO3AqmhDk3Y",
+      authDomain: "beponlineprog-8b8bb.firebaseapp.com",
+      projectId: "beponlineprog-8b8bb",
+      storageBucket: "beponlineprog-8b8bb.firebasestorage.app",
+      messagingSenderId: "312026634976",
+      appId: "1:312026634976:web:5497f071e8f0e6618fce85",
+      measurementId: "G-LDX5CZ68MH"
+    };
 
-  import {
-    initializeApp
-  }
-  from
-    "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
 
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
 
-  import {
-    getAuth,
-    createUserWithEmailAndPassword,
-    sendEmailVerification,
-    signInWithEmailAndPassword,
-    signOut
-  }
-  from
-    "https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js";
+    const auth = getAuth(app);
 
+    const db = getFirestore(app);
 
-  import {
-    getFirestore,
-    doc,
-    setDoc,
-    serverTimestamp
-  }
-  from
-    "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
 
+    // =========================================================
+    // PAGE ELEMENTS
+    // =========================================================
 
-  /* =========================================================
-     FIREBASE CONFIGURATION
-     ========================================================= */
+    const registrationForm =
+      document.getElementById("registrationForm");
 
-  const firebaseConfig = {
+    const registerButton =
+      document.getElementById("registerButton");
 
-    apiKey:
-      "AIzaSyC3N-DrY4mv4M32TMIt2_9btO3AqmhDk3Y",
+    const message =
+      document.getElementById("message");
 
-    authDomain:
-      "beponlineprog-8b8bb.firebaseapp.com",
+    const verificationBox =
+      document.getElementById("verificationBox");
 
-    projectId:
-      "beponlineprog-8b8bb",
+    const registeredEmail =
+      document.getElementById("registeredEmail");
 
-    storageBucket:
-      "beponlineprog-8b8bb.firebasestorage.app",
+    const resendButton =
+      document.getElementById("resendButton");
 
-    messagingSenderId:
-      "312026634976",
 
-    appId:
-      "1:312026634976:web:5497f071e8f0e6618fce85",
+    // Keep the email for resend
+    let verificationEmail = "";
 
-    measurementId:
-      "G-LDX5CZ68MH"
 
-  };
+    // =========================================================
+    // SHOW MESSAGE
+    // =========================================================
 
+    function showMessage(text, type) {
 
-  /* =========================================================
-     INITIALIZE FIREBASE
-     ========================================================= */
+      message.textContent = text;
 
-  const app =
-    initializeApp(firebaseConfig);
+      message.className = "message " + type;
 
+      message.style.display = "block";
 
-  const auth =
-    getAuth(app);
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    }
 
 
-  const db =
-    getFirestore(app);
+    // =========================================================
+    // REGISTRATION
+    // =========================================================
 
-
-  /* =========================================================
-     REGISTRATION ELEMENTS
-     ========================================================= */
-
-  const registrationForm =
-    document.getElementById(
-      "registrationForm"
-    );
-
-
-  const registerBtn =
-    document.getElementById(
-      "registerBtn"
-    );
-
-
-  const message =
-    document.getElementById(
-      "message"
-    );
-
-
-  const verificationNote =
-    document.getElementById(
-      "verificationNote"
-    );
-
-
-  /* =========================================================
-     RESEND ELEMENTS
-     ========================================================= */
-
-  const resendEmail =
-    document.getElementById(
-      "resendEmail"
-    );
-
-
-  const resendPassword =
-    document.getElementById(
-      "resendPassword"
-    );
-
-
-  const resendBtn =
-    document.getElementById(
-      "resendBtn"
-    );
-
-
-  const resendMessage =
-    document.getElementById(
-      "resendMessage"
-    );
-
-
-  /* =========================================================
-     SHOW MESSAGE
-     ========================================================= */
-
-  function showMessage(
-    element,
-    text,
-    type
-  ) {
-
-    element.textContent =
-      text;
-
-    element.className =
-      "message " + type;
-
-  }
-
-
-  /* =========================================================
-     HIDE MESSAGE
-     ========================================================= */
-
-  function hideMessage(
-    element
-  ) {
-
-    element.textContent =
-      "";
-
-    element.className =
-      "message";
-
-  }
-
-
-  /* =========================================================
-     RESET REGISTRATION BUTTON
-     ========================================================= */
-
-  function resetRegisterButton() {
-
-    registerBtn.disabled =
-      false;
-
-    registerBtn.innerHTML =
-      '<i class="fa-solid fa-user-plus"></i> Register as B.E.P. Member';
-
-  }
-
-
-  /* =========================================================
-     RESET RESEND BUTTON
-     ========================================================= */
-
-  function resetResendButton() {
-
-    resendBtn.disabled =
-      false;
-
-    resendBtn.innerHTML =
-      '<i class="fa-solid fa-paper-plane"></i> Resend Verification Email';
-
-  }
-
-
-  /* =========================================================
-     REGISTRATION
-     ========================================================= */
-
-  registrationForm.addEventListener(
-    "submit",
-    async function(event) {
+    registrationForm.addEventListener("submit", async (event) => {
 
       event.preventDefault();
 
 
-      hideMessage(
-        message
-      );
-
-
-      verificationNote.style.display =
-        "none";
-
-
-      /* =====================================================
-         GET FORM VALUES
-         ===================================================== */
-
       const fullName =
-        document
-          .getElementById("fullName")
-          .value
-          .trim();
-
+        document.getElementById("fullName").value.trim();
 
       const email =
-        document
-          .getElementById("email")
-          .value
-          .trim()
-          .toLowerCase();
-
+        document.getElementById("email").value.trim().toLowerCase();
 
       const phone =
-        document
-          .getElementById("phone")
-          .value
-          .trim();
-
+        document.getElementById("phone").value.trim();
 
       const location =
-        document
-          .getElementById("location")
-          .value
-          .trim();
-
+        document.getElementById("location").value.trim();
 
       const heardAbout =
-        document
-          .getElementById("heardAbout")
-          .value;
-
+        document.getElementById("heardAbout").value;
 
       const password =
-        document
-          .getElementById("password")
-          .value;
-
+        document.getElementById("password").value;
 
       const confirmPassword =
-        document
-          .getElementById("confirmPassword")
-          .value;
+        document.getElementById("confirmPassword").value;
 
 
-      /* =====================================================
-         VALIDATION
-         ===================================================== */
+      // =======================================================
+      // VALIDATION
+      // =======================================================
 
-      if (
-        !fullName ||
-        !email ||
-        !phone ||
-        !location ||
-        !heardAbout ||
-        !password ||
-        !confirmPassword
-      ) {
+      if (!fullName ||
+          !email ||
+          !phone ||
+          !location ||
+          !heardAbout ||
+          !password ||
+          !confirmPassword) {
 
         showMessage(
-          message,
           "Please complete all required fields.",
           "error"
         );
 
         return;
-
       }
 
 
-      if (
-        password.length < 6
-      ) {
+      if (password.length < 6) {
 
         showMessage(
-          message,
           "Your password must contain at least 6 characters.",
           "error"
         );
 
         return;
-
       }
 
 
-      if (
-        password !== confirmPassword
-      ) {
+      if (password !== confirmPassword) {
 
         showMessage(
-          message,
           "The passwords do not match.",
           "error"
         );
 
         return;
-
       }
 
 
-      /* =====================================================
-         DISABLE REGISTER BUTTON
-         ===================================================== */
+      // Disable button
+      registerButton.disabled = true;
 
-      registerBtn.disabled =
-        true;
-
-
-      registerBtn.innerHTML =
-        '<i class="fa-solid fa-spinner fa-spin"></i> Registering...';
-
-
-      let createdUser =
-        null;
+      registerButton.textContent =
+        "Creating your account...";
 
 
       try {
 
-        /* ===================================================
-           CREATE FIREBASE AUTH ACCOUNT
-           =================================================== */
+        // =====================================================
+        // CREATE FIREBASE AUTH ACCOUNT
+        // =====================================================
 
         const userCredential =
           await createUserWithEmailAndPassword(
@@ -1114,105 +602,79 @@
           );
 
 
-        createdUser =
+        const user =
           userCredential.user;
 
 
-        /* ===================================================
-           CREATE FIRESTORE MEMBER PROFILE
-           =================================================== */
+        // =====================================================
+        // CREATE FIRESTORE MEMBER PROFILE
+        // =====================================================
 
         await setDoc(
-
-          doc(
-            db,
-            "members",
-            createdUser.uid
-          ),
-
+          doc(db, "members", user.uid),
           {
+            uid: user.uid,
 
-            uid:
-              createdUser.uid,
+            memberNumber: "",
 
-            memberNumber:
-              "",
+            fullName: fullName,
 
-            fullName:
-              fullName,
+            email: email,
 
-            email:
-              email,
+            phone: phone,
 
-            phone:
-              phone,
+            location: location,
 
-            location:
-              location,
+            heardAbout: heardAbout,
 
-            heardAbout:
-              heardAbout,
+            status: "Pending",
 
-            status:
-              "Pending",
+            emailVerified: false,
 
-            emailVerified:
-              false,
-
-            createdAt:
-              serverTimestamp()
-
+            createdAt: serverTimestamp()
           }
-
         );
 
 
-        /* ===================================================
-           SEND VERIFICATION EMAIL
-           =================================================== */
+        // =====================================================
+        // SEND VERIFICATION EMAIL
+        // =====================================================
 
-        await sendEmailVerification(
-          createdUser
-        );
+        await sendEmailVerification(user);
 
 
-        /* ===================================================
-           SUCCESS
-           =================================================== */
+        verificationEmail = email;
+
+        registeredEmail.textContent = email;
+
+
+        // Hide form
+        registrationForm.style.display = "none";
+
+
+        // Show verification box
+        verificationBox.style.display = "block";
+
 
         showMessage(
-
-          message,
-
-          "Registration successful! Your B.E.P. account has been created. Please check your email and click the verification link before signing in.",
-
+          "Your B.E.P. account has been created successfully. Please verify your email address.",
           "success"
-
         );
 
 
-        verificationNote.style.display =
-          "block";
+        // =====================================================
+        // SIGN OUT
+        // =====================================================
+        // This prevents an unverified account from remaining
+        // signed in on the registration page.
+
+        await signOut(auth);
 
 
-        registrationForm.reset();
-
-
-        /* ===================================================
-           SIGN OUT AFTER REGISTRATION
-           =================================================== */
-
-        await signOut(
-          auth
-        );
-
-
-      }
-
-      catch (error) {
+      } catch (error) {
 
         console.error(
-          "Firebase registration error:",
+          "Registration error:",
           error
         );
 
@@ -1221,15 +683,12 @@
           "Registration could not be completed. Please try again.";
 
 
-        switch (
-          error.code
-        ) {
-
+        switch (error.code) {
 
           case "auth/email-already-in-use":
 
             errorMessage =
-              "An account with this email already exists. If you registered previously but did not receive the verification email, use the Resend Verification Email section below.";
+              "This email address already has a B.E.P. account. Please use the Member Portal to log in.";
 
             break;
 
@@ -1261,7 +720,7 @@
           case "auth/too-many-requests":
 
             errorMessage =
-              "Too many registration attempts. Please wait a while and try again.";
+              "Too many requests have been made. Please wait a while and try again.";
 
             break;
 
@@ -1269,7 +728,7 @@
           case "permission-denied":
 
             errorMessage =
-              "Registration was blocked by the database security rules. Please contact B.E.P. support.";
+              "Your account was created, but the member profile could not be saved because of a database permission issue. Please contact B.E.P. support.";
 
             break;
 
@@ -1277,234 +736,118 @@
           case "failed-precondition":
 
             errorMessage =
-              "The B.E.P. database is not ready yet. Please try again later.";
+              "The B.E.P. database is not currently available. Please try again later.";
 
             break;
-
-
-          case "auth/operation-not-allowed":
-
-            errorMessage =
-              "Email/password registration is not enabled in Firebase Authentication.";
-
-            break;
-
-
-          case "auth/internal-error":
-
-            errorMessage =
-              "Firebase encountered an internal error. Please try again.";
-
-            break;
-
         }
 
 
         showMessage(
-          message,
           errorMessage,
           "error"
         );
 
+
+        registerButton.disabled = false;
+
+        registerButton.textContent =
+          "Register as B.E.P. Member";
       }
 
-      finally {
-
-        resetRegisterButton();
-
-      }
-
-    }
-  );
+    });
 
 
-  /* =========================================================
-     RESEND VERIFICATION EMAIL
-     ========================================================= */
+    // =========================================================
+    // RESEND VERIFICATION EMAIL
+    // =========================================================
 
-  resendBtn.addEventListener(
-    "click",
-    async function() {
+    resendButton.addEventListener("click", async () => {
 
-      hideMessage(
-        resendMessage
-      );
-
-
-      const email =
-        resendEmail.value
-          .trim()
-          .toLowerCase();
-
-
-      const password =
-        resendPassword.value;
-
-
-      /* =====================================================
-         VALIDATION
-         ===================================================== */
-
-      if (
-        !email ||
-        !password
-      ) {
+      if (!verificationEmail) {
 
         showMessage(
-
-          resendMessage,
-
-          "Please enter your registered email address and password.",
-
+          "No registration email was found.",
           "error"
-
         );
 
         return;
-
       }
 
 
-      /* =====================================================
-         DISABLE BUTTON
-         ===================================================== */
+      resendButton.disabled = true;
 
-      resendBtn.disabled =
-        true;
-
-
-      resendBtn.innerHTML =
-        '<i class="fa-solid fa-spinner fa-spin"></i> Sending...';
+      resendButton.textContent =
+        "Sending...";
 
 
       try {
 
-        /* ===================================================
-           SIGN IN TEMPORARILY
-           =================================================== */
-
-        const userCredential =
+        // Sign in temporarily
+        const credential =
           await signInWithEmailAndPassword(
             auth,
-            email,
-            password
+            verificationEmail,
+            document.getElementById("password").value
           );
 
 
         const user =
-          userCredential.user;
+          credential.user;
 
 
-        /* ===================================================
-           CHECK WHETHER EMAIL IS ALREADY VERIFIED
-           =================================================== */
+        // Check if already verified
+        await user.reload();
 
-        if (
-          user.emailVerified
-        ) {
+
+        if (user.emailVerified) {
 
           showMessage(
-
-            resendMessage,
-
-            "This email address is already verified. You can now use the B.E.P. Member Portal.",
-
+            "Your email is already verified. You can now use the Member Portal.",
             "success"
-
           );
 
+          await signOut(auth);
 
-          await signOut(
-            auth
-          );
+          resendButton.disabled = false;
 
-
-          resetResendButton();
+          resendButton.textContent =
+            "Resend Verification Email";
 
           return;
-
         }
 
 
-        /* ===================================================
-           SEND NEW VERIFICATION EMAIL
-           =================================================== */
+        // Send verification email
+        await sendEmailVerification(user);
 
-        await sendEmailVerification(
-          user
-        );
-
-
-        /* ===================================================
-           SUCCESS
-           =================================================== */
 
         showMessage(
-
-          resendMessage,
-
-          "A new verification email has been sent. Please check your inbox and your Spam/Junk folder.",
-
+          "A new verification email has been sent. Please check your inbox and Spam/Junk folder.",
           "success"
-
         );
 
 
-        /* ===================================================
-           SIGN OUT
-           =================================================== */
+        await signOut(auth);
 
-        await signOut(
-          auth
-        );
 
-      }
-
-      catch (error) {
+      } catch (error) {
 
         console.error(
-          "Verification resend error:",
+          "Resend verification error:",
           error
         );
 
 
         let errorMessage =
-          "We could not send the verification email. Please try again.";
+          "The verification email could not be sent.";
 
 
-        switch (
-          error.code
-        ) {
-
+        switch (error.code) {
 
           case "auth/invalid-credential":
 
             errorMessage =
-              "The email address or password is incorrect.";
-
-            break;
-
-
-          case "auth/wrong-password":
-
-            errorMessage =
-              "The password is incorrect.";
-
-            break;
-
-
-          case "auth/user-not-found":
-
-            errorMessage =
-              "No Firebase account was found with this email address.";
-
-            break;
-
-
-          case "auth/invalid-email":
-
-            errorMessage =
-              "Please enter a valid email address.";
+              "The password entered is incorrect.";
 
             break;
 
@@ -1512,7 +855,7 @@
           case "auth/too-many-requests":
 
             errorMessage =
-              "Too many attempts have been made. Please wait a while before trying again.";
+              "Too many requests. Please wait before requesting another verification email.";
 
             break;
 
@@ -1523,62 +866,24 @@
               "Network error. Please check your internet connection.";
 
             break;
-
-
-          case "auth/user-disabled":
-
-            errorMessage =
-              "This Firebase account has been disabled.";
-
-            break;
-
         }
 
 
         showMessage(
-
-          resendMessage,
-
           errorMessage,
-
           "error"
-
         );
-
-
-        /* ===================================================
-           MAKE SURE USER IS SIGNED OUT
-           =================================================== */
-
-        try {
-
-          await signOut(
-            auth
-          );
-
-        }
-
-        catch (signOutError) {
-
-          console.error(
-            "Sign-out error:",
-            signOutError
-          );
-
-        }
-
       }
 
-      finally {
 
-        resetResendButton();
+      resendButton.disabled = false;
 
-      }
+      resendButton.textContent =
+        "Resend Verification Email";
 
-    }
-  );
+    });
 
-</script>
+  </script>
 
 </body>
 </html>
