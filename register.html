@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>B.E.P. Member Portal</title>
+  <title>B.E.P. Member Registration</title>
 
-  <link rel="icon" href="banner.png">
+  <link rel="icon" href="../banner.png">
 
   <link
     rel="stylesheet"
@@ -33,14 +33,11 @@
       background: linear-gradient(135deg, #063b73, #0b5cab);
       color: white;
       padding: 18px 20px;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
       box-shadow: 0 3px 12px rgba(0,0,0,0.15);
     }
 
     .header-inner {
-      max-width: 1100px;
+      max-width: 900px;
       margin: auto;
       display: flex;
       justify-content: space-between;
@@ -55,12 +52,12 @@
     }
 
     .brand img {
-      width: 48px;
-      height: 48px;
+      width: 52px;
+      height: 52px;
       object-fit: contain;
-      border-radius: 8px;
       background: white;
-      padding: 3px;
+      border-radius: 8px;
+      padding: 4px;
     }
 
     .brand h1 {
@@ -72,344 +69,137 @@
       opacity: 0.9;
     }
 
-    .logout-btn {
-      border: none;
+    .back-btn {
+      text-decoration: none;
       background: #d4af37;
       color: #111;
-      padding: 10px 16px;
+      padding: 10px 15px;
       border-radius: 7px;
-      cursor: pointer;
       font-weight: bold;
-    }
-
-    .logout-btn:hover {
-      opacity: 0.9;
+      white-space: nowrap;
     }
 
     main {
-      max-width: 1100px;
-      margin: 30px auto;
+      max-width: 700px;
+      margin: 35px auto;
       padding: 0 18px 50px;
     }
 
-    .welcome {
+    .registration-card {
       background: white;
-      border-radius: 14px;
-      padding: 25px;
-      margin-bottom: 25px;
-      box-shadow: 0 3px 15px rgba(0,0,0,0.07);
-      border-left: 5px solid #d4af37;
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
     }
 
-    .welcome h2 {
+    .title {
+      text-align: center;
       color: #063b73;
-      margin-bottom: 5px;
+      margin-bottom: 8px;
     }
 
-    .section {
-      background: white;
-      border-radius: 14px;
-      padding: 25px;
-      margin-bottom: 25px;
-      box-shadow: 0 3px 15px rgba(0,0,0,0.07);
+    .subtitle {
+      text-align: center;
+      color: #667085;
+      margin-bottom: 28px;
     }
 
     .section-title {
       color: #063b73;
-      margin-bottom: 18px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .profile-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 15px;
-    }
-
-    .profile-item {
-      background: #f5f8fc;
-      padding: 15px;
-      border-radius: 9px;
-    }
-
-    .profile-item strong {
-      display: block;
-      color: #063b73;
-      margin-bottom: 4px;
-      font-size: 13px;
-    }
-
-    .profile-item span {
-      word-break: break-word;
-    }
-
-    .btn {
-      border: none;
-      border-radius: 7px;
-      padding: 11px 17px;
-      cursor: pointer;
-      font-weight: bold;
-      margin-top: 15px;
-    }
-
-    .btn-primary {
-      background: #063b73;
-      color: white;
-    }
-
-    .btn-gold {
-      background: #d4af37;
-      color: #111;
-    }
-
-    .btn-secondary {
-      background: #e9eef5;
-      color: #063b73;
-    }
-
-    .btn:hover {
-      opacity: 0.9;
+      margin: 25px 0 15px;
+      border-bottom: 2px solid #d4af37;
+      padding-bottom: 7px;
     }
 
     .form-group {
-      margin-bottom: 15px;
+      margin-bottom: 17px;
     }
 
-    .form-group label {
+    label {
       display: block;
       font-weight: bold;
       color: #063b73;
       margin-bottom: 6px;
     }
 
-    .form-group input {
+    .required {
+      color: #c62828;
+    }
+
+    input,
+    select {
       width: 100%;
-      padding: 12px;
+      padding: 13px;
       border: 1px solid #ccd5e0;
       border-radius: 7px;
       font-size: 15px;
+      background: white;
+    }
+
+    input:focus,
+    select:focus {
+      outline: none;
+      border-color: #0b5cab;
+      box-shadow: 0 0 0 2px rgba(11,92,171,0.1);
+    }
+
+    .password-help {
+      font-size: 12px;
+      color: #68778a;
+      margin-top: 5px;
+    }
+
+    .submit-btn {
+      width: 100%;
+      border: none;
+      background: #063b73;
+      color: white;
+      padding: 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    .submit-btn:hover {
+      background: #0b5cab;
+    }
+
+    .submit-btn:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
     }
 
     .message {
-      margin-top: 12px;
-      padding: 10px;
-      border-radius: 7px;
       display: none;
+      margin-top: 18px;
+      padding: 13px;
+      border-radius: 8px;
     }
 
     .success {
+      display: block;
       background: #e5f7e9;
       color: #176b2c;
     }
 
     .error {
+      display: block;
       background: #fde8e8;
       color: #a11a1a;
     }
 
-    .courses-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 20px;
-    }
-
-    .course-card {
-      border: 1px solid #dbe3ed;
-      border-radius: 12px;
-      padding: 20px;
-      background: #fbfcfe;
-    }
-
-    .course-card h3 {
-      color: #063b73;
-      margin-bottom: 10px;
-    }
-
-    .course-card p {
-      color: #4e5b6c;
-      margin-bottom: 12px;
-    }
-
-    .course-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 8px;
-    }
-
-    .badge {
-      display: inline-block;
-      padding: 5px 9px;
-      border-radius: 20px;
-      background: #e8f0fa;
-      color: #063b73;
-      font-size: 12px;
-      font-weight: bold;
-    }
-
-    .badge.gold {
-      background: #f7edc8;
-      color: #725b00;
-    }
-
-    .lesson-view {
-      display: none;
-    }
-
-    .course-header {
-      background: linear-gradient(135deg, #063b73, #0b5cab);
-      color: white;
-      padding: 25px;
-      border-radius: 12px;
-      margin-bottom: 20px;
-    }
-
-    .course-header h2 {
-      margin-bottom: 5px;
-    }
-
-    .progress-box {
-      margin-top: 18px;
-    }
-
-    .progress-label {
-      display: flex;
-      justify-content: space-between;
-      font-size: 14px;
-      margin-bottom: 7px;
-    }
-
-    .progress-bar {
-      width: 100%;
-      height: 13px;
-      background: rgba(255,255,255,0.25);
-      border-radius: 20px;
-      overflow: hidden;
-    }
-
-    .progress-fill {
-      height: 100%;
-      width: 0%;
-      background: #d4af37;
-      border-radius: 20px;
-      transition: width 0.4s ease;
-    }
-
-    .lesson-card {
-      border: 1px solid #dbe3ed;
-      border-radius: 12px;
-      padding: 20px;
-      margin-bottom: 16px;
-      background: #fff;
-    }
-
-    .lesson-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 15px;
-      margin-bottom: 12px;
-    }
-
-    .lesson-number {
-      color: #d4af37;
-      font-weight: bold;
-      font-size: 14px;
-    }
-
-    .lesson-card h3 {
-      color: #063b73;
-      margin: 3px 0;
-    }
-
-    .lesson-content {
-      white-space: pre-line;
-      color: #39485b;
-      margin-top: 10px;
-    }
-
-    .completed-label {
-      color: #18752e;
-      font-size: 13px;
-      font-weight: bold;
-      white-space: nowrap;
-    }
-
-    .completion-btn {
-      margin-top: 16px;
-      border: none;
-      padding: 10px 15px;
-      border-radius: 7px;
-      background: #063b73;
-      color: white;
-      cursor: pointer;
-      font-weight: bold;
-    }
-
-    .completion-btn.completed {
-      background: #188038;
-    }
-
-    .completion-btn:disabled {
-      cursor: default;
-      opacity: 0.9;
-    }
-
-    .member-card {
-      max-width: 520px;
-      margin: auto;
-      border-radius: 18px;
-      overflow: hidden;
-      background: linear-gradient(135deg, #063b73, #0b5cab);
-      color: white;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.2);
-    }
-
-    .card-top {
-      padding: 25px;
+    .login-link {
       text-align: center;
-      border-bottom: 1px solid rgba(255,255,255,0.2);
+      margin-top: 22px;
+      color: #667085;
     }
 
-    .card-top img {
-      width: 75px;
-      height: 75px;
-      object-fit: contain;
-      background: white;
-      border-radius: 10px;
-      padding: 5px;
-      margin-bottom: 10px;
-    }
-
-    .card-top h2 {
-      margin-bottom: 3px;
-    }
-
-    .card-body {
-      padding: 25px;
-    }
-
-    .card-row {
-      display: flex;
-      justify-content: space-between;
-      gap: 15px;
-      padding: 9px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.15);
-    }
-
-    .card-row:last-child {
-      border-bottom: none;
-    }
-
-    .card-row span:first-child {
-      opacity: 0.75;
-    }
-
-    .card-row span:last-child {
+    .login-link a {
+      color: #063b73;
       font-weight: bold;
-      text-align: right;
+      text-decoration: none;
     }
 
     footer {
@@ -417,24 +207,15 @@
       color: white;
       text-align: center;
       padding: 25px 15px;
-      margin-top: 40px;
+      margin-top: 20px;
     }
 
     footer strong {
       color: #d4af37;
     }
 
-    .loading {
-      text-align: center;
-      padding: 20px;
-      color: #68778a;
-    }
+    @media (max-width: 600px) {
 
-    .hidden {
-      display: none !important;
-    }
-
-    @media (max-width: 650px) {
       .header-inner {
         align-items: flex-start;
       }
@@ -443,26 +224,13 @@
         font-size: 17px;
       }
 
-      .logout-btn {
-        padding: 8px 11px;
+      .back-btn {
+        padding: 8px 10px;
         font-size: 12px;
       }
 
-      .section {
-        padding: 18px;
-      }
-
-      .lesson-top {
-        flex-direction: column;
-      }
-
-      .card-row {
-        flex-direction: column;
-        gap: 2px;
-      }
-
-      .card-row span:last-child {
-        text-align: left;
+      .registration-card {
+        padding: 20px;
       }
     }
   </style>
@@ -474,251 +242,260 @@
   <div class="header-inner">
 
     <div class="brand">
-      <img src="banner.png" alt="B.E.P.">
+      <img src="../banner.png" alt="B.E.P.">
       <div>
-        <h1>B.E.P. Member Portal</h1>
+        <h1>B.E.P. Member Registration</h1>
         <p>Building the Church of Christ</p>
       </div>
     </div>
 
-    <button class="logout-btn" id="logoutBtn">
-      <i class="fa-solid fa-right-from-bracket"></i>
-      Logout
-    </button>
+    <a href="../index.html" class="back-btn">
+      <i class="fa-solid fa-house"></i>
+      B.E.P.
+    </a>
 
   </div>
 </header>
 
+
 <main>
 
-  <!-- WELCOME -->
-  <section class="welcome">
-    <h2>
-      Welcome, <span id="welcomeName">B.E.P. Member</span>
-    </h2>
-    <p>Welcome to your Biblical Empowerment Program member portal.</p>
-  </section>
+  <div class="registration-card">
 
-
-  <!-- PROFILE -->
-  <section class="section">
-
-    <h2 class="section-title">
-      <i class="fa-solid fa-user"></i>
-      My Profile
+    <h2 class="title">
+      <i class="fa-solid fa-user-plus"></i>
+      Become a B.E.P. Member
     </h2>
 
-    <div id="profileLoading" class="loading">
-      Loading your profile...
-    </div>
-
-    <div id="profileContent" class="hidden">
-
-      <div class="profile-grid">
-
-        <div class="profile-item">
-          <strong>Member Number</strong>
-          <span id="memberNumber">—</span>
-        </div>
-
-        <div class="profile-item">
-          <strong>Full Name</strong>
-          <span id="fullName">—</span>
-        </div>
-
-        <div class="profile-item">
-          <strong>Email</strong>
-          <span id="email">—</span>
-        </div>
-
-        <div class="profile-item">
-          <strong>Phone / WhatsApp</strong>
-          <span id="phone">—</span>
-        </div>
-
-        <div class="profile-item">
-          <strong>Location</strong>
-          <span id="location">—</span>
-        </div>
-
-        <div class="profile-item">
-          <strong>Status</strong>
-          <span id="status">—</span>
-        </div>
-
-      </div>
-
-      <button class="btn btn-primary" id="editProfileBtn">
-        <i class="fa-solid fa-pen"></i>
-        Edit Profile
-      </button>
-
-    </div>
-
-    <div id="profileError" class="message error"></div>
-
-  </section>
-
-
-  <!-- EDIT PROFILE -->
-  <section class="section hidden" id="editProfileSection">
-
-    <h2 class="section-title">
-      <i class="fa-solid fa-user-pen"></i>
-      Edit Profile
-    </h2>
-
-    <div class="form-group">
-      <label>Phone / WhatsApp</label>
-      <input type="text" id="editPhone" placeholder="Phone / WhatsApp number">
-    </div>
-
-    <div class="form-group">
-      <label>Location</label>
-      <input type="text" id="editLocation" placeholder="Your location">
-    </div>
-
-    <button class="btn btn-primary" id="saveProfileBtn">
-      <i class="fa-solid fa-floppy-disk"></i>
-      Save Changes
-    </button>
-
-    <button class="btn btn-secondary" id="cancelEditBtn">
-      Cancel
-    </button>
-
-    <div id="profileUpdateMessage" class="message"></div>
-
-  </section>
-
-
-  <!-- DIGITAL MEMBER CARD -->
-  <section class="section">
-
-    <h2 class="section-title">
-      <i class="fa-solid fa-id-card"></i>
-      Digital Member Card
-    </h2>
-
-    <div class="member-card">
-
-      <div class="card-top">
-        <img src="banner.png" alt="B.E.P. Logo">
-        <h2>B.E.P.</h2>
-        <p>Biblical Empowerment Program</p>
-      </div>
-
-      <div class="card-body">
-
-        <div class="card-row">
-          <span>Member</span>
-          <span id="cardName">—</span>
-        </div>
-
-        <div class="card-row">
-          <span>Member Number</span>
-          <span id="cardNumber">—</span>
-        </div>
-
-        <div class="card-row">
-          <span>Email</span>
-          <span id="cardEmail">—</span>
-        </div>
-
-        <div class="card-row">
-          <span>Status</span>
-          <span id="cardStatus">—</span>
-        </div>
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- COURSES -->
-  <section class="section" id="coursesSection">
-
-    <h2 class="section-title">
-      <i class="fa-solid fa-book-bible"></i>
-      B.E.P. Courses
-    </h2>
-
-    <p style="margin-bottom:20px;">
-      Grow in God's Word through our Bible courses and lessons.
+    <p class="subtitle">
+      Register for your Biblical Empowerment Program member account.
     </p>
 
-    <div id="coursesLoading" class="loading">
-      Loading courses...
-    </div>
 
-    <div id="coursesGrid" class="courses-grid"></div>
+    <form id="registrationForm">
 
-    <div id="coursesError" class="message error"></div>
-
-  </section>
+      <h3 class="section-title">
+        <i class="fa-solid fa-user"></i>
+        Personal Information
+      </h3>
 
 
-  <!-- LESSON VIEW -->
-  <section class="section lesson-view" id="lessonView">
+      <div class="form-group">
 
-    <div class="course-header">
+        <label for="fullName">
+          Full Name <span class="required">*</span>
+        </label>
 
-      <h2 id="lessonCourseTitle">Course</h2>
-
-      <p id="lessonCourseDescription"></p>
-
-      <div class="course-meta" style="margin-top:12px;">
-        <span class="badge gold" id="lessonCourseDuration">—</span>
-        <span class="badge gold" id="lessonCourseLessons">—</span>
-      </div>
-
-      <div class="progress-box">
-
-        <div class="progress-label">
-          <span>Your Progress</span>
-          <span id="progressText">0 / 0 completed</span>
-        </div>
-
-        <div class="progress-bar">
-          <div class="progress-fill" id="progressFill"></div>
-        </div>
+        <input
+          type="text"
+          id="fullName"
+          name="fullName"
+          placeholder="Enter your full name"
+          required
+          autocomplete="name"
+        >
 
       </div>
 
+
+      <div class="form-group">
+
+        <label for="email">
+          Email Address <span class="required">*</span>
+        </label>
+
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="Enter your email address"
+          required
+          autocomplete="email"
+        >
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label for="phone">
+          Phone / WhatsApp <span class="required">*</span>
+        </label>
+
+        <input
+          type="tel"
+          id="phone"
+          name="phone"
+          placeholder="Enter your phone or WhatsApp number"
+          required
+          autocomplete="tel"
+        >
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label for="location">
+          Location <span class="required">*</span>
+        </label>
+
+        <input
+          type="text"
+          id="location"
+          name="location"
+          placeholder="City / Town / Area"
+          required
+        >
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label for="heardAbout">
+          How did you hear about B.E.P.? <span class="required">*</span>
+        </label>
+
+        <select id="heardAbout" name="heardAbout" required>
+
+          <option value="">
+            Select an option
+          </option>
+
+          <option value="Facebook">
+            Facebook
+          </option>
+
+          <option value="WhatsApp">
+            WhatsApp
+          </option>
+
+          <option value="Friend or Family">
+            Friend or Family
+          </option>
+
+          <option value="B.E.P. Member">
+            B.E.P. Member
+          </option>
+
+          <option value="Church">
+            Church
+          </option>
+
+          <option value="Google">
+            Google
+          </option>
+
+          <option value="Other">
+            Other
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <h3 class="section-title">
+        <i class="fa-solid fa-lock"></i>
+        Create Your Password
+      </h3>
+
+
+      <div class="form-group">
+
+        <label for="password">
+          Password <span class="required">*</span>
+        </label>
+
+        <input
+          type="password"
+          id="password"
+          name="password"
+          placeholder="Create a password"
+          minlength="6"
+          required
+          autocomplete="new-password"
+        >
+
+        <div class="password-help">
+          Password must contain at least 6 characters.
+        </div>
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label for="confirmPassword">
+          Confirm Password <span class="required">*</span>
+        </label>
+
+        <input
+          type="password"
+          id="confirmPassword"
+          name="confirmPassword"
+          placeholder="Confirm your password"
+          minlength="6"
+          required
+          autocomplete="new-password"
+        >
+
+      </div>
+
+
+      <button
+        type="submit"
+        class="submit-btn"
+        id="registerBtn"
+      >
+
+        <i class="fa-solid fa-user-plus"></i>
+        Register as B.E.P. Member
+
+      </button>
+
+
+      <div id="message" class="message"></div>
+
+
+    </form>
+
+
+    <div class="login-link">
+
+      Already have a B.E.P. account?
+
+      <a href="member.html">
+        Go to Member Portal
+      </a>
+
     </div>
 
-    <button class="btn btn-secondary" id="backToCoursesBtn">
-      <i class="fa-solid fa-arrow-left"></i>
-      Back to Courses
-    </button>
-
-    <div id="lessonsLoading" class="loading">
-      Loading lessons...
-    </div>
-
-    <div id="lessonsContainer"></div>
-
-    <div id="lessonsError" class="message error"></div>
-
-  </section>
+  </div>
 
 </main>
 
 
 <footer>
+
   <p>
     <strong>B.E.P. — Biblical Empowerment Program</strong>
   </p>
-  <p>Building the Church of Christ</p>
+
+  <p>
+    Building the Church of Christ
+  </p>
+
   <p style="margin-top:8px;">
     Growing in God's Word. Growing in Faith. Growing Together.
   </p>
+
 </footer>
 
 
 <script>
+
   /* =========================================================
      SUPABASE CONNECTION
      ========================================================= */
@@ -727,7 +504,7 @@
     "https://rukusaellqqwthzibyib.supabase.co";
 
   const SUPABASE_KEY =
-    "sb_publishable_Co8_MoJOV14tXBkSWyXFTA_ULn1WRa5";
+    "sb_publishable_Co8-MoJOV14tXBkSWyXFTA_ULn1WRa5";
 
   const supabaseClient =
     window.supabase.createClient(
@@ -737,871 +514,189 @@
 
 
   /* =========================================================
-     GLOBAL VARIABLES
-     ========================================================= */
-
-  let currentUser = null;
-  let currentMember = null;
-  let currentCourse = null;
-  let currentLessons = [];
-  let currentProgress = {};
-
-
-  /* =========================================================
      ELEMENTS
      ========================================================= */
 
-  const welcomeName =
-    document.getElementById("welcomeName");
+  const registrationForm =
+    document.getElementById("registrationForm");
 
-  const profileLoading =
-    document.getElementById("profileLoading");
+  const registerBtn =
+    document.getElementById("registerBtn");
 
-  const profileContent =
-    document.getElementById("profileContent");
-
-  const profileError =
-    document.getElementById("profileError");
-
-  const coursesLoading =
-    document.getElementById("coursesLoading");
-
-  const coursesGrid =
-    document.getElementById("coursesGrid");
-
-  const coursesError =
-    document.getElementById("coursesError");
-
-  const lessonView =
-    document.getElementById("lessonView");
-
-  const lessonsLoading =
-    document.getElementById("lessonsLoading");
-
-  const lessonsContainer =
-    document.getElementById("lessonsContainer");
-
-  const lessonsError =
-    document.getElementById("lessonsError");
+  const message =
+    document.getElementById("message");
 
 
   /* =========================================================
-     SHOW MESSAGE
+     MESSAGE
      ========================================================= */
 
-  function showMessage(element, message, type) {
+  function showMessage(text, type) {
 
-    element.textContent = message;
+    message.textContent = text;
 
-    element.className =
+    message.className =
       "message " + type;
 
-    element.style.display = "block";
   }
 
 
-  function hideMessage(element) {
+  function hideMessage() {
 
-    element.style.display = "none";
+    message.textContent = "";
 
-  }
+    message.className = "message";
 
-
-  /* =========================================================
-     LOAD MEMBER PROFILE
-     ========================================================= */
-
-  async function loadMemberProfile(user) {
-
-    profileLoading.classList.remove("hidden");
-    profileContent.classList.add("hidden");
-    hideMessage(profileError);
-
-    const {
-      data,
-      error
-    } = await supabaseClient
-      .from("members")
-      .select(`
-        id,
-        member_number,
-        full_name,
-        email,
-        phone,
-        location,
-        heard_about,
-        status,
-        is_test,
-        auth_user_id
-      `)
-      .eq("auth_user_id", user.id)
-      .single();
-
-    if (error) {
-
-      console.error(error);
-
-      showMessage(
-        profileError,
-        "Unable to load your member profile.",
-        "error"
-      );
-
-      profileLoading.classList.add("hidden");
-
-      return;
-    }
-
-    currentMember = data;
-
-    displayMemberProfile(data);
-
-    profileLoading.classList.add("hidden");
-    profileContent.classList.remove("hidden");
   }
 
 
   /* =========================================================
-     DISPLAY MEMBER PROFILE
+     REGISTRATION
      ========================================================= */
 
-  function displayMemberProfile(member) {
+  registrationForm.addEventListener(
+    "submit",
+    async function(event) {
 
-    document.getElementById("memberNumber").textContent =
-      member.member_number || "—";
+      event.preventDefault();
 
-    document.getElementById("fullName").textContent =
-      member.full_name || "—";
+      hideMessage();
 
-    document.getElementById("email").textContent =
-      member.email || "—";
+      const fullName =
+        document.getElementById("fullName")
+          .value
+          .trim();
 
-    document.getElementById("phone").textContent =
-      member.phone || "—";
+      const email =
+        document.getElementById("email")
+          .value
+          .trim()
+          .toLowerCase();
 
-    document.getElementById("location").textContent =
-      member.location || "—";
+      const phone =
+        document.getElementById("phone")
+          .value
+          .trim();
 
-    document.getElementById("status").textContent =
-      member.status || "—";
+      const location =
+        document.getElementById("location")
+          .value
+          .trim();
 
-    welcomeName.textContent =
-      member.full_name || "B.E.P. Member";
+      const heardAbout =
+        document.getElementById("heardAbout")
+          .value;
 
+      const password =
+        document.getElementById("password")
+          .value;
 
-    document.getElementById("cardName").textContent =
-      member.full_name || "—";
-
-    document.getElementById("cardNumber").textContent =
-      member.member_number || "—";
-
-    document.getElementById("cardEmail").textContent =
-      member.email || "—";
-
-    document.getElementById("cardStatus").textContent =
-      member.status || "—";
-
-
-    document.getElementById("editPhone").value =
-      member.phone || "";
-
-    document.getElementById("editLocation").value =
-      member.location || "";
-  }
+      const confirmPassword =
+        document.getElementById("confirmPassword")
+          .value;
 
 
-  /* =========================================================
-     LOAD COURSES
-     ========================================================= */
+      /* =====================================================
+         VALIDATION
+         ===================================================== */
 
-  async function loadCourses() {
+      if (
+        !fullName ||
+        !email ||
+        !phone ||
+        !location ||
+        !heardAbout ||
+        !password ||
+        !confirmPassword
+      ) {
 
-    coursesLoading.classList.remove("hidden");
-    coursesGrid.innerHTML = "";
-    hideMessage(coursesError);
-
-    const {
-      data,
-      error
-    } = await supabaseClient
-      .from("courses")
-      .select(`
-        id,
-        title,
-        description,
-        duration,
-        lessons,
-        status,
-        created_at
-      `)
-      .eq("status", "Published")
-      .order("id", {
-        ascending: true
-      });
-
-    coursesLoading.classList.add("hidden");
-
-    if (error) {
-
-      console.error(error);
-
-      showMessage(
-        coursesError,
-        "Unable to load courses.",
-        "error"
-      );
-
-      return;
-    }
-
-    if (!data || data.length === 0) {
-
-      coursesGrid.innerHTML = `
-        <div class="loading">
-          No published courses are currently available.
-        </div>
-      `;
-
-      return;
-    }
-
-    data.forEach(course => {
-
-      const card =
-        document.createElement("div");
-
-      card.className = "course-card";
-
-      card.innerHTML = `
-        <h3>${escapeHtml(course.title)}</h3>
-
-        <p>
-          ${escapeHtml(course.description || "")}
-        </p>
-
-        <div class="course-meta">
-
-          <span class="badge">
-            <i class="fa-regular fa-clock"></i>
-            ${escapeHtml(course.duration || "—")}
-          </span>
-
-          <span class="badge">
-            <i class="fa-solid fa-book"></i>
-            ${course.lessons || 0} Lessons
-          </span>
-
-          <span class="badge gold">
-            ${escapeHtml(course.status)}
-          </span>
-
-        </div>
-
-        <button
-          class="btn btn-primary view-course-btn"
-          data-course-id="${course.id}"
-        >
-          <i class="fa-solid fa-book-open"></i>
-          View Course
-        </button>
-      `;
-
-      coursesGrid.appendChild(card);
-    });
-
-
-    document
-      .querySelectorAll(".view-course-btn")
-      .forEach(button => {
-
-        button.addEventListener(
-          "click",
-          () => {
-
-            const courseId =
-              Number(button.dataset.courseId);
-
-            openCourse(courseId);
-          }
+        showMessage(
+          "Please complete all required fields.",
+          "error"
         );
 
-      });
-  }
+        return;
+      }
 
 
-  /* =========================================================
-     OPEN COURSE
-     ========================================================= */
+      if (password.length < 6) {
 
-  async function openCourse(courseId) {
-
-    document
-      .getElementById("coursesSection")
-      .classList.add("hidden");
-
-    lessonView.style.display = "block";
-
-    lessonsContainer.innerHTML = "";
-
-    lessonsLoading.classList.remove("hidden");
-
-    hideMessage(lessonsError);
-
-    const {
-      data: course,
-      error: courseError
-    } = await supabaseClient
-      .from("courses")
-      .select(`
-        id,
-        title,
-        description,
-        duration,
-        lessons,
-        status
-      `)
-      .eq("id", courseId)
-      .eq("status", "Published")
-      .single();
-
-
-    if (courseError) {
-
-      console.error(courseError);
-
-      lessonsLoading.classList.add("hidden");
-
-      showMessage(
-        lessonsError,
-        "Unable to load this course.",
-        "error"
-      );
-
-      return;
-    }
-
-
-    currentCourse = course;
-
-
-    document.getElementById("lessonCourseTitle")
-      .textContent = course.title;
-
-    document.getElementById("lessonCourseDescription")
-      .textContent = course.description || "";
-
-    document.getElementById("lessonCourseDuration")
-      .textContent =
-      course.duration || "—";
-
-    document.getElementById("lessonCourseLessons")
-      .textContent =
-      `${course.lessons || 0} Lessons`;
-
-
-    /* LOAD LESSONS */
-
-    const {
-      data: lessons,
-      error: lessonsErrorData
-    } = await supabaseClient
-      .from("course_lessons")
-      .select(`
-        id,
-        course_id,
-        lesson_number,
-        title,
-        content,
-        created_at
-      `)
-      .eq("course_id", courseId)
-      .order("lesson_number", {
-        ascending: true
-      });
-
-
-    if (lessonsErrorData) {
-
-      console.error(lessonsErrorData);
-
-      lessonsLoading.classList.add("hidden");
-
-      showMessage(
-        lessonsError,
-        "Unable to load the course lessons.",
-        "error"
-      );
-
-      return;
-    }
-
-
-    currentLessons = lessons || [];
-
-
-    /* LOAD SAVED PROGRESS */
-
-    await loadCourseProgress(courseId);
-
-
-    lessonsLoading.classList.add("hidden");
-
-    renderLessons();
-
-    updateProgress();
-  }
-
-
-  /* =========================================================
-     LOAD COURSE PROGRESS
-     ========================================================= */
-
-  async function loadCourseProgress(courseId) {
-
-    currentProgress = {};
-
-
-    const {
-      data,
-      error
-    } = await supabaseClient
-      .from("course_progress")
-      .select(`
-        id,
-        auth_user_id,
-        course_id,
-        lesson_id,
-        completed,
-        completed_at
-      `)
-      .eq("auth_user_id", currentUser.id)
-      .eq("course_id", courseId);
-
-
-    if (error) {
-
-      console.error(
-        "Progress loading error:",
-        error
-      );
-
-      return;
-    }
-
-
-    (data || []).forEach(progress => {
-
-      currentProgress[
-        progress.lesson_id
-      ] = progress;
-
-    });
-  }
-
-
-  /* =========================================================
-     RENDER LESSONS
-     ========================================================= */
-
-  function renderLessons() {
-
-    lessonsContainer.innerHTML = "";
-
-
-    if (currentLessons.length === 0) {
-
-      lessonsContainer.innerHTML = `
-        <div class="loading">
-          No lessons are available for this course yet.
-        </div>
-      `;
-
-      return;
-    }
-
-
-    currentLessons.forEach(lesson => {
-
-      const progress =
-        currentProgress[lesson.id];
-
-      const completed =
-        progress &&
-        progress.completed === true;
-
-
-      const card =
-        document.createElement("div");
-
-      card.className =
-        "lesson-card";
-
-
-      const completedText =
-        completed
-          ? `
-            <span class="completed-label">
-              <i class="fa-solid fa-circle-check"></i>
-              Completed
-            </span>
-          `
-          : "";
-
-
-      const buttonText =
-        completed
-          ? `
-            <i class="fa-solid fa-circle-check"></i>
-            Completed
-          `
-          : `
-            <i class="fa-solid fa-check"></i>
-            Mark as Completed
-          `;
-
-
-      card.innerHTML = `
-
-        <div class="lesson-top">
-
-          <div>
-
-            <div class="lesson-number">
-              LESSON ${lesson.lesson_number}
-            </div>
-
-            <h3>
-              ${escapeHtml(lesson.title)}
-            </h3>
-
-          </div>
-
-          ${completedText}
-
-        </div>
-
-
-        <div class="lesson-content">
-          ${escapeHtml(lesson.content || "")}
-        </div>
-
-
-        <button
-          class="completion-btn ${completed ? "completed" : ""}"
-          data-lesson-id="${lesson.id}"
-          ${completed ? "disabled" : ""}
-        >
-          ${buttonText}
-        </button>
-
-      `;
-
-
-      lessonsContainer.appendChild(card);
-
-    });
-
-
-    document
-      .querySelectorAll(".completion-btn:not(:disabled)")
-      .forEach(button => {
-
-        button.addEventListener(
-          "click",
-          async () => {
-
-            const lessonId =
-              Number(button.dataset.lessonId);
-
-            await markLessonCompleted(
-              lessonId,
-              button
-            );
-
-          }
+        showMessage(
+          "Your password must contain at least 6 characters.",
+          "error"
         );
 
-      });
-  }
-
-
-  /* =========================================================
-     MARK LESSON COMPLETED
-     ========================================================= */
-
-  async function markLessonCompleted(
-    lessonId,
-    button
-  ) {
-
-    if (!currentUser || !currentCourse) {
-      return;
-    }
-
-
-    button.disabled = true;
-
-    button.innerHTML = `
-      <i class="fa-solid fa-spinner fa-spin"></i>
-      Saving...
-    `;
-
-
-    const existing =
-      currentProgress[lessonId];
-
-
-    let result;
-
-
-    if (existing) {
-
-      result =
-        await supabaseClient
-          .from("course_progress")
-          .update({
-            completed: true,
-            completed_at: new Date().toISOString()
-          })
-          .eq("id", existing.id)
-          .eq("auth_user_id", currentUser.id);
-
-    } else {
-
-      result =
-        await supabaseClient
-          .from("course_progress")
-          .insert({
-            auth_user_id: currentUser.id,
-            course_id: currentCourse.id,
-            lesson_id: lessonId,
-            completed: true,
-            completed_at: new Date().toISOString()
-          });
-
-    }
-
-
-    if (result.error) {
-
-      console.error(
-        "Completion save error:",
-        result.error
-      );
-
-      button.disabled = false;
-
-      button.innerHTML = `
-        <i class="fa-solid fa-check"></i>
-        Mark as Completed
-      `;
-
-      alert(
-        "The lesson could not be marked as completed. Please try again."
-      );
-
-      return;
-    }
-
-
-    /* Reload saved progress */
-
-    await loadCourseProgress(
-      currentCourse.id
-    );
-
-
-    renderLessons();
-
-    updateProgress();
-  }
-
-
-  /* =========================================================
-     UPDATE PROGRESS
-     ========================================================= */
-
-  function updateProgress() {
-
-    const total =
-      currentLessons.length;
-
-
-    const completed =
-      currentLessons.filter(lesson => {
-
-        const progress =
-          currentProgress[lesson.id];
-
-        return progress &&
-               progress.completed === true;
-
-      }).length;
-
-
-    const percentage =
-      total > 0
-        ? Math.round(
-            (completed / total) * 100
-          )
-        : 0;
-
-
-    document.getElementById("progressText")
-      .textContent =
-      `${completed} / ${total} completed`;
-
-
-    document.getElementById("progressFill")
-      .style.width =
-      `${percentage}%`;
-  }
-
-
-  /* =========================================================
-     BACK TO COURSES
-     ========================================================= */
-
-  document
-    .getElementById("backToCoursesBtn")
-    .addEventListener(
-      "click",
-      () => {
-
-        lessonView.style.display = "none";
-
-        document
-          .getElementById("coursesSection")
-          .classList.remove("hidden");
-
-        window.scrollTo({
-          top: 0,
-          behavior: "smooth"
-        });
+        return;
       }
-    );
 
 
-  /* =========================================================
-     EDIT PROFILE
-     ========================================================= */
+      if (password !== confirmPassword) {
 
-  document
-    .getElementById("editProfileBtn")
-    .addEventListener(
-      "click",
-      () => {
-
-        document
-          .getElementById("editProfileSection")
-          .classList.remove("hidden");
-
-        document
-          .getElementById("editProfileSection")
-          .scrollIntoView({
-            behavior: "smooth"
-          });
-      }
-    );
-
-
-  /* =========================================================
-     CANCEL EDIT
-     ========================================================= */
-
-  document
-    .getElementById("cancelEditBtn")
-    .addEventListener(
-      "click",
-      () => {
-
-        document
-          .getElementById("editProfileSection")
-          .classList.add("hidden");
-
-        hideMessage(
-          document.getElementById(
-            "profileUpdateMessage"
-          )
+        showMessage(
+          "The passwords do not match.",
+          "error"
         );
+
+        return;
       }
-    );
 
 
-  /* =========================================================
-     SAVE PROFILE
-     ========================================================= */
+      /* =====================================================
+         DISABLE BUTTON
+         ===================================================== */
 
-  document
-    .getElementById("saveProfileBtn")
-    .addEventListener(
-      "click",
-      async () => {
+      registerBtn.disabled = true;
 
-        if (!currentUser || !currentMember) {
-          return;
-        }
+      registerBtn.innerHTML =
+        '<i class="fa-solid fa-spinner fa-spin"></i> Registering...';
 
 
-        const phone =
-          document
-            .getElementById("editPhone")
-            .value
-            .trim();
+      try {
 
-
-        const location =
-          document
-            .getElementById("editLocation")
-            .value
-            .trim();
-
-
-        const saveButton =
-          document.getElementById(
-            "saveProfileBtn"
-          );
-
-
-        saveButton.disabled = true;
-
-        saveButton.innerHTML = `
-          <i class="fa-solid fa-spinner fa-spin"></i>
-          Saving...
-        `;
-
+        /* ===================================================
+           CREATE SUPABASE AUTH ACCOUNT
+           =================================================== */
 
         const {
           data,
           error
-        } = await supabaseClient
-          .from("members")
-          .update({
-            phone: phone,
-            location: location
-          })
-          .eq("auth_user_id", currentUser.id)
-          .select()
-          .single();
+        } = await supabaseClient.auth.signUp({
 
+          email: email,
 
-        saveButton.disabled = false;
+          password: password,
 
-        saveButton.innerHTML = `
-          <i class="fa-solid fa-floppy-disk"></i>
-          Save Changes
-        `;
+          options: {
+
+            emailRedirectTo:
+              "https://beponlineprog.github.io/bep-website/registr/member.html",
+
+            data: {
+
+              full_name: fullName,
+
+              phone: phone,
+
+              location: location,
+
+              heard_about: heardAbout
+
+            }
+
+          }
+
+        });
 
 
         if (error) {
 
-          console.error(error);
+          console.error(
+            "Registration error:",
+            error
+          );
 
           showMessage(
-            document.getElementById(
-              "profileUpdateMessage"
-            ),
-            "Unable to update your profile.",
+            error.message,
             "error"
           );
 
@@ -1609,162 +704,72 @@
         }
 
 
-        currentMember = data;
+        /* ===================================================
+           CHECK RESULT
+           =================================================== */
 
-        displayMemberProfile(data);
+        if (!data.user) {
 
-
-        showMessage(
-          document.getElementById(
-            "profileUpdateMessage"
-          ),
-          "Your profile has been updated successfully.",
-          "success"
-        );
-
-
-        setTimeout(() => {
-
-          document
-            .getElementById(
-              "editProfileSection"
-            )
-            .classList.add("hidden");
-
-        }, 1200);
-
-      }
-    );
-
-
-  /* =========================================================
-     LOGOUT
-     ========================================================= */
-
-  document
-    .getElementById("logoutBtn")
-    .addEventListener(
-      "click",
-      async () => {
-
-        const {
-          error
-        } = await supabaseClient.auth.signOut();
-
-
-        if (error) {
-
-          console.error(error);
-
-          alert(
-            "Unable to log out. Please try again."
+          showMessage(
+            "Registration could not be completed. Please try again.",
+            "error"
           );
 
           return;
         }
 
 
-        window.location.replace("../index.html");
-      }
-    );
+        /* ===================================================
+           EMAIL CONFIRMATION ENABLED
+           =================================================== */
+
+        if (
+          data.user.identities &&
+          data.user.identities.length === 0
+        ) {
+
+          showMessage(
+            "An account with this email already exists. Please use another email address or sign in to your existing account.",
+            "error"
+          );
+
+          return;
+        }
 
 
-  /* =========================================================
-     HTML ESCAPE
-     ========================================================= */
-
-  function escapeHtml(value) {
-
-    if (value === null ||
-        value === undefined) {
-
-      return "";
-    }
+        showMessage(
+          "Registration successful! Please check your email and click the confirmation link to activate your B.E.P. account.",
+          "success"
+        );
 
 
-    return String(value)
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;")
-      .replace(/'/g, "&#039;");
-  }
+        registrationForm.reset();
 
 
-  /* =========================================================
-     AUTH SESSION
-     ========================================================= */
+      } catch (error) {
 
-  async function initializePortal() {
+        console.error(
+          "Unexpected registration error:",
+          error
+        );
 
-    const {
-      data,
-      error
-    } = await supabaseClient.auth.getSession();
-
-
-    if (error) {
-
-      console.error(error);
-
-      alert(
-        "Unable to check your login session."
-      );
-
-      return;
-    }
+        showMessage(
+          "Something went wrong during registration. Please try again.",
+          "error"
+        );
 
 
-    const session =
-      data.session;
+      } finally {
 
+        registerBtn.disabled = false;
 
-    if (!session) {
+        registerBtn.innerHTML =
+          '<i class="fa-solid fa-user-plus"></i> Register as B.E.P. Member';
 
-      window.location.href =
-        "index.html";
-
-      return;
-    }
-
-
-    currentUser =
-      session.user;
-
-
-    await loadMemberProfile(
-      currentUser
-    );
-
-
-    await loadCourses();
-  }
-
-
-  /* =========================================================
-     AUTH STATE CHANGES
-     ========================================================= */
-
-  supabaseClient.auth.onAuthStateChange(
-    (event, session) => {
-
-      if (
-        event === "SIGNED_OUT" ||
-        !session
-      ) {
-
-        window.location.replace("../index.html");
       }
 
     }
   );
-
-
-  /* =========================================================
-     START PORTAL
-     ========================================================= */
-
-  initializePortal();
 
 </script>
 
