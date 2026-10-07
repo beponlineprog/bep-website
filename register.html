@@ -68,11 +68,6 @@
       text-decoration: none;
       font-weight: bold;
       font-size: 14px;
-      transition: 0.2s;
-    }
-
-    .back-home a:hover {
-      background: #e7eef7;
     }
 
     h2 {
@@ -181,7 +176,7 @@
     .verification-box {
       display: none;
       text-align: center;
-      padding: 20px;
+      padding: 22px;
       background: #f0fdf4;
       border: 1px solid #bbf7d0;
       border-radius: 10px;
@@ -190,6 +185,7 @@
     .verification-box h3 {
       color: #166534;
       margin-top: 0;
+      font-size: 22px;
     }
 
     .verification-box p {
@@ -202,6 +198,17 @@
       font-weight: bold;
       color: #003b73;
       word-break: break-word;
+    }
+
+    .important-note {
+      background: #fff7ed;
+      border: 1px solid #fed7aa;
+      color: #9a3412;
+      padding: 12px;
+      border-radius: 7px;
+      margin: 15px 0;
+      font-size: 13px;
+      line-height: 1.5;
     }
 
     .portal-btn,
@@ -244,10 +251,6 @@
       text-decoration: none;
     }
 
-    .bottom-link a:hover {
-      text-decoration: underline;
-    }
-
     .footer {
       text-align: center;
       color: white;
@@ -273,950 +276,1037 @@
 
 <body>
 
-  <div class="container">
+<div class="container">
 
-    <div class="header">
-      <h1>B.E.P.</h1>
-      <p>Building the Church of Christ</p>
-    </div>
+  <div class="header">
+    <h1>B.E.P.</h1>
+    <p>Building the Church of Christ</p>
+  </div>
 
-    <div class="card">
+  <div class="card">
 
-      <div id="message" class="message"></div>
+    <!-- GENERAL MESSAGE -->
+    <div id="message" class="message"></div>
 
-      <!-- REGISTRATION AREA -->
-      <div id="registrationArea">
 
-        <div class="back-home">
-          <a href="index.html">← Back Home</a>
-        </div>
+    <!-- =========================
+         REGISTRATION AREA
+         ========================= -->
 
-        <h2>Member Registration</h2>
+    <div id="registrationArea">
 
-        <p class="subtitle">
-          Create your B.E.P. Member account
-        </p>
-
-        <form id="registerForm">
-
-          <div class="form-group">
-            <label for="fullName">Full Name</label>
-            <input
-              type="text"
-              id="fullName"
-              placeholder="Enter your full name"
-              required
-            >
-          </div>
-
-          <div class="form-group">
-            <label for="email">Email Address</label>
-            <input
-              type="email"
-              id="email"
-              placeholder="Enter your email address"
-              required
-            >
-          </div>
-
-          <div class="form-group">
-            <label for="phone">Phone Number</label>
-            <input
-              type="tel"
-              id="phone"
-              placeholder="Enter your phone number"
-              required
-            >
-          </div>
-
-          <div class="form-group">
-            <label for="location">Location</label>
-            <input
-              type="text"
-              id="location"
-              placeholder="City / Town / Area"
-              required
-            >
-          </div>
-
-          <div class="form-group">
-            <label for="heardAbout">
-              How did you hear about B.E.P.?
-            </label>
-
-            <select id="heardAbout" required>
-              <option value="">Select an option</option>
-              <option value="Facebook">Facebook</option>
-              <option value="WhatsApp">WhatsApp</option>
-              <option value="Friend or Family">Friend or Family</option>
-              <option value="B.E.P. Member">B.E.P. Member</option>
-              <option value="Church">Church</option>
-              <option value="Google">Google</option>
-              <option value="Other">Other</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label for="password">Password</label>
-
-            <input
-              type="password"
-              id="password"
-              placeholder="Create a password"
-              required
-              minlength="6"
-            >
-          </div>
-
-          <div class="form-group">
-            <label for="confirmPassword">Confirm Password</label>
-
-            <input
-              type="password"
-              id="confirmPassword"
-              placeholder="Confirm your password"
-              required
-              minlength="6"
-            >
-          </div>
-
-          <button
-            type="submit"
-            id="registerBtn"
-            class="register-btn"
-          >
-            Register as B.E.P. Member
-          </button>
-
-        </form>
-
-        <div class="bottom-link">
-          Already have a B.E.P. account?
-          <a href="member.html">Go to Member Portal</a>
-        </div>
-
+      <div class="back-home">
+        <a href="index.html">← Back Home</a>
       </div>
 
+      <h2>Member Registration</h2>
 
-      <!-- EMAIL VERIFICATION AREA -->
-      <div id="verificationBox" class="verification-box">
+      <p class="subtitle">
+        Create your B.E.P. Member account
+      </p>
 
-        <h3>Registration Successful</h3>
+      <form id="registerForm">
 
-        <p>
-          Your B.E.P. Member account has been created successfully.
-        </p>
+        <div class="form-group">
+          <label for="fullName">Full Name</label>
 
-        <p>
-          We sent a verification email to:
-        </p>
+          <input
+            type="text"
+            id="fullName"
+            placeholder="Enter your full name"
+            autocomplete="name"
+            required
+          >
+        </div>
 
-        <p
-          class="verification-email"
-          id="verificationEmail"
-        ></p>
 
-        <p>
-          Please check your inbox and spam/junk folder.
-          You must verify your email before accessing the
-          B.E.P. Member Portal.
-        </p>
+        <div class="form-group">
+          <label for="email">Email Address</label>
 
-        <a
-          href="member.html"
-          class="portal-btn"
+          <input
+            type="email"
+            id="email"
+            placeholder="Enter your email address"
+            autocomplete="email"
+            required
+          >
+        </div>
+
+
+        <div class="form-group">
+          <label for="phone">Phone Number</label>
+
+          <input
+            type="tel"
+            id="phone"
+            placeholder="Enter your phone number"
+            autocomplete="tel"
+            required
+          >
+        </div>
+
+
+        <div class="form-group">
+          <label for="location">Location</label>
+
+          <input
+            type="text"
+            id="location"
+            placeholder="City / Town / Area"
+            required
+          >
+        </div>
+
+
+        <div class="form-group">
+
+          <label for="heardAbout">
+            How did you hear about B.E.P.?
+          </label>
+
+          <select id="heardAbout" required>
+
+            <option value="">
+              Select an option
+            </option>
+
+            <option value="Facebook">
+              Facebook
+            </option>
+
+            <option value="WhatsApp">
+              WhatsApp
+            </option>
+
+            <option value="Friend or Family">
+              Friend or Family
+            </option>
+
+            <option value="B.E.P. Member">
+              B.E.P. Member
+            </option>
+
+            <option value="Church">
+              Church
+            </option>
+
+            <option value="Google">
+              Google
+            </option>
+
+            <option value="Other">
+              Other
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label for="password">
+            Password
+          </label>
+
+          <input
+            type="password"
+            id="password"
+            placeholder="Create a password"
+            autocomplete="new-password"
+            minlength="6"
+            required
+          >
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label for="confirmPassword">
+            Confirm Password
+          </label>
+
+          <input
+            type="password"
+            id="confirmPassword"
+            placeholder="Confirm your password"
+            autocomplete="new-password"
+            minlength="6"
+            required
+          >
+
+        </div>
+
+
+        <button
+          type="submit"
+          id="registerBtn"
+          class="register-btn"
         >
+          Register as B.E.P. Member
+        </button>
+
+      </form>
+
+
+      <div class="bottom-link">
+
+        Already have a B.E.P. account?
+
+        <a href="member.html">
           Go to Member Portal
         </a>
 
-        <br>
-
-        <button
-          type="button"
-          id="resendVerificationBtn"
-          class="resend-btn"
-        >
-          Resend Verification Email
-        </button>
-
       </div>
 
     </div>
 
-    <div class="footer">
-      B.E.P. — Biblical Empowerment Program
+
+    <!-- =========================
+         VERIFICATION AREA
+         ========================= -->
+
+    <div
+      id="verificationBox"
+      class="verification-box"
+    >
+
+      <h3>
+        Registration Successful
+      </h3>
+
+
+      <p>
+        Your B.E.P. Member account has been
+        created successfully.
+      </p>
+
+
+      <p>
+        <strong>
+          A verification email has been sent to:
+        </strong>
+      </p>
+
+
+      <p
+        id="verificationEmail"
+        class="verification-email"
+      ></p>
+
+
+      <div class="important-note">
+
+        <strong>
+          Important:
+        </strong>
+
+        You must verify your email address before
+        you can access the B.E.P. Member Portal.
+
+      </div>
+
+
+      <p>
+        Please check your inbox and also your
+        spam or junk folder.
+      </p>
+
+
+      <p>
+        After verifying your email, return to the
+        Member Portal and sign in.
+      </p>
+
+
+      <a
+        href="member.html"
+        class="portal-btn"
+      >
+        Go to Member Portal
+      </a>
+
+
+      <br>
+
+
+      <button
+        type="button"
+        id="resendVerificationBtn"
+        class="resend-btn"
+      >
+        Resend Verification Email
+      </button>
+
     </div>
 
   </div>
 
 
-  <script type="module">
+  <div class="footer">
+    B.E.P. — Biblical Empowerment Program
+  </div>
 
-    /* =========================================================
-       FIREBASE IMPORTS
-       ========================================================= */
+</div>
 
-    import {
-      initializeApp
-    } from
-      "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
 
+<script type="module">
 
-    import {
-      getAuth,
-      createUserWithEmailAndPassword,
-      sendEmailVerification,
-      signOut
-    } from
-      "https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js";
+  /* ============================================================
+     FIREBASE IMPORTS
+     ============================================================ */
 
+  import {
+    initializeApp
+  } from
+    "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
 
-    import {
-      getFirestore,
-      doc,
-      setDoc,
-      serverTimestamp
-    } from
-      "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
 
+  import {
+    getAuth,
+    createUserWithEmailAndPassword,
+    sendEmailVerification,
+    signOut
+  } from
+    "https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js";
 
-    /* =========================================================
-       FIREBASE CONFIGURATION
-       ========================================================= */
 
-    const firebaseConfig = {
+  import {
+    getFirestore,
+    doc,
+    setDoc,
+    serverTimestamp
+  } from
+    "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
 
-      apiKey:
-        apiKey: "AIzaSyC3N-DrY4mv4M32TMIt_2_9btO3AqmhDk3Y",
 
-      authDomain:
-        "beponlineprog-8b8bb.firebaseapp.com",
+  /* ============================================================
+     FIREBASE CONFIGURATION
 
-      projectId:
-        "beponlineprog-8b8bb",
+     THIS API KEY IS THE CONFIRMED KEY
+     ============================================================ */
 
-      storageBucket:
-        "beponlineprog-8b8bb.firebasestorage.app",
+  const firebaseConfig = {
 
-      messagingSenderId:
-        "312026634976",
+    apiKey:
+      "AIzaSyC3N-DrY4mv4M32TMIt_2_9btO3AqmhDk3Y",
 
-      appId:
-        "1:312026634976:web:5497f071e8f0e6618fce85",
+    authDomain:
+      "beponlineprog-8b8bb.firebaseapp.com",
 
-      measurementId:
-        "G-LDX5CZ68MH"
-    };
+    projectId:
+      "beponlineprog-8b8bb",
 
+    storageBucket:
+      "beponlineprog-8b8bb.firebasestorage.app",
 
-    /* =========================================================
-       INITIALIZE FIREBASE
-       ========================================================= */
+    messagingSenderId:
+      "312026634976",
 
-    let app;
-    let auth;
-    let db;
+    appId:
+      "1:312026634976:web:5497f071e8f0e6618fce85",
 
-    try {
+    measurementId:
+      "G-LDX5CZ68MH"
 
-      app = initializeApp(firebaseConfig);
+  };
 
-      auth = getAuth(app);
 
-      db = getFirestore(app);
+  /* ============================================================
+     INITIALIZE FIREBASE
+     ============================================================ */
 
-    } catch (error) {
+  let app;
+  let auth;
+  let db;
 
-      console.error(
-        "Firebase initialization error:",
-        error
-      );
 
-      const message =
-        document.getElementById("message");
+  try {
 
-      message.className =
-        "message error";
+    app =
+      initializeApp(firebaseConfig);
 
-      message.style.display =
-        "block";
+    auth =
+      getAuth(app);
 
-      message.innerHTML =
-        "<strong>Firebase could not start.</strong>" +
-        "<div class='error-details'>" +
-        "Error code: " +
-        (error.code || "unknown") +
-        "<br>" +
-        "Error message: " +
-        (error.message || "Unknown Firebase error") +
-        "</div>";
-    }
+    db =
+      getFirestore(app);
 
+  }
 
-    /* =========================================================
-       ELEMENTS
-       ========================================================= */
+  catch (error) {
 
-    const registerForm =
-      document.getElementById("registerForm");
+    console.error(
+      "Firebase initialization failed:",
+      error
+    );
 
-    const registerBtn =
-      document.getElementById("registerBtn");
+    showMessage(
+      "Firebase could not be initialized.",
+      "error",
+      error.code,
+      error.message
+    );
 
-    const messageBox =
-      document.getElementById("message");
+  }
 
-    const registrationArea =
-      document.getElementById("registrationArea");
 
-    const verificationBox =
-      document.getElementById("verificationBox");
+  /* ============================================================
+     ELEMENTS
+     ============================================================ */
 
-    const verificationEmail =
-      document.getElementById("verificationEmail");
-
-    const resendVerificationBtn =
-      document.getElementById("resendVerificationBtn");
-
-
-    /*
-       Only the email is kept temporarily.
-
-       IMPORTANT:
-       The password is NEVER stored in:
-       - localStorage
-       - sessionStorage
-       - Firestore
-       - JavaScript variables after registration finishes
-
-       Firebase Authentication handles the password.
-    */
-
-    let verificationEmailStored = "";
-
-
-    /* =========================================================
-       SHOW MESSAGE
-       ========================================================= */
-
-    function showMessage(
-      text,
-      type = "error",
-      errorCode = null,
-      errorDetails = null
-    ) {
-
-      messageBox.className =
-        "message " + type;
-
-      messageBox.style.display =
-        "block";
-
-
-      let html =
-        "<strong>" +
-        escapeHtml(text) +
-        "</strong>";
-
-
-      if (errorCode || errorDetails) {
-
-        html +=
-          "<div class='error-details'>";
-
-
-        if (errorCode) {
-
-          html +=
-            "Firebase error code: " +
-            escapeHtml(errorCode) +
-            "<br>";
-
-        }
-
-
-        if (errorDetails) {
-
-          html +=
-            "Firebase message: " +
-            escapeHtml(errorDetails);
-
-        }
-
-
-        html +=
-          "</div>";
-      }
-
-
-      messageBox.innerHTML =
-        html;
-    }
-
-
-    /* =========================================================
-       HIDE MESSAGE
-       ========================================================= */
-
-    function hideMessage() {
-
-      messageBox.textContent =
-        "";
-
-      messageBox.className =
-        "message";
-
-      messageBox.style.display =
-        "none";
-    }
-
-
-    /* =========================================================
-       ESCAPE HTML
-       ========================================================= */
-
-    function escapeHtml(value) {
-
-      const div =
-        document.createElement("div");
-
-      div.textContent =
-        String(value);
-
-      return div.innerHTML;
-    }
-
-
-    /* =========================================================
-       FIREBASE ERROR MESSAGE
-       ========================================================= */
-
-    function getFriendlyError(error) {
-
-      const code =
-        error?.code || "";
-
-
-      switch (code) {
-
-        case "auth/email-already-in-use":
-
-          return (
-            "This email address is already registered. " +
-            "Please go to the B.E.P. Member Portal and sign in."
-          );
-
-
-        case "auth/invalid-email":
-
-          return (
-            "The email address is not valid. " +
-            "Please check the email address and try again."
-          );
-
-
-        case "auth/weak-password":
-
-          return (
-            "The password is too weak. " +
-            "Please use at least 6 characters."
-          );
-
-
-        case "auth/password-does-not-meet-requirements":
-
-          return (
-            "The password does not meet Firebase's password requirements."
-          );
-
-
-        case "auth/operation-not-allowed":
-
-          return (
-            "Email/password registration is not enabled " +
-            "in Firebase Authentication."
-          );
-
-
-        case "auth/network-request-failed":
-
-          return (
-            "Firebase could not connect to the internet. " +
-            "Please check your connection and try again."
-          );
-
-
-        case "auth/too-many-requests":
-
-          return (
-            "Firebase has temporarily blocked requests because " +
-            "there were too many attempts. Please wait and try again later."
-          );
-
-
-        case "auth/invalid-api-key":
-
-          return (
-            "The Firebase API key is invalid. " +
-            "Please check the Firebase configuration."
-          );
-
-
-        case "auth/api-key-not-valid.-please-pass-a-valid-api-key.":
-
-          return (
-            "The Firebase API key is invalid or incorrectly configured."
-          );
-
-
-        case "auth/app-not-authorized":
-
-          return (
-            "This website is not authorized to use this Firebase project. " +
-            "Check the Firebase Authentication authorized domains."
-          );
-
-
-        case "permission-denied":
-
-        case "firestore/permission-denied":
-
-          return (
-            "Firebase Authentication succeeded, but Firestore denied " +
-            "permission to create the B.E.P. member profile. " +
-            "The Firestore security rules need to be checked."
-          );
-
-
-        case "failed-precondition":
-
-          return (
-            "Firestore is not ready or the required Firebase configuration " +
-            "is incomplete."
-          );
-
-
-        case "unavailable":
-
-          return (
-            "Firebase Firestore is temporarily unavailable. " +
-            "Please try again."
-          );
-
-
-        default:
-
-          return (
-            "Registration failed. Firebase returned an unexpected error."
-          );
-      }
-    }
-
-
-    /* =========================================================
-       REGISTRATION
-       ========================================================= */
-
-    registerForm.addEventListener(
-      "submit",
-      async (event) => {
-
-        event.preventDefault();
-
-        hideMessage();
-
-
-        /* -----------------------------------------------------
-           GET FORM VALUES
-           ----------------------------------------------------- */
-
-        const fullName =
-          document
-            .getElementById("fullName")
-            .value
-            .trim();
-
-
-        const email =
-          document
-            .getElementById("email")
-            .value
-            .trim()
-            .toLowerCase();
-
-
-        const phone =
-          document
-            .getElementById("phone")
-            .value
-            .trim();
-
-
-        const location =
-          document
-            .getElementById("location")
-            .value
-            .trim();
-
-
-        const heardAbout =
-          document
-            .getElementById("heardAbout")
-            .value;
-
-
-        const password =
-          document
-            .getElementById("password")
-            .value;
-
-
-        const confirmPassword =
-          document
-            .getElementById("confirmPassword")
-            .value;
-
-
-        /* -----------------------------------------------------
-           BASIC VALIDATION
-           ----------------------------------------------------- */
-
-        if (
-          !fullName ||
-          !email ||
-          !phone ||
-          !location ||
-          !heardAbout ||
-          !password ||
-          !confirmPassword
-        ) {
-
-          showMessage(
-            "Please complete all registration fields.",
-            "error"
-          );
-
-          return;
-        }
-
-
-        if (password.length < 6) {
-
-          showMessage(
-            "Password must contain at least 6 characters.",
-            "error"
-          );
-
-          return;
-        }
-
-
-        if (password !== confirmPassword) {
-
-          showMessage(
-            "Passwords do not match.",
-            "error"
-          );
-
-          return;
-        }
-
-
-        /* -----------------------------------------------------
-           DISABLE BUTTON
-           ----------------------------------------------------- */
-
-        registerBtn.disabled =
-          true;
-
-        registerBtn.textContent =
-          "Creating Account...";
-
-
-        let createdUser =
-          null;
-
-
-        try {
-
-          /* ===================================================
-             STEP 1
-             CREATE FIREBASE AUTH ACCOUNT
-             =================================================== */
-
-          console.log(
-            "Step 1: Creating Firebase Authentication account..."
-          );
-
-
-          const credential =
-            await createUserWithEmailAndPassword(
-              auth,
-              email,
-              password
-            );
-
-
-          createdUser =
-            credential.user;
-
-
-          console.log(
-            "Firebase Auth account created:",
-            createdUser.uid
-          );
-
-
-          /* ===================================================
-             STEP 2
-             CREATE FIRESTORE MEMBER PROFILE
-             =================================================== */
-
-          registerBtn.textContent =
-            "Creating Member Profile...";
-
-
-          console.log(
-            "Step 2: Creating Firestore members document..."
-          );
-
-
-          await setDoc(
-            doc(
-              db,
-              "members",
-              createdUser.uid
-            ),
-            {
-
-              uid:
-                createdUser.uid,
-
-              memberNumber:
-                "",
-
-              fullName:
-                fullName,
-
-              email:
-                email,
-
-              phone:
-                phone,
-
-              location:
-                location,
-
-              heardAbout:
-                heardAbout,
-
-              status:
-                "Pending",
-
-              emailVerified:
-                false,
-
-              createdAt:
-                serverTimestamp()
-            }
-          );
-
-
-          console.log(
-            "Firestore member profile created successfully."
-          );
-
-
-          /* ===================================================
-             STEP 3
-             SEND EMAIL VERIFICATION
-             =================================================== */
-
-          registerBtn.textContent =
-            "Sending Verification Email...";
-
-
-          console.log(
-            "Step 3: Sending verification email..."
-          );
-
-
-          await sendEmailVerification(
-            createdUser
-          );
-
-
-          console.log(
-            "Verification email sent successfully."
-          );
-
-
-          /* ===================================================
-             REGISTRATION COMPLETE
-             =================================================== */
-
-          verificationEmailStored =
-            email;
-
-
-          verificationEmail.textContent =
-            email;
-
-
-          registrationArea.style.display =
-            "none";
-
-
-          verificationBox.style.display =
-            "block";
-
-
-          showMessage(
-            "Registration completed successfully. Please verify your email address.",
-            "success"
-          );
-
-
-          /*
-             Sign out after registration.
-
-             This means the user must use the Member Portal
-             to sign in after verifying their email.
-
-             No password is stored by this page.
-          */
-
-          await signOut(auth);
-
-
-        } catch (error) {
-
-          console.error(
-            "===================================="
-          );
-
-          console.error(
-            "B.E.P. REGISTRATION ERROR"
-          );
-
-          console.error(
-            "Error code:",
-            error?.code
-          );
-
-          console.error(
-            "Error message:",
-            error?.message
-          );
-
-          console.error(
-            "Full error:",
-            error
-          );
-
-          console.error(
-            "===================================="
-          );
-
-
-          /* ===================================================
-             SPECIAL CASE:
-             AUTH ACCOUNT CREATED BUT FIRESTORE FAILED
-             =================================================== */
-
-          if (
-            createdUser &&
-            error?.code === "permission-denied"
-          ) {
-
-            showMessage(
-              "Your Firebase account was created, but your B.E.P. member profile could not be saved. Please show the Firebase error details below.",
-              "error",
-              error.code,
-              error.message
-            );
-
-          } else {
-
-            const friendlyMessage =
-              getFriendlyError(error);
-
-
-            showMessage(
-              friendlyMessage,
-              "error",
-              error?.code || "unknown",
-              error?.message || "No additional Firebase error message was provided."
-            );
-          }
-
-
-          registerBtn.disabled =
-            false;
-
-
-          registerBtn.textContent =
-            "Register as B.E.P. Member";
-
-
-          /*
-             IMPORTANT:
-
-             We do NOT automatically delete the Firebase
-             Authentication account here.
-
-             This prevents accidental deletion of an account
-             if Firestore or another Firebase service fails.
-          */
-        }
-
-      }
+  const registerForm =
+    document.getElementById(
+      "registerForm"
     );
 
 
-    /* =========================================================
-       RESEND VERIFICATION EMAIL
-       =========================================================
-
-       IMPORTANT:
-
-       We intentionally do NOT ask for or store the password.
-
-       After successful registration, the Firebase user is
-       authenticated temporarily. However, we sign them out
-       after registration.
-
-       Therefore, this button sends the user to the Member
-       Portal rather than storing the password and attempting
-       to sign in automatically.
-       ========================================================= */
-
-    resendVerificationBtn.addEventListener(
-      "click",
-      async () => {
-
-        hideMessage();
+  const registerBtn =
+    document.getElementById(
+      "registerBtn"
+    );
 
 
-        /*
-           Because the user has been signed out, this page
-           cannot securely resend the verification email
-           without asking for the password again.
+  const messageBox =
+    document.getElementById(
+      "message"
+    );
 
-           We do NOT store the password.
 
-           The secure method is to use the Member Portal:
-           sign in → resend verification while authenticated.
-        */
+  const registrationArea =
+    document.getElementById(
+      "registrationArea"
+    );
+
+
+  const verificationBox =
+    document.getElementById(
+      "verificationBox"
+    );
+
+
+  const verificationEmail =
+    document.getElementById(
+      "verificationEmail"
+    );
+
+
+  const resendVerificationBtn =
+    document.getElementById(
+      "resendVerificationBtn"
+    );
+
+
+  /* ============================================================
+     TEMPORARY EMAIL ONLY
+
+     NEVER STORE THE PASSWORD.
+     ============================================================ */
+
+  let verificationEmailStored = "";
+
+
+  /* ============================================================
+     SHOW MESSAGE
+     ============================================================ */
+
+  function showMessage(
+    text,
+    type = "error",
+    errorCode = null,
+    errorMessage = null
+  ) {
+
+    messageBox.className =
+      "message " + type;
+
+    messageBox.style.display =
+      "block";
+
+
+    let html =
+      "<strong>" +
+      escapeHtml(text) +
+      "</strong>";
+
+
+    if (
+      errorCode ||
+      errorMessage
+    ) {
+
+      html +=
+        "<div class='error-details'>";
+
+
+      if (errorCode) {
+
+        html +=
+          "Firebase error code: " +
+          escapeHtml(errorCode) +
+          "<br>";
+
+      }
+
+
+      if (errorMessage) {
+
+        html +=
+          "Firebase message: " +
+          escapeHtml(errorMessage);
+
+      }
+
+
+      html +=
+        "</div>";
+
+    }
+
+
+    messageBox.innerHTML =
+      html;
+
+  }
+
+
+  /* ============================================================
+     HIDE MESSAGE
+     ============================================================ */
+
+  function hideMessage() {
+
+    messageBox.style.display =
+      "none";
+
+    messageBox.innerHTML =
+      "";
+
+    messageBox.className =
+      "message";
+
+  }
+
+
+  /* ============================================================
+     ESCAPE HTML
+     ============================================================ */
+
+  function escapeHtml(value) {
+
+    const div =
+      document.createElement(
+        "div"
+      );
+
+    div.textContent =
+      String(value);
+
+    return div.innerHTML;
+
+  }
+
+
+  /* ============================================================
+     FRIENDLY FIREBASE ERROR
+     ============================================================ */
+
+  function getFriendlyError(error) {
+
+    const code =
+      error?.code || "";
+
+
+    switch (code) {
+
+      case "auth/email-already-in-use":
+
+        return (
+          "This email address is already registered. " +
+          "Please use the Member Portal to sign in."
+        );
+
+
+      case "auth/invalid-email":
+
+        return (
+          "The email address is invalid. " +
+          "Please check it and try again."
+        );
+
+
+      case "auth/weak-password":
+
+        return (
+          "The password is too weak. " +
+          "Please use at least 6 characters."
+        );
+
+
+      case "auth/operation-not-allowed":
+
+        return (
+          "Email/password registration is not enabled " +
+          "in Firebase Authentication."
+        );
+
+
+      case "auth/network-request-failed":
+
+        return (
+          "A network error occurred. " +
+          "Please check your internet connection."
+        );
+
+
+      case "auth/too-many-requests":
+
+        return (
+          "There have been too many attempts. " +
+          "Please wait and try again later."
+        );
+
+
+      case "auth/api-key-not-valid.-please-pass-a-valid-api-key.":
+
+        return (
+          "The Firebase API key is invalid or incorrectly configured."
+        );
+
+
+      case "auth/invalid-api-key":
+
+        return (
+          "The Firebase API key is invalid."
+        );
+
+
+      case "auth/app-not-authorized":
+
+        return (
+          "This website is not authorized to use this Firebase project."
+        );
+
+
+      case "permission-denied":
+
+        return (
+          "The Firebase account was created, but Firestore " +
+          "denied permission to create the B.E.P. member profile."
+        );
+
+
+      case "failed-precondition":
+
+        return (
+          "Firestore is not ready or is incorrectly configured."
+        );
+
+
+      case "unavailable":
+
+        return (
+          "Firebase is temporarily unavailable. " +
+          "Please try again."
+        );
+
+
+      default:
+
+        return (
+          "Registration failed. Firebase returned an unexpected error."
+        );
+
+    }
+
+  }
+
+
+  /* ============================================================
+     REGISTRATION
+     ============================================================ */
+
+  registerForm.addEventListener(
+    "submit",
+    async function(event) {
+
+      /*
+         IMPORTANT:
+         Prevents the browser from refreshing/resetting
+         the registration form.
+      */
+
+      event.preventDefault();
+
+      event.stopPropagation();
+
+
+      hideMessage();
+
+
+      /* --------------------------------------------------------
+         GET FORM DATA
+         -------------------------------------------------------- */
+
+      const fullName =
+        document
+          .getElementById("fullName")
+          .value
+          .trim();
+
+
+      const email =
+        document
+          .getElementById("email")
+          .value
+          .trim()
+          .toLowerCase();
+
+
+      const phone =
+        document
+          .getElementById("phone")
+          .value
+          .trim();
+
+
+      const location =
+        document
+          .getElementById("location")
+          .value
+          .trim();
+
+
+      const heardAbout =
+        document
+          .getElementById("heardAbout")
+          .value;
+
+
+      const password =
+        document
+          .getElementById("password")
+          .value;
+
+
+      const confirmPassword =
+        document
+          .getElementById("confirmPassword")
+          .value;
+
+
+      /* --------------------------------------------------------
+         VALIDATION
+         -------------------------------------------------------- */
+
+      if (
+        !fullName ||
+        !email ||
+        !phone ||
+        !location ||
+        !heardAbout ||
+        !password ||
+        !confirmPassword
+      ) {
 
         showMessage(
-          "For security, this page does not store your password. Please go to the Member Portal, sign in with your email and password, and resend the verification email from there.",
+          "Please complete all registration fields.",
+          "error"
+        );
+
+        return;
+
+      }
+
+
+      if (
+        password.length < 6
+      ) {
+
+        showMessage(
+          "Password must contain at least 6 characters.",
+          "error"
+        );
+
+        return;
+
+      }
+
+
+      if (
+        password !== confirmPassword
+      ) {
+
+        showMessage(
+          "Passwords do not match.",
+          "error"
+        );
+
+        return;
+
+      }
+
+
+      /* --------------------------------------------------------
+         DISABLE BUTTON
+         -------------------------------------------------------- */
+
+      registerBtn.disabled =
+        true;
+
+      registerBtn.textContent =
+        "Creating Account...";
+
+
+      try {
+
+        /* ======================================================
+           STEP 1
+           CREATE FIREBASE AUTH ACCOUNT
+           ====================================================== */
+
+        console.log(
+          "B.E.P.: Creating Firebase account..."
+        );
+
+
+        const credential =
+          await createUserWithEmailAndPassword(
+            auth,
+            email,
+            password
+          );
+
+
+        const user =
+          credential.user;
+
+
+        console.log(
+          "B.E.P.: Firebase account created.",
+          user.uid
+        );
+
+
+        /* ======================================================
+           STEP 2
+           CREATE FIRESTORE MEMBER PROFILE
+           ====================================================== */
+
+        registerBtn.textContent =
+          "Creating Member Profile...";
+
+
+        console.log(
+          "B.E.P.: Creating Firestore member profile..."
+        );
+
+
+        await setDoc(
+          doc(
+            db,
+            "members",
+            user.uid
+          ),
+          {
+
+            uid:
+              user.uid,
+
+            memberNumber:
+              "",
+
+            fullName:
+              fullName,
+
+            email:
+              email,
+
+            phone:
+              phone,
+
+            location:
+              location,
+
+            heardAbout:
+              heardAbout,
+
+            status:
+              "Pending",
+
+            emailVerified:
+              false,
+
+            createdAt:
+              serverTimestamp()
+
+          }
+        );
+
+
+        console.log(
+          "B.E.P.: Member profile created."
+        );
+
+
+        /* ======================================================
+           STEP 3
+           SEND VERIFICATION EMAIL
+           ====================================================== */
+
+        registerBtn.textContent =
+          "Sending Verification Email...";
+
+
+        console.log(
+          "B.E.P.: Sending verification email..."
+        );
+
+
+        await sendEmailVerification(
+          user
+        );
+
+
+        console.log(
+          "B.E.P.: Verification email sent."
+        );
+
+
+        /* ======================================================
+           STEP 4
+           SHOW VERIFICATION SCREEN
+
+           THIS IS THE IMPORTANT PART.
+
+           The registration form is hidden ONLY after:
+           1. Auth account succeeds
+           2. Firestore profile succeeds
+           3. Verification email succeeds
+           ====================================================== */
+
+        verificationEmailStored =
+          email;
+
+
+        verificationEmail.textContent =
+          email;
+
+
+        registrationArea.style.display =
+          "none";
+
+
+        verificationBox.style.display =
+          "block";
+
+
+        showMessage(
+          "Registration successful. Please verify your email before signing in.",
+          "success"
+        );
+
+
+        /* ======================================================
+           STEP 5
+           SIGN OUT
+
+           Password is NOT saved anywhere.
+           ====================================================== */
+
+        await signOut(auth);
+
+
+        console.log(
+          "B.E.P.: Registration process completed successfully."
+        );
+
+
+      }
+
+      catch (error) {
+
+        console.error(
+          "======================================"
+        );
+
+        console.error(
+          "B.E.P. REGISTRATION ERROR"
+        );
+
+        console.error(
+          "Error code:",
+          error?.code
+        );
+
+        console.error(
+          "Error message:",
+          error?.message
+        );
+
+        console.error(
+          "Full error:",
+          error
+        );
+
+        console.error(
+          "======================================"
+        );
+
+
+        /* ------------------------------------------------------
+           SHOW EXACT ERROR
+           ------------------------------------------------------ */
+
+        showMessage(
+          getFriendlyError(error),
+          "error",
+          error?.code || "unknown",
+          error?.message ||
+          "No Firebase error message was provided."
+        );
+
+
+        registerBtn.disabled =
+          false;
+
+
+        registerBtn.textContent =
+          "Register as B.E.P. Member";
+
+      }
+
+    }
+  );
+
+
+  /* ============================================================
+     RESEND VERIFICATION
+
+     We DO NOT store the password.
+
+     Because the user is signed out after registration, this
+     button sends them to the Member Portal where they can
+     sign in and resend verification securely.
+     ============================================================ */
+
+  resendVerificationBtn.addEventListener(
+    "click",
+    function() {
+
+      if (
+        verificationEmailStored
+      ) {
+
+        showMessage(
+          "Please go to the Member Portal and sign in with your email and password. You can resend the verification email there without storing your password.",
           "info"
         );
 
 
         setTimeout(
-          () => {
+          function() {
 
             window.location.href =
               "member.html";
@@ -1226,9 +1316,18 @@
         );
 
       }
-    );
 
-  </script>
+      else {
+
+        window.location.href =
+          "member.html";
+
+      }
+
+    }
+  );
+
+</script>
 
 </body>
 </html>
