@@ -144,6 +144,8 @@
       border-radius: 7px;
       margin-bottom: 16px;
       font-size: 14px;
+      line-height: 1.5;
+      word-break: break-word;
     }
 
     .message.error {
@@ -165,6 +167,15 @@
       background: #dbeafe;
       color: #1e40af;
       border: 1px solid #bfdbfe;
+    }
+
+    .error-details {
+      margin-top: 8px;
+      padding-top: 8px;
+      border-top: 1px solid rgba(153, 27, 27, 0.25);
+      font-size: 12px;
+      font-family: monospace;
+      word-break: break-word;
     }
 
     .verification-box {
@@ -214,6 +225,11 @@
       background: white;
       color: #003b73;
       border: 1px solid #003b73;
+    }
+
+    .resend-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
     }
 
     .bottom-link {
@@ -268,6 +284,7 @@
 
       <div id="message" class="message"></div>
 
+      <!-- REGISTRATION AREA -->
       <div id="registrationArea">
 
         <div class="back-home">
@@ -323,7 +340,9 @@
           </div>
 
           <div class="form-group">
-            <label for="heardAbout">How did you hear about B.E.P.?</label>
+            <label for="heardAbout">
+              How did you hear about B.E.P.?
+            </label>
 
             <select id="heardAbout" required>
               <option value="">Select an option</option>
@@ -339,6 +358,7 @@
 
           <div class="form-group">
             <label for="password">Password</label>
+
             <input
               type="password"
               id="password"
@@ -350,6 +370,7 @@
 
           <div class="form-group">
             <label for="confirmPassword">Confirm Password</label>
+
             <input
               type="password"
               id="confirmPassword"
@@ -376,6 +397,8 @@
 
       </div>
 
+
+      <!-- EMAIL VERIFICATION AREA -->
       <div id="verificationBox" class="verification-box">
 
         <h3>Registration Successful</h3>
@@ -388,14 +411,21 @@
           We sent a verification email to:
         </p>
 
-        <p class="verification-email" id="verificationEmail"></p>
+        <p
+          class="verification-email"
+          id="verificationEmail"
+        ></p>
 
         <p>
           Please check your inbox and spam/junk folder.
-          You must verify your email before accessing the B.E.P. Member Portal.
+          You must verify your email before accessing the
+          B.E.P. Member Portal.
         </p>
 
-        <a href="member.html" class="portal-btn">
+        <a
+          href="member.html"
+          class="portal-btn"
+        >
           Go to Member Portal
         </a>
 
@@ -422,18 +452,24 @@
 
   <script type="module">
 
-    import { initializeApp } from
+    /* =========================================================
+       FIREBASE IMPORTS
+       ========================================================= */
+
+    import {
+      initializeApp
+    } from
       "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
+
 
     import {
       getAuth,
       createUserWithEmailAndPassword,
       sendEmailVerification,
-      signInWithEmailAndPassword,
-      signOut,
-      deleteUser
+      signOut
     } from
       "https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js";
+
 
     import {
       getFirestore,
@@ -444,21 +480,82 @@
       "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
 
 
+    /* =========================================================
+       FIREBASE CONFIGURATION
+       ========================================================= */
+
     const firebaseConfig = {
-      apiKey: "AIzaSyC3N-DrY4mv4M32TMIt_2bt_9btO3AqmhDk3Y",
-      authDomain: "beponlineprog-8b8bb.firebaseapp.com",
-      projectId: "beponlineprog-8b8bb",
-      storageBucket: "beponlineprog-8b8bb.firebasestorage.app",
-      messagingSenderId: "312026634976",
-      appId: "1:312026634976:web:5497f071e8f0e6618fce85",
-      measurementId: "G-LDX5CZ68MH"
+
+      apiKey:
+        "AIzaSyC3N-DrY4mv4M32TMIt_2_9bt_9btO3AqmhDk3Y",
+
+      authDomain:
+        "beponlineprog-8b8bb.firebaseapp.com",
+
+      projectId:
+        "beponlineprog-8b8bb",
+
+      storageBucket:
+        "beponlineprog-8b8bb.firebasestorage.app",
+
+      messagingSenderId:
+        "312026634976",
+
+      appId:
+        "1:312026634976:web:5497f071e8f0e6618fce85",
+
+      measurementId:
+        "G-LDX5CZ68MH"
     };
 
 
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-    const db = getFirestore(app);
+    /* =========================================================
+       INITIALIZE FIREBASE
+       ========================================================= */
 
+    let app;
+    let auth;
+    let db;
+
+    try {
+
+      app = initializeApp(firebaseConfig);
+
+      auth = getAuth(app);
+
+      db = getFirestore(app);
+
+    } catch (error) {
+
+      console.error(
+        "Firebase initialization error:",
+        error
+      );
+
+      const message =
+        document.getElementById("message");
+
+      message.className =
+        "message error";
+
+      message.style.display =
+        "block";
+
+      message.innerHTML =
+        "<strong>Firebase could not start.</strong>" +
+        "<div class='error-details'>" +
+        "Error code: " +
+        (error.code || "unknown") +
+        "<br>" +
+        "Error message: " +
+        (error.message || "Unknown Firebase error") +
+        "</div>";
+    }
+
+
+    /* =========================================================
+       ELEMENTS
+       ========================================================= */
 
     const registerForm =
       document.getElementById("registerForm");
@@ -466,7 +563,7 @@
     const registerBtn =
       document.getElementById("registerBtn");
 
-    const message =
+    const messageBox =
       document.getElementById("message");
 
     const registrationArea =
@@ -482,339 +579,512 @@
       document.getElementById("resendVerificationBtn");
 
 
+    /*
+       Only the email is kept temporarily.
+
+       IMPORTANT:
+       The password is NEVER stored in:
+       - localStorage
+       - sessionStorage
+       - Firestore
+       - JavaScript variables after registration finishes
+
+       Firebase Authentication handles the password.
+    */
+
     let verificationEmailStored = "";
-    let verificationPasswordStored = "";
 
 
-    function showMessage(text, type = "error") {
+    /* =========================================================
+       SHOW MESSAGE
+       ========================================================= */
 
-      message.textContent = text;
+    function showMessage(
+      text,
+      type = "error",
+      errorCode = null,
+      errorDetails = null
+    ) {
 
-      message.className = "message " + type;
+      messageBox.className =
+        "message " + type;
 
-      message.style.display = "block";
+      messageBox.style.display =
+        "block";
 
+
+      let html =
+        "<strong>" +
+        escapeHtml(text) +
+        "</strong>";
+
+
+      if (errorCode || errorDetails) {
+
+        html +=
+          "<div class='error-details'>";
+
+
+        if (errorCode) {
+
+          html +=
+            "Firebase error code: " +
+            escapeHtml(errorCode) +
+            "<br>";
+
+        }
+
+
+        if (errorDetails) {
+
+          html +=
+            "Firebase message: " +
+            escapeHtml(errorDetails);
+
+        }
+
+
+        html +=
+          "</div>";
+      }
+
+
+      messageBox.innerHTML =
+        html;
     }
 
+
+    /* =========================================================
+       HIDE MESSAGE
+       ========================================================= */
 
     function hideMessage() {
 
-      message.textContent = "";
+      messageBox.textContent =
+        "";
 
-      message.className = "message";
+      messageBox.className =
+        "message";
 
-      message.style.display = "none";
-
+      messageBox.style.display =
+        "none";
     }
 
 
-    registerForm.addEventListener("submit", async (event) => {
+    /* =========================================================
+       ESCAPE HTML
+       ========================================================= */
 
-      event.preventDefault();
+    function escapeHtml(value) {
 
-      hideMessage();
+      const div =
+        document.createElement("div");
 
-      const fullName =
-        document.getElementById("fullName").value.trim();
+      div.textContent =
+        String(value);
 
-      const email =
-        document.getElementById("email").value.trim();
-
-      const phone =
-        document.getElementById("phone").value.trim();
-
-      const location =
-        document.getElementById("location").value.trim();
-
-      const heardAbout =
-        document.getElementById("heardAbout").value;
-
-      const password =
-        document.getElementById("password").value;
-
-      const confirmPassword =
-        document.getElementById("confirmPassword").value;
+      return div.innerHTML;
+    }
 
 
-      if (
-        !fullName ||
-        !email ||
-        !phone ||
-        !location ||
-        !heardAbout ||
-        !password ||
-        !confirmPassword
-      ) {
+    /* =========================================================
+       FIREBASE ERROR MESSAGE
+       ========================================================= */
 
-        showMessage(
-          "Please complete all registration fields.",
-          "error"
-        );
+    function getFriendlyError(error) {
 
-        return;
-      }
+      const code =
+        error?.code || "";
 
 
-      if (password.length < 6) {
+      switch (code) {
 
-        showMessage(
-          "Password must contain at least 6 characters.",
-          "error"
-        );
+        case "auth/email-already-in-use":
 
-        return;
-      }
-
-
-      if (password !== confirmPassword) {
-
-        showMessage(
-          "Passwords do not match.",
-          "error"
-        );
-
-        return;
-      }
-
-
-      registerBtn.disabled = true;
-
-      registerBtn.textContent = "Creating Account...";
-
-
-      let createdUser = null;
-
-      let memberCreated = false;
-
-
-      try {
-
-        const credential =
-          await createUserWithEmailAndPassword(
-            auth,
-            email,
-            password
+          return (
+            "This email address is already registered. " +
+            "Please go to the B.E.P. Member Portal and sign in."
           );
 
 
-        createdUser = credential.user;
+        case "auth/invalid-email":
 
+          return (
+            "The email address is not valid. " +
+            "Please check the email address and try again."
+          );
 
-        await setDoc(
-          doc(db, "members", createdUser.uid),
-          {
-            uid: createdUser.uid,
-            memberNumber: "",
-            fullName: fullName,
-            email: email,
-            phone: phone,
-            location: location,
-            heardAbout: heardAbout,
-            status: "Pending",
-            emailVerified: false,
-            createdAt: serverTimestamp()
-          }
-        );
 
+        case "auth/weak-password":
 
-        memberCreated = true;
+          return (
+            "The password is too weak. " +
+            "Please use at least 6 characters."
+          );
 
 
-        await sendEmailVerification(createdUser);
+        case "auth/password-does-not-meet-requirements":
 
+          return (
+            "The password does not meet Firebase's password requirements."
+          );
 
-        verificationEmailStored = email;
 
-        verificationPasswordStored = password;
+        case "auth/operation-not-allowed":
 
+          return (
+            "Email/password registration is not enabled " +
+            "in Firebase Authentication."
+          );
 
-        verificationEmail.textContent = email;
 
+        case "auth/network-request-failed":
 
-        registrationArea.style.display = "none";
+          return (
+            "Firebase could not connect to the internet. " +
+            "Please check your connection and try again."
+          );
 
-        verificationBox.style.display = "block";
 
+        case "auth/too-many-requests":
 
-        await signOut(auth);
+          return (
+            "Firebase has temporarily blocked requests because " +
+            "there were too many attempts. Please wait and try again later."
+          );
 
 
-      } catch (error) {
+        case "auth/invalid-api-key":
 
-        console.error("Registration error:", error);
+          return (
+            "The Firebase API key is invalid. " +
+            "Please check the Firebase configuration."
+          );
 
 
-        if (
-          createdUser &&
-          !memberCreated
-        ) {
+        case "auth/api-key-not-valid.-please-pass-a-valid-api-key.":
 
-          try {
+          return (
+            "The Firebase API key is invalid or incorrectly configured."
+          );
 
-            await deleteUser(createdUser);
 
-          } catch (deleteError) {
+        case "auth/app-not-authorized":
 
-            console.error(
-              "Cleanup error:",
-              deleteError
-            );
+          return (
+            "This website is not authorized to use this Firebase project. " +
+            "Check the Firebase Authentication authorized domains."
+          );
 
-          }
 
-        }
+        case "permission-denied":
 
+        case "firestore/permission-denied":
 
-        let errorMessage =
-          "Registration failed. Please try again.";
+          return (
+            "Firebase Authentication succeeded, but Firestore denied " +
+            "permission to create the B.E.P. member profile. " +
+            "The Firestore security rules need to be checked."
+          );
 
 
-        switch (error.code) {
+        case "failed-precondition":
 
-          case "auth/email-already-in-use":
+          return (
+            "Firestore is not ready or the required Firebase configuration " +
+            "is incomplete."
+          );
 
-            errorMessage =
-              "This email address is already registered. Please use another email or go to the Member Portal.";
 
-            break;
+        case "unavailable":
 
+          return (
+            "Firebase Firestore is temporarily unavailable. " +
+            "Please try again."
+          );
 
-          case "auth/invalid-email":
 
-            errorMessage =
-              "Please enter a valid email address.";
+        default:
 
-            break;
-
-
-          case "auth/weak-password":
-
-            errorMessage =
-              "The password is too weak. Please use at least 6 characters.";
-
-            break;
-
-
-          case "auth/network-request-failed":
-
-            errorMessage =
-              "Network error. Please check your internet connection.";
-
-            break;
-
-
-          case "auth/too-many-requests":
-
-            errorMessage =
-              "Too many attempts. Please wait a while and try again.";
-
-            break;
-
-
-          case "permission-denied":
-
-            errorMessage =
-              "Your account could not be saved because Firestore permissions denied the request.";
-
-            break;
-
-
-          case "failed-precondition":
-
-            errorMessage =
-              "Firebase Firestore is not ready. Please try again.";
-
-            break;
-
-
-          case "auth/operation-not-allowed":
-
-            errorMessage =
-              "Email/password registration is not enabled in Firebase Authentication.";
-
-            break;
-
-        }
-
-
-        showMessage(errorMessage, "error");
-
-
-        registerBtn.disabled = false;
-
-        registerBtn.textContent =
-          "Register as B.E.P. Member";
-
+          return (
+            "Registration failed. Firebase returned an unexpected error."
+          );
       }
+    }
 
-    });
 
+    /* =========================================================
+       REGISTRATION
+       ========================================================= */
 
-    resendVerificationBtn.addEventListener(
-      "click",
-      async () => {
+    registerForm.addEventListener(
+      "submit",
+      async (event) => {
+
+        event.preventDefault();
 
         hideMessage();
 
-        resendVerificationBtn.disabled = true;
 
-        resendVerificationBtn.textContent =
-          "Sending...";
+        /* -----------------------------------------------------
+           GET FORM VALUES
+           ----------------------------------------------------- */
+
+        const fullName =
+          document
+            .getElementById("fullName")
+            .value
+            .trim();
+
+
+        const email =
+          document
+            .getElementById("email")
+            .value
+            .trim()
+            .toLowerCase();
+
+
+        const phone =
+          document
+            .getElementById("phone")
+            .value
+            .trim();
+
+
+        const location =
+          document
+            .getElementById("location")
+            .value
+            .trim();
+
+
+        const heardAbout =
+          document
+            .getElementById("heardAbout")
+            .value;
+
+
+        const password =
+          document
+            .getElementById("password")
+            .value;
+
+
+        const confirmPassword =
+          document
+            .getElementById("confirmPassword")
+            .value;
+
+
+        /* -----------------------------------------------------
+           BASIC VALIDATION
+           ----------------------------------------------------- */
+
+        if (
+          !fullName ||
+          !email ||
+          !phone ||
+          !location ||
+          !heardAbout ||
+          !password ||
+          !confirmPassword
+        ) {
+
+          showMessage(
+            "Please complete all registration fields.",
+            "error"
+          );
+
+          return;
+        }
+
+
+        if (password.length < 6) {
+
+          showMessage(
+            "Password must contain at least 6 characters.",
+            "error"
+          );
+
+          return;
+        }
+
+
+        if (password !== confirmPassword) {
+
+          showMessage(
+            "Passwords do not match.",
+            "error"
+          );
+
+          return;
+        }
+
+
+        /* -----------------------------------------------------
+           DISABLE BUTTON
+           ----------------------------------------------------- */
+
+        registerBtn.disabled =
+          true;
+
+        registerBtn.textContent =
+          "Creating Account...";
+
+
+        let createdUser =
+          null;
 
 
         try {
 
-          if (
-            !verificationEmailStored ||
-            !verificationPasswordStored
-          ) {
+          /* ===================================================
+             STEP 1
+             CREATE FIREBASE AUTH ACCOUNT
+             =================================================== */
 
-            showMessage(
-              "Please register again before requesting a verification email.",
-              "error"
-            );
-
-            return;
-          }
+          console.log(
+            "Step 1: Creating Firebase Authentication account..."
+          );
 
 
           const credential =
-            await signInWithEmailAndPassword(
+            await createUserWithEmailAndPassword(
               auth,
-              verificationEmailStored,
-              verificationPasswordStored
+              email,
+              password
             );
 
 
-          const user = credential.user;
+          createdUser =
+            credential.user;
 
 
-          await user.reload();
+          console.log(
+            "Firebase Auth account created:",
+            createdUser.uid
+          );
 
 
-          if (user.emailVerified) {
+          /* ===================================================
+             STEP 2
+             CREATE FIRESTORE MEMBER PROFILE
+             =================================================== */
 
-            showMessage(
-              "Your email is already verified. You can now use the Member Portal.",
-              "success"
-            );
-
-            await signOut(auth);
-
-            return;
-          }
+          registerBtn.textContent =
+            "Creating Member Profile...";
 
 
-          await sendEmailVerification(user);
+          console.log(
+            "Step 2: Creating Firestore members document..."
+          );
+
+
+          await setDoc(
+            doc(
+              db,
+              "members",
+              createdUser.uid
+            ),
+            {
+
+              uid:
+                createdUser.uid,
+
+              memberNumber:
+                "",
+
+              fullName:
+                fullName,
+
+              email:
+                email,
+
+              phone:
+                phone,
+
+              location:
+                location,
+
+              heardAbout:
+                heardAbout,
+
+              status:
+                "Pending",
+
+              emailVerified:
+                false,
+
+              createdAt:
+                serverTimestamp()
+            }
+          );
+
+
+          console.log(
+            "Firestore member profile created successfully."
+          );
+
+
+          /* ===================================================
+             STEP 3
+             SEND EMAIL VERIFICATION
+             =================================================== */
+
+          registerBtn.textContent =
+            "Sending Verification Email...";
+
+
+          console.log(
+            "Step 3: Sending verification email..."
+          );
+
+
+          await sendEmailVerification(
+            createdUser
+          );
+
+
+          console.log(
+            "Verification email sent successfully."
+          );
+
+
+          /* ===================================================
+             REGISTRATION COMPLETE
+             =================================================== */
+
+          verificationEmailStored =
+            email;
+
+
+          verificationEmail.textContent =
+            email;
+
+
+          registrationArea.style.display =
+            "none";
+
+
+          verificationBox.style.display =
+            "block";
 
 
           showMessage(
-            "A new verification email has been sent to " +
-            verificationEmailStored +
-            ".",
+            "Registration completed successfully. Please verify your email address.",
             "success"
           );
 
+
+          /*
+             Sign out after registration.
+
+             This means the user must use the Member Portal
+             to sign in after verifying their email.
+
+             No password is stored by this page.
+          */
 
           await signOut(auth);
 
@@ -822,24 +1092,138 @@
         } catch (error) {
 
           console.error(
-            "Resend verification error:",
+            "===================================="
+          );
+
+          console.error(
+            "B.E.P. REGISTRATION ERROR"
+          );
+
+          console.error(
+            "Error code:",
+            error?.code
+          );
+
+          console.error(
+            "Error message:",
+            error?.message
+          );
+
+          console.error(
+            "Full error:",
             error
           );
 
-
-          showMessage(
-            "Unable to resend the verification email right now. Please try again later.",
-            "error"
+          console.error(
+            "===================================="
           );
 
-        } finally {
 
-          resendVerificationBtn.disabled = false;
+          /* ===================================================
+             SPECIAL CASE:
+             AUTH ACCOUNT CREATED BUT FIRESTORE FAILED
+             =================================================== */
 
-          resendVerificationBtn.textContent =
-            "Resend Verification Email";
+          if (
+            createdUser &&
+            error?.code === "permission-denied"
+          ) {
 
+            showMessage(
+              "Your Firebase account was created, but your B.E.P. member profile could not be saved. Please show the Firebase error details below.",
+              "error",
+              error.code,
+              error.message
+            );
+
+          } else {
+
+            const friendlyMessage =
+              getFriendlyError(error);
+
+
+            showMessage(
+              friendlyMessage,
+              "error",
+              error?.code || "unknown",
+              error?.message || "No additional Firebase error message was provided."
+            );
+          }
+
+
+          registerBtn.disabled =
+            false;
+
+
+          registerBtn.textContent =
+            "Register as B.E.P. Member";
+
+
+          /*
+             IMPORTANT:
+
+             We do NOT automatically delete the Firebase
+             Authentication account here.
+
+             This prevents accidental deletion of an account
+             if Firestore or another Firebase service fails.
+          */
         }
+
+      }
+    );
+
+
+    /* =========================================================
+       RESEND VERIFICATION EMAIL
+       =========================================================
+
+       IMPORTANT:
+
+       We intentionally do NOT ask for or store the password.
+
+       After successful registration, the Firebase user is
+       authenticated temporarily. However, we sign them out
+       after registration.
+
+       Therefore, this button sends the user to the Member
+       Portal rather than storing the password and attempting
+       to sign in automatically.
+       ========================================================= */
+
+    resendVerificationBtn.addEventListener(
+      "click",
+      async () => {
+
+        hideMessage();
+
+
+        /*
+           Because the user has been signed out, this page
+           cannot securely resend the verification email
+           without asking for the password again.
+
+           We do NOT store the password.
+
+           The secure method is to use the Member Portal:
+           sign in → resend verification while authenticated.
+        */
+
+        showMessage(
+          "For security, this page does not store your password. Please go to the Member Portal, sign in with your email and password, and resend the verification email from there.",
+          "info"
+        );
+
+
+        setTimeout(
+          () => {
+
+            window.location.href =
+              "member.html";
+
+          },
+          2500
+        );
 
       }
     );
