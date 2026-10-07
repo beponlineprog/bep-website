@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -242,7 +243,6 @@
         Create your B.E.P. Member account
       </p>
 
-      <!-- Error / success messages -->
       <div id="message" class="message"></div>
 
       <form id="registrationForm">
@@ -360,7 +360,6 @@
 
       </form>
 
-      <!-- Verification section -->
       <div id="verificationBox" class="verification-box">
 
         <h3>Registration Successful</h3>
@@ -384,7 +383,6 @@
           B.E.P. Member Portal.
         </p>
 
-        <!-- CORRECT MEMBER PORTAL LINK -->
         <a href="member.html" class="portal-button">
           Go to Member Portal
         </a>
@@ -415,7 +413,10 @@
   </div>
 
 
-  <!-- Firebase -->
+  <!-- =========================================================
+       FIREBASE
+       ========================================================= -->
+
   <script type="module">
 
     import {
@@ -427,7 +428,8 @@
       createUserWithEmailAndPassword,
       sendEmailVerification,
       signInWithEmailAndPassword,
-      signOut
+      signOut,
+      deleteUser
     } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js";
 
     import {
@@ -453,7 +455,10 @@
     };
 
 
-    // Initialize Firebase
+    // =========================================================
+    // INITIALIZE FIREBASE
+    // =========================================================
+
     const app = initializeApp(firebaseConfig);
 
     const auth = getAuth(app);
@@ -484,8 +489,13 @@
       document.getElementById("resendButton");
 
 
-    // Keep the email for resend
+    // =========================================================
+    // TEMPORARY REGISTRATION INFORMATION
+    // =========================================================
+
     let verificationEmail = "";
+
+    let verificationPassword = "";
 
 
     // =========================================================
@@ -511,379 +521,470 @@
     // REGISTRATION
     // =========================================================
 
-    registrationForm.addEventListener("submit", async (event) => {
+    registrationForm.addEventListener(
+      "submit",
+      async (event) => {
 
-      event.preventDefault();
-
-
-      const fullName =
-        document.getElementById("fullName").value.trim();
-
-      const email =
-        document.getElementById("email").value.trim().toLowerCase();
-
-      const phone =
-        document.getElementById("phone").value.trim();
-
-      const location =
-        document.getElementById("location").value.trim();
-
-      const heardAbout =
-        document.getElementById("heardAbout").value;
-
-      const password =
-        document.getElementById("password").value;
-
-      const confirmPassword =
-        document.getElementById("confirmPassword").value;
+        event.preventDefault();
 
 
-      // =======================================================
-      // VALIDATION
-      // =======================================================
+        // =======================================================
+        // READ FORM VALUES
+        // =======================================================
 
-      if (!fullName ||
+        const fullName =
+          document.getElementById("fullName").value.trim();
+
+        const email =
+          document.getElementById("email").value.trim().toLowerCase();
+
+        const phone =
+          document.getElementById("phone").value.trim();
+
+        const location =
+          document.getElementById("location").value.trim();
+
+        const heardAbout =
+          document.getElementById("heardAbout").value;
+
+        const password =
+          document.getElementById("password").value;
+
+        const confirmPassword =
+          document.getElementById("confirmPassword").value;
+
+
+        // =======================================================
+        // VALIDATION
+        // =======================================================
+
+        if (
+          !fullName ||
           !email ||
           !phone ||
           !location ||
           !heardAbout ||
           !password ||
-          !confirmPassword) {
+          !confirmPassword
+        ) {
 
-        showMessage(
-          "Please complete all required fields.",
-          "error"
-        );
-
-        return;
-      }
-
-
-      if (password.length < 6) {
-
-        showMessage(
-          "Your password must contain at least 6 characters.",
-          "error"
-        );
-
-        return;
-      }
-
-
-      if (password !== confirmPassword) {
-
-        showMessage(
-          "The passwords do not match.",
-          "error"
-        );
-
-        return;
-      }
-
-
-      // Disable button
-      registerButton.disabled = true;
-
-      registerButton.textContent =
-        "Creating your account...";
-
-
-      try {
-
-        // =====================================================
-        // CREATE FIREBASE AUTH ACCOUNT
-        // =====================================================
-
-        const userCredential =
-          await createUserWithEmailAndPassword(
-            auth,
-            email,
-            password
+          showMessage(
+            "Please complete all required fields.",
+            "error"
           );
 
-
-        const user =
-          userCredential.user;
-
-
-        // =====================================================
-        // CREATE FIRESTORE MEMBER PROFILE
-        // =====================================================
-
-        await setDoc(
-          doc(db, "members", user.uid),
-          {
-            uid: user.uid,
-
-            memberNumber: "",
-
-            fullName: fullName,
-
-            email: email,
-
-            phone: phone,
-
-            location: location,
-
-            heardAbout: heardAbout,
-
-            status: "Pending",
-
-            emailVerified: false,
-
-            createdAt: serverTimestamp()
-          }
-        );
-
-
-        // =====================================================
-        // SEND VERIFICATION EMAIL
-        // =====================================================
-
-        await sendEmailVerification(user);
-
-
-        verificationEmail = email;
-
-        registeredEmail.textContent = email;
-
-
-        // Hide form
-        registrationForm.style.display = "none";
-
-
-        // Show verification box
-        verificationBox.style.display = "block";
-
-
-        showMessage(
-          "Your B.E.P. account has been created successfully. Please verify your email address.",
-          "success"
-        );
-
-
-        // =====================================================
-        // SIGN OUT
-        // =====================================================
-        // This prevents an unverified account from remaining
-        // signed in on the registration page.
-
-        await signOut(auth);
-
-
-      } catch (error) {
-
-        console.error(
-          "Registration error:",
-          error
-        );
-
-
-        let errorMessage =
-          "Registration could not be completed. Please try again.";
-
-
-        switch (error.code) {
-
-          case "auth/email-already-in-use":
-
-            errorMessage =
-              "This email address already has a B.E.P. account. Please use the Member Portal to log in.";
-
-            break;
-
-
-          case "auth/invalid-email":
-
-            errorMessage =
-              "Please enter a valid email address.";
-
-            break;
-
-
-          case "auth/weak-password":
-
-            errorMessage =
-              "Your password is too weak. Please use at least 6 characters.";
-
-            break;
-
-
-          case "auth/network-request-failed":
-
-            errorMessage =
-              "Network error. Please check your internet connection and try again.";
-
-            break;
-
-
-          case "auth/too-many-requests":
-
-            errorMessage =
-              "Too many requests have been made. Please wait a while and try again.";
-
-            break;
-
-
-          case "permission-denied":
-
-            errorMessage =
-              "Your account was created, but the member profile could not be saved because of a database permission issue. Please contact B.E.P. support.";
-
-            break;
-
-
-          case "failed-precondition":
-
-            errorMessage =
-              "The B.E.P. database is not currently available. Please try again later.";
-
-            break;
+          return;
         }
 
 
-        showMessage(
-          errorMessage,
-          "error"
-        );
+        if (password.length < 6) {
+
+          showMessage(
+            "Your password must contain at least 6 characters.",
+            "error"
+          );
+
+          return;
+        }
 
 
-        registerButton.disabled = false;
+        if (password !== confirmPassword) {
+
+          showMessage(
+            "The passwords do not match.",
+            "error"
+          );
+
+          return;
+        }
+
+
+        // =======================================================
+        // DISABLE BUTTON
+        // =======================================================
+
+        registerButton.disabled = true;
 
         registerButton.textContent =
-          "Register as B.E.P. Member";
-      }
+          "Creating your account...";
 
-    });
+
+        let createdUser = null;
+
+        let memberCreated = false;
+
+
+        try {
+
+          // =====================================================
+          // CREATE FIREBASE AUTH ACCOUNT
+          // =====================================================
+
+          const userCredential =
+            await createUserWithEmailAndPassword(
+              auth,
+              email,
+              password
+            );
+
+          createdUser = userCredential.user;
+
+
+          // =====================================================
+          // CREATE FIRESTORE MEMBER PROFILE
+          // =====================================================
+
+          await setDoc(
+            doc(db, "members", createdUser.uid),
+            {
+              uid: createdUser.uid,
+
+              memberNumber: "",
+
+              fullName: fullName,
+
+              email: email,
+
+              phone: phone,
+
+              location: location,
+
+              heardAbout: heardAbout,
+
+              status: "Pending",
+
+              emailVerified: false,
+
+              createdAt: serverTimestamp()
+            }
+          );
+
+          memberCreated = true;
+
+
+          // =====================================================
+          // SEND VERIFICATION EMAIL
+          // =====================================================
+
+          await sendEmailVerification(createdUser);
+
+
+          // =====================================================
+          // KEEP INFORMATION FOR RESEND
+          // =====================================================
+
+          verificationEmail = email;
+
+          verificationPassword = password;
+
+          registeredEmail.textContent = email;
+
+
+          // =====================================================
+          // HIDE FORM
+          // =====================================================
+
+          registrationForm.style.display = "none";
+
+
+          // =====================================================
+          // SHOW VERIFICATION BOX
+          // =====================================================
+
+          verificationBox.style.display = "block";
+
+
+          showMessage(
+            "Your B.E.P. account has been created successfully. Please verify your email address.",
+            "success"
+          );
+
+
+          // =====================================================
+          // SIGN OUT
+          // =====================================================
+
+          await signOut(auth);
+
+
+        } catch (error) {
+
+          console.error(
+            "Registration error:",
+            error
+          );
+
+
+          // =====================================================
+          // CLEAN UP AUTH ACCOUNT IF FIRESTORE FAILED
+          // =====================================================
+
+          if (
+            createdUser &&
+            !memberCreated
+          ) {
+
+            try {
+
+              await deleteUser(createdUser);
+
+            } catch (deleteError) {
+
+              console.error(
+                "Could not clean up Auth account:",
+                deleteError
+              );
+            }
+          }
+
+
+          // =====================================================
+          // ERROR MESSAGE
+          // =====================================================
+
+          let errorMessage =
+            "Registration could not be completed. Please try again.";
+
+
+          switch (error.code) {
+
+            case "auth/email-already-in-use":
+
+              errorMessage =
+                "This email address already has a B.E.P. account. Please use the Member Portal to log in.";
+
+              break;
+
+
+            case "auth/invalid-email":
+
+              errorMessage =
+                "Please enter a valid email address.";
+
+              break;
+
+
+            case "auth/weak-password":
+
+              errorMessage =
+                "Your password is too weak. Please use at least 6 characters.";
+
+              break;
+
+
+            case "auth/network-request-failed":
+
+              errorMessage =
+                "Network error. Please check your internet connection and try again.";
+
+              break;
+
+
+            case "auth/too-many-requests":
+
+              errorMessage =
+                "Too many requests have been made. Please wait a while and try again.";
+
+              break;
+
+
+            case "permission-denied":
+
+              errorMessage =
+                "Your account could not be connected to the B.E.P. member profile because of a database permission issue. Please contact B.E.P. support.";
+
+              break;
+
+
+            case "failed-precondition":
+
+              errorMessage =
+                "The B.E.P. database is not currently available. Please try again later.";
+
+              break;
+
+
+            case "auth/operation-not-allowed":
+
+              errorMessage =
+                "Email and password registration is not currently enabled. Please contact B.E.P. support.";
+
+              break;
+          }
+
+
+          showMessage(
+            errorMessage,
+            "error"
+          );
+
+
+          registerButton.disabled = false;
+
+          registerButton.textContent =
+            "Register as B.E.P. Member";
+        }
+
+      }
+    );
 
 
     // =========================================================
     // RESEND VERIFICATION EMAIL
     // =========================================================
 
-    resendButton.addEventListener("click", async () => {
+    resendButton.addEventListener(
+      "click",
+      async () => {
 
-      if (!verificationEmail) {
-
-        showMessage(
-          "No registration email was found.",
-          "error"
-        );
-
-        return;
-      }
-
-
-      resendButton.disabled = true;
-
-      resendButton.textContent =
-        "Sending...";
-
-
-      try {
-
-        // Sign in temporarily
-        const credential =
-          await signInWithEmailAndPassword(
-            auth,
-            verificationEmail,
-            document.getElementById("password").value
-          );
-
-
-        const user =
-          credential.user;
-
-
-        // Check if already verified
-        await user.reload();
-
-
-        if (user.emailVerified) {
+        if (
+          !verificationEmail ||
+          !verificationPassword
+        ) {
 
           showMessage(
-            "Your email is already verified. You can now use the Member Portal.",
-            "success"
+            "Please return to the registration page and register again if verification is required.",
+            "error"
           );
-
-          await signOut(auth);
-
-          resendButton.disabled = false;
-
-          resendButton.textContent =
-            "Resend Verification Email";
 
           return;
         }
 
 
-        // Send verification email
-        await sendEmailVerification(user);
+        resendButton.disabled = true;
+
+        resendButton.textContent =
+          "Sending...";
 
 
-        showMessage(
-          "A new verification email has been sent. Please check your inbox and Spam/Junk folder.",
-          "success"
-        );
+        try {
+
+          // =====================================================
+          // SIGN IN TEMPORARILY
+          // =====================================================
+
+          const credential =
+            await signInWithEmailAndPassword(
+              auth,
+              verificationEmail,
+              verificationPassword
+            );
 
 
-        await signOut(auth);
+          const user =
+            credential.user;
 
 
-      } catch (error) {
+          // =====================================================
+          // REFRESH USER
+          // =====================================================
 
-        console.error(
-          "Resend verification error:",
-          error
-        );
-
-
-        let errorMessage =
-          "The verification email could not be sent.";
+          await user.reload();
 
 
-        switch (error.code) {
+          // =====================================================
+          // CHECK VERIFICATION
+          // =====================================================
 
-          case "auth/invalid-credential":
+          if (user.emailVerified) {
 
-            errorMessage =
-              "The password entered is incorrect.";
+            showMessage(
+              "Your email is already verified. You can now use the Member Portal.",
+              "success"
+            );
 
-            break;
+            await signOut(auth);
+
+            resendButton.disabled = false;
+
+            resendButton.textContent =
+              "Resend Verification Email";
+
+            return;
+          }
 
 
-          case "auth/too-many-requests":
+          // =====================================================
+          // SEND NEW VERIFICATION EMAIL
+          // =====================================================
 
-            errorMessage =
-              "Too many requests. Please wait before requesting another verification email.";
-
-            break;
+          await sendEmailVerification(user);
 
 
-          case "auth/network-request-failed":
+          showMessage(
+            "A new verification email has been sent. Please check your inbox and Spam/Junk folder.",
+            "success"
+          );
 
-            errorMessage =
-              "Network error. Please check your internet connection.";
 
-            break;
+          await signOut(auth);
+
+
+        } catch (error) {
+
+          console.error(
+            "Resend verification error:",
+            error
+          );
+
+
+          let errorMessage =
+            "The verification email could not be sent.";
+
+
+          switch (error.code) {
+
+            case "auth/invalid-credential":
+
+              errorMessage =
+                "The password entered is incorrect.";
+
+              break;
+
+
+            case "auth/user-not-found":
+
+              errorMessage =
+                "The B.E.P. account could not be found.";
+
+              break;
+
+
+            case "auth/too-many-requests":
+
+              errorMessage =
+                "Too many requests. Please wait before requesting another verification email.";
+
+              break;
+
+
+            case "auth/network-request-failed":
+
+              errorMessage =
+                "Network error. Please check your internet connection.";
+
+              break;
+          }
+
+
+          showMessage(
+            errorMessage,
+            "error"
+          );
         }
 
 
-        showMessage(
-          errorMessage,
-          "error"
-        );
+        resendButton.disabled = false;
+
+        resendButton.textContent =
+          "Resend Verification Email";
+
       }
+    );
 
-
-      resendButton.disabled = false;
-
-      resendButton.textContent =
-        "Resend Verification Email";
-
-    });
 
   </script>
 
 </body>
 </html>
+```
