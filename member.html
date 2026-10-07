@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <title>B.E.P. Member Portal</title>
 
   <style>
@@ -46,7 +45,7 @@
       border-radius: 14px;
       padding: 25px;
       margin-bottom: 22px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
     }
 
     .card h2 {
@@ -100,6 +99,19 @@
 
     button.gold:hover {
       background: #a77e00;
+    }
+
+    button.logout {
+      background: #b00020;
+    }
+
+    button.logout:hover {
+      background: #870018;
+    }
+
+    button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
     }
 
     .navigation {
@@ -173,14 +185,6 @@
       display: none;
     }
 
-    .logout {
-      background: #b00020;
-    }
-
-    .logout:hover {
-      background: #870018;
-    }
-
     .small-note {
       font-size: 13px;
       color: #666;
@@ -230,7 +234,7 @@
 
 <div class="container">
 
-  <!-- LOGIN SECTION -->
+  <!-- LOGIN -->
   <div id="loginSection" class="card">
 
     <div class="navigation">
@@ -247,24 +251,26 @@
     <form id="loginForm">
 
       <label for="loginEmail">Email Address</label>
+
       <input
         type="email"
         id="loginEmail"
-        required
         autocomplete="email"
         placeholder="Enter your email address"
+        required
       >
 
       <label for="loginPassword">Password</label>
+
       <input
         type="password"
         id="loginPassword"
-        required
         autocomplete="current-password"
         placeholder="Enter your password"
+        required
       >
 
-      <button type="submit">
+      <button type="submit" id="loginButton">
         Sign In
       </button>
 
@@ -288,12 +294,15 @@
   </div>
 
 
-  <!-- VERIFICATION SECTION -->
+  <!-- EMAIL VERIFICATION -->
   <div id="verificationSection" class="card" style="display:none;">
 
     <h2>Email Verification Required</h2>
 
-    <div class="message warning" style="display:block;">
+    <div
+      class="message warning"
+      style="display:block;"
+    >
       <strong>Your email address has not been verified yet.</strong>
       <br><br>
       Please check your email and click the Firebase verification link before
@@ -331,8 +340,8 @@
     <div id="verificationMessage" class="message"></div>
 
     <p class="small-note">
-      You do not need to enter your password again to resend the verification
-      email while you are signed in. Your password is never stored by this page.
+      Your password is not stored or reused by this page.
+      The verification email is sent through your secure Firebase login session.
     </p>
 
   </div>
@@ -351,7 +360,8 @@
       <h2>Welcome to the B.E.P. Member Portal</h2>
 
       <p>
-        Welcome, <strong id="welcomeName"></strong>.
+        Welcome,
+        <strong id="welcomeName"></strong>.
       </p>
 
       <button
@@ -365,7 +375,7 @@
     </div>
 
 
-    <!-- MEMBER INFORMATION -->
+    <!-- MEMBERSHIP -->
     <div class="card">
 
       <h2>My Membership</h2>
@@ -419,7 +429,7 @@
         class="message warning"
         style="display:none;"
       >
-        Your B.E.P. membership is currently pending.
+        Your B.E.P. membership is currently pending approval.
       </div>
 
     </div>
@@ -442,7 +452,6 @@
           autocomplete="tel"
         >
 
-
         <label for="profileLocation">
           Location
         </label>
@@ -452,7 +461,6 @@
           id="profileLocation"
           autocomplete="address-level2"
         >
-
 
         <button type="submit">
           Update Profile
@@ -474,7 +482,10 @@
         Your B.E.P. courses and assessments will appear here.
       </p>
 
-      <div class="message warning" style="display:block;">
+      <div
+        class="message warning"
+        style="display:block;"
+      >
         Course access is being prepared.
       </div>
 
@@ -491,8 +502,11 @@
 </footer>
 
 
-<!-- FIREBASE -->
 <script type="module">
+
+  // ==========================================================
+  // FIREBASE IMPORTS
+  // ==========================================================
 
   import {
     initializeApp
@@ -517,12 +531,12 @@
   } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
 
 
-  // ============================================================
-  // FIREBASE CONFIGURATION
-  // ============================================================
+  // ==========================================================
+  // CORRECT FIREBASE CONFIGURATION
+  // ==========================================================
 
   const firebaseConfig = {
-    apiKey: "AIzaSyAn-zNZFuOurJyvWJvCilUKsEkrhF7DJs",
+    apiKey: "AIzaSyC3N-DrY4mv4M32TMIt2_9btO3AqmhDk3Y",
     authDomain: "beponlineprog-8b8bb.firebaseapp.com",
     projectId: "beponlineprog-8b8bb",
     storageBucket: "beponlineprog-8b8bb.firebasestorage.app",
@@ -532,6 +546,10 @@
   };
 
 
+  // ==========================================================
+  // INITIALIZE FIREBASE
+  // ==========================================================
+
   const app = initializeApp(firebaseConfig);
 
   const auth = getAuth(app);
@@ -539,9 +557,9 @@
   const db = getFirestore(app);
 
 
-  // ============================================================
+  // ==========================================================
   // ELEMENTS
-  // ============================================================
+  // ==========================================================
 
   const loginSection =
     document.getElementById("loginSection");
@@ -574,9 +592,9 @@
     document.getElementById("profileForm");
 
 
-  // ============================================================
-  // MESSAGE HELPERS
-  // ============================================================
+  // ==========================================================
+  // MESSAGE FUNCTION
+  // ==========================================================
 
   function showMessage(element, message, type) {
 
@@ -590,15 +608,15 @@
 
   function hideMessage(element) {
 
-    element.style.display = "none";
-
     element.textContent = "";
+
+    element.style.display = "none";
   }
 
 
-  // ============================================================
+  // ==========================================================
   // SHOW LOGIN
-  // ============================================================
+  // ==========================================================
 
   function showLogin() {
 
@@ -610,9 +628,9 @@
   }
 
 
-  // ============================================================
+  // ==========================================================
   // SHOW VERIFICATION
-  // ============================================================
+  // ==========================================================
 
   function showVerification(user) {
 
@@ -622,18 +640,21 @@
 
     portalSection.style.display = "none";
 
-    document.getElementById("verificationEmail").textContent =
-      user.email || "";
+    document.getElementById(
+      "verificationEmail"
+    ).textContent = user.email || "";
 
     hideMessage(
-      document.getElementById("verificationMessage")
+      document.getElementById(
+        "verificationMessage"
+      )
     );
   }
 
 
-  // ============================================================
+  // ==========================================================
   // SHOW PORTAL
-  // ============================================================
+  // ==========================================================
 
   function showPortal() {
 
@@ -645,9 +666,9 @@
   }
 
 
-  // ============================================================
+  // ==========================================================
   // LOAD MEMBER PROFILE
-  // ============================================================
+  // ==========================================================
 
   async function loadMemberProfile(user) {
 
@@ -672,10 +693,7 @@
         memberSnap.data();
 
 
-      // --------------------------------------------------------
-      // SECURITY CHECK
-      // --------------------------------------------------------
-
+      // Security check: UID
       if (
         member.uid &&
         member.uid !== user.uid
@@ -687,6 +705,7 @@
       }
 
 
+      // Security check: email
       if (
         member.email &&
         user.email &&
@@ -700,80 +719,113 @@
       }
 
 
-      // --------------------------------------------------------
-      // DISPLAY MEMBER INFORMATION
-      // --------------------------------------------------------
+      // Display member information
 
-      document.getElementById("welcomeName").textContent =
+      document.getElementById(
+        "welcomeName"
+      ).textContent =
         member.fullName || "B.E.P. Member";
 
-      document.getElementById("memberNumber").textContent =
+
+      document.getElementById(
+        "memberNumber"
+      ).textContent =
         member.memberNumber || "Pending";
 
-      document.getElementById("memberName").textContent =
+
+      document.getElementById(
+        "memberName"
+      ).textContent =
         member.fullName || "";
 
-      document.getElementById("memberEmail").textContent =
+
+      document.getElementById(
+        "memberEmail"
+      ).textContent =
         user.email || member.email || "";
 
-      document.getElementById("memberPhone").textContent =
+
+      document.getElementById(
+        "memberPhone"
+      ).textContent =
         member.phone || "Not provided";
 
-      document.getElementById("memberLocation").textContent =
+
+      document.getElementById(
+        "memberLocation"
+      ).textContent =
         member.location || "Not provided";
 
-      document.getElementById("memberHeardAbout").textContent =
+
+      document.getElementById(
+        "memberHeardAbout"
+      ).textContent =
         member.heardAbout || "Not provided";
 
-      document.getElementById("memberStatus").textContent =
+
+      document.getElementById(
+        "memberStatus"
+      ).textContent =
         member.status || "Pending";
 
 
-      // --------------------------------------------------------
-      // PROFILE FORM
-      // --------------------------------------------------------
+      // Profile fields
 
-      document.getElementById("profilePhone").value =
+      document.getElementById(
+        "profilePhone"
+      ).value =
         member.phone || "";
 
-      document.getElementById("profileLocation").value =
+
+      document.getElementById(
+        "profileLocation"
+      ).value =
         member.location || "";
 
 
-      // --------------------------------------------------------
-      // STATUS
-      // --------------------------------------------------------
+      // Membership status
 
       const pendingNote =
-        document.getElementById("pendingNote");
+        document.getElementById(
+          "pendingNote"
+        );
+
 
       if (
-        String(member.status || "").toLowerCase() === "pending"
+        String(member.status || "")
+          .toLowerCase() === "pending"
       ) {
 
-        pendingNote.style.display = "block";
-
-        pendingNote.textContent =
-          "Your B.E.P. membership is currently pending approval.";
+        pendingNote.style.display =
+          "block";
 
       } else {
 
-        pendingNote.style.display = "none";
+        pendingNote.style.display =
+          "none";
       }
 
 
       showPortal();
 
+
     } catch (error) {
 
-      console.error("Profile error:", error);
+      console.error(
+        "Profile loading error:",
+        error
+      );
+
 
       await signOut(auth);
 
       showLogin();
 
+
       showMessage(
-        document.getElementById("loginMessage"),
+        document.getElementById(
+          "loginMessage"
+        ),
         error.message ||
         "Unable to load your B.E.P. member profile.",
         "error"
@@ -782,9 +834,9 @@
   }
 
 
-  // ============================================================
+  // ==========================================================
   // CHECK EMAIL VERIFICATION
-  // ============================================================
+  // ==========================================================
 
   async function checkVerification(user) {
 
@@ -800,7 +852,8 @@
 
       await reload(user);
 
-      const refreshedUser = auth.currentUser;
+      const refreshedUser =
+        auth.currentUser;
 
 
       if (!refreshedUser) {
@@ -811,23 +864,26 @@
       }
 
 
-      // --------------------------------------------------------
-      // EMAIL NOT VERIFIED
-      // --------------------------------------------------------
+      // Not verified
 
-      if (!refreshedUser.emailVerified) {
+      if (
+        !refreshedUser.emailVerified
+      ) {
 
-        showVerification(refreshedUser);
+        showVerification(
+          refreshedUser
+        );
 
         return;
       }
 
 
-      // --------------------------------------------------------
-      // EMAIL VERIFIED
-      // --------------------------------------------------------
+      // Verified
 
-      await loadMemberProfile(refreshedUser);
+      await loadMemberProfile(
+        refreshedUser
+      );
+
 
     } catch (error) {
 
@@ -836,12 +892,16 @@
         error
       );
 
+
       await signOut(auth);
 
       showLogin();
 
+
       showMessage(
-        document.getElementById("loginMessage"),
+        document.getElementById(
+          "loginMessage"
+        ),
         "We could not verify your account. Please try again.",
         "error"
       );
@@ -849,9 +909,9 @@
   }
 
 
-  // ============================================================
+  // ==========================================================
   // LOGIN
-  // ============================================================
+  // ==========================================================
 
   loginForm.addEventListener(
     "submit",
@@ -859,25 +919,32 @@
 
       event.preventDefault();
 
+
       hideMessage(
-        document.getElementById("loginMessage")
+        document.getElementById(
+          "loginMessage"
+        )
       );
 
 
       const email =
-        document.getElementById("loginEmail")
-          .value
-          .trim();
+        document.getElementById(
+          "loginEmail"
+        ).value.trim();
+
 
       const password =
-        document.getElementById("loginPassword")
-          .value;
+        document.getElementById(
+          "loginPassword"
+        ).value;
 
 
       if (!email || !password) {
 
         showMessage(
-          document.getElementById("loginMessage"),
+          document.getElementById(
+            "loginMessage"
+          ),
           "Please enter your email address and password.",
           "error"
         );
@@ -886,12 +953,16 @@
       }
 
 
-      const submitButton =
-        loginForm.querySelector("button[type='submit']");
+      const loginButton =
+        document.getElementById(
+          "loginButton"
+        );
 
-      submitButton.disabled = true;
 
-      submitButton.textContent = "Signing In...";
+      loginButton.disabled = true;
+
+      loginButton.textContent =
+        "Signing In...";
 
 
       try {
@@ -908,11 +979,19 @@
           credential.user;
 
 
-        // ------------------------------------------------------
-        // IMPORTANT:
-        // Firebase handles the password.
-        // We DO NOT save the password anywhere.
-        // ------------------------------------------------------
+        /*
+          IMPORTANT:
+
+          The password is used only by Firebase
+          during this login request.
+
+          It is NOT:
+          - stored in localStorage
+          - stored in sessionStorage
+          - saved to Firestore
+          - saved in the member profile
+        */
+
 
         await reload(user);
 
@@ -929,68 +1008,82 @@
         }
 
 
-        // ------------------------------------------------------
-        // CHECK VERIFICATION
-        // ------------------------------------------------------
+        // Check verification
 
-        if (!currentUser.emailVerified) {
+        if (
+          !currentUser.emailVerified
+        ) {
 
-          showVerification(currentUser);
+          showVerification(
+            currentUser
+          );
 
           return;
         }
 
 
-        // ------------------------------------------------------
-        // VERIFIED USER
-        // ------------------------------------------------------
+        // Verified
 
-        await loadMemberProfile(currentUser);
+        await loadMemberProfile(
+          currentUser
+        );
 
 
       } catch (error) {
 
-        console.error("Login error:", error);
+        console.error(
+          "Login error:",
+          error
+        );
 
 
         let message =
-          "Unable to sign in. Please check your details and try again.";
+          "Unable to sign in. Please check your email and password.";
 
 
-        if (error.code === "auth/invalid-credential") {
+        if (
+          error.code ===
+          "auth/invalid-credential"
+        ) {
 
           message =
             "Incorrect email address or password.";
 
         } else if (
-          error.code === "auth/user-not-found"
+          error.code ===
+          "auth/user-not-found"
         ) {
 
           message =
             "No B.E.P. account was found with this email address.";
 
         } else if (
-          error.code === "auth/wrong-password"
+          error.code ===
+          "auth/wrong-password"
         ) {
 
           message =
             "Incorrect password.";
 
         } else if (
-          error.code === "auth/too-many-requests"
+          error.code ===
+          "auth/too-many-requests"
         ) {
 
           message =
             "Too many login attempts. Please wait and try again later.";
 
         } else if (
-          error.code === "auth/network-request-failed"
+          error.code ===
+          "auth/network-request-failed"
         ) {
 
           message =
             "Network error. Please check your internet connection.";
 
-        } else if (error.message) {
+        } else if (
+          error.message
+        ) {
 
           message =
             error.message;
@@ -1001,40 +1094,38 @@
 
 
         showMessage(
-          document.getElementById("loginMessage"),
+          document.getElementById(
+            "loginMessage"
+          ),
           message,
           "error"
         );
 
+
       } finally {
 
-        submitButton.disabled = false;
+        loginButton.disabled = false;
 
-        submitButton.textContent = "Sign In";
+        loginButton.textContent =
+          "Sign In";
       }
 
     }
   );
 
 
-  // ============================================================
-  // RESEND VERIFICATION EMAIL
-  // ============================================================
-  //
-  // IMPORTANT SECURITY CHANGE:
-  //
-  // This function does NOT ask for or store the password.
-  //
-  // The member must already be authenticated by Firebase.
-  //
-  // ============================================================
+  // ==========================================================
+  // RESEND VERIFICATION
+  // ==========================================================
 
   resendVerificationBtn.addEventListener(
     "click",
     async function() {
 
       hideMessage(
-        document.getElementById("verificationMessage")
+        document.getElementById(
+          "verificationMessage"
+        )
       );
 
 
@@ -1046,8 +1137,11 @@
 
         showLogin();
 
+
         showMessage(
-          document.getElementById("loginMessage"),
+          document.getElementById(
+            "loginMessage"
+          ),
           "Your secure login session has ended. Please sign in again.",
           "warning"
         );
@@ -1059,6 +1153,7 @@
       try {
 
         await reload(user);
+
 
         const currentUser =
           auth.currentUser;
@@ -1072,29 +1167,33 @@
         }
 
 
-        if (currentUser.emailVerified) {
+        if (
+          currentUser.emailVerified
+        ) {
 
-          showMessage(
-            document.getElementById("verificationMessage"),
-            "Your email is already verified. You can access the Member Portal.",
-            "success"
+          await loadMemberProfile(
+            currentUser
           );
-
-
-          await loadMemberProfile(currentUser);
 
           return;
         }
 
 
-        const button =
-          resendVerificationBtn;
+        resendVerificationBtn.disabled =
+          true;
 
-        button.disabled = true;
-
-        button.textContent =
+        resendVerificationBtn.textContent =
           "Sending Verification Email...";
 
+
+        /*
+          IMPORTANT:
+
+          No password is requested.
+          No password is stored.
+          Firebase uses the currently authenticated
+          user session to send the email.
+        */
 
         await sendEmailVerification(
           currentUser
@@ -1102,7 +1201,9 @@
 
 
         showMessage(
-          document.getElementById("verificationMessage"),
+          document.getElementById(
+            "verificationMessage"
+          ),
           "A new verification email has been sent to " +
           currentUser.email +
           ". Please check your inbox and spam/junk folder.",
@@ -1113,7 +1214,7 @@
       } catch (error) {
 
         console.error(
-          "Resend verification error:",
+          "Verification email error:",
           error
         );
 
@@ -1123,20 +1224,24 @@
 
 
         if (
-          error.code === "auth/too-many-requests"
+          error.code ===
+          "auth/too-many-requests"
         ) {
 
           message =
             "Too many verification emails have been requested. Please wait before trying again.";
 
         } else if (
-          error.code === "auth/network-request-failed"
+          error.code ===
+          "auth/network-request-failed"
         ) {
 
           message =
             "Network error. Please check your internet connection.";
 
-        } else if (error.message) {
+        } else if (
+          error.message
+        ) {
 
           message =
             error.message;
@@ -1144,7 +1249,9 @@
 
 
         showMessage(
-          document.getElementById("verificationMessage"),
+          document.getElementById(
+            "verificationMessage"
+          ),
           message,
           "error"
         );
@@ -1152,7 +1259,8 @@
 
       } finally {
 
-        resendVerificationBtn.disabled = false;
+        resendVerificationBtn.disabled =
+          false;
 
         resendVerificationBtn.textContent =
           "Send Verification Email Again";
@@ -1162,9 +1270,9 @@
   );
 
 
-  // ============================================================
+  // ==========================================================
   // CHECK VERIFICATION AGAIN
-  // ============================================================
+  // ==========================================================
 
   checkVerificationBtn.addEventListener(
     "click",
@@ -1182,7 +1290,8 @@
       }
 
 
-      checkVerificationBtn.disabled = true;
+      checkVerificationBtn.disabled =
+        true;
 
       checkVerificationBtn.textContent =
         "Checking...";
@@ -1202,13 +1311,6 @@
           refreshedUser.emailVerified
         ) {
 
-          showMessage(
-            document.getElementById("verificationMessage"),
-            "Email verified successfully. Welcome to the B.E.P. Member Portal!",
-            "success"
-          );
-
-
           await loadMemberProfile(
             refreshedUser
           );
@@ -1217,7 +1319,9 @@
         } else {
 
           showMessage(
-            document.getElementById("verificationMessage"),
+            document.getElementById(
+              "verificationMessage"
+            ),
             "Your email is still not verified. Please click the verification link in your email first.",
             "warning"
           );
@@ -1227,13 +1331,15 @@
       } catch (error) {
 
         console.error(
-          "Verification refresh error:",
+          "Verification check error:",
           error
         );
 
 
         showMessage(
-          document.getElementById("verificationMessage"),
+          document.getElementById(
+            "verificationMessage"
+          ),
           "We could not check your verification status. Please try again.",
           "error"
         );
@@ -1241,7 +1347,8 @@
 
       } finally {
 
-        checkVerificationBtn.disabled = false;
+        checkVerificationBtn.disabled =
+          false;
 
         checkVerificationBtn.textContent =
           "I Have Verified My Email — Check Again";
@@ -1251,24 +1358,26 @@
   );
 
 
-  // ============================================================
+  // ==========================================================
   // FORGOT PASSWORD
-  // ============================================================
+  // ==========================================================
 
   forgotPasswordBtn.addEventListener(
     "click",
     async function() {
 
       const email =
-        document.getElementById("loginEmail")
-          .value
-          .trim();
+        document.getElementById(
+          "loginEmail"
+        ).value.trim();
 
 
       if (!email) {
 
         showMessage(
-          document.getElementById("loginMessage"),
+          document.getElementById(
+            "loginMessage"
+          ),
           "Enter your email address first, then click Forgot Password.",
           "warning"
         );
@@ -1279,7 +1388,8 @@
 
       try {
 
-        forgotPasswordBtn.disabled = true;
+        forgotPasswordBtn.disabled =
+          true;
 
         forgotPasswordBtn.textContent =
           "Sending...";
@@ -1292,7 +1402,9 @@
 
 
         showMessage(
-          document.getElementById("loginMessage"),
+          document.getElementById(
+            "loginMessage"
+          ),
           "If an account exists for this email address, Firebase has sent a password reset email. Please check your inbox and spam/junk folder.",
           "success"
         );
@@ -1311,21 +1423,24 @@
 
 
         if (
-          error.code === "auth/invalid-email"
+          error.code ===
+          "auth/invalid-email"
         ) {
 
           message =
             "Please enter a valid email address.";
 
         } else if (
-          error.code === "auth/too-many-requests"
+          error.code ===
+          "auth/too-many-requests"
         ) {
 
           message =
             "Too many requests. Please wait and try again later.";
 
         } else if (
-          error.code === "auth/network-request-failed"
+          error.code ===
+          "auth/network-request-failed"
         ) {
 
           message =
@@ -1334,7 +1449,9 @@
 
 
         showMessage(
-          document.getElementById("loginMessage"),
+          document.getElementById(
+            "loginMessage"
+          ),
           message,
           "error"
         );
@@ -1342,7 +1459,8 @@
 
       } finally {
 
-        forgotPasswordBtn.disabled = false;
+        forgotPasswordBtn.disabled =
+          false;
 
         forgotPasswordBtn.textContent =
           "Forgot Password?";
@@ -1352,9 +1470,9 @@
   );
 
 
-  // ============================================================
+  // ==========================================================
   // PROFILE UPDATE
-  // ============================================================
+  // ==========================================================
 
   profileForm.addEventListener(
     "submit",
@@ -1376,14 +1494,15 @@
 
 
       const phone =
-        document.getElementById("profilePhone")
-          .value
-          .trim();
+        document.getElementById(
+          "profilePhone"
+        ).value.trim();
+
 
       const location =
-        document.getElementById("profileLocation")
-          .value
-          .trim();
+        document.getElementById(
+          "profileLocation"
+        ).value.trim();
 
 
       const button =
@@ -1401,7 +1520,11 @@
       try {
 
         await updateDoc(
-          doc(db, "members", user.uid),
+          doc(
+            db,
+            "members",
+            user.uid
+          ),
           {
             phone: phone,
             location: location,
@@ -1423,7 +1546,9 @@
 
 
         showMessage(
-          document.getElementById("profileMessage"),
+          document.getElementById(
+            "profileMessage"
+          ),
           "Your profile has been updated successfully.",
           "success"
         );
@@ -1438,7 +1563,9 @@
 
 
         showMessage(
-          document.getElementById("profileMessage"),
+          document.getElementById(
+            "profileMessage"
+          ),
           "Unable to update your profile. Please try again.",
           "error"
         );
@@ -1456,9 +1583,9 @@
   );
 
 
-  // ============================================================
+  // ==========================================================
   // LOGOUT
-  // ============================================================
+  // ==========================================================
 
   logoutBtn.addEventListener(
     "click",
@@ -1470,13 +1597,16 @@
 
         showLogin();
 
+
         document.getElementById(
           "loginPassword"
         ).value = "";
 
 
         showMessage(
-          document.getElementById("loginMessage"),
+          document.getElementById(
+            "loginMessage"
+          ),
           "You have been signed out successfully.",
           "success"
         );
@@ -1494,9 +1624,9 @@
   );
 
 
-  // ============================================================
-  // VERIFICATION PAGE LOGOUT
-  // ============================================================
+  // ==========================================================
+  // VERIFICATION LOGOUT
+  // ==========================================================
 
   verificationLogoutBtn.addEventListener(
     "click",
@@ -1508,13 +1638,16 @@
 
         showLogin();
 
+
         document.getElementById(
           "loginPassword"
         ).value = "";
 
 
         showMessage(
-          document.getElementById("loginMessage"),
+          document.getElementById(
+            "loginMessage"
+          ),
           "You have been signed out successfully.",
           "success"
         );
@@ -1523,7 +1656,7 @@
       } catch (error) {
 
         console.error(
-          "Verification logout error:",
+          "Logout error:",
           error
         );
       }
@@ -1532,9 +1665,9 @@
   );
 
 
-  // ============================================================
-  // AUTH STATE LISTENER
-  // ============================================================
+  // ==========================================================
+  // FIREBASE AUTH STATE
+  // ==========================================================
 
   onAuthStateChanged(
     auth,
@@ -1548,18 +1681,15 @@
       }
 
 
-      // Firebase has an authenticated user.
-      // Now check verification status.
-
       await checkVerification(user);
 
     }
   );
 
 
-  // ============================================================
-  // INITIAL STATE
-  // ============================================================
+  // ==========================================================
+  // INITIAL PAGE STATE
+  // ==========================================================
 
   showLogin();
 
