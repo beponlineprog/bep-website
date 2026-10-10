@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>My B.E.P. Courses</title>
+  <meta name="description" content="B.E.P. member courses and Bible lessons.">
+  <style>
+    :root { --navy:#102a56; --blue:#174ea6; --gold:#d5a62e; --ink:#172033; --muted:#64748b; --line:#dbe3ee; --paper:#f4f7fb; --white:#fff; }
+    * { box-sizing:border-box; }
+    body { margin:0; font-family:Arial,Helvetica,sans-serif; color:var(--ink); background:var(--paper); line-height:1.6; }
+    header { background:linear-gradient(135deg,var(--navy),var(--blue)); color:white; padding:24px 16px; border-bottom:4px solid var(--gold); }
+    .wrap { width:min(100% - 28px, 980px); margin:0 auto; }
+    header h1 { margin:0 0 5px; font-size:clamp(1.45rem,4vw,2rem); }
+    header p { margin:0; opacity:.94; }
+    nav { display:flex; flex-wrap:wrap; gap:10px; margin-top:16px; }
+    a.button, button { display:inline-flex; align-items:center; justify-content:center; border:0; border-radius:9px; padding:10px 14px; font-weight:700; font-size:.95rem; text-decoration:none; cursor:pointer; }
+    a.button { background:white; color:var(--navy); }
+    button { background:var(--blue); color:white; }
+    button.secondary { background:#e7edf6; color:var(--navy); }
+    main { padding:22px 0 34px; }
+    .panel, .course, .lesson { background:var(--white); border:1px solid var(--line); border-radius:14px; padding:18px; box-shadow:0 4px 16px rgba(16,42,86,.045); }
+    .panel { margin-bottom:16px; }
+    h2 { color:var(--navy); margin:0 0 10px; font-size:1.25rem; }
+    h3 { color:var(--navy); margin:0 0 8px; font-size:1.08rem; }
+    p { margin:7px 0; }
+    .muted { color:var(--muted); }
+    .notice { padding:12px 14px; border-radius:9px; background:#eef4ff; border:1px solid #c9dafb; color:#1e3a68; margin-top:12px; }
+    .error { background:#fff1f1; border-color:#f0c7c7; color:#8c2222; }
+    .course { margin:16px 0; }
+    .lessons { display:grid; gap:12px; margin-top:14px; }
+    .lesson p { white-space:pre-wrap; overflow-wrap:anywhere; }
+    .meta { font-size:.9rem; color:var(--muted); }
+    .tag { display:inline-block; border-radius:999px; padding:3px 9px; background:#edf2f8; color:#334155; font-size:.8rem; font-weight:700; margin:0 5px 5px 0; }
+    .lesson-body { margin-top:10px; }
+    .lesson-body[hidden] { display:none; }
+    .lesson-actions { display:flex; flex-wrap:wrap; gap:8px; margin-top:12px; }
+    footer { text-align:center; color:var(--muted); padding:18px 12px; font-size:.9rem; }
+    .hidden { display:none !important; }
+    @media (max-width:560px) { .panel,.course,.lesson { padding:14px; } a.button,button { flex:1 1 auto; } }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <h1>My B.E.P. Courses</h1>
+      <p>Building the Church of Christ</p>
+      <nav>
+        <a class="button" href="member.html">Back to Member Portal</a>
+        <a class="button" href="index.html">Back Home</a>
+        <button id="signOutButton" class="secondary" type="button">Sign Out</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="panel">
+      <h2 id="welcomeTitle">Checking your membership…</h2>
+      <p id="memberSummary" class="muted">Please wait while we verify your account.</p>
+      <div id="pageMessage" class="notice" role="status">Connecting securely to B.E.P.</div>
+    </section>
+
+    <section id="courseList" aria-live="polite"></section>
+
+    <section class="panel">
+      <h2>Assessments and My Progress</h2>
+      <p>Lesson marks, completion tracking, the 12-lesson average, the final assessment, and administrator-approved certificates will be connected in the next stages.</p>
+      <p class="muted">The passing requirement is 70% for each lesson assessment and 70% for the final assessment. No marks or completion results are recorded by this page yet.</p>
+    </section>
+  </main>
+
+  <footer>© B.E.P. — Biblical Empowerment Program<br>Building the Church of Christ</footer>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
+    import { getAuth, onAuthStateChanged, signOut, reload } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js";
+    import { getFirestore, doc, getDoc, collection, getDocs, query, where } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyC3N-DrY4mv4M32TMIt2_9btO3AqmhDk3Y",
+      authDomain: "beponlineprog-8b8bb.firebaseapp.com",
+      projectId: "beponlineprog-8b8bb",
+      storageBucket: "beponlineprog-8b8bb.firebasestorage.app",
+      messagingSenderId: "312026634976",
+      appId: "1:312026634976:web:5497f071e8f0e6618fce85",
+      measurementId: "G-LDX5CZ68MH"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+    const welcomeTitle = document.getElementById("welcomeTitle");
+    const memberSummary = document.getElementById("memberSummary");
+    const pageMessage = document.getElementById("pageMessage");
+    const courseList = document.getElementById("courseList");
+    const signOutButton = document.getElementById("signOutButton");
+
+    function message(text, isError = false) {
+      pageMessage.textContent = text;
+      pageMessage.className = isError ? "notice error" : "notice";
+    }
+
+    function addText(parent, tag, text, className) {
+      const element = document.createElement(tag);
+      element.textContent = text || "";
+      if (className) element.className = className;
+      parent.appendChild(element);
+      return element;
+    }
+
+    function safeExternalUrl(value) {
+      try {
+        const url = new URL(value);
+        return url.protocol === "https:" ? url.href : null;
+      } catch {
+        return null;
+      }
+    }
+
+    async function loadCourses(user) {
+      courseList.replaceChildren();
+      message("Loading published B.E.P. courses…");
+
+      const coursesSnapshot = await getDocs(
+        query(collection(db, "courses"), where("published", "==", true))
+      );
+
+      if (coursesSnapshot.empty) {
+        message("There are no published courses available yet. Your administrator is preparing the course content.");
+        return;
+      }
+
+      for (const courseDoc of coursesSnapshot.docs) {
+        const course = courseDoc.data();
+        const courseCard = document.createElement("article");
+        courseCard.className = "course";
+        addText(courseCard, "h2", course.title || "B.E.P. Course");
+        addText(courseCard, "p", course.description || "Course description will be added soon.", "muted");
+
+        const lessonHeading = addText(courseCard, "h3", "Published lessons");
+        lessonHeading.style.marginTop = "18px";
+
+        const lessonList = document.createElement("div");
+        lessonList.className = "lessons";
+        courseCard.appendChild(lessonList);
+
+        const lessonSnapshot = await getDocs(
+          query(collection(db, "courses", courseDoc.id, "lessons"), where("published", "==", true))
+        );
+
+        if (lessonSnapshot.empty) {
+          addText(lessonList, "p", "Lessons are being prepared for this course.", "muted");
+        } else {
+          const lessons = lessonSnapshot.docs.slice().sort((a, b) => {
+            const aNum = Number(a.data().lessonNumber || 0);
+            const bNum = Number(b.data().lessonNumber || 0);
+            return aNum - bNum;
+          });
+
+          for (const lessonDoc of lessons) {
+            const lesson = lessonDoc.data();
+            const lessonCard = document.createElement("article");
+            lessonCard.className = "lesson";
+            const number = Number(lesson.lessonNumber || 0);
+            if (number > 0) addText(lessonCard, "span", "Lesson " + number, "tag");
+            addText(lessonCard, "span", lesson.type === "video" ? "Video lesson" : "Written lesson", "tag");
+            addText(lessonCard, "h3", lesson.title || "Lesson");
+            if (lesson.scripture) addText(lessonCard, "p", "Key Scripture: " + lesson.scripture, "meta");
+
+            const body = document.createElement("div");
+            body.className = "lesson-body";
+            body.hidden = true;
+            if (lesson.content) addText(body, "p", lesson.content);
+
+            const videoUrl = safeExternalUrl(lesson.videoUrl || "");
+            if (videoUrl) {
+              const videoLink = document.createElement("a");
+              videoLink.href = videoUrl;
+              videoLink.target = "_blank";
+              videoLink.rel = "noopener noreferrer";
+              videoLink.textContent = "Open lesson video";
+              videoLink.className = "button";
+              body.appendChild(videoLink);
+            }
+
+            if (!lesson.content && !videoUrl) {
+              addText(body, "p", "Lesson material will be added soon.", "muted");
+            }
+
+            const actions = document.createElement("div");
+            actions.className = "lesson-actions";
+            const toggle = document.createElement("button");
+            toggle.type = "button";
+            toggle.className = "secondary";
+            toggle.textContent = "Open lesson";
+            toggle.addEventListener("click", () => {
+              body.hidden = !body.hidden;
+              toggle.textContent = body.hidden ? "Open lesson" : "Close lesson";
+            });
+            actions.appendChild(toggle);
+            lessonCard.appendChild(actions);
+            lessonCard.appendChild(body);
+            lessonList.appendChild(lessonCard);
+          }
+        }
+
+        courseList.appendChild(courseCard);
+      }
+
+      message("Published course content loaded. Lesson completion and marks are not recorded by this page yet.");
+    }
+
+    signOutButton.addEventListener("click", async () => {
+      try {
+        await signOut(auth);
+        window.location.href = "member.html";
+      } catch (error) {
+        console.error(error);
+        message("Could not sign out. Please return to the Member Portal and try again.", true);
+      }
+    });
+
+    onAuthStateChanged(auth, async (user) => {
+      courseList.replaceChildren();
+      if (!user) {
+        welcomeTitle.textContent = "Sign-in required";
+        memberSummary.textContent = "Please sign in through the B.E.P. Member Portal first.";
+        message("You must be signed in to access B.E.P. courses.", true);
+        return;
+      }
+
+      try {
+        await reload(user);
+        if (!auth.currentUser.emailVerified) {
+          welcomeTitle.textContent = "Email verification required";
+          memberSummary.textContent = user.email || "";
+          message("Please verify your email address, then sign in again.", true);
+          return;
+        }
+
+        const profileSnapshot = await getDoc(doc(db, "members", user.uid));
+        if (!profileSnapshot.exists()) {
+          welcomeTitle.textContent = "Member profile not found";
+          memberSummary.textContent = user.email || "";
+          message("Your B.E.P. member profile could not be found. Please contact the administrator.", true);
+          return;
+        }
+
+        const profile = profileSnapshot.data();
+        const status = String(profile.status || "").trim().toLowerCase();
+        if (status !== "active") {
+          welcomeTitle.textContent = "Course access not yet approved";
+          memberSummary.textContent = (profile.fullName || user.email || "") + (profile.memberNumber ? " · " + profile.memberNumber : "");
+          message("Your membership status is " + (profile.status || "Pending") + ". Courses are available to verified Active members only.", true);
+          return;
+        }
+
+        welcomeTitle.textContent = "Welcome, " + (profile.fullName || "B.E.P. Member");
+        memberSummary.textContent = (profile.memberNumber || "B.E.P. Member") + " · Active membership";
+        await loadCourses(user);
+      } catch (error) {
+        console.error("Course page error:", error);
+        welcomeTitle.textContent = "Unable to load courses";
+        message("We could not load your courses. Check your connection and try again. If the problem continues, contact the administrator.", true);
+      }
+    });
+  </script>
+</body>
+</html>
