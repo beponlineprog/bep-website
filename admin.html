@@ -1,35 +1,30 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>B.E.P. Administrator Dashboard</title>
-
   <style>
     * { box-sizing: border-box; }
-
     body {
       margin: 0;
       font-family: Arial, sans-serif;
       background: #f0f5fb;
       color: #203047;
     }
-
     header {
       background: linear-gradient(135deg, #073b78, #1479c9);
       color: white;
       padding: 25px 16px;
       text-align: center;
     }
-
     header h1 { margin: 0 0 8px; }
     header p { margin: 0; }
-
     main {
       width: min(100% - 28px, 950px);
       margin: 24px auto;
     }
-
     .panel {
       background: white;
       padding: 22px;
@@ -37,15 +32,12 @@
       border-radius: 14px;
       box-shadow: 0 4px 18px #16365c12;
     }
-
     h2 { color: #0b4d91; margin-top: 0; }
-
     label {
       display: block;
       margin: 14px 0 6px;
       font-weight: bold;
     }
-
     input {
       width: 100%;
       padding: 12px;
@@ -53,7 +45,6 @@
       border-radius: 7px;
       font-size: 16px;
     }
-
     button {
       border: 0;
       border-radius: 7px;
@@ -63,18 +54,31 @@
       cursor: pointer;
       margin: 5px 5px 5px 0;
     }
-
     button:disabled {
       opacity: .55;
       cursor: not-allowed;
     }
-
     .primary { background: #0866bd; color: white; }
     .approve { background: #16834a; color: white; }
     .reject { background: #d97706; color: white; }
     .delete { background: #bd2635; color: white; }
     .secondary { background: #e4edf7; color: #173d66; }
-
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 15px 0 20px;
+    }
+    .nav-links a {
+      display: inline-block;
+      padding: 11px 15px;
+      border-radius: 7px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .nav-home { background: #0b4d91; color: white; }
+    .nav-member { background: #16834a; color: white; }
+    .nav-register { background: #e4edf7; color: #173d66; }
     .application {
       border: 1px solid #dce5ef;
       border-radius: 10px;
@@ -82,17 +86,14 @@
       margin: 14px 0;
       overflow-wrap: anywhere;
     }
-
     .application h3 {
       margin: 0 0 12px;
       color: #104c85;
     }
-
     .details {
       line-height: 1.8;
       font-size: 14px;
     }
-
     .status {
       display: inline-block;
       padding: 5px 9px;
@@ -102,7 +103,6 @@
       font-weight: bold;
       font-size: 12px;
     }
-
     .notice {
       background: #fff8e8;
       border-left: 4px solid #e2a328;
@@ -111,15 +111,12 @@
       line-height: 1.5;
       font-size: 14px;
     }
-
     .message {
       margin-top: 12px;
       overflow-wrap: anywhere;
       line-height: 1.5;
     }
-
     .hidden { display: none; }
-
     footer {
       text-align: center;
       padding: 22px;
@@ -138,6 +135,14 @@
   <main>
     <section id="loginPanel" class="panel">
       <h2>Administrator Login</h2>
+
+      <!-- Navigation remains visible after sign-out -->
+      <nav class="nav-links" aria-label="B.E.P. Website Navigation">
+        <a class="nav-home" href="index.html">Home</a>
+        <a class="nav-member" href="member.html">Member Portal</a>
+        <a class="nav-register" href="register.html">Register</a>
+      </nav>
+
       <p>Sign in using the authorised B.E.P. administrator account.</p>
 
       <form id="loginForm">
@@ -169,7 +174,6 @@
     <section id="dashboardPanel" class="hidden">
       <div class="panel">
         <h2>Member Applications</h2>
-
         <p id="adminIdentity"></p>
 
         <div class="notice">
@@ -178,9 +182,9 @@
           the applicant's Email verified value is Yes. The dashboard cannot
           independently verify another user's email status.
           <br><br>
-          <strong>Delete warning:</strong> Delete Test Application permanently
-          removes the member's Firestore profile. It does not delete the
-          corresponding Firebase Authentication account.
+          <strong>Delete warning:</strong>
+          Delete Test Application permanently removes the member's Firestore
+          profile. The Firebase Authentication account remains.
         </div>
 
         <button class="primary" id="refreshButton" type="button">
@@ -200,9 +204,7 @@
     </section>
   </main>
 
-  <footer>
-    B.E.P. — Building the Church of Christ
-  </footer>
+  <footer>B.E.P. — Building the Church of Christ</footer>
 
   <script type="module">
     import { initializeApp }
@@ -265,7 +267,8 @@
 
     function showDashboardMessage(message, isError = false) {
       dashboardMessage.textContent = message;
-      dashboardMessage.style.color = isError ? "#b42332" : "#17653a";
+      dashboardMessage.style.color =
+        isError ? "#b42332" : "#17653a";
     }
 
     function setButtonsDisabled(disabled) {
@@ -296,6 +299,7 @@
       currentAdmin = user;
       loginPanel.classList.add("hidden");
       dashboardPanel.classList.remove("hidden");
+
       document.getElementById("adminIdentity").textContent =
         "Signed in as: " + (user.email || "Authorised administrator");
 
@@ -316,8 +320,7 @@
         );
         loginMessage.textContent = "";
       } catch (error) {
-        loginMessage.textContent =
-          "Sign-in failed: " + error.message;
+        loginMessage.textContent = "Sign-in failed: " + error.message;
         loginMessage.style.color = "#b42332";
       } finally {
         loginButton.disabled = false;
@@ -338,7 +341,8 @@
         );
 
         if (pending.length === 0) {
-          applications.textContent = "There are no pending applications.";
+          applications.textContent =
+            "There are no pending applications.";
           return;
         }
 
@@ -349,7 +353,6 @@
           return `
             <article class="application">
               <h3>${escapeHtml(member.fullName || "Name not provided")}</h3>
-
               <div class="details">
                 <strong>Email:</strong> ${escapeHtml(member.email)}<br>
                 <strong>Phone:</strong> ${escapeHtml(member.phone)}<br>
@@ -382,7 +385,6 @@
             </article>
           `;
         }).join("");
-
       } catch (error) {
         applications.textContent =
           "Could not load applications: " + error.message;
@@ -392,13 +394,11 @@
     async function approveMember(userId) {
       if (!currentAdmin || currentAdmin.uid !== ADMIN_UID || busy) return;
 
-      const confirmed = confirm(
+      if (!confirm(
         "Have you checked Firebase Authentication and confirmed that " +
         "this applicant's Email verified value is Yes?\n\n" +
         "Only continue if you have checked it."
-      );
-
-      if (!confirmed) return;
+      )) return;
 
       if (!confirm(
         "Approve this member? This will activate the profile and assign " +
@@ -436,7 +436,8 @@
             : 0;
 
           const nextNumber = lastNumber + 1;
-          const memberNumber = "BEP-" + String(nextNumber).padStart(4, "0");
+          const memberNumber =
+            "BEP-" + String(nextNumber).padStart(4, "0");
 
           transaction.set(counterRef, {
             lastNumber: nextNumber,
@@ -444,7 +445,7 @@
           });
 
           transaction.update(memberRef, {
-            memberNumber: memberNumber,
+            memberNumber,
             status: "Active",
             emailVerified: true,
             approvedAt: serverTimestamp(),
@@ -452,16 +453,10 @@
           });
         });
 
-        showDashboardMessage(
-          "Member approved successfully. The member number has been assigned."
-        );
-
+        showDashboardMessage("Member approved successfully.");
         await loadApplications();
-
       } catch (error) {
-        showDashboardMessage(
-          "Approval failed: " + error.message, true
-        );
+        showDashboardMessage("Approval failed: " + error.message, true);
       } finally {
         busy = false;
         setButtonsDisabled(false);
@@ -482,9 +477,7 @@
       showDashboardMessage("Updating application...");
 
       try {
-        const memberRef = doc(db, "members", userId);
-
-        await updateDoc(memberRef, {
+        await updateDoc(doc(db, "members", userId), {
           status: "Rejected",
           rejectedAt: serverTimestamp(),
           rejectedBy: currentAdmin.uid
@@ -492,7 +485,6 @@
 
         showDashboardMessage("Application marked as Rejected.");
         await loadApplications();
-
       } catch (error) {
         showDashboardMessage(
           "Disapproval failed: " + error.message, true
@@ -523,17 +515,12 @@
 
       try {
         await deleteDoc(doc(db, "members", userId));
-
         showDashboardMessage(
           "Test application profile deleted from Firestore."
         );
-
         await loadApplications();
-
       } catch (error) {
-        showDashboardMessage(
-          "Deletion failed: " + error.message, true
-        );
+        showDashboardMessage("Deletion failed: " + error.message, true);
       } finally {
         busy = false;
         setButtonsDisabled(false);
@@ -545,13 +532,12 @@
       if (!button || busy) return;
 
       const userId = button.dataset.uid;
-      const action = button.dataset.action;
 
-      if (action === "approve") {
+      if (button.dataset.action === "approve") {
         await approveMember(userId);
-      } else if (action === "reject") {
+      } else if (button.dataset.action === "reject") {
         await disapproveMember(userId);
-      } else if (action === "delete") {
+      } else if (button.dataset.action === "delete") {
         await deleteTestApplication(userId);
       }
     });
