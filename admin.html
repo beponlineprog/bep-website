@@ -1,1 +1,476 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>B.E.P. Administrator Dashboard</title>
+
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      padding: 18px;
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(135deg, #003b73, #0066b3);
+      min-height: 100vh;
+      color: #1f2937;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    header, .panel {
+      background: white;
+      border-radius: 12px;
+      padding: 22px;
+      margin-bottom: 18px;
+      box-shadow: 0 6px 20px rgba(0,0,0,.15);
+    }
+
+    header { text-align: center; }
+
+    header h1 {
+      margin: 0;
+      color: #003b73;
+    }
+
+    header p { color: #64748b; }
+
+    h2 { color: #003b73; }
+
+    label {
+      display: block;
+      margin: 14px 0 6px;
+      font-weight: bold;
+    }
+
+    input {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 7px;
+      font-size: 16px;
+    }
+
+    button, .nav-link {
+      display: inline-block;
+      padding: 11px 15px;
+      margin: 8px 5px 0 0;
+      border: none;
+      border-radius: 7px;
+      background: #003b73;
+      color: white;
+      font-weight: bold;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    button:disabled {
+      background: #9ca3af;
+      cursor: not-allowed;
+    }
+
+    .secondary { background: #475569; }
+    .approve { background: #166534; }
+
+    .notice {
+      padding: 13px;
+      margin: 12px 0;
+      border-radius: 7px;
+      line-height: 1.5;
+      overflow-wrap: anywhere;
+    }
+
+    .info {
+      background: #dbeafe;
+      color: #1e40af;
+    }
+
+    .warning {
+      background: #fff7ed;
+      color: #9a3412;
+      border: 1px solid #fed7aa;
+    }
+
+    .success {
+      background: #dcfce7;
+      color: #166534;
+    }
+
+    .error {
+      background: #fee2e2;
+      color: #991b1b;
+    }
+
+    .member {
+      border: 1px solid #dbe3ec;
+      border-radius: 9px;
+      padding: 17px;
+      margin: 14px 0;
+      overflow-wrap: anywhere;
+    }
+
+    .member h3 {
+      color: #003b73;
+      margin-top: 0;
+    }
+
+    .member p { line-height: 1.5; }
+
+    .small {
+      font-size: 13px;
+      color: #64748b;
+    }
+
+    .hidden { display: none; }
+
+    footer {
+      text-align: center;
+      color: white;
+      font-size: 13px;
+      padding: 10px;
+    }
+  </style>
+</head>
+
+<body>
+<div class="container">
+
+  <header>
+    <h1>B.E.P. Administrator</h1>
+    <p>Building the Church of Christ</p>
+    <a class="nav-link" href="index.html">← Back Home</a>
+    <a class="nav-link secondary" href="register.html">Registration</a>
+  </header>
+
+  <section class="panel" id="loginPanel">
+    <h2>Administrator Sign In</h2>
+    <p>Sign in using the authorised B.E.P. administrator account.</p>
+
+    <form id="loginForm">
+      <label for="adminEmail">Administrator Email</label>
+      <input id="adminEmail" type="email"
+             value="bep.onlineprog@gmail.com"
+             autocomplete="username" required>
+
+      <label for="adminPassword">Password</label>
+      <input id="adminPassword" type="password"
+             autocomplete="current-password" required>
+
+      <button id="loginButton" type="submit">Sign In</button>
+    </form>
+  </section>
+
+  <section class="panel hidden" id="dashboardPanel">
+    <h2>Member Applications</h2>
+    <p id="signedInAs"></p>
+
+    <div class="notice warning">
+      <strong>Email verification must be checked manually.</strong>
+      Before approving an applicant, open Firebase Console →
+      Authentication → Users. Find the applicant and confirm that
+      Firebase shows their email as verified. Return here only after
+      confirming it. Do not approve an unverified applicant.
+    </div>
+
+    <button id="refreshButton" type="button">Refresh Applications</button>
+    <button id="logoutButton" class="secondary" type="button">Sign Out</button>
+
+    <div id="message" class="notice info" role="status">
+      Loading applications...
+    </div>
+
+    <div id="membersList"></div>
+  </section>
+
+  <footer>
+    B.E.P. — Biblical Empowerment Program
+  </footer>
+</div>
+
+<script type="module">
+  import { initializeApp }
+    from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
+
+  import {
+    getAuth,
+    signInWithEmailAndPassword,
+    signOut,
+    onAuthStateChanged
+  } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js";
+
+  import {
+    getFirestore,
+    collection,
+    getDocs,
+    doc,
+    runTransaction,
+    serverTimestamp
+  } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyC3N-DrY4mv4M32TMIt2_9btO3AqmhDk3Y",
+    authDomain: "beponlineprog-8b8bb.firebaseapp.com",
+    projectId: "beponlineprog-8b8bb",
+    storageBucket: "beponlineprog-8b8bb.firebasestorage.app",
+    messagingSenderId: "312026634976",
+    appId: "1:312026634976:web:5497f071e8f0e6618fce85",
+    measurementId: "G-LDX5CZ68MH"
+  };
+
+  const ADMIN_UID = "BDTeO6G7xvaYQKBP2clG9f3DtEF3";
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+
+  const loginPanel = document.getElementById("loginPanel");
+  const dashboardPanel = document.getElementById("dashboardPanel");
+  const loginForm = document.getElementById("loginForm");
+  const loginButton = document.getElementById("loginButton");
+  const message = document.getElementById("message");
+  const membersList = document.getElementById("membersList");
+
+  let currentAdmin = null;
+  let loading = false;
+
+  function showMessage(text, type = "info") {
+    message.className = "notice " + type;
+    message.textContent = text;
+  }
+
+  function friendlyError(error) {
+    if (error?.code === "auth/invalid-credential" ||
+        error?.code === "auth/wrong-password" ||
+        error?.code === "auth/user-not-found") {
+      return "Sign-in failed. Check the administrator email and password.";
+    }
+
+    if (error?.code === "auth/too-many-requests") {
+      return "Too many sign-in attempts. Wait a while and try again.";
+    }
+
+    if (error?.code === "permission-denied" ||
+        error?.code === "firestore/permission-denied") {
+      return "Firebase denied this action. Check the published Firestore rules and administrator account.";
+    }
+
+    return error?.message || "An unexpected error occurred.";
+  }
+
+  function addText(parent, tag, text, className = "") {
+    const element = document.createElement(tag);
+    element.textContent = text ?? "";
+    if (className) element.className = className;
+    parent.appendChild(element);
+    return element;
+  }
+
+  loginForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    loginButton.disabled = true;
+    loginButton.textContent = "Signing In...";
+
+    try {
+      const email = document.getElementById("adminEmail").value.trim();
+      const password = document.getElementById("adminPassword").value;
+
+      const result = await signInWithEmailAndPassword(auth, email, password);
+
+      if (result.user.uid !== ADMIN_UID) {
+        await signOut(auth);
+        showMessage("Access denied. This account is not the authorised B.E.P. administrator.", "error");
+      }
+    } catch (error) {
+      showMessage(friendlyError(error), "error");
+    } finally {
+      loginButton.disabled = false;
+      loginButton.textContent = "Sign In";
+    }
+  });
+
+  onAuthStateChanged(auth, async (user) => {
+    if (!user) {
+      currentAdmin = null;
+      loginPanel.classList.remove("hidden");
+      dashboardPanel.classList.add("hidden");
+      membersList.replaceChildren();
+      return;
+    }
+
+    if (user.uid !== ADMIN_UID) {
+      await signOut(auth);
+      showMessage("Access denied. Only the authorised administrator can use this dashboard.", "error");
+      return;
+    }
+
+    currentAdmin = user;
+    loginPanel.classList.add("hidden");
+    dashboardPanel.classList.remove("hidden");
+    document.getElementById("signedInAs").textContent =
+      "Signed in as: " + (user.email || "Authorised administrator");
+
+    await loadApplications();
+  });
+
+  async function loadApplications() {
+    if (!currentAdmin || loading) return;
+
+    loading = true;
+    membersList.replaceChildren();
+    showMessage("Loading member applications...");
+
+    try {
+      const snapshot = await getDocs(collection(db, "members"));
+
+      const pending = snapshot.docs
+        .map(item => ({ id: item.id, data: item.data() }))
+        .filter(item => item.data.status === "Pending")
+        .sort((a, b) => {
+          const aTime = a.data.createdAt?.toMillis?.() || 0;
+          const bTime = b.data.createdAt?.toMillis?.() || 0;
+          return aTime - bTime;
+        });
+
+      if (pending.length === 0) {
+        showMessage("There are no pending member applications.", "success");
+        return;
+      }
+
+      showMessage("Pending applications: " + pending.length);
+
+      for (const item of pending) {
+        const card = document.createElement("article");
+        card.className = "member";
+
+        addText(card, "h3", item.data.fullName || "Name not provided");
+        addText(card, "p", "Email: " + (item.data.email || "Not provided"));
+        addText(card, "p", "Phone: " + (item.data.phone || "Not provided"));
+        addText(card, "p", "Location: " + (item.data.location || "Not provided"));
+        addText(card, "p", "Heard about B.E.P.: " + (item.data.heardAbout || "Not provided"));
+        addText(card, "p", "Status: " + (item.data.status || "Unknown"));
+        addText(card, "p", "Member number: " + (item.data.memberNumber || "Not assigned"));
+
+        const note = addText(
+          card,
+          "p",
+          "Verify this applicant's email in Firebase Authentication before approving.",
+          "small"
+        );
+
+        const approveButton = document.createElement("button");
+        approveButton.type = "button";
+        approveButton.className = "approve";
+        approveButton.textContent = "Verify and Approve";
+        approveButton.addEventListener("click", () => approveMember(item.id, approveButton));
+
+        card.appendChild(approveButton);
+        membersList.appendChild(card);
+      }
+    } catch (error) {
+      showMessage(friendlyError(error), "error");
+    } finally {
+      loading = false;
+    }
+  }
+
+  async function approveMember(userId, button) {
+    if (!currentAdmin || currentAdmin.uid !== ADMIN_UID) {
+      showMessage("Administrator access is required.", "error");
+      return;
+    }
+
+    const verified = window.confirm(
+      "Before continuing, have you opened Firebase Authentication → Users and confirmed that this applicant's email is verified?\n\n" +
+      "Choose OK only if Firebase shows the applicant as verified. Choose Cancel otherwise."
+    );
+
+    if (!verified) {
+      showMessage("Approval cancelled. Verify the applicant's email first.", "info");
+      return;
+    }
+
+    const finalConfirm = window.confirm(
+      "Approve this member and assign the next available BEP member number?"
+    );
+
+    if (!finalConfirm) return;
+
+    button.disabled = true;
+    button.textContent = "Approving...";
+
+    try {
+      const memberRef = doc(db, "members", userId);
+      const counterRef = doc(db, "adminCounters", "memberNumber");
+
+      const assignedNumber = await runTransaction(db, async (transaction) => {
+        // Read every document before writing.
+        const memberSnapshot = await transaction.get(memberRef);
+        const counterSnapshot = await transaction.get(counterRef);
+
+        if (!memberSnapshot.exists()) {
+          throw new Error("This member profile no longer exists.");
+        }
+
+        const member = memberSnapshot.data();
+
+        if (member.status !== "Pending" || member.memberNumber !== "") {
+          throw new Error("This application is no longer pending or already has a member number. Refresh the list.");
+        }
+
+        const lastNumber = counterSnapshot.exists()
+          ? Number(counterSnapshot.data().lastNumber || 0)
+          : 0;
+
+        if (!Number.isSafeInteger(lastNumber) || lastNumber < 0) {
+          throw new Error("The member-number counter is invalid. Stop and investigate before approving anyone.");
+        }
+
+        const nextNumber = lastNumber + 1;
+        const formattedNumber = "BEP-" + String(nextNumber).padStart(4, "0");
+
+        transaction.set(counterRef, {
+          lastNumber: nextNumber,
+          updatedAt: serverTimestamp()
+        });
+
+        transaction.update(memberRef, {
+          memberNumber: formattedNumber,
+          status: "Active",
+          emailVerified: true,
+          approvedAt: serverTimestamp(),
+          approvedBy: currentAdmin.uid
+        });
+
+        return formattedNumber;
+      });
+
+      showMessage("Member approved successfully. Assigned number: " + assignedNumber, "success");
+      await loadApplications();
+    } catch (error) {
+      showMessage(friendlyError(error), "error");
+      button.disabled = false;
+      button.textContent = "Verify and Approve";
+    }
+  }
+
+  document.getElementById("refreshButton").addEventListener("click", loadApplications);
+
+  document.getElementById("logoutButton").addEventListener("click", async () => {
+    try {
+      await signOut(auth);
+      showMessage("You have signed out.", "success");
+    } catch (error) {
+      showMessage(friendlyError(error), "error");
+    }
+  });
+</script>
+</body>
+  </html>
+
