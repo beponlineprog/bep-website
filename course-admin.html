@@ -36,6 +36,10 @@
     .muted { color:var(--muted); }
     .tag { display:inline-block; background:#edf2f8; color:#334155; border-radius:999px; padding:3px 9px; font-size:.82rem; font-weight:700; margin:0 5px 5px 0; }
     .lessons { display:grid; gap:12px; margin-top:12px; }
+    .assessment-builder { margin-top:14px; padding:14px; border:1px solid #c9dafb; border-radius:10px; background:#f8fbff; }
+    .question-block { background:#fff; border:1px solid var(--line); border-radius:9px; padding:12px; margin:12px 0; }
+    .question-block h4 { margin:0 0 8px; color:var(--navy); }
+    .small-note { font-size:.9rem; color:var(--muted); }
     .lesson-content { white-space:pre-wrap; overflow-wrap:anywhere; }
     .hidden { display:none !important; }
     footer { text-align:center; color:var(--muted); padding:18px 12px; font-size:.9rem; }
@@ -98,7 +102,7 @@
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
     import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js";
-    import { getFirestore, collection, getDocs, doc, addDoc, updateDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
+    import { getFirestore, collection, getDocs, doc, addDoc, updateDoc, setDoc, getDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyC3N-DrY4mv4M32TMIt2_9btO3AqmhDk3Y",
@@ -232,6 +236,147 @@
       await loadCourses();
     }
 
+
+    // LESSON ASSESSMENT BUILDER: questions and answer keys are stored separately.
+    function makeAssessmentBuilder(courseId, lessonId, lessonTitle) {
+      const box = document.createElement("section");
+      box.className = "assessment-builder";
+      const heading = addText(box, "h3", "Lesson Assessment");
+      heading.style.marginBottom = "6px";
+      addText(box, "p", "Create up to 20 multiple-choice questions. Correct answers are saved in a separate administrator-only document.", "small-note");
+      const status = addText(box, "p", "Checking for an existing assessment…", "small-note");
+      const form = document.createElement("form");
+      const questionsWrap = document.createElement("div");
+      const formActions = document.createElement("div");
+      formActions.className = "actions";
+      const addQuestionButton = makeButton("Add Question", () => {
+        if (questionsWrap.querySelectorAll(".question-block").length >= 20) {
+          setMessage(dashboardMessage, "An assessment can contain no more than 20 questions.", true);
+          return;
+        }
+        addQuestionBlock(questionsWrap);
+      });
+      const saveButton = document.createElement("button");
+      saveButton.type = "submit";
+      saveButton.textContent = "Save Assessment Draft";
+      formActions.append(addQuestionButton, saveButton);
+      form.append(questionsWrap, formActions);
+      box.appendChild(form);
+
+      function addQuestionBlock(parent, data = {}, answer = "A") {
+        const number = parent.querySelectorAll(".question-block").length + 1;
+        const block = document.createElement("div");
+        block.className = "question-block";
+        block.innerHTML = `
+          <h4>Question ${number}</h4>
+          <label>Question text</label>
+          <textarea data-field="prompt" maxlength="1000" required placeholder="Enter the Bible question"></textarea>
+          <div class="grid">
+            <div><label>Option A</label><input data-field="A" maxlength="500" required></div>
+            <div><label>Option B</label><input data-field="B" maxlength="500" required></div>
+            <div><label>Option C</label><input data-field="C" maxlength="500" required></div>
+            <div><label>Option D</label><input data-field="D" maxlength="500" required></div>
+          </div>
+          <label>Correct answer (administrator only)</label>
+          <select data-field="correct" required>
+            <option value="A">A</option><option value="B">B</option>
+            <option value="C">C</option><option value="D">D</option>
+          </select>`;
+        block.querySelector('[data-field="prompt"]').value = data.prompt || "";
+        for (const letter of ["A", "B", "C", "D"]) block.querySelector('[data-field="' + letter + '"]').value = data.options?.[letter] || "";
+        block.querySelector('[data-field="correct"]').value = answer || "A";
+        parent.appendChild(block);
+      }
+
+      form.addEventListener("submit", async event => {
+        event.preventDefault();
+        try {
+          requireAdmin();
+          const blocks = [...questionsWrap.querySelectorAll(".question-block")];
+          if (blocks.length < 1 || blocks.length > 20) throw new Error("Add between 1 and 20 questions.");
+          const questions = [];
+          const answerKey = {};
+          for (let i = 0; i < blocks.length; i++) {
+            const block = blocks[i];
+            const prompt = block.querySelector('[data-field="prompt"]').value.trim();
+            const options = {};
+            for (const letter of ["A", "B", "C", "D"]) options[letter] = block.querySelector('[data-field="' + letter + '"]').value.trim();
+            const correct = block.querySelector('[data-field="correct"]').value;
+            if (!prompt || Object.values(options).some(value => !value)) {
+              throw new Error("Complete the question text and all four options for Question " + (i + 1) + ".");
+            }
+            questions.push({ number: i + 1, prompt, options });
+            answerKey[String(i + 1)] = correct;
+          }
+          const assessmentId = courseId + "_" + lessonId;
+          saveButton.disabled = true;
+          await setDoc(doc(db, "lessonAssessmentQuestions", assessmentId), {
+            courseId, lessonId, lessonTitle, title: lessonTitle + " Assessment",
+            published: false, passMarkPercent: 70, questionCount: questions.length,
+            questions, updatedBy: currentAdmin.uid, updatedAt: serverTimestamp()
+          });
+          await setDoc(doc(db, "lessonAssessmentKeys", assessmentId), {
+            courseId, lessonId, answers: answerKey,
+            updatedBy: currentAdmin.uid, updatedAt: serverTimestamp()
+          });
+          status.textContent = "Assessment draft saved. Questions: " + questions.length + ". Pass mark: 70%. Not published.";
+          setMessage(dashboardMessage, "Assessment draft and private answer key saved. Members cannot see the answer key.");
+        } catch (error) {
+          setMessage(dashboardMessage, "Could not save assessment: " + error.message, true);
+        } finally {
+          saveButton.disabled = false;
+        }
+      });
+
+      (async () => {
+        try {
+          const assessmentId = courseId + "_" + lessonId;
+          const questionSnap = await getDoc(doc(db, "lessonAssessmentQuestions", assessmentId));
+          if (questionSnap.exists()) {
+            const assessment = questionSnap.data();
+            status.textContent = (assessment.published === true ? "Published" : "Draft") + " assessment found (" + (assessment.questionCount || assessment.questions?.length || 0) + " questions). Saving changes will return it to draft.";
+            const keySnap = await getDoc(doc(db, "lessonAssessmentKeys", assessmentId));
+            const answers = keySnap.exists() ? keySnap.data().answers || {} : {};
+            for (let i = 0; i < (assessment.questions || []).length; i++) {
+              addQuestionBlock(questionsWrap, assessment.questions[i], answers[String(i + 1)] || "A");
+            }
+            let assessmentPublished = assessment.published === true;
+            const toggleAssessmentButton = makeButton(
+              assessmentPublished ? "Unpublish Assessment" : "Publish Assessment",
+              async () => {
+                try {
+                  requireAdmin();
+                  const nextState = !assessmentPublished;
+                  if (nextState && !confirm("Publish this assessment? Confirm the questions and answer key are correct. The course and lesson must also be published before members can access it.")) return;
+                  if (!nextState && !confirm("Unpublish this assessment? Members will no longer be able to start it.")) return;
+                  await updateDoc(doc(db, "lessonAssessmentQuestions", assessmentId), {
+                    published: nextState,
+                    ...(nextState ? { publishedBy: currentAdmin.uid, publishedAt: serverTimestamp() } : {}),
+                    updatedAt: serverTimestamp()
+                  });
+                  assessmentPublished = nextState;
+                  toggleAssessmentButton.textContent = nextState ? "Unpublish Assessment" : "Publish Assessment";
+                  toggleAssessmentButton.className = nextState ? "unpublish" : "publish";
+                  status.textContent = nextState ? "Assessment published. Members can access it only when the course and lesson are also published." : "Assessment unpublished.";
+                  setMessage(dashboardMessage, nextState ? "Assessment published." : "Assessment unpublished.");
+                } catch (error) {
+                  setMessage(dashboardMessage, "Could not update assessment: " + error.message, true);
+                }
+              },
+              assessmentPublished ? "unpublish" : "publish"
+            );
+            formActions.prepend(toggleAssessmentButton);
+          } else {
+            status.textContent = "No assessment yet. Add questions below; the saved assessment will remain a draft.";
+            for (let i = 0; i < 5; i++) addQuestionBlock(questionsWrap);
+          }
+        } catch (error) {
+          status.textContent = "Could not load assessment: " + error.message;
+        }
+      })();
+      return box;
+    }
+
     async function loadCourses() {
       requireAdmin();
       courseList.replaceChildren();
@@ -279,6 +424,7 @@
               try { await setLessonPublished(courseDoc.id, lessonDoc.id, lesson.published !== true); }
               catch (error) { setMessage(dashboardMessage, "Could not update lesson: " + error.message, true); }
             }, lesson.published === true ? "unpublish" : "publish"));
+            lessonCard.appendChild(makeAssessmentBuilder(courseDoc.id, lessonDoc.id, lesson.title || ("Lesson " + (lesson.lessonNumber || ""))));
             lessonList.appendChild(lessonCard);
           }
         } catch (error) {
