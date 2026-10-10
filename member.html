@@ -474,7 +474,7 @@
 
 
     <!-- COURSES -->
-    <div class="card">
+    <div class="card" id="coursesSection">
 
       <h2>My B.E.P. Courses</h2>
 
@@ -526,8 +526,7 @@
     getFirestore,
     doc,
     getDoc,
-    updateDoc,
-    serverTimestamp
+    updateDoc
   } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
 
 
@@ -783,28 +782,31 @@
         member.location || "";
 
 
-      // Membership status
-
+      // Membership status and course access.
+      // The page hides courses for non-active members;
+      // Firestore Security Rules must also enforce this on the database.
       const pendingNote =
-        document.getElementById(
-          "pendingNote"
-        );
+        document.getElementById("pendingNote");
+      const coursesSection =
+        document.getElementById("coursesSection");
+      const memberStatus =
+        String(member.status || "Pending").trim().toLowerCase();
 
-
-      if (
-        String(member.status || "")
-          .toLowerCase() === "pending"
-      ) {
-
-        pendingNote.style.display =
-          "block";
-
+      if (memberStatus === "active") {
+        pendingNote.style.display = "none";
+        coursesSection.style.display = "block";
       } else {
+        coursesSection.style.display = "none";
+        pendingNote.style.display = "block";
 
-        pendingNote.style.display =
-          "none";
+        if (memberStatus === "pending") {
+          pendingNote.textContent =
+            "Your B.E.P. membership is pending approval. Courses are available only to verified members with Active status.";
+        } else {
+          pendingNote.textContent =
+            "Your membership is not Active, so course access is currently unavailable. Please contact the B.E.P. administrator if you need help.";
+        }
       }
-
 
       showPortal();
 
@@ -1527,8 +1529,7 @@
           ),
           {
             phone: phone,
-            location: location,
-            updatedAt: serverTimestamp()
+            location: location
           }
         );
 
