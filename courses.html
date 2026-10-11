@@ -332,6 +332,10 @@
     let assessmentData = [];
     let savedResults = [];
 
+    // Attempt counts and the lifetime lesson limit come from the Worker.
+    let attemptCounts = null;
+    let maxLessonAttempts = 2;
+
     function message(text, isError = false) {
       pageMessage.textContent = text;
       pageMessage.className = isError ? "notice error" : "notice";
@@ -380,9 +384,17 @@
       const data = await response.json().catch(() => ({}));
 
       if (!response.ok) {
-        throw new Error(
+        const error = new Error(
           data.error || "The assessment service returned an error."
         );
+        error.attemptLimitReached = data.attemptLimitReached === true;
+        error.attemptCount = Number.isFinite(Number(data.attemptCount))
+          ? Number(data.attemptCount)
+          : null;
+        error.maxAttempts = Number.isFinite(Number(data.maxAttempts))
+          ? Number(data.maxAttempts)
+          : maxLessonAttempts;
+        throw error;
       }
 
       return data;
@@ -606,14 +618,52 @@
 
       addText(card, "h3", assessment.title || "B.E.P. Assessment");
 
+      const isFinal = assessment.id === "final-assessment";
+      const attemptCount = isFinal || !attemptCounts
+        ? null
+        : Number.isFinite(Number(attemptCounts[assessment.id]))
+          ? Number(attemptCounts[assessment.id])
+          : null;
+      const limitReached = !isFinal && (
+        attemptCount === null || attemptCount >= maxLessonAttempts
+      );
+
       addText(
         card,
         "p",
-        assessment.id === "final-assessment"
+        isFinal
           ? "20 questions · Pass mark: 70%"
           : "10 questions · Pass mark: 70%",
         "meta"
       );
+
+      if (!isFinal) {
+        if (attemptCount === null) {
+          addText(
+            card,
+            "p",
+            "Attempt count unavailable. This assessment is temporarily disabled until the assessment service provides the lifetime attempt count.",
+            "notice error"
+          );
+        } else if (attemptCount >= maxLessonAttempts) {
+          addText(
+            card,
+            "p",
+            attemptCount + " attempts already recorded (lifetime limit " +
+              maxLessonAttempts + "); this lesson is closed.",
+            "notice error"
+          );
+        } else {
+          addText(
+            card,
+            "p",
+            attemptCount + " of " + maxLessonAttempts +
+              " lifetime attempts used. " +
+              (maxLessonAttempts - attemptCount) + " remaining.",
+            "notice"
+          );
+        }
+      }
 
       if (bestResult) {
         const passed = Number(bestResult.passed) === 1;
@@ -682,7 +732,14 @@
 
       const toggle = document.createElement("button");
       toggle.type = "button";
-      toggle.textContent = bestResult ? "Retake assessment" : "Start assessment";
+      toggle.textContent = limitReached
+        ? (attemptCount === null
+            ? "Assessment temporarily unavailable"
+            : "Lesson closed — attempt limit reached")
+        : bestResult
+          ? "Retake assessment"
+          : "Start assessment";
+      toggle.disabled = limitReached;
 
       const form = document.createElement("form");
       form.className = "assessment-form";
@@ -811,8 +868,17 @@
         } catch (error) {
           resultMessage.hidden = false;
           resultMessage.className = "notice error";
-          resultMessage.textContent =
-            error.message || "The submission failed. Please try again.";
+          resultMessage.textContent = error.attemptLimitReached
+            ? (error.attemptCount === null
+                ? "The lifetime attempt limit has been reached. This lesson is closed."
+                : error.attemptCount + " attempts are already recorded (limit " +
+                  error.maxAttempts + "). This lesson is closed.")
+            : error.message || "The submission failed. Please try again.";
+
+          if (error.attemptLimitReached) {
+            toggle.disabled = true;
+            toggle.textContent = "Lesson closed — attempt limit reached";
+          }
         } finally {
           submit.disabled = false;
           toggle.disabled = false;
@@ -837,6 +903,21 @@
 
       assessmentData = assessmentResponse.assessments || [];
       savedResults = resultsResponse.results || [];
+
+      const suppliedCounts = assessmentResponse.attemptCounts;
+      const validCounts = suppliedCounts &&
+        typeof suppliedCounts === "object" &&
+        LESSON_IDS.every(id =>
+          Object.prototype.hasOwnProperty.call(suppliedCounts, id) &&
+          Number.isFinite(Number(suppliedCounts[id])) &&
+          Number(suppliedCounts[id]) >= 0
+        );
+
+      attemptCounts = validCounts ? suppliedCounts : null;
+      const suppliedLimit = Number(assessmentResponse.maxLessonAttempts);
+      maxLessonAttempts = Number.isInteger(suppliedLimit) && suppliedLimit > 0
+        ? suppliedLimit
+        : 2;
 
       const unlocked = assessmentResponse.finalAssessmentUnlocked === true;
       updateProgress(savedResults, unlocked);
@@ -878,9 +959,17 @@
         assessmentList.appendChild(lockedCard);
       }
 
-      assessmentNotice(
-        "Assessments loaded securely. Your marks are saved by the B.E.P. assessment service."
-      );
+      if (!attemptCounts) {
+        assessmentNotice(
+          "The assessment service has not supplied lifetime attempt counts. Lesson assessments are disabled until the Worker returns attemptCounts and maxLessonAttempts. Please contact the administrator.",
+          "error"
+        );
+      } else {
+        assessmentNotice(
+          "Assessments loaded securely. Each lesson has a lifetime limit of " +
+            maxLessonAttempts + " attempts. Your saved marks and attempt history are preserved."
+        );
+      }
     }
 
     signOutButton.addEventListener("click", async () => {
