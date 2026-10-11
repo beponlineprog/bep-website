@@ -162,6 +162,36 @@
     .pass { color:var(--green); }
     .fail { color:var(--red); }
 
+    .attempt-history {
+      margin:12px 0 16px;
+      padding:12px;
+      border:1px solid var(--line);
+      border-radius:10px;
+      background:#fafcff;
+    }
+
+    .attempt-history h4 {
+      margin:0 0 8px;
+      color:var(--navy);
+      font-size:.98rem;
+    }
+
+    .attempt-history ol {
+      margin:0;
+      padding-left:22px;
+    }
+
+    .attempt-history li {
+      margin:7px 0;
+      overflow-wrap:anywhere;
+    }
+
+    .attempt-date {
+      display:block;
+      color:var(--muted);
+      font-size:.82rem;
+    }
+
     footer {
       text-align:center;
       color:var(--muted);
@@ -570,7 +600,7 @@
       }
     }
 
-    function renderAssessment(assessment, bestResult) {
+    function renderAssessment(assessment, bestResult, attemptHistory = []) {
       const card = document.createElement("article");
       card.className = "assessment";
 
@@ -605,6 +635,50 @@
       } else {
         addText(card, "p", "No saved result yet.", "meta");
       }
+
+      const historyBox = document.createElement("section");
+      historyBox.className = "attempt-history";
+      addText(
+        historyBox,
+        "h4",
+        "Attempt history (" + attemptHistory.length + ")"
+      );
+
+      if (attemptHistory.length) {
+        const historyList = document.createElement("ol");
+        const orderedAttempts = attemptHistory.slice().sort((a, b) => {
+          return String(a.submitted_at || "").localeCompare(
+            String(b.submitted_at || "")
+          );
+        });
+
+        orderedAttempts.forEach((attempt, index) => {
+          const item = document.createElement("li");
+          const passedAttempt = Number(attempt.passed) === 1;
+
+          addText(
+            item,
+            "span",
+            "Attempt " + (index + 1) + ": " +
+              attempt.score + "/" + attempt.total_marks + " (" +
+              attempt.percentage + "%) — " +
+              (passedAttempt ? "Passed" : "Failed"),
+            passedAttempt ? "pass" : "fail"
+          );
+
+          if (attempt.submitted_at) {
+            addText(item, "span", "Submitted: " + attempt.submitted_at, "attempt-date");
+          }
+
+          historyList.appendChild(item);
+        });
+
+        historyBox.appendChild(historyList);
+      } else {
+        addText(historyBox, "p", "No attempts submitted yet.", "meta");
+      }
+
+      card.appendChild(historyBox);
 
       const toggle = document.createElement("button");
       toggle.type = "button";
@@ -770,8 +844,16 @@
       const best = bestResultsByAssessment(savedResults);
 
       for (const assessment of assessmentData) {
+        const attemptsForAssessment = savedResults.filter(
+          result => result.assessment_id === assessment.id
+        );
+
         assessmentList.appendChild(
-          renderAssessment(assessment, best.get(assessment.id))
+          renderAssessment(
+            assessment,
+            best.get(assessment.id),
+            attemptsForAssessment
+          )
         );
       }
 
