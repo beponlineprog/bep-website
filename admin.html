@@ -22,7 +22,7 @@
     header h1 { margin: 0 0 8px; }
     header p { margin: 0; }
     main {
-      width: min(100% - 28px, 950px);
+      width: calc(100% - 24px);\n      max-width: 1280px;
       margin: 24px auto;
     }
     .panel {
@@ -140,7 +140,7 @@ html { scroll-behavior: smooth; }
 body { overflow-x: hidden; }
 img, video, canvas, iframe { max-width: 100%; }
 input, select, textarea, button { max-width: 100%; }
-main, .container, .wrap, .panel, .card, .question, .certificate, .inner { min-width: 0; }
+main, .container, .wrap, .panel, .card, .question, .certificate, .inner { min-width: 0; max-width: 100%; }\nmain { width: calc(100% - 24px); max-width: 1280px; }\n.panel { width: 100%; }
 pre, code, p, a, strong, span { overflow-wrap: anywhere; }
 /* =========================
    FOOTER
