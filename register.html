@@ -558,9 +558,28 @@ footer{
 }
 @media print { body > footer { display: none !important; } }
 
-/* Registration page uses a centered card above the shared full-width footer */
-body { display: block; min-height: 100vh; align-items: initial; justify-content: initial; }
-.container { margin: 20px auto; }
+/* Registration card: wider on desktop and fitted to the available screen width */
+body {
+  display: block;
+  min-height: 100vh;
+  align-items: initial;
+  justify-content: initial;
+  padding: 12px;
+}
+.container {
+  width: 100%;
+  max-width: 960px;
+  margin: 20px auto;
+}
+.header, .card {
+  width: 100%;
+}
+@media (max-width: 600px) {
+  body { padding: 6px; }
+  .container { width: 100%; margin: 8px auto 16px; }
+  .header { padding: 20px 12px 18px; }
+  .card { padding: 18px 12px; }
+}
 
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
