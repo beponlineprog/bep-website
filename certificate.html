@@ -412,14 +412,15 @@ async function loadCertificate(user) {
   }
 
   try {
-    await reload(user);
-    const currentUser = auth.currentUser;
+    // Use the existing signed-in session first. Forcing a user reload and token
+    // refresh here can cause avoidable auth/network-request-failed errors on mobile.
+    const currentUser = auth.currentUser || user;
     if (!currentUser || !currentUser.emailVerified) {
-      showMessage("Your email must be verified before you can view your B.E.P. certificate.", true);
+      showMessage("Your email must be verified before you can view your B.E.P. certificate. If you verified it just now, return to the Member Portal and sign in again.", true);
       return;
     }
 
-    const token = await currentUser.getIdToken(true);
+    const token = await currentUser.getIdToken();
     const response = await fetch(assessmentApiBase + "/certificate/status", {
       method: "GET",
       headers: {
@@ -453,7 +454,11 @@ async function loadCertificate(user) {
     printButton.hidden = false;
   } catch (error) {
     console.error("B.E.P. certificate loading error:", error);
-    showMessage("We could not load your certificate right now. Please sign in again through the member portal and try once more. " + (error && error.message ? error.message : ""));
+    if (error && error.code === "auth/network-request-failed") {
+      showMessage("Firebase could not connect to its authentication service. Check your internet connection, then refresh this page. Your certificate record has not been changed.");
+    } else {
+      showMessage("We could not load your certificate right now. Please return to the Member Portal, sign in again, and retry. " + (error && error.message ? error.message : ""));
+    }
   }
 }
 
