@@ -30,6 +30,25 @@ body {
   gap: 12px;
   font: 14px Arial, sans-serif;
 }
+.toolbar-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.nav-link {
+  display: inline-block;
+  background: var(--blue);
+  color: #fff;
+  border-radius: 7px;
+  padding: 12px 14px;
+  font: bold 14px Arial, sans-serif;
+  text-decoration: none;
+  text-align: center;
+}
+.nav-link:hover, .nav-link:focus { background: var(--navy); color: #fff; }
+@media print { .toolbar-actions { display: none !important; } }
 .notice {
   max-width: 1100px;
   margin: 0 auto 16px;
@@ -305,7 +324,11 @@ footer{
 <body>
 <div class="toolbar">
   <span><strong>B.E.P.</strong> Certificate preview</span>
-  <button id="printButton" onclick="window.print()" hidden>Print / Save as PDF</button>
+  <div class="toolbar-actions">
+    <a class="nav-link" href="member.html">← Back to Members</a>
+    <a class="nav-link" href="index.html">🏠 Back Home</a>
+    <button id="printButton" onclick="window.print()" hidden>Print / Save as PDF</button>
+  </div>
 </div>
 
 <div id="certificateMessage" class="notice" role="status" aria-live="polite">Checking your B.E.P. certificate status…</div>
