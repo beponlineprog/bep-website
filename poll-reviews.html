@@ -165,7 +165,82 @@
             padding: 25px;
             margin-top: 40px;
         }
-    </style>
+    
+/* Shared B.E.P. footer and responsive-fit rules */
+html { scroll-behavior: smooth; }
+body { overflow-x: hidden; }
+img, video, canvas, iframe { max-width: 100%; }
+input, select, textarea, button { max-width: 100%; }
+main, .container, .wrap, .panel, .card, .question, .certificate, .inner { min-width: 0; }
+pre, code, p, a, strong, span { overflow-wrap: anywhere; }
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+    background:#002b52;
+    color:#dcecff;
+    padding:55px 20px 20px;
+}
+
+.footer-grid{
+    max-width:1150px;
+    margin:auto;
+
+    display:grid;
+    grid-template-columns:1.3fr 1fr 1fr 1fr;
+    gap:35px;
+}
+
+.footer-column h3{
+    color:#ffd700;
+    margin-bottom:18px;
+}
+
+.footer-column p{
+    margin-bottom:9px;
+}
+
+.footer-column a{
+    color:#dcecff;
+    transition:0.3s;
+}
+
+.footer-column a:hover{
+    color:#ffd700;
+}
+
+.footer-column i{
+    color:#ffd700;
+    width:20px;
+    margin-right:5px;
+}
+
+.footer-bottom{
+    max-width:1150px;
+    margin:35px auto 0;
+    padding-top:20px;
+    border-top:1px solid rgba(255,255,255,0.2);
+    text-align:center;
+    font-size:14px;
+}
+
+
+
+@media (max-width: 900px) {
+  .footer-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 26px; }
+}
+@media (max-width: 600px) {
+  .footer-grid { grid-template-columns: minmax(0, 1fr); gap: 22px; }
+  footer { padding: 34px 18px 18px; }
+  .footer-bottom { margin-top: 24px; font-size: 13px; line-height: 1.7; }
+  button, input, select, textarea { font-size: 16px; }
+  .footer-column { min-width: 0; }
+}
+@media print { body > footer { display: none !important; } }
+
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 
 <body>
@@ -361,17 +436,7 @@
 
 
 
-<footer>
 
-    <p>
-        © 2026 Biblical Empowerment Program
-    </p>
-
-    <p>
-        Growing in Christ • Building Character • Empowering Lives
-    </p>
-
-</footer>
 
 
 
@@ -698,5 +763,203 @@
 </script>
 
 
+<footer>
+
+<div class="footer-grid">
+
+
+<!-- COLUMN 1 -->
+
+<div class="footer-column">
+
+<h3>
+B.E.P.
+</h3>
+
+<p>
+Biblical Empowerment Program
+</p>
+
+<p>
+Building the Church of Christ
+</p>
+
+<p>
+Growing believers through God's Word,
+discipleship and Christian fellowship.
+</p>
+
+</div>
+
+
+
+<!-- COLUMN 2 -->
+
+<div class="footer-column">
+
+<h3>
+Quick Links
+</h3>
+
+<p>
+<a href="index.html#home">
+<i class="fa-solid fa-house"></i>
+Home
+</a>
+</p>
+
+<p>
+<a href="index.html#about">
+<i class="fa-solid fa-circle-info"></i>
+About Us
+</a>
+</p>
+
+<p>
+<a href="index.html#vision">
+<i class="fa-solid fa-eye"></i>
+Vision
+</a>
+</p>
+
+<p>
+<a href="index.html#mission">
+<i class="fa-solid fa-bullseye"></i>
+Mission
+</a>
+</p>
+
+<p>
+<a href="index.html#sessions">
+<i class="fa-solid fa-calendar-days"></i>
+Sessions
+</a>
+</p>
+
+<p>
+<a href="register.html">
+<i class="fa-solid fa-user-plus"></i>
+Registration
+</a>
+</p>
+
+<p>
+<a href="quiz.html">
+<i class="fa-solid fa-pen-to-square"></i>
+Bible Quiz
+</a>
+</p>
+
+</div>
+
+
+
+<!-- COLUMN 3 -->
+
+<div class="footer-column">
+
+<h3>Contact Us</h3>
+
+<p>
+<a
+href="https://wa.me/27623508689"
+target="_blank">
+
+<i class="fa-brands fa-whatsapp"></i>
+062 350 8689 — Omega
+</a>
+</p>
+
+<p>
+<a
+href="https://wa.me/27832822644"
+target="_blank">
+
+<i class="fa-brands fa-whatsapp"></i>
+083 282 2644 — Bro. KB
+</a>
+</p>
+
+<p>
+<a
+href="mailto:bep.onlineprog@gmail.com">
+
+<i class="fa-solid fa-envelope"></i>
+Email
+
+</a>
+</p>
+
+<p>
+<a
+href="https://facebook.com/groups/1421853356307383/"
+target="_blank">
+
+<i class="fa-brands fa-facebook"></i>
+Facebook Group
+
+</a>
+</p>
+
+</div>
+
+
+
+<!-- COLUMN 4 -->
+
+<div class="footer-column">
+
+<h3>
+B.E.P. Sessions
+</h3>
+
+<p>
+<i class="fa-solid fa-calendar-days"></i>
+Every Thursday
+</p>
+
+<p>
+<i class="fa-solid fa-clock"></i>
+19:00 – 20:30
+</p>
+
+<p>
+<i class="fa-brands fa-microsoft"></i>
+Microsoft Teams
+</p>
+
+<p>
+
+<a
+href="https://teams.live.com/meet/936085799236?p=b66LnDUAB2Xkx2uQYp&eventType=community"
+target="_blank">
+
+<i class="fa-solid fa-video"></i>
+Join Teams
+
+</a>
+
+</p>
+
+</div>
+
+
+</div>
+
+
+<div class="footer-bottom">
+
+© <span id="year"></span>
+Biblical Empowerment Program (B.E.P.)
+All Rights Reserved.
+
+<br>
+
+Building the Church of Christ
+
+</div>
+
+</footer>
+<script>document.querySelectorAll("#year").forEach(function(node){node.textContent=String(new Date().getFullYear());});</script>
 </body>
   </html>
