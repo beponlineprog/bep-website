@@ -489,13 +489,38 @@
         >Open My B.E.P. Courses</a>
       </p>
 
-      <div
-        class="message warning"
-        style="display:block;"
-      >
-        Lesson marks, progress tracking, final assessment, and certificates are being prepared.
+
+
+    </div>
+
+    <!-- CERTIFICATE -->
+    <div class="card" id="certificateSection" style="display:none;">
+      <h2>My B.E.P. Certificate</h2>
+      <p>Check your assessment eligibility, view your certificate status, and request your certificate when eligible.</p>
+
+      <div class="profile-grid">
+        <div class="profile-item">
+          <strong>Assessment Progress</strong>
+          <span id="certificateProgress">Not checked yet</span>
+        </div>
+        <div class="profile-item">
+          <strong>Certificate Status</strong>
+          <span id="certificateStatus">Not checked yet</span>
+        </div>
+        <div class="profile-item">
+          <strong>Certificate Number</strong>
+          <span id="certificateNumber">Not issued yet</span>
+        </div>
       </div>
 
+      <button type="button" id="checkCertificateBtn">Check Certificate Status</button>
+      <button type="button" id="requestCertificateBtn" disabled>Request Certificate</button>
+      <div id="certificateMessage" class="message"></div>
+
+      <p class="small-note">
+        Certificate requests require all 12 lessons and the final assessment to be passed with at least 70%.
+        Requests are subject to B.E.P. administrator review.
+      </p>
     </div>
 
   </div>
@@ -796,14 +821,18 @@
         document.getElementById("pendingNote");
       const coursesSection =
         document.getElementById("coursesSection");
+      const certificateSection =
+        document.getElementById("certificateSection");
       const memberStatus =
         String(member.status || "Pending").trim().toLowerCase();
 
       if (memberStatus === "active") {
         pendingNote.style.display = "none";
         coursesSection.style.display = "block";
+        certificateSection.style.display = "block";
       } else {
         coursesSection.style.display = "none";
+        certificateSection.style.display = "none";
         pendingNote.style.display = "block";
 
         if (memberStatus === "pending") {
@@ -1671,6 +1700,205 @@
 
     }
   );
+
+
+  // ==========================================================
+  // CERTIFICATE STATUS AND REQUESTS (CLOUDFLARE WORKER)
+  // ==========================================================
+
+  const assessmentApiBase =
+    "https://bep-assessment-api.bep-onlineprog.workers.dev";
+
+  const checkCertificateBtn =
+    document.getElementById("checkCertificateBtn");
+
+  const requestCertificateBtn =
+    document.getElementById("requestCertificateBtn");
+
+  let latestCertificateEligibility = false;
+  let latestCertificateRecord = null;
+
+  async function callAssessmentApi(path, method = "GET") {
+    const user = auth.currentUser;
+
+    if (!user) {
+      throw new Error("Please sign in again to check your certificate.");
+    }
+
+    await reload(user);
+    const currentUser = auth.currentUser;
+
+    if (!currentUser || !currentUser.emailVerified) {
+      throw new Error("A verified email address is required. Please sign in again after verifying your email.");
+    }
+
+    const token = await currentUser.getIdToken(true);
+    const options = {
+      method,
+      headers: {
+        "Authorization": "Bearer " + token,
+        "Accept": "application/json"
+      }
+    };
+
+    if (method === "POST") {
+      options.headers["Content-Type"] = "application/json";
+      options.body = "{}";
+    }
+
+    const response = await fetch(assessmentApiBase + path, options);
+    const data = await response.json().catch(() => ({}));
+
+    if (!response.ok) {
+      const error = new Error(
+        data.error || data.message || "The certificate service could not complete your request."
+      );
+      error.apiData = data;
+      throw error;
+    }
+
+    return data;
+  }
+
+  function renderCertificateStatus(data) {
+    const eligibility = data.eligibility || {};
+    const certificate = data.certificate || null;
+    latestCertificateEligibility = eligibility.eligible === true;
+    latestCertificateRecord = certificate;
+
+    const lessonsPassed = Number(eligibility.lessonsPassed || 0);
+    const totalLessons = Number(eligibility.totalLessons || 12);
+    const finalPassed = eligibility.finalAssessmentPassed === true;
+
+    document.getElementById("certificateProgress").textContent =
+      "Lessons passed: " + lessonsPassed + "/" + totalLessons +
+      " · Final assessment: " + (finalPassed ? "Passed" : "Not passed");
+
+    document.getElementById("certificateStatus").textContent =
+      certificate && certificate.status
+        ? String(certificate.status)
+        : (latestCertificateEligibility ? "Eligible — not requested" : "Not yet eligible");
+
+    document.getElementById("certificateNumber").textContent =
+      certificate && certificate.certificateNumber
+        ? String(certificate.certificateNumber)
+        : "Not issued yet";
+
+    requestCertificateBtn.disabled =
+      !latestCertificateEligibility || Boolean(certificate);
+
+    if (certificate && certificate.status) {
+      const status = String(certificate.status).toLowerCase();
+      if (status === "issued") {
+        showMessage(
+          document.getElementById("certificateMessage"),
+          "Your certificate has been issued. Keep your certificate number for verification.",
+          "success"
+        );
+      } else if (status === "rejected") {
+        showMessage(
+          document.getElementById("certificateMessage"),
+          "Your certificate request was rejected. Please contact the B.E.P. administrator for guidance.",
+          "warning"
+        );
+      } else {
+        showMessage(
+          document.getElementById("certificateMessage"),
+          "Your certificate request is recorded and is awaiting administrator processing.",
+          "success"
+        );
+      }
+    } else if (latestCertificateEligibility) {
+      showMessage(
+        document.getElementById("certificateMessage"),
+        "You meet the assessment requirements. You can request your certificate.",
+        "success"
+      );
+    } else {
+      showMessage(
+        document.getElementById("certificateMessage"),
+        "Complete and pass all 12 lessons and the final assessment with at least 70% to become eligible.",
+        "warning"
+      );
+    }
+  }
+
+  checkCertificateBtn.addEventListener("click", async function() {
+    hideMessage(document.getElementById("certificateMessage"));
+    checkCertificateBtn.disabled = true;
+    requestCertificateBtn.disabled = true;
+    checkCertificateBtn.textContent = "Checking...";
+
+    try {
+      const data = await callAssessmentApi("/certificate/status");
+      renderCertificateStatus(data);
+    } catch (error) {
+      console.error("Certificate status error:", error);
+      showMessage(
+        document.getElementById("certificateMessage"),
+        error.message || "Unable to check certificate status. Please try again.",
+        "error"
+      );
+    } finally {
+      checkCertificateBtn.disabled = false;
+      checkCertificateBtn.textContent = "Check Certificate Status";
+      if (!latestCertificateEligibility || latestCertificateRecord) {
+        requestCertificateBtn.disabled = true;
+      } else {
+        requestCertificateBtn.disabled = false;
+      }
+    }
+  });
+
+  requestCertificateBtn.addEventListener("click", async function() {
+    if (!latestCertificateEligibility || latestCertificateRecord) {
+      showMessage(
+        document.getElementById("certificateMessage"),
+        "Check your certificate status first. A request is available only when you are eligible and have no existing certificate request.",
+        "warning"
+      );
+      return;
+    }
+
+    requestCertificateBtn.disabled = true;
+    checkCertificateBtn.disabled = true;
+    requestCertificateBtn.textContent = "Submitting Request...";
+    hideMessage(document.getElementById("certificateMessage"));
+
+    try {
+      const data = await callAssessmentApi("/certificate/request", "POST");
+      if (data.eligibility) {
+        latestCertificateEligibility = data.eligibility.eligible === true;
+      }
+      showMessage(
+        document.getElementById("certificateMessage"),
+        data.message || "Your certificate request has been submitted for B.E.P. administrator review.",
+        "success"
+      );
+
+      const statusData = await callAssessmentApi("/certificate/status");
+      renderCertificateStatus(statusData);
+    } catch (error) {
+      console.error("Certificate request error:", error);
+      const detail = error.apiData && error.apiData.eligibility;
+      if (detail) {
+        renderCertificateStatus({
+          eligibility: detail,
+          certificate: error.apiData.certificate || null
+        });
+      }
+      showMessage(
+        document.getElementById("certificateMessage"),
+        error.message || "Unable to submit your certificate request. Please try again.",
+        "error"
+      );
+    } finally {
+      requestCertificateBtn.textContent = "Request Certificate";
+      checkCertificateBtn.disabled = false;
+      requestCertificateBtn.disabled =
+        !latestCertificateEligibility || Boolean(latestCertificateRecord);
+    }
+  });
 
 
   // ==========================================================
