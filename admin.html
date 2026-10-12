@@ -116,6 +116,17 @@
       overflow-wrap: anywhere;
       line-height: 1.5;
     }
+    .certificate-status {
+      display: inline-block;
+      padding: 5px 9px;
+      border-radius: 20px;
+      background: #e4edf7;
+      color: #173d66;
+      font-weight: bold;
+      font-size: 12px;
+    }
+    .eligibility-good { color: #17653a; font-weight: bold; }
+    .eligibility-warn { color: #b42332; font-weight: bold; }
     .hidden { display: none; }
     footer {
       text-align: center;
@@ -204,6 +215,17 @@
       <div class="panel">
         <h2>Pending Applications</h2>
         <div id="applications">Loading applications...</div>
+      </div>
+
+      <div class="panel" id="certificatePanel">
+        <h2>Certificate Requests</h2>
+        <p>Review assessment eligibility, approve eligible requests, and issue certificates only after approval.</p>
+        <div class="notice">
+          The Worker rechecks eligibility before approval and issuance. Certificate actions are restricted by the Worker to the configured administrator account.
+        </div>
+        <button class="primary" id="refreshCertificatesButton" type="button">Refresh Certificate Requests</button>
+        <p id="certificateMessage" class="message" role="status"></p>
+        <div id="certificates">Sign in as the administrator to load certificate requests.</div>
       </div>
     </section>
   </main>
@@ -308,6 +330,7 @@
         "Signed in as: " + (user.email || "Authorised administrator");
 
       await loadApplications();
+      await loadCertificates();
     });
 
     loginForm.addEventListener("submit", async event => {
@@ -329,6 +352,122 @@
       } finally {
         loginButton.disabled = false;
       }
+    });
+
+
+    const WORKER_API = "https://bep-assessment-api.bep-onlineprog.workers.dev";
+    const certificates = document.getElementById("certificates");
+    const certificateMessage = document.getElementById("certificateMessage");
+
+    function showCertificateMessage(message, isError = false) {
+      certificateMessage.textContent = message;
+      certificateMessage.style.color = isError ? "#b42332" : "#17653a";
+    }
+
+    async function certificateApi(path, options = {}) {
+      if (!currentAdmin || currentAdmin.uid !== ADMIN_UID) {
+        throw new Error("Administrator sign-in is required.");
+      }
+      const token = await currentAdmin.getIdToken(true);
+      const response = await fetch(WORKER_API + path, {
+        method: options.method || "GET",
+        headers: {
+          "Authorization": "Bearer " + token,
+          ...(options.body ? { "Content-Type": "application/json" } : {})
+        },
+        ...(options.body ? { body: JSON.stringify(options.body) } : {})
+      });
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok || data.ok === false) {
+        throw new Error(data.error || "Certificate service request failed (HTTP " + response.status + ").");
+      }
+      return data;
+    }
+
+    async function loadCertificates() {
+      if (!currentAdmin || currentAdmin.uid !== ADMIN_UID) return;
+      certificates.textContent = "Loading certificate requests...";
+      showCertificateMessage("");
+      try {
+        const data = await certificateApi("/admin/certificates");
+        const rows = Array.isArray(data.certificates) ? data.certificates : [];
+        if (!rows.length) {
+          certificates.textContent = "No certificate requests were found.";
+          return;
+        }
+        certificates.innerHTML = rows.map(item => {
+          const eligibility = item.eligibility || {};
+          const eligible = eligibility.eligible === true;
+          const status = String(item.status || "Unknown");
+          const passedLessons = Number(eligibility.lessonsPassed || 0);
+          const totalLessons = Number(eligibility.totalLessons || 12);
+          const finalPassed = eligibility.finalAssessmentPassed === true;
+          const canApprove = status === "Pending" && eligible;
+          const canReject = status === "Pending";
+          const canIssue = status === "Approved" && eligible;
+          const eligibilityText = eligible
+            ? "Eligible for certificate"
+            : "Not yet eligible";
+          const courseTitle = item.courseTitle || "B.E.P. Discipleship Course";
+          return `
+            <article class="application">
+              <h3>${escapeHtml(courseTitle)}</h3>
+              <div class="details">
+                <strong>Status:</strong> <span class="certificate-status">${escapeHtml(status)}</span><br>
+                <strong>Firebase UID:</strong> ${escapeHtml(item.firebaseUid || "")}<br>
+                <strong>Certificate number:</strong> ${escapeHtml(item.certificateNumber || "Not issued")}<br>
+                <strong>Requested:</strong> ${escapeHtml(item.requestedAt || "Not available")}<br>
+                <strong>Approved:</strong> ${escapeHtml(item.approvedAt || "Not approved")}<br>
+                <strong>Issued:</strong> ${escapeHtml(item.issuedAt || "Not issued")}<br>
+                <strong>Lessons passed:</strong> ${passedLessons} / ${totalLessons}<br>
+                <strong>Final assessment:</strong> ${finalPassed ? "Passed" : "Not passed"}<br>
+                <strong>Eligibility:</strong> <span class="${eligible ? "eligibility-good" : "eligibility-warn"}">${eligibilityText}</span>
+              </div>
+              <div>
+                ${canApprove ? `<button class="approve" data-cert-action="approve" data-uid="${escapeHtml(item.firebaseUid || "")}">Approve Request</button>` : ""}
+                ${canReject ? `<button class="reject" data-cert-action="reject" data-uid="${escapeHtml(item.firebaseUid || "")}">Reject Request</button>` : ""}
+                ${canIssue ? `<button class="primary" data-cert-action="issue" data-uid="${escapeHtml(item.firebaseUid || "")}">Issue Certificate</button>` : ""}
+              </div>
+            </article>
+          `;
+        }).join("");
+      } catch (error) {
+        certificates.textContent = "Could not load certificate requests: " + error.message;
+        showCertificateMessage(error.message, true);
+      }
+    }
+
+    async function handleCertificateAction(action, firebaseUid) {
+      if (!currentAdmin || currentAdmin.uid !== ADMIN_UID || busy) return;
+      const labels = {
+        approve: "Approve this certificate request? The Worker will recheck that all 12 lessons and the final assessment are passed.",
+        reject: "Reject this pending certificate request? The member may need to submit a new request later.",
+        issue: "Issue this approved certificate now? The Worker will recheck eligibility and assign the certificate number."
+      };
+      if (!labels[action] || !firebaseUid) return;
+      if (!confirm(labels[action])) return;
+      busy = true;
+      setButtonsDisabled(true);
+      showCertificateMessage("Processing certificate " + action + "...");
+      try {
+        const data = await certificateApi("/admin/certificates/" + action, {
+          method: "POST",
+          body: { firebaseUid }
+        });
+        showCertificateMessage(data.message || "Certificate action completed.");
+        await loadCertificates();
+      } catch (error) {
+        showCertificateMessage("Certificate action failed: " + error.message, true);
+      } finally {
+        busy = false;
+        setButtonsDisabled(false);
+      }
+    }
+
+    certificates.addEventListener("click", async event => {
+      const button = event.target.closest("button[data-cert-action]");
+      if (!button || busy) return;
+      await handleCertificateAction(button.dataset.certAction, button.dataset.uid);
     });
 
     async function loadApplications() {
@@ -548,6 +687,10 @@
 
     document.getElementById("refreshButton").addEventListener(
       "click", loadApplications
+    );
+
+    document.getElementById("refreshCertificatesButton").addEventListener(
+      "click", loadCertificates
     );
 
     document.getElementById("logoutButton").addEventListener(
