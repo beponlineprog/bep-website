@@ -117,6 +117,42 @@
     .lesson-body[hidden],.assessment-form[hidden] { display:none; }
     .lesson-body p { white-space:pre-wrap; overflow-wrap:anywhere; }
 
+    .assessment-timer {
+      position: sticky;
+      top: 8px;
+      z-index: 10;
+      padding: 14px;
+      margin: 12px 0;
+      border: 2px solid var(--blue);
+      border-radius: 10px;
+      background: white;
+      text-align: center;
+    }
+
+    .assessment-timer strong {
+      display: block;
+      color: var(--navy);
+      font-size: 1.8rem;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .assessment-timer.warning {
+      border-color: #b45309;
+      background: #fff7ed;
+      color: #92400e;
+    }
+
+    .assessment-timer.expired {
+      border-color: var(--red);
+      background: #fff1f1;
+      color: var(--red);
+    }
+
+    .assessment-timer-message {
+      margin-top: 4px;
+      font-weight: 700;
+    }
+
     .question {
       padding:14px 0;
       border-top:1px solid var(--line);
@@ -744,6 +780,83 @@
       const form = document.createElement("form");
       form.className = "assessment-form";
       form.hidden = true;
+      form.noValidate = true;
+
+      const timerBox = document.createElement("section");
+      timerBox.className = "assessment-timer";
+      timerBox.hidden = true;
+      addText(timerBox, "span", "Time remaining");
+      const timerValue = addText(timerBox, "strong", "20:00");
+      const timerMessage = addText(
+        timerBox,
+        "p",
+        "Your answers will be submitted automatically when time expires.",
+        "assessment-timer-message"
+      );
+      form.appendChild(timerBox);
+
+      let secondsRemaining = 20 * 60;
+      let timerDeadline = null;
+      let timerInterval = null;
+      let timerStarted = false;
+      let timeExpired = false;
+      let assessmentSubmitting = false;
+
+      function stopAssessmentTimer() {
+        if (timerInterval !== null) {
+          clearInterval(timerInterval);
+          timerInterval = null;
+        }
+      }
+
+      function updateAssessmentTimer() {
+        if (!timerStarted || timeExpired) return;
+
+        secondsRemaining = Math.max(
+          0,
+          Math.ceil((timerDeadline - Date.now()) / 1000)
+        );
+
+        const minutes = Math.floor(secondsRemaining / 60);
+        const seconds = secondsRemaining % 60;
+        timerValue.textContent =
+          String(minutes).padStart(2, "0") + ":" +
+          String(seconds).padStart(2, "0");
+
+        const warning = secondsRemaining > 0 && secondsRemaining <= 5 * 60;
+        timerBox.classList.toggle("warning", warning);
+
+        if (warning) {
+          timerMessage.textContent =
+            "Warning: 5 minutes remaining. Your answers will submit automatically at 00:00.";
+        } else {
+          timerMessage.textContent =
+            "Your answers will be submitted automatically when time expires.";
+        }
+
+        if (secondsRemaining === 0) {
+          timeExpired = true;
+          stopAssessmentTimer();
+          timerBox.classList.remove("warning");
+          timerBox.classList.add("expired");
+          timerMessage.textContent =
+            "Time is up. Submitting your selected answers now.";
+          toggle.disabled = true;
+          submitAssessment(true);
+        }
+      }
+
+      function startAssessmentTimer() {
+        if (timerStarted || timeExpired) return;
+        timerStarted = true;
+        timerDeadline = Date.now() + 20 * 60 * 1000;
+        timerBox.hidden = false;
+        updateAssessmentTimer();
+
+        if (!timeExpired) {
+          timerInterval = setInterval(updateAssessmentTimer, 250);
+        }
+      }
 
       const questions = Array.isArray(assessment.questions)
         ? assessment.questions
@@ -816,21 +929,10 @@
       submit.textContent = "Submit answers";
       form.appendChild(submit);
 
-      toggle.addEventListener("click", () => {
-        form.hidden = !form.hidden;
-        toggle.textContent = form.hidden
-          ? (bestResult ? "Retake assessment" : "Start assessment")
-          : "Close assessment";
+      async function submitAssessment(timedOut = false) {
+        if (assessmentSubmitting) return;
 
-        if (!form.hidden) {
-          form.scrollIntoView({ behavior: "smooth", block: "start" });
-        }
-      });
-
-      form.addEventListener("submit", async event => {
-        event.preventDefault();
-
-        if (answers.some(answer => !answer)) {
+        if (!timedOut && answers.some(answer => !answer)) {
           resultMessage.hidden = false;
           resultMessage.textContent =
             "Please select an answer for every question.";
@@ -838,16 +940,20 @@
           return;
         }
 
+        assessmentSubmitting = true;
+        stopAssessmentTimer();
         submit.disabled = true;
         toggle.disabled = true;
-        submit.textContent = "Marking and saving…";
+        submit.textContent = timedOut
+          ? "Time expired — submitting..."
+          : "Marking and saving…";
 
         try {
           const result = await apiRequest("/submit", {
             method: "POST",
             body: JSON.stringify({
               assessmentId: assessment.id,
-              answers
+              answers: answers.map(answer => answer == null ? "" : answer)
             })
           });
 
@@ -856,15 +962,25 @@
             "notice " + (result.passed ? "success" : "error");
 
           resultMessage.textContent =
+            (timedOut ? "Time expired. " : "") +
             "Your result: " + result.score + "/" + result.totalMarks +
             " (" + result.percentage + "%). " +
+            (timedOut ? "Unanswered questions count as incorrect. " : "") +
             (result.passed
               ? "Congratulations! You passed."
               : "You need at least " + result.passMark +
                 "%. You may retake this assessment.");
 
           // Reload server-authoritative assessment access and saved marks.
-          await loadAssessments();
+          try {
+            await loadAssessments();
+          } catch (refreshError) {
+            console.error("Assessment result saved, but refresh failed:", refreshError);
+            resultMessage.hidden = false;
+            resultMessage.className = "notice";
+            resultMessage.textContent +=
+              " Your result was submitted, but the progress display could not refresh. Please reload the page.";
+          }
         } catch (error) {
           resultMessage.hidden = false;
           resultMessage.className = "notice error";
@@ -880,10 +996,32 @@
             toggle.textContent = "Lesson closed — attempt limit reached";
           }
         } finally {
+          assessmentSubmitting = false;
           submit.disabled = false;
-          toggle.disabled = false;
-          submit.textContent = "Submit answers";
+          toggle.disabled = timeExpired;
+          submit.textContent = timeExpired
+            ? "Retry submission"
+            : "Submit answers";
         }
+      }
+
+      toggle.addEventListener("click", () => {
+        form.hidden = !form.hidden;
+        toggle.textContent = form.hidden
+          ? (timerStarted
+              ? "Continue assessment"
+              : bestResult ? "Retake assessment" : "Start assessment")
+          : "Close assessment";
+
+        if (!form.hidden) {
+          startAssessmentTimer();
+          form.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      });
+
+      form.addEventListener("submit", async event => {
+        event.preventDefault();
+        await submitAssessment(timeExpired);
       });
 
       card.appendChild(toggle);
