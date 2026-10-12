@@ -755,6 +755,60 @@ a { transition: color .2s ease, background .2s ease, transform .2s ease, box-sha
 .nav-links a i { color: var(--bep-gold); }
 .menu-btn { padding: 7px 10px; border-radius: 8px; }
 .menu-btn:hover { background: rgba(255,255,255,.12); }
+
+/* Home dropdown: About Us, Vision and Mission */
+.home-dropdown { position: relative; }
+.home-menu-row { display: flex; align-items: center; gap: 2px; }
+.home-menu-row > a { flex: 1; }
+.dropdown-toggle {
+    border: 0;
+    color: #fff;
+    background: transparent;
+    border-radius: 7px;
+    padding: 9px 8px;
+    cursor: pointer;
+}
+.dropdown-toggle i { color: var(--bep-gold); }
+.dropdown-toggle:hover,
+.dropdown-toggle:focus-visible { background: rgba(255,255,255,.12); }
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+    min-width: 190px;
+    list-style: none;
+    margin: 0;
+    padding: 8px;
+    background: #082b55;
+    border: 1px solid rgba(255,255,255,.14);
+    border-radius: 10px;
+    box-shadow: 0 12px 28px rgba(0,0,0,.22);
+    z-index: 1100;
+}
+.home-dropdown:hover .dropdown-menu,
+.home-dropdown:focus-within .dropdown-menu,
+.home-dropdown.open .dropdown-menu { display: block; }
+.dropdown-menu li { width: 100%; }
+.dropdown-menu a { display: flex; width: 100%; white-space: nowrap; }
+@media (max-width: 900px) {
+    .home-menu-row { width: 100%; }
+    .home-menu-row > a { width: auto; }
+    .dropdown-toggle { margin-left: auto; padding: 10px 14px; }
+    .dropdown-menu {
+        position: static;
+        min-width: 0;
+        width: 100%;
+        margin: 0 0 8px;
+        padding: 4px 0 4px 14px;
+        border: 0;
+        border-left: 2px solid var(--bep-gold);
+        border-radius: 0;
+        box-shadow: none;
+        background: rgba(0,0,0,.12);
+    }
+    .dropdown-menu a { padding: 10px 8px; }
+}
 .hero {
     min-height: 590px;
     padding: 84px 24px;
@@ -1030,11 +1084,21 @@ B.E.P. Online
 
 <ul class="nav-links" id="navLinks">
 
-<li>
+<li class="home-dropdown">
+<div class="home-menu-row">
 <a href="#home">
 <i class="fa-solid fa-house"></i>
 Home
 </a>
+<button class="dropdown-toggle" id="homeDropdownToggle" type="button" aria-label="Show Home submenu" aria-expanded="false">
+<i class="fa-solid fa-chevron-down"></i>
+</button>
+</div>
+<ul class="dropdown-menu" id="homeDropdownMenu">
+<li><a href="#about"><i class="fa-solid fa-circle-info"></i> About Us</a></li>
+<li><a href="#vision"><i class="fa-solid fa-eye"></i> Vision</a></li>
+<li><a href="#mission"><i class="fa-solid fa-bullseye"></i> Mission</a></li>
+</ul>
 </li>
 
 
@@ -1927,6 +1991,23 @@ menuBtn.addEventListener("click", function(){
 
     navLinks.classList.toggle("active");
 
+});
+
+const homeDropdown = document.querySelector(".home-dropdown");
+const homeDropdownToggle = document.getElementById("homeDropdownToggle");
+
+homeDropdownToggle.addEventListener("click", function(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    const isOpen = homeDropdown.classList.toggle("open");
+    homeDropdownToggle.setAttribute("aria-expanded", String(isOpen));
+});
+
+document.querySelectorAll(".dropdown-menu a").forEach(function(link) {
+    link.addEventListener("click", function() {
+        homeDropdown.classList.remove("open");
+        homeDropdownToggle.setAttribute("aria-expanded", "false");
+    });
 });
 
 
