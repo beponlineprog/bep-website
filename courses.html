@@ -903,7 +903,8 @@
           input.required = true;
 
           input.addEventListener("change", () => {
-            answers[index] = value;
+            // The Worker accepts answer letters only, never option text or IDs.
+            answers[index] = "ABCD"[optionIndex];
           });
 
           const text = document.createElement("span");
