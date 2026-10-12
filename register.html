@@ -271,6 +271,219 @@
         font-size: 27px;
       }
     }
+  
+    /* B.E.P. visual polish — presentation only; registration logic unchanged */
+    :root {
+      color-scheme: light;
+      --bep-navy: #082b55;
+      --bep-blue: #0759a6;
+      --bep-gold: #d6ad54;
+      --bep-ink: #1b2b40;
+      --bep-muted: #637287;
+      --bep-border: #d9e2ed;
+    }
+
+    body {
+      background:
+        radial-gradient(ellipse at 12% 8%, rgba(214,173,84,.18), transparent 34%),
+        linear-gradient(145deg, #071f3f 0%, #0b477f 58%, #12345a 100%);
+      color: var(--bep-ink);
+      padding: clamp(12px, 3vw, 28px);
+    }
+
+    .container {
+      max-width: 540px;
+    }
+
+    .header {
+      position: relative;
+      overflow: hidden;
+      padding: 28px 22px 24px;
+      border-radius: 18px 18px 0 0;
+      background: linear-gradient(135deg, #fff 0%, #f4f8fd 100%);
+      border-bottom: 3px solid var(--bep-gold);
+    }
+
+    .header h1 {
+      color: var(--bep-navy);
+      font-size: clamp(29px, 5vw, 36px);
+      letter-spacing: .04em;
+      font-weight: 800;
+    }
+
+    .header p {
+      color: var(--bep-muted);
+      letter-spacing: .02em;
+      line-height: 1.5;
+    }
+
+    .card {
+      padding: clamp(20px, 5vw, 34px);
+      border-radius: 0 0 18px 18px;
+      box-shadow: 0 22px 60px rgba(0, 10, 28, .28);
+    }
+
+    .back-home a {
+      color: var(--bep-navy);
+      background: #f7f9fc;
+      border-color: var(--bep-border);
+      transition: background .2s ease, transform .2s ease;
+    }
+
+    .back-home a:hover {
+      background: #edf3fa;
+      transform: translateY(-1px);
+    }
+
+    h2 {
+      color: var(--bep-navy);
+      font-size: clamp(23px, 4vw, 28px);
+      letter-spacing: -.02em;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      color: var(--bep-muted);
+      line-height: 1.6;
+      margin: 0 0 26px;
+    }
+
+    label {
+      color: #26384d;
+      font-size: 13px;
+      letter-spacing: .01em;
+    }
+
+    input, select {
+      min-height: 46px;
+      padding: 12px 13px;
+      border: 1px solid var(--bep-border);
+      border-radius: 9px;
+      background: #fff;
+      color: var(--bep-ink);
+      transition: border-color .2s ease, box-shadow .2s ease;
+    }
+
+    input:hover, select:hover {
+      border-color: #a9bfd8;
+    }
+
+    input:focus, select:focus {
+      border-color: var(--bep-blue);
+      box-shadow: 0 0 0 3px rgba(7, 89, 166, .13);
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    .register-btn {
+      min-height: 49px;
+      margin-top: 10px;
+      border: 1px solid #082b55;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #082b55, #0759a6);
+      box-shadow: 0 8px 18px rgba(8, 43, 85, .17);
+      transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+    }
+
+    .register-btn:hover {
+      background: linear-gradient(135deg, #061f40, #064985);
+      box-shadow: 0 11px 22px rgba(8, 43, 85, .23);
+      transform: translateY(-1px);
+    }
+
+    .register-btn:focus-visible,
+    a:focus-visible,
+    .resend-btn:focus-visible {
+      outline: 3px solid var(--bep-gold);
+      outline-offset: 3px;
+    }
+
+    .bottom-link {
+      color: var(--bep-muted);
+      line-height: 1.7;
+    }
+
+    .bottom-link a {
+      color: var(--bep-blue);
+      text-underline-offset: 3px;
+    }
+
+    .bottom-link a:hover {
+      text-decoration: underline;
+    }
+
+    .verification-box {
+      border-radius: 12px;
+      padding: clamp(18px, 4vw, 26px);
+    }
+
+    .important-note {
+      border-radius: 9px;
+    }
+
+    .portal-btn, .resend-btn {
+      min-height: 43px;
+      border-radius: 9px;
+      transition: transform .2s ease, background .2s ease;
+    }
+
+    .portal-btn {
+      background: var(--bep-navy);
+    }
+
+    .portal-btn:hover {
+      background: var(--bep-blue);
+      transform: translateY(-1px);
+    }
+
+    .resend-btn {
+      border-color: #b8c8da;
+    }
+
+    .resend-btn:hover {
+      background: #f1f6fb;
+    }
+
+    .footer {
+      color: rgba(255,255,255,.86);
+      line-height: 1.6;
+      padding: 4px 8px 0;
+      letter-spacing: .02em;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 12px;
+        align-items: flex-start;
+      }
+
+      .header {
+        padding: 24px 16px 20px;
+      }
+
+      .card {
+        padding: 21px 17px;
+      }
+
+      .form-group {
+        margin-bottom: 16px;
+      }
+
+      .portal-btn, .resend-btn {
+        max-width: 100%;
+        white-space: normal;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+      }
+    }
+
   </style>
 </head>
 
