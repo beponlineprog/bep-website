@@ -16,7 +16,7 @@
 * { box-sizing: border-box; }
 body {
   margin: 0;
-  padding: 24px;
+  padding: 12px;
   background: #edf1f6;
   color: var(--ink);
   font-family: Georgia, "Times New Roman", serif;
@@ -51,19 +51,19 @@ button {
   cursor: pointer;
 }
 .certificate {
-  max-width: 1100px;
+  max-width: 1200px;
   min-height: 740px;
   margin: auto;
-  padding: 16px;
+  padding: 12px;
   background: #fffdf8;
   border: 7px solid var(--navy);
   outline: 2px solid var(--gold);
   outline-offset: -17px;
 }
 .inner {
-  min-height: 700px;
+  min-height: 710px;
   border: 1px solid #d9c58c;
-  padding: 38px 48px 28px;
+  padding: 28px 36px 20px;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -173,13 +173,17 @@ h1 {
   margin-bottom: 4px;
 }
 .footer {
-  margin-top: 23px;
+  margin-top: 16px;
+  padding: 0 8px 4px;
+  max-width: 100%;
   color: var(--blue);
-  font: 11px Arial, sans-serif;
-  letter-spacing: 1.5px;
+  font: bold 12px/1.4 Arial, sans-serif;
+  letter-spacing: 1px;
+  text-align: center;
+  overflow-wrap: anywhere;
   text-transform: uppercase;
 }
-@page { size: A4 landscape; margin: 8mm; }
+@page { size: A4 landscape; margin: 5mm; }
 @media print {
   html, body { width: 100%; height: auto; margin: 0; padding: 0; background: white; }
   .toolbar, .notice { display: none !important; }
@@ -187,7 +191,7 @@ h1 {
     display: block !important;
     width: 100%;
     max-width: none;
-    height: 180mm;
+    height: 198mm;
     min-height: 0;
     margin: 0;
     padding: 8px;
@@ -203,7 +207,7 @@ h1 {
   .inner {
     height: 100%;
     min-height: 0;
-    padding: 16px 30px 12px;
+    padding: 12px 24px 8px;
     break-inside: avoid;
     page-break-inside: avoid;
   }
@@ -212,7 +216,7 @@ h1 {
 @media (max-width: 650px) {
   body { padding: 8px; }
   .certificate { min-height: 0; padding: 10px; }
-  .inner { min-height: 650px; padding: 28px 14px; }
+  .inner { min-height: 650px; padding: 24px 12px 18px; }
   .program { font-size: 10px; letter-spacing: 1px; }
   h1 { font-size: 28px; }
   .recipient { min-width: 90%; font-size: 24px; }
