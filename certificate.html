@@ -30,6 +30,17 @@ body {
   gap: 12px;
   font: 14px Arial, sans-serif;
 }
+.notice {
+  max-width: 1100px;
+  margin: 0 auto 16px;
+  padding: 14px 18px;
+  border: 1px solid #d9c58c;
+  border-radius: 8px;
+  background: #fffdf8;
+  color: var(--ink);
+  font: 14px/1.5 Arial, sans-serif;
+}
+.notice a { color: var(--blue); font-weight: bold; }
 button {
   background: var(--navy);
   color: white;
@@ -199,10 +210,12 @@ h1 {
 <body>
 <div class="toolbar">
   <span><strong>B.E.P.</strong> Certificate preview</span>
-  <button onclick="window.print()">Print / Save as PDF</button>
+  <button id="printButton" onclick="window.print()" hidden>Print / Save as PDF</button>
 </div>
 
-<main class="certificate">
+<div id="certificateMessage" class="notice" role="status" aria-live="polite">Checking your B.E.P. certificate status…</div>
+
+<main id="certificateContent" class="certificate" style="display:none;">
   <div class="inner">
     <div class="emblem" aria-hidden="true">✝</div>
     <div class="program">Biblical Empowerment Program</div>
@@ -212,9 +225,9 @@ h1 {
     <h1>Certificate of<br>Completion</h1>
     <div class="presented">This certificate is proudly presented to</div>
 
-    <div class="recipient">[MEMBER FULL NAME]</div>
+    <div class="recipient" id="recipientName">B.E.P. Member</div>
     <div class="member">
-      B.E.P. Member Number: <strong>[BEP-0000]</strong>
+      B.E.P. Member Number: <strong id="memberNumber">Loading…</strong>
     </div>
 
     <p class="bodycopy">
@@ -223,11 +236,11 @@ h1 {
       in God's Word, faith, and Christian service.
     </p>
 
-    <div class="course">Biblical Empowerment Program</div>
+    <div class="course" id="courseTitle">Biblical Empowerment Program</div>
 
     <div class="meta">
-      <div>Date of Issue<strong>[DD MONTH YYYY]</strong></div>
-      <div>Certificate Number<strong>[BEP-CERT-0000]</strong></div>
+      <div>Date of Issue<strong id="issueDate">Loading…</strong></div>
+      <div>Certificate Number<strong id="certificateNumber">Loading…</strong></div>
       <div>Completion Status<strong>Successfully Completed</strong></div>
     </div>
 
@@ -249,5 +262,110 @@ h1 {
     </div>
   </div>
 </main>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
+import { getAuth, onAuthStateChanged, reload } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js";
+import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyC3N-DrY4mv4M32TMIt2_9btO3AqmhDk3Y",
+  authDomain: "beponlineprog-8b8bb.firebaseapp.com",
+  projectId: "beponlineprog-8b8bb",
+  storageBucket: "beponlineprog-8b8bb.firebasestorage.app",
+  messagingSenderId: "312026634976",
+  appId: "1:312026634976:web:5497f071e8f0e6618fce85",
+  measurementId: "G-LDX5CZ68MH"
+};
+const assessmentApiBase = "https://bep-assessment-api.bep-onlineprog.workers.dev";
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+const message = document.getElementById("certificateMessage");
+const certificateContent = document.getElementById("certificateContent");
+const printButton = document.getElementById("printButton");
+
+function showMessage(text, includePortalLink = false) {
+  message.replaceChildren(document.createTextNode(text));
+  if (includePortalLink) {
+    message.appendChild(document.createTextNode(" "));
+    const link = document.createElement("a");
+    link.href = "member.html";
+    link.textContent = "Open the B.E.P. Member Portal";
+    message.appendChild(link);
+  }
+}
+function formatIssueDate(value) {
+  if (!value) return "Date not available";
+  let dateValue = value;
+  if (typeof value === "object" && value.seconds) dateValue = value.seconds * 1000;
+  else if (typeof value === "number" && value < 1000000000000) dateValue = value * 1000;
+  const date = new Date(dateValue);
+  if (Number.isNaN(date.getTime())) return "Date not available";
+  return new Intl.DateTimeFormat("en-ZA", {
+    day: "2-digit", month: "long", year: "numeric", timeZone: "Africa/Johannesburg"
+  }).format(date);
+}
+async function loadCertificate(user) {
+  certificateContent.style.display = "none";
+  printButton.hidden = true;
+
+  if (!user) {
+    showMessage("Please sign in to your verified B.E.P. member account to view your certificate.", true);
+    return;
+  }
+
+  try {
+    await reload(user);
+    const currentUser = auth.currentUser;
+    if (!currentUser || !currentUser.emailVerified) {
+      showMessage("Your email must be verified before you can view your B.E.P. certificate.", true);
+      return;
+    }
+
+    const token = await currentUser.getIdToken(true);
+    const response = await fetch(assessmentApiBase + "/certificate/status", {
+      method: "GET",
+      headers: {
+        "Authorization": "Bearer " + token,
+        "Accept": "application/json"
+      }
+    });
+    let data = {};
+    try { data = await response.json(); } catch (_) {}
+    if (!response.ok || !data.ok) {
+      throw new Error(data.error || "Could not check certificate status (HTTP " + response.status + ").");
+    }
+
+    const cert = data.certificate;
+    if (!cert || String(cert.status || "").toLowerCase() !== "issued") {
+      const status = cert && cert.status ? String(cert.status) : "not issued";
+      showMessage("Your B.E.P. certificate is not available yet. Current status: " + status + ". Certificates appear here after the B.E.P. administrator issues them.");
+      return;
+    }
+
+    const profileSnapshot = await getDoc(doc(db, "members", currentUser.uid));
+    const profile = profileSnapshot.exists() ? profileSnapshot.data() : {};
+    document.getElementById("recipientName").textContent = profile.fullName || currentUser.displayName || "B.E.P. Member";
+    document.getElementById("memberNumber").textContent = profile.memberNumber || "Pending member number";
+    document.getElementById("issueDate").textContent = formatIssueDate(cert.issuedAt);
+    document.getElementById("certificateNumber").textContent = cert.certificateNumber || "Not available";
+    document.getElementById("courseTitle").textContent = cert.courseTitle || "Biblical Empowerment Program";
+
+    showMessage("Your certificate has been issued and is ready to print or save as PDF.");
+    certificateContent.style.display = "block";
+    printButton.hidden = false;
+  } catch (error) {
+    console.error("B.E.P. certificate loading error:", error);
+    showMessage("We could not load your certificate right now. Please sign in again through the member portal and try once more. " + (error && error.message ? error.message : ""));
+  }
+}
+
+onAuthStateChanged(auth, (user) => {
+  loadCertificate(user);
+});
+</script>
+
 </body>
 </html>
