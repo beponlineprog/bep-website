@@ -438,6 +438,20 @@ footer.bep-compact-footer {
   .bep-compact-footer .bep-footer-contact { grid-column: auto; }
   .bep-compact-footer h3 { margin-bottom: 7px !important; }
 }
+
+/* Final print override: keep the website footer off the certificate PDF. */
+@media print {
+  body > footer.bep-compact-footer,
+  body > footer {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+  }
+}
+
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
