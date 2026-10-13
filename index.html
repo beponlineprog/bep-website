@@ -1099,6 +1099,27 @@ footer{
     .hero { min-height: 360px !important; padding: 38px 16px !important; }
 }
 
+
+/* Further reduce homepage banner height */
+.hero {
+    min-height: 300px !important;
+    height: auto !important;
+    padding: 32px 20px !important;
+}
+.hero h1 { font-size: clamp(28px, 3.4vw, 42px) !important; }
+.hero h2 { font-size: clamp(20px, 2.4vw, 26px) !important; margin-bottom: 10px !important; }
+.hero p { font-size: clamp(15px, 1.4vw, 18px) !important; margin-bottom: 18px !important; }
+.grace-badge { margin-bottom: 12px !important; }
+.hero-buttons .btn { padding: 10px 18px !important; min-height: 42px !important; }
+@media (max-width: 900px) {
+    .hero { min-height: 280px !important; padding: 28px 18px !important; }
+}
+@media (max-width: 600px) {
+    .hero { min-height: 260px !important; padding: 24px 15px !important; }
+    .hero h1 { font-size: 27px !important; }
+    .hero h2 { font-size: 21px !important; letter-spacing: 3px !important; }
+}
+
 </style>
 
 </head>
