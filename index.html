@@ -1732,6 +1732,35 @@ Spiritual renewal begins when we surrender our lives to God and allow His Word a
     margin: 10px 0 12px;
     font-weight: 700;
 }
+
+/* Give the Thursday session card more room on desktop */
+@media (min-width: 901px) {
+    #sessions .section-container {
+        width: calc(100% - 48px) !important;
+        max-width: 1400px !important;
+    }
+    #sessions .session-card {
+        width: 100% !important;
+        max-width: none !important;
+        box-sizing: border-box;
+        padding: 38px 44px !important;
+    }
+    #sessions .session-details {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 24px;
+        width: 100%;
+    }
+    #sessions .session-detail {
+        min-width: 0;
+    }
+}
+@media (min-width: 1400px) {
+    #sessions .session-card {
+        padding: 42px 56px !important;
+    }
+}
+
 </style>
 
 <!-- =========================
