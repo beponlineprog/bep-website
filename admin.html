@@ -208,6 +208,37 @@ footer{
 }
 @media print { body > footer { display: none !important; } }
 
+
+/* Consistent wide content cards and a narrower footer content area */
+.footer-grid,
+.footer-bottom {
+    width: 100%;
+    max-width: 950px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+@media (min-width: 901px) {
+    .container,
+    main,
+    .wrap,
+    .content,
+    .page-container {
+        width: calc(100% - 32px);
+        max-width: 1400px !important;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .card,
+    .panel,
+    .question,
+    .certificate,
+    .inner {
+        max-width: 100%;
+    }
+}
+
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
