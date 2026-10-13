@@ -809,31 +809,44 @@ footer{
 
       <h2>My Profile</h2>
 
+      <button
+        type="button"
+        id="toggleProfileBtn"
+        aria-expanded="false"
+        aria-controls="profileFields"
+      >
+        Update Profile
+      </button>
+
       <form id="profileForm">
 
-        <label for="profilePhone">
-          Phone Number
-        </label>
+        <div id="profileFields" hidden>
 
-        <input
-          type="tel"
-          id="profilePhone"
-          autocomplete="tel"
-        >
+          <label for="profilePhone">
+            Phone Number
+          </label>
 
-        <label for="profileLocation">
-          Location
-        </label>
+          <input
+            type="tel"
+            id="profilePhone"
+            autocomplete="tel"
+          >
 
-        <input
-          type="text"
-          id="profileLocation"
-          autocomplete="address-level2"
-        >
+          <label for="profileLocation">
+            Location
+          </label>
 
-        <button type="submit">
-          Update Profile
-        </button>
+          <input
+            type="text"
+            id="profileLocation"
+            autocomplete="address-level2"
+          >
+
+          <button type="submit">
+            Save Profile Changes
+          </button>
+
+        </div>
 
       </form>
 
@@ -1002,6 +1015,22 @@ footer{
 
   const profileForm =
     document.getElementById("profileForm");
+
+  const toggleProfileBtn =
+    document.getElementById("toggleProfileBtn");
+
+  const profileFields =
+    document.getElementById("profileFields");
+
+  toggleProfileBtn.addEventListener("click", function () {
+    const isExpanded = toggleProfileBtn.getAttribute("aria-expanded") === "true";
+    profileFields.hidden = isExpanded;
+    toggleProfileBtn.setAttribute("aria-expanded", String(!isExpanded));
+    toggleProfileBtn.textContent = isExpanded ? "Update Profile" : "Hide Profile Details";
+    if (!isExpanded) {
+      document.getElementById("profilePhone").focus();
+    }
+  });
 
 
   // ==========================================================
