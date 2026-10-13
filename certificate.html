@@ -60,6 +60,15 @@ body {
   font: 14px/1.5 Arial, sans-serif;
 }
 .notice a { color: var(--blue); font-weight: bold; }
+.certificate-warning {
+  border-left: 5px solid var(--gold);
+  background: #fff8df;
+  color: #493a13;
+}
+.certificate-warning strong {
+  color: var(--navy);
+}
+@media print { .certificate-warning { display: none !important; } }
 button {
   background: var(--navy);
   color: white;
@@ -360,6 +369,10 @@ footer{
     <a class="nav-link" href="index.html">🏠 Back Home</a>
     <button id="printButton" onclick="window.print()" hidden>Print / Save as PDF</button>
   </div>
+</div>
+
+<div class="notice certificate-warning" role="note">
+  <strong>Important:</strong> You will receive your B.E.P. certificate only after completing all 11 lessons and the final assessment.
 </div>
 
 <div id="certificateMessage" class="notice" role="status" aria-live="polite">Checking your B.E.P. certificate status…</div>
