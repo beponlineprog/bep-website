@@ -1170,6 +1170,25 @@ footer{
     .hero h2 { letter-spacing: 4px !important; }
 }
 
+
+/* Add the same gold accent beneath the main program title */
+.hero h1 {
+    position: relative;
+    display: table !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding-bottom: 10px !important;
+}
+.hero h1::after {
+    content: "";
+    display: block;
+    width: 68%;
+    height: 3px;
+    margin: 8px auto 0;
+    border-radius: 3px;
+    background: linear-gradient(90deg, transparent, #f5c451, #fff0b0, #f5c451, transparent);
+}
+
 </style>
 
 </head>
