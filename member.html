@@ -196,6 +196,40 @@
       line-height: 1.5;
     }
 
+    .certificate-requirement {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin: 18px 0;
+      padding: 16px 18px;
+      border: 1px solid #e4c66e;
+      border-left: 5px solid #c99a00;
+      border-radius: 11px;
+      background: linear-gradient(120deg, #fff8df, #fffdf6);
+      color: #594516;
+    }
+    .certificate-requirement-icon {
+      display: grid;
+      place-items: center;
+      flex: 0 0 27px;
+      width: 27px;
+      height: 27px;
+      border-radius: 50%;
+      background: #c99a00;
+      color: #fff;
+      font: bold 17px/1 Arial, sans-serif;
+    }
+    .certificate-requirement strong {
+      display: block;
+      margin: 1px 0 4px;
+      color: #082b55;
+    }
+    .certificate-requirement p {
+      margin: 0;
+      color: #594516;
+      line-height: 1.55;
+    }
+
     .status {
       display: inline-block;
       padding: 5px 10px;
@@ -833,6 +867,14 @@ footer{
       <h2>My B.E.P. Certificate</h2>
       <p>Check your assessment eligibility, view your certificate status, and request your certificate when eligible.</p>
 
+      <div class="certificate-requirement" role="note">
+        <span class="certificate-requirement-icon" aria-hidden="true">!</span>
+        <div>
+          <strong>Certificate Requirement</strong>
+          <p>You will receive your B.E.P. certificate only after completing all 11 lessons and passing the final assessment.</p>
+        </div>
+      </div>
+
       <p>
         <a
           href="certificate.html"
@@ -860,7 +902,7 @@ footer{
       <div id="certificateMessage" class="message"></div>
 
       <p class="small-note">
-        Certificate requests require all 12 lessons and the final assessment to be passed with at least 70%.
+        Certificate requests require all 11 lessons and the final assessment to be passed with at least 70%.
         Requests are subject to B.E.P. administrator review.
       </p>
     </div>
@@ -2106,7 +2148,7 @@ footer{
     latestCertificateRecord = certificate;
 
     const lessonsPassed = Number(eligibility.lessonsPassed || 0);
-    const totalLessons = Number(eligibility.totalLessons || 12);
+    const totalLessons = Number(eligibility.totalLessons || 11);
     const finalPassed = eligibility.finalAssessmentPassed === true;
 
     document.getElementById("certificateProgress").textContent =
@@ -2156,7 +2198,7 @@ footer{
     } else {
       showMessage(
         document.getElementById("certificateMessage"),
-        "Complete and pass all 12 lessons and the final assessment with at least 70% to become eligible.",
+        "Complete and pass all 11 lessons and the final assessment with at least 70% to become eligible.",
         "warning"
       );
     }
