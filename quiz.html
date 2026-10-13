@@ -31,6 +31,36 @@ body {
     box-shadow: 0 4px 15px rgba(0,0,0,0.08);
 }
 
+.quiz-navigation {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 0 0 16px;
+}
+
+.quiz-nav-button {
+    display: inline-block;
+    padding: 11px 15px;
+    border-radius: 7px;
+    background: #e4edf7;
+    color: #173d66;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.quiz-nav-button:hover {
+    background: #d2e3f6;
+}
+
+.quiz-home-button {
+    background: #16834a;
+    color: #fff;
+}
+
+.quiz-home-button:hover {
+    background: #116b3b;
+}
+
 header {
     text-align: center;
     background: #073b78;
@@ -315,6 +345,11 @@ footer{
 <body>
 
 <div class="container">
+
+<nav class="quiz-navigation" aria-label="Quiz navigation">
+    <a href="index.html#quiz" class="quiz-nav-button">← Back to Quiz Landing Page</a>
+    <a href="index.html#home" class="quiz-nav-button quiz-home-button">⌂ Back Home</a>
+</nav>
 
 <header>
     <h1>B.E.P. Bible Assessment</h1>
