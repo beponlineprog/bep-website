@@ -1594,8 +1594,18 @@ Our guiding principles shape how we teach, grow, serve, and build the Church of 
 #guiding-scripture .bep-heart-title {
     margin-top: 42px;
 }
+#guiding-scripture .bep-values-grid {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)) !important;
+    gap: 18px !important;
+    align-items: stretch;
+}
 #guiding-scripture .bep-value-card {
     border-top: 3px solid #f5c451;
+    width: 100%;
+    min-width: 0;
+    margin: 0;
+    box-sizing: border-box;
 }
 #guiding-scripture .bep-value-card > i {
     color: #d7a92e;
