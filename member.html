@@ -590,6 +590,86 @@ footer{
     }
 }
 
+
+/* Compact, consistent B.E.P. footer across all pages */
+footer.bep-compact-footer {
+  display: block !important;
+  background: #041f3c !important;
+  color: #dcecff !important;
+  padding: 22px 22px 12px !important;
+  margin: 0 !important;
+  font-size: 13px;
+  line-height: 1.45;
+}
+.bep-footer-layout {
+  width: 100%;
+  max-width: 1180px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(170px, .85fr) minmax(210px, 1fr) minmax(300px, 1.5fr);
+  gap: 24px;
+  align-items: start;
+}
+.bep-compact-footer .bep-footer-brand,
+.bep-compact-footer .bep-footer-links,
+.bep-compact-footer .bep-footer-contact { min-width: 0; }
+.bep-compact-footer .bep-footer-logo {
+  display: inline-block;
+  margin: 0 0 5px;
+  color: #fff !important;
+  font-family: Georgia, serif;
+  font-size: 25px;
+  font-weight: 700;
+  text-decoration: none;
+  letter-spacing: -.5px;
+}
+.bep-compact-footer .bep-footer-logo span { color: #f5c451; }
+.bep-compact-footer p { margin: 3px 0 !important; }
+.bep-compact-footer .bep-footer-brand p:first-of-type { font-size: 12px; }
+.bep-compact-footer h3 {
+  color: #f5c451 !important;
+  font-size: 13px !important;
+  line-height: 1.3;
+  margin: 4px 0 10px !important;
+}
+.bep-footer-link-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 13px;
+}
+.bep-compact-footer a,
+.bep-compact-footer .bep-footer-contact-list span {
+  color: #dcecff !important;
+  text-decoration: none;
+}
+.bep-compact-footer a:hover { color: #f5c451 !important; text-decoration: underline; }
+.bep-footer-contact-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px 14px;
+}
+.bep-footer-contact-list a,
+.bep-footer-contact-list span { display: inline-flex; align-items: center; gap: 6px; }
+.bep-footer-contact-list i { color: #f5c451; }
+.bep-footer-bottom {
+  max-width: 1180px;
+  margin: 15px auto 0 !important;
+  padding-top: 10px !important;
+  border-top: 1px solid rgba(255,255,255,.18);
+  text-align: center;
+  font-size: 11px;
+  line-height: 1.4;
+}
+@media (max-width: 760px) {
+  .bep-footer-layout { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 18px; }
+  .bep-compact-footer .bep-footer-contact { grid-column: 1 / -1; }
+}
+@media (max-width: 480px) {
+  footer.bep-compact-footer { padding: 18px 16px 10px !important; }
+  .bep-footer-layout { grid-template-columns: minmax(0, 1fr); gap: 15px; }
+  .bep-compact-footer .bep-footer-contact { grid-column: auto; }
+  .bep-compact-footer h3 { margin-bottom: 7px !important; }
+}
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
@@ -2341,202 +2421,38 @@ footer{
 
 </script>
 
-<footer>
-
-<div class="footer-grid">
-
-
-<!-- COLUMN 1 -->
-
-<div class="footer-column">
-
-<h3>
-B.E.P.
-</h3>
-
-<p>
-Biblical Empowerment Program
-</p>
-
-<p>
-Building the Church of Christ
-</p>
-
-<p>
-Growing believers through God's Word,
-discipleship and Christian fellowship.
-</p>
-
-</div>
-
-
-
-<!-- COLUMN 2 -->
-
-<div class="footer-column">
-
-<h3>
-Quick Links
-</h3>
-
-<p>
-<a href="index.html#home">
-<i class="fa-solid fa-house"></i>
-Home
-</a>
-</p>
-
-<p>
-<a href="index.html#about">
-<i class="fa-solid fa-circle-info"></i>
-About Us
-</a>
-</p>
-
-<p>
-<a href="index.html#vision">
-<i class="fa-solid fa-eye"></i>
-Vision
-</a>
-</p>
-
-<p>
-<a href="index.html#mission">
-<i class="fa-solid fa-bullseye"></i>
-Mission
-</a>
-</p>
-
-<p>
-<a href="index.html#sessions">
-<i class="fa-solid fa-calendar-days"></i>
-Sessions
-</a>
-</p>
-
-<p>
-<a href="register.html">
-<i class="fa-solid fa-user-plus"></i>
-Registration
-</a>
-</p>
-
-<p>
-<a href="quiz.html">
-<i class="fa-solid fa-pen-to-square"></i>
-Bible Quiz
-</a>
-</p>
-
-</div>
-
-
-
-<!-- COLUMN 3 -->
-
-<div class="footer-column">
-
-<h3>Contact Us</h3>
-
-<p>
-<a
-href="https://wa.me/27623508689"
-target="_blank">
-
-<i class="fa-brands fa-whatsapp"></i>
-062 350 8689 — Omega
-</a>
-</p>
-
-<p>
-<a
-href="https://wa.me/27832822644"
-target="_blank">
-
-<i class="fa-brands fa-whatsapp"></i>
-083 282 2644 — Bro. KB
-</a>
-</p>
-
-<p>
-<a
-href="mailto:bep.onlineprog@gmail.com">
-
-<i class="fa-solid fa-envelope"></i>
-Email
-
-</a>
-</p>
-
-<p>
-<a
-href="https://facebook.com/groups/1421853356307383/"
-target="_blank">
-
-<i class="fa-brands fa-facebook"></i>
-Facebook Group
-
-</a>
-</p>
-
-</div>
-
-
-
-<!-- COLUMN 4 -->
-
-<div class="footer-column">
-
-<h3>
-B.E.P. Sessions
-</h3>
-
-<p>
-<i class="fa-solid fa-calendar-days"></i>
-Every Thursday
-</p>
-
-<p>
-<i class="fa-solid fa-clock"></i>
-19:00 – 20:30
-</p>
-
-<p>
-<i class="fa-brands fa-microsoft"></i>
-Microsoft Teams
-</p>
-
-<p>
-
-<a
-href="https://teams.live.com/meet/936085799236?p=b66LnDUAB2Xkx2uQYp&eventType=community"
-target="_blank">
-
-<i class="fa-solid fa-video"></i>
-Join Teams
-
-</a>
-
-</p>
-
-</div>
-
-
-</div>
-
-
-<div class="footer-bottom">
-
-© <span id="year"></span>
-Biblical Empowerment Program (B.E.P.)
-All Rights Reserved.
-
-<br>
-
-Building the Church of Christ
-
-</div>
-
+<footer class="bep-compact-footer">
+  <div class="bep-footer-layout">
+    <section class="bep-footer-brand">
+      <a class="bep-footer-logo" href="index.html#home">B.E.P. <span>Online</span></a>
+      <p><strong>Biblical Empowerment Program</strong></p>
+      <p>Building the Church of Christ</p>
+    </section>
+    <nav class="bep-footer-links" aria-label="Footer quick links">
+      <h3>Quick Links</h3>
+      <div class="bep-footer-link-list">
+        <a href="index.html#home">Home</a>
+        <a href="index.html#about">About Us</a>
+        <a href="index.html#vision">Vision</a>
+        <a href="index.html#mission">Mission</a>
+        <a href="index.html#sessions">Sessions</a>
+        <a href="register.html">Registration</a>
+        <a href="quiz.html">Bible Quiz</a>
+      </div>
+    </nav>
+    <section class="bep-footer-contact">
+      <h3>Connect with B.E.P.</h3>
+      <div class="bep-footer-contact-list">
+        <a href="https://wa.me/27623508689" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i> Omega: 062 350 8689</a>
+        <a href="https://wa.me/27832822644" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i> Bro. KB: 083 282 2644</a>
+        <a href="mailto:bep.onlineprog@gmail.com"><i class="fa-solid fa-envelope" aria-hidden="true"></i> Email</a>
+        <a href="https://facebook.com/groups/1421853356307383/" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-facebook" aria-hidden="true"></i> Facebook Group</a>
+        <span><i class="fa-solid fa-calendar-days" aria-hidden="true"></i> Thursdays, 19:00–20:30 · Microsoft Teams</span>
+        <a href="https://teams.live.com/meet/936085799236?p=b66LnDUAB2Xkx2uQYp&eventType=community" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-video" aria-hidden="true"></i> Join Teams</a>
+      </div>
+    </section>
+  </div>
+  <div class="bep-footer-bottom">© <span id="year"></span> Biblical Empowerment Program (B.E.P.) · All Rights Reserved</div>
 </footer>
 <script>document.querySelectorAll("#year").forEach(function(node){node.textContent=String(new Date().getFullYear());});</script>
 </body>
