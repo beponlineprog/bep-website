@@ -443,19 +443,95 @@ footer.bep-compact-footer {
 }
 
 
-/* Reinforce landscape print layout for certificate PDFs. */
+/* Fit the certificate to one complete A4 landscape sheet when printing. */
 @media print {
-  @page { size: A4 landscape; margin: 5mm; }
-  html, body {
-    width: 287mm !important;
-    max-width: 287mm !important;
-    min-width: 0 !important;
+  @page {
+    size: A4 landscape;
+    margin: 0;
   }
+
+  html, body {
+    display: block !important;
+    width: 297mm !important;
+    height: 210mm !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    background: #fff !important;
+  }
+
+  body > .toolbar,
+  body > .notice,
+  body > footer {
+    display: none !important;
+  }
+
   main#certificateContent.certificate {
-    width: 287mm !important;
-    max-width: 287mm !important;
-    height: 198mm !important;
+    display: block !important;
+    position: relative !important;
+    box-sizing: border-box !important;
+    width: 297mm !important;
+    max-width: none !important;
+    height: 210mm !important;
     min-height: 0 !important;
+    margin: 0 !important;
+    padding: 5mm !important;
+    border: 2mm solid var(--navy) !important;
+    outline: 1px solid var(--gold) !important;
+    outline-offset: -4mm !important;
+    overflow: hidden !important;
+    break-before: avoid !important;
+    break-after: avoid !important;
+    break-inside: avoid !important;
+    page-break-before: avoid !important;
+    page-break-after: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  #certificateContent .inner {
+    display: flex !important;
+    box-sizing: border-box !important;
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 5mm 8mm 3mm !important;
+    border: 1px solid #d9c58c !important;
+    overflow: hidden !important;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  #certificateContent .emblem {
+    width: 13mm !important;
+    height: 13mm !important;
+    flex: 0 0 13mm !important;
+    font-size: 24px !important;
+    margin-bottom: 2mm !important;
+  }
+
+  #certificateContent .program { font-size: 11px !important; letter-spacing: 2px !important; }
+  #certificateContent .tagline { margin-top: 1mm !important; }
+  #certificateContent .rule { margin: 3mm auto !important; }
+  #certificateContent h1 { font-size: 30px !important; line-height: 1.08 !important; }
+  #certificateContent .presented { margin: 3mm 0 1mm !important; font-size: 14px !important; }
+  #certificateContent .recipient { font-size: 27px !important; padding-bottom: 2mm !important; }
+  #certificateContent .member { margin-top: 2mm !important; font-size: 11px !important; }
+  #certificateContent .bodycopy { max-width: 240mm !important; margin: 4mm auto 2mm !important; font-size: 14px !important; line-height: 1.35 !important; }
+  #certificateContent .course { font-size: 17px !important; margin-bottom: 2mm !important; }
+  #certificateContent .meta { gap: 12mm !important; margin: 2mm 0 4mm !important; font-size: 11px !important; }
+  #certificateContent .meta strong { margin-top: 1mm !important; }
+  #certificateContent .signatures { flex: 0 0 auto !important; margin-top: auto !important; padding: 0 5mm !important; gap: 10mm !important; }
+  #certificateContent .signature { width: 65mm !important; font-size: 10px !important; }
+  #certificateContent .signature .line { margin-bottom: 2mm !important; }
+  #certificateContent .signature strong { font-size: 11px !important; margin-bottom: 1mm !important; }
+  #certificateContent .footer { margin-top: 3mm !important; padding: 0 2mm !important; font-size: 9px !important; letter-spacing: .5px !important; }
+
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
   }
 }
 
