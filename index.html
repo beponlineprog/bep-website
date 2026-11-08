@@ -1381,7 +1381,92 @@ Take the Bible Quiz
 
 </section>
 
+<!-- =========================
+     MEMBERSHIP & ASSESSMENT INVITATION
+========================= -->
+<section class="membership-invitation" aria-labelledby="membership-invitation-title">
+  <div class="membership-invitation-inner">
+    <div class="membership-invitation-icon" aria-hidden="true">
+      <i class="fa-solid fa-graduation-cap"></i>
+    </div>
+    <div class="membership-invitation-copy">
+      <span class="membership-eyebrow">TAKE THE NEXT STEP IN YOUR SPIRITUAL GROWTH</span>
+      <h2 id="membership-invitation-title">Become a B.E.P. Member!</h2>
+      <p>Register as a member of the Biblical Empowerment Program and get the opportunity to complete our course assessments and earn your B.E.P. Certificate upon successful completion.</p>
+    </div>
+    <a href="register.html" class="btn membership-register-btn">
+      <i class="fa-solid fa-user-plus"></i> Register as a Member
+    </a>
+  </div>
+</section>
 
+<style>
+.membership-invitation {
+  padding: 38px 24px;
+  background: #eef4fa;
+}
+.membership-invitation-inner {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 30px 34px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  background: #fff;
+  border: 1px solid #dce6f1;
+  border-left: 5px solid #d7b24c;
+  border-radius: 16px;
+  box-shadow: 0 10px 28px rgba(17, 53, 89, .07);
+}
+.membership-invitation-icon {
+  flex: 0 0 64px;
+  width: 64px;
+  height: 64px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #062b52;
+  color: #f5c451;
+  font-size: 27px;
+}
+.membership-invitation-copy { flex: 1; }
+.membership-eyebrow {
+  color: #a77c13;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.1px;
+}
+.membership-invitation-copy h2 {
+  margin: 4px 0 7px;
+  color: #062b52;
+  font-size: clamp(22px, 2.5vw, 29px);
+  line-height: 1.25;
+}
+.membership-invitation-copy p {
+  margin: 0;
+  color: #526276;
+  line-height: 1.65;
+}
+.membership-register-btn {
+  flex: 0 0 auto;
+  background: #d7b24c;
+  color: #092746;
+  white-space: nowrap;
+}
+.membership-register-btn:hover {
+  background: #f0cf69;
+  transform: translateY(-2px);
+}
+@media (max-width: 760px) {
+  .membership-invitation-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 25px 22px;
+    gap: 15px;
+  }
+  .membership-register-btn { width: 100%; text-align: center; white-space: normal; }
+}
+</style>
 
 <!-- =========================
      COUNTDOWN
