@@ -400,6 +400,14 @@ footer.bep-compact-footer {
       </div>
 
 
+      <div class="panel" id="registeredMembersPanel">
+        <h2>Registered Members</h2>
+        <p>Approved B.E.P. members and their registration details.</p>
+        <button class="primary" id="refreshRegisteredMembersButton" type="button">Refresh Registered Members</button>
+        <p id="registeredMembersMessage" class="message" role="status"></p>
+        <div id="registeredMembers">Sign in as administrator to view registered members.</div>
+      </div>
+
       <div class="panel" id="contactMessagesPanel">
         <h2>Contact Form Enquiries</h2>
         <p>Messages submitted through the public Contact page.</p>
@@ -499,7 +507,7 @@ footer.bep-compact-footer {
 
     function setButtonsDisabled(disabled) {
       document.querySelectorAll(
-        "#applications button, #refreshButton, #logoutButton, #contactMessages button"
+        "#applications button, #refreshButton, #logoutButton, #contactMessages button, #registeredMembers button, #refreshRegisteredMembersButton"
       ).forEach(button => {
         button.disabled = disabled;
       });
@@ -530,6 +538,7 @@ footer.bep-compact-footer {
         "Signed in as: " + (user.email || "Authorised administrator");
 
       await loadApplications();
+      await loadRegisteredMembers();
       await loadCertificates();
       await loadPublicQuizResults();
       await loadContactMessages();
@@ -612,6 +621,65 @@ footer.bep-compact-footer {
       }
     }
 
+
+
+    const registeredMembers = document.getElementById("registeredMembers");
+    const registeredMembersMessage = document.getElementById("registeredMembersMessage");
+
+    function formatMemberDetail(value) {
+      if (value === null || value === undefined || value === "") return "Not provided";
+      if (value && typeof value.toDate === "function") return value.toDate().toLocaleString();
+      if (Array.isArray(value)) return value.map(formatMemberDetail).join(", ");
+      if (typeof value === "object") return JSON.stringify(value);
+      if (typeof value === "boolean") return value ? "Yes" : "No";
+      return String(value);
+    }
+
+    async function loadRegisteredMembers() {
+      if (!currentAdmin || currentAdmin.uid !== ADMIN_UID) return;
+      registeredMembers.textContent = "Loading registered members...";
+      registeredMembersMessage.textContent = "";
+      try {
+        const snapshot = await getDocs(collection(db, "members"));
+        const rows = snapshot.docs
+          .map(memberDoc => ({ id: memberDoc.id, ...memberDoc.data() }))
+          .filter(member => String(member.status || "").toLowerCase() === "active")
+          .sort((a, b) => String(a.fullName || "").localeCompare(String(b.fullName || "")));
+
+        if (!rows.length) {
+          registeredMembers.textContent = "No approved members have been registered yet.";
+          registeredMembersMessage.textContent = "0 registered members.";
+          return;
+        }
+
+        registeredMembers.innerHTML = rows.map(member => {
+          const hiddenFields = new Set(["password", "pass", "passwordHash"]);
+          const fields = Object.entries(member)
+            .filter(([key]) => !hiddenFields.has(key))
+            .map(([key, value]) => {
+              const label = key.replace(/([A-Z])/g, " $1")
+                .replace(/[_-]/g, " ")
+                .replace(/^./, char => char.toUpperCase());
+              return "<strong>" + escapeHtml(label) + ":</strong> " +
+                escapeHtml(formatMemberDetail(value));
+            });
+          fields.push("<strong>Firebase UID:</strong> " + escapeHtml(member.id));
+          return `
+            <article class="application">
+              <h3>${escapeHtml(member.fullName || "Registered member")}</h3>
+              <div class="details">${fields.join("<br>")}</div>
+              <p><span class="status">Active Member</span></p>
+            </article>
+          `;
+        }).join("");
+        registeredMembersMessage.textContent = rows.length +
+          (rows.length === 1 ? " registered member loaded." : " registered members loaded.");
+      } catch (error) {
+        registeredMembers.textContent = "Could not load registered members: " + error.message;
+        registeredMembersMessage.textContent = error.message;
+        registeredMembersMessage.style.color = "#b42332";
+      }
+    }
 
     const contactMessages = document.getElementById("contactMessages");
     const contactMessagesMessage = document.getElementById("contactMessagesMessage");
@@ -933,6 +1001,7 @@ footer.bep-compact-footer {
 
         showDashboardMessage("Member approved successfully.");
         await loadApplications();
+        await loadRegisteredMembers();
       } catch (error) {
         showDashboardMessage("Approval failed: " + error.message, true);
       } finally {
@@ -1022,6 +1091,10 @@ footer.bep-compact-footer {
 
     document.getElementById("refreshButton").addEventListener(
       "click", loadApplications
+    );
+
+    document.getElementById("refreshRegisteredMembersButton").addEventListener(
+      "click", loadRegisteredMembers
     );
 
     document.getElementById("refreshCertificatesButton").addEventListener(
