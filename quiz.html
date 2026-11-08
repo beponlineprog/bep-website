@@ -6,7 +6,6 @@
 
 <title>B.E.P. Bible Assessment</title>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
 * {
@@ -620,34 +619,30 @@ footer.bep-compact-footer {
 </div>
 
 
-<script>
-
-/* =========================================================
-   SUPABASE CONNECTION
-   =========================================================
-
-   IMPORTANT:
-   This is the NEW standalone bep_quiz project.
-
-   It is NOT connected to the B.E.P. Member Portal project.
-========================================================= */
+<script type="module">
 
 "use strict";
 
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
+import {
+    getFirestore,
+    collection,
+    addDoc,
+    serverTimestamp
+} from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
 
-const SUPABASE_URL =
-"https://onyuntiwzfknunlrcpus.supabase.co";
+const firebaseConfig = {
+    apiKey: "AIzaSyC3N-DrY4mv4M32TMIt_2_9btO3AqmhDk3Y",
+    authDomain: "beponlineprog-8b8bb.firebaseapp.com",
+    projectId: "beponlineprog-8b8bb",
+    storageBucket: "beponlineprog-8b8bb.firebasestorage.app",
+    messagingSenderId: "312026634976",
+    appId: "1:312026634976:web:5497f071e8f0e6618fce85",
+    measurementId: "G-LDX5CZ68MH"
+};
 
-
-const SUPABASE_ANON_KEY =
-"sb_publishable_nu-I2N0Zez_LgdQhH_qgQQ_v5hjczO0";
-
-
-const supabaseClient =
-window.supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_ANON_KEY
-);
+const firebaseApp = initializeApp(firebaseConfig);
+const db = getFirestore(firebaseApp);
 
 
 /* =========================================================
@@ -1423,7 +1418,7 @@ async function submitAssessment(autoSubmitted) {
     window.scrollTo(0, 0);
 
 
-    /* Save to NEW bep_quiz project */
+    /* Save the public Bible Quiz result to Firebase Firestore */
 
     await saveResult(record);
 
@@ -1450,21 +1445,14 @@ async function saveResult(record) {
 
     try {
 
-        const response =
-            await supabaseClient
-            .from("bep_public_quiz_results")
-            .insert(record);
-
-
-        const error =
-            response.error;
-
-
-        if (error) {
-
-            throw error;
-
-        }
+        await addDoc(collection(db, "publicQuizResults"), {
+            ...record,
+            quiz_title: "B.E.P. Public Bible Quiz",
+            question_count: TOTAL_QUESTIONS,
+            marks_per_question: MARKS_PER_QUESTION,
+            pass_mark: PASS_MARK,
+            created_at: serverTimestamp()
+        });
 
 
         statusBox.className =
