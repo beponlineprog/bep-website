@@ -679,6 +679,15 @@ footer.bep-compact-footer {
               <h3>${escapeHtml(member.fullName || "Registered member")}</h3>
               <div class="details">${fields.join("<br>")}</div>
               <p><span class="status">Active Member</span></p>
+              <div style="display:flex;justify-content:flex-end;margin-top:14px">
+                <button type="button" class="delete-member-button"
+                  data-member-uid="${escapeHtml(member.id)}"
+                  data-member-number="${escapeHtml(member.memberNumber || "No member number")}"
+                  data-member-email="${escapeHtml(member.email || "No email")}"
+                  style="background:#bd2635;color:#fff">
+                  <i class="fa-solid fa-trash" aria-hidden="true"></i> Delete Member Profile
+                </button>
+              </div>
             </article>
           `;
         }).join("");
@@ -690,6 +699,54 @@ footer.bep-compact-footer {
         registeredMembersMessage.style.color = "#b42332";
       }
     }
+
+    // Delete an approved member's Firestore profile from the Registered Members panel.
+    // This does not delete the Firebase Authentication account or related certificate records.
+    registeredMembers.addEventListener("click", async event => {
+      const button = event.target.closest(".delete-member-button");
+      if (!button) return;
+
+      if (!currentAdmin || currentAdmin.uid !== ADMIN_UID || busy) {
+        registeredMembersMessage.textContent = "You are not authorised to delete this member profile.";
+        registeredMembersMessage.style.color = "#b42332";
+        return;
+      }
+
+      const userId = button.dataset.memberUid;
+      const memberNumber = button.dataset.memberNumber || "No member number";
+      const memberEmail = button.dataset.memberEmail || "No email";
+      if (!userId) return;
+
+      const confirmed = confirm(
+        "DELETE THIS REGISTERED MEMBER PROFILE?\\n\\n" +
+        "Member number: " + memberNumber + "\\n" +
+        "Email: " + memberEmail + "\\n\\n" +
+        "This permanently deletes only the Firestore members profile. " +
+        "The Firebase Authentication account, certificates, and other records will remain.\\n\\n" +
+        "Continue only if you have checked the member's records and are certain."
+      );
+      if (!confirmed) return;
+
+      busy = true;
+      setButtonsDisabled(true);
+      registeredMembersMessage.textContent = "Deleting member profile...";
+      registeredMembersMessage.style.color = "";
+
+      try {
+        await deleteDoc(doc(db, "members", userId));
+        registeredMembersMessage.textContent =
+          memberNumber + " profile deleted from Registered Members.";
+        registeredMembersMessage.style.color = "#17653a";
+        await loadRegisteredMembers();
+      } catch (error) {
+        registeredMembersMessage.textContent =
+          "Could not delete member profile: " + error.message;
+        registeredMembersMessage.style.color = "#b42332";
+      } finally {
+        busy = false;
+        setButtonsDisabled(false);
+      }
+    });
 
     const contactMessages = document.getElementById("contactMessages");
     const contactMessagesMessage = document.getElementById("contactMessagesMessage");
