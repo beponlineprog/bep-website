@@ -399,6 +399,14 @@ footer.bep-compact-footer {
         <div id="applications">Loading applications...</div>
       </div>
 
+      <div class="panel" id="publicQuizPanel">
+        <h2>Public Bible Quiz Results</h2>
+        <p>View results submitted through the public 20-question B.E.P. Bible Quiz.</p>
+        <button class="primary" id="refreshPublicQuizButton" type="button">Refresh Quiz Results</button>
+        <p id="publicQuizMessage" class="message" role="status"></p>
+        <div id="publicQuizResults">Sign in as the administrator to load public quiz results.</div>
+      </div>
+
       <div class="panel" id="certificatePanel">
         <h2>Certificate Requests</h2>
         <p>Review assessment eligibility, approve eligible requests, and issue certificates only after approval.</p>
@@ -513,6 +521,7 @@ footer.bep-compact-footer {
 
       await loadApplications();
       await loadCertificates();
+      await loadPublicQuizResults();
     });
 
     loginForm.addEventListener("submit", async event => {
@@ -536,6 +545,61 @@ footer.bep-compact-footer {
       }
     });
 
+
+    const publicQuizResults = document.getElementById("publicQuizResults");
+    const publicQuizMessage = document.getElementById("publicQuizMessage");
+
+    async function loadPublicQuizResults() {
+      if (!currentAdmin || currentAdmin.uid !== ADMIN_UID) return;
+      publicQuizResults.textContent = "Loading public Bible Quiz results...";
+      publicQuizMessage.textContent = "";
+      try {
+        const snapshot = await getDocs(collection(db, "publicQuizResults"));
+        const rows = snapshot.docs.map(resultDoc => ({
+          id: resultDoc.id,
+          ...resultDoc.data()
+        }));
+        rows.sort((a, b) => {
+          const aTime = a.created_at && a.created_at.toMillis ? a.created_at.toMillis() : 0;
+          const bTime = b.created_at && b.created_at.toMillis ? b.created_at.toMillis() : 0;
+          return bTime - aTime;
+        });
+        if (!rows.length) {
+          publicQuizResults.textContent = "No public Bible Quiz results have been submitted yet.";
+          return;
+        }
+        publicQuizResults.innerHTML = rows.map(item => {
+          const submittedAt = item.created_at && item.created_at.toDate
+            ? item.created_at.toDate().toLocaleString()
+            : "Date not available";
+          const score = Number(item.score || 0);
+          const total = Number(item.total_marks || 60);
+          const passed = score >= Number(item.pass_mark || 40);
+          return `
+            <article class="application">
+              <h3>${escapeHtml(item.visitor_name || "Name not provided")}</h3>
+              <div class="details">
+                <strong>Email:</strong> ${escapeHtml(item.visitor_email || "Not provided")}<br>
+                <strong>Phone / WhatsApp:</strong> ${escapeHtml(item.visitor_phone || "Not provided")}<br>
+                <strong>Location:</strong> ${escapeHtml(item.visitor_location || "Not provided")}<br>
+                <strong>Score:</strong> ${score} / ${total}<br>
+                <strong>Percentage:</strong> ${Number(item.percentage || 0)}%<br>
+                <strong>Correct answers:</strong> ${Number(item.correct_answers || 0)} / 20<br>
+                <strong>Unanswered:</strong> ${Number(item.unanswered || 0)}<br>
+                <strong>Result:</strong> <span class="${passed ? "eligibility-good" : "eligibility-warn"}">${passed ? "Passed" : "Not passed"}</span><br>
+                <strong>Time taken:</strong> ${Math.floor(Number(item.time_taken_seconds || 0) / 60)}m ${Number(item.time_taken_seconds || 0) % 60}s<br>
+                <strong>Submitted:</strong> ${escapeHtml(submittedAt)}
+              </div>
+            </article>
+          `;
+        }).join("");
+        publicQuizMessage.textContent = rows.length + " result(s) loaded.";
+      } catch (error) {
+        publicQuizResults.textContent = "Could not load public quiz results: " + error.message;
+        publicQuizMessage.textContent = error.message;
+        publicQuizMessage.style.color = "#b42332";
+      }
+    }
 
     const WORKER_API = "https://bep-assessment-api.bep-onlineprog.workers.dev";
     const certificates = document.getElementById("certificates");
@@ -873,6 +937,10 @@ footer.bep-compact-footer {
 
     document.getElementById("refreshCertificatesButton").addEventListener(
       "click", loadCertificates
+    );
+
+    document.getElementById("refreshPublicQuizButton").addEventListener(
+      "click", loadPublicQuizResults
     );
 
     document.getElementById("logoutButton").addEventListener(
