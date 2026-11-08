@@ -399,6 +399,15 @@ footer.bep-compact-footer {
         <div id="applications">Loading applications...</div>
       </div>
 
+
+      <div class="panel" id="contactMessagesPanel">
+        <h2>Contact Form Enquiries</h2>
+        <p>Messages submitted through the public Contact page.</p>
+        <button class="primary" id="refreshContactMessagesButton" type="button">Refresh Enquiries</button>
+        <p id="contactMessagesMessage" class="message" role="status"></p>
+        <div id="contactMessages">Sign in as administrator to view contact enquiries.</div>
+      </div>
+
       <div class="panel" id="publicQuizPanel">
         <h2>Public Bible Quiz Results</h2>
         <p>View results submitted through the public 20-question B.E.P. Bible Quiz.</p>
@@ -437,6 +446,7 @@ footer.bep-compact-footer {
       getFirestore,
       collection,
       getDocs,
+      addDoc,
       doc,
       runTransaction,
       serverTimestamp,
@@ -522,6 +532,7 @@ footer.bep-compact-footer {
       await loadApplications();
       await loadCertificates();
       await loadPublicQuizResults();
+      await loadContactMessages();
     });
 
     loginForm.addEventListener("submit", async event => {
@@ -598,6 +609,50 @@ footer.bep-compact-footer {
         publicQuizResults.textContent = "Could not load public quiz results: " + error.message;
         publicQuizMessage.textContent = error.message;
         publicQuizMessage.style.color = "#b42332";
+      }
+    }
+
+
+    const contactMessages = document.getElementById("contactMessages");
+    const contactMessagesMessage = document.getElementById("contactMessagesMessage");
+
+    async function loadContactMessages() {
+      if (!currentAdmin || currentAdmin.uid !== ADMIN_UID) return;
+      contactMessages.textContent = "Loading contact enquiries...";
+      contactMessagesMessage.textContent = "";
+      try {
+        const snapshot = await getDocs(collection(db, "contactMessages"));
+        const rows = snapshot.docs.map(messageDoc => ({ id: messageDoc.id, ...messageDoc.data() }));
+        rows.sort((x, y) => {
+          const xt = x.createdAt && x.createdAt.toMillis ? x.createdAt.toMillis() : 0;
+          const yt = y.createdAt && y.createdAt.toMillis ? y.createdAt.toMillis() : 0;
+          return yt - xt;
+        });
+        if (!rows.length) {
+          contactMessages.textContent = "No contact enquiries have been submitted yet.";
+          return;
+        }
+        contactMessages.innerHTML = rows.map(item => {
+          const submitted = item.createdAt && item.createdAt.toDate
+            ? item.createdAt.toDate().toLocaleString() : "Date not available";
+          return `
+            <article class="application">
+              <h3>${escapeHtml(item.subject || "Contact enquiry")}</h3>
+              <div class="details">
+                <strong>Name:</strong> ${escapeHtml(item.name || "Not provided")}<br>
+                <strong>Email:</strong> <a href="mailto:${encodeURIComponent(item.email || "")}">${escapeHtml(item.email || "Not provided")}</a><br>
+                <strong>Phone / WhatsApp:</strong> ${escapeHtml(item.phone || "Not provided")}<br>
+                <strong>Submitted:</strong> ${escapeHtml(submitted)}
+              </div>
+              <p style="white-space:pre-wrap;overflow-wrap:anywhere;margin:12px 0 0"><strong>Message:</strong><br>${escapeHtml(item.message || "")}</p>
+            </article>
+          `;
+        }).join("");
+        contactMessagesMessage.textContent = rows.length + " enquiry/enquiries loaded.";
+      } catch (error) {
+        contactMessages.textContent = "Could not load contact enquiries: " + error.message;
+        contactMessagesMessage.textContent = error.message;
+        contactMessagesMessage.style.color = "#b42332";
       }
     }
 
@@ -938,6 +993,8 @@ footer.bep-compact-footer {
     document.getElementById("refreshCertificatesButton").addEventListener(
       "click", loadCertificates
     );
+
+    document.getElementById("refreshContactMessagesButton").addEventListener("click", loadContactMessages);
 
     document.getElementById("refreshPublicQuizButton").addEventListener(
       "click", loadPublicQuizResults
