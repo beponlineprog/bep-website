@@ -499,7 +499,7 @@ footer.bep-compact-footer {
 
     function setButtonsDisabled(disabled) {
       document.querySelectorAll(
-        "#applications button, #refreshButton, #logoutButton"
+        "#applications button, #refreshButton, #logoutButton, #contactMessages button"
       ).forEach(button => {
         button.disabled = disabled;
       });
@@ -645,6 +645,11 @@ footer.bep-compact-footer {
                 <strong>Submitted:</strong> ${escapeHtml(submitted)}
               </div>
               <p style="white-space:pre-wrap;overflow-wrap:anywhere;margin:12px 0 0"><strong>Message:</strong><br>${escapeHtml(item.message || "")}</p>
+              <div style="display:flex;justify-content:flex-end;margin-top:16px">
+                <button type="button" class="delete-contact-button" data-contact-id="${escapeHtml(item.id)}" style="background:#b42332;color:#fff;border:0;border-radius:7px;padding:10px 16px;font-weight:700;cursor:pointer">
+                  <i class="fa-solid fa-trash" aria-hidden="true"></i> Delete Enquiry
+                </button>
+              </div>
             </article>
           `;
         }).join("");
@@ -655,6 +660,35 @@ footer.bep-compact-footer {
         contactMessagesMessage.style.color = "#b42332";
       }
     }
+
+    contactMessages.addEventListener("click", async event => {
+      const deleteButton = event.target.closest(".delete-contact-button");
+      if (!deleteButton) return;
+
+      if (!currentAdmin || currentAdmin.uid !== ADMIN_UID) {
+        contactMessagesMessage.textContent = "You are not authorised to delete enquiries.";
+        contactMessagesMessage.style.color = "#b42332";
+        return;
+      }
+
+      const messageId = deleteButton.dataset.contactId;
+      if (!messageId) return;
+      if (!confirm("Delete this contact enquiry permanently? This action cannot be undone.")) return;
+
+      deleteButton.disabled = true;
+      deleteButton.textContent = "Deleting...";
+      try {
+        await deleteDoc(doc(db, "contactMessages", messageId));
+        contactMessagesMessage.textContent = "Enquiry deleted successfully.";
+        contactMessagesMessage.style.color = "#17653a";
+        await loadContactMessages();
+      } catch (error) {
+        deleteButton.disabled = false;
+        deleteButton.innerHTML = '<i class="fa-solid fa-trash" aria-hidden="true"></i> Delete Enquiry';
+        contactMessagesMessage.textContent = "Could not delete enquiry: " + error.message;
+        contactMessagesMessage.style.color = "#b42332";
+      }
+    });
 
     const WORKER_API = "https://bep-assessment-api.bep-onlineprog.workers.dev";
     const certificates = document.getElementById("certificates");
