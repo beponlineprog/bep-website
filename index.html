@@ -1477,6 +1477,13 @@ Take the Bible Quiz
 
 <!-- B.E.P. MEMBER JOURNEY: 12 STEPS -->
 <section id="membership-journey" class="membership-journey" aria-labelledby="membership-journey-title">
+<div class="membership-guide-toggle-wrap">
+  <button type="button" class="membership-guide-toggle" id="membershipGuideToggle" aria-expanded="false" aria-controls="membershipGuidePanel">
+    <span><i class="fa-solid fa-route" aria-hidden="true"></i> How to Become a B.E.P. Member</span>
+    <i class="fa-solid fa-chevron-down membership-guide-chevron" aria-hidden="true"></i>
+  </button>
+</div>
+<div id="membershipGuidePanel" class="membership-guide-panel" hidden>
 <div class="section-container">
 <h2 class="section-title" id="membership-journey-title"><i class="fa-solid fa-route" aria-hidden="true"></i> Your B.E.P. Membership Journey</h2>
 <p class="section-subtitle">Becoming part of B.E.P. Online is a simple step-by-step journey. Follow these 12 steps from registration to receiving your certificate.</p>
@@ -1493,7 +1500,9 @@ Take the Bible Quiz
 <article class="membership-step"><div class="membership-step-top"><span class="membership-step-number">11</span><svg viewBox="0 0 48 48" role="img" aria-label="Request and Receive Your Certificate icon"><path d="M10 5h22l7 7v20H10zM32 5v8h7M16 20h17m-17 6h13"/><circle cx="24" cy="36" r="7"/><path d="m20 42-1 4 5-2 5 2-1-4"/></svg></div><h3>11. Request and Receive Your Certificate</h3><p>After meeting the certificate requirements, submit your certificate request and follow the B.E.P. certificate process.</p></article>
 <article class="membership-step"><div class="membership-step-top"><span class="membership-step-number">12</span><svg viewBox="0 0 48 48" role="img" aria-label="Download and Print Your PDF icon"><path d="M24 5v24m-9-9 9 9 9-9M9 31v10h30V31M15 36h18M7 23h8m18 0h8"/></svg></div><h3>12. Download and Print Your PDF</h3><p>Open your certificate, check your details, download the PDF and print or save it for your records.</p></article></div>
 <div class="membership-journey-cta"><p><strong>Ready to begin your journey?</strong> Register with B.E.P. Online and take your next step in Biblical learning and spiritual growth.</p><a href="register.html" class="btn btn-primary"><i class="fa-solid fa-user-plus" aria-hidden="true"></i> Register as a Member</a></div>
-</div></section>
+</div>
+</div>
+</section>
 <style>
 .membership-journey{background:#f7f9fc;padding:72px 24px}
 .membership-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
@@ -1509,6 +1518,17 @@ Take the Bible Quiz
 .membership-journey-cta .btn{flex:0 0 auto}
 @media(max-width:900px){.membership-steps{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:600px){.membership-journey{padding:52px 15px}.membership-steps{grid-template-columns:1fr;gap:14px}.membership-step{padding:20px}.membership-journey-cta{flex-direction:column;align-items:stretch;padding:22px}.membership-journey-cta .btn{width:100%;text-align:center}}
+
+.membership-guide-toggle-wrap{max-width:1160px;margin:0 auto 24px;padding:0 24px}
+.membership-guide-toggle{width:100%;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:19px 24px;border:1px solid #d7b24c;border-radius:12px;background:#062b52;color:#fff;font:700 17px/1.4 inherit;text-align:left;cursor:pointer;box-shadow:0 6px 18px rgba(6,43,82,.12);transition:background .2s ease,transform .2s ease}
+.membership-guide-toggle:hover{background:#0a3b6c;transform:translateY(-1px)}
+.membership-guide-toggle>span{display:flex;align-items:center;gap:12px}
+.membership-guide-toggle>span i{color:#f5d477}
+.membership-guide-chevron{color:#f5d477;transition:transform .2s ease}
+.membership-guide-toggle[aria-expanded="true"] .membership-guide-chevron{transform:rotate(180deg)}
+.membership-guide-panel[hidden]{display:none}
+.membership-guide-panel{padding-top:4px}
+@media(max-width:600px){.membership-guide-toggle-wrap{padding:0 15px}.membership-guide-toggle{font-size:15px;padding:16px 17px}}
 </style>
 
 <section class="countdown-section">
@@ -2504,5 +2524,18 @@ document.getElementById("year").textContent =
 
 
 <script>document.querySelectorAll("#year").forEach(function(node){node.textContent=String(new Date().getFullYear());});</script>
+
+<script>
+(function(){
+  const toggle=document.getElementById("membershipGuideToggle");
+  const panel=document.getElementById("membershipGuidePanel");
+  if(!toggle||!panel)return;
+  toggle.addEventListener("click",function(){
+    const isOpen=toggle.getAttribute("aria-expanded")==="true";
+    toggle.setAttribute("aria-expanded",String(!isOpen));
+    panel.hidden=isOpen;
+  });
+})();
+</script>
 </body>
 </html>
