@@ -127,6 +127,31 @@
     }
     .eligibility-good { color: #17653a; font-weight: bold; }
     .eligibility-warn { color: #b42332; font-weight: bold; }
+    .broadcast-recipient-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 8px;
+      margin: 12px 0 18px;
+    }
+    .broadcast-recipient {
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+      padding: 10px;
+      border: 1px solid #dce5ef;
+      border-radius: 8px;
+      background: #fbfdff;
+      font-size: 14px;
+      line-height: 1.4;
+      overflow-wrap: anywhere;
+    }
+    .broadcast-recipient input {
+      width: 18px;
+      min-width: 18px;
+      margin: 2px 0 0;
+      padding: 0;
+    }
+    .broadcast-recipient span { min-width: 0; }
     .hidden { display: none; }
     footer {
       text-align: center;
@@ -408,6 +433,32 @@ footer.bep-compact-footer {
         <div id="registeredMembers">Sign in as administrator to view registered members.</div>
       </div>
 
+      <div class="panel" id="emailBroadcastPanel">
+        <h2>Email Broadcast</h2>
+        <p>Send an email announcement to approved B.E.P. members through the verified B.E.P. Online sender.</p>
+        <div class="notice">
+          Only members whose status is Active and who have an email address are listed.
+          Select up to 50 recipients per message. Emails are sent individually, so members cannot see one another's email addresses.
+          Check your message and recipient selection carefully before sending.
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin:14px 0">
+          <button class="primary" id="refreshBroadcastMembersButton" type="button">Refresh Member List</button>
+          <button class="secondary" id="selectBroadcastMembersButton" type="button">Select First 50</button>
+          <button class="secondary" id="clearBroadcastMembersButton" type="button">Clear Selection</button>
+        </div>
+        <p id="broadcastMembersMessage" class="message" role="status">Sign in as administrator to load active members.</p>
+        <div id="broadcastRecipients" class="broadcast-recipient-list">Member list will appear here.</div>
+
+        <label for="broadcastSubject">Email Subject</label>
+        <input id="broadcastSubject" type="text" maxlength="200" placeholder="Enter the email subject">
+
+        <label for="broadcastMessage">Email Message</label>
+        <textarea id="broadcastMessage" rows="8" maxlength="15000" placeholder="Write your announcement here..." style="width:100%;padding:12px;border:1px solid #b9c8d9;border-radius:7px;font:16px Arial,sans-serif;resize:vertical"></textarea>
+
+        <p id="broadcastSendMessage" class="message" role="status"></p>
+        <button class="primary" id="sendBroadcastButton" type="button" disabled>Send Email Broadcast</button>
+      </div>
+
       <div class="panel" id="contactMessagesPanel">
         <h2>Contact Form Enquiries</h2>
         <p>Messages submitted through the public Contact page.</p>
@@ -548,6 +599,7 @@ footer.bep-compact-footer {
 
       await loadApplications();
       await loadRegisteredMembers();
+      await loadBroadcastMembers();
       await loadCertificates();
       await loadPublicQuizResults();
       await loadContactMessages();
@@ -699,6 +751,179 @@ footer.bep-compact-footer {
         registeredMembersMessage.style.color = "#b42332";
       }
     }
+
+    // Email broadcast: recipients are loaded only from Active member profiles.
+    const EMAIL_BROADCAST_API = "https://bep-email-api.bep-onlineprog.workers.dev";
+    const broadcastRecipients = document.getElementById("broadcastRecipients");
+    const broadcastMembersMessage = document.getElementById("broadcastMembersMessage");
+    const broadcastSendMessage = document.getElementById("broadcastSendMessage");
+    const sendBroadcastButton = document.getElementById("sendBroadcastButton");
+    let broadcastMembers = [];
+    const selectedBroadcastEmails = new Set();
+
+    function showBroadcastMembersMessage(message, isError = false) {
+      broadcastMembersMessage.textContent = message;
+      broadcastMembersMessage.style.color = isError ? "#b42332" : "#17653a";
+    }
+
+    function showBroadcastSendMessage(message, isError = false) {
+      broadcastSendMessage.textContent = message;
+      broadcastSendMessage.style.color = isError ? "#b42332" : "#17653a";
+    }
+
+    function renderBroadcastRecipients() {
+      if (!broadcastMembers.length) {
+        broadcastRecipients.textContent = "No active members with valid email addresses were found.";
+      } else {
+        broadcastRecipients.innerHTML = broadcastMembers.map(member => {
+          const checked = selectedBroadcastEmails.has(member.email) ? "checked" : "";
+          return `
+            <label class="broadcast-recipient">
+              <input type="checkbox" class="broadcast-recipient-checkbox" value="${escapeHtml(member.email)}" ${checked}>
+              <span><strong>${escapeHtml(member.fullName || "B.E.P. Member")}</strong><br>
+              ${escapeHtml(member.email)}
+              ${member.memberNumber ? "<br>" + escapeHtml(member.memberNumber) : ""}</span>
+            </label>
+          `;
+        }).join("");
+      }
+
+      const selectedCount = selectedBroadcastEmails.size;
+      showBroadcastMembersMessage(
+        broadcastMembers.length + " active member(s) with valid email addresses loaded. " +
+        selectedCount + " recipient(s) selected."
+      );
+      sendBroadcastButton.disabled = selectedCount === 0 || selectedCount > 50;
+    }
+
+    async function loadBroadcastMembers() {
+      if (!currentAdmin || currentAdmin.uid !== ADMIN_UID) return;
+      broadcastRecipients.textContent = "Loading active members...";
+      showBroadcastMembersMessage("Loading approved members...");
+      try {
+        const snapshot = await getDocs(collection(db, "members"));
+        broadcastMembers = snapshot.docs
+          .map(memberDoc => ({ id: memberDoc.id, ...memberDoc.data() }))
+          .filter(member =>
+            String(member.status || "").toLowerCase() === "active" &&
+            /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(String(member.email || "").trim())
+          )
+          .map(member => ({
+            id: member.id,
+            fullName: String(member.fullName || "B.E.P. Member"),
+            email: String(member.email).trim().toLowerCase(),
+            memberNumber: String(member.memberNumber || "")
+          }))
+          .sort((a, b) => a.fullName.localeCompare(b.fullName));
+
+        const validEmails = new Set(broadcastMembers.map(member => member.email));
+        for (const email of [...selectedBroadcastEmails]) {
+          if (!validEmails.has(email)) selectedBroadcastEmails.delete(email);
+        }
+        renderBroadcastRecipients();
+      } catch (error) {
+        broadcastRecipients.textContent = "Could not load active members.";
+        showBroadcastMembersMessage("Could not load members: " + error.message, true);
+      }
+    }
+
+    broadcastRecipients.addEventListener("change", event => {
+      const checkbox = event.target.closest(".broadcast-recipient-checkbox");
+      if (!checkbox) return;
+      const email = checkbox.value;
+      if (checkbox.checked) {
+        if (selectedBroadcastEmails.size >= 50) {
+          checkbox.checked = false;
+          showBroadcastMembersMessage("You can select a maximum of 50 recipients per email request.", true);
+          return;
+        }
+        selectedBroadcastEmails.add(email);
+      } else {
+        selectedBroadcastEmails.delete(email);
+      }
+      renderBroadcastRecipients();
+    });
+
+    document.getElementById("refreshBroadcastMembersButton").addEventListener(
+      "click", loadBroadcastMembers
+    );
+
+    document.getElementById("selectBroadcastMembersButton").addEventListener("click", () => {
+      selectedBroadcastEmails.clear();
+      broadcastMembers.slice(0, 50).forEach(member => selectedBroadcastEmails.add(member.email));
+      renderBroadcastRecipients();
+      if (broadcastMembers.length > 50) {
+        showBroadcastMembersMessage("First 50 of " + broadcastMembers.length + " active members selected. Send this batch, then select the next members.", false);
+      }
+    });
+
+    document.getElementById("clearBroadcastMembersButton").addEventListener("click", () => {
+      selectedBroadcastEmails.clear();
+      renderBroadcastRecipients();
+      showBroadcastSendMessage("");
+    });
+
+    sendBroadcastButton.addEventListener("click", async () => {
+      if (!currentAdmin || currentAdmin.uid !== ADMIN_UID) {
+        showBroadcastSendMessage("Administrator sign-in is required.", true);
+        return;
+      }
+
+      const subject = document.getElementById("broadcastSubject").value.trim();
+      const message = document.getElementById("broadcastMessage").value.trim();
+      const recipients = broadcastMembers
+        .filter(member => selectedBroadcastEmails.has(member.email))
+        .map(member => ({ email: member.email }));
+
+      if (!subject || !message) {
+        showBroadcastSendMessage("Enter both an email subject and a message.", true);
+        return;
+      }
+      if (!recipients.length || recipients.length > 50) {
+        showBroadcastSendMessage("Select between 1 and 50 active members.", true);
+        return;
+      }
+
+      const confirmed = confirm(
+        "Send this email to " + recipients.length + " selected B.E.P. member(s)?\\n\\n" +
+        "Subject: " + subject + "\\n\\n" +
+        "This will send individual emails and cannot be undone."
+      );
+      if (!confirmed) return;
+
+      sendBroadcastButton.disabled = true;
+      sendBroadcastButton.textContent = "Sending...";
+      showBroadcastSendMessage("Sending email broadcast...");
+      try {
+        const token = await currentAdmin.getIdToken(true);
+        const response = await fetch(EMAIL_BROADCAST_API, {
+          method: "POST",
+          headers: {
+            "Authorization": "Bearer " + token,
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ subject, message, recipients })
+        });
+        const result = await response.json().catch(() => ({}));
+        if (!response.ok) {
+          throw new Error(result.error || "Email service returned HTTP " + response.status + ".");
+        }
+
+        const summary = "Broadcast completed. Sent: " + Number(result.sent || 0) +
+          "; failed: " + Number(result.failed || 0) +
+          "; total: " + Number(result.total || recipients.length) + ".";
+        showBroadcastSendMessage(summary, Number(result.failed || 0) > 0);
+        if (Number(result.sent || 0) > 0) {
+          selectedBroadcastEmails.clear();
+          renderBroadcastRecipients();
+        }
+      } catch (error) {
+        showBroadcastSendMessage("Email broadcast failed: " + error.message, true);
+      } finally {
+        sendBroadcastButton.textContent = "Send Email Broadcast";
+        sendBroadcastButton.disabled = selectedBroadcastEmails.size === 0;
+      }
+    });
 
     // Delete an approved member's Firestore profile from the Registered Members panel.
     // This does not delete the Firebase Authentication account or related certificate records.
