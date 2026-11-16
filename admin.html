@@ -806,7 +806,7 @@ footer.bep-compact-footer {
           .map(memberDoc => ({ id: memberDoc.id, ...memberDoc.data() }))
           .filter(member =>
             String(member.status || "").toLowerCase() === "active" &&
-            /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(String(member.email || "").trim())
+            /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(member.email || "").trim())
           )
           .map(member => ({
             id: member.id,
@@ -886,7 +886,7 @@ footer.bep-compact-footer {
 
       const confirmed = confirm(
         "Send this email to " + recipients.length + " selected B.E.P. member(s)?\\n\\n" +
-        "Subject: " + subject + "\\n\\n" +
+        "Subject: " + subject + "\n\n" +
         "This will send individual emails and cannot be undone."
       );
       if (!confirmed) return;
@@ -945,7 +945,7 @@ footer.bep-compact-footer {
       const confirmed = confirm(
         "DELETE THIS REGISTERED MEMBER PROFILE?\\n\\n" +
         "Member number: " + memberNumber + "\\n" +
-        "Email: " + memberEmail + "\\n\\n" +
+        "Email: " + memberEmail + "\n\n" +
         "This permanently deletes only the Firestore members profile. " +
         "The Firebase Authentication account, certificates, and other records will remain.\\n\\n" +
         "Continue only if you have checked the member's records and are certain."
