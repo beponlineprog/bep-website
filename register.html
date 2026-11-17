@@ -868,6 +868,14 @@ footer.bep-compact-footer {
         </div>
 
 
+        <div class="form-group" style="background:#f5f8ff;border:1px solid #d7e2f5;border-radius:8px;padding:12px;">
+          <label style="display:flex;gap:9px;align-items:flex-start;font-weight:600;line-height:1.45;">
+            <input type="checkbox" id="whatsappOptIn" style="width:auto;margin-top:3px;">
+            <span>I agree to receive B.E.P. announcements, programme updates and information through WhatsApp. I understand that I can opt out at any time from my Member Dashboard.</span>
+          </label>
+          <small style="display:block;margin:7px 0 0 25px;color:#555;">This consent is optional. Leave this box unticked if you do not want WhatsApp messages.</small>
+        </div>
+
         <div class="form-group">
 
           <label for="password">
@@ -1443,6 +1451,9 @@ footer.bep-compact-footer {
           .getElementById("heardAbout")
           .value;
 
+      const whatsappOptIn =
+        document.getElementById("whatsappOptIn").checked;
+
 
       const password =
         document
@@ -1591,6 +1602,14 @@ footer.bep-compact-footer {
 
             heardAbout:
               heardAbout,
+
+            whatsappOptIn:
+              whatsappOptIn,
+
+            ...(whatsappOptIn ? {
+              whatsappOptInAt: serverTimestamp(),
+              whatsappOptInRecordedBy: user.uid
+            } : {}),
 
             status:
               "Pending",
