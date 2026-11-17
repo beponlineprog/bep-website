@@ -67,7 +67,7 @@ const firebaseConfig = {
 };
 
 const firebaseReady = (async () => {
-  const app = initializeApp(firebaseConfig);
+  const app = initializeApp(firebaseConfig, "BEPBibleChallenge");
   const auth = getAuth(app);
   const db = getFirestore(app);
   if (!auth.currentUser) await signInAnonymously(auth);
