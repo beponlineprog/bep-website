@@ -214,12 +214,15 @@ async function signInProgressAccount(){
   try{
     const {auth}=await firebaseReady;
     const user=(await signInWithEmailAndPassword(auth,email,password)).user;
-    if(name){await updateProfile(user,{displayName:name});signedInPlayerName=name;}
-    else{signedInPlayerName=user.displayName||"";}
+    const playerName=name||user.displayName||(user.email||"Player").split("@")[0];
+    if(name||!user.displayName)await updateProfile(user,{displayName:playerName});
+    signedInPlayerName=playerName;
     await loadCloudProgress();
     await saveCloudProgress();
-    $("accountStatus").textContent="Welcome back, "+(signedInPlayerName||user.email)+"! Your saved stage progress is loaded.";
-    if(!$("setup").classList.contains("hidden")&&$("player1"))$("player1").value=signedInPlayerName;
+    $("accountPlayerName").value=playerName;
+    $("accountStatus").textContent="Welcome back, "+playerName+"! Your saved progress is loaded. Choose your challenge below.";
+    showSetup();
+    if($("player1"))$("player1").value=playerName;
   }catch(error){
     console.error("Progress sign-in failed:",error);
     $("accountStatus").textContent=error.code==="auth/invalid-credential"?"Email or password is incorrect.":(error.message||"Could not sign in. Please try again.");
