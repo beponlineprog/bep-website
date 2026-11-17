@@ -46,12 +46,34 @@ main{max-width:760px;margin:26px auto;padding:0 14px 40px}.panel{background:whit
 <div class="actions"><button class="btn primary" onclick="showSetup()">PLAY AGAIN</button><button class="btn secondary" onclick="showScores()">LEADERBOARD</button><button class="btn dark" onclick="goHome()">HOME</button></div>
 </section>
 <section id="scores" class="panel hidden">
-<div class="eyebrow">Hall of achievement</div><h2>Local leaderboard</h2><p class="notice">Scores are saved only in this browser on this device.</p>
-<div id="scoreTable"></div><div class="actions"><button class="btn secondary" onclick="goHome()">HOME</button><button class="btn primary" onclick="showSetup()">PLAY</button></div>
+<div class="eyebrow">Hall of achievement</div><h2>Online leaderboard</h2><p class="notice">Scores are shared with Bible Challenge players across devices.</p>
+<p id="scoreStatus" class="notice" aria-live="polite">Connecting to the online leaderboard…</p><div id="scoreTable"></div><div class="actions"><button class="btn secondary" onclick="goHome()">HOME</button><button class="btn primary" onclick="showSetup()">PLAY</button></div>
 </section>
 </main>
 <footer>© B.E.P. Online • Building the Church of Christ<br>Learn • Play • Grow</footer>
-<script>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
+import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js";
+import { getFirestore, collection, addDoc, getDocs, query, orderBy, limit, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyC3N-DrY4mv4M32TMIt_2_9btO3AqmhDk3Y",
+  authDomain: "beponlineprog-8b8bb.firebaseapp.com",
+  projectId: "beponlineprog-8b8bb",
+  storageBucket: "beponlineprog-8b8bb.firebasestorage.app",
+  messagingSenderId: "312026634976",
+  appId: "1:312026634976:web:5497f071e8f0e6618fce85",
+  measurementId: "G-LDX5CZ68MH"
+};
+
+const firebaseReady = (async () => {
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+  if (!auth.currentUser) await signInAnonymously(auth);
+  return { auth, db };
+})();
+
 const questions=[
 {c:"Genesis",t:"Who built an ark to survive the great flood?",a:["Abraham","Noah","Moses","Joseph"],k:1,e:"God instructed Noah to build the ark. Read Genesis 6:13–22."},
 {c:"Exodus",t:"Who led the Israelites out of Egypt?",a:["Joshua","Aaron","Moses","David"],k:2,e:"Moses led Israel out of Egypt. Read Exodus 3:10."},
@@ -85,9 +107,10 @@ function startGame(){const p1=($("player1").value||"Player 1").trim().slice(0,24
 function renderQuestion(){locked=false;remaining=30;$("feedback").classList.add("hidden");$("nextBtn").classList.add("hidden");$("turnLabel").textContent=players[turn]+"'s turn";$("scoreLabel").textContent="Score: "+scores[turn];$("qCount").textContent="QUESTION "+(index+1)+" / 20";$("progressBar").style.width=(index/20*100)+"%";$("timer").textContent=remaining+"s";let q=round[index];$("category").textContent=q.c.toUpperCase();$("questionText").textContent=q.t;$("answers").innerHTML="";q.a.forEach((a,i)=>{let b=document.createElement("button");b.className="answer";b.textContent=String.fromCharCode(65+i)+". "+a;b.onclick=()=>answer(i);$("answers").appendChild(b)});clearInterval(tick);tick=setInterval(()=>{remaining--;$("timer").textContent=remaining+"s";if(remaining<=0)answer(-1)},1000)}
 function answer(choice){if(locked)return;locked=true;clearInterval(tick);let q=round[index],correct=choice===q.k;if(correct)scores[turn]+=10;[...$("answers").children].forEach((b,i)=>{b.disabled=true;if(i===q.k)b.classList.add("correct");else if(i===choice)b.classList.add("wrong")});$("scoreLabel").textContent="Score: "+scores[turn];let f=$("feedback");f.className="feedback "+(correct?"good":"bad");f.innerHTML="<strong>"+(correct?"Correct! +10 points":"Not quite — the correct answer is "+q.a[q.k])+"</strong>"+q.e;$("nextBtn").textContent=index===19?(mode==="multi"&&turn===0?"NEXT PLAYER":"SEE RESULTS"):"NEXT QUESTION";$("nextBtn").classList.remove("hidden")}
 function nextQuestion(){if(index===19&&mode==="multi"&&turn===0){turn=1;index=0;round=[...questions].sort(()=>Math.random()-.5);renderQuestion();return}if(index===19){finish();return}index++;renderQuestion()}
-function finish(){clearInterval(tick);hideAll();$("results").classList.remove("hidden");let total=mode==="multi"?players.length:1;let best=Math.max(...scores);$("resultTitle").textContent=mode==="multi"?(scores.filter(s=>s===best).length>1?"It’s a tie!":players[scores.indexOf(best)]+" wins!"):"Challenge complete, "+players[0]+"!";$("resultMessage").textContent="You answered 20 questions. Keep learning and growing in the Word.";let html="";players.forEach((p,i)=>html+='<div class="stat"><b>'+scores[i]+'/200</b><small>'+escapeHtml(p)+'</small></div>');$("resultStats").innerHTML=html;$("winnerBox").innerHTML=mode==="multi"?"<p><b>Well played to both challengers!</b></p>":"";let board=JSON.parse(localStorage.getItem("bepBibleScores")||"[]");players.forEach((p,i)=>board.push({name:p,score:scores[i],date:new Date().toLocaleDateString()}));board.sort((a,b)=>b.score-a.score);localStorage.setItem("bepBibleScores",JSON.stringify(board.slice(0,20)))}
+async function finish(){clearInterval(tick);hideAll();$("results").classList.remove("hidden");let best=Math.max(...scores);$("resultTitle").textContent=mode==="multi"?(scores.filter(s=>s===best).length>1?"It’s a tie!":players[scores.indexOf(best)]+" wins!"):"Challenge complete, "+players[0]+"!";$("resultMessage").textContent="You answered 20 questions. Saving your scores…";let html="";players.forEach((p,i)=>html+='<div class="stat"><b>'+scores[i]+'/200</b><small>'+escapeHtml(p)+'</small></div>');$("resultStats").innerHTML=html;$("winnerBox").innerHTML=mode==="multi"?"<p><b>Well played to both challengers!</b></p>":"";let board=JSON.parse(localStorage.getItem("bepBibleScores")||"[]");players.forEach((p,i)=>board.push({name:p,score:scores[i],date:new Date().toLocaleDateString()}));board.sort((a,b)=>b.score-a.score);localStorage.setItem("bepBibleScores",JSON.stringify(board.slice(0,20)));try{const {auth,db}=await firebaseReady;for(let i=0;i<players.length;i++){await addDoc(collection(db,"bibleChallengeScores"),{uid:auth.currentUser.uid,playerName:players[i],score:scores[i],mode,createdAt:serverTimestamp()})}$("resultMessage").textContent="Your score"+(players.length>1?"s have":" has")+" been saved to the online leaderboard. Keep learning and growing in the Word."}catch(error){console.error("Bible Challenge score save failed:",error);$("resultMessage").textContent="Your game is complete. Your score is saved on this device, but the online leaderboard could not be reached. Please try again later."}}
 function escapeHtml(s){return s.replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
-function renderScores(){let board=JSON.parse(localStorage.getItem("bepBibleScores")||"[]");$("scoreTable").innerHTML=board.length?'<table class="leader"><thead><tr><th>PLAYER</th><th>SCORE</th><th>DATE</th></tr></thead><tbody>'+board.map(x=>'<tr><td>'+escapeHtml(x.name)+'</td><td><b>'+x.score+'/200</b></td><td>'+escapeHtml(x.date)+'</td></tr>').join("")+'</tbody></table>':'<p>No scores yet. Be the first to play!</p>'}
+async function renderScores(){const localBoard=JSON.parse(localStorage.getItem("bepBibleScores")||"[]");$("scoreStatus").textContent="Loading shared scores…";try{const {db}=await firebaseReady;const scoreQuery=query(collection(db,"bibleChallengeScores"),orderBy("score","desc"),limit(20));const snapshot=await getDocs(scoreQuery);const board=snapshot.docs.map(doc=>{const d=doc.data();return{name:d.playerName,score:d.score,date:d.createdAt&&d.createdAt.toDate?d.createdAt.toDate().toLocaleDateString():"Recently"}});$("scoreStatus").textContent="Showing the top "+board.length+" online score"+(board.length===1?"":"s")+". Scores are shared across devices.";const display=board.length?board:localBoard;$("scoreTable").innerHTML=display.length?'<table class="leader"><thead><tr><th>PLAYER</th><th>SCORE</th><th>DATE</th></tr></thead><tbody>'+display.map(x=>'<tr><td>'+escapeHtml(String(x.name||"Player"))+'</td><td><b>'+Number(x.score||0)+'/200</b></td><td>'+escapeHtml(String(x.date||""))+'</td></tr>').join("")+'</tbody></table>':'<p>No scores yet. Be the first to play!</p>'}catch(error){console.error("Bible Challenge leaderboard load failed:",error);$("scoreStatus").textContent="Online leaderboard is temporarily unavailable. Showing scores saved on this device."; $("scoreTable").innerHTML=localBoard.length?'<table class="leader"><thead><tr><th>PLAYER</th><th>SCORE</th><th>DATE</th></tr></thead><tbody>'+localBoard.map(x=>'<tr><td>'+escapeHtml(String(x.name||"Player"))+'</td><td><b>'+Number(x.score||0)+'/200</b></td><td>'+escapeHtml(String(x.date||""))+'</td></tr>').join("")+'</tbody></table>':'<p>No local scores yet. Please try the online leaderboard again later.</p>'}}
+Object.assign(window,{goHome,showSetup,showScores,setMode,startGame,nextQuestion});
 goHome();
 </script>
 </body></html>
