@@ -884,6 +884,17 @@ footer.bep-compact-footer {
     </div>
 
 
+    <!-- WHATSAPP CONSENT -->
+    <div class="card" id="whatsappConsentCard">
+      <h2>WhatsApp Announcements</h2>
+      <p id="whatsappConsentStatus" aria-live="polite">Loading your WhatsApp consent preference...</p>
+      <p class="small-note">Choose whether B.E.P. may send you announcements and programme updates on WhatsApp. You can change this choice at any time.</p>
+      <button type="button" id="whatsappOptInButton" style="display:none;">Opt In to WhatsApp</button>
+      <button type="button" id="whatsappOptOutButton" class="secondary" style="display:none;">Opt Out of WhatsApp</button>
+      <div id="whatsappConsentMessage" class="message" role="status"></div>
+    </div>
+
+
     <!-- PROFILE -->
     <div class="card">
 
@@ -1032,7 +1043,8 @@ footer.bep-compact-footer {
     getFirestore,
     doc,
     getDoc,
-    updateDoc
+    updateDoc,
+    serverTimestamp
   } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
 
 
@@ -1289,6 +1301,9 @@ footer.bep-compact-footer {
       ).textContent =
         member.status || "Pending";
 
+
+      // WhatsApp consent preference
+      renderWhatsAppConsent(member.whatsappOptIn === true);
 
       // Profile fields
 
@@ -1996,6 +2011,80 @@ footer.bep-compact-footer {
 
     }
   );
+
+
+  // ==========================================================
+  // WHATSAPP CONSENT MANAGEMENT
+  // ==========================================================
+
+  const whatsappConsentStatus =
+    document.getElementById("whatsappConsentStatus");
+  const whatsappOptInButton =
+    document.getElementById("whatsappOptInButton");
+  const whatsappOptOutButton =
+    document.getElementById("whatsappOptOutButton");
+  const whatsappConsentMessage =
+    document.getElementById("whatsappConsentMessage");
+
+  function renderWhatsAppConsent(isOptedIn) {
+    whatsappConsentStatus.textContent = isOptedIn
+      ? "You are opted in. B.E.P. may send you announcements through WhatsApp."
+      : "You are not opted in. B.E.P. will not send you WhatsApp announcements.";
+    whatsappOptInButton.style.display = isOptedIn ? "none" : "inline-block";
+    whatsappOptOutButton.style.display = isOptedIn ? "inline-block" : "none";
+  }
+
+  async function updateWhatsAppConsent(optIn) {
+    const user = auth.currentUser;
+    if (!user) {
+      showMessage(whatsappConsentMessage, "Please sign in again to update your preference.", "error");
+      return;
+    }
+
+    const button = optIn ? whatsappOptInButton : whatsappOptOutButton;
+    const originalText = button.textContent;
+    button.disabled = true;
+    button.textContent = "Saving...";
+
+    try {
+      await updateDoc(doc(db, "members", user.uid), {
+        whatsappOptIn: optIn,
+        ...(optIn ? {
+          whatsappOptInAt: serverTimestamp(),
+          whatsappOptInRecordedBy: user.uid
+        } : {
+          whatsappOptOutAt: serverTimestamp()
+        })
+      });
+
+      renderWhatsAppConsent(optIn);
+      showMessage(
+        whatsappConsentMessage,
+        optIn
+          ? "Your WhatsApp consent has been saved. You are opted in."
+          : "Your WhatsApp preference has been saved. You are opted out.",
+        "success"
+      );
+    } catch (error) {
+      console.error("WhatsApp consent update error:", error);
+      showMessage(
+        whatsappConsentMessage,
+        "We could not save your WhatsApp preference. Please try again.",
+        "error"
+      );
+    } finally {
+      button.disabled = false;
+      button.textContent = originalText;
+    }
+  }
+
+  whatsappOptInButton.addEventListener("click", function() {
+    updateWhatsAppConsent(true);
+  });
+
+  whatsappOptOutButton.addEventListener("click", function() {
+    updateWhatsAppConsent(false);
+  });
 
 
   // ==========================================================
