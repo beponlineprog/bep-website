@@ -20,7 +20,7 @@ main{max-width:760px;margin:26px auto;padding:0 14px 40px}.panel{background:whit
 <div class="eyebrow">Test your knowledge • Grow your faith</div><h1>Bible <span class="gold">Challenge</span></h1>
 <p>Twenty questions from Genesis to Revelation. Choose a challenge mode, beat the clock and learn from every answer.</p>
 <div class="actions"><button class="btn primary" onclick="showSetup()">PLAY NOW</button><button class="btn secondary" onclick="showScores()">LEADERBOARD</button></div>
-<p class="notice">Open to everyone. No account or payment is required.</p>
+<div class="field"><span>Save progress across devices (optional)</span><input id="accountEmail" type="email" placeholder="Email address" autocomplete="email"><input id="accountPassword" type="password" placeholder="Password (at least 6 characters)" autocomplete="current-password" style="margin-top:8px"><div class="actions"><button class="btn primary" onclick="createProgressAccount()">CREATE ACCOUNT</button><button class="btn secondary" onclick="signInProgressAccount()">SIGN IN</button></div><p id="accountStatus" class="notice" aria-live="polite">You can also play as a guest. An account lets you sync unlocked stages across devices.</p></div><p class="notice">Open to everyone. No payment is required.</p>
 </section>
 <section id="setup" class="panel hidden">
 <div class="eyebrow">Game setup</div><h2>Choose how to play</h2>
@@ -54,8 +54,8 @@ main{max-width:760px;margin:26px auto;padding:0 14px 40px}.panel{background:whit
 <footer>© B.E.P. Online • Building the Church of Christ<br>Learn • Play • Grow</footer>
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
-import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js";
-import { getFirestore, collection, addDoc, getDocs, query, orderBy, limit, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
+import { getAuth, signInAnonymously, EmailAuthProvider, linkWithCredential, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js";
+import { getFirestore, collection, addDoc, getDocs, query, orderBy, limit, serverTimestamp, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyC3N-DrY4mv4M32TMIt_2_9btO3AqmhDk3Y",
@@ -123,6 +123,62 @@ function hideAll(){["home","setup","game","results","scores"].forEach(id=>$(id).
 function goHome(){clearInterval(tick);hideAll();$("home").classList.remove("hidden")}
 function showSetup(){clearInterval(tick);hideAll();$("setup").classList.remove("hidden");renderStagePicker()}
 function showScores(){clearInterval(tick);hideAll();$("scores").classList.remove("hidden");renderScores()}
+
+async function loadCloudProgress(){
+  const {auth,db}=await firebaseReady;
+  if(!auth.currentUser)return;
+  const snap=await getDoc(doc(db,"bibleChallengeProgress",auth.currentUser.uid));
+  if(snap.exists()){
+    const cloud=snap.data(),cloudStage=Math.max(1,Math.min(5,Number(cloud.unlockedStage)||1));
+    unlockedStage=Math.max(unlockedStage,cloudStage);
+    localStorage.setItem("bepBibleUnlockedStage",String(unlockedStage));
+    if(Array.isArray(cloud.completedStages))localStorage.setItem("bepBibleCompletedStages",JSON.stringify(cloud.completedStages));
+  }
+  if($("accountStatus"))$("accountStatus").textContent=auth.currentUser.isAnonymous?"Playing as guest. Sign in or create an account to sync progress across devices.":"Signed in. Your stage progress can sync across devices.";
+  if(!$("setup").classList.contains("hidden"))renderStagePicker();
+}
+async function saveCloudProgress(completedStage){
+  const {auth,db}=await firebaseReady;
+  if(!auth.currentUser||auth.currentUser.isAnonymous)return false;
+  const ref=doc(db,"bibleChallengeProgress",auth.currentUser.uid);
+  const snap=await getDoc(ref),old=snap.exists()?snap.data():{};
+  const completed=new Set(Array.isArray(old.completedStages)?old.completedStages:[]);
+  if(completedStage)completed.add(Number(completedStage));
+  await setDoc(ref,{unlockedStage:Math.max(Number(old.unlockedStage)||1,unlockedStage),completedStages:[...completed].sort((a,b)=>a-b),updatedAt:serverTimestamp()},{merge:true});
+  return true;
+}
+async function createProgressAccount(){
+  const email=$("accountEmail").value.trim(),password=$("accountPassword").value;
+  if(!email||password.length<6){$("accountStatus").textContent="Enter a valid email address and a password of at least 6 characters.";return}
+  $("accountStatus").textContent="Creating your account…";
+  try{
+    const {auth}=await firebaseReady;
+    if(!auth.currentUser)throw new Error("Authentication is not ready. Refresh and try again.");
+    if(!auth.currentUser.isAnonymous)throw new Error("You are already signed in. Use the sign-in option only on another device.");
+    const credential=EmailAuthProvider.credential(email,password);
+    await linkWithCredential(auth.currentUser,credential);
+    await saveCloudProgress();
+    $("accountStatus").textContent="Account created. Your stage progress is now linked to this email and password.";
+  }catch(error){
+    console.error("Progress account creation failed:",error);
+    $("accountStatus").textContent=error.code==="auth/email-already-in-use"?"That email already has an account. Use SIGN IN instead.":(error.message||"Could not create the account. Please try again.");
+  }
+}
+async function signInProgressAccount(){
+  const email=$("accountEmail").value.trim(),password=$("accountPassword").value;
+  if(!email||!password){$("accountStatus").textContent="Enter your email address and password.";return}
+  $("accountStatus").textContent="Signing in and loading your progress…";
+  try{
+    const {auth}=await firebaseReady;
+    await signInWithEmailAndPassword(auth,email,password);
+    await loadCloudProgress();
+    $("accountStatus").textContent="Signed in. Your saved stage progress is loaded.";
+  }catch(error){
+    console.error("Progress sign-in failed:",error);
+    $("accountStatus").textContent=error.code==="auth/invalid-credential"?"Email or password is incorrect.":(error.message||"Could not sign in. Please try again.");
+  }
+}
+
 function renderStagePicker(){const p=$("stagePicker");p.innerHTML="";for(let n=1;n<=5;n++){const open=n<=unlockedStage,b=document.createElement("button");b.type="button";b.className="mode"+(selectedStage===n?" selected":"");b.disabled=!open;b.innerHTML="<b>"+(open?"🔓":"🔒")+" Stage "+n+" – "+stageNames[n]+"</b><small>"+(open?"Available to play":"Score 140/200 in the previous stage")+"</small>";b.onclick=()=>{selectedStage=n;renderStagePicker()};p.appendChild(b)}$("stageHelp").textContent="Selected: Stage "+selectedStage+" – "+stageNames[selectedStage]+". Score 140/200 to unlock the next stage."}
 function setMode(m){mode=m;$("soloMode").classList.toggle("selected",m==="solo");$("multiMode").classList.toggle("selected",m==="multi");$("playerFields").innerHTML=m==="solo"?'<label class="field"><span>Player name</span><input id="player1" maxlength="24" placeholder="Enter your name"></label>':'<label class="field"><span>Player 1 name</span><input id="player1" maxlength="24" placeholder="Player 1"></label><label class="field"><span>Player 2 name</span><input id="player2" maxlength="24" placeholder="Player 2"></label>'}
 function startGame(){if(selectedStage>unlockedStage){alert("Complete the previous stage with at least 140/200 first.");return}const p1=($("player1").value||"Player 1").trim().slice(0,24);players=[p1];if(mode==="multi")players.push(($("player2").value||"Player 2").trim().slice(0,24));scores=players.map(()=>0);totalTimes=players.map(()=>0);turn=0;index=0;round=[...stageQuestions[selectedStage]].sort(()=>Math.random()-.5);hideAll();$("game").classList.remove("hidden");renderQuestion()}
@@ -130,7 +186,7 @@ function renderQuestion(){locked=false;remaining=30;$("feedback").classList.add(
 function answer(choice){if(locked)return;locked=true;clearInterval(tick);let q=round[index],correct=choice===q.k,elapsed=30-remaining,points=correct&&remaining>0?(elapsed<=5?10:elapsed<=10?9:elapsed<=15?8:elapsed<=20?6:elapsed<=25?4:2):0;totalTimes[turn]+=elapsed;if(points)scores[turn]+=points;[...$("answers").children].forEach((b,i)=>{b.disabled=true;if(i===q.k)b.classList.add("correct");else if(i===choice)b.classList.add("wrong")});$("scoreLabel").textContent="Score: "+scores[turn];let f=$("feedback");f.className="feedback "+(correct?"good":"bad");let resultText=correct?"Correct! +"+points+" points":(choice===-1?"Time is up! +0 points":"Not quite — the correct answer is "+q.a[q.k]+". +0 points");f.innerHTML="<strong>"+resultText+"</strong>"+q.e;$("nextBtn").textContent=index===19?(mode==="multi"&&turn===0?"NEXT PLAYER":"SEE RESULTS"):"NEXT QUESTION";$("nextBtn").classList.remove("hidden")}
 function nextQuestion(){if(index===19&&mode==="multi"&&turn===0){turn=1;index=0;round=[...stageQuestions[selectedStage]].sort(()=>Math.random()-.5);renderQuestion();return}if(index===19){finish();return}index++;renderQuestion()}
 function startNextStage(){if(selectedStage>=5||selectedStage>=unlockedStage)return;selectedStage++;scores=players.map(()=>0);totalTimes=players.map(()=>0);turn=0;index=0;round=[...stageQuestions[selectedStage]].sort(()=>Math.random()-.5);hideAll();$("game").classList.remove("hidden");renderQuestion()}
-async function finish(){clearInterval(tick);hideAll();$("results").classList.remove("hidden");let best=Math.max(...scores);$("resultTitle").textContent=mode==="multi"?(scores.filter(s=>s===best).length>1?"It’s a tie!":players[scores.indexOf(best)]+" wins!"):"Challenge complete, "+players[0]+"!";$("resultMessage").textContent="You answered 20 questions. Saving your scores…";let html="";players.forEach((p,i)=>html+='<div class="stat"><b>'+scores[i]+'/200</b><small>'+escapeHtml(p)+' · '+totalTimes[i]+' sec</small></div>');$("resultStats").innerHTML=html;if(scores[0]>=140&&selectedStage===unlockedStage&&unlockedStage<5){unlockedStage++;localStorage.setItem("bepBibleUnlockedStage",String(unlockedStage))} $("winnerBox").innerHTML=(mode==="multi"?"<p><b>Well played to both challengers!</b></p>":"")+(scores[0]>=140?"<p><b>Stage passed!</b> You scored "+scores[0]+"/200. "+(selectedStage<5?"Stage "+(selectedStage+1)+" – "+stageNames[selectedStage+1]+" is unlocked!":"You completed all five stages!")+"</p>":"<p>You need 140/200 to unlock the next stage. Replay this stage and try again.</p>");const canAdvance=scores[0]>=140&&selectedStage<5&&selectedStage<unlockedStage;$("nextStageBtn").classList.toggle("hidden",!canAdvance);$("replayBtn").classList.toggle("hidden",canAdvance);$("nextStageBtn").textContent=canAdvance?"NEXT STAGE – "+stageNames[selectedStage+1].toUpperCase():"NEXT STAGE";let board=JSON.parse(localStorage.getItem("bepBibleScores")||"[]");players.forEach((p,i)=>board.push({name:p,score:scores[i],totalTimeSeconds:totalTimes[i],stage:selectedStage,stageName:stageNames[selectedStage],mode:mode==="multi"?"Multiplayer":"Single player",date:new Date().toLocaleDateString()}));board.sort((a,b)=>b.score-a.score||(a.totalTimeSeconds??999999)-(b.totalTimeSeconds??999999));localStorage.setItem("bepBibleScores",JSON.stringify(board.slice(0,20)));try{const {auth,db}=await firebaseReady;for(let i=0;i<players.length;i++){await addDoc(collection(db,"bibleChallengeScores"),{uid:auth.currentUser.uid,playerName:players[i],score:scores[i],totalTimeSeconds:totalTimes[i],stage:selectedStage,stageName:stageNames[selectedStage],mode,createdAt:serverTimestamp()})}$("resultMessage").textContent="Your score"+(players.length>1?"s have":" has")+" been saved to the online leaderboard. Keep learning and growing in the Word."}catch(error){console.error("Bible Challenge score save failed:",error);$("resultMessage").textContent="Your game is complete. Your score is saved on this device, but the online leaderboard could not be reached. Please try again later."}}
+async function finish(){clearInterval(tick);hideAll();$("results").classList.remove("hidden");let best=Math.max(...scores);$("resultTitle").textContent=mode==="multi"?(scores.filter(s=>s===best).length>1?"It’s a tie!":players[scores.indexOf(best)]+" wins!"):"Challenge complete, "+players[0]+"!";$("resultMessage").textContent="You answered 20 questions. Saving your scores…";let html="";players.forEach((p,i)=>html+='<div class="stat"><b>'+scores[i]+'/200</b><small>'+escapeHtml(p)+' · '+totalTimes[i]+' sec</small></div>');$("resultStats").innerHTML=html;let stagePassed=scores[0]>=140;if(stagePassed){if(selectedStage===unlockedStage&&unlockedStage<5)unlockedStage++;localStorage.setItem("bepBibleUnlockedStage",String(unlockedStage));let completed=JSON.parse(localStorage.getItem("bepBibleCompletedStages")||"[]");if(!completed.includes(selectedStage)){completed.push(selectedStage);localStorage.setItem("bepBibleCompletedStages",JSON.stringify(completed))}try{await saveCloudProgress(selectedStage)}catch(progressError){console.error("Stage progress sync failed:",progressError)}} $("winnerBox").innerHTML=(mode==="multi"?"<p><b>Well played to both challengers!</b></p>":"")+(scores[0]>=140?"<p><b>Stage passed!</b> You scored "+scores[0]+"/200. "+(selectedStage<5?"Stage "+(selectedStage+1)+" – "+stageNames[selectedStage+1]+" is unlocked!":"You completed all five stages!")+"</p>":"<p>You need 140/200 to unlock the next stage. Replay this stage and try again.</p>");const canAdvance=scores[0]>=140&&selectedStage<5&&selectedStage<unlockedStage;$("nextStageBtn").classList.toggle("hidden",!canAdvance);$("replayBtn").classList.toggle("hidden",canAdvance);$("nextStageBtn").textContent=canAdvance?"NEXT STAGE – "+stageNames[selectedStage+1].toUpperCase():"NEXT STAGE";let board=JSON.parse(localStorage.getItem("bepBibleScores")||"[]");players.forEach((p,i)=>board.push({name:p,score:scores[i],totalTimeSeconds:totalTimes[i],stage:selectedStage,stageName:stageNames[selectedStage],mode:mode==="multi"?"Multiplayer":"Single player",date:new Date().toLocaleDateString()}));board.sort((a,b)=>b.score-a.score||(a.totalTimeSeconds??999999)-(b.totalTimeSeconds??999999));localStorage.setItem("bepBibleScores",JSON.stringify(board.slice(0,20)));try{const {auth,db}=await firebaseReady;for(let i=0;i<players.length;i++){await addDoc(collection(db,"bibleChallengeScores"),{uid:auth.currentUser.uid,playerName:players[i],score:scores[i],totalTimeSeconds:totalTimes[i],stage:selectedStage,stageName:stageNames[selectedStage],mode,createdAt:serverTimestamp()})}$("resultMessage").textContent="Your score"+(players.length>1?"s have":" has")+" been saved to the online leaderboard. Keep learning and growing in the Word."}catch(error){console.error("Bible Challenge score save failed:",error);$("resultMessage").textContent="Your game is complete. Your score is saved on this device, but the online leaderboard could not be reached. Please try again later."}}
 function setLeaderboardStage(value){leaderboardStage=value;renderScores()}
 function buildShareText(){
   const gameLink="https://beponlineprog.github.io/bep-website/bible-challenge.html";
@@ -183,7 +239,8 @@ async function renderScores(){
     $("scoreTable").innerHTML=localBoard.length?'<table class="leader"><thead><tr><th>RANK</th><th>PLAYER</th><th>SCORE</th><th>TOTAL TIME</th><th>MODE</th><th>DATE</th></tr></thead><tbody>'+tableRows+'</tbody></table>':'<p>No local scores yet. Please try the online leaderboard again later.</p>';
   }
 }
-Object.assign(window,{goHome,showSetup,showScores,setMode,startGame,nextQuestion,shareResult,shareOnWhatsApp,setLeaderboardStage});
+Object.assign(window,{goHome,showSetup,showScores,setMode,startGame,nextQuestion,startNextStage,shareResult,shareOnWhatsApp,setLeaderboardStage,createProgressAccount,signInProgressAccount});
+firebaseReady.then(()=>loadCloudProgress()).catch(error=>{console.error("Could not load cloud stage progress:",error);if($("accountStatus"))$("accountStatus").textContent="Progress sync is unavailable right now. You can still play as a guest.";});
 goHome();
 </script>
 </body></html>
