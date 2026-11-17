@@ -157,7 +157,7 @@ async function renderScores(){
     const rank=i=>i===0?"🥇 1":i===1?"🥈 2":i===2?"🥉 3":String(i+1);
     localBoard.sort((a,b)=>b.score-a.score||(a.totalTimeSeconds??999999)-(b.totalTimeSeconds??999999));
     const tableRows=localBoard.map((x,i)=>'<tr'+(i<3?' class="podium-'+(i+1)+'"':'')+'><td class="rank">'+rank(i)+'</td><td>'+escapeHtml(String(x.name||"Player"))+'</td><td><b>'+Number(x.score||0)+'/200</b></td><td>'+(Number.isInteger(x.totalTimeSeconds)?x.totalTimeSeconds+" sec":"—")+'</td><td><span class="mode-tag">'+escapeHtml(String(x.mode||"—"))+'</span></td><td>'+escapeHtml(String(x.date||""))+'</td></tr>').join("");
-    $("scoreTable").innerHTML=localBoard.length?'<table class="leader"><thead><tr><th>RANK</th><th>PLAYER</th><th>SCORE</th><th>MODE</th><th>DATE</th></tr></thead><tbody>'+tableRows+'</tbody></table>':'<p>No local scores yet. Please try the online leaderboard again later.</p>';
+    $("scoreTable").innerHTML=localBoard.length?'<table class="leader"><thead><tr><th>RANK</th><th>PLAYER</th><th>SCORE</th><th>TOTAL TIME</th><th>MODE</th><th>DATE</th></tr></thead><tbody>'+tableRows+'</tbody></table>':'<p>No local scores yet. Please try the online leaderboard again later.</p>';
   }
 }
 Object.assign(window,{goHome,showSetup,showScores,setMode,startGame,nextQuestion,shareResult,shareOnWhatsApp});
