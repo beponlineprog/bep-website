@@ -459,6 +459,23 @@ footer.bep-compact-footer {
         <button class="primary" id="sendBroadcastButton" type="button" disabled>Send Email Broadcast</button>
       </div>
 
+      <div class="panel" id="whatsappBroadcastPanel">
+        <h2>WhatsApp Broadcast</h2>
+        <p>Manage WhatsApp announcement consent for existing active B.E.P. members.</p>
+        <div class="notice">
+          Only mark a member as opted in after they have clearly agreed to receive B.E.P. WhatsApp announcements.
+          Existing members are not automatically opted in. Keep a record of their permission and honour opt-out requests.
+          Sending is locked while the WhatsApp message template is pending Meta approval.
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin:14px 0">
+          <button class="primary" id="refreshWhatsAppConsentButton" type="button">Refresh Members</button>
+        </div>
+        <p id="whatsAppConsentMessage" class="message" role="status">Sign in as administrator to load active members.</p>
+        <div id="whatsAppConsentMembers" class="broadcast-recipient-list">Member list will appear here.</div>
+        <p class="message">WhatsApp sending will be enabled after Meta approves the <strong>bep_member_announcement</strong> template and the Worker is configured to send approved templates.</p>
+        <button class="primary" id="sendWhatsAppBroadcastButton" type="button" disabled>WhatsApp Sending — Pending Approval</button>
+      </div>
+
       <div class="panel" id="contactMessagesPanel">
         <h2>Contact Form Enquiries</h2>
         <p>Messages submitted through the public Contact page.</p>
@@ -600,6 +617,7 @@ footer.bep-compact-footer {
       await loadApplications();
       await loadRegisteredMembers();
       await loadBroadcastMembers();
+      await loadWhatsAppConsentMembers();
       await loadCertificates();
       await loadPublicQuizResults();
       await loadContactMessages();
@@ -751,6 +769,117 @@ footer.bep-compact-footer {
         registeredMembersMessage.style.color = "#b42332";
       }
     }
+
+    // WhatsApp consent management for existing Active member profiles.
+    const whatsAppConsentMembers = document.getElementById("whatsAppConsentMembers");
+    const whatsAppConsentMessage = document.getElementById("whatsAppConsentMessage");
+    let whatsAppMembers = [];
+
+    function showWhatsAppConsentMessage(message, isError = false) {
+      whatsAppConsentMessage.textContent = message;
+      whatsAppConsentMessage.style.color = isError ? "#b42332" : "#17653a";
+    }
+
+    function renderWhatsAppConsentMembers() {
+      if (!whatsAppMembers.length) {
+        whatsAppConsentMembers.textContent = "No active members were found.";
+        return;
+      }
+      whatsAppConsentMembers.innerHTML = whatsAppMembers.map(member => {
+        const optedIn = member.whatsappOptIn === true;
+        const phone = String(member.phone || "").trim();
+        return `
+          <article class="broadcast-recipient" style="display:block">
+            <strong>${escapeHtml(member.fullName || "B.E.P. Member")}</strong><br>
+            ${escapeHtml(member.memberNumber || "No member number")}<br>
+            Phone / WhatsApp: ${escapeHtml(phone || "No phone number recorded")}<br>
+            <label style="display:flex;align-items:center;gap:8px;margin-top:10px">
+              <input type="checkbox" class="whatsapp-optin-checkbox"
+                data-member-uid="${escapeHtml(member.id)}" ${optedIn ? "checked" : ""}>
+              Member has explicitly agreed to WhatsApp announcements
+            </label>
+            <button type="button" class="secondary save-whatsapp-consent-button"
+              data-member-uid="${escapeHtml(member.id)}" style="margin-top:8px">
+              Save consent
+            </button>
+            <span class="message" style="display:block;margin-top:5px">${optedIn ? "Consent recorded" : "Not opted in"}</span>
+          </article>
+        `;
+      }).join("");
+    }
+
+    async function loadWhatsAppConsentMembers() {
+      if (!currentAdmin || currentAdmin.uid !== ADMIN_UID) return;
+      whatsAppConsentMembers.textContent = "Loading active members...";
+      showWhatsAppConsentMessage("Loading active member records...");
+      try {
+        const snapshot = await getDocs(collection(db, "members"));
+        whatsAppMembers = snapshot.docs
+          .map(memberDoc => ({ id: memberDoc.id, ...memberDoc.data() }))
+          .filter(member => String(member.status || "").toLowerCase() === "active")
+          .sort((a, b) => String(a.fullName || "").localeCompare(String(b.fullName || "")));
+        renderWhatsAppConsentMembers();
+        showWhatsAppConsentMessage(
+          whatsAppMembers.length + " active member(s) loaded. " +
+          whatsAppMembers.filter(member => member.whatsappOptIn === true).length +
+          " have WhatsApp consent recorded."
+        );
+      } catch (error) {
+        whatsAppConsentMembers.textContent = "Could not load active members.";
+        showWhatsAppConsentMessage("Could not load members: " + error.message, true);
+      }
+    }
+
+    whatsAppConsentMembers.addEventListener("click", async event => {
+      const button = event.target.closest(".save-whatsapp-consent-button");
+      if (!button) return;
+      if (!currentAdmin || currentAdmin.uid !== ADMIN_UID || busy) {
+        showWhatsAppConsentMessage("Administrator sign-in is required.", true);
+        return;
+      }
+      const uid = button.dataset.memberUid;
+      const checkbox = whatsAppConsentMembers.querySelector(
+        '.whatsapp-optin-checkbox[data-member-uid="' + CSS.escape(uid) + '"]'
+      );
+      const member = whatsAppMembers.find(item => item.id === uid);
+      if (!uid || !checkbox || !member) return;
+      if (checkbox.checked && !String(member.phone || "").trim()) {
+        checkbox.checked = false;
+        showWhatsAppConsentMessage(
+          "This member has no phone number recorded. Update their member profile before recording WhatsApp consent.",
+          true
+        );
+        return;
+      }
+      const optedIn = checkbox.checked;
+      const confirmation = optedIn
+        ? "Confirm that " + (member.fullName || "this member") + " has explicitly agreed to receive B.E.P. WhatsApp announcements?"
+        : "Record that " + (member.fullName || "this member") + " is not opted in / has withdrawn WhatsApp consent?";
+      if (!confirm(confirmation)) {
+        checkbox.checked = member.whatsappOptIn === true;
+        return;
+      }
+      button.disabled = true;
+      try {
+        const update = optedIn
+          ? { whatsappOptIn: true, whatsappOptInAt: serverTimestamp(), whatsappOptInRecordedBy: currentAdmin.uid }
+          : { whatsappOptIn: false, whatsappOptOutAt: serverTimestamp(), whatsappOptInRecordedBy: currentAdmin.uid };
+        await updateDoc(doc(db, "members", uid), update);
+        member.whatsappOptIn = optedIn;
+        renderWhatsAppConsentMembers();
+        showWhatsAppConsentMessage(
+          "WhatsApp consent updated for " + (member.fullName || "member") + ".",
+          false
+        );
+      } catch (error) {
+        showWhatsAppConsentMessage("Could not save consent: " + error.message, true);
+        button.disabled = false;
+      }
+    });
+
+    document.getElementById("refreshWhatsAppConsentButton").addEventListener(
+      "click", loadWhatsAppConsentMembers
+    );
 
     // Email broadcast: recipients are loaded only from Active member profiles.
     const EMAIL_BROADCAST_API = "https://bep-email-api.bep-onlineprog.workers.dev";
