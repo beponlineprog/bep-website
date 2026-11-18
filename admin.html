@@ -370,6 +370,7 @@ footer.bep-compact-footer {
   margin-top: 3px !important;
 }
 #whatsappBroadcastPanel > p { font-size: 12px; line-height: 1.35; }
+#whatsAppSendMessage { white-space: pre-line; overflow-wrap: anywhere; }
 
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
@@ -979,11 +980,11 @@ footer.bep-compact-footer {
       return data;
     }
 
-    async function loadWhatsAppRecipients() {
+    async function loadWhatsAppRecipients(options = {}) {
       if (!currentAdmin || currentAdmin.uid !== ADMIN_UID) return;
       whatsAppRecipients.textContent = "Loading eligible recipients...";
       showWhatsAppRecipientsMessage("Checking active status, consent and WhatsApp numbers...");
-      showWhatsAppSendMessage("");
+      if (!options.preserveSendMessage) showWhatsAppSendMessage("");
       sendWhatsAppBroadcastButton.disabled = true;
       selectedWhatsAppMemberIds.clear();
       try {
@@ -1066,7 +1067,7 @@ footer.bep-compact-footer {
           (details.length ? "\\n" + details.join("\\n") : ""),
           Number(data.failed || 0) > 0
         );
-        await loadWhatsAppRecipients();
+        await loadWhatsAppRecipients({ preserveSendMessage: true });
       } catch (error) {
         showWhatsAppSendMessage("WhatsApp broadcast failed: " + error.message, true);
         sendWhatsAppBroadcastButton.disabled = selectedWhatsAppMemberIds.size === 0;
