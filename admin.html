@@ -491,16 +491,28 @@ footer.bep-compact-footer {
         <p>Manage WhatsApp announcement consent for existing active B.E.P. members.</p>
         <div class="notice">
           Only mark a member as opted in after they have clearly agreed to receive B.E.P. WhatsApp announcements.
-          Existing members are not automatically opted in. Keep a record of their permission and honour opt-out requests.
-          Sending is locked while the WhatsApp message template is pending Meta approval.
+          Only Active members with recorded WhatsApp consent and a valid South African WhatsApp number can receive announcements.
+          Select up to 50 recipients. Messages are sent individually using the approved <strong>bep_member_announcement</strong> template.
         </div>
         <div style="display:flex;flex-wrap:wrap;gap:8px;margin:14px 0">
-          <button class="primary" id="refreshWhatsAppConsentButton" type="button">Refresh Members</button>
+          <button class="primary" id="refreshWhatsAppConsentButton" type="button">Refresh Consent Records</button>
         </div>
         <p id="whatsAppConsentMessage" class="message" role="status">Sign in as administrator to load active members.</p>
         <div id="whatsAppConsentMembers" class="broadcast-recipient-list">Member list will appear here.</div>
-        <p class="message">WhatsApp sending will be enabled after Meta approves the <strong>bep_member_announcement</strong> template and the Worker is configured to send approved templates.</p>
-        <button class="primary" id="sendWhatsAppBroadcastButton" type="button" disabled>WhatsApp Sending — Pending Approval</button>
+
+        <hr style="border:0;border-top:1px solid #dce5ef;margin:22px 0">
+        <h3 style="color:#0b4d91">Send WhatsApp Announcement</h3>
+        <p>Recipients are rechecked by the Worker immediately before sending. No phone numbers are shown in this selection list.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin:14px 0">
+          <button class="primary" id="refreshWhatsAppRecipientsButton" type="button">Load Eligible Recipients</button>
+          <button class="secondary" id="selectWhatsAppRecipientsButton" type="button">Select First 50</button>
+          <button class="secondary" id="clearWhatsAppRecipientsButton" type="button">Clear Selection</button>
+        </div>
+        <p id="whatsAppRecipientsMessage" class="message" role="status">Load eligible recipients after signing in.</p>
+        <div id="whatsAppRecipients" class="broadcast-recipient-list">Eligible recipients will appear here.</div>
+        <p id="whatsAppSendMessage" class="message" role="status"></p>
+        <button class="primary" id="sendWhatsAppBroadcastButton" type="button" disabled>Send WhatsApp Announcement</button>
+        <p class="message" style="font-size:12px">A successful API response means Meta accepted the message request; it does not confirm delivery or reading.</p>
       </div>
 
       <div class="panel" id="contactMessagesPanel">
@@ -907,6 +919,161 @@ footer.bep-compact-footer {
     document.getElementById("refreshWhatsAppConsentButton").addEventListener(
       "click", loadWhatsAppConsentMembers
     );
+
+    // WhatsApp template broadcast through the authenticated Cloudflare Worker.
+    const WHATSAPP_API = "https://bep-whatsapp-api.bep-onlineprog.workers.dev";
+    const whatsAppRecipients = document.getElementById("whatsAppRecipients");
+    const whatsAppRecipientsMessage = document.getElementById("whatsAppRecipientsMessage");
+    const whatsAppSendMessage = document.getElementById("whatsAppSendMessage");
+    const sendWhatsAppBroadcastButton = document.getElementById("sendWhatsAppBroadcastButton");
+    let eligibleWhatsAppRecipients = [];
+    const selectedWhatsAppMemberIds = new Set();
+
+    function showWhatsAppRecipientsMessage(message, isError = false) {
+      whatsAppRecipientsMessage.textContent = message;
+      whatsAppRecipientsMessage.style.color = isError ? "#b42332" : "#17653a";
+    }
+
+    function showWhatsAppSendMessage(message, isError = false) {
+      whatsAppSendMessage.textContent = message;
+      whatsAppSendMessage.style.color = isError ? "#b42332" : "#17653a";
+    }
+
+    function renderWhatsAppRecipients() {
+      if (!eligibleWhatsAppRecipients.length) {
+        whatsAppRecipients.textContent = "No eligible opted-in members were returned. Check active status, consent and phone numbers.";
+        sendWhatsAppBroadcastButton.disabled = true;
+        return;
+      }
+      whatsAppRecipients.innerHTML = eligibleWhatsAppRecipients.map(member => {
+        const checked = selectedWhatsAppMemberIds.has(member.id);
+        return `
+          <label class="broadcast-recipient">
+            <input type="checkbox" class="whatsapp-send-checkbox"
+              data-member-id="${escapeHtml(member.id)}" ${checked ? "checked" : ""}>
+            <span><strong>${escapeHtml(member.fullName || "B.E.P. Member")}</strong><br>
+              ${escapeHtml(member.memberNumber || "No member number")}</span>
+          </label>
+        `;
+      }).join("");
+      sendWhatsAppBroadcastButton.disabled = selectedWhatsAppMemberIds.size === 0;
+    }
+
+    async function whatsappApi(path, options = {}) {
+      if (!currentAdmin || currentAdmin.uid !== ADMIN_UID) {
+        throw new Error("Administrator sign-in is required.");
+      }
+      const token = await currentAdmin.getIdToken(true);
+      const response = await fetch(WHATSAPP_API + path, {
+        method: options.method || "GET",
+        headers: {
+          "Authorization": "Bearer " + token,
+          ...(options.body ? { "Content-Type": "application/json" } : {})
+        },
+        ...(options.body ? { body: JSON.stringify(options.body) } : {})
+      });
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok || data.ok === false) {
+        throw new Error(data.error || "WhatsApp service request failed (HTTP " + response.status + ").");
+      }
+      return data;
+    }
+
+    async function loadWhatsAppRecipients() {
+      if (!currentAdmin || currentAdmin.uid !== ADMIN_UID) return;
+      whatsAppRecipients.textContent = "Loading eligible recipients...";
+      showWhatsAppRecipientsMessage("Checking active status, consent and WhatsApp numbers...");
+      showWhatsAppSendMessage("");
+      sendWhatsAppBroadcastButton.disabled = true;
+      selectedWhatsAppMemberIds.clear();
+      try {
+        const data = await whatsappApi("/admin/whatsapp/recipients");
+        eligibleWhatsAppRecipients = Array.isArray(data.recipients) ? data.recipients : [];
+        renderWhatsAppRecipients();
+        showWhatsAppRecipientsMessage(
+          eligibleWhatsAppRecipients.length + " eligible recipient(s) loaded. Maximum 50 per send."
+        );
+      } catch (error) {
+        eligibleWhatsAppRecipients = [];
+        whatsAppRecipients.textContent = "Could not load eligible recipients.";
+        showWhatsAppRecipientsMessage(error.message, true);
+      }
+    }
+
+    whatsAppRecipients.addEventListener("change", event => {
+      const checkbox = event.target.closest(".whatsapp-send-checkbox");
+      if (!checkbox) return;
+      const id = checkbox.dataset.memberId;
+      if (!id) return;
+      if (checkbox.checked) {
+        if (selectedWhatsAppMemberIds.size >= 50) {
+          checkbox.checked = false;
+          showWhatsAppRecipientsMessage("You can select a maximum of 50 recipients per announcement.", true);
+          return;
+        }
+        selectedWhatsAppMemberIds.add(id);
+      } else {
+        selectedWhatsAppMemberIds.delete(id);
+      }
+      sendWhatsAppBroadcastButton.disabled = selectedWhatsAppMemberIds.size === 0;
+      showWhatsAppRecipientsMessage(selectedWhatsAppMemberIds.size + " recipient(s) selected.");
+    });
+
+    document.getElementById("refreshWhatsAppRecipientsButton").addEventListener("click", loadWhatsAppRecipients);
+    document.getElementById("selectWhatsAppRecipientsButton").addEventListener("click", () => {
+      selectedWhatsAppMemberIds.clear();
+      eligibleWhatsAppRecipients.slice(0, 50).forEach(member => selectedWhatsAppMemberIds.add(member.id));
+      renderWhatsAppRecipients();
+      showWhatsAppRecipientsMessage(selectedWhatsAppMemberIds.size + " recipient(s) selected.");
+    });
+    document.getElementById("clearWhatsAppRecipientsButton").addEventListener("click", () => {
+      selectedWhatsAppMemberIds.clear();
+      renderWhatsAppRecipients();
+      showWhatsAppRecipientsMessage("Selection cleared.");
+    });
+
+    sendWhatsAppBroadcastButton.addEventListener("click", async () => {
+      if (!currentAdmin || currentAdmin.uid !== ADMIN_UID) {
+        showWhatsAppSendMessage("Administrator sign-in is required.", true);
+        return;
+      }
+      const memberIds = Array.from(selectedWhatsAppMemberIds);
+      if (!memberIds.length || memberIds.length > 50) {
+        showWhatsAppSendMessage("Select between 1 and 50 members.", true);
+        return;
+      }
+      if (!confirm("Send the approved B.E.P. WhatsApp announcement to " + memberIds.length +
+        " selected member(s)? Only members who remain Active and opted in will be sent a message.")) return;
+
+      sendWhatsAppBroadcastButton.disabled = true;
+      sendWhatsAppBroadcastButton.textContent = "Sending...";
+      showWhatsAppSendMessage("Sending approved WhatsApp template messages individually...");
+      try {
+        const data = await whatsappApi("/admin/whatsapp/send", {
+          method: "POST",
+          body: { memberIds }
+        });
+        const results = Array.isArray(data.results) ? data.results : [];
+        const details = results.map(item =>
+          (item.status === "accepted" ? "ACCEPTED: " : "FAILED: ") +
+          (item.fullName || "Member") +
+          (item.status === "failed" ? " — " + (item.error || "Unknown error") : "")
+        );
+        showWhatsAppSendMessage(
+          "Meta accepted " + Number(data.accepted || 0) + " of " + Number(data.total || results.length) +
+          " message(s); " + Number(data.failed || 0) + " failed. " +
+          (data.note || "Acceptance is not delivery confirmation.") +
+          (details.length ? "\\n" + details.join("\\n") : ""),
+          Number(data.failed || 0) > 0
+        );
+        await loadWhatsAppRecipients();
+      } catch (error) {
+        showWhatsAppSendMessage("WhatsApp broadcast failed: " + error.message, true);
+        sendWhatsAppBroadcastButton.disabled = selectedWhatsAppMemberIds.size === 0;
+      } finally {
+        sendWhatsAppBroadcastButton.textContent = "Send WhatsApp Announcement";
+      }
+    });
 
     // Email broadcast: recipients are loaded only from Active member profiles.
     const EMAIL_BROADCAST_API = "https://bep-email-api.bep-onlineprog.workers.dev";
