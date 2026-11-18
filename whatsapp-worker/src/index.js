@@ -181,12 +181,62 @@ async function handle(request, env) {
   const url = new URL(request.url);
   if (url.pathname !== "/admin/whatsapp/recipients" &&
       url.pathname !== "/admin/whatsapp/send" &&
+      url.pathname !== "/admin/whatsapp/connection-test" &&
       url.pathname !== "/") {
     return json({ ok: false, error: "Not found." }, 404, origin);
   }
 
   try {
     const token = await verifyAdmin(request, env);
+
+    // Secure Meta connection diagnostic: administrator authentication is required.
+    // This checks the WhatsApp phone-number endpoint without sending a message.
+    if (url.pathname === "/admin/whatsapp/connection-test") {
+      if (request.method !== "GET") {
+        return json({ ok: false, error: "Method not allowed." }, 405, origin);
+      }
+
+      try {
+        const version = String(env.META_GRAPH_API_VERSION || "v23.0")
+          .replace(/^\\/+|\\/+$/g, "");
+        const response = await fetch(
+          "https://graph.facebook.com/" + version + "/" +
+            encodeURIComponent(env.WHATSAPP_PHONE_NUMBER_ID) +
+            "?fields=id,display_phone_number,verified_name",
+          {
+            headers: {
+              "Authorization": "Bearer " + env.WHATSAPP_ACCESS_TOKEN
+            }
+          }
+        );
+
+        const data = await response.json().catch(() => ({}));
+        if (!response.ok) {
+          return json({
+            ok: false,
+            connection: "failed",
+            error: data.error && data.error.message
+              ? data.error.message
+              : "Meta connection failed."
+          }, 502, origin);
+        }
+
+        return json({
+          ok: true,
+          connection: "connected",
+          phoneNumberId: data.id || "",
+          displayPhoneNumber: data.display_phone_number || "",
+          verifiedName: data.verified_name || ""
+        }, 200, origin);
+      } catch (error) {
+        return json({
+          ok: false,
+          connection: "failed",
+          error: String(error.message || "Connection test failed.")
+        }, 500, origin);
+      }
+    }
+
     const members = await loadMembers(token, env);
     const eligible = eligibleMembers(members);
 
