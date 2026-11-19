@@ -489,6 +489,11 @@ footer.bep-compact-footer {
 
       <div class="panel" id="whatsappBroadcastPanel">
         <h2>WhatsApp Broadcast</h2>
+        <p>Check that the B.E.P. WhatsApp account is connected to Meta. This test does not send a message.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin:12px 0">
+          <button class="secondary" id="testWhatsAppConnectionButton" type="button">Test WhatsApp Connection</button>
+        </div>
+        <p id="whatsAppConnectionMessage" class="message" role="status" aria-live="polite">Connection has not been tested yet.</p>
         <p>Manage WhatsApp announcement consent for existing active B.E.P. members.</p>
         <div class="notice">
           Only mark a member as opted in after they have clearly agreed to receive B.E.P. WhatsApp announcements.
@@ -979,6 +984,45 @@ footer.bep-compact-footer {
       }
       return data;
     }
+
+    // Test the Meta WhatsApp phone-number connection without sending a message.
+    const testWhatsAppConnectionButton = document.getElementById("testWhatsAppConnectionButton");
+    const whatsAppConnectionMessage = document.getElementById("whatsAppConnectionMessage");
+
+    testWhatsAppConnectionButton.addEventListener("click", async () => {
+      if (!currentAdmin || currentAdmin.uid !== ADMIN_UID) {
+        whatsAppConnectionMessage.textContent = "Administrator sign-in is required.";
+        whatsAppConnectionMessage.style.color = "#b42332";
+        return;
+      }
+
+      testWhatsAppConnectionButton.disabled = true;
+      testWhatsAppConnectionButton.textContent = "Testing connection...";
+      whatsAppConnectionMessage.textContent = "Checking the WhatsApp phone-number connection with Meta. No message will be sent.";
+      whatsAppConnectionMessage.style.color = "";
+
+      try {
+        const data = await whatsappApi("/admin/whatsapp/connection-test");
+        if (data.connection !== "connected") {
+          throw new Error(data.error || "Meta did not confirm the WhatsApp connection.");
+        }
+
+        const details = [
+          "Connected to Meta.",
+          data.verifiedName ? "Business name: " + data.verifiedName : "",
+          data.displayPhoneNumber ? "WhatsApp number: " + data.displayPhoneNumber : "",
+          data.phoneNumberId ? "Phone number ID: " + data.phoneNumberId : ""
+        ].filter(Boolean);
+        whatsAppConnectionMessage.textContent = details.join(" ");
+        whatsAppConnectionMessage.style.color = "#17653a";
+      } catch (error) {
+        whatsAppConnectionMessage.textContent = "Connection test failed: " + error.message;
+        whatsAppConnectionMessage.style.color = "#b42332";
+      } finally {
+        testWhatsAppConnectionButton.disabled = false;
+        testWhatsAppConnectionButton.textContent = "Test WhatsApp Connection";
+      }
+    });
 
     async function loadWhatsAppRecipients(options = {}) {
       if (!currentAdmin || currentAdmin.uid !== ADMIN_UID) return;
