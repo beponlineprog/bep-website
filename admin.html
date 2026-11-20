@@ -518,7 +518,14 @@ footer.bep-compact-footer {
         <div id="whatsAppRecipients" class="broadcast-recipient-list">Eligible recipients will appear here.</div>
         <p id="whatsAppSendMessage" class="message" role="status"></p>
         <button class="primary" id="sendWhatsAppBroadcastButton" type="button" disabled>Send WhatsApp Announcement</button>
-        <p class="message" style="font-size:12px">A successful API response means Meta accepted the message request; it does not confirm delivery or reading.</p>
+        <p class="message" style="font-size:12px">Meta acceptance is not delivery confirmation. Check the delivery and read results below after sending.</p>
+
+        <hr style="border:0;border-top:1px solid #dce5ef;margin:22px 0">
+        <h3 style="color:#0b4d91">Delivery and Read Confirmations</h3>
+        <p>View the latest status returned by WhatsApp: accepted, sent, delivered, read or failed. Statuses are saved in Cloudflare and can be checked again after signing in.</p>
+        <button class="secondary" id="refreshWhatsAppStatusesButton" type="button">Refresh Delivery Status</button>
+        <p id="whatsAppStatusMessage" class="message" role="status">No delivery status has been loaded yet.</p>
+        <div id="whatsAppStatuses">Send a WhatsApp announcement to begin tracking its status.</div>
       </div>
 
       <div class="panel" id="contactMessagesPanel">
@@ -985,6 +992,87 @@ footer.bep-compact-footer {
       return data;
     }
 
+    // Keep the latest WhatsApp message IDs in this administrator's browser
+    // so delivery/read status can be refreshed after a page reload.
+    const WHATSAPP_TRACKED_IDS_KEY = "bepWhatsAppTrackedMessageIds";
+    const whatsAppStatuses = document.getElementById("whatsAppStatuses");
+    const whatsAppStatusMessage = document.getElementById("whatsAppStatusMessage");
+    const refreshWhatsAppStatusesButton = document.getElementById("refreshWhatsAppStatusesButton");
+    const trackedWhatsAppMessageIds = new Set();
+    try {
+      const savedIds = JSON.parse(localStorage.getItem(WHATSAPP_TRACKED_IDS_KEY) || "[]");
+      if (Array.isArray(savedIds)) savedIds.filter(id => typeof id === "string" && id).slice(-50)
+        .forEach(id => trackedWhatsAppMessageIds.add(id));
+    } catch {}
+
+    function saveTrackedWhatsAppMessageIds() {
+      try {
+        localStorage.setItem(WHATSAPP_TRACKED_IDS_KEY,
+          JSON.stringify(Array.from(trackedWhatsAppMessageIds).slice(-50)));
+      } catch {}
+    }
+
+    function showWhatsAppStatusMessage(message, isError = false) {
+      whatsAppStatusMessage.textContent = message;
+      whatsAppStatusMessage.style.color = isError ? "#b42332" : "#17653a";
+    }
+
+    async function loadWhatsAppStatuses() {
+      if (!currentAdmin || currentAdmin.uid !== ADMIN_UID) {
+        showWhatsAppStatusMessage("Administrator sign-in is required.", true);
+        return;
+      }
+      const ids = Array.from(trackedWhatsAppMessageIds).slice(-50);
+      if (!ids.length) {
+        whatsAppStatuses.textContent = "No tracked WhatsApp messages yet. Send an announcement first.";
+        showWhatsAppStatusMessage("No message IDs are saved in this browser yet.");
+        return;
+      }
+      refreshWhatsAppStatusesButton.disabled = true;
+      refreshWhatsAppStatusesButton.textContent = "Refreshing...";
+      showWhatsAppStatusMessage("Checking WhatsApp delivery and read confirmations...");
+      try {
+        const data = await whatsappApi("/admin/whatsapp/statuses?ids=" + encodeURIComponent(ids.join(",")));
+        const rows = Array.isArray(data.statuses) ? data.statuses : [];
+        rows.sort((a, b) => Date.parse(b.updatedAt || b.statusTimestamp || b.acceptedAt || 0) -
+          Date.parse(a.updatedAt || a.statusTimestamp || a.acceptedAt || 0));
+        if (!rows.length) {
+          whatsAppStatuses.textContent = "No status records were returned yet. Refresh again after WhatsApp processes the messages.";
+          showWhatsAppStatusMessage("No status records found for the saved message IDs.");
+          return;
+        }
+        whatsAppStatuses.innerHTML = rows.map(item => {
+          const rawStatus = String(item.status || "unknown").toLowerCase();
+          const status = rawStatus.charAt(0).toUpperCase() + rawStatus.slice(1);
+          const timestamp = item.statusTimestamp || item.updatedAt || item.acceptedAt || "";
+          const formattedTime = timestamp && !Number.isNaN(Date.parse(timestamp))
+            ? new Date(timestamp).toLocaleString() : "Not available";
+          const errors = Array.isArray(item.errors)
+            ? item.errors.map(error => error.title || error.message || error.code || "Delivery error").join("; ")
+            : "";
+          return `
+            <article class="application">
+              <h3>${escapeHtml(item.fullName || "B.E.P. Member")}</h3>
+              <div class="details">
+                <strong>WhatsApp status:</strong> <span class="status">${escapeHtml(status)}</span><br>
+                <strong>Last update:</strong> ${escapeHtml(formattedTime)}
+                ${errors ? "<br><strong>Details:</strong> " + escapeHtml(errors) : ""}
+              </div>
+            </article>
+          `;
+        }).join("");
+        showWhatsAppStatusMessage(rows.length + " WhatsApp message status record(s) loaded.");
+      } catch (error) {
+        whatsAppStatuses.textContent = "Could not load WhatsApp delivery statuses.";
+        showWhatsAppStatusMessage(error.message, true);
+      } finally {
+        refreshWhatsAppStatusesButton.disabled = false;
+        refreshWhatsAppStatusesButton.textContent = "Refresh Delivery Status";
+      }
+    }
+
+    refreshWhatsAppStatusesButton.addEventListener("click", loadWhatsAppStatuses);
+
     // Test the Meta WhatsApp phone-number connection without sending a message.
     const testWhatsAppConnectionButton = document.getElementById("testWhatsAppConnectionButton");
     const whatsAppConnectionMessage = document.getElementById("whatsAppConnectionMessage");
@@ -1099,6 +1187,11 @@ footer.bep-compact-footer {
           body: { memberIds }
         });
         const results = Array.isArray(data.results) ? data.results : [];
+        results.filter(item => item.messageId).forEach(item => trackedWhatsAppMessageIds.add(item.messageId));
+        while (trackedWhatsAppMessageIds.size > 50) {
+          trackedWhatsAppMessageIds.delete(trackedWhatsAppMessageIds.values().next().value);
+        }
+        saveTrackedWhatsAppMessageIds();
         const details = results.map(item =>
           (item.status === "accepted" ? "ACCEPTED: " : "FAILED: ") +
           (item.fullName || "Member") +
@@ -1112,6 +1205,7 @@ footer.bep-compact-footer {
           Number(data.failed || 0) > 0
         );
         await loadWhatsAppRecipients({ preserveSendMessage: true });
+        await loadWhatsAppStatuses();
       } catch (error) {
         showWhatsAppSendMessage("WhatsApp broadcast failed: " + error.message, true);
         sendWhatsAppBroadcastButton.disabled = selectedWhatsAppMemberIds.size === 0;
